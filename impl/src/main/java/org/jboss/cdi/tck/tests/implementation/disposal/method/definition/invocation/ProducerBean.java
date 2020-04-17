@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.invoca
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.TransientReference;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.TransientReference;
 
 @Dependent
 public class ProducerBean {

@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.conversation.filter;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ConversationScoped;
+import jakarta.enterprise.context.ConversationScoped;
 
 @SuppressWarnings("serial")
 @ConversationScoped

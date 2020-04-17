@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection;
 
-import javax.enterprise.inject.spi.Interceptor;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.Interceptor;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Inject;
 
 public class Dog {
     private static boolean constructorCalled = false;

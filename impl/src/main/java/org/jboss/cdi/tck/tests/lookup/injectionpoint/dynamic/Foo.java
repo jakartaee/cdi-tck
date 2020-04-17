@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic;
 
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

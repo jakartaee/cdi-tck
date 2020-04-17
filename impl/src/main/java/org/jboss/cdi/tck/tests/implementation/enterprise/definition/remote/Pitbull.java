@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 
-import javax.ejb.Local;
-import javax.ejb.Stateful;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import jakarta.ejb.Local;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
 @Stateful
 @ApplicationScoped

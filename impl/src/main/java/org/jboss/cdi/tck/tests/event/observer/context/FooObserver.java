@@ -19,11 +19,11 @@ package org.jboss.cdi.tck.tests.event.observer.context;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
-import javax.ejb.EJB;
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.TransactionPhase;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.TransactionPhase;
 import javax.naming.InitialContext;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
@@ -71,7 +71,7 @@ public class FooObserver {
         try {
             printer.tryAccess();
             fail("Transactional observer method was NOT called within the same client security context.");
-        } catch (javax.ejb.EJBAccessException expected) {
+        } catch (jakarta.ejb.EJBAccessException expected) {
             // OK
         }
 

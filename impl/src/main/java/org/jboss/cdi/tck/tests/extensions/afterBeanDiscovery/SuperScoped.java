@@ -26,7 +26,7 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.inject.Scope;
+import jakarta.inject.Scope;
 
 @Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)

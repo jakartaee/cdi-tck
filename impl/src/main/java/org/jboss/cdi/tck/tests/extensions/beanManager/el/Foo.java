@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.el;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.inject.Named;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.inject.Named;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;

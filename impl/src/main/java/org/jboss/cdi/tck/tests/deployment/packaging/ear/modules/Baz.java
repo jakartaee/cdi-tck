@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.ear.modules;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 /**
  * @author Martin Kouba

@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.Model;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 @Model
 public class Hummingbird extends Bird {

@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.interceptorCanNotBeDecorator;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
-import javax.interceptor.Interceptor;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptor;
 
 @Decorator
 @Interceptor

@@ -1,8 +1,8 @@
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessManagedBean;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessManagedBean;
 
 public class EnterpriseBeanObserver implements Extension {
 

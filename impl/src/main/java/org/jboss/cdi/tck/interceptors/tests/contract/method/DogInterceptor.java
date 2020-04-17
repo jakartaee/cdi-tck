@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.method;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 public class DogInterceptor {
     @AroundInvoke

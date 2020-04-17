@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 
 /**
  * Test bean with injection point on the constructor of the bean

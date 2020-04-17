@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.context.passivating;
 
 import java.io.Serializable;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 @SuppressWarnings("serial")
 public class KokkolaInterceptor implements Serializable {

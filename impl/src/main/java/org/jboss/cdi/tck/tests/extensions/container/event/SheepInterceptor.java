@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.container.event;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 public class SheepInterceptor {
     @AroundInvoke

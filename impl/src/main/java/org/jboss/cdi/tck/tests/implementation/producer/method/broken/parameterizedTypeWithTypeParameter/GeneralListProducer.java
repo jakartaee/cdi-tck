@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.broken.parameteri
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
 
 public class GeneralListProducer<T> {
 

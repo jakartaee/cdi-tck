@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.non.contextual;
 
-import javax.ejb.Stateful;
-import javax.inject.Inject;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

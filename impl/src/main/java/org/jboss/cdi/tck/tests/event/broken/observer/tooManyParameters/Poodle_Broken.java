@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.tooManyParameters;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.ObservesAsync;
-import javax.enterprise.inject.spi.AfterDeploymentValidation;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.ObservesAsync;
+import jakarta.enterprise.inject.spi.AfterDeploymentValidation;
 
 public class Poodle_Broken {
 

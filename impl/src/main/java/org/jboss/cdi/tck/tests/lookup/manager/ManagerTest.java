@@ -22,10 +22,10 @@ import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CONTEXTUAL_REFERENCE;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Default;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

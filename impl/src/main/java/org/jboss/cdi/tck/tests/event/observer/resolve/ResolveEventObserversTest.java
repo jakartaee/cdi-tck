@@ -34,9 +34,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Set;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.ObserverMethod;
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.ObserverMethod;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

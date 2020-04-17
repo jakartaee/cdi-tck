@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.beanConstructor;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 @RequestScoped
 public class Unproxyable_Broken {

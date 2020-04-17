@@ -20,14 +20,14 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.annotation.Resource;
-import javax.annotation.security.RolesAllowed;
-import javax.annotation.security.RunAs;
-import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
-import javax.interceptor.Interceptors;
+import jakarta.annotation.Resource;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RunAs;
+import jakarta.ejb.SessionContext;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.Timeout;
+import jakarta.ejb.Timer;
+import jakarta.interceptor.Interceptors;
 
 @Stateless
 @Interceptors(AlarmSecurityInterceptor.class)

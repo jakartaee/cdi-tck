@@ -28,7 +28,7 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @Target({ TYPE, METHOD, PARAMETER, FIELD, CONSTRUCTOR })
 @Retention(RUNTIME)

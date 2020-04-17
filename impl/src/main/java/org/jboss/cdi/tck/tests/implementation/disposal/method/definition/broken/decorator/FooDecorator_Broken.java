@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.decorator;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.enterprise.inject.Disposes;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.inject.Inject;
 
 @Decorator
 public class FooDecorator_Broken implements Foo {

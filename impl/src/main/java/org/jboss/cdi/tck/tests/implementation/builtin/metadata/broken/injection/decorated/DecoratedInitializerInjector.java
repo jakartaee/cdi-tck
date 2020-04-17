@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection.decorated;
 
-import javax.enterprise.inject.Decorated;
-import javax.enterprise.inject.spi.Bean;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Decorated;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Inject;
 
 public class DecoratedInitializerInjector {
 

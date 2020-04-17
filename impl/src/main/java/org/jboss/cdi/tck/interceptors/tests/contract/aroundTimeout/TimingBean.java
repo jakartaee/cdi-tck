@@ -18,15 +18,15 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
 import static org.testng.Assert.assertNotNull;
 
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.interceptor.Interceptors;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.annotation.Resource;
+import jakarta.ejb.SessionContext;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.Timeout;
+import jakarta.ejb.Timer;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
+import jakarta.interceptor.Interceptors;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 @Interceptors(TimeoutInterceptor.class)
 @Stateless

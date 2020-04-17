@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.same.type.twice;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Alternative;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.inject.Named;
 
 @RequestScoped
 @Named

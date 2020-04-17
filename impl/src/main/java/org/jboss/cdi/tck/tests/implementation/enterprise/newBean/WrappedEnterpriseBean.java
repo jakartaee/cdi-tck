@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 
 @SuppressWarnings("serial")
 @SessionScoped

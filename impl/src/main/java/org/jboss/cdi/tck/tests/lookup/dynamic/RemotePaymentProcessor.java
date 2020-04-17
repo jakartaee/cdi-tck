@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.jboss.cdi.tck.tests.lookup.dynamic.PayBy.PaymentMethod;
 

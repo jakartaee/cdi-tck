@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.binding.members.annotation;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * @author pmuir

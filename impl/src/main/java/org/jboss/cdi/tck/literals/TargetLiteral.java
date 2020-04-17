@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.literals;
 
 import java.lang.annotation.Target;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * @author pmuir

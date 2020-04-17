@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.trimmed;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class Bus implements MotorizedVehicle {

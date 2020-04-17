@@ -20,8 +20,8 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.interceptor.AroundTimeout;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundTimeout;
+import jakarta.interceptor.InvocationContext;
 
 public class AroundTimeoutThreadInterceptor {
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct.bindings;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class BravoParameterProducer {
 

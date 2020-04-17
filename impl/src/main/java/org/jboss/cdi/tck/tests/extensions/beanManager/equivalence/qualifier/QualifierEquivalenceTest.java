@@ -26,7 +26,7 @@ import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

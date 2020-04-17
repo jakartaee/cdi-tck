@@ -1,6 +1,6 @@
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Bar {
 

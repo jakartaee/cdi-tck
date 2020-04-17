@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.producer.broken;
 
-import javax.enterprise.inject.Vetoed;
+import jakarta.enterprise.inject.Vetoed;
 
 /**
  *

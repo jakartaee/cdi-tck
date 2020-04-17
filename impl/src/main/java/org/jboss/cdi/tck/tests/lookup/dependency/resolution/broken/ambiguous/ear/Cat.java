@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dependency.resolution.broken.ambiguous.ear;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Stateful(name = "Cat")
 public class Cat implements Animal {

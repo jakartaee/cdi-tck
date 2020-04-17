@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.initializer.broken.generic;
 
 import java.util.List;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Foo {
     private List<?> injectedList;

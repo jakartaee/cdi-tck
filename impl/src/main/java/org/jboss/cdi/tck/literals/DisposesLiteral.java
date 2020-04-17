@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.literals;
 
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * @author Tomas Remes

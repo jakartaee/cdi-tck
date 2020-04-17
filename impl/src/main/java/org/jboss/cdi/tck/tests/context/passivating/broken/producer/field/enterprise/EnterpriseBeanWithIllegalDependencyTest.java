@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.passivating.broken.producer.field.enterp
 import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION_EE;
 
-import javax.enterprise.inject.IllegalProductException;
+import jakarta.enterprise.inject.IllegalProductException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

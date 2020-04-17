@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Stateful
 public class Cactus extends PongPlant {

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class RoleLiteral extends AnnotationLiteral<Role> implements Role {
     private String value = null;

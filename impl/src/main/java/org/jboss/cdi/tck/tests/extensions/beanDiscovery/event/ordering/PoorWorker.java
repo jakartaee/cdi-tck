@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanDiscovery.event.ordering;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 
 /**
  *

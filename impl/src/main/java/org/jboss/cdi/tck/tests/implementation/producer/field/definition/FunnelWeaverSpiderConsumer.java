@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class FunnelWeaverSpiderConsumer {
     @Inject

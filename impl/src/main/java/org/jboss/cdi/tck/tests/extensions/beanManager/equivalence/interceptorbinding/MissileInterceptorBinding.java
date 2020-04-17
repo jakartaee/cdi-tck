@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.interceptorbinding;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("all")
 public abstract class MissileInterceptorBinding extends AnnotationLiteral<Missile> implements Missile {

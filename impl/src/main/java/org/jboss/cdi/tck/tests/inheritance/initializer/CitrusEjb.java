@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.initializer;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @FirstLevel
 @Stateless

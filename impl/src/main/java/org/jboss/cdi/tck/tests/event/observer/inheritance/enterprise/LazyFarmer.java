@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.inheritance.enterprise;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 public @Stateful
 class LazyFarmer extends Farmer implements LazyFarmerLocal, FarmerLocal {

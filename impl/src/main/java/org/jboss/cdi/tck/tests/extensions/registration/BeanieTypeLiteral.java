@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.registration;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public abstract class BeanieTypeLiteral extends AnnotationLiteral<BeanieType> implements BeanieType {
 }

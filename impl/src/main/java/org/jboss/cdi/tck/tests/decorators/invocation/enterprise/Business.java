@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.decorators.invocation.enterprise;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 /**
  * @author Martin Kouba

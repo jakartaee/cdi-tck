@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.se.customCDIProvider;
 
-import javax.enterprise.inject.Vetoed;
-import javax.enterprise.inject.spi.CDI;
-import javax.enterprise.inject.spi.CDIProvider;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.enterprise.inject.spi.CDI;
+import jakarta.enterprise.inject.spi.CDIProvider;
 
 /**
  * @author Martin Kouba

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
-import javax.annotation.Priority;
-import javax.enterprise.inject.Alternative;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 @Priority(1200)

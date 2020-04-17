@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @SuppressWarnings("serial")
 @ApplicationScoped

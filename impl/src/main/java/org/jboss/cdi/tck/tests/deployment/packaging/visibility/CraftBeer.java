@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.visibility;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("americanCraftBeer")
 @American

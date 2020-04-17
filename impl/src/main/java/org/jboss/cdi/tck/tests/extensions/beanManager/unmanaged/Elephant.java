@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * @author Kirill Gaevskii

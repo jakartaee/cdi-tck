@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.context.enterprise.staticMethod;
 
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RunAs;
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RunAs;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateful;
 
 @Stateful
 @RunAs("student")

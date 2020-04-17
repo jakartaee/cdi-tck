@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.modif
 
 import java.io.Serializable;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.spi.Bean;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @ApplicationScoped
 @Named

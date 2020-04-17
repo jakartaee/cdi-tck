@@ -16,13 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata;
 
-import javax.decorator.Delegate;
-import javax.enterprise.inject.Decorated;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.Decorator;
-import javax.inject.Inject;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.Decorated;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.Decorator;
+import jakarta.inject.Inject;
 
-@javax.decorator.Decorator
+@jakarta.decorator.Decorator
 @SuppressWarnings({ "unused", "serial" })
 public class MilkProductDecorator implements MilkProduct {
 

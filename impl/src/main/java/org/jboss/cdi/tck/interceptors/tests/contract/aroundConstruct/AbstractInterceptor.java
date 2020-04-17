@@ -21,7 +21,7 @@ import static org.testng.Assert.assertNotNull;
 
 import java.lang.reflect.Constructor;
 
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

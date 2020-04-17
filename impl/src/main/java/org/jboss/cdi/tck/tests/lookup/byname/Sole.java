@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname;
 
-import javax.enterprise.inject.Alternative;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.inject.Named;
 
 @Named("fish")
 @Alternative

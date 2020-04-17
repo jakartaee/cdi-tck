@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptors;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 /**
  * @author Stuart Douglas <stuart@baileyroberts.com.au>

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
 /**
  * Only withdrawal is charged. Implicit implementation that calls the method on the delegate is provided for

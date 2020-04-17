@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.parameters;
 
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 public class IdeaFactory {
 

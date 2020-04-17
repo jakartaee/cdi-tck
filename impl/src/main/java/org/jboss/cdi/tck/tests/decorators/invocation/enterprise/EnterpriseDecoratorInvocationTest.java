@@ -28,8 +28,8 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
-import javax.enterprise.inject.spi.Decorator;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.Decorator;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

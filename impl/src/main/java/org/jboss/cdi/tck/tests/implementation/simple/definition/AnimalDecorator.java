@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
 @Decorator
 abstract class AnimalDecorator implements Animal {

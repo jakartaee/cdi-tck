@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.invalid;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Any;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Inject;
 
 /**
  *

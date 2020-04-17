@@ -16,16 +16,16 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.transactional.roolback;
 
-import javax.annotation.Resource;
-import javax.ejb.EJBContext;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
-import javax.transaction.SystemException;
+import jakarta.annotation.Resource;
+import jakarta.ejb.EJBContext;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
+import jakarta.ejb.TransactionManagement;
+import jakarta.ejb.TransactionManagementType;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
+import jakarta.transaction.SystemException;
 
 /**
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>

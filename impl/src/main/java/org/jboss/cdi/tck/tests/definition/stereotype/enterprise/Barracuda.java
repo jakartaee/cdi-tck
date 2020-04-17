@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.enterprise;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Stateful
 public class Barracuda extends Fish implements BarracudaLocal {

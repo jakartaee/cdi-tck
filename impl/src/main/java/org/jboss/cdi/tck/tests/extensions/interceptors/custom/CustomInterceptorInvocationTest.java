@@ -20,8 +20,8 @@ import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR;
 import static org.testng.Assert.assertTrue;
 
-import javax.inject.Inject;
-import javax.interceptor.Interceptor;
+import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptor;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.container.event.ws;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 import javax.jws.WebService;
 
 @WebService(endpointInterface = "org.jboss.cdi.tck.tests.extensions.container.event.ws.Translator", serviceName = "Translator")

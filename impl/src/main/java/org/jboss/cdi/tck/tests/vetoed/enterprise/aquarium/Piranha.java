@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.vetoed.enterprise.aquarium;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Stateful
 public class Piranha {

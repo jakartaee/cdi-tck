@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.enterprise;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.Produces;
 
 @Stateful
 public class Chicken implements ChickenLocal {

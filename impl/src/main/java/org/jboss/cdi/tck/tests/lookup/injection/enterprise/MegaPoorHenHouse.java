@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Stateful;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.Stateful;
 
 @Stateful
 public class MegaPoorHenHouse extends PoorHenHouse implements MegaPoorHenHouseLocal {

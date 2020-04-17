@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery.implicit;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * This bean has bean defining annotation hence is picked up in implicit archive.

@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.decorators.definition.producer;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
 
 @ApplicationScoped
 public class Bank {

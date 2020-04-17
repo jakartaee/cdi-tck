@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.interceptors.ordering.global;
 
-import javax.interceptor.Interceptor;
+import jakarta.interceptor.Interceptor;
 
 @Transactional
 @Interceptor

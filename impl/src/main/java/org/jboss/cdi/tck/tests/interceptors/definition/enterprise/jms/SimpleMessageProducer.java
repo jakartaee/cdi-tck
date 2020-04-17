@@ -16,15 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.jms;
 
-import javax.annotation.PostConstruct;
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.JMSException;
-import javax.jms.MessageProducer;
-import javax.jms.Queue;
-import javax.jms.Session;
-import javax.jms.TextMessage;
-import javax.jms.Topic;
+import jakarta.annotation.PostConstruct;
+import jakarta.jms.Connection;
+import jakarta.jms.ConnectionFactory;
+import jakarta.jms.JMSException;
+import jakarta.jms.MessageProducer;
+import jakarta.jms.Queue;
+import jakarta.jms.Session;
+import jakarta.jms.TextMessage;
+import jakarta.jms.Topic;
 
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.util.JndiLookupUtils;

@@ -16,14 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessInjectionTarget;
-import javax.servlet.ServletContextListener;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.jsp.tagext.SimpleTag;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessInjectionTarget;
+import jakarta.servlet.ServletContextListener;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.jsp.tagext.SimpleTag;
+import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 
 public class ProcessInjectionTargetObserver implements Extension {
 

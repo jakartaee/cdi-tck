@@ -16,7 +16,7 @@
   
   <section id="2.1.1" title="Component definition">
     <group>
-      <text>A Managed Bean can be declared by annotating its class with the |javax.annotation.ManagedBean| annotation.</text>
+      <text>A Managed Bean can be declared by annotating its class with the |jakarta.annotation.ManagedBean| annotation.</text>
       <assertion id="aa">
          <text>Verify a top-level class</text>
       </assertion>
@@ -105,14 +105,14 @@
   
   <section id="2.1.3" title="Lifecycle and Resource Injection">
     <group>
-      <text>Managed Beans may use the |javax.annotation.PostConstruct| and |javax.annotation.PreDestroy| annotations to identify methods to be called back by the container at the appropriate points in the bean's lifecycle.</text>
+      <text>Managed Beans may use the |jakarta.annotation.PostConstruct| and |jakarta.annotation.PreDestroy| annotations to identify methods to be called back by the container at the appropriate points in the bean's lifecycle.</text>
       
       <assertion id="a">
-        <text>Test the |javax.annotation.PostConstruct| annotation.</text>
+        <text>Test the |jakarta.annotation.PostConstruct| annotation.</text>
       </assertion>
       
       <assertion id="b">
-        <text>Test the |javax.annotation.PreDestroy| annotation.</text>
+        <text>Test the |jakarta.annotation.PreDestroy| annotation.</text>
       </assertion>
     </group>
     
@@ -189,7 +189,7 @@
   
   <section id="2.2.5" title="Interceptors">
     <assertion id="a" testable="false">
-      <text>An extension specification may add its own interceptor-like facilities to the predefined one. For example, an extension specification may allow declaring type-safe interceptors, defined using a different set of APIs than those in the |javax.interceptor| package.</text>
+      <text>An extension specification may add its own interceptor-like facilities to the predefined one. For example, an extension specification may allow declaring type-safe interceptors, defined using a different set of APIs than those in the |jakarta.interceptor| package.</text>
     </assertion>
   </section>
   

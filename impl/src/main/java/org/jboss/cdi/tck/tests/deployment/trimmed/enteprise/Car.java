@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.trimmed.enteprise;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class Car implements MotorizedVehicle {

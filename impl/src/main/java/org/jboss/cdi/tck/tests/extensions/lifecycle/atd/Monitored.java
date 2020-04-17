@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import javax.enterprise.util.AnnotationLiteral;
-import javax.interceptor.InterceptorBinding;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.interceptor.InterceptorBinding;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

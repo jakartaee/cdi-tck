@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class CheapLiteral extends AnnotationLiteral<Cheap> implements Cheap {
 }

@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.order;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

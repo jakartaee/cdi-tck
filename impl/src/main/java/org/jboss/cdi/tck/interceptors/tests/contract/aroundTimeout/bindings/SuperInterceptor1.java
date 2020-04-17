@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout.bindings;
 
-import javax.interceptor.AroundTimeout;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundTimeout;
+import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

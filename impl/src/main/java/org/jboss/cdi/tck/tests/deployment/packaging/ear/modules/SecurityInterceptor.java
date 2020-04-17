@@ -19,9 +19,9 @@ package org.jboss.cdi.tck.tests.deployment.packaging.ear.modules;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 /**
  * @author Martin Kouba

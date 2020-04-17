@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.Typed;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Typed;
 
 /**
  * 

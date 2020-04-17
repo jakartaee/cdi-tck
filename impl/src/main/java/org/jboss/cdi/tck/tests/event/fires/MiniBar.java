@@ -19,10 +19,10 @@ package org.jboss.cdi.tck.tests.event.fires;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.inject.Inject;
 
 public class MiniBar {
 

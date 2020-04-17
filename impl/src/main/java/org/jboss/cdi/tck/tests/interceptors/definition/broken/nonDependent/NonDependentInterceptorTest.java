@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.broken.nonDependent;
 
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

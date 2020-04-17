@@ -18,11 +18,11 @@ package org.jboss.cdi.tck.tests.lookup.modules.interceptors;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Priority;
-import javax.inject.Inject;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @SuppressWarnings("serial")
 @BarBinding

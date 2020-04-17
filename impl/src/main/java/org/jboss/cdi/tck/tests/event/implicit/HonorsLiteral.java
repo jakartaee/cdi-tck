@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.implicit;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class HonorsLiteral extends AnnotationLiteral<Honors> {
 }

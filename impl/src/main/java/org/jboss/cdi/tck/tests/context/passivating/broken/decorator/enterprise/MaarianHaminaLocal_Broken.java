@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.decorator.enterprise;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface MaarianHaminaLocal_Broken {

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("managedFoo")
 public class ManagedFoo implements Foo {

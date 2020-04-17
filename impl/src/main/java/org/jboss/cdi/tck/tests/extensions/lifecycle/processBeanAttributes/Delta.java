@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.New;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.New;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @Named
 @Stateless

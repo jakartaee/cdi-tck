@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Countryside {
 

@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.bean.bytype;
 
-import javax.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 public class AlternativeConnector extends Connector {

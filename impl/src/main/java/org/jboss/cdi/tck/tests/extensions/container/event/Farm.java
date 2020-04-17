@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.container.event;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class Farm {
     @SuppressWarnings("unused")

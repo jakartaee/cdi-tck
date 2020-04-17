@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct.bindings;
 
 import java.io.Serializable;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
 @AlphaBinding

@@ -18,11 +18,11 @@ package org.jboss.cdi.tck.tests.se.discovery.trimmed;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.ProcessBean;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessAnnotatedType;
+import jakarta.enterprise.inject.spi.ProcessBean;
+import jakarta.enterprise.inject.spi.ProcessBeanAttributes;
 
 public class TestExtension implements Extension {
 

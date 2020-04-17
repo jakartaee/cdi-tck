@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ejb;
 
-import javax.ejb.EJB;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.EJB;
+import jakarta.enterprise.inject.Produces;
 
 public class ResourceProducer {
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.jws.WebService;
 
 @WebService(endpointInterface = "org.jboss.cdi.tck.tests.lookup.injection.non.contextual.ws.SheepWS", serviceName = "SheepWS")

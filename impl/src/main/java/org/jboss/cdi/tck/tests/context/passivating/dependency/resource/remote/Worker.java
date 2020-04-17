@@ -20,10 +20,10 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.remote;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.SessionScoped;
 
 import org.jboss.cdi.tck.tests.context.passivating.dependency.resource.remote.ejb.FooRemote;
 

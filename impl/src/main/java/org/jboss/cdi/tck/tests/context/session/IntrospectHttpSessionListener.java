@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context.session;
 
-import javax.servlet.annotation.WebListener;
-import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
+import jakarta.servlet.annotation.WebListener;
+import jakarta.servlet.http.HttpSessionEvent;
+import jakarta.servlet.http.HttpSessionListener;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;

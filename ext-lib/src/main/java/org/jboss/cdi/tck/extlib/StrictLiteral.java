@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.extlib;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * Annotation literal for {@link Strict}

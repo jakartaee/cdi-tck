@@ -1,7 +1,7 @@
 package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 
-import javax.enterprise.inject.New;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.New;
+import jakarta.inject.Inject;
 
 public class Consumer {
 

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.enterprise.nonstatic;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Produces;
 
 @Stateless
 public class Foo_Broken implements FooLocal_Broken {

@@ -23,9 +23,9 @@ import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.AnnotationLiteral;
-import javax.enterprise.util.TypeLiteral;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

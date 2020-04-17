@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.param.modification;
 
-import javax.annotation.Priority;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.ObserverMethod;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.ObserverMethod;
 
 public class CounterObserver02 {
 

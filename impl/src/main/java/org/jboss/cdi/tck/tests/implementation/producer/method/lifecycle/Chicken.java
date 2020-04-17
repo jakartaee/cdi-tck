@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class Chicken {
     private static Egg egg = new Egg();

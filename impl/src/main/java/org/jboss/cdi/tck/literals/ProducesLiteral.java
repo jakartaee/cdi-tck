@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.literals;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * @author Tomas Remes

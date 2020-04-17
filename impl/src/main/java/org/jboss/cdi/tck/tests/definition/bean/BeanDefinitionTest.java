@@ -32,8 +32,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Set;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.spi.Bean;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

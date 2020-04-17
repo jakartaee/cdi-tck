@@ -20,8 +20,8 @@ import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES_WITH_ADDITIONAL_STEREOT
 
 import java.util.Set;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.spi.Bean;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

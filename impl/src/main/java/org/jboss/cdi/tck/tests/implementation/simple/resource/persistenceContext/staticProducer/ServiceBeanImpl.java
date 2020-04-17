@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.implementation.simple.resource.persistenceContext.staticProducer;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 /**
  * @author Marius Bogoevici

@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
-import javax.annotation.security.RolesAllowed;
-import javax.annotation.security.RunAs;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.annotation.security.RunAs;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
+import jakarta.interceptor.Interceptors;
 
 @Stateless
 @Interceptors(PrinterSecurityInterceptor.class)

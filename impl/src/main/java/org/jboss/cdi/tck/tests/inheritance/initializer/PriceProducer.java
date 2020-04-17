@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.inheritance.initializer;
 
 import java.math.BigDecimal;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class PriceProducer {
 

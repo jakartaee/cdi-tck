@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 @AnimalStereotype
 @FishStereotype

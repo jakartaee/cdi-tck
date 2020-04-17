@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context.conversation;
 
-import javax.enterprise.context.Conversation;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Conversation;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 public @Named
 class CloudController {

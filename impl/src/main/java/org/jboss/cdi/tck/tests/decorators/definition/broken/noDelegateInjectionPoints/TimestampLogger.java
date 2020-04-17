@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.noDelegateInjectionPoints;
 
-import javax.decorator.Decorator;
+import jakarta.decorator.Decorator;
 
 /**
  * @author pmuir

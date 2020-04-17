@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.se.context.request;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class ReqScopedCounter {

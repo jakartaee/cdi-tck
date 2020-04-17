@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class SuperInjectedSessionBean {

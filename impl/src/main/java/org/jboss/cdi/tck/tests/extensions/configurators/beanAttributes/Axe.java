@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.beanAttributes;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  *

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
-import javax.ejb.Stateful;
-import javax.inject.Inject;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Inject;
 
 /**
  * @author pmuir

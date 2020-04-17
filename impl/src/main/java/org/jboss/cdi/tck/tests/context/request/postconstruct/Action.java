@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.context.request.postconstruct;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.extensions.producer;
 
 import java.util.Set;
 
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.enterprise.inject.spi.InjectionTarget;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.inject.spi.InjectionTarget;
 
 public class CheckableInjectionTarget<T> implements InjectionTarget<T> {
     private InjectionTarget<T> wrappedInjectionTarget;

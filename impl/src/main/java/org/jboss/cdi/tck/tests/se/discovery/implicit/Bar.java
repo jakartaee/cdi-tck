@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.se.discovery.implicit;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class Bar {

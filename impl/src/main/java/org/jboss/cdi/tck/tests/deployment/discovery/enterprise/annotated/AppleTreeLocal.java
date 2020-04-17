@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery.enterprise.annotated;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface AppleTreeLocal {

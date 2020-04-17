@@ -17,17 +17,17 @@
 package org.jboss.cdi.tck.tests.extensions.configurators;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
-import javax.enterprise.inject.spi.ProcessInjectionPoint;
-import javax.enterprise.inject.spi.ProcessObserverMethod;
-import javax.enterprise.inject.spi.configurator.AnnotatedTypeConfigurator;
-import javax.enterprise.inject.spi.configurator.BeanAttributesConfigurator;
-import javax.enterprise.inject.spi.configurator.InjectionPointConfigurator;
-import javax.enterprise.inject.spi.configurator.ObserverMethodConfigurator;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessAnnotatedType;
+import jakarta.enterprise.inject.spi.ProcessBeanAttributes;
+import jakarta.enterprise.inject.spi.ProcessInjectionPoint;
+import jakarta.enterprise.inject.spi.ProcessObserverMethod;
+import jakarta.enterprise.inject.spi.configurator.AnnotatedTypeConfigurator;
+import jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator;
+import jakarta.enterprise.inject.spi.configurator.InjectionPointConfigurator;
+import jakarta.enterprise.inject.spi.configurator.ObserverMethodConfigurator;
 
 public class DummyConfiguringExtension implements Extension {
 

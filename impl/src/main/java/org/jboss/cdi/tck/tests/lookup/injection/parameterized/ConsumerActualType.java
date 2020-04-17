@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
 import java.util.List;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class ConsumerActualType {
 

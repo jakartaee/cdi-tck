@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.broken;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class BrokenWebBar implements BrokenBar {
 

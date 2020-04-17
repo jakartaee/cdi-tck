@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.decorators.builtin.transaction;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
-import javax.inject.Inject;
-import javax.transaction.UserTransaction;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionManagement;
+import jakarta.ejb.TransactionManagementType;
+import jakarta.inject.Inject;
+import jakarta.transaction.UserTransaction;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.BEAN)

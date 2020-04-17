@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.enterprise;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface FarmLocal {

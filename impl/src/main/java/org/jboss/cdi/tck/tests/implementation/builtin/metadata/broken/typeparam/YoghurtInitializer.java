@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.spi.Bean;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class YoghurtInitializer {

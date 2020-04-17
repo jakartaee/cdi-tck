@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.invalid;
 
-import javax.enterprise.inject.spi.AnnotatedType;
+import jakarta.enterprise.inject.spi.AnnotatedType;
 
 import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
 

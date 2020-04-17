@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.interceptorbinding;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @Missile(numberOfTargets = 10, level = Level.A, position = "sky")

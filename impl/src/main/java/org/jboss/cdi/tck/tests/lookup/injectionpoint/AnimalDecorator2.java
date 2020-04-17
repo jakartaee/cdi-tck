@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
 @Decorator
 public abstract class AnimalDecorator2 implements Animal {

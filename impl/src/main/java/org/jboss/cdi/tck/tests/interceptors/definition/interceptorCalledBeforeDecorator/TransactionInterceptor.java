@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 public class TransactionInterceptor {
     @AroundInvoke

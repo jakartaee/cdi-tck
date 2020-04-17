@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class TypeVariableObserver extends AbstractObserver {
 

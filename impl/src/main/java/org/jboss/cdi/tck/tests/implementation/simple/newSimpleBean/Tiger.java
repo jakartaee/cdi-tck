@@ -1,6 +1,6 @@
 package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 
-import javax.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 public class Tiger {

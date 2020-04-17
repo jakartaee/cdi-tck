@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.decorators.definition.broken.parameterizedTypesW
 
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
 
 @RequestScoped
 public class RadioProducer {

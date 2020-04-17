@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.spi.Bean;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Inject;
 
 @RequestScoped
 public class YoghurtConstructor {

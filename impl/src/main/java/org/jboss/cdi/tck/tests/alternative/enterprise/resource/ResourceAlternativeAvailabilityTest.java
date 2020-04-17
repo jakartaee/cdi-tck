@@ -24,10 +24,10 @@ import static org.testng.Assert.assertNotNull;
 
 import java.util.Set;
 
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.AnnotationLiteral;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

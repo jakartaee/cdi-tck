@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 /**
  * @author pmuir

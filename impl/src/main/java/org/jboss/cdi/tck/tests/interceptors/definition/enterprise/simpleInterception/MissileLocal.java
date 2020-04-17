@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.simpleInterception;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface MissileLocal {

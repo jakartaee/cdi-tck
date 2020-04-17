@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.decorators.builtin.event.complex;
 
 import java.util.Comparator;
 
-import javax.enterprise.inject.spi.ObserverMethod;
+import jakarta.enterprise.inject.spi.ObserverMethod;
 
 public class ObserverMethodComparator implements Comparator<ObserverMethod<?>> {
 

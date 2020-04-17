@@ -17,9 +17,9 @@
 
 package org.jboss.cdi.tck.tests.definition.stereotype.alternative.enterprise;
 
-import javax.ejb.Local;
-import javax.ejb.Singleton;
-import javax.enterprise.inject.Specializes;
+import jakarta.ejb.Local;
+import jakarta.ejb.Singleton;
+import jakarta.enterprise.inject.Specializes;
 
 @Mock
 @Singleton

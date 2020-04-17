@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.container.event;
 
-import static javax.enterprise.inject.spi.SessionBeanType.STATEFUL;
-import static javax.enterprise.inject.spi.SessionBeanType.STATELESS;
+import static jakarta.enterprise.inject.spi.SessionBeanType.STATEFUL;
+import static jakarta.enterprise.inject.spi.SessionBeanType.STATELESS;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS_EE;
@@ -28,10 +28,10 @@ import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_TARGET_EE;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_BEAN_DISCOVERY_EE;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_DISCOVERY_STEPS;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.Annotated;
-import javax.enterprise.inject.spi.AnnotatedType;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.Annotated;
+import jakarta.enterprise.inject.spi.AnnotatedType;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

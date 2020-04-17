@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent.transientreference;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.TransientReference;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.TransientReference;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 @RequestScoped
 public class Kitchen {

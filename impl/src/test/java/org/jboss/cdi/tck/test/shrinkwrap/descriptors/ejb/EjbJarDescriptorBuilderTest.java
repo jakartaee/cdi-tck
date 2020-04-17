@@ -58,11 +58,11 @@ public class EjbJarDescriptorBuilderTest {
         EjbJarDescriptor ejbJarDescriptor = new EjbJarDescriptorBuilder().messageDrivenBeans(
                 newMessageDriven("TestQueue", QueueMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
-                        .addActivationConfigProperty("destinationType", "javax.jms.Queue")
+                        .addActivationConfigProperty("destinationType", "jakarta.jms.Queue")
                         .addActivationConfigProperty("destinationLookup", "test_queue"),
                 newMessageDriven("TestTopic", TopicMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
-                        .addActivationConfigProperty("destinationType", "javax.jms.Topic")
+                        .addActivationConfigProperty("destinationType", "jakarta.jms.Topic")
                         .addActivationConfigProperty("destinationLookup", "test_topic")).build();
 
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod;
 
-import javax.ejb.Stateless;
-import javax.enterprise.event.ObservesAsync;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.event.ObservesAsync;
 
 @Stateless
 public class FoxTerrrier implements Terrier{

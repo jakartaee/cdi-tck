@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 /**
  * @author Kirill Gaevskii

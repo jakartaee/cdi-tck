@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority.contextLifecycleEvent;
 
-import javax.annotation.Priority;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Initialized;
-import javax.enterprise.event.Observes;
-import javax.interceptor.Interceptor;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Initialized;
+import jakarta.enterprise.event.Observes;
+import jakarta.interceptor.Interceptor;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

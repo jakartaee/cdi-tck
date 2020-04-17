@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve.enterprise;
 
-import javax.ejb.Stateful;
-import javax.enterprise.event.Observes;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.event.Observes;
 
 @Stateful
 public class Spitz implements LocalInterface {

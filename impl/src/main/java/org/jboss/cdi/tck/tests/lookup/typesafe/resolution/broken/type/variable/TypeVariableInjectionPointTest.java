@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.type.variable;
 
 import static org.jboss.cdi.tck.cdi.Sections.LEGAL_INJECTION_POINT_TYPES;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

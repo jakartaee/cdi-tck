@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.interceptor;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 public class Interceptor_Broken {
     @AroundInvoke

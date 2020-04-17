@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.se.context.activation.interceptor;
 
-import javax.enterprise.context.control.ActivateRequestContext;
-import javax.inject.Inject;
+import jakarta.enterprise.context.control.ActivateRequestContext;
+import jakarta.inject.Inject;
 
 @BeforeActivationBinding
 @ActivateRequestContext

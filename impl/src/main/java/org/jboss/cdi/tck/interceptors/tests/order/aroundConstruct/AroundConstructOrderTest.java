@@ -20,7 +20,7 @@ import static org.jboss.cdi.tck.interceptors.InterceptorsSections.ENABLING_INTER
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_ORDERING_RULES;
 import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 
-import javax.enterprise.inject.Instance;
+import jakarta.enterprise.inject.Instance;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

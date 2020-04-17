@@ -20,8 +20,8 @@ import static org.jboss.cdi.tck.cdi.Sections.BM_DECORATOR_RESOLUTION;
 
 import java.util.Set;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.ObserverMethod;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

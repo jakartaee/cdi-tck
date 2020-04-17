@@ -18,11 +18,11 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.AroundTimeout;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.AroundTimeout;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @SuppressWarnings("serial")
 @Interceptor

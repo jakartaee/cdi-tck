@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.interceptor.Interceptors;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.interceptor.Interceptors;
 
 @Interceptors(AnimalInterceptor.class)
 class Goat extends Animal {

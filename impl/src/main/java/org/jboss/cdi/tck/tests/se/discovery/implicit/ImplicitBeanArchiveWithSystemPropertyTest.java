@@ -22,8 +22,8 @@ import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.enterprise.inject.se.SeContainer;
-import javax.enterprise.inject.se.SeContainerInitializer;
+import jakarta.enterprise.inject.se.SeContainer;
+import jakarta.enterprise.inject.se.SeContainerInitializer;
 
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -52,7 +52,7 @@ public class ImplicitBeanArchiveWithSystemPropertyTest extends Arquillian {
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_SE, id = "a"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dk") })
     public void testImplicitArchiveDiscovered() {
         Map<String, Object> properties = new HashMap<>();
-        properties.put("javax.enterprise.inject.scan.implicit", true);
+        properties.put("jakarta.enterprise.inject.scan.implicit", true);
         try (SeContainer seContainer = SeContainerInitializer.newInstance().setProperties(properties).initialize()) {
             Bar bar = seContainer.select(Bar.class).get();
             Assert.assertNotNull(bar);

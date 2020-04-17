@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
-import javax.annotation.PreDestroy;
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
+import jakarta.annotation.PreDestroy;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ejb.Stateless;
 
 @Stateless
 @RolesAllowed("alarm")

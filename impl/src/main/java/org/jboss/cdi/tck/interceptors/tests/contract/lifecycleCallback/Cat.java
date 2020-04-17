@@ -18,14 +18,14 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
 import static org.testng.Assert.assertNotNull;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
-import javax.ejb.Stateful;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.interceptor.Interceptors;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Resource;
+import jakarta.ejb.Stateful;
+import jakarta.ejb.TransactionAttribute;
+import jakarta.ejb.TransactionAttributeType;
+import jakarta.interceptor.Interceptors;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 @Stateful
 @Interceptors(CatInterceptor.class)

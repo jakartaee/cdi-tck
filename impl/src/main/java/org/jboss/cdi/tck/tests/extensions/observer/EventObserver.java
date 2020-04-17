@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.observer;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class EventObserver {
     public void observeEventA(@Observes EventA event) {

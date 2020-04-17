@@ -21,10 +21,10 @@ import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
 import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_LIFECYCLE;
 import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

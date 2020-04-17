@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.dependentWithPublicField;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class Leopard_Broken {

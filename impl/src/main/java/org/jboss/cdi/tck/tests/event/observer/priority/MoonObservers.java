@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
-import javax.annotation.Priority;
-import javax.enterprise.event.Observes;
-import javax.interceptor.Interceptor;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.event.Observes;
+import jakarta.interceptor.Interceptor;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterce
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @FooBinding
 @SessionScoped

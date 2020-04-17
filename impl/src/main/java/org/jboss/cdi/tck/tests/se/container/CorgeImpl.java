@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.se.container;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CorgeImpl implements Corge {

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.spi.InterceptionFactory;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.spi.InterceptionFactory;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class BeanWithInvalidInjectionPoint {

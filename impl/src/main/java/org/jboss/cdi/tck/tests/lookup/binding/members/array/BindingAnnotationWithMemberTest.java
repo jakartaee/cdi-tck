@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.lookup.binding.members.array;
 import static org.jboss.cdi.tck.cdi.Sections.QUALIFIER_ANNOTATION_MEMBERS;
 import static org.testng.Assert.assertNotNull;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

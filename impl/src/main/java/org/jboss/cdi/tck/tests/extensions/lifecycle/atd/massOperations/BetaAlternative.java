@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd.massOperations;
 
-import javax.annotation.Priority;
-import javax.enterprise.inject.Alternative;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.inject.Alternative;
 
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.Alternatives;
 

@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.interceptorOrder;
 
-import javax.ejb.Stateful;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptors;
-import javax.interceptor.InvocationContext;
+import jakarta.ejb.Stateful;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptors;
+import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

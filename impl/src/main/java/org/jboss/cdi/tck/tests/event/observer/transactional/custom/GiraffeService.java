@@ -17,13 +17,13 @@
 
 package org.jboss.cdi.tck.tests.event.observer.transactional.custom;
 
-import javax.annotation.Resource;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
-import javax.transaction.UserTransaction;
+import jakarta.annotation.Resource;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.TransactionManagement;
+import jakarta.ejb.TransactionManagementType;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
+import jakarta.transaction.UserTransaction;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

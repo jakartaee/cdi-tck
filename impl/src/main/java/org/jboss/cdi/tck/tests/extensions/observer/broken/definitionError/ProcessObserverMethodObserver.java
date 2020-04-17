@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.observer.broken.definitionError;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessObserverMethod;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessObserverMethod;
 
 public class ProcessObserverMethodObserver implements Extension {
 

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.session.async;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class StatusBean {

@@ -18,12 +18,12 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
 import static org.testng.AssertJUnit.assertTrue;
 
-import javax.annotation.Resource;
-import javax.annotation.security.DeclareRoles;
-import javax.ejb.EJB;
-import javax.ejb.SessionContext;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.Resource;
+import jakarta.annotation.security.DeclareRoles;
+import jakarta.ejb.EJB;
+import jakarta.ejb.SessionContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 @DeclareRoles(value = { "student", "printer" })
 public class PrinterSecurityInterceptor {

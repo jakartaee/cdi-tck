@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.enterprise.remove;
 
 import java.io.Serializable;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface SessionScopedSessionInterface extends Serializable {

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized.multiple.bounds;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Default;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Inject;
 
 class ConsumerMultipleBounds<T extends BarImpl & Baz & Foo, U extends Bar & Baz> {
 

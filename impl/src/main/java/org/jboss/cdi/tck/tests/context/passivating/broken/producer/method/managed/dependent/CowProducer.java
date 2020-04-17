@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.managed.dependent;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class CowProducer {
 

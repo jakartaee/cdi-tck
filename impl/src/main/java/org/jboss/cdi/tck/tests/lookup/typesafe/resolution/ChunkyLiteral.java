@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class ChunkyLiteral extends AnnotationLiteral<Chunky> implements Chunky {
     public boolean realChunky() {

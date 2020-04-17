@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.observer;
 
-import javax.enterprise.event.Observes;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.enterprise.event.Observes;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 

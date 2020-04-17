@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.qualifiers;
 
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Specializes;
 
 public class StaticNestedClassesParent {
     @Mock

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.invocation;
 
-import javax.enterprise.context.Dependent;
+import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class FirstBean {

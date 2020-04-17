@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.broken.processAnnotatedObserverThrowsException;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessAnnotatedType;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessAnnotatedType;
 
 public class ProcessAnnotatedTypeObserver implements Extension {
     public void observeAnnotatedType(@Observes ProcessAnnotatedType<Dog> event) {

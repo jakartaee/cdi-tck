@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptions;
 
-import javax.annotation.PostConstruct;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.interceptor.InvocationContext;
 
 public class GoatInterceptor {
     private static boolean exceptionCaught = false;

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class StandardChickenHutch {
     private ChickenInterface chicken;

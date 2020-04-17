@@ -16,16 +16,16 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.custom;
 
-import static javax.enterprise.inject.spi.InterceptionType.AROUND_INVOKE;
-import static javax.enterprise.inject.spi.InterceptionType.AROUND_TIMEOUT;
-import static javax.enterprise.inject.spi.InterceptionType.POST_ACTIVATE;
-import static javax.enterprise.inject.spi.InterceptionType.POST_CONSTRUCT;
-import static javax.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
-import static javax.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
+import static jakarta.enterprise.inject.spi.InterceptionType.AROUND_INVOKE;
+import static jakarta.enterprise.inject.spi.InterceptionType.AROUND_TIMEOUT;
+import static jakarta.enterprise.inject.spi.InterceptionType.POST_ACTIVATE;
+import static jakarta.enterprise.inject.spi.InterceptionType.POST_CONSTRUCT;
+import static jakarta.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
+import static jakarta.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.AfterBeanDiscovery;
-import javax.enterprise.inject.spi.Extension;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
+import jakarta.enterprise.inject.spi.Extension;
 
 public class AfterBeanDiscoveryObserver implements Extension {
     public static final CustomInterceptorImplementation POST_CONSTRUCT_INTERCEPTOR = new CustomInterceptorImplementation(

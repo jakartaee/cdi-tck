@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.ear;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class FooBean {
 

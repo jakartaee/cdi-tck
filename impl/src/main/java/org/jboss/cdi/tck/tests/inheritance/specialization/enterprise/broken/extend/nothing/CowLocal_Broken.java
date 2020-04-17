@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise.broken.extend.nothing;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface CowLocal_Broken {

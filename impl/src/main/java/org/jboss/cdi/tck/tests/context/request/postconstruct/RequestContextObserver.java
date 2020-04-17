@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.request.postconstruct;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * @author Martin Kouba

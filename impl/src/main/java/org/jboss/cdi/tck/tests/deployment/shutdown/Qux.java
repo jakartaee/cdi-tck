@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.deployment.shutdown;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class Qux {

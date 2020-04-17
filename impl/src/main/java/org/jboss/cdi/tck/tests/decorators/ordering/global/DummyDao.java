@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.ordering.global;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 import org.jboss.cdi.tck.shrinkwrap.DummySessionBean;
 

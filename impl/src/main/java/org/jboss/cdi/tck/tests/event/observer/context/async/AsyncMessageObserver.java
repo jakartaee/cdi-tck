@@ -19,13 +19,13 @@ package org.jboss.cdi.tck.tests.event.observer.context.async;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.ObservesAsync;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.ObservesAsync;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
+import jakarta.transaction.SystemException;
+import jakarta.transaction.UserTransaction;
 
 @ApplicationScoped
 public class AsyncMessageObserver {

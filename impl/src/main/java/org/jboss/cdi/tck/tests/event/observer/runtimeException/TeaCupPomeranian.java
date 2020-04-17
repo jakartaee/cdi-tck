@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.runtimeException;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class TeaCupPomeranian {
 

@@ -3,7 +3,7 @@
     <parent>
         <artifactId>cdi-tck-parent</artifactId>
         <groupId>jakarta.enterprise</groupId>
-        <version>2.1.0-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>cdi-tck-impl</artifactId>
@@ -16,16 +16,6 @@
         <dependency>
             <groupId>jakarta.enterprise</groupId>
             <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jboss-interceptors-api_1.1_spec</artifactId>
-                    <groupId>org.jboss.spec.javax.interceptor</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>jsr250-api</artifactId>
-                    <groupId>javax.annotation</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -79,28 +69,28 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.spec.javax.ejb</groupId>
-            <artifactId>jboss-ejb-api_3.2_spec</artifactId>
+            <groupId>jakarta.ejb</groupId>
+            <artifactId>jakarta.ejb-api</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.spec.javax.interceptor</groupId>
-            <artifactId>jboss-interceptors-api_1.2_spec</artifactId>
+            <groupId>jakarta.interceptor</groupId>
+            <artifactId>jakarta.interceptor-api</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.spec.javax.annotation</groupId>
-            <artifactId>jboss-annotations-api_1.3_spec</artifactId>
+            <groupId>jakarta.annotation</groupId>
+            <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.spec.javax.resource</groupId>
-            <artifactId>jboss-connector-api_1.7_spec</artifactId>
+            <groupId>jakarta.resource</groupId>
+            <artifactId>jakarta.resource-api</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.spec.javax.jms</groupId>
-            <artifactId>jboss-jms-api_2.0_spec</artifactId>
+            <groupId>jakarta.jms</groupId>
+            <artifactId>jakarta.jms-api</artifactId>
         </dependency>
 
         <dependency>
@@ -160,8 +150,8 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>org.jboss.spec.javax.annotation</groupId>
-                                    <artifactId>jboss-annotations-api_1.3_spec</artifactId>
+                                    <groupId>jakarta.annotation</groupId>
+                                    <artifactId>jakarta.annotation-api</artifactId>
                                 </artifactItem>
                             </artifactItems>
                             <outputDirectory>${project.build.directory}/endorsed</outputDirectory>
@@ -451,17 +441,17 @@
                         <configuration>
                             <classes>${project.build.directory}/cdi-api</classes>
                             <packages>
-                                javax.decorator,
-                                javax.enterprise.context,
-                                javax.enterprise.context.control,
-                                javax.enterprise.context.spi,
-                                javax.enterprise.event,
-                                javax.enterprise.inject,
-                                javax.enterprise.inject.literal,
-                                javax.enterprise.inject.se,
-                                javax.enterprise.inject.spi,
-                                javax.enterprise.inject.spi.configurator,
-                                javax.enterprise.util
+                                jakarta.decorator,
+                                jakarta.enterprise.context,
+                                jakarta.enterprise.context.control,
+                                jakarta.enterprise.context.spi,
+                                jakarta.enterprise.event,
+                                jakarta.enterprise.inject,
+                                jakarta.enterprise.inject.literal,
+                                jakarta.enterprise.inject.se,
+                                jakarta.enterprise.inject.spi,
+                                jakarta.enterprise.inject.spi.configurator,
+                                jakarta.enterprise.util
                             </packages>
                             <attach>false</attach>
                             <sigfile>${project.build.directory}/cdi-api-jdk${jdk.major.version}.sig</sigfile>

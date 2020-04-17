@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Specializes;
 
 /**
  * This bean contains a producer field and specializes another bean which has the same producer field.

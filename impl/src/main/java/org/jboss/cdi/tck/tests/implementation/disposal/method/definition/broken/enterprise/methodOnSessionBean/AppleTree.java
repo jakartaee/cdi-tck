@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.enterprise.methodOnSessionBean;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 @Stateless
 public class AppleTree implements AppleTreeLocal {

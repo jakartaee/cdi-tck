@@ -22,12 +22,12 @@ import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESOURCE;
 import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_LIFECYCLE;
 import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 
-import javax.enterprise.context.spi.CreationalContext;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.AnnotationLiteral;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

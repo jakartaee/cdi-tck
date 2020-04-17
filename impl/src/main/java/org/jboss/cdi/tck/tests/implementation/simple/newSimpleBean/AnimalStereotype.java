@@ -25,9 +25,9 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Stereotype;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Stereotype;
+import jakarta.inject.Named;
 
 @Stereotype
 @Target({ TYPE, METHOD, FIELD })

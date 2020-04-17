@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class DaoProducer {
 

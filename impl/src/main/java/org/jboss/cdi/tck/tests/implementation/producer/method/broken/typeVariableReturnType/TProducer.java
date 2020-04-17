@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.typeVariableReturnType;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 
 public class TProducer {
     @Produces

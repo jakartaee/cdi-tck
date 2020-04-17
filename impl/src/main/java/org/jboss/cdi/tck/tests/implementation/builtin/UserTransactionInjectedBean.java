@@ -16,12 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin;
 
-import static javax.ejb.TransactionManagementType.BEAN;
+import static jakarta.ejb.TransactionManagementType.BEAN;
 
-import javax.ejb.Stateful;
-import javax.ejb.TransactionManagement;
-import javax.inject.Inject;
-import javax.transaction.UserTransaction;
+import jakarta.ejb.Stateful;
+import jakarta.ejb.TransactionManagement;
+import jakarta.inject.Inject;
+import jakarta.transaction.UserTransaction;
 
 /**
  * @author pmuir

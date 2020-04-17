@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.Produces;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.Produces;
 
 /**
  * Test that {@link Programmer#disposeCode(Code)} is not inherited.

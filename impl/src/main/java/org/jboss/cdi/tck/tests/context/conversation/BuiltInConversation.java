@@ -20,14 +20,14 @@ import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Default;
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.enterprise.context.Conversation;
+import jakarta.enterprise.context.ConversationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 @ConversationScoped
 @Named("builtin")
@@ -52,7 +52,7 @@ public class BuiltInConversation implements Serializable {
     }
 
     public boolean isNameCorrect() {
-        return getConversationBean().getName().equals("javax.enterprise.context.conversation");
+        return getConversationBean().getName().equals("jakarta.enterprise.context.conversation");
     }
 
     public boolean isDefaultConversationHasNullId() {

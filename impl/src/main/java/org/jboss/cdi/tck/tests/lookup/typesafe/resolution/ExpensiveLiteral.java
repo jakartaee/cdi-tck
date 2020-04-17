@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 abstract class ExpensiveLiteral extends AnnotationLiteral<Expensive> implements Expensive {
 

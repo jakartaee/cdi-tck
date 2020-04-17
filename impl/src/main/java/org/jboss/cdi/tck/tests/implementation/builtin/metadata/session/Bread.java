@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 import org.jboss.cdi.tck.tests.implementation.builtin.metadata.session.BakeryProduct;
 import org.jboss.cdi.tck.tests.implementation.builtin.metadata.session.BakeryProductDecorator;
 

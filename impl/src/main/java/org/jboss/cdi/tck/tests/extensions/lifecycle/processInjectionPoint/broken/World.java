@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.broken;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class World {
 

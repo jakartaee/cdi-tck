@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
-import javax.ejb.Stateful;
-import javax.inject.Inject;
-import javax.interceptor.Interceptors;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptors;
 
 @Stateful
 @Interceptors(FenceInterceptor.class)

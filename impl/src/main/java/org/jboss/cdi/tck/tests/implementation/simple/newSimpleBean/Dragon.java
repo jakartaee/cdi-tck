@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.inject.New;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.New;
+import jakarta.inject.Inject;
 
 public class Dragon {
 

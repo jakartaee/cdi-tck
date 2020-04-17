@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-import javax.enterprise.inject.Any;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Any;
+import jakarta.inject.Named;
 
 @Named
 @Any

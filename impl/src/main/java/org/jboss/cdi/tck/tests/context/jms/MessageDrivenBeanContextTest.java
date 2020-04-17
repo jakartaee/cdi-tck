@@ -27,7 +27,7 @@ import static org.testng.Assert.assertFalse;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -59,11 +59,11 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
         EjbJarDescriptor ejbJarDescriptor = new EjbJarDescriptorBuilder().messageDrivenBeans(
                 newMessageDriven("TestQueue", QueueMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
-                        .addActivationConfigProperty("destinationType", "javax.jms.Queue")
+                        .addActivationConfigProperty("destinationType", "jakarta.jms.Queue")
                         .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsQueue()),
                 newMessageDriven("TestTopic", TopicMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
-                        .addActivationConfigProperty("destinationType", "javax.jms.Topic")
+                        .addActivationConfigProperty("destinationType", "jakarta.jms.Topic")
                         .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsTopic())).build();
 
         return new WebArchiveBuilder().withTestClassPackage(MessageDrivenBeanContextTest.class).withEjbJarXml(ejbJarDescriptor)

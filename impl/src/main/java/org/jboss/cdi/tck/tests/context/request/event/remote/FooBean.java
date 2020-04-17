@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.request.event.remote;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 @Stateless
 public class FooBean implements FooRemote {

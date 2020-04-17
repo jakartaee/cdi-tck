@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.interceptors;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class BarSuperInterceptor {
 

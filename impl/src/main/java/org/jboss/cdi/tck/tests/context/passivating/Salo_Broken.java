@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.context.passivating;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 
 @SessionScoped
 public class Salo_Broken extends City implements Serializable {

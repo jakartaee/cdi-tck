@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.se.container;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class BazObserver {
 

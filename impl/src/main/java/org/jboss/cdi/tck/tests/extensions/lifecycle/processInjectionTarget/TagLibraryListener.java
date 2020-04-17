@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
-import javax.enterprise.inject.Vetoed;
-import javax.inject.Inject;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 
 @Vetoed
 public class TagLibraryListener implements ServletContextListener {

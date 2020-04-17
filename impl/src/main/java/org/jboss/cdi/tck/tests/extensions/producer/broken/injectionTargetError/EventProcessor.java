@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.broken.injectionTargetError;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessInjectionTarget;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessInjectionTarget;
 
 public class EventProcessor implements Extension {
     public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent) {

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.test.porting;
 
-import javax.enterprise.context.spi.Context;
+import jakarta.enterprise.context.spi.Context;
 
 import org.jboss.cdi.tck.spi.Contexts;
 

@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.decorators.builtin.transaction;
 import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 
-import javax.inject.Inject;
-import javax.transaction.Status;
+import jakarta.inject.Inject;
+import jakarta.transaction.Status;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("serial")
 public class TameLiteral extends AnnotationLiteral<Tame> {

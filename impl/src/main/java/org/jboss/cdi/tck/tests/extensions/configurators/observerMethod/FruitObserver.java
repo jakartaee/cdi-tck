@@ -17,8 +17,8 @@
 package org.jboss.cdi.tck.tests.extensions.configurators.observerMethod;
 
 import java.util.concurrent.atomic.AtomicBoolean;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 
 @ApplicationScoped
 public class FruitObserver {

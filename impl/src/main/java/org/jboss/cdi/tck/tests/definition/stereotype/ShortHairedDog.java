@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.definition.stereotype;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @AnimalStereotype
 @SessionScoped

@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.UnproxyableResolutionException;
-import javax.enterprise.inject.spi.InterceptionFactory;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.UnproxyableResolutionException;
+import jakarta.enterprise.inject.spi.InterceptionFactory;
 
 @ApplicationScoped
 public class InterceptedInstanceProducer {

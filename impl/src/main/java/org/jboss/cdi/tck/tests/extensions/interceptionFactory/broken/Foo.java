@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
-import javax.enterprise.inject.Vetoed;
+import jakarta.enterprise.inject.Vetoed;
 
 @Vetoed
 public class Foo {

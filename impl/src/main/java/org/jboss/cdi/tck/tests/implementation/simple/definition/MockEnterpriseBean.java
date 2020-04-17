@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import javax.ejb.EnterpriseBean;
-import javax.ejb.Stateless;
+import jakarta.ejb.EnterpriseBean;
+import jakarta.ejb.Stateless;
 
 /**
  * This mock originally implemented {@link EnterpriseBean} - does not correspond to relevant assertion.

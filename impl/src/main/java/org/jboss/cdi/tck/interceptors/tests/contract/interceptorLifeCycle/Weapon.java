@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 
 public class Weapon {
     

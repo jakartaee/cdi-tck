@@ -21,8 +21,8 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

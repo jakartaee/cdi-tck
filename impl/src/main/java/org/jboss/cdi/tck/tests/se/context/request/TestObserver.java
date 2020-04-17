@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.se.context.request;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.ObservesAsync;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.ObservesAsync;
 
 @ApplicationScoped
 public class TestObserver {

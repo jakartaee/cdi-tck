@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.alternative.selection.stereotype.priority;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  *

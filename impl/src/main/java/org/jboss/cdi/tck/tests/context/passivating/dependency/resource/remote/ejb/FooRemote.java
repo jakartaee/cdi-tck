@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.remote.ejb;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 @Remote
 public interface FooRemote {

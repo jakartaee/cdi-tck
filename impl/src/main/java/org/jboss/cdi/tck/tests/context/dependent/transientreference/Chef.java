@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent.transientreference;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.Dependent;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;

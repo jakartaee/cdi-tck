@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
-import javax.enterprise.inject.New;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.New;
+import jakarta.inject.Inject;
 
 /**
  * The container discovers <code>@New</code> qualified beans by inspecting injection points other enabled beans.

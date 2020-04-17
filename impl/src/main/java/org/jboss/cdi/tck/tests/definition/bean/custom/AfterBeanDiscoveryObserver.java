@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.definition.bean.custom;
 
 import java.lang.reflect.Type;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.*;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.*;
 
 public class AfterBeanDiscoveryObserver implements Extension {
 

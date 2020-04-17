@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalClass;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 final class Tuna_Broken {

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged.broken;
 
-import javax.enterprise.inject.spi.Unmanaged;
-import javax.enterprise.inject.spi.Unmanaged.UnmanagedInstance;
+import jakarta.enterprise.inject.spi.Unmanaged;
+import jakarta.enterprise.inject.spi.Unmanaged.UnmanagedInstance;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

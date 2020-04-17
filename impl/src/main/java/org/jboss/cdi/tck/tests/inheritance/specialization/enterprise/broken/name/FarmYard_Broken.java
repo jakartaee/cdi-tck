@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise.broken.name;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.Specializes;
-import javax.inject.Named;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.Specializes;
+import jakarta.inject.Named;
 
 @Specializes
 @Stateful

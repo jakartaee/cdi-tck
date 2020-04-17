@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.name;
 
-import javax.annotation.Resource;
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Named;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Named;
 
 public class ResourceProducer {
 

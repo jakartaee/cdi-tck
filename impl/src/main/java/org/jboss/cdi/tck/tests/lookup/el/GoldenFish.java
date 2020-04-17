@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("magic.golden.fish")
 public class GoldenFish {

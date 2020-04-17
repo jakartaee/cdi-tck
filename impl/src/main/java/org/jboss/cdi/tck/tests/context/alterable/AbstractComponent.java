@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.alterable;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 
 public abstract class AbstractComponent {
 

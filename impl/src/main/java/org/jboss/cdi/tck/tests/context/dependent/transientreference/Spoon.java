@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent.transientreference;
 
-import javax.enterprise.inject.TransientReference;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.TransientReference;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 public class Spoon {
 

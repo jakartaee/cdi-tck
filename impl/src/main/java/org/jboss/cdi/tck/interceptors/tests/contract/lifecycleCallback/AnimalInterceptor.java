@@ -21,10 +21,10 @@ import static org.testng.Assert.assertNotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 public class AnimalInterceptor {
     private static Set<String> postConstructInterceptorCalledFor = new HashSet<String>();

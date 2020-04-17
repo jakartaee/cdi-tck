@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 /**
  * @author Martin Kouba

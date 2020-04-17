@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class Delta implements Ping {

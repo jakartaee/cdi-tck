@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.manager.provider.init;
 
-import javax.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 public class Charlie implements Marker {

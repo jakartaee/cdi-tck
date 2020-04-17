@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
-import javax.inject.Inject;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 
 public class TagLibraryListener implements ServletContextListener {
     @Inject

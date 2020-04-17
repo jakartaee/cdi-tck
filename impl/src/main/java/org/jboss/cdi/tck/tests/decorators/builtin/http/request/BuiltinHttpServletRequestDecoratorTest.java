@@ -30,10 +30,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
-import javax.enterprise.inject.spi.Decorator;
-import javax.inject.Inject;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.enterprise.inject.spi.Decorator;
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;

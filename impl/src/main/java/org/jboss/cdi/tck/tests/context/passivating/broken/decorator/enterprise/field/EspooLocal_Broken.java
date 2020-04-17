@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.decorator.enterprise.field;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface EspooLocal_Broken {

@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.event.fires.sync;
 
 import static org.jboss.cdi.tck.cdi.Sections.FIRING_EVENTS_SYNCHRONOUSLY;
 
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.broken.validation.ambiguous;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class Observer {
     public void observe(@Observes String event, Animal animal) {

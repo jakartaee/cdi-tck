@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.array;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class TypeVariableBrokenProducer<T> {
 

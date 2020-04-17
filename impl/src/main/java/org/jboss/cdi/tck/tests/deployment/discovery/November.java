@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery;
 
-import javax.enterprise.inject.Model;
+import jakarta.enterprise.inject.Model;
 
 @Model
 public class November implements Ping {

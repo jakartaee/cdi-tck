@@ -21,7 +21,7 @@ import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 

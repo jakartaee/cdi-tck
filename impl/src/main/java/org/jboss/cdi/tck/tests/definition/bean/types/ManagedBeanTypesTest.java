@@ -25,8 +25,8 @@ import static org.testng.Assert.assertNotNull;
 import java.util.Collection;
 import java.util.List;
 
-import javax.enterprise.inject.spi.Bean;
-import javax.enterprise.util.TypeLiteral;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

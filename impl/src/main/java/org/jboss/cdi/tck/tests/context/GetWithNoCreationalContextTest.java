@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.context;
 
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.context.spi.Contextual;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.spi.Contextual;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

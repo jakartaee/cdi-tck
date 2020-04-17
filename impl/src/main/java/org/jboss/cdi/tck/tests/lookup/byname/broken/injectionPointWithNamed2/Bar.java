@@ -1,6 +1,6 @@
 package org.jboss.cdi.tck.tests.lookup.byname.broken.injectionPointWithNamed2;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named
 public class Bar {

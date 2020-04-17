@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import javax.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.context.spi.CreationalContext;
 
 public class CreationalContextImpl<T> implements CreationalContext<T> {
 

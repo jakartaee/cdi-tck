@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.request.ws;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class ObservingBean {

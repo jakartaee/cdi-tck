@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution.ejb;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @LoggedBinding
 @Stateless

@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.initializer.broken.parameterAnnot
 
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_INITIALIZER;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

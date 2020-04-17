@@ -20,9 +20,9 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 
 import java.util.Arrays;
 
-import javax.enterprise.event.TransactionPhase;
-import javax.inject.Inject;
-import javax.transaction.SystemException;
+import jakarta.enterprise.event.TransactionPhase;
+import jakarta.inject.Inject;
+import jakarta.transaction.SystemException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

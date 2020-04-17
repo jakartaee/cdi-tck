@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery.enterprise;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Stateful
 public class Charlie implements CharlieLocal {

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named
 public class NamedBean {

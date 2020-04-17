@@ -22,10 +22,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.event.Reception;
-import javax.enterprise.event.TransactionPhase;
-import javax.enterprise.inject.spi.EventContext;
-import javax.enterprise.inject.spi.ObserverMethod;
+import jakarta.enterprise.event.Reception;
+import jakarta.enterprise.event.TransactionPhase;
+import jakarta.enterprise.inject.spi.EventContext;
+import jakarta.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

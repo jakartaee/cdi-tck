@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.simpleInterception;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Airborne
 @Stateless

@@ -26,8 +26,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.enterprise.inject.Vetoed;
-import javax.inject.Qualifier;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Qualifier;
 
 @Vetoed
 @Target({ TYPE, METHOD, PARAMETER, FIELD })

@@ -16,12 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.implementation.builtin.broken.transaction;
 
-import static javax.ejb.TransactionManagementType.CONTAINER;
+import static jakarta.ejb.TransactionManagementType.CONTAINER;
 
-import javax.ejb.Stateful;
-import javax.ejb.TransactionManagement;
-import javax.inject.Inject;
-import javax.transaction.UserTransaction;
+import jakarta.ejb.Stateful;
+import jakarta.ejb.TransactionManagement;
+import jakarta.inject.Inject;
+import jakarta.transaction.UserTransaction;
 
 /**
  * 

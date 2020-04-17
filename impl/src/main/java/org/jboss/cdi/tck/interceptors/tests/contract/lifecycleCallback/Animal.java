@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public abstract class Animal {
 

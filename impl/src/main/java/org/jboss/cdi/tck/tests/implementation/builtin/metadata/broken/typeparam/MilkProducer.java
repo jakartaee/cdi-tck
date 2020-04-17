@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.Bean;
 
 /**
  * @author Martin Kouba

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Alternative;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 public class DisabledObserver {

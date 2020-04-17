@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class Turkey {
 

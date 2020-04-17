@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.statelessWithConversationScope;
 
-import javax.ejb.Stateless;
-import javax.enterprise.context.ConversationScoped;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.ConversationScoped;
 
 @Stateless
 @ConversationScoped

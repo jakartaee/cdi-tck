@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
-import javax.enterprise.inject.Typed;
+import jakarta.enterprise.inject.Typed;
 
 @Typed()
 public class Sheep extends AbstractAnimal {

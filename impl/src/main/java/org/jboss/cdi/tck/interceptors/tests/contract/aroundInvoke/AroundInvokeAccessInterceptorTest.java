@@ -22,7 +22,7 @@ import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BUSINESS_METHO
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import javax.transaction.UserTransaction;
+import jakarta.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

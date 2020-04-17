@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.parameterAnnotatedAsyncObserves;
 
-import javax.enterprise.event.ObservesAsync;
-import javax.inject.Inject;
+import jakarta.enterprise.event.ObservesAsync;
+import jakarta.inject.Inject;
 
 public class FoodConsumer {
 

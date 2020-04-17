@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
-import javax.enterprise.inject.Vetoed;
-import javax.inject.Inject;
-import javax.servlet.jsp.tagext.SimpleTagSupport;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Inject;
+import jakarta.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
 @Vetoed

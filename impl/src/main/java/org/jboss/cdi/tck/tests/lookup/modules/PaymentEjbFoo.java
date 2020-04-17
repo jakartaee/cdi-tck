@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules;
 
-import javax.ejb.Local;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
+import jakarta.ejb.Local;
+import jakarta.ejb.LocalBean;
+import jakarta.ejb.Stateless;
 
 @LocalBean
 @Local(Foo.class)

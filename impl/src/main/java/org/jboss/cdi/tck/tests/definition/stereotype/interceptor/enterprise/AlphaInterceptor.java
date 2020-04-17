@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.interceptor.enterprise;
 
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @AlphaBinding
 @Interceptor

@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
 import java.security.Principal;
 import java.util.Collections;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;

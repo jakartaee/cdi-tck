@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.sessionbean;
 
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.Singleton;
 
 @Singleton
 public class Hammer {

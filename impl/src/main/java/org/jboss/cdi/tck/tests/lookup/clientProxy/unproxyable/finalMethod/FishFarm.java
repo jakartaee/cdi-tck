@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class FishFarm {
     @Inject

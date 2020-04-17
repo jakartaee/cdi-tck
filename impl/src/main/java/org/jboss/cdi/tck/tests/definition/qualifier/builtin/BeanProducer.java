@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Produces;
-import javax.inject.Named;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Named;
 
 public class BeanProducer {
     

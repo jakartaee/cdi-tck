@@ -17,14 +17,14 @@
 package org.jboss.cdi.tck.tests.context.activation;
 
 import java.io.IOException;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.control.RequestContextController;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.control.RequestContextController;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "TestServlet", urlPatterns = { "/test" })
 public class TestServlet extends HttpServlet {

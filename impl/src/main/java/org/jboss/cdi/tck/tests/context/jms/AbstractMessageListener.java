@@ -3,12 +3,12 @@ package org.jboss.cdi.tck.tests.context.jms;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.jms.TextMessage;
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jakarta.jms.JMSException;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
+import jakarta.jms.TextMessage;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 public class AbstractMessageListener implements MessageListener {

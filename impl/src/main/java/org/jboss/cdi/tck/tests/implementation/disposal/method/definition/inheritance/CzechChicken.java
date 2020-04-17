@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 /**
  * @author Martin Kouba

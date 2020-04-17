@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class LadybirdSpider extends Spider {

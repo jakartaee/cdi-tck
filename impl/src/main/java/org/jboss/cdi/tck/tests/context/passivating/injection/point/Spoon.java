@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.context.passivating.injection.point;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
 @SessionScoped

@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.tests.interceptors.ordering.global;
 
-import javax.annotation.Priority;
-import javax.interceptor.Interceptor;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.Interceptor;
 
 @Priority(1005)
 @Transactional

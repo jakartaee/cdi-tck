@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.InjectionPoint;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 
 public class Cat implements Animal {
     @Inject

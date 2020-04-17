@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.request.jaxrs;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RequestScoped

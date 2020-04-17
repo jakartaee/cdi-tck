@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.alternative.selection.enterprise;
 
-import javax.annotation.Priority;
-import javax.ejb.Singleton;
-import javax.enterprise.inject.Alternative;
+import jakarta.annotation.Priority;
+import jakarta.ejb.Singleton;
+import jakarta.enterprise.inject.Alternative;
 
 @Priority(1000)
 @Alternative

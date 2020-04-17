@@ -20,15 +20,15 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-import javax.annotation.Resource;
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.EJB;
-import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.TransactionPhase;
+import jakarta.annotation.Resource;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.ejb.EJB;
+import jakarta.ejb.SessionContext;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.TransactionPhase;
 import javax.naming.InitialContext;
-import javax.transaction.TransactionSynchronizationRegistry;
+import jakarta.transaction.TransactionSynchronizationRegistry;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
@@ -88,7 +88,7 @@ public class FooObserver implements ObserverLocal {
         try {
             printer.tryAccess();
             fail("Transactional observer method was NOT called within the same client security context.");
-        } catch (javax.ejb.EJBAccessException expected) {
+        } catch (jakarta.ejb.EJBAccessException expected) {
             // OK
         }
 

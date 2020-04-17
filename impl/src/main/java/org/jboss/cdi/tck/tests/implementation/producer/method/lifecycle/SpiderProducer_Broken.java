@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
 
 public class SpiderProducer_Broken {
 

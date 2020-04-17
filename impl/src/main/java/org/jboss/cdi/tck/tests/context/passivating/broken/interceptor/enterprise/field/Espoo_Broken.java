@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.interceptor.enterprise.field;
 
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
-import javax.interceptor.Interceptors;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.interceptor.Interceptors;
 
 @Stateful
 @SessionScoped

@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 
 @RequestScoped
 public class Cat {

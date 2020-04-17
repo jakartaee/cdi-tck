@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.event.broken.observer.dependentIsConditionalObse
 
 import static org.jboss.cdi.tck.cdi.Sections.CONDITIONAL_OBSERVER_METHODS;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

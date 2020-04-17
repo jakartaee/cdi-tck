@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.war.modules;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba

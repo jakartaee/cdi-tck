@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.modif
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 
 @SessionScoped
 @SuppressWarnings("serial")

@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken
 
 import java.util.List;
 
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 public class Producer {
 

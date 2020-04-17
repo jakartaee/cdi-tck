@@ -27,6 +27,6 @@ import java.lang.annotation.Target;
 @Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 @Documented
-@javax.interceptor.InterceptorBinding
+@jakarta.interceptor.InterceptorBinding
 public @interface AfterActivationBinding {
 }

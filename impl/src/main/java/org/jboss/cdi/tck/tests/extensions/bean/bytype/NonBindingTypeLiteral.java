@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.bean.bytype;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class NonBindingTypeLiteral extends AnnotationLiteral<NonBindingType> implements NonBindingType {
 

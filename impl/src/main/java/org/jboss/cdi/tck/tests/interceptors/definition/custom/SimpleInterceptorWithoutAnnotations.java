@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.custom;
 
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.InvocationContext;
 
 public class SimpleInterceptorWithoutAnnotations {
     public Object intercept(InvocationContext ctx) throws Exception {

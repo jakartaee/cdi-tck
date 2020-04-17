@@ -20,8 +20,8 @@ import static org.jboss.cdi.tck.TestGroups.SE;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
 import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 
-import javax.enterprise.inject.se.SeContainer;
-import javax.enterprise.inject.se.SeContainerInitializer;
+import jakarta.enterprise.inject.se.SeContainer;
+import jakarta.enterprise.inject.se.SeContainerInitializer;
 
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ImplicitBeanArchiveSETest extends Arquillian {
 
-    private static final String IMPLICIT_SCAN_KEY = "javax.enterprise.inject.scan.implicit";
+    private static final String IMPLICIT_SCAN_KEY = "jakarta.enterprise.inject.scan.implicit";
 
     @Deployment
     public static Archive<?> deployment() {

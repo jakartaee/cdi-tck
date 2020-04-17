@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.invoca
 
 import static org.jboss.cdi.tck.cdi.Sections.DISPOSER_METHOD_DISPOSED_PARAMETER;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

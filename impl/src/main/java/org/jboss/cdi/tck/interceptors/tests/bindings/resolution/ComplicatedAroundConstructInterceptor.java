@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
-import javax.interceptor.AroundConstruct;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @TransactionalBinding

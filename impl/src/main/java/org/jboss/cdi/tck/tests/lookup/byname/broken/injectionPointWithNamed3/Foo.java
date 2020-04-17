@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.broken.injectionPointWithNamed3;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 public class Foo {
     @Inject

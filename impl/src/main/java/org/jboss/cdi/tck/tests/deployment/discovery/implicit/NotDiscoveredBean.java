@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.discovery.implicit;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 public class NotDiscoveredBean {
 

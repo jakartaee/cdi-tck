@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasObservesParameter;
 
-import javax.enterprise.event.Observes;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 public class ObservingConstructor {
 

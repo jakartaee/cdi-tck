@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.context.passivating.transientreference;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.TransientReference;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.TransientReference;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
 @SessionScoped

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
-import javax.enterprise.event.Observes;
-import javax.inject.Named;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Named;
 
 @Named("Teddy")
 public class Pomeranian {

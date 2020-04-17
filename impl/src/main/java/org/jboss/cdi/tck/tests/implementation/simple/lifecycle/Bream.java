@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
 public class Bream implements Serializable {

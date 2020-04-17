@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes.producer.field;
 
-import javax.enterprise.context.ConversationScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ConversationScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Produces;
 
 public class ProducerFieldWithTooManyScopeTypes_Broken {
     @Produces

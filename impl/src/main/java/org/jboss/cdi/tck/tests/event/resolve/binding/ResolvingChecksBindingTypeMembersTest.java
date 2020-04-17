@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.event.resolve.binding;
 import static org.jboss.cdi.tck.cdi.Sections.EVENT_QUALIFIER_TYPES_WITH_MEMBERS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD_EVENT_PARAMETER;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

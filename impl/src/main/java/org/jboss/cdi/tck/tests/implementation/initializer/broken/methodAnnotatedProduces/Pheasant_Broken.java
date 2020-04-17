@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.methodAnnotatedProduces;
 
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 
 public class Pheasant_Broken {
 

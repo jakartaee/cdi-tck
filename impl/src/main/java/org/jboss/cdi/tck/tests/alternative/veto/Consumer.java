@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.alternative.veto;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class Consumer {

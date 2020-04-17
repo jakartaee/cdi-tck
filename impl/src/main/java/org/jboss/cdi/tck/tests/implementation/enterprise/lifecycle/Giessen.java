@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.lifecycle;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @Stateless
 public class Giessen implements NeueStadt, GeschichtslosStadt {

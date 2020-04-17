@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 /**
  * Contains producer for Spider which always is a null value and in Dependent scope

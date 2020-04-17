@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint;
 
-import javax.enterprise.inject.Vetoed;
-import javax.inject.Inject;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Inject;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 
 @SuppressWarnings("serial")
 @Vetoed

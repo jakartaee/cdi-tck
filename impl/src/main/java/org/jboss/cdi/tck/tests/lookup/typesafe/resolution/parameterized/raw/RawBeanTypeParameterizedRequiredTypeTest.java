@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized.raw;
 import static org.jboss.cdi.tck.cdi.Sections.ASSIGNABLE_PARAMETERS;
 import static org.testng.Assert.assertEquals;
 
-import javax.enterprise.util.TypeLiteral;
+import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

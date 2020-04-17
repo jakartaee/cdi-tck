@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.passivating.validation;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 import static org.testng.Assert.assertEquals;
 
-import javax.enterprise.inject.spi.InterceptionType;
+import jakarta.enterprise.inject.spi.InterceptionType;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

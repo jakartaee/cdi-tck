@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.interceptors.definition.enterprise.jms;
 
 import java.util.concurrent.LinkedBlockingDeque;
 
-import javax.jms.Message;
-import javax.jms.MessageListener;
+import jakarta.jms.Message;
+import jakarta.jms.MessageListener;
 
 @Missile
 public class MessageDrivenMissile implements MessageListener {

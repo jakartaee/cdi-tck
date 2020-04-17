@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.statelessDecorator;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface BulldogLocal_Broken {

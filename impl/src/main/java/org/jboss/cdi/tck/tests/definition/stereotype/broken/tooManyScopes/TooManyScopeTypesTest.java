@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.definition.stereotype.broken.tooManyScopes;
 import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
 import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPE_DEFAULT_SCOPE;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

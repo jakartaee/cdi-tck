@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 
-import javax.interceptor.Interceptors;
+import jakarta.interceptor.Interceptors;
 
 @Interceptors({ Interceptor1.class, Interceptor2.class })
 class SimpleBean {

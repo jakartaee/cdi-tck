@@ -20,7 +20,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Set;
 
-import javax.enterprise.inject.spi.AnnotatedField;
+import jakarta.enterprise.inject.spi.AnnotatedField;
 
 public class AnnotatedFieldWrapper<X> extends AnnotatedMemberWrapper<X> implements AnnotatedField<X> {
 

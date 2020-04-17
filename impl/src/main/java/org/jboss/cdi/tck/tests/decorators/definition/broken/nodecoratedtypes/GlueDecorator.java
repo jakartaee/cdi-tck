@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nodecoratedtypes;
 
-import javax.decorator.Delegate;
-import javax.enterprise.inject.Vetoed;
-import javax.inject.Inject;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Inject;
 
 @Vetoed
 public class GlueDecorator implements Glue {

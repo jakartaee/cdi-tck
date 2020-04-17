@@ -21,8 +21,8 @@ import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_ORDERING;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.enterprise.order;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.ejb.Stateful;
-import javax.interceptor.Interceptors;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.ejb.Stateful;
+import jakarta.interceptor.Interceptors;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

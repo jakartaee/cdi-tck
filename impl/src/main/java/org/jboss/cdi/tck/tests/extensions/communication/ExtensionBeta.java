@@ -17,11 +17,11 @@
 
 package org.jboss.cdi.tck.tests.extensions.communication;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessBean;
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessBean;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

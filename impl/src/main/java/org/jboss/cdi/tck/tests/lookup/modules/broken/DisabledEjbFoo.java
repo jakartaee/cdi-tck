@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.broken;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Alternative;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 @Stateless

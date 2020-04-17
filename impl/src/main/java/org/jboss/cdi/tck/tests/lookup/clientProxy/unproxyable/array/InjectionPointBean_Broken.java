@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.array;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 public class InjectionPointBean_Broken {
     @Inject

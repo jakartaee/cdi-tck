@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.event.observer.async.basic;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.Priority;
-import javax.enterprise.event.Observes;
-import javax.enterprise.event.ObservesAsync;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.ObservesAsync;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

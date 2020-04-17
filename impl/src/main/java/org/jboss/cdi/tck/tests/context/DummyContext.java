@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.context;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.context.spi.Context;
-import javax.enterprise.context.spi.Contextual;
-import javax.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.context.spi.Context;
+import jakarta.enterprise.context.spi.Contextual;
+import jakarta.enterprise.context.spi.CreationalContext;
 
 public class DummyContext implements Context {
     public <T> T get(Contextual<T> bean, CreationalContext<T> creationalContext) {

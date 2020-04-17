@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 public class DogProducer {
     public static final String QUIET_DOG_COLOR = "Black";

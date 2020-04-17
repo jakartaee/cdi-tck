@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.deployment.trimmed.enteprise;
 
-import javax.ejb.Singleton;
+import jakarta.ejb.Singleton;
 
 @Singleton
 public class Bike {

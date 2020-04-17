@@ -24,11 +24,11 @@ import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
 
-import javax.enterprise.inject.AmbiguousResolutionException;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.AmbiguousResolutionException;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 public abstract class AssertBean {
 

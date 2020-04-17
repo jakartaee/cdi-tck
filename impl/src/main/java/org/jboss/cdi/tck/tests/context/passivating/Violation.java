@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating;
 
-import javax.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Alternative;
 
 @Alternative
 public class Violation {

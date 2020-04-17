@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @Standard
 public class WebPaymentBar implements Bar {

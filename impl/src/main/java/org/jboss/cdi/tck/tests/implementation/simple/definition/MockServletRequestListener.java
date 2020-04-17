@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import javax.servlet.ServletRequestEvent;
-import javax.servlet.ServletRequestListener;
+import jakarta.servlet.ServletRequestEvent;
+import jakarta.servlet.ServletRequestListener;
 
 public class MockServletRequestListener implements ServletRequestListener {
 

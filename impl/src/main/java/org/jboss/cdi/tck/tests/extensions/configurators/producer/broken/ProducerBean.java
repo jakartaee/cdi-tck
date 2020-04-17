@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.producer.broken;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Produces;
 
 /**
  *

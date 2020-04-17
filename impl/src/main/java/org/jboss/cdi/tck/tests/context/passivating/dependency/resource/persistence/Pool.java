@@ -19,9 +19,9 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persiste
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 import javax.sql.DataSource;
 
 @SessionScoped

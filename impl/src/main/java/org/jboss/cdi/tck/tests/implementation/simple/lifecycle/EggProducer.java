@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
 
 public class EggProducer {
     private static boolean eggDisposed = false;

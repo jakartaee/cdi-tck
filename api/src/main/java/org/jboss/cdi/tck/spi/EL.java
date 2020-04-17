@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.spi;
 
-import javax.el.ELContext;
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.el.ELContext;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 /**
  * This interface provides operations relating to EL.

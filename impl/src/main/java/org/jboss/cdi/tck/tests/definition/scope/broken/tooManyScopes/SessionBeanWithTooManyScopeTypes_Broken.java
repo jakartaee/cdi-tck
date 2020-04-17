@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes;
 
-import javax.ejb.Singleton;
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
+import jakarta.ejb.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 
 @ApplicationScoped
 @Dependent

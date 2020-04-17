@@ -23,8 +23,8 @@ import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE_VALIDITY;
 
 import java.io.IOException;
 
-import javax.enterprise.context.ContextNotActiveException;
-import javax.enterprise.context.spi.Context;
+import jakarta.enterprise.context.ContextNotActiveException;
+import jakarta.enterprise.context.spi.Context;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

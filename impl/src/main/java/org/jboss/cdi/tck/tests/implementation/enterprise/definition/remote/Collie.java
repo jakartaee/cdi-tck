@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition.remote;
 
-import javax.ejb.Singleton;
+import jakarta.ejb.Singleton;
 
 @Tame
 @Singleton

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.observer.broken.exception;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class EventCObserver {
     public void observeEvent(@Observes EventC event) {

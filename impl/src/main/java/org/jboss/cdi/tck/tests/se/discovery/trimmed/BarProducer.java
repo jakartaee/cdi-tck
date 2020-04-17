@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.se.discovery.trimmed;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InterceptionFactory;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.InterceptionFactory;
 
 @TestStereotype
 public class BarProducer {

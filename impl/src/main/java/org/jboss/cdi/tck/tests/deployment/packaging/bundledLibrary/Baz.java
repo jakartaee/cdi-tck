@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.deployment.packaging.bundledLibrary;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
 /**
  * Injects bar from bean archive - EAR lib.

@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bootstrap.unavailable.methods;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.enterprise.event.Observes;
 
 @Named("foo")
 public class Foo {

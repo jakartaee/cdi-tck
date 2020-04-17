@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.broken.indirectoverride;
 
-import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.Specializes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Specializes;
 
 public class ShoeShop_Broken extends MallShop {
     @Override

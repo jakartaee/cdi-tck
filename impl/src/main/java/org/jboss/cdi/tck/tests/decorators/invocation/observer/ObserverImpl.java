@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation.observer;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 /**
  * @author pmuir

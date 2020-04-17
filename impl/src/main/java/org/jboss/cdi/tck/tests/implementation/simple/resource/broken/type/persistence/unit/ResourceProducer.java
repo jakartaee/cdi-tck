@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.persistence.unit;
 
-import javax.enterprise.inject.Produces;
-import javax.persistence.PersistenceUnit;
+import jakarta.enterprise.inject.Produces;
+import jakarta.persistence.PersistenceUnit;
 
 import org.jboss.cdi.tck.tests.implementation.simple.resource.persistenceContext.Database;
 

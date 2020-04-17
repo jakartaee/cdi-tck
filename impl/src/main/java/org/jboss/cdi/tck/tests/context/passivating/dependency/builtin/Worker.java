@@ -20,10 +20,10 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.builtin;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
 
 @SessionScoped
 public class Worker implements Serializable {

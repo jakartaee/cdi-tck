@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.enterprise;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface EnglishBorderCollieLocal {

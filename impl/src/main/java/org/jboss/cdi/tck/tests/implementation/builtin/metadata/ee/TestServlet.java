@@ -18,12 +18,12 @@
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.ee;
 
 import java.io.IOException;
-import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
 
 @WebServlet("/test")
 public class TestServlet extends HttpServlet {

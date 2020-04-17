@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent.ejb;
 
-import javax.annotation.PreDestroy;
-import javax.ejb.Stateful;
+import jakarta.annotation.PreDestroy;
+import jakarta.ejb.Stateful;
 
 @Stateful
 public class Table implements TableLocal {

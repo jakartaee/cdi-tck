@@ -22,8 +22,8 @@ import static org.jboss.cdi.tck.cdi.Sections.PROCESS_OBSERVER_METHOD;
 
 import java.util.Set;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.spi.ObserverMethod;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.spi.ObserverMethod;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

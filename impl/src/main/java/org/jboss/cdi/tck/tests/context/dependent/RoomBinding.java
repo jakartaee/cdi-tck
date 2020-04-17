@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 public class RoomBinding extends AnnotationLiteral<Room> implements Room {
 

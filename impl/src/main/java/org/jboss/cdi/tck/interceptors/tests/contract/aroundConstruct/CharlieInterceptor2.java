@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
-import javax.interceptor.AroundConstruct;
-import javax.interceptor.InvocationContext;
+import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.InvocationContext;
 
 public class CharlieInterceptor2 extends AbstractInterceptor {
 

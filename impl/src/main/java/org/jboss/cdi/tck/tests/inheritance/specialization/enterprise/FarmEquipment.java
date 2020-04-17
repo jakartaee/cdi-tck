@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise;
 
-import javax.inject.Named;
+import jakarta.inject.Named;
 
 @Named("plough")
 public class FarmEquipment {

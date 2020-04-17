@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Stateful
 public class FinalMethodMethodLevelMissile implements FinalMethodMethodLevelMissileLocal {

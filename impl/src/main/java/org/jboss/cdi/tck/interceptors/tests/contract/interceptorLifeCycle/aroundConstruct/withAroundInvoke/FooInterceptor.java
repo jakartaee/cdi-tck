@@ -18,11 +18,11 @@ package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroun
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.Priority;
-import javax.interceptor.AroundConstruct;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.Interceptor;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
 @FooBinding
 @Interceptor

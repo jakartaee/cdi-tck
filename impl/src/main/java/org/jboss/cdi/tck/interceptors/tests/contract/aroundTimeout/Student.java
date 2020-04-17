@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundTimeout;
 
-import javax.annotation.security.PermitAll;
-import javax.annotation.security.RunAs;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import jakarta.annotation.security.PermitAll;
+import jakarta.annotation.security.RunAs;
+import jakarta.ejb.EJB;
+import jakarta.ejb.Stateless;
 
 @Stateless
 @RunAs("student")

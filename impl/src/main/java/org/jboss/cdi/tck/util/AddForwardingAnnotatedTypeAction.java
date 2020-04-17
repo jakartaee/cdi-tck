@@ -17,8 +17,8 @@
 
 package org.jboss.cdi.tck.util;
 
-import javax.enterprise.inject.spi.AnnotatedType;
-import javax.enterprise.inject.spi.BeforeBeanDiscovery;
+import jakarta.enterprise.inject.spi.AnnotatedType;
+import jakarta.enterprise.inject.spi.BeforeBeanDiscovery;
 
 /**
  * Tests should use this abstraction when adding new custom {@link AnnotatedType} during {@link BeforeBeanDiscovery}

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.privateConstructor;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class Unproxyable_Broken {

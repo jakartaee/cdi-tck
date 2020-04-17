@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.repeatable;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.EventMetadata;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.EventMetadata;
 
 @ApplicationScoped
 public class ProcessObserver {

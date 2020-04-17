@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 /**
  * @author Martin Kouba

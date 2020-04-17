@@ -1,7 +1,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.managed.dependent;
 
-import javax.enterprise.context.SessionScoped;
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Produces;
 
 @SessionScoped
 public class ProducerMethodParamInjectionCorralBroken extends Ranch {

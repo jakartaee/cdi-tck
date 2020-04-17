@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.decorators.builtin.principal;
 
 import java.security.Principal;
 
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
 public class PrincipalInjector {
 

@@ -20,8 +20,8 @@ package org.jboss.cdi.tck.tests.context.application.destroy;
 import java.net.URL;
 import java.net.URLConnection;
 
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
 

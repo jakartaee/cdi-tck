@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * This simple bean contains an injection point to receive the value of a producer field in another bean.

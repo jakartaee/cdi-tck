@@ -16,11 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.lifecycle;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Inject;
 
 @Stateful
 @Important

@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.context.spi.CreationalContext;
 
 public class MockCreationalContext<T> implements CreationalContext<T> {
     private static List<Object> beansPushed = new ArrayList<Object>();

@@ -17,10 +17,10 @@
 
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings.ejb;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.ejb.Stateful;
-import javax.inject.Inject;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.ejb.Stateful;
+import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 

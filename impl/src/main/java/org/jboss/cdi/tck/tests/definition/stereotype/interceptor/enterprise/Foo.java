@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.interceptor.enterprise;
 
-import javax.ejb.Stateless;
+import jakarta.ejb.Stateless;
 
 @AlphaStereotype
 @Stateless

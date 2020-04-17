@@ -19,10 +19,10 @@ package org.jboss.cdi.tck.tests.decorators.builtin.http.session;
 
 import java.io.Serializable;
 
-import javax.decorator.Decorator;
-import javax.decorator.Delegate;
-import javax.inject.Inject;
-import javax.servlet.http.HttpSession;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * @author Martin Kouba

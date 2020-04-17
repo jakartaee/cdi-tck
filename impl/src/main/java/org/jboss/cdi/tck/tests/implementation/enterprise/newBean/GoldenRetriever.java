@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.newBean;
 
-import javax.ejb.Remove;
-import javax.ejb.Stateful;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Observes;
+import jakarta.ejb.Remove;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.event.Observes;
 
 @Stateful
 @RequestScoped

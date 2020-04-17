@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.noexten
 
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
 
-import javax.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

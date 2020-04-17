@@ -21,7 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.BIZ_METHOD_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 import static org.testng.Assert.assertTrue;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;

@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise.broken.twobeans;
 
-import javax.ejb.Stateful;
+import jakarta.ejb.Stateful;
 
 @Landowner
 // @Named

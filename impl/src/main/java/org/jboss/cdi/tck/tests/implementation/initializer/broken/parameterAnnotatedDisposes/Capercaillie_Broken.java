@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.parameterAnnotatedDisposes;
 
-import javax.enterprise.inject.Disposes;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.inject.Inject;
 
 public class Capercaillie_Broken {
 

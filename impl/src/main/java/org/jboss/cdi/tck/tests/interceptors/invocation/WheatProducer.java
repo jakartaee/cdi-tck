@@ -16,10 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Disposes;
-import javax.enterprise.inject.Produces;
-import javax.interceptor.Interceptors;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Disposes;
+import jakarta.enterprise.inject.Produces;
+import jakarta.interceptor.Interceptors;
 
 @RequestScoped
 @Interceptors(AlmightyInterceptor.class)

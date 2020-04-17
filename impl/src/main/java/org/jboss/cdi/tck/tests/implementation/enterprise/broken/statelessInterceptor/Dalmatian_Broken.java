@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.broken.statelessInterceptor;
 
-import javax.ejb.Stateless;
-import javax.interceptor.Interceptor;
+import jakarta.ejb.Stateless;
+import jakarta.interceptor.Interceptor;
 
 @Stateless
 @Interceptor

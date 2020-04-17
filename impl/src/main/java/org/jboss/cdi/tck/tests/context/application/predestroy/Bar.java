@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.context.application.predestroy;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * @author Martin Kouba

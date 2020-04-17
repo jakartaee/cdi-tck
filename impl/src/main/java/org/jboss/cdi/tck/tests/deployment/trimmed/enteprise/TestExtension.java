@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.deployment.trimmed.enteprise;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.Extension;
-import javax.enterprise.inject.spi.ProcessBeanAttributes;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.Extension;
+import jakarta.enterprise.inject.spi.ProcessBeanAttributes;
 
 public class TestExtension implements Extension {
 

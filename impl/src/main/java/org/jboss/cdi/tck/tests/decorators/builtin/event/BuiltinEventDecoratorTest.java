@@ -25,9 +25,9 @@ import static org.testng.Assert.assertTrue;
 import java.lang.reflect.Type;
 import java.util.Collections;
 
-import javax.enterprise.event.Event;
-import javax.enterprise.util.TypeLiteral;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.util.TypeLiteral;
+import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-import javax.enterprise.inject.Vetoed;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Inject;
 
 /** @Vetoed ensures this bean will not get picked up by CDI automatically
  *

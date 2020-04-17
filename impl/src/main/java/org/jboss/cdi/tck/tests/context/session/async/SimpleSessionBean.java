@@ -19,8 +19,8 @@ package org.jboss.cdi.tck.tests.context.session.async;
 
 import java.io.Serializable;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.SessionScoped;
 
 /**
  * @author Martin Kouba

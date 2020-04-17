@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.enterprise.broken.twobeans;
 
-import javax.ejb.Stateful;
-import javax.enterprise.inject.Specializes;
+import jakarta.ejb.Stateful;
+import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 @Stateful

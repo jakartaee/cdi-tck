@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.eventTypes;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 /**
  * This class declares observer methods for every superclass and interface contained in the hierarchy for the

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.metadata.broken.initializer;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.spi.EventMetadata;
-import javax.inject.Inject;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.EventMetadata;
+import jakarta.inject.Inject;
 
 public class Foo {
 

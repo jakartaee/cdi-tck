@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.passivating.broken.interceptor.field;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
 @BakedBinding

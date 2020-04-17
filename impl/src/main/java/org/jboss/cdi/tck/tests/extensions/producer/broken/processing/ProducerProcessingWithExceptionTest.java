@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.producer.broken.processing;
 
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
 
-import javax.enterprise.inject.spi.DefinitionException;
-import javax.enterprise.inject.spi.ProcessProducer;
+import jakarta.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.ProcessProducer;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

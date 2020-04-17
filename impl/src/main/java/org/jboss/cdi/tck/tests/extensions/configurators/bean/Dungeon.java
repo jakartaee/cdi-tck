@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 /** Simple class checking that all 'manually' created beans can be injected
  *

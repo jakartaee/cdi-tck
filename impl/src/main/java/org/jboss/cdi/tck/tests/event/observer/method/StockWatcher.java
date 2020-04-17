@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.method;
 
-import javax.enterprise.event.Observes;
+import jakarta.enterprise.event.Observes;
 
 public class StockWatcher {
 

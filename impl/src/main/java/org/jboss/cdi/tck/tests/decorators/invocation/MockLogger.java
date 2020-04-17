@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 /**
  * @author pmuir

@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.remote.e
 
 import java.util.UUID;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.annotation.PostConstruct;
+import jakarta.ejb.Singleton;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 @Singleton

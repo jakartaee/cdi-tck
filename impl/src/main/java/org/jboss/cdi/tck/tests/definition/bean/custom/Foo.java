@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.definition.bean.custom;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
 
 @SuppressWarnings("unused")
 @SessionScoped

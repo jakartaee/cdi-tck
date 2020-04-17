@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.interceptors.custom;
 
 import java.io.Serializable;
 
-import javax.enterprise.inject.Typed;
+import jakarta.enterprise.inject.Typed;
 
 @SuppressWarnings("serial")
 @Typed(InterceptedSerializableBean.class)

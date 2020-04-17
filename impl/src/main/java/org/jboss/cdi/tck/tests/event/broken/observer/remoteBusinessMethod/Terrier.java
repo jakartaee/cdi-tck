@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.remoteBusinessMethod;
 
-import javax.ejb.Remote;
+import jakarta.ejb.Remote;
 
 @Remote
 public interface Terrier {

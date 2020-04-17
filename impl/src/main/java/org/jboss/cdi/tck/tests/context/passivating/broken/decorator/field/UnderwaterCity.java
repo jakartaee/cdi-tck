@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.context.passivating.broken.decorator.field;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
 public class UnderwaterCity implements CityInterface, Serializable {

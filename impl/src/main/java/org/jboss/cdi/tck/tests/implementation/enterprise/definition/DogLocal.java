@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.enterprise.definition;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface DogLocal {

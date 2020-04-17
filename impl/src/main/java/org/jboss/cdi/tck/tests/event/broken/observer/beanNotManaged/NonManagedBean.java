@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.beanNotManaged;
 
-import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Any;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Any;
 
 /**
  * This class is not a bean since it does not have a default constructor nor does it have a constructor annotated with {@link

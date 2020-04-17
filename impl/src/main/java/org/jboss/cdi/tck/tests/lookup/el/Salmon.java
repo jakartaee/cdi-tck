@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Default;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Named;
 
 @Named
 @Default

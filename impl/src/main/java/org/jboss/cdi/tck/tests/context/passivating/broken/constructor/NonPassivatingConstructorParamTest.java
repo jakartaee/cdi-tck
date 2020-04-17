@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.context.passivating.broken.constructor;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_INJECTION_POINTS;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
-import javax.enterprise.inject.spi.DeploymentException;
+import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

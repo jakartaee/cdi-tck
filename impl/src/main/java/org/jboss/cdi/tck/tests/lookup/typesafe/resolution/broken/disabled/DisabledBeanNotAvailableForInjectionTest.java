@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled;
 
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
-import javax.enterprise.inject.spi.DeploymentException;
+import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;

@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 
 public class Farm {
 

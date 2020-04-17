@@ -20,12 +20,12 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
-import javax.ejb.Stateless;
-import javax.ejb.Timeout;
-import javax.ejb.Timer;
-import javax.interceptor.Interceptors;
+import jakarta.annotation.Resource;
+import jakarta.ejb.SessionContext;
+import jakarta.ejb.Stateless;
+import jakarta.ejb.Timeout;
+import jakarta.ejb.Timer;
+import jakarta.interceptor.Interceptors;
 
 @Stateless
 @Interceptors(AroundTimeoutThreadInterceptor.class)

@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.env;
 
-import javax.annotation.Resource;
-import javax.enterprise.inject.Produces;
+import jakarta.annotation.Resource;
+import jakarta.enterprise.inject.Produces;
 
 public class ResourceProducer {
 

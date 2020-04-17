@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import javax.enterprise.inject.Produces;
+import jakarta.enterprise.inject.Produces;
 
 public class FoxProducer {
 

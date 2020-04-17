@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.request.ejb;
 
-import javax.ejb.Local;
+import jakarta.ejb.Local;
 
 @Local
 public interface FMS {

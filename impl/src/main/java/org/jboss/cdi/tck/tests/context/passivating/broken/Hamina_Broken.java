@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken;
 
-import javax.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
 public class Hamina_Broken {

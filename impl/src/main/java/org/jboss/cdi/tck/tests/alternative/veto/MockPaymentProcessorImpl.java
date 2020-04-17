@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.alternative.veto;
 
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Alternative;
-import javax.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.inject.Named;
 
 @Named
 @Alternative

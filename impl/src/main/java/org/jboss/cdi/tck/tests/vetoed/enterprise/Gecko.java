@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.vetoed.enterprise;
 
-import javax.ejb.Stateless;
-import javax.enterprise.inject.Vetoed;
+import jakarta.ejb.Stateless;
+import jakarta.enterprise.inject.Vetoed;
 
 /**
  * 

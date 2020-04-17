@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptions;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.interceptor.InvocationContext;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.interceptor.InvocationContext;
 
 class CatInterceptor {
     public static boolean preDestroyCalled = false;

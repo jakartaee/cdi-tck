@@ -17,7 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.manager.provider.runtime;
 
-import javax.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.BeanManager;
 
 /**
  * @author Martin Kouba

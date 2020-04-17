@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.inheritance.initializer;
 
 import java.math.BigDecimal;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 @SecondLevel
 public class Lemon extends Citrus {

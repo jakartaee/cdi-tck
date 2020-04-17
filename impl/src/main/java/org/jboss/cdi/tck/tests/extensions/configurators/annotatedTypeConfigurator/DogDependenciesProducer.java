@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurat
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class DogDependenciesProducer {
