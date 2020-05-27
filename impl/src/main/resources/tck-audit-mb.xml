@@ -2,7 +2,7 @@
     xmlns="http://jboss.com/products/weld/tck/audit"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd"
-    name="Java EE: Managed Beans"
+    name="Jakarta EE: Managed Beans"
     id="mb"
     version="1.0.PFD">
 
@@ -73,12 +73,12 @@
     </assertion>
     
     <assertion id="c" testable="false">
-      <text>Managed Bean names must be unique within a Java EE module.  It is an error if a Java EE module contains an EJB component and a Managed Bean with the same name.</text>
+      <text>Managed Bean names must be unique within a Jakarta EE module.  It is an error if a Jakarta EE module contains an EJB component and a Managed Bean with the same name.</text>
       <note>The behaviour here is unspecified.</note>
     </assertion>
     
     <group>
-      <text>For each named Managed Bean, Java EE containers must make available the following entries in JNDI, using the same naming schema used for EJB components.  In the application namespace: |java:app/&lt;module-name&gt;/&lt;bean-name&gt;|.  In the module namespace of the module containing the Managed Bean: |java:module/&lt;bean-name&gt;|.</text>
+      <text>For each named Managed Bean, Jakarta EE containers must make available the following entries in JNDI, using the same naming schema used for EJB components.  In the application namespace: |java:app/&lt;module-name&gt;/&lt;bean-name&gt;|.  In the module namespace of the module containing the Managed Bean: |java:module/&lt;bean-name&gt;|.</text>
       
       <assertion id="d">
         <text>Test that the application namespace entry exists.</text>
@@ -90,7 +90,7 @@
     </group>
     
     <group>
-      <text>Java EE applications may obtain a new instance of a Managed Bean by looking up the corresponding names in JNDI or by using resource injection.  See Section MB.2.3, "[Injection of] Managed Bean References" for more details.</text>
+      <text>Jakarta EE applications may obtain a new instance of a Managed Bean by looking up the corresponding names in JNDI or by using resource injection.  See Section MB.2.3, "[Injection of] Managed Bean References" for more details.</text>
       
       <assertion id="f">
         <text>Test obtaining a new instance via JNDI lookup.</text>
@@ -117,7 +117,7 @@
     </group>
     
     <group>
-      <text>In a Java EE implementation, a Managed Bean may use any of the resource injection functionality laid out in Chapter EE.5 of the Java EE Platform specification, "Resources, Naming and Injection".</text>
+      <text>In a Jakarta EE implementation, a Managed Bean may use any of the resource injection functionality laid out in Chapter EE.5 of the Jakarta EE Platform specification, "Resources, Naming and Injection".</text>
       <assertion id="ca">
          <text>Check @Resource injection</text>
       </assertion>
@@ -226,9 +226,9 @@
     </assertion>
   </section>
   
-  <section id="2.3.2" title="Java EE Product Provider's Responsibilities">
+  <section id="2.3.2" title="Jakarta EE Product Provider's Responsibilities">
     <assertion id="a" testable="false">
-      <text>The Java EE Product Provider is responsible for providing appropriate instances of the requested Managed Bean class as required by this specification.</text>
+      <text>The Jakarta EE Product Provider is responsible for providing appropriate instances of the requested Managed Bean class as required by this specification.</text>
     </assertion>
   </section>  
 

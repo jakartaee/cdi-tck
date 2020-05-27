@@ -1,6 +1,6 @@
 <specification xmlns="http://jboss.com/products/weld/tck/audit"
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jboss.com/products/weld/tck/audit"
-               name="JSR-318: Interceptors Specification" id="interceptors" version="1.2" generateSectionIds="true">
+               name="Jakarta Interceptors Specification" id="interceptors" version="2.0" generateSectionIds="true">
 
     <section id="overview" title="Overview" level="1">
     </section>

@@ -1,4 +1,4 @@
-<!--title>Technology Compatibility Kit Reference Guide for JSR 365: Contexts and Dependency Injection for Java 2.0</title-->
+<!--title>Technology Compatibility Kit Reference Guide for Jakarta Contexts and Dependency Injection 3.0</title-->
 <subtitle>
  Specification Lead: Red Hat Inc.
 </subtitle>
@@ -7,7 +7,7 @@
       <firstname>Antoine</firstname>
       <surname>Sabot-Durand</surname>
       <affiliation>
-            <jobtitle>JSR 365: Contexts and Dependency Injection (CDI) for Java 2.0 specification lead</jobtitle>
+            <jobtitle>Jakarta Contexts and Dependency Injection (CDI) 3.0 specification lead</jobtitle>
       </affiliation>
    </author>
    <author>

@@ -32,7 +32,7 @@
             <classifier>sources</classifier>
         </dependency>
 
-        <!-- The TCK distribution includes weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar which contains two classes showing how the CDI RI passes the JSR-330 TCK -->
+        <!-- The TCK distribution includes weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar which contains two classes showing how Weld passes the CDI TCK -->
         <dependency>
             <groupId>org.jboss.weld</groupId>
             <artifactId>weld-inject-tck-runner</artifactId>

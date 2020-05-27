@@ -1,6 +1,6 @@
 <specification xmlns="http://jboss.com/products/weld/tck/audit" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                xsi:schemaLocation="http://jboss.com/products/weld/tck/audit /Users/pmuir/workspace/jboss-test-audit/api/src/main/resources/tck-audit.xsd"
-               name="JSR 365: Contexts and Dependency Injection for Java 2.0" id="cdi" version="2.0" generateSectionIds="true">
+               name="Jakarta Contexts and Dependency Injection 3.0" id="cdi" version="3.0" generateSectionIds="true">
 
     <section id="architecture" title="Architecture" level="1"/>
 
@@ -3464,7 +3464,7 @@
 
         <assertion id="t">
             <text>The |destroy()| method destroys an existing contextual instance, removing it from the context instance.</text>
-            <note>The AlterableContext interface was introduced in Contexts and Dependency Injection for Java EE 1.1 to allow bean instances to be destroyed by
+            <note>The AlterableContext interface was introduced in Contexts and Dependency Injection for Jakarta EE 1.1 to allow bean instances to be destroyed by
                 the application.
             </note>
         </assertion>
@@ -9043,13 +9043,13 @@
     </section>
 
     <!-- EE SECTION FROM HERE -->
-    <section id="concepts_ee" title="Extended Concepts for Java EE" level="1">
+    <section id="concepts_ee" title="Extended Concepts for Jakarta EE" level="1">
     </section>
 
-    <section id="capabilities_ee" title="Functionality provided by the container to the bean in Java EE" level="2">
+    <section id="capabilities_ee" title="Functionality provided by the container to the bean in Jakarta EE" level="2">
     </section>
 
-    <section id="bean_types_ee" title="Bean types for Java EE component" level="2">
+    <section id="bean_types_ee" title="Bean types for Jakarta EE component" level="2">
         <group>
             <text>The bean types of a bean may be restricted by annotating the bean class or producer method or field with the annotation
                 |@jakarta.enterprise.inject.Typed|. When a |@Typed| annotation is explicitly specified, only the types whose classes are explicitly listed using
@@ -9074,17 +9074,17 @@
     <section id="scopes_ee" title="Scopes" level="2">
     </section>
 
-    <section id="builtin_scopes_ee" title="Built-in scope types in Java EE" level="3">
+    <section id="builtin_scopes_ee" title="Built-in scope types in Jakarta EE" level="3">
         <assertion id="a" testable="false">
-            <text>When running in Java EE, the implementations of the @RequestScoped, @ApplicationScoped and @SessionScoped annotations provided by the
+            <text>When running in Jakarta EE, the implementations of the @RequestScoped, @ApplicationScoped and @SessionScoped annotations provided by the
                 container, represent the standard scopes defined by the Java Servlets specification.
             </text>
         </assertion>
     </section>
 
-    <section id="default_bean_discovery_ee" title="Default bean discovery mode for Java EE" level="2">
+    <section id="default_bean_discovery_ee" title="Default bean discovery mode for Jakarta EE" level="2">
         <group>
-            <text>When running in Java EE, If the bean discovery mode is annotated, the container must extend the rules defined in Default bean discovery mode
+            <text>When running in Jakarta EE, If the bean discovery mode is annotated, the container must extend the rules defined in Default bean discovery mode
                 with:
             </text>
             <assertion id="a">
@@ -9105,7 +9105,7 @@
         </group>
     </section>
 
-    <section id="names_ee" title="Bean names in Java EE" level="2">
+    <section id="names_ee" title="Bean names in Jakarta EE" level="2">
         <assertion id="a">
             <text>A bean with a name may be referred to by its name in Unified EL expressions.</text>
         </assertion>
@@ -9120,12 +9120,12 @@
         </assertion>
     </section>
 
-    <section id="implementation_ee" title="Addition to programming model for Java EE" level="1">
+    <section id="implementation_ee" title="Addition to programming model for Jakarta EE" level="1">
     </section>
 
-    <section id="managed_beans_ee" title="Managed beans in Java EE" level="2"></section>
+    <section id="managed_beans_ee" title="Managed beans in Jakarta EE" level="2"></section>
 
-    <section id="what_classes_are_beans_ee" title="Which Java classes are managed beans in Java EE?" level="3">
+    <section id="what_classes_are_beans_ee" title="Which Java classes are managed beans in Jakarta EE?" level="3">
         <assertion id="a">
             <text>A top-level Java class is not a managed bean if it is annotated with any of the EJB component-defining annotations</text>
         </assertion>
@@ -9375,10 +9375,10 @@
         </assertion>
     </section>
 
-    <section id="javaee_components" title="Java EE components" level="2">
+    <section id="javaee_components" title="Jakarta EE components" level="2">
 
         <group>
-            <text>The instance used by the container to service an invocation of a Java EE component will not be the same instance obtained when using
+            <text>The instance used by the container to service an invocation of a Jakarta EE component will not be the same instance obtained when using
                 |@Inject|, instantiated by the container to invoke a producer method, observer method or disposer method, or instantiated by the container to
                 access the value of a producer field.
             </text>
@@ -9416,14 +9416,14 @@
 
     <section id="declaring_resource" title="Declaring a resource" level="3">
         <assertion id="aa" testable="false">
-            <text>A resource may be declared by specifying a Java EE component environment injection annotation as part of a producer field declaration. The
+            <text>A resource may be declared by specifying a Jakarta EE component environment injection annotation as part of a producer field declaration. The
                 producer field may be static.
             </text>
             <note>Introductory text for the following assertions</note>
         </assertion>
 
         <assertion id="bb">
-            <text>For a Java EE resource, |@Resource| must be specified.</text>
+            <text>For a Jakarta EE resource, |@Resource| must be specified.</text>
         </assertion>
 
         <assertion id="cc">
@@ -9459,7 +9459,7 @@
         </assertion>
 
         <assertion id="j">
-            <text>If the matching object in the Java EE component environment is not of the same type as the producer field declaration, the container
+            <text>If the matching object in the Jakarta EE component environment is not of the same type as the producer field declaration, the container
                 automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
@@ -9496,13 +9496,13 @@
 
     <section id="additional_builtin_beans" title="Additional built-in beans" level="2">
         <assertion id="a">
-            <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |jakarta.transaction.UserTransaction|,
+            <text>A Jakarta EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |jakarta.transaction.UserTransaction|,
                 allowing injection of a reference to the JTA |UserTransaction|.
             </text>
         </assertion>
 
         <assertion id="b">
-            <text>A Java EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.security.Principal|, allowing
+            <text>A Jakarta EE or embeddable EJB container must provide a bean with qualifier |@Default| and bean type |javax.security.Principal|, allowing
                 injection of a |Principal| representing the current caller identity.
             </text>
         </assertion>
@@ -9527,32 +9527,32 @@
         </assertion>
 
         <assertion id="e">
-            <text>If a Java EE component class has an injection point of type |UserTransaction| and qualifier |@Default|, and may not validly make use of the
-                JTA |UserTransaction| according to the Java EE platform specification, the container automatically detects the problem and treats it as a
+            <text>If a Jakarta EE component class has an injection point of type |UserTransaction| and qualifier |@Default|, and may not validly make use of the
+                JTA |UserTransaction| according to the Jakarta EE platform specification, the container automatically detects the problem and treats it as a
                 definition error.
             </text>
         </assertion>
     </section>
 
-    <section id="injected_fields_ee" title="Injected fields in Java EE" level="2">
+    <section id="injected_fields_ee" title="Injected fields in Jakarta EE" level="2">
         <group>
             <text>An injected field is a non-static, non-final field of a bean class or of any other classes supporting injection.</text>
 
             <assertion id="b">
-                <text>Test a Java EE component class.</text>
+                <text>Test a Jakarta EE component class.</text>
             </assertion>
 
         </group>
     </section>
 
-    <section id="initializer_methods_ee" title="Initializer methods in Java EE" level="2">
+    <section id="initializer_methods_ee" title="Initializer methods in Jakarta EE" level="2">
         <group>
             <text>An initializer method is a default-access, public, protected or private, non-abstract, non-static, non-generic method of a bean class or of
-                any Java EE component class supporting injection.
+                any Jakarta EE component class supporting injection.
             </text>
 
             <assertion id="b">
-                <text>Test a Java EE component class.</text>
+                <text>Test a Jakarta EE component class.</text>
             </assertion>
         </group>
 
@@ -9565,7 +9565,7 @@
         </assertion>
     </section>
 
-    <section id="new_ee" title="@New qualified beans in Java EE" level="2">
+    <section id="new_ee" title="@New qualified beans in Jakarta EE" level="2">
         <assertion id="j">
             <text>For each session bean, a second bean exists which has the same bean class.</text>
         </assertion>
@@ -9657,7 +9657,7 @@
         </group>
     </section>
 
-    <section id="type_level_inheritance_ee" title="Inheritance of type-level metadata in Java EE" level="2">
+    <section id="type_level_inheritance_ee" title="Inheritance of type-level metadata in Jakarta EE" level="2">
         <group>
             <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean Y. If X is annotated with a qualifier type,
                 stereotype or interceptor binding type Z then Y inherits the annotation if and only if Z declares the |@Inherited| meta-annotation and neither Y
@@ -9747,7 +9747,7 @@
         </assertion>
     </section>
 
-    <section id="member_level_inheritance_ee" title="Inheritance of member-level metadata in Java EE" level="2">
+    <section id="member_level_inheritance_ee" title="Inheritance of member-level metadata in Jakarta EE" level="2">
 
         <group>
             <text>Suppose a class X is extended directly or indirectly by the bean class of a managed bean. If X declares an injected field x then Y inherits
@@ -9843,10 +9843,10 @@
 
     </section>
 
-    <section id="specialization_ee" title="Specialization in Java EE" level="2">
+    <section id="specialization_ee" title="Specialization in Jakarta EE" level="2">
     </section>
 
-    <section id="direct_and_indirect_specialization_ee" title="Direct and indirect specialization in Java EE" level="3">
+    <section id="direct_and_indirect_specialization_ee" title="Direct and indirect specialization in Jakarta EE" level="3">
 
         <assertion id="ia" implied="true">
             <text>A bean X is said to specialize another bean Y if X directly specializes Y.</text>
@@ -9870,9 +9870,9 @@
         </group>
     </section>
 
-    <section id="injection_el_resolution_ee" title="Dependency injection, lookup and EL in Java EE" level="1"></section>
+    <section id="injection_el_resolution_ee" title="Dependency injection, lookup and EL in Jakarta EE" level="1"></section>
 
-    <section id="selection_ee" title="Modularity in Java EE" level="2">
+    <section id="selection_ee" title="Modularity in Jakarta EE" level="2">
         <group>
             <text>A bean is available for injection in a certain module if the bean is not an interceptor or decorator, the bean is enabled, the bean is either
                 not an alternative, or the module is a bean archive and the bean is a selected alternative of the bean archive, and the bean class is required
@@ -9897,7 +9897,7 @@
         </group>
     </section>
 
-    <section id="declaring_selected_alternatives_application_ee" title="Declaring selected alternatives for an application in Java EE" level="3">
+    <section id="declaring_selected_alternatives_application_ee" title="Declaring selected alternatives for an application in Jakarta EE" level="3">
 
         <assertion id="a" implied="true">
             <text>A stereotype may declare an |@Alternative| annotation, which specifies that every bean with the stereotype is an alternative.</text>
@@ -9911,7 +9911,7 @@
         </group>
     </section>
 
-    <section id="declaring_selected_alternatives_bean_archive_ee" title="Declaring selected alternatives for a bean archive in Java EE" level="3">
+    <section id="declaring_selected_alternatives_bean_archive_ee" title="Declaring selected alternatives for a bean archive in Jakarta EE" level="3">
 
         <assertion id="a" testable="false">
             <text>An alternative may be explicitly declared using the |&lt;alternatives&gt;| element of the |beans.xml| file of the bean archive. The |&lt;alternative&gt;|
@@ -9929,17 +9929,17 @@
     </section>
 
 
-    <section id="unsatisfied_and_ambig_dependencies_ee" title="Unsatisfied and ambiguous dependencies in Java EE" level="3">
+    <section id="unsatisfied_and_ambig_dependencies_ee" title="Unsatisfied and ambiguous dependencies in Jakarta EE" level="3">
         <group>
-            <text>The container must validate all injection points of all enabled beans, all observer methods, all disposer methods and all other Java EE
+            <text>The container must validate all injection points of all enabled beans, all observer methods, all disposer methods and all other Jakarta EE
                 component classes supporting injection when the application is initialized to ensure that there are no unsatisfied or ambiguous dependencies. If
                 an unsatisfied or ambiguous dependency exists, the container automatically detects the problem and treats it as a deployment problem.
             </text>
             <assertion id="ad">
-                <text>Test unsatisfied dependency for Java EE component.</text>
+                <text>Test unsatisfied dependency for Jakarta EE component.</text>
             </assertion>
             <assertion id="ah">
-                <text>Test ambiguous dependency for Java EE component.</text>
+                <text>Test ambiguous dependency for Jakarta EE component.</text>
             </assertion>
         </group>
     </section>
@@ -9957,7 +9957,7 @@
 
     </section>
 
-    <section id="injection_ee" title="Dependency injection in Java EE" level="2">
+    <section id="injection_ee" title="Dependency injection in Jakarta EE" level="2">
         <assertion id="a">
             <text>The container is required to perform dependency injection whenever it creates a contextual instance of a session bean.</text>
         </assertion>
@@ -9969,7 +9969,7 @@
         </assertion>
 
         <group>
-            <text>The container is required to perform dependency injection whenever it instantiates instances of any other Java EE component class supporting
+            <text>The container is required to perform dependency injection whenever it instantiates instances of any other Jakarta EE component class supporting
                 injection.
             </text>
             <assertion id="ea">
@@ -9996,12 +9996,12 @@
         </group>
 
         <assertion id="f" testable="false">
-            <text>A Java EE 5 container is not required to support injection for non-contextual objects.</text>
+            <text>A Jakarta EE 5 container is not required to support injection for non-contextual objects.</text>
         </assertion>
 
     </section>
 
-    <section id="instantiation_ee" title="Injection using the bean constructor in Java EE" level="3">
+    <section id="instantiation_ee" title="Injection using the bean constructor in Jakarta EE" level="3">
 
         <group>
             <text>The bean constructor may be identified by annotating the constructor |@Inject|</text>
@@ -10025,7 +10025,7 @@
 
     </section>
 
-    <section id="fields_initializer_methods_ee" title="Injection of fields and initializer methods in Java EE" level="3">
+    <section id="fields_initializer_methods_ee" title="Injection of fields and initializer methods in Jakarta EE" level="3">
         <group>
             <text>When the container creates a new instance of session bean the container must: Initialize the values of all injected fields. The container sets
                 the value of each injected field to an injectable reference. Call all initializer methods, passing an injectable reference to each parameter.
@@ -10094,12 +10094,12 @@
 
         <group>
             <text>The container must ensure that: Initializer methods declared by a class X in the type hierarchy of the bean are called after all injected
-                fields declared by X or by superclasses of X have been initialized, and after all Java EE component environment resource dependencies declared
+                fields declared by X or by superclasses of X have been initialized, and after all Jakarta EE component environment resource dependencies declared
                 by X or by superclasses of X have been injected. Any |@PostConstruct| callback declared by a class X in the type hierarchy of the bean is called
                 after all initializer methods declared by X or by superclasses of X have been called, after all injected fields declared by X or by superclasses
-                of X have been initialized, and after all Java EE component environment resource dependencies declared by X
+                of X have been initialized, and after all Jakarta EE component environment resource dependencies declared by X
                 or by superclasses of X have been injected. Any servlet |init()| method is called after all initializer methods have been called, all injected
-                fields have been initialized and all Java EE component environment resource dependencies have been injected.
+                fields have been initialized and all Jakarta EE component environment resource dependencies have been injected.
             </text>
             <assertion id="ba">
                 <text>Test session bean initializer methods called after injected field of X</text>
@@ -10132,7 +10132,7 @@
                 <text>Servlet |init()| method called after injected fields</text>
             </assertion>
             <assertion id="bo">
-                <text>Servlet |init()| method called after Java EE resource injection</text>
+                <text>Servlet |init()| method called after Jakarta EE resource injection</text>
             </assertion>
             <assertion id="bp">
                 <text>Servlet Filter |init()| method called after initializer method</text>
@@ -10141,12 +10141,12 @@
                 <text>Servlet Filter |init()| method called after injected fields</text>
             </assertion>
             <assertion id="br">
-                <text>Servlet Filter |init()| method called after Java EE resource injection</text>
+                <text>Servlet Filter |init()| method called after Jakarta EE resource injection</text>
             </assertion>
         </group>
     </section>
 
-    <section id="dependent_objects_destruction_ee" title="Destruction of dependent objects in Java EE" level="3">
+    <section id="dependent_objects_destruction_ee" title="Destruction of dependent objects in Jakarta EE" level="3">
         <assertion id="a">
             <text>When the container destroys an instance of a bean, the container destroys all dependent objects, as defined in Section 6.4.2, "Destruction of
                 objects with scope @Dependent", after the |@PreDestroy| callback completes.
@@ -10154,18 +10154,18 @@
         </assertion>
     </section>
 
-    <section id="bean_metadata_ee" title="Bean metadata in Java EE" level="3">
+    <section id="bean_metadata_ee" title="Bean metadata in Jakarta EE" level="3">
         <assertion id="a">
-            <text>Interceptor and decorator instances associated with Java EE components that are not considered beans
+            <text>Interceptor and decorator instances associated with Jakarta EE components that are not considered beans
                 (as defined by this specification) cannot obtain information about the beans they intercept and
                 decorate (as defined in Bean metadata) and thus null is injected into relevant injection points.
             </text>
         </assertion>
     </section>
 
-    <section id="contexts_ee" title="Scopes and contexts in Java EE" level="1"></section>
+    <section id="contexts_ee" title="Scopes and contexts in Jakarta EE" level="1"></section>
 
-    <section id="dependent_context_ee" title="Dependent pseudo-scope in Java EE" level="2">
+    <section id="dependent_context_ee" title="Dependent pseudo-scope in Jakarta EE" level="2">
         <assertion id="ca">
             <text>When a bean is declared to have |@Dependent| scope, when a unified EL expression in a JSF or JSP page that refers to the bean by its EL name
                 is evaluated, at most one instance of the bean is instantiated. This instance exists to service just a single evaluation of the EL expression.
@@ -10175,18 +10175,18 @@
         </assertion>
     </section>
 
-    <section id="dependent_objects_ee" title="Dependent objects in Java EE" level="3">
+    <section id="dependent_objects_ee" title="Dependent objects in Jakarta EE" level="3">
 
     </section>
 
-    <section id="dependent_destruction_ee" title="Destruction of objects with scope @Dependent in Java EE" level="3">
+    <section id="dependent_destruction_ee" title="Destruction of objects with scope @Dependent in Jakarta EE" level="3">
 
         <group>
-            <text>The container must ensure that all dependent objects of a non-contextual instance of a bean or other Java EE component class are destroyed
+            <text>The container must ensure that all dependent objects of a non-contextual instance of a bean or other Jakarta EE component class are destroyed
                 when the instance is destroyed by the container.
             </text>
             <assertion id="aaab">
-                <text>Test with a Java EE component.</text>
+                <text>Test with a Jakarta EE component.</text>
             </assertion>
         </group>
         <assertion id="eee">
@@ -10209,9 +10209,9 @@
         </assertion>
     </section>
 
-    <section id="passivating_scope_ee" title="Passivation and passivating scopes in Java EE" level="2"></section>
+    <section id="passivating_scope_ee" title="Passivation and passivating scopes in Jakarta EE" level="2"></section>
 
-    <section id="passivation_capable_ee" title="Passivation capable beans in Java EE" level="3">
+    <section id="passivation_capable_ee" title="Passivation capable beans in Jakarta EE" level="3">
 
         <group>
             <text>As defined by the EJB specification, a stateful session bean is passivation capable if interceptors and decorators of the bean are passivation
@@ -10250,7 +10250,7 @@
         <group>
             <text>The container must guarantee that all resources are passivation capable dependencies.</text>
             <assertion id="da">
-                <text>Test resource for a Java EE resource.</text>
+                <text>Test resource for a Jakarta EE resource.</text>
             </assertion>
             <assertion id="db">
                 <text>Test resource for a persistence unit.</text>
@@ -10268,7 +10268,7 @@
 
     </section>
 
-    <section id="passivation_validation_ee" title="Validation of passivation capable beans and dependencies in Java EE" level="3">
+    <section id="passivation_validation_ee" title="Validation of passivation capable beans and dependencies in Jakarta EE" level="3">
 
         <group>
             <text>If a stateful session bean which declares a passivating scope, or a built-in bean is not passivation capable then the container automatically
@@ -10332,7 +10332,7 @@
         </group>
     </section>
 
-    <section id="builtin_contexts_ee" title="Context management for built-in scopes in Java EE" level="2">
+    <section id="builtin_contexts_ee" title="Context management for built-in scopes in Jakarta EE" level="2">
         <group>
             <text>The built-in request and application context objects are active during servlet, web service and EJB invocations, and the built in session and
                 request context objects are active during servlet and web service invocations. For other kinds of invocations, a portable extension may define a
@@ -10341,7 +10341,7 @@
         </group>
     </section>
 
-    <section id="request_context_ee" title="Request context lifecycle in Java EE" level="3">
+    <section id="request_context_ee" title="Request context lifecycle in Jakarta EE" level="3">
 
         <group>
             <text>The request scope is active during the |service()| method of any servlet in the web application, during the |doFilter()| method of any servlet
@@ -10362,7 +10362,7 @@
         </group>
 
         <assertion id="b">
-            <text>The request scope is active during any Java EE web service invocation.</text>
+            <text>The request scope is active during any Jakarta EE web service invocation.</text>
         </assertion>
 
         <group>
@@ -10458,7 +10458,7 @@
         </group>
 
     </section>
-    <section id="session_context_ee" title="Session context lifecycle in Java EE" level="3">
+    <section id="session_context_ee" title="Session context lifecycle in Jakarta EE" level="3">
         <assertion id="aa">
             <text>The session scope is active during the |service()| method of any servlet in the web application.</text>
         </assertion>
@@ -10515,7 +10515,7 @@
 
     </section>
 
-    <section id="application_context_ee" title="Application context lifecycle in Java EE" level="3">
+    <section id="application_context_ee" title="Application context lifecycle in Jakarta EE" level="3">
         <group>
             <text>The application scope is active during the |service()| method of any servlet in the web application, during the |doFilter()| method of any
                 servlet filter and when the container calls any |ServletContextListener|, |HttpSessionListener|, |AsyncListener| or |ServletRequestListener|.
@@ -10546,7 +10546,7 @@
         </group>
 
         <assertion id="b">
-            <text>The application scope is active during any Java EE web service invocation.</text>
+            <text>The application scope is active during any Jakarta EE web service invocation.</text>
         </assertion>
 
         <group>
@@ -10612,7 +10612,7 @@
 
     </section>
 
-    <section id="conversation_context_ee" title="Conversation context lifecycle in Java EE" level="3">
+    <section id="conversation_context_ee" title="Conversation context lifecycle in Jakarta EE" level="3">
 
         <group>
             <text>The conversation scope is active during all Servlet requests.</text>
@@ -10804,7 +10804,7 @@
 
     </section>
 
-    <section id="biz_method_ee" title="Container invocations and interception in Java EE" level="2">
+    <section id="biz_method_ee" title="Container invocations and interception in Jakarta EE" level="2">
         <assertion id="ac">
             <text>When the application invokes a business method of a session bean via an EJB remote or local reference, the invocation is treated as a business
                 method invocation.
@@ -10901,12 +10901,12 @@
     <section id="resource_lifecycle" title="Lifecycle of resources" level="3">
         <group>
             <text>When the |create()| method of a |Bean| object that represents a resource is called, the container creates and returns a container-specific
-                internal reference to the Java EE component environment resource, entity manager, entity manager factory, remote EJB instance or web service
+                internal reference to the Jakarta EE component environment resource, entity manager, entity manager factory, remote EJB instance or web service
                 reference. This reference is not directly exposed to the application.
             </text>
 
             <assertion id="la">
-                <text>Check Java EE component environment resource</text>
+                <text>Check Jakarta EE component environment resource</text>
             </assertion>
 
             <assertion id="lb">
@@ -10932,11 +10932,11 @@
             </text>
 
             <assertion id="ma">
-                <text>Check delegations to underlying Java EE component environment resource</text>
+                <text>Check delegations to underlying Jakarta EE component environment resource</text>
             </assertion>
 
             <assertion id="mb">
-                <text>Check injected Java EE component environment resource is passivation capable</text>
+                <text>Check injected Jakarta EE component environment resource is passivation capable</text>
             </assertion>
 
             <assertion id="mc">
@@ -10973,8 +10973,8 @@
         </group>
 
         <group>
-            <text>The container must perform ordinary Java EE component environment injection upon any non-static field that functions as a resource
-                declaration, as defined by the Java EE platform and Common Annotations for the Java platform specifications.
+            <text>The container must perform ordinary Jakarta EE component environment injection upon any non-static field that functions as a resource
+                declaration, as defined by the Jakarta EE platform and Common Annotations for the Java platform specifications.
             </text>
             <assertion id="o">
                 <text>Check @Resource injection</text>
@@ -10982,7 +10982,7 @@
         </group>
 
         <assertion id="p" testable="false">
-            <text>The container is not required to perform Java EE component environment injection upon a static field. Portable applications should not rely
+            <text>The container is not required to perform Jakarta EE component environment injection upon a static field. Portable applications should not rely
                 upon the value of a static field that functions as a resource declaration.
             </text>
             <note>Defines non-portable behavior</note>
@@ -11006,10 +11006,10 @@
 
     </section>
 
-    <section id="decorators_ee" title="Decorators in Java EE" level="1">
+    <section id="decorators_ee" title="Decorators in Jakarta EE" level="1">
 
         <assertion id="a">
-            <text>When running in Java EE, the container must extend the rules defined for managed beans in Decorators to EJB session beans.</text>
+            <text>When running in Jakarta EE, the container must extend the rules defined for managed beans in Decorators to EJB session beans.</text>
         </assertion>
 
         <assertion id="b" implied="true">
@@ -11042,7 +11042,7 @@
 
     </section>
 
-    <section id="decorator_bean_ee" title="Decorator beans in Java EE" level="2">
+    <section id="decorator_bean_ee" title="Decorator beans in Jakarta EE" level="2">
 
         <group>
             <text>Whenever a business method is invoked on an instance of a bean with decorators, the container intercepts the business method invocation and,
@@ -11089,13 +11089,13 @@
     </section>
 
 
-    <section id="interceptors_ee" title="Interceptor bindings in Java EE" level="1">
+    <section id="interceptors_ee" title="Interceptor bindings in Jakarta EE" level="1">
         <assertion id="b" implied="true">
             <text>A stereotype may declare one interceptor bindings.</text>
         </assertion>
     </section>
 
-    <section id="interceptor_resolution_ee" title="Interceptor resolution in Java EE" level="2">
+    <section id="interceptor_resolution_ee" title="Interceptor resolution in Jakarta EE" level="2">
         <assertion id="a">
             <text>For a custom implementation of the Interceptor interface defined in Section 11.1.2. "The Interceptor interface", the container also calls
                 intercepts() to
@@ -11104,7 +11104,7 @@
         </assertion>
     </section>
 
-    <section id="events_ee" title="Events in Java EE" level="1"></section>
+    <section id="events_ee" title="Events in Jakarta EE" level="1"></section>
 
     <section id="observer_methods_ee" title="Observer methods in EJB session beans" level="2">
         <assertion id="d">
@@ -11125,7 +11125,7 @@
         </assertion>
     </section>
 
-    <section id="observer_method_invocation_context_ee" title="Observer method invocation context in Java EE" level="3">
+    <section id="observer_method_invocation_context_ee" title="Observer method invocation context in Jakarta EE" level="3">
         <assertion id="a">
             <text>The transaction and security contexts for a business method exposed by a local business interface of an EJB session bean also depend upon the
                 transaction attribute and @RunAs descriptor, if any.
@@ -11140,55 +11140,55 @@
 
     </section>
 
-    <section id="spi_ee" title="Portable extensions in Java EE" level="1">
+    <section id="spi_ee" title="Portable extensions in Jakarta EE" level="1">
 
     </section>
 
-    <section id="bean_ee" title="The Bean interface in Java EE" level="2">
+    <section id="bean_ee" title="The Bean interface in Jakarta EE" level="2">
 
     </section>
 
-    <section id="interceptor_ee" title="The Interceptor interface in Java EE" level="3">
+    <section id="interceptor_ee" title="The Interceptor interface in Jakarta EE" level="3">
         <assertion id="a">
-            <text>When Running in Java EE, the container must extend the rules defined in Section 11.1.2 "The Interceptor interface" and must also ensure that
+            <text>When Running in Jakarta EE, the container must extend the rules defined in Section 11.1.2 "The Interceptor interface" and must also ensure that
                 PRE_PASSIVATE,
                 POST_ACTIVATE and AROUND_TIMEOUT InterceptorType values are linked to EJB lifecycle callback or timeout method.
             </text>
         </assertion>
     </section>
 
-    <section id="injectiontarget_ee" title="InjectionTarget interface in Java EE" level="2">
+    <section id="injectiontarget_ee" title="InjectionTarget interface in Jakarta EE" level="2">
         <group>
-            <text>When running in Java EE, the container must extend the rules defined for InjectionTarget in The Producer and InjectionTarget interfaces and
+            <text>When running in Jakarta EE, the container must extend the rules defined for InjectionTarget in The Producer and InjectionTarget interfaces and
                 must also ensure that:
             </text>
             <assertion id="a">
-                <text>when inject() is called, The container performs Java EE component environment injection, according to the semantics required by the Java
+                <text>when inject() is called, The container performs Jakarta EE component environment injection, according to the semantics required by the Java
                     EE platform specification, sets the value of all injected fields, and calls all initializer methods, as defined in Injection of fields and
-                    initializer methods in Java EE.
+                    initializer methods in Jakarta EE.
                 </text>
             </assertion>
             <assertion id="b">
-                <text>@PostConstruct callback is called according to the semantics required by the Java EE platform specification.</text>
+                <text>@PostConstruct callback is called according to the semantics required by the Jakarta EE platform specification.</text>
             </assertion>
             <assertion id="c">
-                <text>@PreDestroy callback is called according to the semantics required by the Java EE platform specification.</text>
+                <text>@PreDestroy callback is called according to the semantics required by the Jakarta EE platform specification.</text>
             </assertion>
         </group>
 
     </section>
 
-    <section id="beanmanager_ee" title="The BeanManager object in Java EE" level="2">
+    <section id="beanmanager_ee" title="The BeanManager object in Jakarta EE" level="2">
 
     </section>
 
-    <section id="provider_ee" title="Obtaining a reference to the CDI container in Java EE" level="3">
+    <section id="provider_ee" title="Obtaining a reference to the CDI container in Jakarta EE" level="3">
         <assertion id="d">
-            <text>Java EE components may obtain an instance of |BeanManager| from JNDI by looking up the name |java:comp/BeanManager|.</text>
+            <text>Jakarta EE components may obtain an instance of |BeanManager| from JNDI by looking up the name |java:comp/BeanManager|.</text>
         </assertion>
 
         <assertion id="e">
-            <text>When running in Java EE, when initialize method of CDIProvider is called an UnsupportedOperationException is thrown.</text>
+            <text>When running in Jakarta EE, when initialize method of CDIProvider is called an UnsupportedOperationException is thrown.</text>
         </assertion>
 
     </section>
@@ -11225,13 +11225,13 @@
         </group>
     </section>
 
-    <section id="init_events_ee" title="Addition to Container lifecycle events in Java EE" level="2">
+    <section id="init_events_ee" title="Addition to Container lifecycle events in Jakarta EE" level="2">
 
     </section>
 
     <section id="process_injection_point_ee" title="ProcessInjectionPoint event and EJB" level="3">
         <assertion id="a">
-            <text>When running in Java EE, the container must also fire an event for every injection point of every Java EE component class supporting injection
+            <text>When running in Jakarta EE, the container must also fire an event for every injection point of every Jakarta EE component class supporting injection
                 that may be instantiated by the container at runtime, including every managed bean declared using @ManagedBean, EJB session or message-driven
                 bean.
             </text>
@@ -11316,7 +11316,7 @@
 
         <group>
             <text>Any observer of this event is permitted to wrap and/or replace the |InjectionTarget|. The container must use the final value of this property,
-                after all observers have been called, whenever it performs injection upon the managed bean, session bean or other Java EE component class
+                after all observers have been called, whenever it performs injection upon the managed bean, session bean or other Jakarta EE component class
                 supporting injection.
             </text>
             <assertion id="eb">
@@ -11410,7 +11410,7 @@
         </group>
     </section>
 
-    <section id="packaging_deployment_ee" title="Packaging and deployment in Java EE" level="1">
+    <section id="packaging_deployment_ee" title="Packaging and deployment in Jakarta EE" level="1">
 
     </section>
 
@@ -11431,7 +11431,7 @@
             </assertion>
         </group>
         <assertion id="e" testable="false">
-            <text>A Java EE container is required by the Java EE specification to support Java EE modules. Other containers may or may not provide support for
+            <text>A Jakarta EE container is required by the Jakarta EE specification to support Jakarta EE modules. Other containers may or may not provide support for
                 war, EJB jar or rar bean archives.
             </text>
             <note>Covered elsewhere in this section.</note>
@@ -11572,7 +11572,7 @@
         </group>
     </section>
 
-    <section id="bean_discovery_steps_ee" title="Bean discovery in Java EE" level="3">
+    <section id="bean_discovery_steps_ee" title="Bean discovery in Jakarta EE" level="3">
         <assertion id="tc">
             <text>The container discovers each session bean.</text>
         </assertion>
@@ -11621,9 +11621,9 @@
         </group>
     </section>
 
-    <section id="trimmed_bean_archive_ee" title="Trimmed bean archive in Java EE" level="3">
+    <section id="trimmed_bean_archive_ee" title="Trimmed bean archive in Jakarta EE" level="3">
         <assertion id="a">
-            <text>When running in Java EE, the container must extend the rules defined in "Trimmed bean archive" and
+            <text>When running in Jakarta EE, the container must extend the rules defined in "Trimmed bean archive" and
                 must ensure that EJB session beans are not removed from the set of discovered types.
             </text>
         </assertion>

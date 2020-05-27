@@ -8,7 +8,7 @@ One of the requirements of an implementation passing the TCK is for it to pass t
 
 === Obtaining the sigtest tool
 
-You can obtain the Sigtest tool (at the time of writing the TCK uses version 2.1) from the Sigtest home  page at link:$$http://sigtest.java.net/$$[]. The user guide can be found at  link:$$http://docs.oracle.com/javame/test-tools/sigtest/2_1/sigtest2.1_usersguide.pdf$$[]. 
+You can obtain the Sigtest tool (at the time of writing the TCK uses version 4.0) from the Sigtest home  page at link:$$https://wiki.openjdk.java.net/display/CodeTools/sigtest$$[]. The user guide can be found at  link:$$http://docs.oracle.com/javacomponents/sigtest.htm$$[].
 
 
 

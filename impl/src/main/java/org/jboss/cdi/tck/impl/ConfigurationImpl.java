@@ -133,7 +133,7 @@ public class ConfigurationImpl implements Configuration {
     @Override
     public String toString() {
         StringBuilder configuration = new StringBuilder();
-        configuration.append("JSR 365 TCK Configuration\n");
+        configuration.append("Jakarta CDI 3.0 TCK Configuration\n");
         configuration.append("-----------------\n");
         configuration.append("\tBeans: ").append(getBeans()).append("\n");
         configuration.append("\tContexts: ").append(getContexts()).append("\n");

@@ -36,7 +36,7 @@ public final class TestGroups {
     public static final String INTEGRATION = "integration";
 
     /**
-     * Integration test that requires full Java EE platform (EAR packaging, JAX-WS, EJB timers, ...)
+     * Integration test that requires full Jakarta EE platform (EAR packaging, JAX-WS, EJB timers, ...)
      */
     public static final String JAVAEE_FULL = "javaee-full";
 
