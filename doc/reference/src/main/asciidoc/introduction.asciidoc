@@ -280,7 +280,7 @@ The CDI TCK includes the following components:
 *  *Arquillian 1.7.0.Alpha1*
 
 
-*  *TestNG 6.8.8*
+*  *TestNG 6.14.3*
 
 
 *  *Porting Package SPIs* - Extensions to the CDI SPIs to allow testing of a container. 
