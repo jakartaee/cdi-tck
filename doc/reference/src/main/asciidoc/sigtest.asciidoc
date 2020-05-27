@@ -5,27 +5,146 @@
 One of the requirements of an implementation passing the TCK is for it to pass the CDI signature test. This section describes how the signature file is generated and how to run it against your implementation. 
 
 
+=== Obtaining the sigtest plugin
 
-=== Obtaining the sigtest tool
-
-You can obtain the Sigtest tool (at the time of writing the TCK uses version 4.0) from the Sigtest home  page at link:$$https://wiki.openjdk.java.net/display/CodeTools/sigtest$$[]. The user guide can be found at  link:$$http://docs.oracle.com/javacomponents/sigtest.htm$$[].
-
+The source for the sigtest plugin can be found here:
+https://github.com/emilianbold/netbeans-apitest.git
 
 
 === Running the signature test
+To run the signature test, use a pom file like that found in
+https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigtest-pom.xml
+and shown here:
+[source, xml]
+----
+<?xml version="1.0"?>
+<!-- Sample maven pom to verify signatures -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>jakarta.enterprise</groupId>
+  <artifactId>cdi-tck-sigtest</artifactId>
+  <version>3.0</version>
+  <name>CDI TCK Signature Tests</name>
+  <description>CDI TCK Signature test validation of CDI dependent API jars</description>
+  <properties>
+    <!-- Set the api jar artifact versions here -->
+    <annotation.api.version>2.0.0-RC1</annotation.api.version>
+    <atinject.api.version>2.0.0-RC3</atinject.api.version>
+    <interceptor.api.version>2.0.0-RC2</interceptor.api.version>
+    <el.api.version>4.0.0-RC1</el.api.version>
+    <cdi.api.version>3.0.0-M2</cdi.api.version>
+  </properties>
 
-To run the signature test simply change the execution command from +Setup+ to +SignatureTest+:
+  <!-- Set the api jar artifact dependencies here -->
+  <dependencies>
+    <dependency>
+      <groupId>jakarta.annotation</groupId>
+      <artifactId>jakarta.annotation-api</artifactId>
+      <version>${annotation.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.el</groupId>
+      <artifactId>jakarta.el-api</artifactId>
+      <version>${el.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.interceptor</groupId>
+      <artifactId>jakarta.interceptor-api</artifactId>
+      <version>${interceptor.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+      <version>${atinject.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.enterprise</groupId>
+      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <version>${cdi.api.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <stripVersion>true</stripVersion>
+              <overWriteReleases>true</overWriteReleases>
+              <outputDirectory>target/classes</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.netbeans.tools</groupId>
+        <artifactId>sigtest-maven-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <execution>
+            <id>sigtest</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <sigfile>cdi-api-jdk8.sig</sigfile>
+          <packages>jakarta.decorator,jakarta.enterprise</packages>
+          <classes>target/classes</classes>
+          <report>cdi-sig-report.txt</report>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+----
 
 [source, console]
 ----
-java -jar sigtestdev.jar SignatureTest -classpath "%JAVA_HOME%\jre\lib\rt.jar:lib/cdi-api.jar:lib/jakarta.inject.jar:lib/el-api.jar:lib/jboss-interceptor-api.jar" -Package jakarta.decorator -Package jakarta.enterprise -FileName artifacts/cdi-tck-impl-sigtest.sig -static
+Scotts-iMacPro:resources starksm$ mvn -f sigtest-pom.xml verify
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------< jakarta.enterprise:cdi-tck-sigtest >-----------------
+[INFO] Building CDI TCK Signature Tests 3.0
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+...
+[INFO] --- sigtest-maven-plugin:1.2:check (sigtest) @ cdi-tck-sigtest ---
+[INFO] Packages: jakarta.decorator,jakarta.enterprise
+[INFO] SignatureTest report
+Base version: 3.0.0-SNAPSHOT
+Tested version: 3.0
+Check mode: bin [throws removed]
+Constant checking: on
+
+Warning: The return type java.lang.reflect.Member can't be resolved
+Warning: The return type java.lang.reflect.Member can't be resolved
+Warning: The return type java.lang.reflect.Member can't be resolved
+
+
+[INFO] /Users/starksm/Dev/JBoss/Jakarta/cdi-tck/impl/src/main/resources/cdi-sig-report.txt: 0 failures in /Users/starksm/Dev/JBoss/Jakarta/cdi-tck/impl/src/main/resources/cdi-api-jdk8.sig
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.887 s
+[INFO] Finished at: 2020-05-27T15:55:18-05:00
+[INFO] ------------------------------------------------------------------------
 ----
 
-When running the signature test, you may get the following message:
-
+You can ignore the following warnings:
 +"The return type java.lang.reflect.Member can't be resolved"+
 
-This can safely be ignored - the important thing is to get the +"STATUS:Passed."+ message.
+The important thing is that the mvn version shows "BUILD SUCCESS".
 
 === Forcing a signature test failure
 
