@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ws;
 import java.util.Random;
 
 import jakarta.enterprise.inject.Produces;
-import javax.xml.ws.WebServiceRef;
+import jakarta.xml.ws.WebServiceRef;
 
 public class ResourceProducer {
 

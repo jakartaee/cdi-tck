@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.lookup.injection.ws;
 
 import jakarta.inject.Inject;
-import javax.xml.ws.WebServiceRef;
+import jakarta.xml.ws.WebServiceRef;
 
 public class Alpha extends Bravo {
 

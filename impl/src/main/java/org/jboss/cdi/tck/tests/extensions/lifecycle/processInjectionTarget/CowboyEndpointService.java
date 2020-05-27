@@ -18,8 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 
 import javax.xml.namespace.QName;
-import javax.xml.ws.Service;
-import javax.xml.ws.WebServiceClient;
+import jakarta.xml.ws.Service;
+import jakarta.xml.ws.WebServiceClient;
 import java.net.URL;
 
 @WebServiceClient(name="Cowboy")

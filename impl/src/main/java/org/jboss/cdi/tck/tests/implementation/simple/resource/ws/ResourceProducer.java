@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.implementation.simple.resource.ws;
 
 import jakarta.enterprise.inject.Produces;
-import javax.xml.ws.WebServiceRef;
+import jakarta.xml.ws.WebServiceRef;
 
 public class ResourceProducer {
 

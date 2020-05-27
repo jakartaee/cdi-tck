@@ -18,9 +18,9 @@
 package org.jboss.cdi.tck.tests.context.request.jaxrs;
 
 import jakarta.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 
 /**
  * RESTful web service which returns a value from an request scoped bean.

@@ -17,7 +17,7 @@
 package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.webservice;
 
 import jakarta.enterprise.inject.Produces;
-import javax.xml.ws.WebServiceRef;
+import jakarta.xml.ws.WebServiceRef;
 
 public class ResourceProducer {
 

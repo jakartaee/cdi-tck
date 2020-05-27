@@ -112,7 +112,12 @@
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
         </dependency>
-        
+
+        <dependency>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
             <artifactId>jakarta.xml.ws-api</artifactId>
@@ -126,11 +131,6 @@
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>jaxrs-api</artifactId>
         </dependency>
 
     </dependencies>
@@ -470,8 +470,8 @@
             <dependencies>
                 <dependency>
                     <groupId>com.sun.xml.ws</groupId>
-                    <artifactId>jaxws-ri</artifactId>
-                    <type>zip</type>
+                    <artifactId>jaxws-rt</artifactId>
+                    <version>3.0.0-M3</version>
                 </dependency>
             </dependencies>
         </profile>
