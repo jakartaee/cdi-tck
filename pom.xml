@@ -100,7 +100,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- Jakarta EE APIs -->
         <ejb.api.version>4.0.0-RC2</ejb.api.version>
-        <jms.api.version>3.0.0-SNAPSHOT</jms.api.version>
+        <jms.api.version>3.0.0-RC1</jms.api.version>
         <jca.api.version>2.0.0-RC2</jca.api.version>
         <annotations.api.version>2.0.0</annotations.api.version>
         <interceptors.api.version>2.0.0</interceptors.api.version>
@@ -110,7 +110,7 @@
         <jsp.api.version>3.0.0-RC2</jsp.api.version>
         <jta.api.version>2.0.0-RC2</jta.api.version>
         <el.api.version>4.0.0</el.api.version>
-        <jsf.api.version>3.0.0-SNAPSHOT</jsf.api.version>
+        <jsf.api.version>3.0.0-RC1</jsf.api.version>
         <jaxrs.api.version>3.0.0-M1</jaxrs.api.version>
         <!-- Test tools/dependencies -->
         <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
