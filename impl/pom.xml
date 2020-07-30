@@ -119,11 +119,6 @@
         </dependency>
 
         <dependency>
-            <groupId>jakarta.xml.ws</groupId>
-            <artifactId>jakarta.xml.ws-api</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
         </dependency>
@@ -474,43 +469,6 @@
                     <version>3.0.0-M3</version>
                 </dependency>
             </dependencies>
-        </profile>
-
-        <!--
-This profile enables consuming artifacts from the ossrh staging
-repository group.
--->
-        <profile>
-            <id>staging</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>sonatype-nexus-staging</id>
-                    <name>Sonatype Nexus Staging</name>
-                    <url>https://oss.sonatype.org/content/repositories/staging</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>sonatype-nexus-staging</id>
-                    <name>Sonatype Nexus Staging</name>
-                    <url>https://oss.sonatype.org/content/repositories/staging</url>
-                    <releases>
-                        <enabled>true</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>false</enabled>
-                    </snapshots>
-                </pluginRepository>
-            </pluginRepositories>
         </profile>
     </profiles>
 

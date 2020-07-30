@@ -57,9 +57,6 @@ public class TestServlet extends HttpServlet {
         if (param.equals("interceptor")) {
             writer.append(String.valueOf(FenceInterceptor.isIsWrappedInjectionSuccessfull()));
         }
-        if (param.equals("wsendpoint")) {
-            writer.append(String.valueOf(CowboyEndpoint.isIsWrappedInjectionSuccessfull()));
-        }
         if (param.equals("filter")) {
             writer.append(String.valueOf(TestFilter.isIsWrappedInjectionSuccessfull()));
         }

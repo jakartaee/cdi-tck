@@ -99,10 +99,6 @@ public class ProcessInjectionTargetObserver implements Extension {
         event.setInjectionTarget(new CustomInjectionTarget<FenceInterceptor>(event.getInjectionTarget(), () -> FenceInterceptor.setIsWrappedInjectionSuccessfull(true)));
     }
 
-    public void observeWSEndpoint(@Observes ProcessInjectionTarget<CowboyEndpoint> event, BeanManager beanManager) {
-        event.setInjectionTarget(new CustomInjectionTarget<CowboyEndpoint>(event.getInjectionTarget(), () -> CowboyEndpoint.setIsWrappedInjectionSuccessfull(true)));
-    }
-
     public void stringObserver(@Observes ProcessInjectionTarget<String> event) {
         stringObserved = true;
     }
