@@ -14,7 +14,7 @@
     </parent>
 
     <!-- Metadata -->
-    <url>http://weld.cdi-spec.org/</url>
+    <url>https://github.com/eclipse-ee4j/cdi-tck/</url>
 
     <developers>
         <developer>
@@ -95,28 +95,27 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>3.0.0-M3</cdi.api.version>
+        <cdi.api.version>3.0.0</cdi.api.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- Jakarta EE APIs -->
-        <jboss.ejb.api.version>4.0.0-RC1</jboss.ejb.api.version>
-        <jboss.jms.api.version>3.0.0-RC1</jboss.jms.api.version>
-        <jboss.connector.api.version>2.0.0-RC1</jboss.connector.api.version>
-        <jboss.annotations.api.version>2.0.0-RC1</jboss.annotations.api.version>
-        <jboss.interceptors.api.version>2.0.0-RC2</jboss.interceptors.api.version>
-        <atinject.api.version>2.0.0-RC3</atinject.api.version>
+        <ejb.api.version>4.0.0-RC2</ejb.api.version>
+        <jms.api.version>3.0.0-RC1</jms.api.version>
+        <jca.api.version>2.0.0-RC2</jca.api.version>
+        <annotations.api.version>2.0.0</annotations.api.version>
+        <interceptors.api.version>2.0.0</interceptors.api.version>
+        <atinject.api.version>2.0.0</atinject.api.version>
         <jpa.api.version>3.0.0-RC2</jpa.api.version>
-        <servlet.api.version>5.0.0-M1</servlet.api.version>
-        <jsp.api.version>3.0.0-M1</jsp.api.version>
-        <jta.api.version>2.0.0-RC1</jta.api.version>
-        <el.api.version>4.0.0-RC1</el.api.version>
+        <servlet.api.version>5.0.0</servlet.api.version>
+        <jsp.api.version>3.0.0-RC2</jsp.api.version>
+        <jta.api.version>2.0.0-RC2</jta.api.version>
+        <el.api.version>4.0.0</el.api.version>
         <jsf.api.version>3.0.0-RC1</jsf.api.version>
         <jaxrs.api.version>3.0.0-M1</jaxrs.api.version>
-        <ws.api.version>3.0.0-RC3</ws.api.version>
         <!-- Test tools/dependencies -->
         <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
         <testng.version>6.14.3</testng.version>
-        <arquillian.version>1.7.0.Alpha1</arquillian.version>
+        <arquillian.version>1.7.0.Alpha2</arquillian.version>
         <arquillian.container.se.api.version>1.0.1.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
         <htmlunit.version>2.9</htmlunit.version>
@@ -150,32 +149,32 @@
             <dependency>
                 <groupId>jakarta.ejb</groupId>
                 <artifactId>jakarta.ejb-api</artifactId>
-                <version>${jboss.ejb.api.version}</version>
+                <version>${ejb.api.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>jakarta.interceptor</groupId>
                 <artifactId>jakarta.interceptor-api</artifactId>
-                <version>${jboss.interceptors.api.version}</version>
+                <version>${interceptors.api.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>jakarta.jms</groupId>
                 <artifactId>jakarta.jms-api</artifactId>
-                <version>${jboss.jms.api.version}</version>
+                <version>${jms.api.version}</version>
             </dependency>
 
             <!--            TODO this wasnt updated?-->
             <dependency>
                 <groupId>jakarta.resource</groupId>
                 <artifactId>jakarta.resource-api</artifactId>
-                <version>${jboss.connector.api.version}</version>
+                <version>${jca.api.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>jakarta.annotation</groupId>
                 <artifactId>jakarta.annotation-api</artifactId>
-                <version>${jboss.annotations.api.version}</version>
+                <version>${annotations.api.version}</version>
             </dependency>
 
             <dependency>
@@ -220,12 +219,6 @@
                 <version>${jpa.api.version}</version>
             </dependency>
             
-            <dependency>
-                <groupId>jakarta.xml.ws</groupId>
-                <artifactId>jakarta.xml.ws-api</artifactId>
-                <version>${ws.api.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>jakarta.ws.rs</groupId>
                 <artifactId>jakarta.ws.rs-api</artifactId>
