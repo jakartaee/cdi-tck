@@ -16,7 +16,7 @@
 
 
     <properties>
-        <asciidoctor.version>0.1.4</asciidoctor.version>
+        <asciidoctor.version>1.6.0</asciidoctor.version>
         <pdf.name>cdi-tck-reference-guide.pdf</pdf.name>
         <jdocbook.source.directory>target/docbook</jdocbook.source.directory>
         <pressgang.version>2.0.2</pressgang.version>
@@ -39,11 +39,9 @@
                         <configuration>
                             <backend>docbook45</backend>
                             <doctype>book</doctype>
-                            <toc>true</toc>
                             <sourceDocumentName>cdi-tck-reference-guide.asciidoc</sourceDocumentName>
                             <templateEngine>slim</templateEngine>
                             <headerFooter>true</headerFooter>
-                            <compact>false</compact>
                             <outputDirectory>${jdocbook.source.directory}/en-US</outputDirectory>
                             <attributes>
                                 <docinfo>true</docinfo>
