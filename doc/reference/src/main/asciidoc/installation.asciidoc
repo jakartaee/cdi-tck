@@ -34,11 +34,13 @@ The TCK requires the following two Java runtime environments:
 
 *  Java SE 8 or better
 
-*  Jakarta EE 8 or better (e.g., WildFly 17.x or GlassFish V5)
+*  Jakarta EE 8 or better (e.g., WildFly 22.x or GlassFish V6)
 
 You should refer to vendor instructions for how to install the runtime environment. 
 
-The rest of the TCK software can simply be extracted. It's recommended that you create a folder named _jakartacdi_ to hold all of the jakartacdi-related projects. Then, extract the TCK distribution into a subfolder named _tck_. If you have downloaded the Weld distribution, extract it into a sibling folder named _weld_. The resulting folder structure is shown here:
+The rest of the TCK software can simply be extracted. It's recommended that you create a folder named _jakartacdi_ to hold all
+of the jakartacdi-related projects. Then, extract the TCK distribution into a subfolder named _tck_. If you have downloaded
+the Weld distribution, extract it into a sibling folder named _weld_. The resulting folder structure is shown here:
 
 
 [NOTE]
@@ -57,10 +59,11 @@ jakartacdi/
 Each test class is treated as an individual artifact. All test methods (i.e., methods annotated with +@Test+) in the test class are run in the application, meaning bean discovery occurs exactly once per artifact and the same BeanManager is used by each test method in the class. 
 
 [TIP]
-==== 
+====
+[[running-against-weld, Running the TCK against Weld and WildFly]]
 Running the TCK against Weld and WildFly
 
-* First, you should download WildFly 10.x from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
+* First, you should download WildFly 22.x from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
 
 * Set the JBOSS_HOME environment variable to the location of the WildFly software. 
 

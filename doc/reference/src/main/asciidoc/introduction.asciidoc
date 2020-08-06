@@ -246,7 +246,7 @@ This section lists the applicable requirements and specifications for the CDI TC
 *  *Jakarta Contexts and Dependency Injection 3.0 API* - The Java API defined in the CDI specification and provided by the compatible implementation.
 
 
-*  *Testing platform* - The CDI TCK requires version 1.7.0.Alpha1 of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG 6.x (http://testng.org). .
+*  *Testing platform* - The CDI TCK requires version 1.7.0.Alpha2 of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG 6.x (http://testng.org). .
 
 
 *  *Porting Package* - An implementation of SPIs that are required for the test suite to run the in-container tests and at times extend the CDI 3.0 API to provide extra information to the TCK.
@@ -277,7 +277,7 @@ The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X
 The CDI TCK includes the following components:
 
 
-*  *Arquillian 1.7.0.Alpha1*
+*  *Arquillian 1.7.0.Alpha2*
 
 
 *  *TestNG 6.14.3*

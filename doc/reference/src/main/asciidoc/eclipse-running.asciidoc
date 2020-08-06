@@ -14,7 +14,7 @@ Before running a test from the TCK test suite in Eclipse, you must have the Ecli
 
 [NOTE]
 ====
-In order to run the TCK tests in Eclipse you must have CDI TCK and Weld JBoss TCK runner projects imported. Get the source from GitHub repositories https://github.com/jboss/cdi-tck and https://github.com/weld/core.
+In order to run the TCK tests in Eclipse you must have CDI TCK and Weld JBoss TCK runner projects imported. Get the source from GitHub repositories https://github.com/eclipse-ee4j/cdi-tck and https://github.com/weld/core.
 
 ====
 
@@ -88,7 +88,7 @@ As you have learned, the TCK determines how to behave based on the values of sys
 The CDI TCK project conveniently provides the properties file src/test/resources/META-INF/cdi-tck.properties that contains all of the necessary properties for testing in Eclipse. You have to tune the org.jboss.cdi.tck.libraryDirectory and org.jboss.cdi.tck.testDataSource properties to point to the relative location of the related projects and specify the name of test datasource. The properties should be defined as follows:
 
 org.jboss.cdi.tck.libraryDirectory - the path to the target/dependency/lib directory in the TCK runner project
-org.jboss.cdi.tck.testDataSource - the JNDI name of the test datasource, e.g. WildFly 10:
+org.jboss.cdi.tck.testDataSource - the JNDI name of the test datasource, e.g. WildFly 22:
 
 [source, console]
 ----
