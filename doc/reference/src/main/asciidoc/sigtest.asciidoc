@@ -28,11 +28,11 @@ and shown here:
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
     <!-- Set the api jar artifact versions here -->
-    <annotation.api.version>2.0.0-RC1</annotation.api.version>
-    <atinject.api.version>2.0.0-RC3</atinject.api.version>
-    <interceptor.api.version>2.0.0-RC2</interceptor.api.version>
-    <el.api.version>4.0.0-RC1</el.api.version>
-    <cdi.api.version>3.0.0-M2</cdi.api.version>
+    <annotation.api.version>2.0.0</annotation.api.version>
+    <atinject.api.version>2.0.0</atinject.api.version>
+    <interceptor.api.version>2.0.0</interceptor.api.version>
+    <el.api.version>4.0.0</el.api.version>
+    <cdi.api.version>3.0.0</cdi.api.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
