@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebService;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import jakarta.jws.WebService;
 
 @WebService(targetNamespace = "http://contextual.non.injection.lookup.tests.tck.cdi.jboss.org/")
 public interface Translator {
