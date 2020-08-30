@@ -16,7 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.non.contextual;
 
-import javax.jws.WebService;
+import jakarta.jws.WebService;
 
 @WebService(endpointInterface = "org.jboss.cdi.tck.tests.lookup.injection.non.contextual.Translator", serviceName = "Translator")
 public class TranslatorEndpoint implements Translator {

@@ -112,6 +112,7 @@
         <el.api.version>4.0.0</el.api.version>
         <jsf.api.version>3.0.0-RC1</jsf.api.version>
         <jaxrs.api.version>3.0.0-M1</jaxrs.api.version>
+        <jws.api.version>3.0.0-RC2</jws.api.version>
         <!-- Test tools/dependencies -->
         <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
         <testng.version>6.14.3</testng.version>
@@ -223,6 +224,12 @@
                 <groupId>jakarta.ws.rs</groupId>
                 <artifactId>jakarta.ws.rs-api</artifactId>
                 <version>${jaxrs.api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.jws</groupId>
+                <artifactId>jakarta.jws-api</artifactId>
+                <version>${jws.api.version}</version>
             </dependency>
 
             <dependency>
