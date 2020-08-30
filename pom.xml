@@ -105,14 +105,14 @@
         <annotations.api.version>2.0.0</annotations.api.version>
         <interceptors.api.version>2.0.0</interceptors.api.version>
         <atinject.api.version>2.0.0</atinject.api.version>
-        <jpa.api.version>3.0.0-RC2</jpa.api.version>
+        <jpa.api.version>3.0.0</jpa.api.version>
         <servlet.api.version>5.0.0</servlet.api.version>
-        <jsp.api.version>3.0.0-RC2</jsp.api.version>
+        <jsp.api.version>3.0.0</jsp.api.version>
         <jta.api.version>2.0.0-RC2</jta.api.version>
         <el.api.version>4.0.0</el.api.version>
         <jsf.api.version>3.0.0-RC1</jsf.api.version>
-        <jaxrs.api.version>3.0.0-M1</jaxrs.api.version>
-        <jws.api.version>3.0.0-RC2</jws.api.version>
+        <jaxrs.api.version>3.0.0</jaxrs.api.version>
+        <jws.api.version>3.0.0</jws.api.version>
         <!-- Test tools/dependencies -->
         <jboss.test.audit.version>1.1.4.Final</jboss.test.audit.version>
         <testng.version>6.14.3</testng.version>
@@ -122,7 +122,7 @@
         <htmlunit.version>2.9</htmlunit.version>
         <!-- Required for distribution build, should be overriden for each build -->
         <cdi.tck.version>${project.version}</cdi.tck.version>
-        <weld.version>4.0.0.Alpha2</weld.version>
+        <weld.version>4.0.0.Alpha3</weld.version>
     </properties>
 
     <!-- Dependency management -->
