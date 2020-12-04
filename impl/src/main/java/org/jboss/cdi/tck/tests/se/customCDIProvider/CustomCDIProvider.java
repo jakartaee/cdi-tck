@@ -16,12 +16,19 @@
  */
 package org.jboss.cdi.tck.tests.se.customCDIProvider;
 
+import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.Vetoed;
+import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.inject.spi.CDI;
 import jakarta.enterprise.inject.spi.CDIProvider;
+import jakarta.enterprise.util.TypeLiteral;
+
+import java.lang.annotation.Annotation;
+import java.util.Iterator;
 
 /**
  * @author Martin Kouba
+ * @author Matej Novotny
  *
  */
 @Vetoed
@@ -32,7 +39,54 @@ public class CustomCDIProvider implements CDIProvider {
     @Override
     public CDI<Object> getCDI() {
         initializedCalled = true;
-        return null;
+        return new CustomCdi();
     }
 
+    public class CustomCdi extends CDI<Object> {
+
+        @Override
+        public BeanManager getBeanManager() {
+            return null;
+        }
+
+        @Override
+        public Instance<Object> select(Annotation... qualifiers) {
+            return null;
+        }
+
+        @Override
+        public <U> Instance<U> select(Class<U> subtype, Annotation... qualifiers) {
+            return null;
+        }
+
+        @Override
+        public <U> Instance<U> select(TypeLiteral<U> subtype, Annotation... qualifiers) {
+            return null;
+        }
+
+        @Override
+        public boolean isUnsatisfied() {
+            return false;
+        }
+
+        @Override
+        public boolean isAmbiguous() {
+            return false;
+        }
+
+        @Override
+        public void destroy(Object instance) {
+
+        }
+
+        @Override
+        public Object get() {
+            return null;
+        }
+
+        @Override
+        public Iterator<Object> iterator() {
+            return null;
+        }
+    }
 }
