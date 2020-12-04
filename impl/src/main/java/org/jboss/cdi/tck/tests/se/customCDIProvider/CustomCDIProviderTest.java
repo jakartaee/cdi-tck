@@ -50,7 +50,8 @@ public class CustomCDIProviderTest extends Arquillian {
     @SpecAssertions({ @SpecAssertion(section = Sections.PROVIDER, id = "da"), @SpecAssertion(section = Sections.PROVIDER, id = "c") })
     public void testCustomCDIProvider() {
         CDI.setCDIProvider(new CustomCDIProvider());
-        Assert.assertNull(CDI.current());
+        CDI<Object> current = CDI.current();
+        Assert.assertNotNull(current);
         Assert.assertTrue(CustomCDIProvider.initializedCalled);
     }
 
