@@ -129,8 +129,8 @@ public class ResolutionByTypeTest extends AbstractTest {
         double max = getContextualReference(double.class, new AnnotationLiteral<Max>() {
         });
 
-        assertEquals(min, NumberProducer.min);
-        assertEquals(max, NumberProducer.max);
+        assertEquals(min, Double.valueOf(NumberProducer.min));
+        assertEquals(Double.valueOf(max), NumberProducer.max);
     }
 
     @Test

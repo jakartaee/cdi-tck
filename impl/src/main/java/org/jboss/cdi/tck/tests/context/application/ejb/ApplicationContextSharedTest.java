@@ -117,7 +117,7 @@ public class ApplicationContextSharedTest extends AbstractTest {
         Future<Double> result = bar.compute();
         Double id = result.get();
         assertNotEquals(id, -1.00);
-        assertEquals(id, simpleApplicationBean.getId());
+        assertEquals(id, Double.valueOf(simpleApplicationBean.getId()));
     }
 
     @OperateOnDeployment("TEST")
