@@ -22,7 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.testng.IInvokedMethod;
-import org.testng.IInvokedMethodListener2;
+import org.testng.IInvokedMethodListener;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 
@@ -31,7 +31,7 @@ import org.testng.ITestResult;
  *
  * @author Martin Kouba
  */
-public class ProgressLoggingTestListener implements IInvokedMethodListener2 {
+public class ProgressLoggingTestListener implements IInvokedMethodListener {
 
     private final Logger logger = Logger.getLogger(ProgressLoggingTestListener.class.getName());
 
