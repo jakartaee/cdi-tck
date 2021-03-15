@@ -24,15 +24,13 @@ import static org.testng.Assert.assertNotNull;
 
 import jakarta.enterprise.inject.spi.CDI;
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.extensions.alternative.deployment.Bar;
 import org.jboss.cdi.tck.tests.extensions.alternative.deployment.Foo;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -59,12 +57,12 @@ public class CDIProviderInitTest extends AbstractTest {
                 .withClasses(Alpha.class, MarkerObtainerWar.class, Foo.class, Marker.class,
                         AfterDeploymentValidationObserver.class)
                 .withExtension(AfterDeploymentValidationObserver.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Alpha.class.getName()).up())
+                .withBeansXml(new BeansXml().alternatives(Alpha.class))
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Bravo.class.getName()).up(),
+                        new BeansXml().alternatives(Bravo.class),
                         Bravo.class, MarkerObtainerBda1.class, Bar.class)
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Charlie.class.getName()).up(),
+                        new BeansXml().alternatives(Charlie.class),
                         Charlie.class, MarkerObtainerBda2.class, Baz.class)
                 .withLibrary(MarkerObtainerNonBda.class, NonBdaAfterDeploymentValidationObserver.class).build();
     }

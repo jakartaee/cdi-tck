@@ -19,26 +19,24 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
 import static org.testng.Assert.assertEquals;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.enterprise.inject.spi.InterceptionType;
 import jakarta.enterprise.inject.spi.Interceptor;
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Type;
+import java.util.Collections;
 
 /**
  * <p>
@@ -58,10 +56,7 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(BuiltinMetadataBeanTest.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                                .clazz(YoghurtInterceptor.class.getName()).up().getOrCreateDecorators()
-                                .clazz(MilkProductDecorator.class.getName()).up()).build();
+                .withBeansXml(new BeansXml().interceptors(YoghurtInterceptor.class).decorators(MilkProductDecorator.class)).build();
     }
 
     @Inject

@@ -21,13 +21,11 @@ import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEA
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
 
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -55,9 +53,8 @@ public class AlternativeInLibraryWithExtensionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(AlternativeInLibraryWithExtensionTest.class)
-                .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(BarAlternative.class.getName())
-                                .up(), Foo.class, Bar.class, BarAlternative.class, NoopExtension.class).build();
+                .withBeanLibrary(new BeansXml().alternatives(BarAlternative.class),
+                        Foo.class, Bar.class, BarAlternative.class, NoopExtension.class).build();
     }
 
     @Test

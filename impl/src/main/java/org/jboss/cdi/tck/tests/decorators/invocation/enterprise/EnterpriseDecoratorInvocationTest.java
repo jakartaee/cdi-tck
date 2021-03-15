@@ -24,24 +24,22 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
 import static org.testng.Assert.assertEquals;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
-
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
 
 /**
  *
@@ -55,15 +53,10 @@ public class EnterpriseDecoratorInvocationTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(EnterpriseDecoratorInvocationTest.class)
-                .withBeansXml(
-                        Descriptors
-                                .create(BeansDescriptor.class)
-                                .getOrCreateInterceptors()
-                                .clazz(FooInterceptor.class.getName())
-                                .up()
-                                .getOrCreateDecorators()
-                                .clazz(FooBusinessDecorator1.class.getName(), FooBusinessDecorator2.class.getName(),
-                                        BarBusinessDecorator.class.getName()).up()).build();
+                .withBeansXml(new BeansXml()
+                        .interceptors(FooInterceptor.class)
+                        .decorators(FooBusinessDecorator1.class, FooBusinessDecorator2.class, BarBusinessDecorator.class))
+                .build();
     }
 
     @Inject

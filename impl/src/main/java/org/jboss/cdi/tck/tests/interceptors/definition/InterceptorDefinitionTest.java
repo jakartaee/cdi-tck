@@ -27,6 +27,21 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import jakarta.enterprise.inject.spi.InterceptionType;
+import jakarta.enterprise.inject.spi.Interceptor;
+import jakarta.enterprise.util.AnnotationLiteral;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.HierarchyDiscovery;
+import org.jboss.cdi.tck.util.ParameterizedTypeImpl;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.impl.BeansXml;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.annotations.Test;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
@@ -36,23 +51,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import jakarta.enterprise.inject.spi.InterceptionType;
-import jakarta.enterprise.inject.spi.Interceptor;
-import jakarta.enterprise.util.AnnotationLiteral;
-
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.HierarchyDiscovery;
-import org.jboss.cdi.tck.util.ParameterizedTypeImpl;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.annotations.Test;
 
 /**
  * Tests related to the definition of interceptors, but not necessarily their execution.
@@ -84,13 +82,9 @@ public class InterceptorDefinitionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorDefinitionTest.class)
-                .withBeansXml(
-                        Descriptors
-                                .create(BeansDescriptor.class)
-                                .getOrCreateInterceptors()
-                                .clazz(AtomicInterceptor.class.getName(), MissileInterceptor.class.getName(),
-                                        SecureInterceptor.class.getName(), TransactionalInterceptor.class.getName(),
-                                        FileLogger.class.getName(), NetworkLogger.class.getName()).up()).build();
+                .withBeansXml(new BeansXml().interceptors(AtomicInterceptor.class, MissileInterceptor.class,
+                        SecureInterceptor.class, TransactionalInterceptor.class, FileLogger.class, NetworkLogger.class))
+                .build();
     }
 
     @Test

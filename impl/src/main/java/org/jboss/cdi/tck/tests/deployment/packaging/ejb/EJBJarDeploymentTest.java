@@ -37,6 +37,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -53,8 +54,7 @@ public class EJBJarDeploymentTest extends AbstractTest {
                 .create(JavaArchive.class, "test-ejb.jar")
                 .addClasses(FooRemote.class, FooBean.class, Bar.class, ProcessBeanObserver.class)
                 .addAsServiceProvider(Extension.class, ProcessBeanObserver.class)
-                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(
-                        Versions.v1_1).exportAsString()), "beans.xml");
+                .addAsManifestResource(new BeansXml(), "beans.xml");
     }
 
     @Deployment(name = "TEST", order = 2)

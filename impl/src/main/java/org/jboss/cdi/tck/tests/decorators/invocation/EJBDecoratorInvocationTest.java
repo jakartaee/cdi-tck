@@ -22,13 +22,11 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 import static org.testng.Assert.assertTrue;
 
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -47,8 +45,8 @@ public class EJBDecoratorInvocationTest extends AbstractTest {
                 .withTestClass(EJBDecoratorInvocationTest.class)
                 .withClasses(PigSty.class, PigStyImpl.class, PigStyDecorator.class, Pig.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(PigStyDecorator.class.getName())
-                                .up()).build();
+                        new BeansXml().decorators(PigStyDecorator.class))
+                .build();
     }
 
     @Inject

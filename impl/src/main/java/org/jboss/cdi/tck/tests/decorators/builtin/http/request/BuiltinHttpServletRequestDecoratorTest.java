@@ -23,28 +23,26 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
 
+import jakarta.enterprise.inject.spi.Decorator;
+import jakarta.inject.Inject;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.decorators.AbstractDecoratorTest;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.impl.BeansXml;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.annotations.Test;
+
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-
-import jakarta.enterprise.inject.spi.Decorator;
-import jakarta.inject.Inject;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.http.HttpServletRequest;
-
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.decorators.AbstractDecoratorTest;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
@@ -60,9 +58,7 @@ public class BuiltinHttpServletRequestDecoratorTest extends AbstractDecoratorTes
                 .withTestClassPackage(BuiltinHttpServletRequestDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
-                                .clazz(HttpServletRequestDecorator1.class.getName())
-                                .clazz(HttpServletRequestDecorator2.class.getName()).up()).build();
+                        new BeansXml().decorators(HttpServletRequestDecorator1.class, HttpServletRequestDecorator2.class)).build();
     }
 
     @Inject

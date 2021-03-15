@@ -30,27 +30,25 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.spi.Decorator;
+import jakarta.enterprise.util.AnnotationLiteral;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.impl.BeansXml;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.annotations.Test;
+
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.List;
-
-import jakarta.decorator.Delegate;
-import jakarta.enterprise.inject.Default;
-import jakarta.enterprise.inject.spi.Decorator;
-import jakarta.enterprise.util.AnnotationLiteral;
-
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.annotations.Test;
 
 /**
  * @author pmuir
@@ -64,13 +62,9 @@ public class DecoratorDefinitionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorDefinitionTest.class)
-                .withBeansXml(
-                        Descriptors
-                                .create(BeansDescriptor.class)
-                                .getOrCreateDecorators()
-                                .clazz(BazDecorator1.class.getName(), BazDecorator2.class.getName(),
-                                        FooDecorator.class.getName(), TimestampLogger.class.getName(),
-                                        ChargeDecorator.class.getName()).up()).build();
+                .withBeansXml(new BeansXml().decorators(BazDecorator1.class, BazDecorator2.class,
+                        FooDecorator.class, TimestampLogger.class,
+                        ChargeDecorator.class)).build();
     }
 
     @Test

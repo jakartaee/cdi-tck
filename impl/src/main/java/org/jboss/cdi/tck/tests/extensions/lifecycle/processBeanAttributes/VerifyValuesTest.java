@@ -26,8 +26,6 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-import java.lang.annotation.Annotation;
-
 import jakarta.decorator.Decorator;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
@@ -42,17 +40,17 @@ import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.enterprise.inject.spi.BeanAttributes;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.lang.annotation.Annotation;
 
 /**
  * <p/>
@@ -74,10 +72,9 @@ public class VerifyValuesTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(VerifyValuesTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives()
-                                .clazz(Alpha.class.getName(), BravoProducer.class.getName(), CharlieProducer.class.getName())
-                                .up().getOrCreateInterceptors().clazz(BravoInterceptor.class.getName()).up().getOrCreateDecorators()
-                                .clazz(BravoDecorator.class.getName()).up()).withExtension(VerifyingExtension.class).build();
+                        new BeansXml().alternatives(Alpha.class, BravoProducer.class, CharlieProducer.class)
+                            .interceptors(BravoInterceptor.class).decorators(BravoDecorator.class))
+                .withExtension(VerifyingExtension.class).build();
     }
 
     @Test

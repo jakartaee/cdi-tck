@@ -21,13 +21,11 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Status;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -51,8 +49,7 @@ public class BuiltinUserTransactionDecoratorTest extends AbstractTest {
         return new EnterpriseArchiveBuilder()
                 .withTestClassPackage(BuiltinUserTransactionDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
-                                .clazz(UserTransactionDecorator.class.getName()).up()).build();
+                        new BeansXml().decorators(UserTransactionDecorator.class)).build();
     }
 
     @Test

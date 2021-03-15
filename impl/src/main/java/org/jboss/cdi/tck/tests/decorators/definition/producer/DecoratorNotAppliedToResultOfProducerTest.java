@@ -25,8 +25,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -43,8 +42,7 @@ public class DecoratorNotAppliedToResultOfProducerTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorNotAppliedToResultOfProducerTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(ChargeDecorator.class.getName())
-                                .up()).build();
+                        new BeansXml().decorators(ChargeDecorator.class)).build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

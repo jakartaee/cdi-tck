@@ -23,9 +23,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
-import java.lang.reflect.Type;
-import java.util.Set;
-
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.spi.CreationalContext;
@@ -33,17 +30,18 @@ import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.New;
 import jakarta.enterprise.inject.spi.Bean;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Type;
+import java.util.Set;
 
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -57,9 +55,7 @@ public class NewEnterpriseBeanTest extends AbstractTest {
                         Dragon.class.getName(), NewEnterpriseBeanICTest.class.getName(), Hat.class.getName(),
                         Fireball.class.getName())
                 .withLibrary(Tiger.class, Spell.class, Staff.class, Dragon.class, Hat.class, Fireball.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(OrderInterceptor.class.getName())
-                                .up()).build();
+                .withBeansXml(new BeansXml().interceptors(OrderInterceptor.class)).build();
     }
 
     @Test

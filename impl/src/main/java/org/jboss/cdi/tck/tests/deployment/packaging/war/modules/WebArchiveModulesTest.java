@@ -30,22 +30,20 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import java.util.Set;
-
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.util.Set;
 
 /**
  * This test is aimed to verify packaging-related issues in a little bit more complex deployment scenario. The assertions are
@@ -74,18 +72,12 @@ public class WebArchiveModulesTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClass(WebArchiveModulesTest.class)
                 // A
                 .withClasses(Foo.class, Secured.class, SecurityInterceptor.class, Business.class, BusinessOperationEvent.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeBar.class.getName())
-                                .up())
+                .withBeansXml(new BeansXml().alternatives(AlternativeBar.class))
                 // B
-                .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                                .clazz(SecurityInterceptor.class.getName()).up(), Bar.class, AlternativeBar.class,
+                .withBeanLibrary(new BeansXml().interceptors(SecurityInterceptor.class), Bar.class, AlternativeBar.class,
                         BarInspector.class)
                 // C
-                .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(LoggingDecorator.class.getName())
-                                .up(), Baz.class, LoggingDecorator.class, Bazinga.class)
+                .withBeanLibrary(new BeansXml().decorators(LoggingDecorator.class), Baz.class, LoggingDecorator.class, Bazinga.class)
                 // D
                 .withBeanLibrary(Qux.class, ContainerEventsObserver.class, LegacyServiceProducer.class)
                 // E

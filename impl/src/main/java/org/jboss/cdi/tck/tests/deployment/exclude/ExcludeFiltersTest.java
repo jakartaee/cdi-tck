@@ -36,6 +36,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -55,21 +56,19 @@ public class ExcludeFiltersTest extends AbstractTest {
                 .withPackage(Beard.class.getPackage())
                 .withPackage(Chonmage.class.getPackage())
                 .withPackage(Meat.class.getPackage())
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).createScan().createExclude()
-                                .name(Chonmage.class.getPackage().getName() + ".*").up().createExclude()
-                                .name(Mustache.class.getPackage().getName() + ".**").up().createExclude()
-                                .name(Meat.class.getPackage().getName() + ".*").createIfClassAvailable().name("com.some.unreal.class.Name").up().up().createExclude()
-                                .name(Meat.class.getPackage().getName() + ".*").createIfClassNotAvailable().name(ExcludeFiltersTest.class.getName()).up().up().createExclude()
-                                .name(Alpha.class.getName()).createIfClassAvailable().name(Stubble.class.getName()).up().up().createExclude()
-                                .name(Stubble.class.getName()).up().createExclude()
-                                .name(Foxtrot.class.getName()).createIfClassAvailable().name("com.some.unreal.class.Name").up().up().createExclude()
-                                .name(Bravo.class.getName()).createIfClassNotAvailable().name("com.some.unreal.class.Name").up().up().createExclude()
-                                .name(Echo.class.getName()).createIfClassNotAvailable().name(ExcludeFiltersTest.class.getName()).up().up().createExclude()
-                                .name(Charlie.class.getName()).createIfSystemProperty().name(TestSystemProperty.EXCLUDE_DUMMY.getKey()).up().up().createExclude()
-                                .name(Delta.class.getName()).createIfSystemProperty().name(TestSystemProperty.EXCLUDE_DUMMY.getKey())
-                                .value(TestSystemProperty.EXCLUDE_DUMMY.getValue()).up().up().up()
-                )
+                .withBeansXml(new BeansXml().excludeFilters(
+                        BeansXml.Exclude.match(Chonmage.class.getPackage().getName() + ".*"),
+                        BeansXml.Exclude.match(Mustache.class.getPackage().getName() + ".**"),
+                        BeansXml.Exclude.match(Meat.class.getPackage().getName() + ".*").ifClassAvailable("com.some.unreal.class.Name"),
+                        BeansXml.Exclude.match(Meat.class.getPackage().getName() + ".*").ifClassNotAvailable(ExcludeFiltersTest.class.getName()),
+                        BeansXml.Exclude.match(Alpha.class.getName()).ifClassAvailable(Stubble.class.getName()),
+                        BeansXml.Exclude.match(Stubble.class.getName()),
+                        BeansXml.Exclude.match(Foxtrot.class.getName()).ifClassAvailable("com.some.unreal.class.Name"),
+                        BeansXml.Exclude.match(Bravo.class.getName()).ifClassNotAvailable("com.some.unreal.class.Name"),
+                        BeansXml.Exclude.match(Echo.class.getName()).ifClassNotAvailable(ExcludeFiltersTest.class.getName()),
+                        BeansXml.Exclude.match(Charlie.class.getName()).ifSystemProperty(TestSystemProperty.EXCLUDE_DUMMY.getKey()),
+                        BeansXml.Exclude.match(Delta.class.getName()).ifSystemProperty(TestSystemProperty.EXCLUDE_DUMMY.getKey(), TestSystemProperty.EXCLUDE_DUMMY.getValue())
+                ))
                 .withExtension(VerifyingExtension.class).build();
     }
 

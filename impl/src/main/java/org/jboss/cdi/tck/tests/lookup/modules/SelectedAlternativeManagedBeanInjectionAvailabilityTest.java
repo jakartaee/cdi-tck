@@ -20,14 +20,12 @@ import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
@@ -57,9 +55,8 @@ public class SelectedAlternativeManagedBeanInjectionAvailabilityTest extends Abs
         enterpriseArchive.addAsModule(new WebArchiveBuilder()
                 .notTestArchive()
                 .withDefaultEjbModuleDependency()
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeFoo.class.getName())
-                                .up()).withClasses(SelectedAlternativeManagedBeanInjectionAvailabilityTest.class, WebBar.class)
+                .withBeansXml(new BeansXml().alternatives(AlternativeFoo.class))
+                .withClasses(SelectedAlternativeManagedBeanInjectionAvailabilityTest.class, WebBar.class)
                 .build());
 
         return enterpriseArchive;

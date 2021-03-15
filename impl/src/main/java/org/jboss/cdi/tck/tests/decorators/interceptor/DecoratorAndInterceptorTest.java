@@ -33,6 +33,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -46,9 +47,8 @@ public class DecoratorAndInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorAndInterceptorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                                .clazz(FooInterceptor1.class.getName(), FooInterceptor2.class.getName()).up()
-                                .getOrCreateDecorators().clazz(FooDecorator1.class.getName(), FooDecorator2.class.getName()).up())
+                        new BeansXml().interceptors(FooInterceptor1.class, FooInterceptor2.class)
+                            .decorators(FooDecorator1.class, FooDecorator2.class))
                 .build();
     }
 

@@ -40,6 +40,7 @@ import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -52,7 +53,8 @@ public class AlternativeMetadataInterceptorInjectionTargetTest extends AbstractT
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(AlternativeMetadataInterceptorInjectionTargetTest.class)
                 .withClasses(Login.class, LoginInterceptor.class, LoginInterceptorBinding.class, Secured.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(LoginInterceptor.class.getName()).up()).build();
+                .withBeansXml(new BeansXml().interceptors(LoginInterceptor.class))
+                .build();
     }
 
     @Inject

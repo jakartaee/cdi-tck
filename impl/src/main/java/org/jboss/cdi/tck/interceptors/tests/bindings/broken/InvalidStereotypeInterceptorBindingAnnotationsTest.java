@@ -19,14 +19,12 @@ package org.jboss.cdi.tck.interceptors.tests.bindings.broken;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_BINDING_TYPES_WITH_MEMBERS;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -47,12 +45,8 @@ public class InvalidStereotypeInterceptorBindingAnnotationsTest extends Abstract
                 .withClasses(Bar.class, FooBinding.class, BarBinding.class, BazBinding.class, FooInterceptor.class,
                         BarInterceptor.class, YesBazInterceptor.class, NoBazInterceptor.class, FooStereotype.class,
                         BarStereotype.class)
-                .withBeansXml(
-                        Descriptors
-                                .create(BeansDescriptor.class)
-                                .getOrCreateInterceptors()
-                                .clazz(FooInterceptor.class.getName(), BarInterceptor.class.getName(),
-                                        YesBazInterceptor.class.getName(), NoBazInterceptor.class.getName()).up()).build();
+                .withBeansXml(new BeansXml().interceptors(FooInterceptor.class, BarInterceptor.class, YesBazInterceptor.class, NoBazInterceptor.class))
+                .build();
     }
 
     @Test

@@ -26,14 +26,12 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.fail;
 
 import jakarta.enterprise.inject.Instance;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -54,12 +52,9 @@ public class AroundConstructTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AroundConstructTest.class)
-                .withBeansXml(
-                        Descriptors
-                                .create(BeansDescriptor.class)
-                                .getOrCreateInterceptors()
-                                .clazz(AlphaInterceptor.class.getName(), BravoInterceptor.class.getName(),
-                                        CharlieInterceptor1.class.getName(), CharlieInterceptor2.class.getName()).up()).build();
+                .withBeansXml(new BeansXml().interceptors(AlphaInterceptor.class, BravoInterceptor.class,
+                        CharlieInterceptor1.class, CharlieInterceptor2.class))
+                .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

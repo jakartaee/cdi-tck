@@ -20,13 +20,11 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.SELECTION_EE;
 
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
@@ -40,7 +38,7 @@ public class SelectedAlternativeSessionBeanInjectionAvailability02Test extends A
 
         WebArchive webArchive = new WebArchiveBuilder().withTestClass(SelectedAlternativeSessionBeanInjectionAvailability02Test.class)
                 .withClasses(AlternativeEjbFoo.class, EjbFooLocal.class).withBeanLibrary(Foo.class, Bar.class)
-                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeEjbFoo.class.getName()).up(), WebBar.class)
+                .withBeanLibrary(new BeansXml().alternatives(AlternativeEjbFoo.class), WebBar.class)
                 .build();
 
         return webArchive;

@@ -41,6 +41,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -59,10 +60,9 @@ public class ProcessBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(ProcessBeanTest.class)
                 .withClasses(Cat.class, Cow.class, Cowshed.class, Domestic.class, Chicken.class, ChickenHutch.class,
-                        ProcessBeanObserver.class, CatInterceptor.class, CatInterceptorBinding.class, Animal.class, AnimalDecorator.class).
-                        withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(CatInterceptor.class.getName())
-                                .up().getOrCreateDecorators().clazz(AnimalDecorator.class.getName()).up()).
-                        withExtension(ProcessBeanObserver.class).build();
+                        ProcessBeanObserver.class, CatInterceptor.class, CatInterceptorBinding.class, Animal.class, AnimalDecorator.class)
+                .withBeansXml(new BeansXml().interceptors(CatInterceptor.class).decorators(AnimalDecorator.class))
+                .withExtension(ProcessBeanObserver.class).build();
     }
 
     @SuppressWarnings("unchecked")
