@@ -30,6 +30,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
+import org.jboss.shrinkwrap.api.BeansXmlVersion;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
@@ -56,6 +57,16 @@ public class BeanDiscoveryTest extends AbstractTest {
                 .create(JavaArchive.class)
                 .addClass(Alpha.class)
                 .addAsManifestResource(new BeansXml(BeanDiscoveryMode.ALL), "beans.xml");
+        // beans.xml with version 1.1 and bean-discovery-mode of all
+        JavaArchive alpha2 = ShrinkWrap
+                .create(JavaArchive.class)
+                .addClass(Alpha2.class)
+                .addAsManifestResource(new BeansXml(BeanDiscoveryMode.ALL).setBeansXmlVersion(BeansXmlVersion.v11), "beans.xml");
+        // beans.xml with version 2.0 and bean-discovery-mode of all
+        JavaArchive alpha3 = ShrinkWrap
+                .create(JavaArchive.class)
+                .addClass(Alpha3.class)
+                .addAsManifestResource(new BeansXml(BeanDiscoveryMode.ALL).setBeansXmlVersion(BeansXmlVersion.v20), "beans.xml");
         // Empty beans.xml
         JavaArchive bravo = ShrinkWrap.create(JavaArchive.class).addClass(Bravo.class)
                 .addAsManifestResource(new StringAsset(""), "beans.xml");
@@ -87,7 +98,7 @@ public class BeanDiscoveryTest extends AbstractTest {
                 .withClasses(VerifyingExtension.class, ScopesExtension.class, Binding.class, MyNormalScope.class, MyPseudoScope.class,
                         MyNormalContext.class, MyPseudoContext.class, MyStereotype.class)
                 .withExtensions(VerifyingExtension.class, ScopesExtension.class).withLibrary(Ping.class)
-                .withLibraries(alpha, bravo, charlie, delta, echo, foxtrot, legacy).build();
+                .withLibraries(alpha, alpha2, alpha3, bravo, charlie, delta, echo, foxtrot, legacy).build();
     }
 
     @Inject
@@ -97,6 +108,18 @@ public class BeanDiscoveryTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
     public void testExplicitBeanArchiveModeAll(Alpha alpha) {
         assertDiscoveredAndAvailable(alpha, Alpha.class);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
+    public void testExplicitBeanArchiveModeAllVersion11(Alpha2 alpha) {
+        assertDiscoveredAndAvailable(alpha, Alpha2.class);
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
+    public void testExplicitBeanArchiveModeAllVersion20(Alpha3 alpha) {
+        assertDiscoveredAndAvailable(alpha, Alpha3.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
