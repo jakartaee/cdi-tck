@@ -3,7 +3,7 @@ CDI TCK Development
 
 [![Travis CI Build Status](https://img.shields.io/travis/cdi-spec/cdi-tck/master.svg)](https://travis-ci.org/cdi-spec/cdi-tck)
 
-Check out the [TCK Reference Guide](http://docs.jboss.org/cdi/tck/reference/latest/en-US/html/) to get acquainted with the CDI TCK and learn how to execute and debug it.
+Check out the [TCK Reference Guide](https://eclipse-ee4j.github.io/cdi-tck/) to get acquainted with the CDI TCK and learn how to execute and debug it.
 
 Sources in GIT
 --------------
