@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory">Technology Compatibility Kit Reference Guide for Jakarta Contexts and Dependency Injection</title><link rel="stylesheet" href="css/cditck.css" type="text/css"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" name="generator" content="DocBook XSL-NS Stylesheets V1.74.0"/><meta xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" http-equiv="Content-Type" content="text/html; charset=UTF-8"/></head><body><div class="book" lang="en-US"><div class="titlepage"><div><p xmlns:d="http://docbook.org/ns/docbook" id="title"><a href="http://cdi-spec.org" class="site_href"><strong>CDI TCK</strong></a><a href="http://docs.jboss.org/" class="doc_href"><strong>Community Documentation</strong></a></p><div><h1 class="title"><a id="d4e1"/>Technology Compatibility Kit Reference Guide for Jakarta Contexts and Dependency Injection</h1></div></div><hr/></div><div class="toc"><dl><dt><span class="preface"><a href="#_preface">Preface</a></span></dt><dd><dl><dt><span class="section"><a href="#_who_should_use_this_book">1. Who Should Use This Book</a></span></dt><dt><span class="section"><a href="#_before_you_read_this_book">2. Before You Read This Book</a></span></dt><dt><span class="section"><a href="#_how_this_book_is_organized">3. How This Book Is Organized</a></span></dt></dl></dd><dt><span class="part"><a href="#_getting_acquainted_with_the_tck">I. Getting Acquainted with the TCK</a></span></dt><dd><dl><dt><span class="chapter"><a href="#introduction">1. Introduction (CDI TCK)</a></span></dt><dd><dl><dt><span class="section"><a href="#_tck_primer">1.1. TCK Primer</a></span></dt><dt><span class="section"><a href="#_compatibility_testing">1.2. Compatibility Testing</a></span></dt><dd><dl><dt><span class="section"><a href="#_why_compatibility_is_important">1.2.1. Why Compatibility Is Important</a></span></dt></dl></dd><dt><span class="section"><a href="#_compatibility_requirements">1.3. Compatibility Requirements</a></span></dt><dd><dl><dt><span class="section"><a href="#_definitions">1.3.1. Definitions</a></span></dt><dt><span class="section"><a href="#_rules_for_jakarta_contexts_and_dependency_injection_version_3_0_products">1.3.2. Rules for Jakarta Contexts and Dependency Injection Version 3.0 Products</a></span></dt></dl></dd><dt><span class="section"><a href="#_about_the_cdi_tck">1.4. About the CDI TCK</a></span></dt><dd><dl><dt><span class="section"><a href="#_cdi_tck_specifications_and_requirements">1.4.1. CDI TCK Specifications and Requirements</a></span></dt><dt><span class="section"><a href="#tck-components">1.4.2. CDI TCK Components</a></span></dt></dl></dd><dt><span class="section"><a href="#libraries">1.5. Libraries for Jakarta Contexts and Dependency Injection Version 3.0</a></span></dt></dl></dd><dt><span class="chapter"><a href="#appeals-process">2. Appeals Process</a></span></dt><dd><dl><dt><span class="section"><a href="#_what_challenges_to_the_tck_may_be_submitted">2.1. What challenges to the TCK may be submitted?</a></span></dt><dt><span class="section"><a href="#_how_these_challenges_are_submitted">2.2. How these challenges are submitted?</a></span></dt><dt><span class="section"><a href="#_how_and_by_whom_challenges_are_addressed">2.3. How and by whom challenges are addressed?</a></span></dt><dt><span class="section"><a href="#_how_accepted_challenges_to_the_tck_are_managed">2.4. How accepted challenges to the TCK are managed?</a></span></dt></dl></dd><dt><span class="chapter"><a href="#installation">3. Installation</a></span></dt><dd><dl><dt><span class="section"><a href="#_obtaining_the_software">3.1. Obtaining the Software</a></span></dt><dt><span class="section"><a href="#_the_tck_environment">3.2. The TCK Environment</a></span></dt><dt><span class="section"><a href="#eclipse-plugins">3.3. Eclipse Plugins</a></span></dt><dd><dl><dt><span class="section"><a href="#eclipse-testng-plugin">3.3.1. TestNG Plugin</a></span></dt><dt><span class="section"><a href="#m2e-plugin">3.3.2. Maven Plugin (m2e)</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#configuration">4. Configuration</a></span></dt><dd><dl><dt><span class="section"><a href="#tck-properties">4.1. TCK Properties</a></span></dt><dt><span class="section"><a href="#arquillian-settings">4.2. Arquillian settings</a></span></dt><dt><span class="section"><a href="#porting-package">4.3. The Porting Package</a></span></dt><dt><span class="section"><a href="#_using_the_cdi_tck_with_the_jakarta_ee_web_profile">4.4. Using the CDI TCK with the Jakarta EE Web Profile</a></span></dt><dt><span class="section"><a href="#_configuring_testng_to_execute_the_tck">4.5. Configuring TestNG to execute the TCK</a></span></dt><dt><span class="section"><a href="#_configuring_your_build_environment_to_execute_the_tck">4.6. Configuring your build environment to execute the TCK</a></span></dt><dt><span class="section"><a href="#_configuring_your_application_server_to_execute_the_tck">4.7. Configuring your application server to execute the TCK</a></span></dt></dl></dd><dt><span class="chapter"><a href="#reporting">5. Reporting</a></span></dt><dd><dl><dt><span class="section"><a href="#_cdi_tck_coverage_metrics">5.1. CDI TCK Coverage Metrics</a></span></dt><dt><span class="section"><a href="#_cdi_tck_coverage_report">5.2. CDI TCK Coverage Report</a></span></dt><dd><dl><dt><span class="section"><a href="#_cdk_tck_assertions">5.2.1. CDK TCK Assertions</a></span></dt><dt><span class="section"><a href="#_producing_the_coverage_report">5.2.2. Producing the Coverage Report</a></span></dt><dt><span class="section"><a href="#_testng_reports">5.2.3. TestNG Reports</a></span></dt></dl></dd></dl></dd></dl></dd><dt><span class="part"><a href="#_executing_and_debugging_tests">II. Executing and Debugging Tests</a></span></dt><dd><dl><dt><span class="chapter"><a href="#sigtest">6. Running the Signature Test</a></span></dt><dd><dl><dt><span class="section"><a href="#_obtaining_the_sigtest_plugin">6.1. Obtaining the sigtest plugin</a></span></dt><dt><span class="section"><a href="#_running_the_signature_test">6.2. Running the signature test</a></span></dt><dt><span class="section"><a href="#_forcing_a_signature_test_failure">6.3. Forcing a signature test failure</a></span></dt></dl></dd><dt><span class="chapter"><a href="#executing">7. Executing the Test Suite</a></span></dt><dd><dl><dt><span class="section"><a href="#_the_test_suite_runner">7.1. The Test Suite Runner</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_standalone_mode">7.2. Running the Tests In Standalone Mode</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_the_container_core_and_ee_parts">7.3. Running the Tests In the Container - Core and EE parts</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_the_container_se_part">7.4. Running the Tests In the Container - SE part</a></span></dt><dt><span class="section"><a href="#_dumping_the_test_archives">7.5. Dumping the Test Archives</a></span></dt></dl></dd><dt><span class="chapter"><a href="#eclipse-running">8. Running Tests in Eclipse</a></span></dt><dd><dl><dt><span class="section"><a href="#_leveraging_eclipses_plugin_ecosystem">8.1. Leveraging Eclipse’s plugin ecosystem</a></span></dt><dt><span class="section"><a href="#_readying_the_eclipse_workspace">8.2. Readying the Eclipse workspace</a></span></dt><dt><span class="section"><a href="#_running_a_test_in_standalone_mode">8.3. Running a test in standalone mode</a></span></dt><dt><span class="section"><a href="#running-integration-tests">8.4. Running integration tests</a></span></dt></dl></dd><dt><span class="chapter"><a href="#eclipse-debugging">9. Debugging Tests in Eclipse</a></span></dt><dd><dl><dt><span class="section"><a href="#_debugging_a_standalone_test">9.1. Debugging a standalone test</a></span></dt><dt><span class="section"><a href="#_debugging_an_integration_test">9.2. Debugging an integration test</a></span></dt><dd><dl><dt><span class="section"><a href="#_attaching_the_ide_debugger_to_the_container">9.2.1. Attaching the IDE debugger to the container</a></span></dt><dt><span class="section"><a href="#_launching_the_test_in_the_debugger">9.2.2. Launching the test in the debugger</a></span></dt></dl></dd></dl></dd></dl></dd></dl></div>
+
+<div class="preface" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_preface"/>Preface</h2></div></div></div>
+
+<p>This guide describes how to download, install, configure, and run the
+Technology Compatibility Kit (TCK) used to verify the compatibility of an
+implementation of the Jakarta Contexts and Dependency Injection.</p>
+<p>The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses
+the Arquillian version <span class="emphasis"><em>1.7.0.Alpha2</em></span> to execute the test suite.</p>
+<p>The CDI TCK is provided under <a class="ulink" href="http://www.apache.org/licenses/LICENSE-2.0">Apache Public License 2.0</a>.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_who_should_use_this_book"/>1. Who Should Use This Book</h2></div></div></div>
+
+<p>This guide is for implementors of the Jakarta Context and Dependency Injection 3.0 technology to assist in running the test suite that verifies the compatibility of their implementation.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_before_you_read_this_book"/>2. Before You Read This Book</h2></div></div></div>
+
+<p>Before reading this guide, you should familiarize yourself with the Jakarta EE programming model, specifically the Jakarta Enterprise Beans (EJB) 4.0 and the Jakarta Contexts and Dependency Injection 3.0 specifications. A good resource for the Jakarta EE programming model is the <a class="ulink" href="http://jakarta.ee">Jakarta EE</a> web site.</p>
+<p>The CDI TCK is based on the Jakarta Context and Dependency Injection technology specification. Information about the specification, including links to the specification documents, can be found on the <a class="ulink" href="https://jakarta.ee/specifications/cdi">CDI page</a>.</p>
+<p>Before running the tests in the CDI TCK, read and become familiar with the Arquillian testing platform. A good starting point could be  a series of <a class="ulink" href="http://arquillian.org/guides/">Arquillian Guides</a>.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_how_this_book_is_organized"/>3. How This Book Is Organized</h2></div></div></div>
+
+<p>If you are running the CDI TCK for the first time, read <a class="xref" href="#introduction" title="Chapter 1. Introduction (CDI TCK)">Chapter 1, <i>Introduction (CDI TCK)</i></a> completely for the necessary background information about the TCK.  Once you have reviewed that material, perform the steps outlined in the remaining chapters.</p>
+<div class="itemizedlist"><ul><li>
+<a class="xref" href="#introduction" title="Chapter 1. Introduction (CDI TCK)">Chapter 1, <i>Introduction (CDI TCK)</i></a> gives an overview of the principles that apply generally to all Technology Compatibility Kits (TCKs), outlines the appeals process and describes the CDI TCK architecture and components. It also includes a broad overview of how the TCK is executed and lists the platforms on which the TCK has been tested and verified.
+</li><li>
+<a class="xref" href="#appeals-process" title="Chapter 2. Appeals Process">Chapter 2, <i>Appeals Process</i></a> explains the process to be followed by an implementor, who wish to challenge any test in the TCK.
+</li><li>
+<a class="xref" href="#installation" title="Chapter 3. Installation">Chapter 3, <i>Installation</i></a> explains where to obtain the required software for the CDI TCK and how to install it. It covers both the primary TCK components as well as tools useful for troubleshooting tests.
+</li><li>
+<a class="xref" href="#configuration" title="Chapter 4. Configuration">Chapter 4, <i>Configuration</i></a> details the configuration of the JBoss Test Harness, how to create a TCK runner for the TCK test suite and the mechanics of how an in-container test is conducted.
+</li><li>
+<a class="xref" href="#reporting" title="Chapter 5. Reporting">Chapter 5, <i>Reporting</i></a> explains the test reports that are generated by the TCK test suite and introduces the TCK audit report as a tool for measuring the completeness of the TCK in testing the CDI specification and in understanding how testcases relate to the specification.
+</li><li>
+<a class="xref" href="#executing" title="Chapter 7. Executing the Test Suite">Chapter 7, <i>Executing the Test Suite</i></a> documents how the TCK test suite is executed. It covers both modes supported by the TCK, standalone and in-container, and shows how to dump the generated test artifacts to disk.
+</li><li>
+<a class="xref" href="#eclipse-running" title="Chapter 8. Running Tests in Eclipse">Chapter 8, <i>Running Tests in Eclipse</i></a> shows how to run individual tests in Eclipse and advises the best way to setup your Eclipse workspace for running the tests.
+</li><li>
+<a class="xref" href="#eclipse-debugging" title="Chapter 9. Debugging Tests in Eclipse">Chapter 9, <i>Debugging Tests in Eclipse</i></a>  builds on <a class="xref" href="#eclipse-running" title="Chapter 8. Running Tests in Eclipse">Chapter 8, <i>Running Tests in Eclipse</i></a> by detailing how to debug individual tests in Eclipse.
+</li></ul></div>
+</div>
+</div>
+<div class="part" lang="en-US"><div class="titlepage"><div><div><h1 class="title"><a id="_getting_acquainted_with_the_tck"/>Part I. Getting Acquainted with the TCK</h1></div></div></div>
+
+<div class="partintro" lang="en-US"><div/>
+<p>The CDI TCK must be used to ensure that your implementation conforms to the CDI specification. This part introduces the TCK, gives some background about its purpose, states the requirements for passing the TCK and outlines the appeals process.</p>
+<p>In this part you will learn where to obtain the CDI TCK and supporting software. You are then presented with recommendations of how to organize and configure the software so that you are ready to execute the TCK.</p>
+<p>Finally, it discusses the reporting provided by the TCK.</p>
+<div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#introduction">1. Introduction (CDI TCK)</a></span></dt><dd><dl><dt><span class="section"><a href="#_tck_primer">1.1. TCK Primer</a></span></dt><dt><span class="section"><a href="#_compatibility_testing">1.2. Compatibility Testing</a></span></dt><dd><dl><dt><span class="section"><a href="#_why_compatibility_is_important">1.2.1. Why Compatibility Is Important</a></span></dt></dl></dd><dt><span class="section"><a href="#_compatibility_requirements">1.3. Compatibility Requirements</a></span></dt><dd><dl><dt><span class="section"><a href="#_definitions">1.3.1. Definitions</a></span></dt><dt><span class="section"><a href="#_rules_for_jakarta_contexts_and_dependency_injection_version_3_0_products">1.3.2. Rules for Jakarta Contexts and Dependency Injection Version 3.0 Products</a></span></dt></dl></dd><dt><span class="section"><a href="#_about_the_cdi_tck">1.4. About the CDI TCK</a></span></dt><dd><dl><dt><span class="section"><a href="#_cdi_tck_specifications_and_requirements">1.4.1. CDI TCK Specifications and Requirements</a></span></dt><dt><span class="section"><a href="#tck-components">1.4.2. CDI TCK Components</a></span></dt></dl></dd><dt><span class="section"><a href="#libraries">1.5. Libraries for Jakarta Contexts and Dependency Injection Version 3.0</a></span></dt></dl></dd><dt><span class="chapter"><a href="#appeals-process">2. Appeals Process</a></span></dt><dd><dl><dt><span class="section"><a href="#_what_challenges_to_the_tck_may_be_submitted">2.1. What challenges to the TCK may be submitted?</a></span></dt><dt><span class="section"><a href="#_how_these_challenges_are_submitted">2.2. How these challenges are submitted?</a></span></dt><dt><span class="section"><a href="#_how_and_by_whom_challenges_are_addressed">2.3. How and by whom challenges are addressed?</a></span></dt><dt><span class="section"><a href="#_how_accepted_challenges_to_the_tck_are_managed">2.4. How accepted challenges to the TCK are managed?</a></span></dt></dl></dd><dt><span class="chapter"><a href="#installation">3. Installation</a></span></dt><dd><dl><dt><span class="section"><a href="#_obtaining_the_software">3.1. Obtaining the Software</a></span></dt><dt><span class="section"><a href="#_the_tck_environment">3.2. The TCK Environment</a></span></dt><dt><span class="section"><a href="#eclipse-plugins">3.3. Eclipse Plugins</a></span></dt><dd><dl><dt><span class="section"><a href="#eclipse-testng-plugin">3.3.1. TestNG Plugin</a></span></dt><dt><span class="section"><a href="#m2e-plugin">3.3.2. Maven Plugin (m2e)</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#configuration">4. Configuration</a></span></dt><dd><dl><dt><span class="section"><a href="#tck-properties">4.1. TCK Properties</a></span></dt><dt><span class="section"><a href="#arquillian-settings">4.2. Arquillian settings</a></span></dt><dt><span class="section"><a href="#porting-package">4.3. The Porting Package</a></span></dt><dt><span class="section"><a href="#_using_the_cdi_tck_with_the_jakarta_ee_web_profile">4.4. Using the CDI TCK with the Jakarta EE Web Profile</a></span></dt><dt><span class="section"><a href="#_configuring_testng_to_execute_the_tck">4.5. Configuring TestNG to execute the TCK</a></span></dt><dt><span class="section"><a href="#_configuring_your_build_environment_to_execute_the_tck">4.6. Configuring your build environment to execute the TCK</a></span></dt><dt><span class="section"><a href="#_configuring_your_application_server_to_execute_the_tck">4.7. Configuring your application server to execute the TCK</a></span></dt></dl></dd><dt><span class="chapter"><a href="#reporting">5. Reporting</a></span></dt><dd><dl><dt><span class="section"><a href="#_cdi_tck_coverage_metrics">5.1. CDI TCK Coverage Metrics</a></span></dt><dt><span class="section"><a href="#_cdi_tck_coverage_report">5.2. CDI TCK Coverage Report</a></span></dt><dd><dl><dt><span class="section"><a href="#_cdk_tck_assertions">5.2.1. CDK TCK Assertions</a></span></dt><dt><span class="section"><a href="#_producing_the_coverage_report">5.2.2. Producing the Coverage Report</a></span></dt><dt><span class="section"><a href="#_testng_reports">5.2.3. TestNG Reports</a></span></dt></dl></dd></dl></dd></dl></div></div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="introduction"/>Chapter 1. Introduction (CDI TCK)</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#_tck_primer">1.1. TCK Primer</a></span></dt><dt><span class="section"><a href="#_compatibility_testing">1.2. Compatibility Testing</a></span></dt><dd><dl><dt><span class="section"><a href="#_why_compatibility_is_important">1.2.1. Why Compatibility Is Important</a></span></dt></dl></dd><dt><span class="section"><a href="#_compatibility_requirements">1.3. Compatibility Requirements</a></span></dt><dd><dl><dt><span class="section"><a href="#_definitions">1.3.1. Definitions</a></span></dt><dt><span class="section"><a href="#_rules_for_jakarta_contexts_and_dependency_injection_version_3_0_products">1.3.2. Rules for Jakarta Contexts and Dependency Injection Version 3.0 Products</a></span></dt></dl></dd><dt><span class="section"><a href="#_about_the_cdi_tck">1.4. About the CDI TCK</a></span></dt><dd><dl><dt><span class="section"><a href="#_cdi_tck_specifications_and_requirements">1.4.1. CDI TCK Specifications and Requirements</a></span></dt><dt><span class="section"><a href="#tck-components">1.4.2. CDI TCK Components</a></span></dt></dl></dd><dt><span class="section"><a href="#libraries">1.5. Libraries for Jakarta Contexts and Dependency Injection Version 3.0</a></span></dt></dl></div>
+
+<p>This chapter explains the purpose of a TCK and identifies the foundation elements of the CDI TCK.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_tck_primer"/>1.1. TCK Primer</h2></div></div></div>
+
+<p>A TCK, or Technology Compatibility Kit, is one of the three required pieces for any specification (the other two being the specification document and a compatible implementation). The TCK is a set of tools and tests to verify that an implementation of the technology conforms to the specification. The tests are the primary component, but the tools serve an equally critical role of providing a framework and/or set of SPIs for executing the tests.</p>
+<p>The tests in the TCK are derived from assertions in the written specification document. The assertions are itemized in an XML document, where they each get assigned a unique identifier, and materialize as a suite of automated tests that collectively validate whether an implementation complies with the aforementioned assertions, and in turn the specification. For a particular implementation to be certified, all of the required tests must pass (i.e., the provided test suite must be run unmodified).</p>
+<p>A TCK is entirely implementation agnostic. Ideally, it should validate assertions by consulting the specification’s public API.  However, when the information returned by the public API is not low-level enough to validate the assertion, the implementation must be consulted directly. In this case, the TCK provides an independent API as part of a porting package that enables this transparency. The porting package must be implemented for each CDI implementation. <a class="xref" href="#tck-components" title="1.4.2. CDI TCK Components">Section 1.4.2, “CDI TCK Components”</a> introduces the porting package and <a class="xref" href="#porting-package" title="4.3. The Porting Package">Section 4.3, “The Porting Package”</a> covers the requirements for implementing it.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_compatibility_testing"/>1.2. Compatibility Testing</h2></div></div></div>
+
+<p>The goal of any specification is to eliminate portability problems so long as the program which uses the implementation also conforms to the rules laid out in the specification.</p>
+<p>Executing the TCK is a form of compatibility testing. It’s important to understand that compatibility testing is distinctly different from product testing. The TCK is not concerned with robustness, performance or ease of use, and therefore cannot vouch for how well an implementation meets these criteria. What a TCK can do is to ensure the exactness of an implementation as it relates to the specification.</p>
+<p>Compatibility testing of any feature relies on both a complete specification and a complete compatible implementation. The compatible implementation demonstrates how each test can be passed and provides additional context to the implementor during development for the corresponding assertion.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_why_compatibility_is_important"/>1.2.1. Why Compatibility Is Important</h3></div></div></div>
+
+<p>Java platform compatibility is important to different groups involved with Java technologies for different reasons:</p>
+<div class="itemizedlist"><ul><li>
+Compatibility testing is the means by which the Jakarta ensures that the Java platform does not become fragmented as it’s ported to different operating systems and hardware.
+</li><li>
+Compatibility testing benefits developers working in the Java programming language, enabling them to write applications once and deploy them across heterogeneous computing environments without porting.
+</li><li>
+Compatibility testing enables application users to obtain applications from disparate sources and deploy them with confidence.
+</li><li>
+Conformance testing benefits Java platform implementors by ensuring the same extent of reliability for all Java platform ports.
+</li></ul></div>
+<p>The CDI specification goes to great lengths to ensure that programs written for Jakarta EE are compatible and the TCK is rigorous about enforcing the rules the specification lays down.</p>
+</div>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_compatibility_requirements"/>1.3. Compatibility Requirements</h2></div></div></div>
+
+<p>The compatibility requirements for Jakarta Contexts and Dependency Injection Version 3.0 consist of meeting the
+requirements set forth by the rules and associated definitions contained in this section.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_definitions"/>1.3.1. Definitions</h3></div></div></div>
+
+<p>These definitions are for use only with these compatibility requirements and are not
+intended for any other purpose.</p>
+<div class="table"><a id="d4e136"/><p class="title"><b>Table 1.1. Definitions</b></p><div class="table-contents">
+
+<table summary="Definitions" border="1"><colgroup><col/><col/></colgroup><thead><tr><th align="left" valign="top">Term</th><th align="left" valign="top">Definition</th></tr></thead><tbody><tr><td align="left" valign="top"><p>API Definition Product  </p></td><td align="left" valign="top"><p>A Product for which the only Java class files contained in the product
+                     are those corresponding to the application programming interfaces
+                     defined by the Specifications, and which is intended only as a means
+                     for formally specifying the application programming interfaces
+                     defined by the Specifications.</p></td></tr><tr><td align="left" valign="top"><p>Computational Resource  </p></td><td align="left" valign="top"><p>A piece of hardware or software that may vary in quantity, existence,
+                     or version, which may be required to exist in a minimum quantity
+                     and/or at a specific or minimum revision level so as to satisfy the
+                     requirements of the Test Suite.
+                     Examples of computational resources that may vary in quantity are
+                     RAM and file descriptors.
+                     Examples of computational resources that may vary in existence (that
+                     is, may or may not exist) are graphics cards and device drivers.
+                     Examples of computational resources that may vary in version are
+                     operating systems and device drivers.</p></td></tr><tr><td align="left" valign="top"><p>Conformance Tests  </p></td><td align="left" valign="top"><p>All tests in the Test Suite for an indicated Technology Under Test, as
+                     distributed by the Maintenance Lead, excluding those tests on the
+                     Exclude List for the Technology Under Test.</p></td></tr><tr><td align="left" valign="top"><p>Documented  </p></td><td align="left" valign="top"><p>Made technically accessible and made known to users, typically by
+                     means such as marketing materials, product documentation, usage
+                     messages, or developer support programs.</p></td></tr><tr><td align="left" valign="top"><p>Edition  </p></td><td align="left" valign="top"><p>A Version of the Java Platform. Editions include Java Platform
+                     Standard Edition and Jakarta Platform Enterprise Edition.</p></td></tr><tr><td align="left" valign="top"><p>Exclude List  </p></td><td align="left" valign="top"><p>The most current list of tests, distributed by the Maintenance Lead or TCK Lead,
+                     that are not required to be passed to certify conformance. The
+                     Maintenance Lead or TCK Lead may add to the Exclude List for that Test Suite as
+                     needed at any time, in which case the updated Exclude List supplants
+                     any previous Exclude Lists for that Test Suite.</p></td></tr><tr><td align="left" valign="top"><p>Libraries  </p></td><td align="left" valign="top"><p>The class libraries for the Technology Under Test.
+                     The Libraries for Jakarta Contexts and Dependency Injection Version 3.0 are listed in <a class="xref" href="#libraries" title="1.5. Libraries for Jakarta Contexts and Dependency Injection Version 3.0">Section 1.5, “Libraries for Jakarta Contexts and Dependency Injection Version 3.0”</a>.</p></td></tr><tr><td align="left" valign="top"><p>Location Resource  </p></td><td align="left" valign="top"><p>A location of classes or native libraries that are components of the test
+                     tools or tests, such that these classes or libraries may be required to
+                     exist in a certain location in order to satisfy the requirements of the
+                     test suite.
+                     For example, classes may be required to exist in directories named in a
+                     CLASSPATH variable, or native libraries may be required to exist in
+                     directories named in a PATH variable.</p></td></tr><tr><td align="left" valign="top"><p>Product  </p></td><td align="left" valign="top"><p>A licensee product in which the Technology Under Test is
+                     implemented or incorporated, and that is subject to compatibility
+                     testing.</p></td></tr><tr><td align="left" valign="top"><p>Product Configuration  </p></td><td align="left" valign="top"><p>A specific setting or instantiation of an Operating Mode.
+                     For example, a Product supporting an Operating Mode that permits
+                     user selection of an external encryption package may have a Product
+                     Configuration that links the Product to that encryption package.</p></td></tr><tr><td align="left" valign="top"><p>Compatible Implementation (CI)  </p></td><td align="left" valign="top"><p>The prototype or "proof of concept" implementation of a Specification.</p></td></tr><tr><td align="left" valign="top"><p>Resource  </p></td><td align="left" valign="top"><p>A Computational Resource, a Location Resource, or a Security
+                     Resource.</p></td></tr><tr><td align="left" valign="top"><p>Rules  </p></td><td align="left" valign="top"><p>These definitions and rules in this Compatibility Requirements section
+                     of this User’s Guide.</p></td></tr><tr><td align="left" valign="top"><p>Security Resource  </p></td><td align="left" valign="top"><p>A security privilege or policy necessary for the proper execution of the
+                     Test Suite.
+                     For example, the user executing the Test Suite will need the privilege
+                     to access the files and network resources necessary for use of the
+                     Product.</p></td></tr><tr><td align="left" valign="top"><p>Specifications  </p></td><td align="left" valign="top"><p>The documents produced through the Jakarta EE Specification Process that
+                     define a particular Version of a Technology.
+                     The Specifications for the Technology Under Test are referenced later
+                     in this chapter.</p></td></tr><tr><td align="left" valign="top"><p>TCK Lead  </p></td><td align="left" valign="top"><p>Person responsible for maintaining TCK for the Technology. TCK Lead is representative of Red Hat Inc.</p></td></tr><tr><td align="left" valign="top"><p>Technology  </p></td><td align="left" valign="top"><p>Specifications and a compatible implementation produced through the
+                     Jakarta EE Specification Process.</p></td></tr><tr><td align="left" valign="top"><p>Technology Under Test </p></td><td align="left" valign="top"><p>Specifications and the compatible implementation for Jakarta Contexts and Dependency Injection Version 3.0.</p></td></tr><tr><td align="left" valign="top"><p>Test Suite  </p></td><td align="left" valign="top"><p>The requirements, tests, and testing tools distributed by the
+                     Maintenance Lead or TCK Lead as applicable to a given Version of the Technology.</p></td></tr><tr><td align="left" valign="top"><p>Version </p></td><td align="left" valign="top"><p>A release of the Technology, as produced through the Jakarta EE Specification Process.</p></td></tr></tbody></table>
+</div></div><br class="table-break"/>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_rules_for_jakarta_contexts_and_dependency_injection_version_3_0_products"/>1.3.2. Rules for Jakarta Contexts and Dependency Injection Version 3.0 Products</h3></div></div></div>
+
+<p>The following rules apply for each version of an operating system, software
+component, and hardware platform Documented as supporting the Product:</p>
+<p><span class="strong"><strong>CDI-1</strong></span> The Product must be able to satisfy all applicable compatibility requirements,
+including passing all Conformance Tests, in every Product Configuration and in every
+combination of Product Configurations, except only as specifically exempted by these
+Rules.</p>
+<p>For example, if a Product provides distinct Operating Modes to optimize performance,
+then that Product must satisfy all applicable compatibility requirements for a Product
+in each Product Configuration, and combination of Product Configurations, of those
+Operating Modes.</p>
+<p><span class="strong"><strong>CDI-1.1</strong></span> If an Operating Mode controls a Resource necessary for the basic execution of
+the Test Suite, testing may always use a Product Configuration of that Operating Mode
+providing that Resource, even if other Product Configurations do not provide that
+Resource. Notwithstanding such exceptions, each Product must have at least one set of
+Product Configurations of such Operating Modes that is able to pass all the Conformance Tests.</p>
+<p>For example, a Product with an Operating Mode that controls a security policy which has one or more Product Configurations that cause
+Conformance Tests to fail may be tested using a Product Configuration that allows all Conformance Tests to pass.</p>
+<p><span class="strong"><strong>CDI-1.2</strong></span> A Product Configuration of an Operating Mode that causes the Product to
+report only version, usage, or diagnostic information is exempted from these
+compatibility rules.</p>
+<p><span class="strong"><strong>CDI-1.3</strong></span> A Product may contain an Operating Mode that selects the Edition with
+which it is compatible. The Product must meet the compatibility requirements for the
+corresponding Edition for all Product Configurations of this Operating Mode. This
+Operating Mode must affect no smaller unit of execution than an entire Application.</p>
+<p><span class="strong"><strong>CDI-1.4</strong></span> An API Definition Product is exempt from all functional testing requirements
+defined here, except the signature tests.</p>
+<p><span class="strong"><strong>CDI-2</strong></span> Some Conformance Tests may have properties that may be changed. Properties
+that can be changed are identified in the configuration interview. Properties that can be
+changed are specified in <a class="xref" href="#tck-properties" title="4.1. TCK Properties">Section 4.1, “TCK Properties”</a>. Apart from changing such properties and other allowed
+modifications described in this User’s Guide (if any), no source or binary code for a
+Conformance Test may be altered in any way without prior written permission.</p>
+<p><span class="strong"><strong>CDI-3</strong></span> The testing tools supplied as part of the Test Suite or as updated by the
+Maintenance Lead or TCK Lead must be used to certify compliance.</p>
+<p><span class="strong"><strong>CDI-4</strong></span> The Exclude List associated with the Test Suite cannot be modified.</p>
+<p><span class="strong"><strong>CDI-5</strong></span> The Maintenance Lead or TCK Lead can define exceptions to these Rules. Such exceptions
+would be made available to and apply to all licensees.</p>
+<p><span class="strong"><strong>CDI-6</strong></span> All hardware and software component additions, deletions, and modifications to
+a Documented supporting hardware/software platform, that are not part of the
+Product but required for the Product to satisfy the compatibility requirements, must be
+Documented and available to users of the Product.
+For example, if a patch to a particular version of a supporting operating system is
+required for the Product to pass the Conformance Tests, that patch must be
+Documented and available to users of the Product.</p>
+<p><span class="strong"><strong>CDI-7</strong></span> The Product must contain the full set of public and protected classes and
+interfaces for all the Libraries. Those classes and interfaces must contain exactly the set
+of public and protected methods, constructors, and fields defined by the Specifications
+for those Libraries. No subsetting, supersetting, or modifications of the public and
+protected API of the Libraries are allowed except only as specifically exempted by
+these Rules.</p>
+<p><span class="strong"><strong>CDI-8</strong></span> Except for tests specifically required by this TCK to be recompiled (if any), the
+binary Conformance Tests supplied as part of the Test Suite or as updated by the
+Maintenance Lead or TCK Lead must be used to certify compliance.</p>
+<p><span class="strong"><strong>CDI-9</strong></span> The functional programmatic behavior of any binary class or interface must be
+that defined by the Specifications.</p>
+</div>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_about_the_cdi_tck"/>1.4. About the CDI TCK</h2></div></div></div>
+
+<p>The CDI TCK is designed as a portable, configurable and automated test suite for verifying the compatibility of an implementation of the Jakarta CDI specification. The test suite is built atop TestNG framework and Arquillian platform.</p>
+<p>Each test class in the suite acts as a deployable unit. The deployable units, or artifacts, can be either a WAR or an EAR.</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>The test archives are built with ShrinkWrap, a Java API for creating archives.
+ShrinkWrap is a part of the Arqullian platform ecosystem.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_cdi_tck_specifications_and_requirements"/>1.4.1. CDI TCK Specifications and Requirements</h3></div></div></div>
+
+<p>This section lists the applicable requirements and specifications for the CDI TCK.</p>
+<div class="itemizedlist"><ul><li>
+<span class="strong"><strong>Specification requirements</strong></span> - Software requirements for a CDI implementation are itemized in section 1.2, "Relationship to other specifications" in the CDI specification, with details provided throughout the specification. Generally, the CDI specification targets the Jakarta EE 8 platform and will be aligned with its specifications.
+</li><li>
+<span class="strong"><strong>Jakarta Contexts and Dependency Injection 3.0 API</strong></span> - The Java API defined in the CDI specification and provided by the compatible implementation.
+</li><li>
+<span class="strong"><strong>Testing platform</strong></span> - The CDI TCK requires version 1.7.0.Alpha2 of the Arquillian (<a class="ulink" href="http://arquillian.org">http://arquillian.org</a>). The TCK test suite is based on TestNG 6.x (<a class="ulink" href="http://testng.org">http://testng.org</a>). .
+</li><li>
+<span class="strong"><strong>Porting Package</strong></span> - An implementation of SPIs that are required for the test suite to run the in-container tests and at times extend the CDI 3.0 API to provide extra information to the TCK.
+</li><li>
+<span class="strong"><strong>TCK Audit Tool</strong></span> - An itemization of the assertions in the specification documents which are cross referenced by the individual tests. Describes how well the TCK covers the specification.
+</li><li>
+<span class="strong"><strong>Compatible implementation</strong></span> - A compatible implementation runtime for compatibility testing of the CDI specification is the Jakarta Platform Enterprise Edition 8 compatible implementation.
+</li><li>
+<span class="strong"><strong>Jarkarta Dependency Injection</strong></span> - CDI builds on DI, and as such CDI implementations must additionally pass the Jakarta Dependency Injection TCK.
+</li></ul></div>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="tip"><h2>Tip</h2>
+<p>The TCK distribution includes weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar which contains two classes showing how the Weld compatible implementation passes the CDI TCK. The source for these classes is available from <a class="ulink" href="hhttps://github.com/weld/core/tree/4.0.0.Alpha2/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck">hhttps://github.com/weld/core/tree/4.0.0.Alpha2/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck</a></p>
+</div>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="tck-components"/>1.4.2. CDI TCK Components</h3></div></div></div>
+
+<p>The CDI TCK includes the following components:</p>
+<div class="itemizedlist"><ul><li>
+<span class="strong"><strong>Arquillian 1.7.0.Alpha2</strong></span>
+</li><li>
+<span class="strong"><strong>TestNG 6.14.3</strong></span>
+</li><li>
+<span class="strong"><strong>Porting Package SPIs</strong></span> - Extensions to the CDI SPIs to allow testing of a container.
+</li><li>
+<span class="strong"><strong>The test suite</strong></span>, which is a collection of TestNG tests, the TestNG test suite descriptor and supplemental resources that configure CDI and other software components.
+</li><li>
+<span class="strong"><strong>The TCK audit</strong></span> is used to list out the assertions identified in the CDI specification. It matches the assertions to testcases in the test suite by unique identifier and produces a coverage report.
+</li></ul></div>
+<p>The audit document is provided along with the TCK; at least 95% of assertions are tested. Each assertion is defined with a reference to a chapter, section and paragraph from the specification document, making it easy for the implementor to locate the language in the specification document that supports the feature being tested.</p>
+<div class="itemizedlist"><ul><li>
+<span class="strong"><strong>TCK documentation</strong></span> accompanied by release notes identifying updates between versions.
+</li></ul></div>
+<p>The CDI TCK has been tested on following platforms:</p>
+<div class="itemizedlist"><ul><li>
+WildFly X using Oracle Java SE 8 on Red Hat Enterprise Linux 7.2
+</li></ul></div>
+<p>CDI supports Jakarta EE 8, Jakarta EE 8 Web Profile, Embeddable Jakarta Enterprise Beans 3.2. The TCK will execute on any of these runtimes, but is only part of the CTS for Jakarta EE 8 and Jakarta EE 8 Web Profile.</p>
+</div>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="libraries"/>1.5. Libraries for Jakarta Contexts and Dependency Injection Version 3.0</h2></div></div></div>
+
+<p>The following is the list of packages that constitute the required class libraries for
+Jakarta Contexts and Dependency Injection Version 3.0:</p>
+<div class="itemizedlist"><ul><li>
+jakarta.decorator
+</li><li>
+jakarta.enterprise.context
+</li><li>
+jakarta.enterprise.context.control
+</li><li>
+jakarta.enterprise.context.spi
+</li><li>
+jakarta.enterprise.event
+</li><li>
+jakarta.enterprise.inject
+</li><li>
+jakarta.enterprise.inject.literal
+</li><li>
+jakarta.enterprise.inject.se
+</li><li>
+jakarta.enterprise.inject.spi
+</li><li>
+jakarta.enterprise.inject.spi.configurator
+</li><li>
+jakarta.enterprise.util
+</li></ul></div>
+</div>
+</div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="appeals-process"/>Chapter 2. Appeals Process</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#_what_challenges_to_the_tck_may_be_submitted">2.1. What challenges to the TCK may be submitted?</a></span></dt><dt><span class="section"><a href="#_how_these_challenges_are_submitted">2.2. How these challenges are submitted?</a></span></dt><dt><span class="section"><a href="#_how_and_by_whom_challenges_are_addressed">2.3. How and by whom challenges are addressed?</a></span></dt><dt><span class="section"><a href="#_how_accepted_challenges_to_the_tck_are_managed">2.4. How accepted challenges to the TCK are managed?</a></span></dt></dl></div>
+
+<p>While the CDI TCK is rigorous about enforcing an implementation’s conformance to the Jakarta CDI specification, it’s reasonable to assume that an implementor may discover new and/or better ways to validate the assertions.
+The appeals process is defined by the Jakarta EE
+<a class="ulink" href="https://jakarta.ee/committees/specification/tckprocess/">Jakarta EE TCK Process 1.0</a></p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_what_challenges_to_the_tck_may_be_submitted"/>2.1. What challenges to the TCK may be submitted?</h2></div></div></div>
+
+<p>Any test case (e.g., test class, @Test method), test case configuration (e.g., beans.xml), test beans, annotations and other resources may be challenged by an appeal.</p>
+<p>What is generally not challengeable are the assertions made by the specification. The specification document is controlled by a separate process and challenges to it should be handled by the Maintenance Lead or by sending an e-mail to link:mailto:cdi-dev@eclipse.org</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_how_these_challenges_are_submitted"/>2.2. How these challenges are submitted?</h2></div></div></div>
+
+<p>To submit a challenge, a new issue should be created in the <a class="ulink" href="https://github.com/eclipse-ee4j/cdi">CDI specification project</a> using the label challenge. Any communication regarding the issue should be pursed in the comments of the filed issue for accurate record.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_how_and_by_whom_challenges_are_addressed"/>2.3. How and by whom challenges are addressed?</h2></div></div></div>
+
+<p>The challenges will be addressed in a timely fashion by the TCK Lead, as designated by Specification Lead, Red Hat Inc. or his/her designate. The appellant can also monitor the process by following the issue report filed in the <a class="ulink" href="https://github.com/eclipse-ee4j/cdiK">CDI TCK project</a> issues.</p>
+<p>The current TCK Lead is listed on the <a class="ulink" href="https://jakarta.ee/specifications/cdi">CDI Project Summary Page</a> on Jakarta EE.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_how_accepted_challenges_to_the_tck_are_managed"/>2.4. How accepted challenges to the TCK are managed?</h2></div></div></div>
+
+<p>The worflow for TCK challenges is outlined in
+<a class="ulink" href="https://jakarta.ee/committees/specification/tckprocess/">Jakarta EE TCK Process 1.0</a>.</p>
+<p>Periodically, an updated TCK will be released, containing tests altered due to challenges - no new tests will be added. Implementations are required to pass the updated TCK. This release stream is named 3.0.x, where x will be incremented.</p>
+<p>Additionally, new tests will be added to the TCK improving coverage of the specification. We encourage implementations to pass this TCK, however it is not required. This release stream is named 3.y.z where y &gt;= 1.</p>
+</div>
+</div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="installation"/>Chapter 3. Installation</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#_obtaining_the_software">3.1. Obtaining the Software</a></span></dt><dt><span class="section"><a href="#_the_tck_environment">3.2. The TCK Environment</a></span></dt><dt><span class="section"><a href="#eclipse-plugins">3.3. Eclipse Plugins</a></span></dt><dd><dl><dt><span class="section"><a href="#eclipse-testng-plugin">3.3.1. TestNG Plugin</a></span></dt><dt><span class="section"><a href="#m2e-plugin">3.3.2. Maven Plugin (m2e)</a></span></dt></dl></dd></dl></div>
+
+<p>This chapter explains how to obtain the TCK and supporting software and provides recommendations for how to install/extract it on your system.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_obtaining_the_software"/>3.1. Obtaining the Software</h2></div></div></div>
+
+<p>You can obtain a release of the CDI TCK project from the <a class="ulink" href="https://download.eclipse.org/jakartaee/cdi/">download page</a> on the CDI specification website. The release stream for Jakarta CDI is named <span class="emphasis"><em>3.0.x</em></span>. The CDI TCK is distributed as a ZIP file, which contains the TCK artifacts (the test suite binary and source, porting package API binary and source, the test suite configuration file, the audit source and report) in /artifacts and documentation in /doc. The TCK library dependencies are not part of the distribution and can be downloaded on demand (see readme.txt file in /lib).</p>
+<p>You can also download the current source code from <a class="ulink" href="https://github.com/eclipse-ee4j/cdi-tck">GitHub repository</a>.</p>
+<p>Executing the TCK requires a Jakarta EE 8 or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK does not depend on any particular Jakarta EE implementation.</p>
+<p>A Jakarta Contexts and Dependency Injection for compatible implementation project is named Weld. The release stream for Jakarta CDI 3.0 is named <span class="emphasis"><em>3.x</em></span>. You can obtain the latest release from the <a class="ulink" href="http://weld.cdi-spec.org/download/">download page</a> on the Weld website.</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>Weld is not required for running the CDI TCK, but it can be used as a reference for familiarizing yourself with the TCK before testing your own CDI implementation.</p>
+</div>
+<p>Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 8 or better, which you can obtain from the <a class="ulink" href="http://www.oracle.com/technetwork/java/index.html">Java Software</a> website.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_the_tck_environment"/>3.2. The TCK Environment</h2></div></div></div>
+
+<p>The TCK requires the following two Java runtime environments:</p>
+<div class="itemizedlist"><ul><li>
+Java SE 8 or better
+</li><li>
+Jakarta EE 8 or better (e.g., WildFly 22.x or GlassFish V6)
+</li></ul></div>
+<p>You should refer to vendor instructions for how to install the runtime environment.</p>
+<p>The rest of the TCK software can simply be extracted. It’s recommended that you create a folder named <span class="emphasis"><em>jakartacdi</em></span> to hold all
+of the jakartacdi-related projects. Then, extract the TCK distribution into a subfolder named <span class="emphasis"><em>tck</em></span>. If you have downloaded
+the Weld distribution, extract it into a sibling folder named <span class="emphasis"><em>weld</em></span>. The resulting folder structure is shown here:</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>This layout is assumed through all descriptions in this reference guide.</p>
+</div>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">jakartacdi/
+   weld/
+   tck/</pre>
+<p>Each test class is treated as an individual artifact. All test methods (i.e., methods annotated with @Test) in the test class are run in the application, meaning bean discovery occurs exactly once per artifact and the same BeanManager is used by each test method in the class.</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="tip"><h2>Tip</h2>
+<p><a id="running-against-weld"/>Running the TCK against Weld and WildFly</p>
+<div class="itemizedlist"><ul><li>
+First, you should download WildFly 22.x from the WildFly <a class="ulink" href="http://www.wildfly.org/downloads/">project page</a>.
+</li><li>
+Set the JBOSS_HOME environment variable to the location of the WildFly software.
+</li></ul></div>
+<p>The CDI TCK distribution includes a TCK runner that executes the TCK using Weld as the CDI implementation and WildFly as the Jakarta EE runtime. To run the TCK:</p>
+<div class="itemizedlist"><ul><li>
+You need to install Maven. You can find documentation on how to install Maven in the <a class="ulink" href="http://books.sonatype.com/mvnref-book/reference/installation.html">Maven: The Definitive Guide</a> book published by Sonatype.
+</li><li>
+Next, instruct Maven to run the TCK:
+</li></ul></div>
+<pre xmlns="" class="CONSOLE">cd jakartacdi/tck/weld/jboss-tck-runner
+mvn test -Dincontainer</pre>
+<div class="itemizedlist"><ul><li>
+Use cdi.tck.version system property to specify particular TCK version:
+</li></ul></div>
+<pre xmlns="" class="CONSOLE">mvn test -Dincontainer -Dcdi.tck.version=3.0.0-RC1</pre>
+<div class="itemizedlist"><ul><li>
+TestNG will report, via Maven, the outcome of the run, and report any failures on the console. Details can be found in target/surefire-reports/TestSuite.txt.
+</li></ul></div>
+</div>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="eclipse-plugins"/>3.3. Eclipse Plugins</h2></div></div></div>
+
+<p>Eclipse, or any other IDE, is not required to execute or pass the TCK. However an implementor may wish to execute tests in an IDE to aid debugging the tests. This section introduces two essential Eclipse plugins, TestNG and Maven, and points you to resources explaining how to install them.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="eclipse-testng-plugin"/>3.3.1. TestNG Plugin</h3></div></div></div>
+
+<p>The TCK test suite is built on the TestNG. Therefore, having the TestNG plugin installed in Eclipse is essential. Instructions for using the TestNG update site to add the TestNG plugin to Eclipse are provided on the TestNG <a class="ulink" href="http://testng.org/doc/download.html">download page</a>. You can find a tutorial that explains how to use the TestNG plugin on the TestNG <a class="ulink" href="http://testng.org/doc/eclipse.html">Eclipse page</a>.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="m2e-plugin"/>3.3.2. Maven Plugin (m2e)</h3></div></div></div>
+
+<p>Another useful plugin is m2e. The TCK project uses Maven. Therefore, to work with TCK in Eclipse, you may wish to have native support for Maven projects, which the m2e plugin provides. Instructions for using the m2e update site to add the m2e plugin to Eclipse are provided on the m2e <a class="ulink" href="http://eclipse.org/m2e/">home page</a>.</p>
+<p>You can alternatively use the Eclipse plugin for Maven to generate native Eclipse projects from Maven projects.</p>
+<p>If you have Maven installed, you have everything you need.  Just execute the following command from any Maven project to produce the Eclipse project files.</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">mvn eclipse:eclipse</pre>
+<p>Again, the Eclipse plugins are not required to execute the TCK, but can be very helpful when validating an implementation against the TCK test suite and especially when using the modules from the project.</p>
+</div>
+</div>
+</div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="configuration"/>Chapter 4. Configuration</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#tck-properties">4.1. TCK Properties</a></span></dt><dt><span class="section"><a href="#arquillian-settings">4.2. Arquillian settings</a></span></dt><dt><span class="section"><a href="#porting-package">4.3. The Porting Package</a></span></dt><dt><span class="section"><a href="#_using_the_cdi_tck_with_the_jakarta_ee_web_profile">4.4. Using the CDI TCK with the Jakarta EE Web Profile</a></span></dt><dt><span class="section"><a href="#_configuring_testng_to_execute_the_tck">4.5. Configuring TestNG to execute the TCK</a></span></dt><dt><span class="section"><a href="#_configuring_your_build_environment_to_execute_the_tck">4.6. Configuring your build environment to execute the TCK</a></span></dt><dt><span class="section"><a href="#_configuring_your_application_server_to_execute_the_tck">4.7. Configuring your application server to execute the TCK</a></span></dt></dl></div>
+
+<p>This chapter lays out how to configure the TCK Harness by specifying the SPI implementation classes, defining the target container connection information, and various other switches. You then learn how to setup a TCK runner project that executes the TCK test suite, putting these settings into practice.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="tck-properties"/>4.1. TCK Properties</h2></div></div></div>
+
+<p>System properties and/or the resource META-INF/cdi-tck.properties, a Java properties file, are used to configure the TCK.</p>
+<p>You should set the following required properties:</p>
+<div class="table"><a id="d4e475"/><p class="title"><b>Table 4.1. Required TCK Configuration Properties</b></p><div class="table-contents">
+
+<table summary="Required TCK Configuration Properties" border="1"><colgroup><col/><col/></colgroup><thead><tr><th align="left" valign="top">Property = Example Value</th><th align="left" valign="top">Description</th></tr></thead><tbody><tr><td align="left" valign="top"><p>+org.jboss.cdi.tck.libraryDirectory=/path/to/extra/libraries
+                    </p></td><td align="left" valign="top"><p>The directory containing extra JARs to be placed in
+                     the test archive library directory such as the porting package
+                     implementation.</p></td></tr><tr><td align="left" valign="top"><p>org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS</p></td><td align="left" valign="top"><p>A few TCK tests work with Jakarta Persistence services and require a data source to be provided.
+                     This property defines JNDI name of such resource. Required for the tests within the <span class="emphasis"><em>persistence</em></span> test group.</p></td></tr><tr><td align="left" valign="top"><p>org.jboss.cdi.tck.testJmsConnectionFactory=java:/ConnectionFactory</p></td><td align="left" valign="top"><p>The JNDI name of the JMS test ConnectionFactory. Required for the tests within the <span class="emphasis"><em>jms</em></span> test group.</p></td></tr><tr><td align="left" valign="top"><p>org.jboss.cdi.tck.testJmsQueue=java:/queue/test</p></td><td align="left" valign="top"><p>The JNDI name of the JMS test Queue. Required for the tests within the <span class="emphasis"><em>jms</em></span> test group.</p></td></tr><tr><td align="left" valign="top"><p>org.jboss.cdi.tck.testJmsTopic=java:/topic/test</p></td><td align="left" valign="top"><p>The JNDI name of the JMS test Topic. Required for the tests within the <span class="emphasis"><em>jms</em></span> test group.</p></td></tr></tbody></table>
+</div></div><br class="table-break"/>
+<div class="table"><a id="d4e514"/><p class="title"><b>Table 4.2. Optional TCK Configuration Properties</b></p><div class="table-contents">
+
+<table summary="Optional TCK Configuration Properties" border="1"><colgroup><col/><col/></colgroup><thead><tr><th align="left" valign="top">Property = Example Value</th><th align="left" valign="top">Description</th></tr></thead><tbody><tr><td align="left" valign="top"><p>org.jboss.cdi.tck.testTimeoutFactor=200</p></td><td align="left" valign="top"><p>Tests use this percentage value to adjust the final timeout (e.g. when waiting for some async processing) so that it’s possible to configure timeouts according to the testing runtime performance and throughput.
+                    The value must be an integer greater than zero. The default value is 100% - i.e. timeouts will remain the same.</p></td></tr></tbody></table>
+</div></div><br class="table-break"/>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="arquillian-settings"/>4.2. Arquillian settings</h2></div></div></div>
+
+<p>The Arquillian testing platform will look for configuration settings in a file named <span class="emphasis"><em>arquillian.xml</em></span> in the root of your classpath. If it exists it will be auto loaded, else default values will be used. This file is not a requirement however it’s very useful for container configuration. See an example configuration for JBoss TCK runner:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">        weld/jboss-tck-runner/src/test/wildfly8/arquillian.xml</pre>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="porting-package"/>4.3. The Porting Package</h2></div></div></div>
+
+<p>The CDI TCK relies on an implementation of the porting package to function. There are times when the tests need to tap directly into the CDI implementation to manipulate behavior or verify results. The porting package is Java package named "org.jboss.cdi.tck.spi" and includes a set of SPIs that provide the TCK with this level of access without tying the tests to a given implementation.</p>
+<p>The SPI classes in the CDI TCK are as follows:</p>
+<div class="itemizedlist"><ul><li>
+org.jboss.cdi.tck.spi.Beans
+</li><li>
+org.jboss.cdi.tck.spi.Contexts
+</li><li>
+org.jboss.cdi.tck.spi.EL
+</li></ul></div>
+<p>Please consult the JavaDoc for these interfaces for the implementation requirements.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_using_the_cdi_tck_with_the_jakarta_ee_web_profile"/>4.4. Using the CDI TCK with the Jakarta EE Web Profile</h2></div></div></div>
+
+<p>You can configure the CDI TCK to just run tests appropriate to the Jakarta EE Web Profile by excluding TestNG group <span class="emphasis"><em>javaee-full</em></span>, e.g. via maven-surefire-plugin configuration:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="XML"><!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">plugin</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">org.apache.maven.plugins</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">maven-surefire-plugin</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">configuration</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">excludedGroups</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">javaee-full</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">excludedGroups</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">configuration</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">plugin</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+</pre>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_configuring_testng_to_execute_the_tck"/>4.5. Configuring TestNG to execute the TCK</h2></div></div></div>
+
+<p>The CDI TCK is built atop Arquillian and TestNG, and it’s TestNG that is responsible for selecting the tests to execute, the order of execution, and reporting the results. Detailed TestNG documentation can be found at <a class="ulink" href="http://testng.org/doc/documentation-main.html">testng.org</a>.</p>
+<p>Certain TestNG configuration file must be run by TestNG (described by the TestNG documentation as "with a testng.xml file") unmodified for an implementation to pass the TCK. The TCK distribution contains the configuration file accurate at the date of the release - artifacts/cdi-tck-impl-suite.xml. However this artifact may not be up to date due to unresolved challenges or pending releases. Therefore a canonical configuration file exists. This file is located in the CDI TCK source code repository at <span class="emphasis"><em>${CORRESPONDING_BRANCH_ROOT}/impl/src/main/resources/tck-tests.xml</em></span>.</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>The canonical configuration file for CDI TCK is located at <a class="ulink" href="https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/tck-tests.xml">https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/tck-tests.xml</a>.</p>
+</div>
+<p>This file also allows tests to be excluded from a run:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="XML"><!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">suite</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;CDI&nbsp;TCK&quot;</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">verbose</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;0&quot;</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">configfailurepolicy</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;continue&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">test</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;CDI&nbsp;TCK&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">classes</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">class</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;org.jboss.cdi.tck.tests.context.application.ApplicationContextTest&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">methods</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">exclude</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;testApplicationScopeActiveDuringServiceMethod&quot;</span><span class="xml_tag_symbols">/&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">methods</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">class</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">classes</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">test</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">suite</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+</pre>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>Additionally there is available canonical configuration file at <a class="ulink" href="https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/tck-tests-previous.xml">https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/tck-tests-previous.xml</a>.
+Please note that this exclude list serves only for the previous micro version of TCK release! This means that if the latest version of TCK is e.g. 3.0.1 then this exclude list is valid only for the version 3.0.0 and invalid for any other version!</p>
+</div>
+<p>TestNG provides extensive reporting information. Depending on the build tool or IDE you use, the reporting will take a different format. Please consult the TestNG documentation and the tool documentation for more information.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_configuring_your_build_environment_to_execute_the_tck"/>4.6. Configuring your build environment to execute the TCK</h2></div></div></div>
+
+<p>It’s beyond the scope of this guide to describe in how to set up your build environment to run the TCK. The TestNG documentation provides extensive information on launching TestNG using the Java, Ant, Eclipse or IntelliJ IDEA.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_configuring_your_application_server_to_execute_the_tck"/>4.7. Configuring your application server to execute the TCK</h2></div></div></div>
+
+<p>The TCK makes use of the Java 1.4 keyword assert; you must ensure that the JVM used to run the application server is started with assertions enabled. See <a class="ulink" href="http://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html#enable-disable">Programming With Assertions</a> for more information on how to enable assertions.</p>
+<p>Tests within the <span class="emphasis"><em>jms</em></span> test group require some basic Java Message Service configuration. A connection factory, a queue destination for PTP messaging domain and a topic destination for pub/sub messaging domain must be available via JNDI lookup. The corresponding JNDI names are specified with configuration properties - see <a class="xref" href="#tck-properties" title="4.1. TCK Properties">Section 4.1, “TCK Properties”</a>.</p>
+<p>Tests within the <span class="emphasis"><em>persistence</em></span> test group require basic data source configuration. The data source has to be valid and JTA-based. The JNDI name of the DataSource is specified with configuration property - see <a class="xref" href="#tck-properties" title="4.1. TCK Properties">Section 4.1, “TCK Properties”</a>.</p>
+<p>Tests within the <span class="emphasis"><em>installedLib</em></span> test group require the CDI TCK cdi-tck-ext-lib artifact to be installed as a library (see also Jakarta EE 8 specification, section EE.8.2.2 "Installed Libraries").</p>
+<p>Tests within the <span class="emphasis"><em>systemProperties</em></span> test group require the following system properties to be set:</p>
+<div class="informaltable">
+<table border="1"><colgroup><col/><col/></colgroup><thead><tr><th align="left" valign="top">Name</th><th align="left" valign="top">Value</th></tr></thead><tbody><tr><td align="left" valign="top"><p>cdiTckExcludeDummy</p></td><td align="left" valign="top"><p>true</p></td></tr></tbody></table>
+</div>
+<p>Tests within the <span class="emphasis"><em>security</em></span> test group require the following mapping of roles to principals:</p>
+<div class="informaltable">
+<table border="1"><colgroup><col/><col/></colgroup><thead><tr><th align="left" valign="top">Principal</th><th align="left" valign="top">Group</th></tr></thead><tbody><tr><td align="left" valign="top"><p>student</p></td><td align="left" valign="top"><p>student</p></td></tr><tr><td align="left" valign="top"><p>alarm</p></td><td align="left" valign="top"><p>alarm, student</p></td></tr><tr><td align="left" valign="top"><p>printer</p></td><td align="left" valign="top"><p>printer</p></td></tr></tbody></table>
+</div>
+<p>Tests within <span class="emphasis"><em>SE</em></span> test groups require execution in a separate JVM instance with isolated classpath including all required dependencies.</p>
+</div>
+</div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="reporting"/>Chapter 5. Reporting</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#_cdi_tck_coverage_metrics">5.1. CDI TCK Coverage Metrics</a></span></dt><dt><span class="section"><a href="#_cdi_tck_coverage_report">5.2. CDI TCK Coverage Report</a></span></dt><dd><dl><dt><span class="section"><a href="#_cdk_tck_assertions">5.2.1. CDK TCK Assertions</a></span></dt><dt><span class="section"><a href="#_producing_the_coverage_report">5.2.2. Producing the Coverage Report</a></span></dt><dt><span class="section"><a href="#_testng_reports">5.2.3. TestNG Reports</a></span></dt></dl></dd></dl></div>
+
+<p>This chapter covers the two types of reports that can be generated from the TCK, an assertion coverage report and the test execution results. The chapter also justifies why the TCK is good indicator of how accurately an implementation conforms to the CDI specification.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_cdi_tck_coverage_metrics"/>5.1. CDI TCK Coverage Metrics</h2></div></div></div>
+
+<p>The CDI TCK coverage has been measured as follows:</p>
+<div class="itemizedlist"><ul><li>
+<span class="strong"><strong>Assertion Breadth Coverage</strong></span>
+</li></ul></div>
+<p>The CDI TCK provides at least 95% coverage of identified assertions with test cases.</p>
+<div class="itemizedlist"><ul><li>
+<span class="strong"><strong>Assertion Depth Coverage</strong></span>
+</li></ul></div>
+<p>The assertion depth coverage  has not been measured, as, when an assertion requires more than one testcase, these have been enumerated in an assertion group and so are adequately described by the assertion breadth coverage.</p>
+<div class="itemizedlist"><ul><li>
+<span class="strong"><strong>API Signature Coverage</strong></span>
+</li></ul></div>
+<p>The CDI TCK covers 100% of all API public methods using the Java CTT Sig Test tool.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_cdi_tck_coverage_report"/>5.2. CDI TCK Coverage Report</h2></div></div></div>
+
+<p>A specification can be distilled into a collection of assertions that define the behavior of the software. This section introduces the CDI TCK coverage report, which documents the relationship between the assertions that have been identified in the Jakarta CDI specification document and the tests in the TCK test suite.</p>
+<p>The structure of this report is controlled by the assertion document, so we’ll start there.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_cdk_tck_assertions"/>5.2.1. CDK TCK Assertions</h3></div></div></div>
+
+<p>The CDI TCK developers have analyzed the Jakarta CDI specification document and identified the assertions that are present in each chapter. Here’s an example of one such assertion found in section 2.3.3:</p>
+<div class="blockquote"><blockquote class="blockquote">
+<p>Any bean may declare multiple qualifier types.</p>
+</blockquote></div>
+<p>The assertions are listed in the XML file impl/src/main/resources/tck-audit.xml in the CDI TCK distribution. Each assertion is identified by the section identifier of the specification document in which it resides and assigned a unique paragraph identifier to narrow down the location of the assertion further.  To continue with the example, the assertion shown above is listed in the tck-audit.xml file using this XML fragment:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="XML"><!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">section</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">id</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;declaring_bean_qualifiers&quot;</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">title</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;Declaring&nbsp;the&nbsp;qualifiers&nbsp;of&nbsp;a&nbsp;bean&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">assertion</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">id</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;d&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">text</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">Any&nbsp;bean&nbsp;may&nbsp;declare&nbsp;multiple&nbsp;qualifier&nbsp;types.</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">type</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">assertion</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">section</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+</pre>
+<p>The strategy of the CDI TCK is to write a test which validates this assertion when run against an implementation. A test case (a method annotated with @Test in a test class) is correlated with an assertion using the @org.jboss.test.audit.annotations.SpecAssertion annotation as follows:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="JAVA"><!-- <br/> --><span class="java_plain">@</span><!-- <br/> --><span class="java_type">Test</span>
+<!--  --><br/><span class="java_plain">@</span><span class="java_type">SpecAssertion</span><span class="java_separator">(</span><span class="java_plain">section&nbsp;</span><span class="java_operator">=</span><span class="java_plain">&nbsp;DECLARING_BEAN_QUALIFIERS</span><span class="java_separator">,</span><span class="java_plain">&nbsp;id&nbsp;</span><span class="java_operator">=</span><span class="java_plain">&nbsp;</span><span class="java_literal">&quot;d&quot;</span><span class="java_separator">)</span>
+<!--  --><br/><span class="java_keyword">public</span><span class="java_plain">&nbsp;</span><span class="java_type">void</span><span class="java_plain">&nbsp;testMultipleQualifiers</span><span class="java_separator">()</span>
+<!--  --><br/><span class="java_separator">{</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;</span><span class="java_type">Bean</span><span class="java_operator">&lt;?&gt;</span><span class="java_plain">&nbsp;model&nbsp;</span><span class="java_operator">=</span><span class="java_plain">&nbsp;getBeans</span><span class="java_separator">(</span><span class="java_type">Cod</span><span class="java_separator">.</span><span class="java_keyword">class</span><span class="java_separator">,</span><span class="java_plain">&nbsp;</span><span class="java_keyword">new</span><span class="java_plain">&nbsp;</span><span class="java_type">ChunkyBinding</span><span class="java_separator">(</span><span class="java_literal">true</span><span class="java_separator">),</span><span class="java_plain">&nbsp;</span><span class="java_keyword">new</span><span class="java_plain">&nbsp;</span><span class="java_type">WhitefishBinding</span><span class="java_separator">()).</span><span class="java_plain">iterator</span><span class="java_separator">().</span><span class="java_plain">next</span><span class="java_separator">();</span>
+<!--  --><br/><span class="java_plain">&nbsp;&nbsp;</span><span class="java_keyword">assert</span><span class="java_plain">&nbsp;model</span><span class="java_separator">.</span><span class="java_plain">getBindings</span><span class="java_separator">().</span><span class="java_plain">size</span><span class="java_separator">()</span><span class="java_plain">&nbsp;</span><span class="java_operator">==</span><span class="java_plain">&nbsp;</span><span class="java_literal">3</span><span class="java_separator">;</span>
+<!--  --><br/><span class="java_separator">}</span></pre>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>Section identifiers are not used directly. Instead automatically generated constants are applied.</p>
+</div>
+<p>To help evaluate the distribution of coverage for these assertions, the TCK provides a detailed coverage report. This report is also useful to help implementors match tests with the language in the specification that supports the behavior being tested.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_producing_the_coverage_report"/>5.2.2. Producing the Coverage Report</h3></div></div></div>
+
+<p>The coverage report is an HTML report generated as part of the TCK project build.  Specifically, it is generated by an annotation processor that attaches to the compilation of the classes in the TCK test suite, another tool from the JBoss Test Utils project. The report is only generated when using Java 6 or above, as it requires the annotation processor.</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">mvn clean install</pre>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>You must run clean first because the annotation processor performs it’s work when the test class is being compiled. If compilation is unnecessary, then the assertions referenced in that class will not be discovered.</p>
+</div>
+<p>The report is written to the file target/coverage.html in the same project. The report has five sections:</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li>
+<span class="strong"><strong>Chapter Summary</strong></span> - Lists the chapters (that contain assertions) in the specification document along with total assertions, tests and coverage percentage.
+</li><li>
+<span class="strong"><strong>Section Summary</strong></span> - Lists the sections (that contain assertions) in the specification document along with total assertions, tests and coverage percentage.
+</li><li>
+<span class="strong"><strong>Coverage Detail</strong></span> - Each assertion and the test that covers it, if any.
+</li><li>
+<span class="strong"><strong>Unmatched Tests</strong></span> - A list of tests for which there is no matching assertion (useful during TCK development).
+</li><li>
+<span class="strong"><strong>Unversioned Tests</strong></span> - A list of tests for which there is no @SpecVersion annotation on the test class (useful during TCK development).
+</li></ol></div>
+<p>The coverage report is color coded to indicate the status of an assertion, or group of assertions. The status codes are as follows:</p>
+<div class="itemizedlist"><ul><li>
+<span class="strong"><strong>Covered</strong></span> - a test exists for this assertion
+</li><li>
+<span class="strong"><strong>Not covered</strong></span> - no test exists for this assertion
+</li><li>
+<span class="strong"><strong>Problematic</strong></span> - a test exists but is currently disabled. For example, this may be because the test is under development
+</li><li>
+<span class="strong"><strong>Untestable</strong></span> - the assertion has been deemed untestable; a note, explaining why, is normally provided
+</li></ul></div>
+<p>For reasons provided in the tck-audit.xml document and presented in the coverage report, some assertions are not testable.</p>
+<p>The coverage report does not give any indication as to whether the tests are passing. That’s where the TestNG reports come in.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_testng_reports"/>5.2.3. TestNG Reports</h3></div></div></div>
+
+<p>The CDI TCK test suite is really just a TestNG test suite. That means an execution of the CDI TCK test suite produces the same reports as TestNG does. This section will go over those reports and show you where to find each of them.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h4 class="title"><a id="_maven_surefire_and_testng"/>5.2.3.1. Maven, Surefire and TestNG</h4></div></div></div>
+
+<p>When the CDI TCK test suite is executed during the Maven test phase of the TCK runner project, TestNG is invoked indirectly through the Maven Surefire plugin. Surefire is a test execution abstraction layer capable of executing a mix of tests written for JUnit, TestNG, and other supported test frameworks.</p>
+<p>Why is this relevant? It means two things. First, it means that you are going to get a summary of the test run on the commandline. Here’s the output generated when the tests are run using standalone mode.</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running TestSuite
+[XmlMethodSelector] CLASSNAME:org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector
+[XmlMethodSelector] SETTING PRIORITY:0
+[XmlMethodSelector] CLASSNAME:org.jboss.testharness.impl.testng.ExcludeIncontainerUnderInvestigationMethodSelector
+[XmlMethodSelector] SETTING PRIORITY:0
+Tests run: 441, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.816 sec
+
+Results :
+
+Tests run: 441, Failures: 0, Errors: 0, Skipped: 0</pre>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>The number of tests executed, the execution time, and the output will differ when you run the tests using in-container mode as the CDI TCK requires.</p>
+</div>
+<p>If the Maven reporting plugin that complements Surefire is configured properly, Maven will also generate a generic HTML test result report. That report is written to the file test-report.html in the target/surefire-reports directory of the TCK runner project. It shows how many tests were run, how many failed and the success rate of the test run.</p>
+<p>The one drawback of the Maven Surefire report plugin is that it buffers the test failures and puts them in the HTML report rather than outputting them to the commandline. If you are running the test suite to determine if there are any failures, it may be more useful to get this information in the foreground. You can prevent the failures from being redirected to the report using the following commandline switch:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">mvn test -Dsurefire.useFile=false</pre>
+<p>The information that the Surefire provides is fairly basic and the detail pales in comparison to what the native TestNG reports provide.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h4 class="title"><a id="_testng_html_reports"/>5.2.3.2. TestNG HTML Reports</h4></div></div></div>
+
+<p>TestNG produces several HTML reports for a given test run. All the reports can be found in the target/surefire-reports directory in the TCK runner project. Below is a list of the three types of reports:</p>
+<div class="itemizedlist"><ul><li>
+Test Summary Report
+</li><li>
+Test Suite Detail Report
+</li><li>
+Emailable Report
+</li></ul></div>
+<p>The first report, the test summary report, shown below, is written to the file index.html. It produces the same information as the generic Surefire report.</p>
+<p><span class="inlinemediaobject"><img src="images/testng-summary-report.png" alt="image"/></span></p>
+<p>The summary report links to the test suite detail report, which has a wealth of information. It shows a complete list of test groups along with the classes in each group, which groups were included and excluded, and any exceptions that were raised, whether from a passed or failed test. A partial view of the test suite detail report is shown below.</p>
+<p><span class="inlinemediaobject"><img src="images/testng-suite-detail-report.png" alt="image"/></span></p>
+<p>The test suite detail report is very useful, but it borderlines on complex. As an alternative, you can have a look at the emailable report, which is a single HTML document that shows much of the same information as the test suite detail report in a more compact layout. A partial view of the emailable report is shown below.</p>
+<p><span class="inlinemediaobject"><img src="images/testng-emailable-report.png" alt="image"/></span></p>
+<p>Now that you have seen two ways to get test results from the Maven test execution, let’s switch over to the IDE, specifically Eclipse, and see how it presents TestNG test results.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h4 class="title"><a id="_test_results_in_the_testng_plugin_view"/>5.2.3.3. Test Results in the TestNG Plugin View</h4></div></div></div>
+
+<p>After running a test in Eclipse, the test results are displayed in the TestNG plugin view, as shown below.</p>
+<p><span class="inlinemediaobject"><img src="images/testng-plugin-report.png" alt="image"/></span></p>
+<p>The view offers two lists. The first is a list of all methods (tests) in the class flagged as either passed or failed. The second is a list of methods (tests) in the class that failed.  If there is a test failure, you can click on the method name to get the stacktrace leading up to the failure to display in the lower frame.</p>
+<p>You can also find the raw output of the TestNG execution in the IDE console view. In that view, you can click on a test in the stacktrace to open it in the editor pane.</p>
+<p>One of the nice features of TestNG is that it can keep track of which tests failed and offer to run only those tests again. You can also rerun the entire class. Buttons are available for both functions at the top of the view.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="part" lang="en-US"><div class="titlepage"><div><div><h1 class="title"><a id="_executing_and_debugging_tests"/>Part II. Executing and Debugging Tests</h1></div></div></div>
+
+<div class="partintro" lang="en-US"><div/>
+<p>In this part you learn how to execute the CDI TCK on the Wled compatible implementation.
+First, you are walked through the steps necessary to execute the test suite on Weld. Then you
+discover how to modify the TCK runner to execute the test suite on your own implementation.
+Finally, you learn how to debug tests from the test suite in Eclipse.</p>
+<div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#sigtest">6. Running the Signature Test</a></span></dt><dd><dl><dt><span class="section"><a href="#_obtaining_the_sigtest_plugin">6.1. Obtaining the sigtest plugin</a></span></dt><dt><span class="section"><a href="#_running_the_signature_test">6.2. Running the signature test</a></span></dt><dt><span class="section"><a href="#_forcing_a_signature_test_failure">6.3. Forcing a signature test failure</a></span></dt></dl></dd><dt><span class="chapter"><a href="#executing">7. Executing the Test Suite</a></span></dt><dd><dl><dt><span class="section"><a href="#_the_test_suite_runner">7.1. The Test Suite Runner</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_standalone_mode">7.2. Running the Tests In Standalone Mode</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_the_container_core_and_ee_parts">7.3. Running the Tests In the Container - Core and EE parts</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_the_container_se_part">7.4. Running the Tests In the Container - SE part</a></span></dt><dt><span class="section"><a href="#_dumping_the_test_archives">7.5. Dumping the Test Archives</a></span></dt></dl></dd><dt><span class="chapter"><a href="#eclipse-running">8. Running Tests in Eclipse</a></span></dt><dd><dl><dt><span class="section"><a href="#_leveraging_eclipses_plugin_ecosystem">8.1. Leveraging Eclipse’s plugin ecosystem</a></span></dt><dt><span class="section"><a href="#_readying_the_eclipse_workspace">8.2. Readying the Eclipse workspace</a></span></dt><dt><span class="section"><a href="#_running_a_test_in_standalone_mode">8.3. Running a test in standalone mode</a></span></dt><dt><span class="section"><a href="#running-integration-tests">8.4. Running integration tests</a></span></dt></dl></dd><dt><span class="chapter"><a href="#eclipse-debugging">9. Debugging Tests in Eclipse</a></span></dt><dd><dl><dt><span class="section"><a href="#_debugging_a_standalone_test">9.1. Debugging a standalone test</a></span></dt><dt><span class="section"><a href="#_debugging_an_integration_test">9.2. Debugging an integration test</a></span></dt><dd><dl><dt><span class="section"><a href="#_attaching_the_ide_debugger_to_the_container">9.2.1. Attaching the IDE debugger to the container</a></span></dt><dt><span class="section"><a href="#_launching_the_test_in_the_debugger">9.2.2. Launching the test in the debugger</a></span></dt></dl></dd></dl></dd></dl></div></div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="sigtest"/>Chapter 6. Running the Signature Test</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#_obtaining_the_sigtest_plugin">6.1. Obtaining the sigtest plugin</a></span></dt><dt><span class="section"><a href="#_running_the_signature_test">6.2. Running the signature test</a></span></dt><dt><span class="section"><a href="#_forcing_a_signature_test_failure">6.3. Forcing a signature test failure</a></span></dt></dl></div>
+
+<p>One of the requirements of an implementation passing the TCK is for it to pass the CDI signature test. This section describes how the signature file is generated and how to run it against your implementation.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_obtaining_the_sigtest_plugin"/>6.1. Obtaining the sigtest plugin</h2></div></div></div>
+
+<p>The source for the sigtest plugin can be found here:
+<a class="ulink" href="https://github.com/emilianbold/netbeans-apitest.git">https://github.com/emilianbold/netbeans-apitest.git</a></p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_running_the_signature_test"/>6.2. Running the signature test</h2></div></div></div>
+
+<p>To run the signature test, use a pom file like that found in
+<a class="ulink" href="https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigtest-pom.xml">https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigtest-pom.xml</a>
+and shown here:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="XML"><!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_processing_instruction">&lt;?xml&nbsp;version=&quot;1.0&quot;?&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_comment">&lt;!--&nbsp;Sample&nbsp;maven&nbsp;pom&nbsp;to&nbsp;verify&nbsp;signatures&nbsp;--&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">project</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">xmlns</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;http://maven.apache.org/POM/4.0.0&quot;</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">xmlns:xsi</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">xsi:schemaLocation</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;http://maven.apache.org/POM/4.0.0&nbsp;http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">modelVersion</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">4.0.0</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">modelVersion</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.enterprise</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">cdi-tck-sigtest</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">3.0</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">name</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">CDI&nbsp;TCK&nbsp;Signature&nbsp;Tests</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">name</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">description</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">CDI&nbsp;TCK&nbsp;Signature&nbsp;test&nbsp;validation&nbsp;of&nbsp;CDI&nbsp;dependent&nbsp;API&nbsp;jars</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">description</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">properties</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_comment">&lt;!--&nbsp;Set&nbsp;the&nbsp;api&nbsp;jar&nbsp;artifact&nbsp;versions&nbsp;here&nbsp;--&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">annotation.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">2.0.0</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">annotation.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">atinject.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">2.0.0</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">atinject.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">interceptor.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">2.0.0</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">interceptor.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">el.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">4.0.0</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">el.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">cdi.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">3.0.0</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">cdi.api.version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">properties</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_comment">&lt;!--&nbsp;Set&nbsp;the&nbsp;api&nbsp;jar&nbsp;artifact&nbsp;dependencies&nbsp;here&nbsp;--&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">dependencies</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.annotation</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.annotation-api</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">${annotation.api.version}</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.el</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.el-api</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">${el.api.version}</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.interceptor</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.interceptor-api</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">${interceptor.api.version}</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.inject</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.inject-api</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">${atinject.api.version}</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.enterprise</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.enterprise.cdi-api</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">${cdi.api.version}</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">dependency</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">dependencies</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">build</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">plugins</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">plugin</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">org.apache.maven.plugins</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">maven-dependency-plugin</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">executions</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">execution</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">id</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">unpack-dependencies</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">id</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">phase</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">package</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">phase</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">goals</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">goal</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">unpack-dependencies</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">goal</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">goals</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">configuration</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">stripVersion</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">true</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">stripVersion</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">overWriteReleases</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">true</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">overWriteReleases</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">outputDirectory</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">target/classes</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">outputDirectory</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">configuration</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">execution</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">executions</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">plugin</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">plugin</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">org.netbeans.tools</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">groupId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">sigtest-maven-plugin</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">artifactId</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">1.2</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">version</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">executions</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">execution</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">id</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">sigtest</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">id</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">phase</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">verify</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">phase</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">goals</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">goal</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">check</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">goal</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">goals</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">execution</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">executions</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">configuration</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">sigfile</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">cdi-api-jdk8.sig</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">sigfile</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">packages</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">jakarta.decorator,jakarta.enterprise</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">packages</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">classes</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">target/classes</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">classes</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">report</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">cdi-sig-report.txt</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">report</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">configuration</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">plugin</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">plugins</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">build</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">project</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+</pre>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">Scotts-iMacPro:resources starksm$ mvn -f sigtest-pom.xml verify
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------&lt; jakarta.enterprise:cdi-tck-sigtest &gt;-----------------
+[INFO] Building CDI TCK Signature Tests 3.0
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+...
+[INFO] --- sigtest-maven-plugin:1.2:check (sigtest) @ cdi-tck-sigtest ---
+[INFO] Packages: jakarta.decorator,jakarta.enterprise
+[INFO] SignatureTest report
+Base version: 3.0.0-SNAPSHOT
+Tested version: 3.0
+Check mode: bin [throws removed]
+Constant checking: on
+
+Warning: The return type java.lang.reflect.Member can't be resolved
+Warning: The return type java.lang.reflect.Member can't be resolved
+Warning: The return type java.lang.reflect.Member can't be resolved
+
+
+[INFO] /Users/starksm/Dev/JBoss/Jakarta/cdi-tck/impl/src/main/resources/cdi-sig-report.txt: 0 failures in /Users/starksm/Dev/JBoss/Jakarta/cdi-tck/impl/src/main/resources/cdi-api-jdk8.sig
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.887 s
+[INFO] Finished at: 2020-05-27T15:55:18-05:00
+[INFO] ------------------------------------------------------------------------</pre>
+<p>You can ignore the following warnings:
+"The return type java.lang.reflect.Member can't be resolved"</p>
+<p>The important thing is that the mvn version shows "BUILD SUCCESS".</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_forcing_a_signature_test_failure"/>6.3. Forcing a signature test failure</h2></div></div></div>
+
+<p>Just for fun (and to confirm that the signature test is working correctly), you can try the following:</p>
+<p>1) Edit cdi-api.sig</p>
+<p>2) Modify one of the class signatures - in the following example we change one of the constructors for BusyConversationException - here’s the original:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">CLSS public jakarta.enterprise.context.BusyConversationException
+cons public BusyConversationException()
+cons public BusyConversationException(java.lang.String)
+cons public BusyConversationException(java.lang.String,java.lang.Throwable)
+cons public BusyConversationException(java.lang.Throwable)
+supr jakarta.enterprise.context.ContextException
+hfds serialVersionUID</pre>
+<p>Let’s change the default (empty) constructor parameter to one with a java.lang.Integer parameter instead:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">CLSS public jakarta.enterprise.context.BusyConversationException
+cons public BusyConversationException(java.lang.Integer)
+cons public BusyConversationException(java.lang.String)
+cons public BusyConversationException(java.lang.String,java.lang.Throwable)
+cons public BusyConversationException(java.lang.Throwable)
+supr jakarta.enterprise.context.ContextException
+hfds serialVersionUID</pre>
+<p>3) Now when we run the signature test using the above command, we should get the following errors:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">Missing Constructors
+--------------------
+
+jakarta.enterprise.context.BusyConversationException:         constructor public jakarta.enterprise.context.BusyConversationException.BusyConversationException(java.lang.Integer)
+
+Added Constructors
+------------------
+
+jakarta.enterprise.context.BusyConversationException:         constructor public jakarta.enterprise.context.BusyConversationException.BusyConversationException()
+
+
+STATUS:Failed.2 errors</pre>
+</div>
+</div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="executing"/>Chapter 7. Executing the Test Suite</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#_the_test_suite_runner">7.1. The Test Suite Runner</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_standalone_mode">7.2. Running the Tests In Standalone Mode</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_the_container_core_and_ee_parts">7.3. Running the Tests In the Container - Core and EE parts</a></span></dt><dt><span class="section"><a href="#_running_the_tests_in_the_container_se_part">7.4. Running the Tests In the Container - SE part</a></span></dt><dt><span class="section"><a href="#_dumping_the_test_archives">7.5. Dumping the Test Archives</a></span></dt></dl></div>
+
+<p>This chapter explains how to run the TCK on Weld as well as your own implementation. The CDI TCK uses the Maven Surefire plugin and the Arquillian test platform to execute the test suite. Learning to execute the test suite from Maven is prerequisite knowledge for running the tests in an IDE, such as Eclipse.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_the_test_suite_runner"/>7.1. The Test Suite Runner</h2></div></div></div>
+
+<p>The test suite is executed by the Maven Surefire plugin during the test phase of the Maven life cycle. The execution happens within a TCK runner project (as opposed to the TCK project itself). Weld includes a TCK runner project that executes the CDI TCK on Weld running inside WildFly 22.x. To execute the CDI TCK on your own CDI implementation, you could modify the TCK runner project included with Weld to use your CDI implementation.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_running_the_tests_in_standalone_mode"/>7.2. Running the Tests In Standalone Mode</h2></div></div></div>
+
+<p>To execute the TCK test suite against Weld, first switch to the jboss-tck-runner directory in the extracted TCK distribution:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">cd jakartacdi/tck/weld/jboss-tck-runner</pre>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>These instructions assume you have extracted the Jakarta CDI TCK software according to the recommendation given in <a class="xref" href="#_the_tck_environment" title="3.2. The TCK Environment">Section 3.2, “The TCK Environment”</a>.</p>
+</div>
+<p>Then execute the Maven life cycle through the test phase:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">mvn test</pre>
+<p>Without any command-line flags, the test suite is run in standalone mode (activating weld-embedded Maven profile), which means that any test within the <span class="emphasis"><em>integration</em></span>, <span class="emphasis"><em>javaee-full</em></span> and SE TestNG group is excluded. This mode uses the <span class="emphasis"><em>Weld EE Embedded Arquillian container adapter</em></span> to invoke the test within a mock Jakarta EE life cycle and capture the results of the test. However, passing the suite in this mode is not sufficient to pass the TCK as a whole. The suite must be passed while executing using the in-container mode.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_running_the_tests_in_the_container_core_and_ee_parts"/>7.3. Running the Tests In the Container - Core and EE parts</h2></div></div></div>
+
+<p>To execute tests within Core and EE parts of the specification you need to use in-container mode with the JBoss TCK runner, you first have to setup WildFly as described in the <a class="xref" href="#running-against-weld">Running the TCK against Weld and WildFly</a> callout.</p>
+<p>Then, execute the TCK runner with Maven as follows:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">mvn test -Dincontainer</pre>
+<p>The presence of the incontainer property activates an incontainer Maven profile. This time, all the tests except the tests within SE TestNG group are executed.</p>
+<p>In order to run tests appropriate to the Jakarta EE Web Profile execute:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">mvn test -Dincontainer=webprofile</pre>
+<p>To specify particular TCK version:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">mvn test -Dincontainer -Dcdi.tck.version=3.0.0-RC1</pre>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>In order to run the TCK Test Suite in the container an Arquillian container adapter is required. See also <a class="ulink" href="https://docs.jboss.org/author/display/ARQ/Containers">Arqullian reference guide</a>.</p>
+</div>
+<p>The Arquillian will also start and stop the application server automatically (provided a managed Arqullian container adapter is used).</p>
+<p>Since Arquillian in-container tests are executed in a remote JVM, the results of the test must be communicated back to the runner over a container-supported protocol. The TCK utilizes servlet-based protocol (communication over HTTP).</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_running_the_tests_in_the_container_se_part"/>7.4. Running the Tests In the Container - SE part</h2></div></div></div>
+
+<p>To execute full TCK testsuite you have to run tests within SE group as well.
+SE tests make use of <a class="ulink" href="https://github.com/arquillian/arquillian-container-se">Arquillian container SE</a>.
+This way the tests are executed in a separate JVM instance with isolated and configurable classpath.
+The Arquillian container does not start CDI container in any way - this is still done directly in the tests using CDI SE bootstrap API and <code class="literal">jakarta.enterprise.inject.se.SeContainerInitializer</code>.
+In order to run SE TCK tests in Weld, you need to execute "weld-se" Maven profile from the JBoss TCK runner POM file as follows:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">---
+mvn test -Dincontainer=se
+---</pre>
+<p>The profile needs to provide RI dependencies as well as Arquillian settings (<code class="literal">arquillian.xml</code>).
+These two need to be stored into a directory so that Arquillian container can then be instructed to pick them up.
+<a class="ulink" href="https://github.com/weld/core/blob/3.0.0.Final/jboss-tck-runner/pom.xml#L424">In RI</a>, this orchestration is done using <code class="literal">maven-dependency-plugin</code> along with <code class="literal">maven-surefire-plugin</code>.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_dumping_the_test_archives"/>7.5. Dumping the Test Archives</h2></div></div></div>
+
+<p>As you have learned, when the test suite is executing using in-container mode, each test class is packaged as a deployable archive and deployed to the container. The test is then executed within the context of the deployed application. This leaves room for errors in packaging. When investigating a test failure, you may find it helpful to inspect the archive after it’s generated. The TCK (or Arquillian respectively) can accommodate this type of inspection by "dumping" the generated archive to disk.</p>
+<p>The feature just described is activated in the Arquillian configuration file (<a class="xref" href="#arquillian-settings" title="4.2. Arquillian settings">Section 4.2, “Arquillian settings”</a>). In order to export the test archive you’ll have to add the deploymentExportPath property element inside engine element and assign a relative or absolute directory where the test archive should be exported, e.g.:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="XML"><!-- XML : generated by JHighlight v1.0 (http://jhighlight.dev.java.net) -->
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">engine</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;</span><span class="xml_tag_name">property</span><span class="xml_plain">&nbsp;</span><span class="xml_attribute_name">name</span><span class="xml_tag_symbols">=</span><span class="xml_attribute_value">&quot;deploymentExportPath&quot;</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain">target/</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">property</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+<span class="xml_plain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="xml_tag_symbols">&lt;/</span><span class="xml_tag_name">engine</span><span class="xml_tag_symbols">&gt;</span><span class="xml_plain"></span><br />
+</pre>
+<p>Arquillian will export the archive to that location for any test you run.</p>
+<p>To enable the export for just a single test, use the VM argument arquillian.deploymentExportPath:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">-Darquillian.deploymentExportPath=target/deployments/</pre>
+</div>
+</div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="eclipse-running"/>Chapter 8. Running Tests in Eclipse</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#_leveraging_eclipses_plugin_ecosystem">8.1. Leveraging Eclipse’s plugin ecosystem</a></span></dt><dt><span class="section"><a href="#_readying_the_eclipse_workspace">8.2. Readying the Eclipse workspace</a></span></dt><dt><span class="section"><a href="#_running_a_test_in_standalone_mode">8.3. Running a test in standalone mode</a></span></dt><dt><span class="section"><a href="#running-integration-tests">8.4. Running integration tests</a></span></dt></dl></div>
+
+<p>This chapter explains how to run individual tests using the Eclipse TestNG plugin. It covers running non-integration tests in standalone mode and integration tests (as well as non-integration tests) in in-container mode. You should be able to use the lessons learned here to debug tests in an alternate IDE as well.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_leveraging_eclipses_plugin_ecosystem"/>8.1. Leveraging Eclipse’s plugin ecosystem</h2></div></div></div>
+
+<p>Using an existing test harness (TestNG) allows the tests to be executed and debugged in an Integrated Development Environment (IDE) using available plugins. Using an IDE is also the easiest way to execute a test class in isolation.</p>
+<p>The TCK can be executed in any IDE for which there is a <a class="ulink" href="http://testng.org/doc/index.html">TestNG plugin</a> available. Running a test from the CDI TCK test suite using the Eclipse TestNG plugin is almost as simple as running any other TestNG test. You can also use the plugin to debug a test, which is described in the next chapter.</p>
+<p>Before running a test from the TCK test suite in Eclipse, you must have the Eclipse TestNG plugin and either the m2e plugin or an Eclipse project generated using the Maven 2 Eclipse plugin (maven-eclipse-plugin). Refer to <a class="xref" href="#eclipse-plugins" title="3.3. Eclipse Plugins">Section 3.3, “Eclipse Plugins”</a> for more information on these plugins.</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>In order to run the TCK tests in Eclipse you must have CDI TCK and Weld JBoss TCK runner projects imported. Get the source from GitHub repositories <a class="ulink" href="https://github.com/eclipse-ee4j/cdi-tck">https://github.com/eclipse-ee4j/cdi-tck</a> and <a class="ulink" href="https://github.com/weld/core">https://github.com/weld/core</a>.</p>
+</div>
+<p>With the m2e plugin installed, Eclipse should recognize the CDI TCK projects as valid Eclipse projects (or any Weld project for that matter). Import them into the Eclipse workspace at this time. You should also import the Weld projects if you want to debug into that code, which is covered later.</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="tip"><h2>Tip</h2>
+<p>If you choose to use the Maven 2 Eclipse plugin (maven-eclipse-plugin), you should execute the plugin in both the tck and weld projects:</p>
+<pre xmlns="" class="CONSOLE">cd tck
+mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs
+cd ../weld
+mvn clean eclipse:clean eclipse:eclipse -DdownloadSources -DdownloadJavadocs</pre>
+</div>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_readying_the_eclipse_workspace"/>8.2. Readying the Eclipse workspace</h2></div></div></div>
+
+<p>When setting up your Eclipse workspace, we recommended creating three workings sets:</p>
+<p>Weld - Groups the CDI API and the Weld projects
+CDI TCK - Groups the CDI TCK API and the test suite projects
+Weld JBoss TCK Runner - Groups the porting package implementation and TCK runner projects
+The dependencies between the projects will either be established automatically by the m2e plugin, based on the dependency information in the pom.xml files, or as generated by the mvn eclipse:eclipse command.</p>
+<p>Your workspace should appear as follows:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">Weld
+  cdi-api
+  weld-core
+  ...
+CDI TCK
+  cdi-tck-api
+  cdi-tck-impl
+  cdi-tck-parent
+Weld JBoss TCK Runner
+  weld-jboss-runner-tck
+  weld-porting-package-tck</pre>
+<p>The tests in the TCK test suite are located in the cdi-tck-impl project. You’ll be working within this project in Eclipse when you are developing tests. However, as you learned earlier, there are no references to a CDI implementation in the TCK. So how can you execute an individual test in Eclipse? The secret is that you need to establish a link in Eclipse (not in Maven) between the cdi-tck-impl project and your TCK runner project, which in this case is weld-jboss-runner-tck (the project in the jboss-tck-runner directory).</p>
+<p>Here are the steps to establish the link:</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li>
+Right click on the cdi-tck-impl project
+</li><li>
+Select Build Path &gt; Configure Build Path…​
+</li><li>
+Click on the Projects tab
+</li><li>
+Click the Add…​ button on the right
+</li><li>
+Check the TCK runner project (e.g., weld-jboss-runner-tck)
+</li><li>
+Click the OK button on the Required Project Selection dialog window
+</li><li>
+Click the OK button on the Java Build Path window
+</li></ol></div>
+<p>Of course, the weld-jboss-runner-tck also depends on the cdi-tck-impl at runtime (so it can actually find the tests to execute). But m2e plugin doesn’t distinguish between build-time and runtime dependencies. As a result, we’ve created a circular dependency between the projects. In all likelihood, Eclipse will struggle (if not fail) to compile one or more projects. How can we break this cycle?</p>
+<p>As it turns out, the TCK runner doesn’t need to access the tests to build. It only needs its classes, configurations and other dependencies at runtime (when the TestNG plugin executes). Therefore, we can disable Resolve dependencies from workspace projects setting on weld-jboss-runner-tck project:</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li>
+Right click on the weld-jboss-runner-tck project
+</li><li>
+Select Maven
+</li><li>
+Uncheck Resolve dependencies from workspace projects option
+</li><li>
+Click the OK button on the Properties window
+</li></ol></div>
+<p>As you have learned, the TCK determines how to behave based on the values of system properties or properties defined in META-INF/cdi-tck.properties classpath resources. In order to run the tests, you need to add a properties file to the classpath or define corresponding system properties.</p>
+<p>The CDI TCK project conveniently provides the properties file src/test/resources/META-INF/cdi-tck.properties that contains all of the necessary properties for testing in Eclipse. You have to tune the org.jboss.cdi.tck.libraryDirectory and org.jboss.cdi.tck.testDataSource properties to point to the relative location of the related projects and specify the name of test datasource. The properties should be defined as follows:</p>
+<p>org.jboss.cdi.tck.libraryDirectory - the path to the target/dependency/lib directory in the TCK runner project
+org.jboss.cdi.tck.testDataSource - the JNDI name of the test datasource, e.g. WildFly 22:</p>
+<pre xmlns="" xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="CONSOLE">org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS</pre>
+<p>You are now ready to execute an individual test class (or artifact). Let’s start with a test artifact capable of running in standalone mode.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_running_a_test_in_standalone_mode"/>8.3. Running a test in standalone mode</h2></div></div></div>
+
+<p>Use weld-embedded Maven profile (active by default) in order to run a test in standalone mode.</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="tip"><h2>Tip</h2>
+<p>If using m2e Eclipse plugin, you can activate/deactivate the profile in Maven section of project properties.</p>
+</div>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>Note that all TestNG tests that are not included in integration and javaee-full test groups are considered to be standalone artifacts.</p>
+</div>
+<p>Select a test class containing standalone tests and open it in the Eclipse editor. Now right click in the editor view and select Run As &gt; TestNG Test. The TestNG view should pop out and you should see all the tests in that artifact pass (if all goes well).</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>If the TCK complains that there is a property missing, close all the projects, open them again, and rebuild. The m2e plugin can be finicky getting everything built correctly the first time.</p>
+</div>
+<p>So far you have executed a test in standalone mode. That’s not sufficient to pass the TCK. The test must be executed using in-container mode.</p>
+<p>Let’s see what has to be done to execute an integration test. This will result in the artifact being deployed to the container, which is WildFly if you are using the JBoss TCK runner.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="running-integration-tests"/>8.4. Running integration tests</h2></div></div></div>
+
+<p>In order to run a test in the container you must explicitly specify following active Maven profiles in JBoss TCK runner Eclipse project properties: incontainer,!weld-embedded.</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="note"><h2>Note</h2>
+<p>Note that all TestNG tests that are included in integration and javaee-full test groups are considered to be integration tests and must be run in in-container mode. javaee-full TestNG test group contains tests that require full Jakarta EE platform (EAR packaging, JAX-WS, EJB timers, etc.).</p>
+</div>
+<p>Select an integration test (a class that extends org.jboss.cdi.tck.AbstractTest and open it in your Eclipse editor. Right click in the editor view and select Run As &gt; TestNG Test.</p>
+<p>You have now mastered running the CDI TCK against Weld using both Maven and within Eclipse. Now you’re likely interested in how to debug a test so that you can efficiently investigate test failures.</p>
+</div>
+</div>
+<div class="chapter" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="eclipse-debugging"/>Chapter 9. Debugging Tests in Eclipse</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="#_debugging_a_standalone_test">9.1. Debugging a standalone test</a></span></dt><dt><span class="section"><a href="#_debugging_an_integration_test">9.2. Debugging an integration test</a></span></dt><dd><dl><dt><span class="section"><a href="#_attaching_the_ide_debugger_to_the_container">9.2.1. Attaching the IDE debugger to the container</a></span></dt><dt><span class="section"><a href="#_launching_the_test_in_the_debugger">9.2.2. Launching the test in the debugger</a></span></dt></dl></dd></dl></div>
+
+<p>This chapter explains how to debug standalone and integration tests from the TCK test suite in Eclipse. You should be able to use the lessons learned here to debug tests in an alternate IDE as well.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_debugging_a_standalone_test"/>9.1. Debugging a standalone test</h2></div></div></div>
+
+<p>There is almost no difference in how you debug a standalone test from how you run it. With the test class open in the Eclipse editor, simply right click in the editor view and select Debug As &gt; TestNG Test. Eclipse will stop at any breakpoints you set just like it would with any other local debug process.</p>
+<p>If you plan to step into a class in the Weld implementation (or any other dependent library), you must ensure that the source is properly associated with the library. Below are the steps to follow to associate the source of Weld with the TestNG debug configuration:</p>
+<div xmlns:d="http://docbook.org/ns/docbook" xmlns:rf="java:org.jboss.highlight.XhtmlRendererFactory" class="orderedlist"><ol><li>
+Select the Run &gt; Debug Configurations…​ menu from the main menubar
+</li><li>
+Select the name of the test class in the TestNG category
+</li><li>
+Select the Source tab
+</li><li>
+Click the Add…​ button on the right
+</li><li>
+Select Java Project
+</li><li>
+Check the project that contains the class you want to debug (e.g., weld-core)
+</li><li>
+Click OK on the Project Selection window
+</li><li>
+Click Close on the Debug Configurations window
+</li></ol></div>
+<p>You’ll have to complete those steps for any test class you are debugging, though you only have to do it once (the debug configuration hangs around indefinitely).</p>
+<p>Again, running a test in standalone mode isn’t enough to pass the TCK and cannot be used to run or debug an integration test. Let’s look at how to debug a test running in the context of the container.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h2 class="title"><a id="_debugging_an_integration_test"/>9.2. Debugging an integration test</h2></div></div></div>
+
+<p>In order to debug an integration test, or any test run using in-container mode, the test must be configured to run in-container, as described in <a class="xref" href="#running-integration-tests" title="8.4. Running integration tests">Section 8.4, “Running integration tests”</a>, and you must attach the IDE debugger to the container. That puts the debugger on both sides of the fence, so to speak.</p>
+<p>Since setting up a test to run in-container has already been covered, we’ll look at how to attach the IDE debugger to the container, and then move on launching the test in debug mode.</p>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_attaching_the_ide_debugger_to_the_container"/>9.2.1. Attaching the IDE debugger to the container</h3></div></div></div>
+
+<p>There are two ways to attach the IDE debugger to the container. You can either start the container in debug mode from within the IDE, or you can attach the debugger over a socket connection to a standalone container running with JPDA enabled.</p>
+<p>The Eclipse Server Tools, a subproject of the Eclipse Web Tools Project (WTP), has support for launching most major application servers, including WildFly 22. However, if you are using WildFly, you should consider using JBoss Tools instead, which offers tighter integration with JBoss technologies. See either the <a class="ulink" href="http://www.eclipse.org/webtools/server/server.php">Server Tools documentation</a> or the <a class="ulink" href="http://docs.jboss.org/tools/">JBoss Tools documentation</a> for how to setup a container and start it in debug mode.</p>
+<p>See <a class="ulink" href="http://justinjohnson.org/java/configuring-remote-debugging-in-jboss-as-7-and-eclipse/">this blog entry</a> to learn how to start WildFly with JPDA enabled and how to get the Eclipse debugger to connect to the remote process.</p>
+</div>
+<div class="section" lang="en-US"><div class="titlepage"><div><div><h3 class="title"><a id="_launching_the_test_in_the_debugger"/>9.2.2. Launching the test in the debugger</h3></div></div></div>
+
+<p>Once Eclipse is debugging the container, you can set a breakpoint in the test and debug it just like a standalone test. Let’s give it a try.</p>
+<p>Open a test in the Eclipse editor, right click in the editor view, and select Debug As &gt; TestNG Test (this works for the container started in debug mode from within the IDE) or run the TestNG test and debug Remote Java Application (remote debug configuration) in the same time (when attaching the debugger over a socket connection to a container). This time when the IDE hits the breakpoint, it halts the JVM thread of the container rather than the thread that launched the test.</p>
+<p>Remember that if you need to debug into dependent libraries, the source code for those libraries will need to be registered with the TestNG debug configuration as described in the first section in this chapter.</p>
+</div>
+</div>
+</div>
+</div>
+</div></body></html>
