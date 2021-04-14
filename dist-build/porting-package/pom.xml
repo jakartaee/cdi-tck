@@ -85,6 +85,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.2</version>
                 <executions>
                     <execution>
                         <id>copy-jboss-tck-runner</id>
@@ -93,7 +94,6 @@
                             <goal>unpack</goal>
                         </goals>
                         <configuration>
-                            <stripVersion>true</stripVersion>
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.jboss.weld</groupId>
