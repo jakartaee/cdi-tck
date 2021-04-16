@@ -21,21 +21,19 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import java.util.List;
-
 import jakarta.enterprise.inject.spi.InterceptionType;
 import jakarta.enterprise.inject.spi.Interceptor;
 import jakarta.enterprise.util.AnnotationLiteral;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * Tests for interceptor bindings types with members.
@@ -55,12 +53,8 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorBindingTypeWithMemberTest.class)
-                .withBeansXml(
-                        Descriptors
-                                .create(BeansDescriptor.class)
-                                .getOrCreateInterceptors()
-                                .clazz(IncreasingInterceptor.class.getName(), DecreasingInterceptor.class.getName(),
-                                        VehicleCountInterceptor.class.getName(), PlantInterceptor.class.getName()).up())
+                .withBeansXml(new BeansXml()
+                        .interceptors(IncreasingInterceptor.class, DecreasingInterceptor.class, VehicleCountInterceptor.class, PlantInterceptor.class))
                 .build();
     }
 

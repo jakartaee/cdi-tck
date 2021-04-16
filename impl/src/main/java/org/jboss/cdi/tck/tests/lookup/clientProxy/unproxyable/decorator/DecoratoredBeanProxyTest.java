@@ -11,6 +11,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -25,7 +26,8 @@ public class DecoratoredBeanProxyTest extends AbstractTest {
 	public static WebArchive createTestArchive() {
 		return new WebArchiveBuilder()
 				.withTestClassPackage(DecoratoredBeanProxyTest.class)
-				.withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(MarineDecorator.class.getName()).up()).build();
+				.withBeansXml(new BeansXml().decorators(MarineDecorator.class))
+				.build();
 	}
 
 	@Test

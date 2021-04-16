@@ -28,6 +28,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -46,8 +47,7 @@ public class EnterpriseStereotypeAlternativeTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(EnterpriseStereotypeAlternativeTest.class)
                 .withClasses(Mock.class, SimpleAlternativeService.class, Service.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().stereotype(Mock.class.getName()).up())
+                .withBeansXml(new BeansXml().stereotype(Mock.class))
                 .build();
     }
 

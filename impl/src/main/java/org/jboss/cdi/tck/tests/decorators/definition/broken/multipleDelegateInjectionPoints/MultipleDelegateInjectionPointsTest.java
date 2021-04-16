@@ -27,6 +27,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -44,8 +45,7 @@ public class MultipleDelegateInjectionPointsTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(MultipleDelegateInjectionPointsTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(TimestampLogger.class.getName())
-                                .up()).build();
+                        new BeansXml().decorators(TimestampLogger.class)).build();
     }
 
     @Test

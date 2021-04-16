@@ -21,22 +21,20 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.lang.reflect.Type;
-import java.security.Principal;
-import java.util.Collections;
-
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.tests.decorators.AbstractDecoratorTest;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Type;
+import java.security.Principal;
+import java.util.Collections;
 
 /**
  * 
@@ -52,8 +50,7 @@ public class BuiltinPrincipalDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinPrincipalDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(PrincipalDecorator.class.getName())
-                                .up()).build();
+                        new BeansXml().decorators(PrincipalDecorator.class)).build();
     }
 
     @Inject

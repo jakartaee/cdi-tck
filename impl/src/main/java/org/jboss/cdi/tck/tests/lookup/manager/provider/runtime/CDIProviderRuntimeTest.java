@@ -26,13 +26,11 @@ import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.inject.spi.CDI;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -55,7 +53,7 @@ public class CDIProviderRuntimeTest extends AbstractTest {
                 .withClasses(Alpha.class, Powerful.class, PowerfulLiteral.class, AlphaLocator.class)
                 // BDA01
                 .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Bravo.class.getName()).up(),
+                        new BeansXml().alternatives(Bravo.class),
                         Bravo.class, BravoLocator.class, BravoMarker.class).build();
     }
 

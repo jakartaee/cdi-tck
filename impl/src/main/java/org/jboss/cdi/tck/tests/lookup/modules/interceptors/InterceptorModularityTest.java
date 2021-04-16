@@ -23,7 +23,6 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.inject.Instance;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.cdi.tck.AbstractTest;
@@ -37,8 +36,8 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -61,7 +60,7 @@ public class InterceptorModularityTest extends AbstractTest {
         EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder()
                 .withTestClassDefinition(InterceptorModularityTest.class)
                 .withClasses(Checker.class, BarBinding.class, Animal.class, Cow.class, BarSuperInterceptor.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Cow.class.getName()).up())
+                .withBeansXml(new BeansXml().alternatives(Cow.class))
                 .noDefaultWebModule().build();
 
         JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class, TEST1_JAR)

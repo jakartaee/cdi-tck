@@ -28,6 +28,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -46,9 +47,7 @@ public class StatefulSessionBeanXmlDescriptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(StatefulSessionBeanXmlDescriptorTest.class)
                 .withClasses(Digital.class, DigitalInterceptor.class, Elephant.class, ElephantLocal.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                                .clazz(DigitalInterceptor.class.getName()).up())
+                .withBeansXml(new BeansXml().interceptors(DigitalInterceptor.class))
                 .build()
                 .addAsWebInfResource(StatefulSessionBeanXmlDescriptorTest.class.getPackage(), "ejb-jar.xml", "ejb-jar.xml");
     }

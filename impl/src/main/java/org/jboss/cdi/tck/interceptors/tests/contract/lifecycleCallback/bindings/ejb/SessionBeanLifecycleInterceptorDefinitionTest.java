@@ -23,14 +23,12 @@ import static org.testng.Assert.assertEquals;
 
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -42,9 +40,7 @@ public class SessionBeanLifecycleInterceptorDefinitionTest extends AbstractTest 
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(SessionBeanLifecycleInterceptorDefinitionTest.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                                .clazz(AirborneInterceptor.class.getName(), DestructionInterceptor.class.getName()).up())
+                .withBeansXml(new BeansXml().interceptors(AirborneInterceptor.class, DestructionInterceptor.class))
                 .build();
     }
 

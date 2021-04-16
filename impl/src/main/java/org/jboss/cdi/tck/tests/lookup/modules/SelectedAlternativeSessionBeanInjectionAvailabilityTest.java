@@ -28,6 +28,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
@@ -57,9 +58,8 @@ public class SelectedAlternativeSessionBeanInjectionAvailabilityTest extends Abs
         enterpriseArchive.addAsModule(new WebArchiveBuilder()
                 .withDefaultEjbModuleDependency()
                 .notTestArchive()
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeEjbFoo.class.getName())
-                                .up()).withClasses(SelectedAlternativeSessionBeanInjectionAvailabilityTest.class, WebBar.class)
+                .withBeansXml(new BeansXml().alternatives(AlternativeEjbFoo.class))
+                .withClasses(SelectedAlternativeSessionBeanInjectionAvailabilityTest.class, WebBar.class)
                 .build());
 
         return enterpriseArchive;

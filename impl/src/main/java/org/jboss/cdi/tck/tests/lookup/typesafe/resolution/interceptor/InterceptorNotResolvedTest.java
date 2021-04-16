@@ -27,6 +27,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -40,9 +41,8 @@ public class InterceptorNotResolvedTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(InterceptorNotResolvedTest.class)
                 .withClasses(Cat.class, CatInterceptor.class, CatInterceptorBinding.class, Foo.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(CatInterceptor.class.getName())
-                                .up()).build();
+                .withBeansXml(new BeansXml().interceptors(CatInterceptor.class))
+                .build();
     }
 
     @Test

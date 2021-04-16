@@ -16,6 +16,42 @@
  */
 package org.jboss.cdi.tck.shrinkwrap;
 
+import jakarta.enterprise.inject.spi.Extension;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.arquillian.container.test.api.ShouldThrowException;
+import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.TestGroups;
+import org.jboss.cdi.tck.api.Configuration;
+import org.jboss.cdi.tck.cdi.Sections;
+import org.jboss.cdi.tck.impl.ConfigurationFactory;
+import org.jboss.cdi.tck.impl.ConfigurationImpl;
+import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
+import org.jboss.cdi.tck.spi.Beans;
+import org.jboss.cdi.tck.util.Timer;
+import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
+import org.jboss.shrinkwrap.api.Archive;
+import org.jboss.shrinkwrap.api.ArchivePath;
+import org.jboss.shrinkwrap.api.ArchivePaths;
+import org.jboss.shrinkwrap.api.Filter;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.Asset;
+import org.jboss.shrinkwrap.api.asset.ClassAsset;
+import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.container.ClassContainer;
+import org.jboss.shrinkwrap.api.container.LibraryContainer;
+import org.jboss.shrinkwrap.api.container.ManifestContainer;
+import org.jboss.shrinkwrap.api.container.ResourceContainer;
+import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.descriptor.api.Descriptors;
+import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
+import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
+import org.jboss.shrinkwrap.impl.BeansXml;
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.lang.reflect.Method;
@@ -29,46 +65,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import jakarta.enterprise.inject.spi.Extension;
-
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.arquillian.container.test.api.ShouldThrowException;
-import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.TestGroups;
-import org.jboss.cdi.tck.api.Configuration;
-import org.jboss.cdi.tck.cdi.Sections;
-import org.jboss.cdi.tck.impl.ConfigurationFactory;
-import org.jboss.cdi.tck.impl.ConfigurationImpl;
-import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
-import org.jboss.cdi.tck.spi.Beans;
-import org.jboss.cdi.tck.util.Timer;
-import org.jboss.cdi.tck.util.Versions;
-import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
-import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ArchivePath;
-import org.jboss.shrinkwrap.api.ArchivePaths;
-import org.jboss.shrinkwrap.api.Filter;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.Asset;
-import org.jboss.shrinkwrap.api.asset.ClassAsset;
-import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
-import org.jboss.shrinkwrap.api.container.ClassContainer;
-import org.jboss.shrinkwrap.api.container.LibraryContainer;
-import org.jboss.shrinkwrap.api.container.ManifestContainer;
-import org.jboss.shrinkwrap.api.container.ResourceContainer;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeanDiscoveryMode;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.persistence20.PersistenceDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
-import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
 
 /**
  * Abstract ShrinkWrap archive builder for CDI TCK Arquillian test.
@@ -120,7 +116,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     protected ResourceDescriptor beansXml = null;
 
-    protected BeansDescriptor beansDescriptor = null;
+    protected BeansXml beansDescriptor = null;
 
     protected ResourceDescriptor webXml = null;
 
@@ -172,7 +168,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}.
      * <p/>
      * <p>
-     * Do not use this in new tests - use {@link #withBeansXml(BeansDescriptor)} instead.
+     * Do not use this in new tests - use {@link #withBeansXml(BeansXml)} instead.
      * </p>
      *
      * @param beansXml
@@ -184,12 +180,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add <code>beans.xml</code> descriptor created with shrinkwrap-descriptors.
+     * Add <code>beans.xml</code> descriptor created with TCK utils
      *
      * @param beansDescriptor
      * @return self
      */
-    public T withBeansXml(BeansDescriptor beansDescriptor) {
+    public T withBeansXml(BeansXml beansDescriptor) {
         this.beansDescriptor = beansDescriptor;
         return self();
     }
@@ -316,7 +312,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * <p/>
      * Always use this for as-client test archives, e.g. deployment method annotated with {@link ShouldThrowException}.
      *
-     * @param test
+     * @param testClazz
      * @return self
      */
     public T withTestClassDefinition(Class<?> testClazz) {
@@ -480,7 +476,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Add ejb-jar.xml descriptor created with shrinkwrap-descriptors.
      *
-     * @param ejbJarXml
+     * @param descriptor
      * @return
      */
     public T withEjbJarXml(EjbJarDescriptor descriptor) {
@@ -538,7 +534,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Add persistence.xml descriptor created with shrinkwrap-descriptors.
      *
-     * @param persistenceXml
+     * @param persistenceDescriptor
      * @return self
      */
     public T withPersistenceXml(PersistenceDescriptor persistenceDescriptor) {
@@ -585,8 +581,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param beanClasses
      * @return self
      */
-    public T withBeanLibrary(BeansDescriptor beansDescriptor, Class<?>... beanClasses) {
-        return withBeanLibrary(null, beansDescriptor, beanClasses);
+    public T withBeanLibrary(BeansXml beansXml, Class<?>... beanClasses) {
+        return withBeanLibrary(null, beansXml, beanClasses);
     }
 
     /**
@@ -607,8 +603,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param beanClasses
      * @return self
      */
-    public T withBeanLibrary(String name, BeansDescriptor beansDescriptor, Class<?>... beanClasses) {
-        return withLibrary(name, beansDescriptor, true, beanClasses);
+    public T withBeanLibrary(String name, BeansXml beansXml, Class<?>... beanClasses) {
+        return withLibrary(name, beansXml, true, beanClasses);
     }
 
     /**
@@ -624,24 +620,25 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Add library that consists of defined classes. Include empty beans.xml if necessary.
      *
-     * @param serviceProvider
-     * @param omitBeansXml
+     * @param beansXml
+     * @param includeEmptyBeanXml
      * @param classes
      * @return self
      */
-    public T withLibrary(BeansDescriptor beansDescriptor, boolean includeEmptyBeanXml, Class<?>... classes) {
-        return withLibrary(null, beansDescriptor, includeEmptyBeanXml, classes);
+    public T withLibrary(BeansXml beansXml, boolean includeEmptyBeanXml, Class<?>... classes) {
+        return withLibrary(null, beansXml, includeEmptyBeanXml, classes);
     }
 
     /**
      * Add library that consists of defined classes. Include empty beans.xml if necessary.
      *
-     * @param serviceProvider
-     * @param omitBeansXml
+     * @param name
+     * @param beansXml
+     * @param includeEmptyBeanXml
      * @param classes
      * @return self
      */
-    public T withLibrary(String name, BeansDescriptor beansDescriptor, boolean includeEmptyBeanXml, Class<?>... classes) {
+    public T withLibrary(String name, BeansXml beansXml, boolean includeEmptyBeanXml, Class<?>... classes) {
 
         if (libraries == null)
             libraries = new ArrayList<LibraryDescriptor>(5);
@@ -655,7 +652,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         ServiceProviderDescriptor serviceProvider = extensions.isEmpty() ? null : new ServiceProviderDescriptor(Extension.class,
                 extensions.toArray(new Class<?>[extensions.size()]));
 
-        this.libraries.add(beansDescriptor != null ? new LibraryDescriptor(name, serviceProvider, beansDescriptor, classes) : new LibraryDescriptor(name,
+        this.libraries.add(beansXml != null ? new LibraryDescriptor(name, serviceProvider, beansXml, classes) : new LibraryDescriptor(name,
                 serviceProvider, includeEmptyBeanXml, classes));
         return self();
     }
@@ -783,7 +780,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected abstract A buildInternal();
 
     /**
-     * Process packages. Exclude classes specified via {@link #withExcludedClass(Class)}. If in as-client mode, filter test class.
+     * Process packages. Exclude classes specified via {@link #withExcludedClass(String)}. If in as-client mode, filter test class.
      *
      * @param archive
      */
@@ -988,15 +985,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         Asset asset = null;
 
         if (beansDescriptor != null) {
-            if (beansDescriptor.getBeanDiscoveryMode() == null || beansDescriptor.getBeanDiscoveryMode().isEmpty()) {
-                beansDescriptor.beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(Versions.v1_1);
-            }
-            asset = new StringAsset(beansDescriptor.exportAsString());
+            asset = beansDescriptor;
         } else if (beansXml != null) {
             asset = new ClassLoaderAsset(beansXml.getSource());
         } else {
-            asset = new StringAsset(
-                    Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(Versions.v1_1).exportAsString());
+            asset = new BeansXml();
         }
 
         if (this.isDebugMode) {
@@ -1010,14 +1003,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     protected String getBeansDescriptorTarget() {
 
-        String target = null;
+        String target = "beans.xml";
 
-        if (beansDescriptor != null) {
-            target = beansDescriptor.getDescriptorName();
-        } else if (beansXml != null) {
+        if (beansXml != null) {
             target = beansXml.getTarget();
-        } else {
-            target = "beans.xml";
         }
         return target;
     }
@@ -1107,7 +1096,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         private List<Class<?>> libraryClasses = null;
 
-        protected BeansDescriptor beansDescriptor = null;
+        protected BeansXml beansDescriptor = null;
 
         private boolean includeEmptyBeanXml = false;
 
@@ -1118,16 +1107,13 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             this.fileDescriptor = fileDescriptor;
         }
 
-        public LibraryDescriptor(String name, ServiceProviderDescriptor serviceProvider, BeansDescriptor beansDescriptor, Class<?>... classes) {
+        public LibraryDescriptor(String name, ServiceProviderDescriptor serviceProvider, BeansXml beansDescriptor, Class<?>... classes) {
             super();
             if (serviceProvider != null) {
                 this.serviceProviders = new ArrayList<ServiceProviderDescriptor>();
                 this.serviceProviders.add(serviceProvider);
             }
             this.beansDescriptor = beansDescriptor;
-            if (beansDescriptor.getBeanDiscoveryMode() == null || beansDescriptor.getBeanDiscoveryMode().isEmpty()) {
-                beansDescriptor.beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).version(Versions.v1_1);
-            }
             this.libraryClasses = Arrays.asList(classes);
             this.name = name;
         }
@@ -1197,7 +1183,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             }
 
             if (beansDescriptor != null) {
-                library.addAsManifestResource(new StringAsset(beansDescriptor.exportAsString()), beansDescriptor.getDescriptorName());
+                library.addAsManifestResource(beansDescriptor, "beans.xml");
 
             } else if (includeEmptyBeanXml) {
                 library.addAsManifestResource(EmptyAsset.INSTANCE, ArchivePaths.create("beans.xml"));

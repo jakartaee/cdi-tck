@@ -11,14 +11,12 @@ import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -42,8 +40,8 @@ public class Specialization05Test extends AbstractTest {
                 .withTestClassDefinition(Specialization05Test.class)
                 .noDefaultWebModule()
                 .withBeanLibrary(Factory.class, Product.class, InjectedBean1.class, FactoryEvent.class)
-                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeSpecializedFactory.class.getName()).up(),
-                        AlternativeSpecializedFactory.class).build();
+                .withBeanLibrary(new BeansXml().alternatives(AlternativeSpecializedFactory.class), AlternativeSpecializedFactory.class)
+                .build();
 
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
                 .withClasses(InjectedBean2.class,Specialization05Test.class).build());

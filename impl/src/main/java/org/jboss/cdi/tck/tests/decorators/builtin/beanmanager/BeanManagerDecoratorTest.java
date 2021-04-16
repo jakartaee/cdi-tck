@@ -24,13 +24,11 @@ import static org.testng.Assert.assertTrue;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.decorators.AbstractDecoratorTest;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -50,8 +48,7 @@ public class BeanManagerDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BeanManagerDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
-                                .clazz(BeanManagerDecorator.class.getName()).up()).build();
+                        new BeansXml().decorators(BeanManagerDecorator.class)).build();
     }
 
     @Inject

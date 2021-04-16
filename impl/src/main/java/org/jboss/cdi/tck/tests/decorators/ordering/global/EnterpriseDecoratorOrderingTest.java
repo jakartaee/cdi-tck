@@ -37,6 +37,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -47,7 +48,7 @@ import org.testng.annotations.Test;
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "cdi", version = "2.0")
-public class EnterpriseDecoratorOrderingTest extends AbstractTest {
+    public class EnterpriseDecoratorOrderingTest extends AbstractTest {
 
     /**
      * Modules:
@@ -74,8 +75,7 @@ public class EnterpriseDecoratorOrderingTest extends AbstractTest {
                 //A - default test-ejb.jar
                 .withTestClassDefinition(EnterpriseDecoratorOrderingTest.class)
                 .withClasses(DecoratedImpl.class, LegacyDecorator2.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class)
-                        .getOrCreateDecorators().clazz(LegacyDecorator2.class.getName()).up())
+                .withBeansXml(new BeansXml().decorators(LegacyDecorator2.class))
                 //B
                 .withBeanLibrary(Decorated.class, GloballyEnabledDecorator3.class)
                 //C
@@ -86,9 +86,7 @@ public class EnterpriseDecoratorOrderingTest extends AbstractTest {
         JavaArchive ejbArchive = ShrinkWrap
                 .create(JavaArchive.class, ejbJar)
                 .addClasses(DummyDao.class, GloballyEnabledDecorator2.class, GloballyEnabledDecorator5.class, LegacyDecorator3.class)
-                .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
-                                .clazz(LegacyDecorator3.class.getName()).up().exportAsString()), "beans.xml")
+                .addAsManifestResource(new BeansXml().decorators(LegacyDecorator3.class), "beans.xml")
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
                                 .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME)
@@ -100,8 +98,7 @@ public class EnterpriseDecoratorOrderingTest extends AbstractTest {
                 .notTestArchive()
                 //F
                 .withClasses(EnterpriseDecoratorOrderingTest.class, GloballyEnabledDecorator1.class, LegacyDecorator1.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class)
-                        .getOrCreateDecorators().clazz(LegacyDecorator1.class.getName()).up())
+                .withBeansXml(new BeansXml().decorators(LegacyDecorator1.class))
                 //G
                 .withBeanLibrary(GloballyEnabledDecorator4.class)
                 .build()

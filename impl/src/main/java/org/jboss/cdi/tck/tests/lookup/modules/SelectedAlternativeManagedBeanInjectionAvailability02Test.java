@@ -19,13 +19,11 @@ package org.jboss.cdi.tck.tests.lookup.modules;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
@@ -38,7 +36,7 @@ public class SelectedAlternativeManagedBeanInjectionAvailability02Test extends A
     public static WebArchive createTestArchive() {
         WebArchive webArchive = new WebArchiveBuilder().withTestClass(SelectedAlternativeManagedBeanInjectionAvailability02Test.class)
                 .withClasses(AlternativeFoo.class).withBeanLibrary(Foo.class, Bar.class)
-                .withBeanLibrary(Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(AlternativeFoo.class.getName()).up(), WebBar.class)
+                .withBeanLibrary(new BeansXml().alternatives(AlternativeFoo.class), WebBar.class)
                 .build();
 
         return webArchive;

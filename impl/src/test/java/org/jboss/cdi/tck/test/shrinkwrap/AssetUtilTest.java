@@ -17,26 +17,35 @@
 package org.jboss.cdi.tck.test.shrinkwrap;
 
 import static org.testng.Assert.assertEquals;
-
-import java.io.File;
-import java.io.IOException;
+import static org.testng.Assert.assertTrue;
 
 import org.apache.commons.io.FileUtils;
 import org.jboss.cdi.tck.shrinkwrap.AssetUtil;
+import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
+import org.jboss.shrinkwrap.api.BeansXmlVersion;
+import org.jboss.shrinkwrap.api.asset.Asset;
 import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
-import org.jboss.shrinkwrap.api.asset.StringAsset;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.testng.annotations.Test;
+
+import java.io.File;
+import java.io.IOException;
 
 public class AssetUtilTest {
 
     @Test
     public void testReadAssetContentAsString() throws IOException {
 
-        String content = Descriptors.create(BeansDescriptor.class).exportAsString();
-        StringAsset stringAsset = new StringAsset(content);
-        assertEquals(AssetUtil.readAssetContent(stringAsset).trim(), content.trim());
+        // TODO these are weak assertions because BeansXml cannot be translated to String easily
+        Asset asset = new BeansXml(BeanDiscoveryMode.ANNOTATED).alternatives(Engine.class).setBeansXmlVersion(BeansXmlVersion.v20);
+        String content = AssetUtil.readAssetContent(asset);
+        assertTrue(content != null);
+        assertTrue(content.length() > 0);
+        assertTrue(content.contains("bean-discovery-mode=\"annotated\""));
+        assertTrue(content.contains("version=\"2.0\""));
+        assertTrue(content.contains("<alternatives>"));
+        assertTrue(content.contains("<class>org.jboss.cdi.tck.test.shrinkwrap.Engine</class>"));
+        assertTrue(content.contains("</alternatives>"));
 
         ClassLoaderAsset classLoaderAsset = new ClassLoaderAsset("beans-01.xml");
         assertEquals(AssetUtil.readAssetContent(classLoaderAsset).trim().replaceAll("\\s", ""),

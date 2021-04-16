@@ -37,6 +37,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -74,8 +75,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
                 //A - default test-ejb.jar
                 .withTestClassDefinition(EnterpriseInterceptorOrderingTest.class)
                 .withClasses(Dao.class, LegacyInterceptor2.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class)
-                        .getOrCreateInterceptors().clazz(LegacyInterceptor2.class.getName()).up())
+                .withBeansXml(new BeansXml().interceptors(LegacyInterceptor2.class))
                 //B
                 .withBeanLibrary(Transactional.class, GloballyEnabledInterceptor3.class)
                 //C
@@ -86,9 +86,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
         JavaArchive ejbArchive = ShrinkWrap
                 .create(JavaArchive.class, ejbJar)
                 .addClasses(DummyDao.class, GloballyEnabledInterceptor2.class, GloballyEnabledInterceptor5.class, LegacyInterceptor3.class)
-                .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                                .clazz(LegacyInterceptor3.class.getName()).up().exportAsString()), "beans.xml")
+                .addAsManifestResource(new BeansXml().interceptors(LegacyInterceptor3.class), "beans.xml")
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
                                 .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME)
@@ -100,8 +98,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
                 .notTestArchive()
                 //F
                 .withClasses(EnterpriseInterceptorOrderingTest.class, GloballyEnabledInterceptor1.class, LegacyInterceptor1.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class)
-                        .getOrCreateInterceptors().clazz(LegacyInterceptor1.class.getName()).up())
+                .withBeansXml(new BeansXml().interceptors(LegacyInterceptor1.class))
                 //G
                 .withBeanLibrary(GloballyEnabledInterceptor4.class)
                 .build()

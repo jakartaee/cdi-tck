@@ -27,6 +27,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -39,9 +40,7 @@ public class ProducerFieldOnDecoratorTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ProducerFieldOnDecoratorTest.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(FooDecorator_Broken.class.getName())
-                                .up()).build();
+                .withBeansXml(new BeansXml().decorators(FooDecorator_Broken.class)).build();
     }
 
     @Test

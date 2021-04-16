@@ -19,14 +19,12 @@ package org.jboss.cdi.tck.tests.extensions.interceptors.custom;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 
 import jakarta.interceptor.Interceptor;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.HierarchyDiscovery;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -56,9 +54,7 @@ public class CustomInterceptorRegistrationTest extends AbstractTest {
                         CustomInterceptorExtension.class, FooInterceptor.class, FooInterceptorBinding.class,
                         InterceptedBean.class, InterceptedSerializableBean.class)
                 .withExtension(CustomInterceptorExtension.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors().clazz(FooInterceptor.class.getName())
-                                .up()).build();
+                .withBeansXml(new BeansXml().interceptors(FooInterceptor.class)).build();
     }
 
     @Test

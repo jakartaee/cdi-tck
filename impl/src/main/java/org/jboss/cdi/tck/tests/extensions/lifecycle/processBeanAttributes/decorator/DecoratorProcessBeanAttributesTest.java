@@ -24,8 +24,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -45,12 +44,9 @@ public class DecoratorProcessBeanAttributesTest extends AbstractTest {
                 .withClasses(VerifyingExtension.class, AlphaDecorator.class, Alpha.class, Charlie.class)
                 .withExtension(VerifyingExtension.class)
                 .withBeanLibrary(BravoDecorator.class, Bravo.class)
-                .withBeanLibrary(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
-                                .clazz(AlphaDecorator.class.getName(), BravoDecorator.class.getName()).up())
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
-                                .clazz(AlphaDecorator.class.getName(), BravoDecorator.class.getName()).up()).build();
+                .withBeanLibrary(new BeansXml().decorators(AlphaDecorator.class, BravoDecorator.class))
+                .withBeansXml(new BeansXml().decorators(AlphaDecorator.class, BravoDecorator.class))
+                .build();
     }
 
     @Test

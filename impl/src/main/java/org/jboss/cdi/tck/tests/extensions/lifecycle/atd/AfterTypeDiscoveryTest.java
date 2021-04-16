@@ -27,7 +27,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -37,8 +36,7 @@ import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Boss;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Foo;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib.Pro;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -56,11 +54,9 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
                 .withTestClassPackage(AfterTypeDiscoveryTest.class)
                 .withExtension(AfterTypeDiscoveryObserver.class)
                 .withLibrary(Boss.class, Foo.class, Bar.class, Baz.class, Pro.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                                .clazz(CharlieInterceptor.class.getName()).up().getOrCreateDecorators()
-                                .clazz(CharlieDecorator.class.getName()).up().getOrCreateAlternatives()
-                                .clazz(CharlieAlternative.class.getName()).up()).build();
+                .withBeansXml(new BeansXml().interceptors(CharlieInterceptor.class)
+                        .decorators(CharlieDecorator.class).alternatives(CharlieAlternative.class))
+                .build();
     }
 
     @Inject

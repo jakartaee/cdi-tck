@@ -17,10 +17,28 @@
 package org.jboss.cdi.tck.tests.implementation.simple.newSimpleBean;
 
 import static org.jboss.cdi.tck.cdi.Sections.NEW;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.New;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.util.TypeLiteral;
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.DependentInstance;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.impl.BeansXml;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.annotations.Test;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,26 +48,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.TreeSet;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.context.spi.CreationalContext;
-import jakarta.enterprise.inject.Any;
-import jakarta.enterprise.inject.Default;
-import jakarta.enterprise.inject.New;
-import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.TypeLiteral;
-
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.DependentInstance;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.annotations.Test;
-
 @SpecVersion(spec = "cdi", version = "2.0")
 public class NewSimpleBeanTest extends AbstractTest {
 
@@ -57,9 +55,7 @@ public class NewSimpleBeanTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(NewSimpleBeanTest.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateAlternatives().clazz(Tiger.class.getName()).up()
-                                .getOrCreateInterceptors().clazz(OrderInterceptor.class.getName()).up()).build();
+                .withBeansXml(new BeansXml().alternatives(Tiger.class).interceptors(OrderInterceptor.class)).build();
     }
 
     @Test

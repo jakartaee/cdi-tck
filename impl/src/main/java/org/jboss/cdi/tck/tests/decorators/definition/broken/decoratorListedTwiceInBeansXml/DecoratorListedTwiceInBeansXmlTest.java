@@ -27,6 +27,7 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -45,8 +46,7 @@ public class DecoratorListedTwiceInBeansXmlTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorListedTwiceInBeansXmlTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
-                                .clazz(PresentDecorator.class.getName(), PresentDecorator.class.getName()).up()).build();
+                        new BeansXml().decorators(PresentDecorator.class, PresentDecorator.class)).build();
     }
 
     @Test

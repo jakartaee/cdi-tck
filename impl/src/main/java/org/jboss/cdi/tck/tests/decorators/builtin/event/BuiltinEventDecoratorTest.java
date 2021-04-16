@@ -22,24 +22,22 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.decorators.AbstractDecoratorTest;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Type;
+import java.util.Collections;
 
 /**
  * @author Martin Kouba
@@ -54,9 +52,7 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinEventDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators().clazz(FooEventDecorator.class.getName())
-                        .clazz(StringEventDecorator.class.getName()).clazz(CharSequenceEventDecorator.class.getName())
-                                .up()).build();
+                        new BeansXml().decorators(FooEventDecorator.class, StringEventDecorator.class, CharSequenceEventDecorator.class)).build();
     }
 
     @Inject

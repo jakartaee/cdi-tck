@@ -21,18 +21,17 @@ import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
-import java.util.List;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+
+import java.util.List;
 
 /**
  * This test was originally part of Weld testsuite
@@ -47,9 +46,10 @@ public class InterceptorConflictingEnablementTest extends AbstractTest {
     @Deployment
     public static Archive<?> createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(InterceptorConflictingEnablementTest.class)
-                .withBeansXml(Descriptors.create(BeansDescriptor.class).getOrCreateInterceptors()
-                        .clazz(TransactionalInterceptor.class.getName(), LoggingInterceptor.class.getName()).up().getOrCreateDecorators()
-                        .clazz(TestDecorator.class.getName(), AnotherTestDecorator.class.getName()).up()).build();
+                .withBeansXml(new BeansXml()
+                        .interceptors(TransactionalInterceptor.class, LoggingInterceptor.class)
+                        .decorators(TestDecorator.class, AnotherTestDecorator.class))
+                .build();
     }
 
     @org.testng.annotations.Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

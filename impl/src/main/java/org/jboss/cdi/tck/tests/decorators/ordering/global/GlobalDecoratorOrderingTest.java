@@ -21,21 +21,19 @@ import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_PRIORITY;
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.inject.Inject;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -55,12 +53,7 @@ public class GlobalDecoratorOrderingTest extends AbstractTest {
                 .withTestClass(GlobalDecoratorOrderingTest.class)
                 .withClasses(DecoratedImpl.class, LegacyDecorator1.class, LegacyDecorator2.class, LegacyDecorator3.class,
                         WebApplicationGlobalDecorator.class)
-                .withBeansXml(
-                        Descriptors
-                                .create(BeansDescriptor.class)
-                                .getOrCreateDecorators()
-                                .clazz(LegacyDecorator1.class.getName(), LegacyDecorator2.class.getName(),
-                                        LegacyDecorator3.class.getName()).up())
+                .withBeansXml(new BeansXml().decorators(LegacyDecorator1.class, LegacyDecorator2.class, LegacyDecorator3.class))
                 .withBeanLibrary(AbstractDecorator.class, Decorated.class, GloballyEnabledDecorator1.class,
                         GloballyEnabledDecorator2.class, GloballyEnabledDecorator3.class, GloballyEnabledDecorator4.class,
                         GloballyEnabledDecorator5.class).build();

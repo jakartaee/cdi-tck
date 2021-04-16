@@ -8503,7 +8503,7 @@
                 |bean-discovery-mode| of |all|, or with no version number, or that is an empty file.
             </text>
             <assertion id="ba">
-                <text>Test an archive which contains a |beans.xml| file with a version number of 1.1, with the |bean-discovery-mode| of |all|.</text>
+                <text>Test an archive which contains a |beans.xml| file with a version number of 1.1 (or later), with the |bean-discovery-mode| of |all|.</text>
             </assertion>
             <assertion id="bb">
                 <text>Test an archive which contains a |beans.xml| file with no version number.</text>

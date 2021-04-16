@@ -19,14 +19,11 @@ package org.jboss.cdi.tck.tests.decorators.definition.broken.nonExistantClassInB
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 
 import jakarta.enterprise.inject.spi.DeploymentException;
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -39,9 +36,8 @@ public class NonExistantDecoratorClassInBeansXmlTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(NonExistantDecoratorClassInBeansXmlTest.class)
-                .withBeansXml(
-                        Descriptors.create(BeansDescriptor.class).getOrCreateDecorators()
-                                .clazz("com.acme.NonExistantDecoratorClass").up()).build();
+                .withBeansXml("beans.xml")
+                .build();
     }
 
     @Test
