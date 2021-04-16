@@ -112,35 +112,6 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES_EE, id = "bab") })
-    public void testSessionBeanAnnotated() {
-        Annotated deltaAnnotated = extension.getAnnotatedMap().get(Delta.class);
-        assertNotNull(deltaAnnotated);
-        assertTrue(deltaAnnotated instanceof AnnotatedType);
-        @SuppressWarnings("unchecked")
-        AnnotatedType<Delta> deltaAnnotatedType = (AnnotatedType<Delta>) deltaAnnotated;
-        assertEquals(deltaAnnotatedType.getJavaClass(), Delta.class);
-        assertEquals(deltaAnnotatedType.getMethods().size(), 1);
-        assertEquals(deltaAnnotatedType.getMethods().iterator().next().getJavaMember().getName(), "foo");
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES_EE, id = "bab"),
-            @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
-    public void testSessionBeanAttributes() {
-        BeanAttributes<Delta> deltaAttributes = extension.getDeltaAttributes();
-        assertNotNull(deltaAttributes);
-        assertEquals(deltaAttributes.getScope(), Dependent.class);
-        verifyName(deltaAttributes, "delta");
-        assertFalse(deltaAttributes.isAlternative());
-
-        assertTrue(typeSetMatches(deltaAttributes.getTypes(), Object.class, Delta.class));
-        assertTrue(deltaAttributes.getStereotypes().isEmpty());
-        assertTrue(annotationSetMatches(deltaAttributes.getQualifiers(), Named.class, Any.class, Default.class));
-    }
-
-    @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bac") })
     public void testProducerMethodAnnotated() {
         Annotated bravoAnnotated = extension.getAnnotatedMap().get(Bravo.class);

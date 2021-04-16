@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
@@ -30,8 +28,6 @@ import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.literal.NamedLiteral;
 import jakarta.enterprise.inject.spi.AnnotatedConstructor;
-import jakarta.enterprise.inject.spi.AnnotatedField;
-import jakarta.enterprise.inject.spi.AnnotatedMethod;
 import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.enterprise.inject.spi.BeanAttributes;
 import jakarta.inject.Named;
@@ -92,82 +88,6 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertFalse(attributes.isAlternative());
     }
 
-    @SuppressWarnings("unchecked")
-    @Test(groups = INTEGRATION)
-    @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a")
-    public void testBeanAttributesForSessionBean() {
-        AnnotatedType<Lake> type = getCurrentManager().createAnnotatedType(Lake.class);
-        BeanAttributes<Lake> attributes = getCurrentManager().createBeanAttributes(type);
-
-        assertTrue(typeSetMatches(attributes.getTypes(), LakeLocal.class, WaterBody.class, Landmark.class, Object.class));
-        assertTrue(typeSetMatches(attributes.getStereotypes(), TundraStereotype.class));
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), Natural.class, Any.class));
-        assertEquals(attributes.getScope(), Dependent.class);
-        assertEquals(attributes.getName(), "lake");
-        assertTrue(attributes.isAlternative());
-    }
-
-    @Test
-    @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "b")
-    public void testBeanAttributesForMethod() {
-        AnnotatedType<Dam> type = getCurrentManager().createAnnotatedType(Dam.class);
-
-        AnnotatedMethod<?> lakeFishMethod = null;
-        AnnotatedMethod<?> damFishMethod = null;
-        AnnotatedMethod<?> volumeMethod = null;
-
-        for (AnnotatedMethod<?> method : type.getMethods()) {
-            if (method.getJavaMember().getName().equals("getFish")
-                    && method.getJavaMember().getDeclaringClass().equals(Dam.class)) {
-                damFishMethod = method;
-            }
-            if (method.getJavaMember().getName().equals("getFish")
-                    && method.getJavaMember().getDeclaringClass().equals(Lake.class)) {
-                lakeFishMethod = method;
-            }
-            if (method.getJavaMember().getName().equals("getVolume")
-                    && method.getJavaMember().getDeclaringClass().equals(Lake.class)) {
-                volumeMethod = method;
-            }
-        }
-        assertNotNull(lakeFishMethod);
-        assertNotNull(damFishMethod);
-        assertNotNull(volumeMethod);
-
-        verifyLakeFish(getCurrentManager().createBeanAttributes(lakeFishMethod));
-        verifyDamFish(getCurrentManager().createBeanAttributes(damFishMethod));
-        verifyVolume(getCurrentManager().createBeanAttributes(volumeMethod));
-    }
-
-    @Test
-    @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "b")
-    public void testBeanAttributesForField() {
-        AnnotatedType<Dam> type = getCurrentManager().createAnnotatedType(Dam.class);
-
-        AnnotatedField<?> lakeFishField = null;
-        AnnotatedField<?> damFishField = null;
-        AnnotatedField<?> volumeField = null;
-
-        for (AnnotatedField<?> field : type.getFields()) {
-            if (field.getJavaMember().getName().equals("fish") && field.getJavaMember().getDeclaringClass().equals(Dam.class)) {
-                damFishField = field;
-            }
-            if (field.getJavaMember().getName().equals("fish") && field.getJavaMember().getDeclaringClass().equals(Lake.class)) {
-                lakeFishField = field;
-            }
-            if (field.getJavaMember().getName().equals("volume")
-                    && field.getJavaMember().getDeclaringClass().equals(Lake.class)) {
-                volumeField = field;
-            }
-        }
-        assertNotNull(lakeFishField);
-        assertNotNull(damFishField);
-        assertNotNull(volumeField);
-
-        verifyLakeFish(getCurrentManager().createBeanAttributes(lakeFishField));
-        verifyDamFish(getCurrentManager().createBeanAttributes(damFishField));
-        verifyVolume(getCurrentManager().createBeanAttributes(volumeField));
-    }
 
     @SuppressWarnings("unchecked")
     private void verifyLakeFish(BeanAttributes<?> attributes) {

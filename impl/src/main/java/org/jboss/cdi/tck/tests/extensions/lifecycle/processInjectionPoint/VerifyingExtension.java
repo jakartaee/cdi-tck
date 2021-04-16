@@ -34,9 +34,6 @@ public class VerifyingExtension implements Extension {
     private InjectionPoint producerAlpha;
     private InjectionPoint producerBravo;
 
-    private InjectionPoint servletCharlie;
-    private InjectionPoint filterCharlie;
-    private InjectionPoint listenerCharlie;
     private InjectionPoint observerCharliIp;
     private InjectionPoint observerDeltaIp;
     private InjectionPoint disposerDeltaIp;
@@ -94,18 +91,6 @@ public class VerifyingExtension implements Extension {
         disposerDeltaIp = event.getInjectionPoint();
     }
 
-    public void observeServletInjectionPoint(@Observes ProcessInjectionPoint<TestServlet, ?> event) {
-        servletCharlie = event.getInjectionPoint();
-    }
-
-    public void observeFilterInjectionPoint(@Observes ProcessInjectionPoint<TestFilter, ?> event) {
-        filterCharlie = event.getInjectionPoint();
-    }
-
-    public void observeListenerInjectionPoint(@Observes ProcessInjectionPoint<TestListener, ?> event) {
-        listenerCharlie = event.getInjectionPoint();
-    }
-
     public InjectionPoint getAlpha() {
         return alpha;
     }
@@ -124,18 +109,6 @@ public class VerifyingExtension implements Extension {
 
     public InjectionPoint getProducerBravo() {
         return producerBravo;
-    }
-
-    public InjectionPoint getServletCharlie() {
-        return servletCharlie;
-    }
-
-    public InjectionPoint getFilterCharlie() {
-        return filterCharlie;
-    }
-
-    public InjectionPoint getListenerCharlie() {
-        return listenerCharlie;
     }
 
     public Bean<?> getInjectingBean() {

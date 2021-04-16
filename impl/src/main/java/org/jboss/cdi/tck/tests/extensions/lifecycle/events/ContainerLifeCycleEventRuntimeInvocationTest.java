@@ -89,7 +89,7 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(ContainerLifeCycleEventRuntimeInvocationTest.class)
-                .withClasses(TestExtension.class, SimpleAnnotation.class, SimpleBean.class, SessionBean.class).withExtension(TestExtension.class)
+                .withClasses(TestExtension.class, SimpleAnnotation.class, SimpleBean.class).withExtension(TestExtension.class)
                 .build();
     }
 
@@ -343,48 +343,6 @@ public class ContainerLifeCycleEventRuntimeInvocationTest extends AbstractTest {
         new Invocation() {
             void execute() {
                 event.getAnnotatedBeanClass();
-            }
-        }.run();
-
-        new Invocation() {
-            void execute() {
-                event.addDefinitionError(new NullPointerException());
-            }
-        }.run();
-
-        new Invocation() {
-            void execute() {
-                event.getBean();
-            }
-        }.run();
-
-    }
-
-    @Test
-    @SpecAssertions({@SpecAssertion(section = PROCESS_BEAN, id = "o")})
-    public void testProcessSessionBeanEventFails() {
-        final ProcessSessionBean<SessionBean> event = extension.getProcessSessionBean();
-        new Invocation() {
-            void execute() {
-                event.getAnnotated();
-            }
-        }.run();
-
-        new Invocation() {
-            void execute() {
-                event.getAnnotatedBeanClass();
-            }
-        }.run();
-
-        new Invocation() {
-            void execute() {
-                event.getEjbName();
-            }
-        }.run();
-
-        new Invocation() {
-            void execute() {
-                event.getSessionBeanType();
             }
         }.run();
 

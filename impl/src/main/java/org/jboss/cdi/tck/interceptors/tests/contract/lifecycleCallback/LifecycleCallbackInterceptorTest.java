@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
-import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.CONSTRUCTOR_AND_METHOD_LEVEL_INT;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.DEF_OF_INTERCEPTOR_CLASSES_AND_INTERCEPTOR_METHODS;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
@@ -136,12 +135,4 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
         assertFalse(SheepInterceptor.isPostConstructCalled());
     }
 
-    @Test(groups = JAVAEE_FULL)
-    @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "h")
-    public void testLifecycleCallbackInterceptorTransactionContext() {
-        createAndDestroyInstance(Cat.class);
-        // checks are done in CatInterceptor
-        assertTrue(CatInterceptor.pcCalled);
-        assertTrue(CatInterceptor.pdCalled);
-    }
 }

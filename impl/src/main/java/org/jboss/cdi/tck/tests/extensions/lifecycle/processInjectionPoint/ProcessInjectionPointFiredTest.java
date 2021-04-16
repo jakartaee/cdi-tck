@@ -147,20 +147,6 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
         assertFalse(ip.isTransient());
     }
 
-    @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT_EE, id = "a") })
-    public void testJavaEEComponentInjectionPoint() {
-        InjectionPoint servletIp = extension.getServletCharlie();
-        assertNotNull(servletIp);
-        verifyType(servletIp, Charlie.class);
-        InjectionPoint filterIp = extension.getFilterCharlie();
-        assertNotNull(filterIp);
-        verifyType(filterIp, Charlie.class);
-        InjectionPoint listenerIp = extension.getListenerCharlie();
-        assertNotNull(listenerIp);
-        verifyType(listenerIp, Charlie.class);
-    }
-
     @Test
     @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "ka")
     public void testObserverMethodInjectionPoint() {

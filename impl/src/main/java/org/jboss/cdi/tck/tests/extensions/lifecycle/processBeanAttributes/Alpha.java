@@ -25,6 +25,6 @@ import jakarta.inject.Named;
 @AlphaQualifier
 @AlphaStereotype
 @Alternative
-class Alpha {
+public class Alpha {
 
 }

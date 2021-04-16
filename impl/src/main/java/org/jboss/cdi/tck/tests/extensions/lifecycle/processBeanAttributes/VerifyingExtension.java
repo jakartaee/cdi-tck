@@ -35,7 +35,6 @@ public class VerifyingExtension implements Extension {
     private BeanAttributes<BravoInterceptor> bravoInterceptorAttributes;
     private BeanAttributes<BravoDecorator> bravoDecoratorAttributes;
     private BeanAttributes<Charlie> producedCharlieAttributes;
-    private BeanAttributes<Delta> deltaAttributes;
     private BeanAttributes<Mike> mike;
 
     private Map<Class<?>, Annotated> annotatedMap = new HashMap<Class<?>, Annotated>();
@@ -74,11 +73,6 @@ public class VerifyingExtension implements Extension {
         mike = event.getBeanAttributes();
     }
 
-    void observeDelta(@Observes ProcessBeanAttributes<Delta> event) {
-        deltaAttributes = event.getBeanAttributes();
-        annotatedMap.put(Delta.class, event.getAnnotated());
-    }
-
     protected BeanAttributes<Alpha> getAlphaAttributes() {
         return alphaAttributes;
     }
@@ -105,10 +99,6 @@ public class VerifyingExtension implements Extension {
 
     public BeanAttributes<Mike> getMike() {
         return mike;
-    }
-
-    public BeanAttributes<Delta> getDeltaAttributes() {
-        return deltaAttributes;
     }
 
     public Map<Class<?>, Annotated> getAnnotatedMap() {

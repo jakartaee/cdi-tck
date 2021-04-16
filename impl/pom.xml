@@ -6,10 +6,10 @@
         <version>4.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>cdi-tck-impl</artifactId>
-    <name>CDI TCK Test Suite</name>
+    <artifactId>cdi-tck-core-impl</artifactId>
+    <name>CDI Core TCK Test Suite</name>
 
-    <description>CDI TCK tests</description>
+    <description>CDI Core TCK Tests</description>
 
     <dependencies>
 
@@ -49,29 +49,10 @@
         </dependency>
 
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.servlet.jsp</groupId>
-            <artifactId>jakarta.servlet.jsp-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.transaction</groupId>
-            <artifactId>jakarta.transaction-api</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.jboss.test-audit</groupId>
             <artifactId>jboss-test-audit-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>jakarta.ejb</groupId>
-            <artifactId>jakarta.ejb-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>jakarta.interceptor</groupId>
@@ -83,39 +64,10 @@
             <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>jakarta.resource</groupId>
-            <artifactId>jakarta.resource-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.jms</groupId>
-            <artifactId>jakarta.jms-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.el</groupId>
-            <artifactId>jakarta.el-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.faces</groupId>
-            <artifactId>jakarta.faces-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>jakarta.inject</groupId>
             <artifactId>jakarta.inject-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>jakarta.ws.rs</groupId>
-            <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
 
         <dependency>
