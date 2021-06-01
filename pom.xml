@@ -110,7 +110,7 @@
         <arquillian.version>1.7.0.Alpha9</arquillian.version>
         <arquillian.container.se.api.version>1.0.1.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
-        <htmlunit.version>2.9</htmlunit.version>
+        <htmlunit.version>2.50.0</htmlunit.version>
         <!-- Required for distribution build, should be overriden for each build -->
         <cdi.tck.version>${project.version}</cdi.tck.version>
         <weld.version>4.0.1.Final</weld.version>
