@@ -30,6 +30,6 @@ import jakarta.inject.Qualifier;
 @Qualifier
 @Target({ TYPE, METHOD, PARAMETER, FIELD })
 @Retention(RUNTIME)
-@interface BravoQualifier {
+public @interface BravoQualifier {
 
 }

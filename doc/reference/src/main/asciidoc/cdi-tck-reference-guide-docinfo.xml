@@ -8,7 +8,7 @@
       <firstname>Antoine</firstname>
       <surname>Sabot-Durand</surname>
       <affiliation>
-            <jobtitle>Jakarta Contexts and Dependency Injection (CDI) 3.0 specification lead</jobtitle>
+            <jobtitle>Jakarta Contexts and Dependency Injection (CDI) 4.0 specification lead</jobtitle>
       </affiliation>
    </author>
    <author>
@@ -59,7 +59,7 @@ vim:et:ts=3:sw=3:tw=120
 </copyright>
   <revhistory>
     <revision>
-      <revnumber>3.0</revnumber>
+      <revnumber>4.0</revnumber>
       <date>2020-07-30</date>
       <authorinitials>AS</authorinitials>
       <authorinitials>SMS</authorinitials>

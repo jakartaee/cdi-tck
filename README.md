@@ -8,4 +8,4 @@ Check out the [TCK Reference Guide](https://eclipse-ee4j.github.io/cdi-tck/) to 
 Sources in GIT
 --------------
 
-Master branch contains the work-in-progress on CDI TCK 3.0
+Master branch contains the work-in-progress on CDI TCK 4.0

@@ -231,8 +231,9 @@ public class BeansXml implements Asset {
         return version;
     }
 
-    public void setBeanDiscoveryMode(BeanDiscoveryMode mode) {
+    public BeansXml setBeanDiscoveryMode(BeanDiscoveryMode mode) {
         this.mode = mode;
+        return this;
     }
 
     @Override

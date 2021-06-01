@@ -94,7 +94,7 @@ intended for any other purpose.
                      any previous Exclude Lists for that Test Suite.
 |Libraries   +|
                      The class libraries for the Technology Under Test.
-                     The Libraries for Jakarta Contexts and Dependency Injection Version 3.0 are listed in <<libraries>>.
+                     The Libraries for Jakarta Contexts and Dependency Injection Version {revnumver} are listed in <<libraries>>.
 |Location Resource   +|
                      A location of classes or native libraries that are components of the test
                      tools or tests, such that these classes or libraries may be required to
@@ -145,7 +145,7 @@ intended for any other purpose.
                      A release of the Technology, as produced through the Jakarta EE Specification Process.
 |===============
 
-==== Rules for Jakarta Contexts and Dependency Injection Version 3.0 Products
+==== Rules for Jakarta Contexts and Dependency Injection Version {revnumber} Products
 
 The following rules apply for each version of an operating system, software
 component, and hardware platform Documented as supporting the Product:
@@ -243,7 +243,7 @@ This section lists the applicable requirements and specifications for the CDI TC
 *  *Specification requirements* - Software requirements for a CDI implementation are itemized in section 1.2, "Relationship to other specifications" in the CDI specification, with details provided throughout the specification. Generally, the CDI specification targets the Jakarta EE 8 platform and will be aligned with its specifications.
 
 
-*  *Jakarta Contexts and Dependency Injection 3.0 API* - The Java API defined in the CDI specification and provided by the compatible implementation.
+*  *Jakarta Contexts and Dependency Injection {revnumber} API* - The Java API defined in the CDI specification and provided by the compatible implementation.
 
 
 *  *Testing platform* - The CDI TCK requires version 1.7.0.Alpha2 of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG 6.x (http://testng.org). .
@@ -306,10 +306,10 @@ CDI supports Jakarta EE 8, Jakarta EE 8 Web Profile, Embeddable Jakarta Enterpri
 
 [[libraries]]
 
-=== Libraries for Jakarta Contexts and Dependency Injection Version 3.0
+=== Libraries for Jakarta Contexts and Dependency Injection Version {revnumber}
 
 The following is the list of packages that constitute the required class libraries for
-Jakarta Contexts and Dependency Injection Version 3.0:
+Jakarta Contexts and Dependency Injection Version {revnumber}:
 
 * jakarta.decorator
 * jakarta.enterprise.context

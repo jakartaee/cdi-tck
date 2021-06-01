@@ -37,7 +37,7 @@ porting-package-lib/
 
 == Software Requirements
 
-* A Java SE 8 or 11 runtime
+* A Java SE 11 runtime
 * Maven 3.3.x +
 
 == Installation

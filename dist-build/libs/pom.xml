@@ -71,7 +71,12 @@
         </dependency>
         <dependency>
             <groupId>jakarta.enterprise</groupId>
-            <artifactId>cdi-tck-impl</artifactId>
+            <artifactId>cdi-tck-core-impl</artifactId>
+            <version>${cdi.tck.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>cdi-tck-web-impl</artifactId>
             <version>${cdi.tck.version}</version>
         </dependency>
     </dependencies>

@@ -23,7 +23,7 @@ and shown here:
   <modelVersion>4.0.0</modelVersion>
   <groupId>jakarta.enterprise</groupId>
   <artifactId>cdi-tck-sigtest</artifactId>
-  <version>3.0</version>
+  <version>{revnumber}</version>
   <name>CDI TCK Signature Tests</name>
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>

@@ -46,6 +46,9 @@
                             <attributes>
                                 <docinfo>true</docinfo>
                                 <experimental>true</experimental>
+                                <tck-version>${project.version}</tck-version>
+                                <revnumber>4.0</revnumber>
+                                <revmajor>4</revmajor>
                             </attributes>
                         </configuration>
                     </execution>

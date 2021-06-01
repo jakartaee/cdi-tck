@@ -4,8 +4,9 @@ import org.jboss.cdi.tck.shrinkwrap.AssetUtil;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.BeansXmlVersion;
 import org.jboss.shrinkwrap.impl.BeansXml;
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
 
 /**
  * A very simple test that checks if {@link BeansXml} API constructs a valid descriptor with certain format.
