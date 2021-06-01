@@ -17,9 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
-import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -63,29 +61,6 @@ public class DisposerMethodInheritanceTest extends AbstractTest {
         mealInstance.destroy();
         // Disposer method is not inherited
         assertEquals(Meal.disposedBy.size(), 0);
-    }
-
-    @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "de"),
-            @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE_EE, id = "dk") })
-    public void testSessionBeanDisposerMethodNotInherited() {
-
-        DependentInstance<Egg> eggInstance = new DependentInstance<Egg>(getCurrentManager(), Egg.class);
-        Egg egg = eggInstance.get();
-        ;
-        // The producer method for @Default Egg is defined on Sumavanka
-        assertEquals(egg.getChicken().getOriginClass(), Sumavanka.class);
-        eggInstance.destroy();
-        // Disposer method is not inherited
-        assertEquals(Egg.disposedBy.size(), 0);
-
-        DependentInstance<Code> codeInstance = new DependentInstance<Code>(getCurrentManager(), Code.class);
-        Code code = codeInstance.get();
-        // The producer method for @Default Code is defined on Guru
-        assertEquals(code.getProgrammer().getOriginClass(), Guru.class);
-        codeInstance.destroy();
-        // Disposer method is not inherited
-        assertEquals(Code.disposedBy.size(), 0);
     }
 
 }

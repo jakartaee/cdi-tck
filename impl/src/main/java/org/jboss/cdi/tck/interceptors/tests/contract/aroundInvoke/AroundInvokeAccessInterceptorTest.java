@@ -16,13 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
-import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.TestGroups.SECURITY;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BUSINESS_METHOD_INTERCEPTOR_METHODS;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
-import jakarta.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -61,25 +57,4 @@ public class AroundInvokeAccessInterceptorTest extends AbstractTest {
         assertEquals(getContextualReference(Bean2.class).zero(), 1);
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
-    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "e")
-    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "fb")
-    public void testSecurityContext(Student student) throws Exception {
-        student.printArticle();
-        assertTrue(PrinterSecurityInterceptor.securityContextOK);
-        assertTrue(Toner.calledFromInterceptor);
-    }
-
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = JAVAEE_FULL)
-    @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "fa")
-    public void testTransactionContext(Foo foo, UserTransaction ut) throws Exception {
-        ut.begin();
-
-        foo.invoke();
-        // checks are done in FooInterceptor and BazInterceptor
-        assertTrue(FooInterceptor.called);
-        assertTrue(BazInterceptor.called);
-
-        ut.commit();
-    }
 }

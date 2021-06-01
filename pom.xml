@@ -91,29 +91,21 @@
         <module>api</module>
         <module>ext-lib</module>
         <module>impl</module>
+        <module>web</module>
     </modules>
 
     <properties>
         <!-- CDI API -->
         <cdi.api.version>3.0.0</cdi.api.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <!-- Jakarta EE APIs -->
-        <ejb.api.version>4.0.0</ejb.api.version>
-        <jms.api.version>3.0.0</jms.api.version>
-        <jca.api.version>2.0.0</jca.api.version>
+        <maven.compiler.release>11</maven.compiler.release>
+        <!-- Jakarta EE APIs Core -->
         <annotations.api.version>2.0.0</annotations.api.version>
         <interceptors.api.version>2.0.0</interceptors.api.version>
         <atinject.api.version>2.0.0</atinject.api.version>
-        <jpa.api.version>3.0.0</jpa.api.version>
-        <servlet.api.version>5.0.0</servlet.api.version>
-        <jsp.api.version>3.0.0</jsp.api.version>
-        <jta.api.version>2.0.0</jta.api.version>
         <el.api.version>4.0.0</el.api.version>
-        <jsf.api.version>3.0.0</jsf.api.version>
-        <jaxrs.api.version>3.0.0</jaxrs.api.version>
+
         <!-- Test tools/dependencies -->
-        <testng.version>7.3.0</testng.version>
+        <testng.version>7.4.0</testng.version>
         <jboss.test.audit.version>2.0.0.Final</jboss.test.audit.version>
         <arquillian.version>1.7.0.Alpha9</arquillian.version>
         <arquillian.container.se.api.version>1.0.1.Final</arquillian.container.se.api.version>
@@ -147,27 +139,9 @@
             </dependency>
 
             <dependency>
-                <groupId>jakarta.ejb</groupId>
-                <artifactId>jakarta.ejb-api</artifactId>
-                <version>${ejb.api.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>jakarta.interceptor</groupId>
                 <artifactId>jakarta.interceptor-api</artifactId>
                 <version>${interceptors.api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>jakarta.jms</groupId>
-                <artifactId>jakarta.jms-api</artifactId>
-                <version>${jms.api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>jakarta.resource</groupId>
-                <artifactId>jakarta.resource-api</artifactId>
-                <version>${jca.api.version}</version>
             </dependency>
 
             <dependency>
@@ -177,51 +151,15 @@
             </dependency>
 
             <dependency>
-                <groupId>jakarta.servlet</groupId>
-                <artifactId>jakarta.servlet-api</artifactId>
-                <version>${servlet.api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>jakarta.servlet.jsp</groupId>
-                <artifactId>jakarta.servlet.jsp-api</artifactId>
-                <version>${jsp.api.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>jakarta.inject</groupId>
                 <artifactId>jakarta.inject-api</artifactId>
                 <version>${atinject.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>jakarta.transaction</groupId>
-                <artifactId>jakarta.transaction-api</artifactId>
-                <version>${jta.api.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>jakarta.el</groupId>
                 <artifactId>jakarta.el-api</artifactId>
                 <version>${el.api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>jakarta.faces</groupId>
-                <artifactId>jakarta.faces-api</artifactId>
-                <version>${jsf.api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>jakarta.persistence</groupId>
-                <artifactId>jakarta.persistence-api</artifactId>
-                <version>${jpa.api.version}</version>
-            </dependency>
-            
-            <dependency>
-                <groupId>jakarta.ws.rs</groupId>
-                <artifactId>jakarta.ws.rs-api</artifactId>
-                <version>${jaxrs.api.version}</version>
             </dependency>
 
             <dependency>

@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes;
 
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
-import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -69,12 +68,13 @@ public class VerifyValuesTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
+        WebArchive archive = new WebArchiveBuilder()
                 .withTestClassPackage(VerifyValuesTest.class)
                 .withBeansXml(
                         new BeansXml().alternatives(Alpha.class, BravoProducer.class, CharlieProducer.class)
                             .interceptors(BravoInterceptor.class).decorators(BravoDecorator.class))
                 .withExtension(VerifyingExtension.class).build();
+        return archive;
     }
 
     @Test
@@ -87,57 +87,6 @@ public class VerifyValuesTest extends AbstractTest {
         AnnotatedType<Alpha> alphaAnnotatedType = (AnnotatedType<Alpha>) alphaAnnotated;
         assertEquals(alphaAnnotatedType.getJavaClass(), Alpha.class);
         assertEquals(alphaAnnotatedType.getMethods().size(), 0);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ad") })
-    public void testManagedBeanAttributes() {
-
-        assertEquals(getCurrentManager().getBeans(Alpha.class, New.Literal.of(Alpha.class)).size(), 1);
-        // No event is fired for any @New qualified bean
-        assertEquals(extension.getAlphaAttributesObserved(), 1);
-
-        BeanAttributes<Alpha> attributes = extension.getAlphaAttributes();
-        assertNotNull(attributes);
-        assertEquals(attributes.getScope(), ApplicationScoped.class);
-        verifyName(attributes, "alpha");
-        assertTrue(attributes.isAlternative());
-        assertTrue(typeSetMatches(attributes.getTypes(), Object.class, Alpha.class));
-        assertTrue(typeSetMatches(attributes.getStereotypes(), AlphaStereotype.class));
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), AlphaQualifier.class, Named.class, Any.class));
-
-        // Event is not fired for managed bean that is not enabled
-        assertNull(extension.getMike());
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES_EE, id = "bab") })
-    public void testSessionBeanAnnotated() {
-        Annotated deltaAnnotated = extension.getAnnotatedMap().get(Delta.class);
-        assertNotNull(deltaAnnotated);
-        assertTrue(deltaAnnotated instanceof AnnotatedType);
-        @SuppressWarnings("unchecked")
-        AnnotatedType<Delta> deltaAnnotatedType = (AnnotatedType<Delta>) deltaAnnotated;
-        assertEquals(deltaAnnotatedType.getJavaClass(), Delta.class);
-        assertEquals(deltaAnnotatedType.getMethods().size(), 1);
-        assertEquals(deltaAnnotatedType.getMethods().iterator().next().getJavaMember().getName(), "foo");
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES_EE, id = "bab"),
-            @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
-    public void testSessionBeanAttributes() {
-        BeanAttributes<Delta> deltaAttributes = extension.getDeltaAttributes();
-        assertNotNull(deltaAttributes);
-        assertEquals(deltaAttributes.getScope(), Dependent.class);
-        verifyName(deltaAttributes, "delta");
-        assertFalse(deltaAttributes.isAlternative());
-
-        assertTrue(typeSetMatches(deltaAttributes.getTypes(), Object.class, Delta.class));
-        assertTrue(deltaAttributes.getStereotypes().isEmpty());
-        assertTrue(annotationSetMatches(deltaAttributes.getQualifiers(), Named.class, Any.class, Default.class));
     }
 
     @Test

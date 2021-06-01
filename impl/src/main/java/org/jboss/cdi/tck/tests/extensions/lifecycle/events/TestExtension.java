@@ -53,7 +53,6 @@ public class TestExtension implements Extension {
     private ProcessInjectionPoint<SimpleBean, ?> pip;
     private ProcessProducer<SimpleBean, Integer> pp;
     private ProcessManagedBean<SimpleBean> pmb;
-    private ProcessSessionBean<SessionBean> psb;
     private ProcessProducerField<Integer,SimpleBean> ppf;
     private ProcessProducerMethod<Integer,SimpleBean> ppm;
 
@@ -112,10 +111,6 @@ public class TestExtension implements Extension {
 
     void observesProcessManagedBean(@Observes ProcessManagedBean<SimpleBean> event) {
         this.pmb = event;
-    }
-
-    void observesProcessSessionBean(@Observes ProcessSessionBean<SessionBean> event) {
-        this.psb = event;
     }
 
     void observesProcessProducerField(@Observes ProcessProducerField<Integer,SimpleBean> event) {
@@ -188,10 +183,6 @@ public class TestExtension implements Extension {
 
     public ProcessManagedBean<SimpleBean> getProcessManagedBean() {
         return pmb;
-    }
-
-    public ProcessSessionBean<SessionBean> getProcessSessionBean() {
-        return psb;
     }
 
     public ProcessProducerField<Integer,SimpleBean> getProcessProducerField() {

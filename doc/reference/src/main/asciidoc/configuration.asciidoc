@@ -142,7 +142,7 @@ This file also allows tests to be excluded from a run:
 [NOTE]
 ====
 Additionally there is available canonical configuration file at https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/tck-tests-previous.xml.
-Please note that this exclude list serves only for the previous micro version of TCK release! This means that if the latest version of TCK is e.g. 3.0.1 then this exclude list is valid only for the version 3.0.0 and invalid for any other version!
+Please note that this exclude list serves only for the previous micro version of TCK release! This means that if the latest version of TCK is e.g. 4.0.1 then this exclude list is valid only for the version 4.0.0 and invalid for any other version!
     
     
 ====
