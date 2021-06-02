@@ -14,20 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.clientProxy;
-
-import static org.jboss.cdi.tck.cdi.Sections.CLIENT_PROXIES;
-import static org.jboss.cdi.tck.cdi.Sections.CLIENT_PROXY_INVOCATION;
+package org.jboss.cdi.tck.tests.lookup.clientProxy.integration;
 
 import java.io.IOException;
 
+import jakarta.enterprise.context.ContextNotActiveException;
+import jakarta.enterprise.context.spi.Context;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.CLIENT_PROXIES;
+import static org.jboss.cdi.tck.cdi.Sections.CLIENT_PROXY_INVOCATION;
+import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE_VALIDITY;
 
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ClientProxyTest extends AbstractTest {
@@ -63,4 +68,18 @@ public class ClientProxyTest extends AbstractTest {
         assert tuna.getState().equals("tuned");
     }
 
+    @Test(groups = INTEGRATION, expectedExceptions = { ContextNotActiveException.class, IllegalStateException.class })
+    @SpecAssertions({ @SpecAssertion(section = CLIENT_PROXY_INVOCATION, id = "ab"), @SpecAssertion(section = CONTEXTUAL_REFERENCE_VALIDITY, id = "a") })
+    public void testInactiveScope() throws Exception {
+        assert getCurrentConfiguration().getContexts().getRequestContext().isActive();
+        Context ctx = getCurrentConfiguration().getContexts().getRequestContext();
+        setContextInactive(ctx);
+        assert !getCurrentConfiguration().getContexts().getRequestContext().isActive();
+        try {
+            getContextualReference(TunedTuna.class).getState();
+        } finally {
+            // need to set request scope active again, some other tests will fail otherwise
+            setContextActive(ctx);
+        }
+    }
 }
