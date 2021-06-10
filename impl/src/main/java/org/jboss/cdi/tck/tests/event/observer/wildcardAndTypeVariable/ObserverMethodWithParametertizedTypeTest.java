@@ -22,6 +22,7 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
+import jakarta.enterprise.util.TypeLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -50,7 +51,7 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractTest {
         BostonTerrier.reset();
         Behavior event = new Behavior() {
         };
-        getCurrentManager().fireEvent(event);
+        getCurrentManager().getEvent().select(Behavior.class).fire(event);
         assertTrue(BostonTerrier.observedTypeVariable);
     }
 
@@ -59,7 +60,8 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractTest {
     public void testObserverMethodCanObserveWildcardType() {
         BostonTerrier.reset();
         List<Object> event = new ObjectList();
-        getCurrentManager().fireEvent(event);
+        getCurrentManager().getEvent().select(new TypeLiteral<List<Object>>() {
+        }).fire(event);
         assertTrue(BostonTerrier.observedWildcard);
     }
 
@@ -68,7 +70,7 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractTest {
     public void testObserverMethodCanObserveArrayTypeVariable() {
         BostonTerrier.reset();
         Behavior[] event = new Behavior[] {};
-        getCurrentManager().fireEvent(event);
+        getCurrentManager().getEvent().select(Behavior[].class).fire(event);
         assertTrue(BostonTerrier.observedArrayTypeVariable);
     }
 
@@ -77,7 +79,8 @@ public class ObserverMethodWithParametertizedTypeTest extends AbstractTest {
     public void testObserverMethodCanObserveArrayWildcard() {
         BostonTerrier.reset();
         List<?>[] event = new ObjectList[0];
-        getCurrentManager().fireEvent(event);
+        getCurrentManager().getEvent().select(new TypeLiteral<List<?>[]>() {
+        }).fire(event);
         assertTrue(BostonTerrier.observedArrayWildCard);
     }
 

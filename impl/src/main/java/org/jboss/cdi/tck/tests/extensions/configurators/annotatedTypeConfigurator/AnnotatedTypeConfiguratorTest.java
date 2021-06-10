@@ -122,7 +122,7 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         Set<Bean<Feed>> catFeedBeans = getBeans(Feed.class, Cats.CatsLiteral.INSTANCE);
         assertEquals(catFeedBeans.size(), 0);
 
-        getCurrentManager().fireEvent(new Feed());
+        getCurrentManager().getEvent().select(Feed.class).fire(new Feed());
         assertFalse(cat.isFeedObserved());
     }
 
@@ -148,7 +148,7 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
 
         CreationalContext<AnimalShelter> creationalContext = getCurrentManager().createCreationalContext(animalShelterBean);
         AnimalShelter animalShelter = animalShelterBean.create(creationalContext);
-        getCurrentManager().fireEvent(new Room(), Cats.CatsLiteral.INSTANCE, Any.Literal.INSTANCE);
+        getCurrentManager().getEvent().select(Room.class, Cats.CatsLiteral.INSTANCE, Any.Literal.INSTANCE).fire(new Room());
 
         assertNotNull(animalShelterBean);
         assertEquals(animalShelterBean.getName(), null);

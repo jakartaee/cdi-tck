@@ -34,8 +34,7 @@ public class ExtensionBeta implements Extension {
     @SuppressWarnings("serial")
     public void observeProcessAnnotatedType(@Observes ProcessBean<?> event, BeanManager beanManager) {
         if (event.getBean().getBeanClass().equals(Foo.class) || event.getBean().getBeanClass().equals(Bar.class)) {
-            beanManager.fireEvent(new PbEvent(event.getBean().getBeanClass()), new AnnotationLiteral<Baz>() {
-            });
+            beanManager.getEvent().select(PbEvent.class, new AnnotationLiteral<Baz>() {}).fire(new PbEvent(event.getBean().getBeanClass()));
         }
     }
 

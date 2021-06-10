@@ -27,6 +27,7 @@ import static org.testng.Assert.assertTrue;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.ObserverMethod;
+import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -78,7 +79,8 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         ActionSequence.reset();
         Foo<String> fooString = new Foo.FooString();
         verifyObserver(fooString, 1, FooObserver.class);
-        getCurrentManager().fireEvent(fooString);
+        getCurrentManager().getEvent().select(new TypeLiteral<Foo<String>>() {
+        }).fire(fooString);
         verifyEvent(FooObserver.SEQUENCE, 1, buildActionId(FooObserver.class, fooString));
     }
 
@@ -88,7 +90,8 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         ActionSequence.reset();
         Foo<List<String>> fooStringList = new Foo.FooStringList();
         verifyObserver(fooStringList, 1, FooObserver.class);
-        getCurrentManager().fireEvent(fooStringList);
+        getCurrentManager().getEvent().select(new TypeLiteral<Foo<List<String>>>() {
+        }).fire(fooStringList);
         verifyEvent(FooObserver.SEQUENCE_NESTED, 1, buildActionId(FooObserver.class, fooStringList));
     }
 
@@ -106,9 +109,12 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         verifyObserver(quxNumber, 2, WildcardObserver.class);
         verifyObserver(quxStringList, 2, WildcardObserver.class);
 
-        getCurrentManager().fireEvent(quxString);
-        getCurrentManager().fireEvent(quxStringList);
-        getCurrentManager().fireEvent(quxNumber);
+        getCurrentManager().getEvent().select(new TypeLiteral<Qux<String>>() {
+        }).fire(quxString);
+        getCurrentManager().getEvent().select(new TypeLiteral<Qux<List<String>>>() {
+        }).fire(quxStringList);
+        getCurrentManager().getEvent().select(new TypeLiteral<Qux<Number>>() {
+        }).fire(quxNumber);
 
         verifyEvent(WildcardObserver.SEQUENCE, 3, buildActionId(WildcardObserver.class, quxString),
                 buildActionId(WildcardObserver.class, quxStringList), buildActionId(WildcardObserver.class, quxNumber));
@@ -128,8 +134,10 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         verifyObserver(duckString, 1, TypeVariableObserver.class);
         verifyObserver(duckInteger, 2, TypeVariableObserver.class);
 
-        getCurrentManager().fireEvent(duckString);
-        getCurrentManager().fireEvent(duckInteger);
+        getCurrentManager().getEvent().select(new TypeLiteral<Duck<String>>() {
+        }).fire(duckString);
+        getCurrentManager().getEvent().select(new TypeLiteral<Duck<Integer>>() {
+        }).fire(duckInteger);
 
         verifyEvent(TypeVariableObserver.SEQUENCE_TYPE_VAR, 2, buildActionId(TypeVariableObserver.class, duckString),
                 buildActionId(TypeVariableObserver.class, duckInteger));
@@ -149,9 +157,9 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         verifyObserver(bar, 1, TypeVariableObserver.class);
         verifyObserver(baz, 1, TypeVariableObserver.class);
 
-        getCurrentManager().fireEvent(new Bar());
-        getCurrentManager().fireEvent(new Baz());
-        getCurrentManager().fireEvent(new StringList());
+        getCurrentManager().getEvent().select(Bar.class).fire(new Bar());
+        getCurrentManager().getEvent().select(Baz.class).fire(new Baz());
+        getCurrentManager().getEvent().select(StringList.class).fire(new StringList());
 
         verifyEvent(TypeVariableObserver.SEQUENCE_UPPER, 2, buildActionId(TypeVariableObserver.class, bar),
                 buildActionId(TypeVariableObserver.class, baz));
@@ -165,7 +173,8 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         int expectedMatches = 5;
         Dog<?, ?> dogStringNumber = new Dog.DogStringNumber();
         verifyObserver(dogStringNumber, expectedMatches, DogObserver.class);
-        getCurrentManager().fireEvent(dogStringNumber);
+        getCurrentManager().getEvent().select(new TypeLiteral<Dog<?, ?>>() {
+        }).fire(dogStringNumber);
         verifyEvent(DogObserver.SEQUENCE, expectedMatches);
 
     }

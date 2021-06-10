@@ -88,11 +88,6 @@ public class FooBean implements Bean<Foo>, PassivationCapable {
     }
 
     @Override
-    public boolean isNullable() {
-        return false;
-    }
-
-    @Override
     public Set<InjectionPoint> getInjectionPoints() {
         Set<InjectionPoint> injectionPoints = new HashSet<InjectionPoint>(2);
         injectionPoints.add(integerInjectionPoint);

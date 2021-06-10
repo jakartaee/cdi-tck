@@ -66,7 +66,7 @@ public class ObserverExceptionAbortsProcessingTest extends AbstractTest {
         AnEventType anEvent = new AnEventType();
         boolean fireFailed = false;
         try {
-            getCurrentManager().fireEvent(anEvent);
+            getCurrentManager().getEvent().select(AnEventType.class).fire(anEvent);
         } catch (Exception e) {
             if (e.equals(AnObserverWithException.theException)) {
                 fireFailed = true;

@@ -18,19 +18,14 @@ package org.jboss.cdi.tck.tests.event.metadata;
 
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Any;
-import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.tests.event.metadata.Bravo.BravoLiteral;
-import org.jboss.cdi.tck.tests.event.metadata.Charlie.CharlieLiteral;
 
 public class SimpleEventNotifier {
 
     @Inject
     SimpleEventObserver observer;
-
-    @Inject
-    BeanManager beanManager;
 
     @Inject
     @Any
@@ -48,16 +43,6 @@ public class SimpleEventNotifier {
     public void fireSimpleEventWithQualifiers() {
         observer.reset();
         alphaEvent.select(BravoLiteral.INSTANCE).fire(new SimpleEvent());
-    }
-
-    public void fireSimpleEventBeanManager() {
-        observer.reset();
-        beanManager.fireEvent(new SimpleEvent());
-    }
-
-    public void fireSimpleEventBeanManagerWithQualifiers() {
-        observer.reset();
-        beanManager.fireEvent(new SimpleEvent(), CharlieLiteral.INSTANCE);
     }
 
 }

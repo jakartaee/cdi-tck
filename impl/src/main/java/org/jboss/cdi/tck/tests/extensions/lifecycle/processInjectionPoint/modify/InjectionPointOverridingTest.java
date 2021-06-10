@@ -17,21 +17,15 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.modify;
 
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_POINT;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.inject.New;
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -84,16 +78,5 @@ public class InjectionPointOverridingTest extends AbstractTest {
         assertTrue(hound.decorated());
         assertNotNull(dog);
         assertTrue(dog.decorated());
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "a"), @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "bb"),
-            @SpecAssertion(section = PROCESS_INJECTION_POINT, id = "c") })
-    public void testNewInjectionPointDiscovered() {
-        assertEquals(getBeans(Cat.class, New.Literal.INSTANCE).size(), 1);
-        assertNotNull(bean.getCat());
-        assertNotNull(bean.getCat().getBean());
-        assertEquals(bean.getCat().getBean().getScope(), Dependent.class);
-        assertNull(bean.getCat().getBean().getName());
     }
 }

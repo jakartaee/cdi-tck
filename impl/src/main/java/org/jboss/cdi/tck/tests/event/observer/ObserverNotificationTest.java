@@ -51,7 +51,7 @@ public class ObserverNotificationTest extends AbstractTest {
 
         resetObservers();
         // Fire an event with qualifiers @Role("Admin") and @Any
-        getCurrentManager().fireEvent(anEvent, new RoleLiteral("Admin", "hurray"));
+        getCurrentManager().getEvent().select(AnEventType.class, new RoleLiteral("Admin", "hurray")).fire(anEvent);
 
         assertTrue(AnObserver.wasNotified);
         assertTrue(AnotherObserver.wasNotified);
@@ -60,7 +60,7 @@ public class ObserverNotificationTest extends AbstractTest {
 
         resetObservers();
         // Fire an event with qualifier @Any
-        getCurrentManager().fireEvent(anEvent);
+        getCurrentManager().getEvent().select(AnEventType.class).fire(anEvent);
         assertTrue(AnObserver.wasNotified);
         assertFalse(AnotherObserver.wasNotified);
         assertTrue(LastObserver.wasNotified);
@@ -68,7 +68,7 @@ public class ObserverNotificationTest extends AbstractTest {
 
         resetObservers();
         // Fire an event with qualifiers @Role("user") and @Any
-        getCurrentManager().fireEvent(anEvent, new RoleLiteral("user", "hurray"));
+        getCurrentManager().getEvent().select(AnEventType.class, new RoleLiteral("user", "hurray")).fire(anEvent);
         assertTrue(AnObserver.wasNotified);
         assertFalse(AnotherObserver.wasNotified);
         assertTrue(LastObserver.wasNotified);
@@ -86,7 +86,7 @@ public class ObserverNotificationTest extends AbstractTest {
         try {
             setContextInactive(requestContext);
             // Observer method not called - there is no context active for its scope
-            getCurrentManager().fireEvent(new AnEventType(), new RoleLiteral("Admin", "hurray"));
+            getCurrentManager().getEvent().select(AnEventType.class, new RoleLiteral("Admin", "hurray")).fire(new AnEventType());
             assertFalse(AnotherObserver.wasNotified);
         } finally {
             setContextActive(requestContext);

@@ -37,6 +37,7 @@ import java.util.Set;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.AnnotationLiteral;
 
@@ -172,11 +173,12 @@ public class DependentContextTest extends AbstractTest {
         HorseStable.reset();
         HorseStable firstStableInstance = getContextualReference(HorseStable.class);
 
-        getCurrentManager().fireEvent(new HorseInStableEvent());
+        Event<HorseInStableEvent> inStableEvent = getCurrentManager().getEvent().select(HorseInStableEvent.class);
+        inStableEvent.fire(new HorseInStableEvent());
         Integer firstFoxHash = HorseStable.getFoxUsedForObservedEventHashcode();
         Integer firstObserverHash = HorseStable.getInstanceThatObservedEventHashcode();
 
-        getCurrentManager().fireEvent(new HorseInStableEvent());
+        inStableEvent.fire(new HorseInStableEvent());
         Integer secondFoxHash = HorseStable.getFoxUsedForObservedEventHashcode();
         Integer secondObserverHash = HorseStable.getInstanceThatObservedEventHashcode();
 
@@ -264,7 +266,7 @@ public class DependentContextTest extends AbstractTest {
     @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g")
     // Dependent context is now always active
     public void testContextIsActiveWhenCreatingObserverMethodInstance() {
-        getCurrentManager().fireEvent(new HorseInStableEvent());
+        getCurrentManager().getEvent().select(HorseInStableEvent.class).fire(new HorseInStableEvent());
         assert HorseStable.isDependentContextActive();
     }
 
@@ -434,7 +436,7 @@ public class DependentContextTest extends AbstractTest {
         // Reset test class state...
         HorseStable.reset();
         Fox.reset();
-        getCurrentManager().fireEvent(new HorseInStableEvent());
+        getCurrentManager().getEvent().select(HorseInStableEvent.class).fire(new HorseInStableEvent());
         assert HorseStable.getInstanceThatObservedEventHashcode() != null;
         assert HorseStable.isDestroyed();
         assert Fox.isDestroyed();

@@ -90,7 +90,7 @@ public class AlternativeMetadataInterceptorInjectionTargetTest extends AbstractT
         BeanAttributes<Login> beanAttributes = manager.createBeanAttributes(modifiedInterceptedLogin);
         InjectionTargetFactory<Login> factory = manager.getInjectionTargetFactory(modifiedInterceptedLogin);
         Bean<Login> bean = manager.createBean(beanAttributes, Login.class, factory);
-        InjectionTarget<Login> it = manager.createInjectionTarget(modifiedInterceptedLogin);
+        InjectionTarget<Login> it = manager.getInjectionTargetFactory(modifiedInterceptedLogin).createInjectionTarget(null);
         CreationalContext<Login> ctx = manager.createCreationalContext(bean);
         Login login = it.produce(ctx);
         assertEquals(login.login(), "intercepted");

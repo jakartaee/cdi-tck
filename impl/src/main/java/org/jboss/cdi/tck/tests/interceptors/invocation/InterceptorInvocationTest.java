@@ -114,7 +114,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     public void testObserverMethodsAreIntercepted() {
 
         AlmightyInterceptor.reset();
-        getCurrentManager().fireEvent(new Missile());
+        getCurrentManager().getEvent().select(Missile.class).fire(new Missile());
 
         assertTrue(MissileObserver.observed);
         assertTrue(AlmightyInterceptor.methodIntercepted);

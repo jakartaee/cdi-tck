@@ -45,6 +45,6 @@ public class CheckedExceptionWrappedTest extends AbstractTest {
     @Test(expectedExceptions = { ObserverException.class })
     @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cd")
     public void testNonTransactionalObserverThrowsCheckedExceptionIsWrappedAndRethrown() {
-        getCurrentManager().fireEvent(new Integer(1));
+        getCurrentManager().getEvent().select(Integer.class).fire(1);
     }
 }

@@ -98,10 +98,6 @@ public class ContainerLifecycleEvents {
         }
 
         @Override
-        public void addAnnotatedType(AnnotatedType<?> type) {
-        }
-
-        @Override
         public void addQualifier(AnnotatedType<? extends Annotation> qualifier) {
         }
 
