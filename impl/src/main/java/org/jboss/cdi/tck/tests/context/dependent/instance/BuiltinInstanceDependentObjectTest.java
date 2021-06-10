@@ -48,7 +48,7 @@ public class BuiltinInstanceDependentObjectTest extends AbstractTest {
     @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ccd")
     public void testInstanceDependentObject() {
         Foo.reset();
-        getCurrentManager().fireEvent(new GoodEvent());
+        getCurrentManager().getEvent().select(GoodEvent.class).fire(new GoodEvent());
         assertTrue(Foo.created);
         assertTrue(Foo.destroyed);
     }

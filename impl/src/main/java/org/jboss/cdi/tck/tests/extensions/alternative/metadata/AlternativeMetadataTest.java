@@ -97,7 +97,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "he")
     public void testGetBaseTypeUsedToDetermineTypeOfObserverInjectionPoint() {
-        getCurrentManager().fireEvent(new Milk(false));
+        getCurrentManager().getEvent().select(Milk.class).fire(new Milk(false));
         assertEquals(getContextualReference(Grocery.class, Any.Literal.INSTANCE).getObserverFruit().getMetadata().getType(),
                 TropicalFruit.class);
 
@@ -122,7 +122,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "i")
     public void testGetBaseTypeUsedToDetermineTypeOfEventParameter() {
-        getCurrentManager().fireEvent(new Carrot());
+        getCurrentManager().getEvent().select(Carrot.class).fire(new Carrot());
         assertEquals(getContextualReference(Grocery.class, Any.Literal.INSTANCE).getWrappedEventParameter().getClass(),
                 Carrot.class);
         assertTrue(GroceryWrapper.isGetBaseTypeOfObserverParameterUsed());
@@ -292,7 +292,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ae"), @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ag") })
     public void testObserverMethod() {
-        getCurrentManager().fireEvent(new Milk(true));
+        getCurrentManager().getEvent().select(Milk.class).fire(new Milk(true));
         Milk event = getContextualReference(Grocery.class, Any.Literal.INSTANCE).getObserverEvent();
         TropicalFruit parameter = getContextualReference(Grocery.class, Any.Literal.INSTANCE).getObserverParameter();
         assertNotNull(event);
@@ -304,7 +304,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "af")
     public void testExtraQualifierAppliedToObservesMethodParameter() {
-        getCurrentManager().fireEvent(new Bread(true));
+        getCurrentManager().getEvent().select(Bread.class).fire(new Bread(true));
         // normally, the event would be observer, however the extension adds the
         // @Expensive qualifier to the method parameter
         assertFalse(getContextualReference(Grocery.class, Any.Literal.INSTANCE).isObserver2Used());

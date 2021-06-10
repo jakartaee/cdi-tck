@@ -72,11 +72,10 @@ public class FireEventTest extends AbstractTest {
         billing.reset();
         MiniBar miniBar = new MiniBar();
         miniBar.stockNoNotify();
-        getCurrentManager().fireEvent(miniBar);
+        getCurrentManager().getEvent().select(MiniBar.class).fire(miniBar);
         assertTrue(billing.isActive());
         Item chocolate = miniBar.getItemByName("Chocolate");
-        getCurrentManager().fireEvent(chocolate, new Lifted.LiftedLiteral() {
-        });
+        getCurrentManager().getEvent().select(Item.class, new Lifted.LiftedLiteral(){}).fire(chocolate);
         assertEquals(billing.getCharge(), 5);
     }
 
@@ -90,9 +89,9 @@ public class FireEventTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = BM_FIRE_EVENT, id = "d")
     public void testDuplicateBindingsToFireEventFails() throws Exception {
-        getCurrentManager().fireEvent(new Object(), new Lifted.LiftedLiteral("a") {
+        getCurrentManager().getEvent().select(new Lifted.LiftedLiteral("a") {
         }, new Lifted.LiftedLiteral("b") {
-        });
+        }).fire(new Object());
     }
 
 /**
@@ -212,8 +211,8 @@ public class FireEventTest extends AbstractTest {
     }
 
     /**
-     * This test verifies that binding types can be specified dynamically when firing an event using {@link Event#fire()} by
-     * first using the {@link Event#select()} method to retrieve an Event object with associated binding types.
+     * This test verifies that binding types can be specified dynamically when firing an event using {@code Event#fire()} by
+     * first using the {@code Event#select()} method to retrieve an Event object with associated binding types.
      */
     // Simplify assertions
     @Test(groups = REWRITE)

@@ -59,7 +59,8 @@ public class ConditionalObserverTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa"), @SpecAssertion(section = CONDITIONAL_OBSERVER_METHODS, id = "a") })
     public void testConditionalObserver() {
 
-        getCurrentManager().fireEvent(new ConditionalEvent());
+        Event<ConditionalEvent> conditionalEvent = getCurrentManager().getEvent().select(ConditionalEvent.class);
+        conditionalEvent.fire(new ConditionalEvent());
         // Should not be notified since bean is not instantiated yet
         assert !WidowSpider.isNotified();
 
@@ -68,7 +69,7 @@ public class ConditionalObserverTest extends AbstractTest {
         assert bean != null;
         // Must invoke a method to really create the instance
         assert !bean.isInstanceNotified();
-        getCurrentManager().fireEvent(new ConditionalEvent());
+        conditionalEvent.fire(new ConditionalEvent());
         assert WidowSpider.isNotified() && bean.isInstanceNotified();
 
     }
@@ -79,7 +80,7 @@ public class ConditionalObserverTest extends AbstractTest {
 
         RecluseSpider spider = getContextualReference(RecluseSpider.class);
         spider.setWeb(new Web());
-        getCurrentManager().fireEvent(new ConditionalEvent());
+        getCurrentManager().getEvent().select(ConditionalEvent.class).fire(new ConditionalEvent());
         assert spider.isInstanceNotified();
         assert spider.getWeb().getRings() == 1;
     }
@@ -106,17 +107,18 @@ public class ConditionalObserverTest extends AbstractTest {
         Tarantula tarantula = getContextualReference(Tarantula.class);
         tarantula.ping();
 
+        Event<TarantulaEvent> tarantulaEvent = getCurrentManager().getEvent().select(TarantulaEvent.class);
         try {
             // Instance exists but there is no context active for its scope
             setContextInactive(requestContext);
-            getCurrentManager().fireEvent(new TarantulaEvent());
+            tarantulaEvent.fire(new TarantulaEvent());
             // Observer method not called
             assertFalse(Tarantula.isNotified());
         } finally {
             setContextActive(requestContext);
         }
         // Context is active now
-        getCurrentManager().fireEvent(new TarantulaEvent());
+        tarantulaEvent.fire(new TarantulaEvent());
         assertTrue(Tarantula.isNotified());
     }
 

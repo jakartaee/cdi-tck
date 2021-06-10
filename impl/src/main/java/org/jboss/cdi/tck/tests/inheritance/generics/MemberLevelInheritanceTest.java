@@ -104,7 +104,7 @@ public class MemberLevelInheritanceTest extends AbstractTest {
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "g")
     public void testObserver(Foo foo) throws Exception {
         assertNotNull(foo);
-        getCurrentManager().fireEvent(new Qux(null));
+        getCurrentManager().getEvent().select(Qux.class).fire(new Qux(null));
         assertNotNull(foo.getT1BazEvent());
         assertEquals(foo.getT1ObserverInjectionPoint(), "ok");
     }

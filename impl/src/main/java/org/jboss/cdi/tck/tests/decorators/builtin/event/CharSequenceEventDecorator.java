@@ -39,7 +39,7 @@ public abstract class CharSequenceEventDecorator<T extends CharSequence> impleme
 
     @Override
     public void fire(CharSequence event) {
-        manager.fireEvent("DecoratedCharSequence" + event.toString());
+        manager.getEvent().select(String.class).fire("DecoratedCharSequence" + event.toString());
     }
 
     @Override

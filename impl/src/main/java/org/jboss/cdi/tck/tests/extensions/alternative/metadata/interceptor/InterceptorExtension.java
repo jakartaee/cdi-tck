@@ -73,7 +73,7 @@ public class InterceptorExtension implements Extension {
                 return LoginInterceptorBinding.class.equals(annotationType) || Secured.class.equals(annotationType);
             }
         };
-        event.addAnnotatedType(modifiedInterceptedLogin);
+        event.addAnnotatedType(modifiedInterceptedLogin, Login.class.getSimpleName());
     }
 
 }

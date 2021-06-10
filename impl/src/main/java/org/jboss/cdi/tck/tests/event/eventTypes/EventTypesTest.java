@@ -80,7 +80,7 @@ public class EventTypesTest extends AbstractTest {
         assert listener.getObjectsFired().size() == 3;
         assert listener.getObjectsFired().get(2) == b;
         // boxed primitive
-        getCurrentManager().fireEvent(1, extraLiteral);
+        getCurrentManager().getEvent().select(extraLiteral).fire(1);
         assert listener.getObjectsFired().size() == 4;
         assert listener.getObjectsFired().get(3).equals(1);
     }
@@ -101,7 +101,7 @@ public class EventTypesTest extends AbstractTest {
 
         // array of boxed primitives
         Integer[] integerArray = new Integer[] { 0, 1 };
-        getCurrentManager().fireEvent(integerArray);
+        getCurrentManager().getEvent().select(Integer[].class).fire(integerArray);
         assertEquals(listener.getObjectsFired().size(), 2);
         assertTrue(listener.getObjectsFired().get(1) instanceof Integer[]);
         assertEquals(listener.getObjectsFired().get(1), integerArray);
@@ -121,7 +121,7 @@ public class EventTypesTest extends AbstractTest {
         // and a request-scoped object would get called outside of when the request scope is active in this situation
         EventTypeFamilyObserver observer = getContextualReference(EventTypeFamilyObserver.class);
         observer.reset();
-        getCurrentManager().fireEvent(new ComplexEvent());
+        getCurrentManager().getEvent().select(ComplexEvent.class).fire(new ComplexEvent());
         assert observer.getGeneralEventQuantity() == 1;
         assert observer.getAbstractEventQuantity() == 1;
         assert observer.getComplexEventQuantity() == 1;

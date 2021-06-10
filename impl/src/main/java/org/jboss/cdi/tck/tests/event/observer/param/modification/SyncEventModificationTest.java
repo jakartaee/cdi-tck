@@ -44,7 +44,7 @@ public class SyncEventModificationTest extends AbstractTest {
     @Test
     @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "e")
     public void testModifiedEventParameterIsPropagated() {
-        bm.fireEvent(new Counter());
+        bm.getEvent().select(Counter.class).fire(new Counter());
         Assert.assertEquals(CounterObserver02.count, 3);
     }
 }

@@ -54,9 +54,4 @@ public class BicycleBean extends ForwardingBeanAttributes<Bicycle> implements Be
         return delegate;
     }
 
-    @Override
-    public boolean isNullable() {
-        return false;
-    }
-
 }

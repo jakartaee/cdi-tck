@@ -67,14 +67,8 @@ public class EventMetadataTest extends AbstractTest {
         notifier.fireSimpleEvent();
         verifyMetadata(observer.getSyncMetadata(), true, SimpleEvent.class, Any.class);
 
-        notifier.fireSimpleEventBeanManager();
-        verifyMetadata(observer.getSyncMetadata(), false, SimpleEvent.class, Any.class);
-
         notifier.fireSimpleEventWithQualifiers();
         verifyMetadata(observer.getSyncMetadata(), true, SimpleEvent.class, Alpha.class, Bravo.class, Any.class);
-
-        notifier.fireSimpleEventBeanManagerWithQualifiers();
-        verifyMetadata(observer.getSyncMetadata(), false, SimpleEvent.class, Charlie.class, Any.class);
     }
 
     @SuppressWarnings({ "serial", "unchecked" })

@@ -76,7 +76,7 @@ public class AfterBeanDiscoveryTest extends AbstractTest {
     @Test
     @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "eb")
     public void testObserverMethodRegistered() {
-        getCurrentManager().fireEvent(new Talk("Hello"));
+        getCurrentManager().getEvent().select(Talk.class).fire(new Talk("Hello"));
         assertTrue(AfterBeanDiscoveryObserver.addedObserverMethod.isObserved());
     }
 
