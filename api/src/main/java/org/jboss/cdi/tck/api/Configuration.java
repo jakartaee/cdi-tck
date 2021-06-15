@@ -21,14 +21,15 @@ import jakarta.enterprise.context.spi.Context;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
 import org.jboss.cdi.tck.spi.EL;
+import org.jboss.cdi.tck.spi.SourceProcessor;
 
 /**
  * The configuration of the TCK.
  *
  * The TCK may be configured using system properties or placed in a properties file called META-INF/cdi-tck.properties.
  *
- * Porting package property names are the FQCN of the SPI class. Other property names (one for each non-porting package SPI configuration option) are specified
- * here.
+ * Porting package property names are the FQCN of the SPI class. Other property names (one for each non-porting package SPI
+ * configuration option) are specified here.
  *
  * The TCK may also be configured programatically through this interface.
  *
@@ -48,6 +49,8 @@ public interface Configuration {
     public static final String TEST_JMS_TOPIC = "org.jboss.cdi.tck.testJmsTopic";
 
     public static final String TEST_TIMEOUT_FACTOR = "org.jboss.cdi.tck.testTimeoutFactor";
+
+    public static final String CDI_LITE_MODE_FLAG = "org.jboss.cdi.tck.cdiLiteModeFlag";
 
     public static final int TEST_TIMEOUT_FACTOR_DEFAULT_VALUE = 100;
 
@@ -73,6 +76,14 @@ public interface Configuration {
     public EL getEl();
 
     /**
+     * The implementation of the {@link SourceProcessor} in use.
+     * @return
+     */
+    SourceProcessor getSourceProcessor();
+
+    void setSourceProcessor(SourceProcessor sourceProcessor);
+
+    /**
      * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the implementation). Any jars in this
      * directory will be added to the deployed artifact.
      *
@@ -83,6 +94,13 @@ public interface Configuration {
     public String getLibraryDirectory();
 
     public void setLibraryDirectory(String libraryDir);
+
+    /**
+     * The CDI-lite mode setting
+     * @return true if running in a CDI-lite environment
+     */
+    public Boolean getCDILiteModeFlag();
+    public void setCDILiteModeFlag(Boolean modeFlag);
 
     /**
      * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided. These tests belong to testng group

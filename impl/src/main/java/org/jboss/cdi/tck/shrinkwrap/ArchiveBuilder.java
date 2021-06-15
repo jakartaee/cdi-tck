@@ -28,6 +28,7 @@ import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.impl.ConfigurationImpl;
 import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
 import org.jboss.cdi.tck.spi.Beans;
+import org.jboss.cdi.tck.spi.SourceProcessor;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.Archive;
@@ -56,6 +57,11 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -65,6 +71,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.tools.DiagnosticCollector;
+import javax.tools.JavaFileObject;
 
 /**
  * Abstract ShrinkWrap archive builder for CDI TCK Arquillian test.
@@ -771,6 +782,18 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         logger.log(Level.INFO, "Test archive built [info: {0}, time: {1} ms]",
                 new Object[] { testClazz != null ? testClazz.getName() : archive.getName(), Long.valueOf(System.currentTimeMillis() - start) });
+
+        // test some archive conversions
+        if(ConfigurationFactory.get().getCDILiteModeFlag() && isDebugMode) {
+            if (archive instanceof WebArchive) {
+                try {
+                    JavaArchive jar = ArchiveConverter.toJar((WebArchive) archive);
+                    logger.info(jar.toString(true));
+                } catch (Throwable t) {
+                    logger.info("War to jar error: " + t.getMessage());
+                }
+            }
+        }
         return archive;
     }
 
@@ -844,7 +867,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Process classes.
      *
-     * @param archive
+     * @param archive - the test archive
      */
     protected <P extends Archive<?> & ClassContainer<?>> void processClasses(P archive) {
 
@@ -906,6 +929,62 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                     continue;
                 }
                 archive.addClass(clazz);
+            }
+        }
+    }
+
+    /**
+     * Go through paths added by processPackages and processClasses if CDI-lite is true and there is a
+     * {@link SourceProcessor} configured to located the corresponding source files and call the source
+     * processor.
+     *
+     * @param archive - the test archive
+     * @param <P> - test archive type
+     */
+    protected <P extends Archive<?> & ClassContainer<?>> void processSources(P archive) {
+        Configuration configuration = ConfigurationFactory.get();
+        SourceProcessor sourceProcessor = configuration.getSourceProcessor();
+        Boolean isCDIlite = configuration.getCDILiteModeFlag();
+        if(!isCDIlite || sourceProcessor == null)
+            return;
+
+        Path cwd = Paths.get("").toAbsolutePath();
+        // TODO: externalize this location
+        Path suiteSrc = cwd.resolve("target/suites/src");
+        // This is just to pickup local tests of source processor
+        Path testSrc = cwd.resolve("src/test/java");
+
+        HashSet<File> sourceSet = new HashSet<>();
+        // Go through paths added by processPackages and processClasses
+        for(ArchivePath apath : archive.getContent().keySet()) {
+            String path = apath.get();
+            if(path.endsWith(".class")) {
+                // Strip leading / and .class
+                String testClassPath = path.substring(1, path.length()-6);
+                testClassPath += ".java";
+                Path tstPath = testSrc.resolve(testClassPath);
+                Path tstPath2 = suiteSrc.resolve(testClassPath);
+                if (tstPath.toFile().exists()) {
+                    sourceSet.add(tstPath.toFile());
+                } else if (tstPath2.toFile().exists()) {
+                    sourceSet.add(tstPath2.toFile());
+                }
+            }
+        }
+
+        // Call the sourceProcessor
+        if(sourceSet.size() > 0) {
+            File outputDir = getCompileDir(archive);
+            DiagnosticCollector<JavaFileObject> errors =  new DiagnosticCollector<>();
+            sourceProcessor.process(sourceSet, outputDir, errors);
+            try {
+                reloadCompiledClasses(archive);
+                if(isDebugMode) {
+                    logger.fine("ArchiveBuilder.reloadCompiledClasses, archive: "+archive.toString(true));
+                }
+
+            } catch (Exception e) {
+                getLogger().log(Level.SEVERE, "Failed to reload SourceProcessor output", e);
             }
         }
     }
@@ -1193,6 +1272,76 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     }
 
+    protected Logger getLogger() {
+        return logger;
+    }
+
+    /**
+     * Create a unique directory under target/test-archives/ using the unique archive name for use
+     * with the source processor phase
+     *
+     * @return output dir for use by {@link javax.tools.JavaCompiler}
+     */
+    protected <P extends Archive<?>> File getCompileDir(P archive) {
+        String name = archive.getName();
+        File outputDir = new File("target/test-archives/"+name);
+        if(outputDir.exists() == false && outputDir.mkdirs() == false) {
+            getLogger().severe("Failed to create output directory; "+outputDir.getAbsolutePath());
+        } else if(isDebugMode) {
+            getLogger().fine("Using compile dir: "+outputDir.getAbsolutePath());
+        }
+        return outputDir;
+    }
+
+    /**
+     * Called after the {@link org.jboss.cdi.tck.spi.SourceProcessor} has run to replace/add classes produced by the
+     * call.
+     *
+     * @param archive - the test archive
+     * @param <P> - the type of archive
+     * @throws Exception on ClassLoading or class access failure
+     */
+    protected <P extends Archive<?> & ClassContainer<?>> void reloadCompiledClasses(P archive) throws Exception {
+        File compileDir = getCompileDir(archive);
+        ArrayList<File> classFiles = new ArrayList<>();
+        try (Stream<Path> walk = Files.walk(compileDir.toPath())) {
+            List<File> result = walk.filter(ArchiveBuilder::isClassFileOrDir).map(Path::toFile).collect(Collectors.toList());
+            classFiles.addAll(result);
+        }
+
+        final ClassLoader cl = testClazz.getClassLoader();
+        final ClassLoader parentCL = (cl != null ? cl : ClassLoader.getSystemClassLoader());
+        // Add +1 to include the trailing '/' that classes will see but this path does not have
+        int compileDirPrefixLength = compileDir.toPath().toString().length()+1;
+        URL[] cp = {compileDir.toURL()};
+        URLClassLoader clToUse = new URLClassLoader(cp, parentCL);
+        for(File classFile : classFiles) {
+            // The classFiles set includes parent directories, so skip those
+            if(classFile.isDirectory())
+                continue;
+
+            String className = classFile.getPath().replaceAll("/", ".");
+            // Strip compileDir prefix and .class suffix
+            className = className.substring(compileDirPrefixLength, className.length()-6);
+            Class<?> clazz = clToUse.loadClass(className);
+            archive.deleteClass(clazz);
+            archive.addClass(clazz);
+        }
+        if (this.isDebugMode) {
+            logger.info(archive.toString(true));
+        }
+    }
+
+    /**
+     * {@link #reloadCompiledClasses} helper method
+     * @param path - path under the test archive sources output dir
+     * @return true if path is a directory or .class file
+     */
+    private static boolean isClassFileOrDir(Path path) {
+        File file = path.toFile();
+        return file.isDirectory() || file.getName().endsWith(".class");
+    }
+
     /**
      * Add default libraries from lib directory specified with <code>org.jboss.cdi.tck.libraryDirectory</code> property in <b>cdi-tck.properties</b>.
      */
@@ -1344,7 +1493,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             for (int i = 0; i < digest.length; i++) {
                 hexString.append(Integer.toHexString(0xFF & digest[i]));
             }
-            return hexString.toString();
+            return testClazz.getSimpleName()+hexString.toString();
         }
         return null;
     }

@@ -28,6 +28,7 @@ import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
 import org.jboss.cdi.tck.spi.EL;
+import org.jboss.cdi.tck.spi.SourceProcessor;
 
 /**
  * CDI TCK configuration builder.
@@ -65,6 +66,8 @@ public class PropertiesBasedConfigurationBuilder {
         configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, !deploymentPhase));
         configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, !deploymentPhase));
         configuration.setContexts((Contexts<?>)getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
+        configuration.setSourceProcessor(getInstanceValue(SourceProcessor.PROPERTY_NAME, SourceProcessor.class, !deploymentPhase));
+        configuration.setCDILiteModeFlag(getBooleanValue(Configuration.CDI_LITE_MODE_FLAG, Boolean.FALSE, deploymentPhase));
 
         configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, deploymentPhase));
 
@@ -123,15 +126,24 @@ public class PropertiesBasedConfigurationBuilder {
 
     /**
      *
-     * @param propertyName
-     * @param defaultValue
-     * @param required
-     * @return
+     * @param propertyName - System property name
+     * @param defaultValue - default value
+     * @param required - is required flag
+     * @return property value as integer
      */
     public int getIntegerValue(String propertyName, int defaultValue, boolean required) {
         try {
             String value = getValue(propertyName, required);
             return value != null ? Integer.valueOf(value) : defaultValue;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid property value", e);
+        }
+    }
+
+    public Boolean getBooleanValue(String propertyName, Boolean defaultValue, boolean required) {
+        try {
+            String value = getValue(propertyName, required);
+            return value != null ? Boolean.valueOf(value) : defaultValue;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid property value", e);
         }
