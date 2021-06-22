@@ -4,7 +4,7 @@
     <parent>
         <groupId>jakarta.enterprise</groupId>
         <artifactId>cdi-tck-parent</artifactId>
-        <version>4.1.0-SNAPSHOT</version>
+        <version>4.1.1-20210621-lite</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
