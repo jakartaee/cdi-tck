@@ -1347,19 +1347,25 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     private void addDefaultLibraries() {
 
-        File directory = new File(ConfigurationFactory.get(true).getLibraryDirectory());
-        logger.log(Level.FINE, "Scanning default library dir {0}", directory.getPath());
+        String libDir = ConfigurationFactory.get(true).getLibraryDirectory();
+        if(libDir != null) {
+            File directory = new File(libDir);
+            logger.log(Level.FINE, "Scanning default library dir {0}", directory.getPath());
 
-        if (directory.isDirectory()) {
-            for (File file : directory.listFiles(new FilenameFilter() {
-                public boolean accept(File dir, String name) {
-                    return name.endsWith(".jar");
+            if (directory.isDirectory()) {
+                for (File file : directory.listFiles(new FilenameFilter() {
+                    public boolean accept(File dir, String name) {
+                        return name.endsWith(".jar");
+                    }
+                })) {
+                    logger.log(Level.FINE, "Adding default library {0}", file.getName());
+                    withLibrary(file);
                 }
-            })) {
-                logger.log(Level.FINE, "Adding default library {0}", file.getName());
-                withLibrary(file);
             }
+        } else {
+            logger.log(Level.FINE, "No default library dir specified");
         }
+
     }
 
     private boolean skipClassName(String className) {
