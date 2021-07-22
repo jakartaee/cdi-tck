@@ -122,6 +122,7 @@ public class WebArchiveBuilderTest {
         for (int i = 0; i < digest.length; i++) {
             hexString.append(Integer.toHexString(0xFF & digest[i]));
         }
+        hexString.insert(0, TestClass.class.getSimpleName());
         assertEquals(archive.getName().split("\\.")[0], hexString.toString());
     }
 

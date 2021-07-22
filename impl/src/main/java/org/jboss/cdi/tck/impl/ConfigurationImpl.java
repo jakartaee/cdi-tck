@@ -22,6 +22,7 @@ import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
 import org.jboss.cdi.tck.spi.EL;
+import org.jboss.cdi.tck.spi.SourceProcessor;
 
 /**
  * CDI TCK configuration implementation.
@@ -34,7 +35,9 @@ public class ConfigurationImpl implements Configuration {
     private Beans beans;
     private Contexts<? extends Context> contexts;
     private EL el;
+    private SourceProcessor sourceProcessor;
 
+    private Boolean cdiLiteModeFlag;
     private String libraryDirectory;
 
     private String testDataSource;
@@ -52,6 +55,23 @@ public class ConfigurationImpl implements Configuration {
 
     public void setBeans(Beans beans) {
         this.beans = beans;
+    }
+
+    @Override
+    public SourceProcessor getSourceProcessor() {
+        return sourceProcessor;
+    }
+
+    public void setSourceProcessor(SourceProcessor sourceProcessor) {
+        this.sourceProcessor = sourceProcessor;
+    }
+
+    public Boolean getCDILiteModeFlag() {
+        return cdiLiteModeFlag;
+    }
+
+    public void setCDILiteModeFlag(Boolean cdiLiteModeFlag) {
+        this.cdiLiteModeFlag = cdiLiteModeFlag;
     }
 
     @SuppressWarnings("unchecked")
@@ -133,11 +153,13 @@ public class ConfigurationImpl implements Configuration {
     @Override
     public String toString() {
         StringBuilder configuration = new StringBuilder();
-        configuration.append("Jakarta CDI 3.0 TCK Configuration\n");
+        configuration.append("Jakarta CDI 4.0 TCK Configuration\n");
         configuration.append("-----------------\n");
         configuration.append("\tBeans: ").append(getBeans()).append("\n");
         configuration.append("\tContexts: ").append(getContexts()).append("\n");
         configuration.append("\tEL: ").append(getEl()).append("\n");
+        configuration.append("\tSourceProcessor: ").append(getSourceProcessor()).append("\n");
+        configuration.append("\tCDI-lite mode: ").append(getCDILiteModeFlag()).append("\n");
         configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");
         configuration.append("\tTest DS: ").append(getTestDataSource()).append("\n");
         configuration.append("\tTest JMS connection factory: ").append(getTestJmsConnectionFactory()).append("\n");
