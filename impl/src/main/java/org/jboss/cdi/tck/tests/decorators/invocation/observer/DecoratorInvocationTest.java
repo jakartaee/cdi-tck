@@ -43,7 +43,7 @@ public class DecoratorInvocationTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "if") })
     public void testDecoratorInvocation() {
         ObserverImpl.reset();
-        getCurrentManager().fireEvent(new Foo("foo!"));
+        getCurrentManager().getEvent().select(Foo.class).fire(new Foo("foo!"));
         assert ObserverImpl.isObservervedCorrectly();
     }
 

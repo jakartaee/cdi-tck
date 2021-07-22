@@ -96,7 +96,7 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>3.0.0</cdi.api.version>
+        <cdi.api.version>4.0.0.Alpha1</cdi.api.version>
         <maven.compiler.release>11</maven.compiler.release>
         <!-- Jakarta EE APIs Core -->
         <annotations.api.version>2.0.0</annotations.api.version>
@@ -107,7 +107,7 @@
         <!-- Test tools/dependencies -->
         <testng.version>7.4.0</testng.version>
         <jboss.test.audit.version>2.0.0.Final</jboss.test.audit.version>
-        <arquillian.version>1.7.0.Alpha9</arquillian.version>
+        <arquillian.version>1.7.0.Alpha10</arquillian.version>
         <arquillian.container.se.api.version>1.0.1.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
         <htmlunit.version>2.50.0</htmlunit.version>

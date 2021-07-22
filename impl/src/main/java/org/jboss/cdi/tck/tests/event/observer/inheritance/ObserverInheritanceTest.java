@@ -50,7 +50,7 @@ public class ObserverInheritanceTest extends AbstractTest {
     public void testNonStaticObserverMethodInherited() {
 
         ActionSequence.reset();
-        getCurrentManager().fireEvent(new Egg());
+        getCurrentManager().getEvent().select(Egg.class).fire(new Egg());
 
         // Foo directly extends AbstractFooObserver - observer invoked
         // Bar indirectly extends AbstractFooObserver - observer invoked

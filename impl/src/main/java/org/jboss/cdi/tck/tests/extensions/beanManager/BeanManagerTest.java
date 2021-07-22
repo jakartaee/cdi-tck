@@ -227,14 +227,14 @@ public class BeanManagerTest extends AbstractTest {
     // CDI-83
     public void testObtainingInjectionTarget() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(DerivedBean.class);
-        assertNotNull(getCurrentManager().createInjectionTarget(annotatedType));
+        assertNotNull(getCurrentManager().getInjectionTargetFactory(annotatedType).createInjectionTarget(null));
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = BM_OBTAIN_INJECTIONTARGET, id = "ab")
     public void testObtainingInjectionTargetWithDefinitionError() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(Snake.class);
-        getCurrentManager().createInjectionTarget(annotatedType);
+        getCurrentManager().getInjectionTargetFactory(annotatedType).createInjectionTarget(null);
     }
 
     /**

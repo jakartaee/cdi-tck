@@ -61,7 +61,7 @@ public class BeanManagerDecoratorTest extends AbstractDecoratorTest {
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "be") })
     public void testDecoratorIsNotApplied() {
         Foo payload = new Foo(false);
-        manager.fireEvent(payload);
+        manager.getEvent().fire(payload);
         assertTrue(fooObserver.isObserved());
         assertFalse(payload.isDecorated());
 

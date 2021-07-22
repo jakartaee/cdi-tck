@@ -207,29 +207,6 @@ public class DynamicLookupTest extends AbstractTest {
         assertFalse(injectionPoint.getPaymentProcessor().isAmbiguous());
     }
 
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "e"), @SpecAssertion(section = ANNOTATIONLITERAL_TYPELITERAL, id = "b"),
-            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma") })
-    public void testNewBean() {
-        Instance<String> string = getContextualReference(ObtainsNewInstanceBean.class).getString();
-        assertFalse(string.isAmbiguous());
-        assertFalse(string.isUnsatisfied());
-        assertNotNull(string.get());
-        assertTrue(string.get() instanceof String);
-
-        Instance<Map<String, String>> map = getContextualReference(ObtainsNewInstanceBean.class).getMap();
-        assertTrue(map.isResolvable());
-        Map<String, String> instance = map.get();
-        assertNotNull(instance);
-        assertTrue(instance instanceof HashMap<?, ?>);
-    }
-
-    @Test
-    @SpecAssertion(section = NEW, id = "xc")
-    public void testNewBeanNotEnabledWithouInjectionPoint() {
-        assertTrue(getContextualReference(ObtainsNewInstanceBean.class).getIae().isUnsatisfied());
-    }
-
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ja"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "jb"),
             @SpecAssertion(section = DYNAMIC_LOOKUP, id = "la"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma") })

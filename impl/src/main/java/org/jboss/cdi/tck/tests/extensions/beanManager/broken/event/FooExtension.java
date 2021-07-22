@@ -32,7 +32,7 @@ public class FooExtension implements Extension {
 
         for (Object event : ContainerLifecycleEvents.CONTAINER_LIFECYCLE_EVENTS) {
             try {
-                beanManager.fireEvent(event);
+                beanManager.getEvent().fire(event);
                 throw new IllegalStateException("Expected exception (IllegalArgumentException) not thrown");
             } catch (IllegalArgumentException expected) {
             }

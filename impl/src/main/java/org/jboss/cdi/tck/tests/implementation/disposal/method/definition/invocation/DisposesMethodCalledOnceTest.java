@@ -45,7 +45,7 @@ public class DisposesMethodCalledOnceTest extends AbstractTest {
     @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba")
     public void testDisposerCalledOnce1() {
         ProducerBean.reset();
-        beanManager.fireEvent("Hello");
+        beanManager.getEvent().select(String.class).fire("Hello");
         Assert.assertEquals(ProducerBean.firstDisposerCalled.get(), 1, "Disposer method called multiple times!");
 
     }
@@ -54,7 +54,7 @@ public class DisposesMethodCalledOnceTest extends AbstractTest {
     @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba")
     public void testDisposerCalledOnce2() {
         ProducerBean.reset();
-        beanManager.fireEvent("Hello");
+        beanManager.getEvent().select(String.class).fire("Hello");
         Assert.assertEquals(ProducerBean.secondDisposerCalled.get(), 1, "Disposer method called multiple times!");
     }
 
@@ -62,7 +62,7 @@ public class DisposesMethodCalledOnceTest extends AbstractTest {
     @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba")
     public void testDisposerCalledOnce3() {
         ProducerBean.reset();
-        beanManager.fireEvent("Hello");
+        beanManager.getEvent().select(String.class).fire("Hello");
         Assert.assertEquals(ProducerBean.thirdDisposerCalled.get(), 1, "Disposer method called multiple times!");
     }
 
@@ -70,7 +70,7 @@ public class DisposesMethodCalledOnceTest extends AbstractTest {
     @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba")
     public void testDisposerCalledOnce4() {
         ProducerBean.reset();
-        beanManager.fireEvent("Hello");
+        beanManager.getEvent().select(String.class).fire("Hello");
         Assert.assertEquals(ProducerBean.forthDisposerCalled.get(), 1, "Disposer method called multiple times!");
     }
 
@@ -78,7 +78,7 @@ public class DisposesMethodCalledOnceTest extends AbstractTest {
     @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba")
     public void testDisposerCalledOnce5() {
         ProducerBean.reset();
-        beanManager.fireEvent("Hello");
+        beanManager.getEvent().select(String.class).fire("Hello");
         Assert.assertEquals(ProducerBean.fifthDisposerCalled.get(), 1, "Disposer method called multiple times!");
     }
 
@@ -86,7 +86,7 @@ public class DisposesMethodCalledOnceTest extends AbstractTest {
     @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba")
     public void testDisposerCalledOnce6() {
         ProducerBean.reset();
-        beanManager.fireEvent("Hello");
+        beanManager.getEvent().select(String.class).fire("Hello");
         Assert.assertEquals(ProducerBean.sixthDisposerCalled.get(), 1, "Disposer method called multiple times!");
     }
 

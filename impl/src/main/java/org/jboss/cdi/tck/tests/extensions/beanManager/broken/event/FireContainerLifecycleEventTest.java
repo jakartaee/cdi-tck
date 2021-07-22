@@ -49,7 +49,7 @@ public class FireContainerLifecycleEventTest extends AbstractTest {
     public void testFireContainerLifecycleEvent() {
         for (Object event : ContainerLifecycleEvents.CONTAINER_LIFECYCLE_EVENTS) {
             try {
-                getCurrentManager().fireEvent(event);
+                getCurrentManager().getEvent().fire(event);
                 throw new IllegalStateException("Expected exception (IllegalArgumentException) not thrown");
             } catch (IllegalArgumentException expected) {
             }

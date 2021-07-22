@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.event.fires;
 
 import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
 
 public class Bar {
@@ -25,7 +26,8 @@ public class Bar {
     BeanManager beanManager;
 
     public <T extends Number> void fireWithTypeVariable() {
-        beanManager.fireEvent(new Foo<T>());
+        beanManager.getEvent().select(new TypeLiteral<Foo<T>>() {
+        }).fire(new Foo<T>());
     }
 
 }

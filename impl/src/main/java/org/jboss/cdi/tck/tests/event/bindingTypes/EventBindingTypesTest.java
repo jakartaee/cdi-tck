@@ -48,7 +48,7 @@ public class EventBindingTypesTest extends AbstractTest {
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "d")
     public void testEventBindingTypeTargetsMethodFieldParameterElementTypes() {
         Animal animal = new Animal();
-        getCurrentManager().fireEvent(animal, new TameAnnotationLiteral());
+        getCurrentManager().getEvent().select(Animal.class, new TameAnnotationLiteral()).fire(animal);
         getContextualReference(AnimalAssessment.class).classifyAsTame(animal);
     }
 
@@ -56,7 +56,7 @@ public class EventBindingTypesTest extends AbstractTest {
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "d")
     public void testEventBindingTypeTargetsFieldParameterElementTypes() {
         Animal animal = new Animal();
-        getCurrentManager().fireEvent(animal, new WildAnnotationLiteral());
+        getCurrentManager().getEvent().select(Animal.class, new WildAnnotationLiteral()).fire(animal);
         getContextualReference(AnimalAssessment.class).classifyAsWild(animal);
     }
 
@@ -80,15 +80,13 @@ public class EventBindingTypesTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "d")
     public void testFireEventWithNonRuntimeBindingTypeFails() {
-        getCurrentManager().fireEvent(new Animal(), new AnnotationLiteral<NonRuntimeBindingType>() {
-        });
+        getCurrentManager().getEvent().select(Animal.class, new AnnotationLiteral<NonRuntimeBindingType>() {}).fire(new Animal());
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "g")
     public void testFireEventWithNonBindingAnnotationsFails() {
-        getCurrentManager().fireEvent(new Animal(), new AnnotationLiteral<NonBindingType>() {
-        });
+        getCurrentManager().getEvent().select(Animal.class, new AnnotationLiteral<NonBindingType>() {}).fire(new Animal());
     }
 
     @Test

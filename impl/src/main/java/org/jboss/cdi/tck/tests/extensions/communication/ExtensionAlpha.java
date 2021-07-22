@@ -36,7 +36,7 @@ public class ExtensionAlpha implements Extension {
     }
 
     public void observeProcessAnnotatedType(@Observes ProcessAnnotatedType<?> event, BeanManager beanManager) {
-        beanManager.fireEvent(new PatEvent(event.getAnnotatedType().getJavaClass()));
+        beanManager.getEvent().select(PatEvent.class).fire(new PatEvent(event.getAnnotatedType().getJavaClass()));
     }
 
     public void observeBeta(@Observes @Baz PbEvent event) {

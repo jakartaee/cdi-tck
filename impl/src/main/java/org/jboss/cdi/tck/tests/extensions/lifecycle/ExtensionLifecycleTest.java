@@ -93,7 +93,7 @@ public class ExtensionLifecycleTest extends AbstractTest {
             @SpecAssertion(section = INIT_EVENTS, id = "bb") })
     public void testContainerDeliversEventNotifications() {
         assertTrue(simpleBean.getSimpleExtension().isContainerEventObserved());
-        getCurrentManager().fireEvent(new SimpleEvent(System.currentTimeMillis()));
+        getCurrentManager().getEvent().select(SimpleEvent.class).fire(new SimpleEvent(System.currentTimeMillis()));
         assertTrue(simpleBean.getSimpleExtension().isSimpleEventObserved());
     }
 

@@ -122,7 +122,7 @@ public class EventObserverOrderingTest extends AbstractTest {
     public void testPrioritizedEventSubclass() {
 
         ActionSequence.reset();
-        getCurrentManager().fireEvent(new Moonrise());
+        getCurrentManager().getEvent().select(Moonrise.class).fire(new Moonrise());
 
         assertEquals(ActionSequence.getSequenceSize(), 4);
 
@@ -139,7 +139,7 @@ public class EventObserverOrderingTest extends AbstractTest {
     public void testPrioritizedEventBaseclass() {
 
         ActionSequence.reset();
-        getCurrentManager().fireEvent(new MoonActivity());
+        getCurrentManager().getEvent().select(MoonActivity.class).fire(new MoonActivity());
 
         assertEquals(ActionSequence.getSequenceSize(), 2);
 

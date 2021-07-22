@@ -63,7 +63,7 @@ public class EventTest extends AbstractTest {
             @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })
     public void testObserverMethodParameterInjectionPoints() {
         TerrierObserver.reset();
-        getCurrentManager().fireEvent(new BullTerrier());
+        getCurrentManager().getEvent().select(BullTerrier.class).fire(new BullTerrier());
         assertTrue(TerrierObserver.eventObserved);
         assertTrue(TerrierObserver.parametersInjected);
     }
@@ -83,7 +83,7 @@ public class EventTest extends AbstractTest {
             getCurrentConfiguration().getContexts().setInactive(requestContext);
 
             StaticObserver.reset();
-            getCurrentManager().fireEvent(new Delivery());
+            getCurrentManager().getEvent().select(Delivery.class).fire(new Delivery());
 
             assertTrue(StaticObserver.isDeliveryReceived());
 
@@ -96,7 +96,7 @@ public class EventTest extends AbstractTest {
     @SpecAssertion(section = OBSERVES, id = "a")
     public void testPrivateObserverMethodInvoked() {
         PrivateObserver.reset();
-        getCurrentManager().fireEvent(new Delivery());
+        getCurrentManager().getEvent().select(Delivery.class).fire(new Delivery());
         assertTrue(PrivateObserver.isObserved);
     }
 
@@ -104,7 +104,7 @@ public class EventTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "cc"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa") })
     public void testObserverCalledOnSpecializedBeanOnly() {
         Shop.observers.clear();
-        getCurrentManager().fireEvent(new Delivery());
+        getCurrentManager().getEvent().select(Delivery.class).fire(new Delivery());
         // FarmShop specializes Shop
         assertEquals(Shop.observers.size(), 1);
         assertEquals(Shop.observers.iterator().next(), FarmShop.class.getName());
@@ -122,7 +122,7 @@ public class EventTest extends AbstractTest {
 
         BullTerrier.reset();
 
-        getCurrentManager().fireEvent(new MultiBindingEvent(), new RoleLiteral("Admin"), new TameAnnotationLiteral());
+        getCurrentManager().getEvent().select(MultiBindingEvent.class, new RoleLiteral("Admin"), new TameAnnotationLiteral()).fire(new MultiBindingEvent());
 
         assertTrue(BullTerrier.isMultiBindingEventObserved());
         assertTrue(BullTerrier.isSingleBindingEventObserved());
@@ -132,7 +132,7 @@ public class EventTest extends AbstractTest {
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dc")
     public void testNonStaticObserverMethodInherited() {
         Egg egg = new Egg();
-        getCurrentManager().fireEvent(egg);
+        getCurrentManager().getEvent().select(Egg.class).fire(egg);
         assertTrue(typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class));
     }
 
@@ -140,7 +140,7 @@ public class EventTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "di") })
     public void testNonStaticObserverMethodIndirectlyInherited() {
         StockPrice price = new StockPrice();
-        getCurrentManager().fireEvent(price);
+        getCurrentManager().getEvent().select(StockPrice.class).fire(price);
         assertTrue(typeSetMatches(price.getClassesVisited(), StockWatcher.class, IntermediateStockWatcher.class,
                 IndirectStockWatcher.class));
     }

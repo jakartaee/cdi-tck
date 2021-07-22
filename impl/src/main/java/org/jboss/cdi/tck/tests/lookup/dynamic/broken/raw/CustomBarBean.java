@@ -88,11 +88,6 @@ public class CustomBarBean implements Bean<Bar> {
     }
 
     @Override
-    public boolean isNullable() {
-        return false;
-    }
-
-    @Override
     public Set<InjectionPoint> getInjectionPoints() {
         return Collections.<InjectionPoint> singleton(instanceInjectionPoint);
     }

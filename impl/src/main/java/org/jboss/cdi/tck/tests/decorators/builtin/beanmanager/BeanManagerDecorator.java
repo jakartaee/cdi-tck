@@ -19,10 +19,14 @@ package org.jboss.cdi.tck.tests.decorators.builtin.beanmanager;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.util.concurrent.CompletionStage;
 
 import jakarta.decorator.Decorator;
 import jakarta.decorator.Delegate;
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.event.NotificationOptions;
 import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
 
 /**
@@ -38,10 +42,41 @@ public abstract class BeanManagerDecorator implements BeanManager, Serializable 
     BeanManager beanManager;
 
     @Override
-    public void fireEvent(Object event, Annotation... qualifiers) {
-        if (Foo.class.isAssignableFrom(event.getClass())) {
-            ((Foo) event).setDecorated(true);
-        }
+    public Event<Object> getEvent() {
+        Event<Object> delegate = beanManager.getEvent();
+        return new Event<Object>() {
+            @Override
+            public void fire(Object event) {
+                if (Foo.class.isAssignableFrom(event.getClass())) {
+                    ((Foo) event).setDecorated(true);
+                }
+            }
+
+            @Override
+            public <U> CompletionStage<U> fireAsync(U event) {
+                return delegate.fireAsync(event);
+            }
+
+            @Override
+            public <U> CompletionStage<U> fireAsync(U event, NotificationOptions options) {
+                return delegate.fireAsync(event, options);
+            }
+
+            @Override
+            public Event<Object> select(Annotation... qualifiers) {
+                return delegate.select(qualifiers);
+            }
+
+            @Override
+            public <U> Event<U> select(Class<U> subtype, Annotation... qualifiers) {
+                return delegate.select(subtype, qualifiers);
+            }
+
+            @Override
+            public <U> Event<U> select(TypeLiteral<U> subtype, Annotation... qualifiers) {
+                return delegate.select(subtype, qualifiers);
+            }
+        };
     }
 
     @Override

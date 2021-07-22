@@ -113,8 +113,8 @@ public class BootstrapSEContainerTest extends Arquillian {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery().addBeanClasses(Baz.class, Qux.class, BazObserver.class).initialize()) {
             BeanManager beanManager = seContainer.getBeanManager();
-            beanManager.fireEvent(new Baz(), Any.Literal.INSTANCE);
-            beanManager.fireEvent(new Qux(), Any.Literal.INSTANCE);
+            beanManager.getEvent().select(Baz.class, Any.Literal.INSTANCE).fire(new Baz());
+            beanManager.getEvent().select(Qux.class, Any.Literal.INSTANCE).fire(new Qux());
             assertNotNull(seContainer.select(Baz.class).get().ping());
             assertTrue(BazObserver.isNotified);
             // is not in synthetic archive
