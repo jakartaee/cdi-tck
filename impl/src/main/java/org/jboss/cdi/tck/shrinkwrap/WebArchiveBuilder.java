@@ -74,6 +74,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
         processPackages(webArchive);
         processClasses(webArchive);
+        processSources(webArchive);
         processLibraries(webArchive);
         processManifestResources(webArchive);
         processResources(webArchive);

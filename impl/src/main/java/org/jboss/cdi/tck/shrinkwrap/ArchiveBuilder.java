@@ -944,6 +944,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected <P extends Archive<?> & ClassContainer<?>> void processSources(P archive) {
         Configuration configuration = ConfigurationFactory.get();
         SourceProcessor sourceProcessor = configuration.getSourceProcessor();
+        // If this is not running in cdi-lite mode or there is no source processor, skip source attachment
         Boolean isCDIlite = configuration.getCDILiteModeFlag();
         if(!isCDIlite || sourceProcessor == null)
             return;
@@ -956,11 +957,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         HashSet<File> sourceSet = new HashSet<>();
         // Go through paths added by processPackages and processClasses
+        String classesPrefix = archive instanceof WebArchive ? "WEB-INF/classes/" : "";
         for(ArchivePath apath : archive.getContent().keySet()) {
             String path = apath.get();
             if(path.endsWith(".class")) {
                 // Strip leading / and .class
-                String testClassPath = path.substring(1, path.length()-6);
+                String testClassPath = path.substring(classesPrefix.length()+1, path.length()-6);
                 testClassPath += ".java";
                 Path tstPath = testSrc.resolve(testClassPath);
                 Path tstPath2 = suiteSrc.resolve(testClassPath);
@@ -1295,13 +1297,15 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Called after the {@link org.jboss.cdi.tck.spi.SourceProcessor} has run to replace/add classes produced by the
-     * call.
+     * call. Currently this filters out all classes that did not exist before source processing, so if classes
+     * were actually added, we need a way to flag them.
      *
      * @param archive - the test archive
      * @param <P> - the type of archive
      * @throws Exception on ClassLoading or class access failure
      */
     protected <P extends Archive<?> & ClassContainer<?>> void reloadCompiledClasses(P archive) throws Exception {
+        // Reload classes from the Javac build of source processed classes
         File compileDir = getCompileDir(archive);
         ArrayList<File> classFiles = new ArrayList<>();
         try (Stream<Path> walk = Files.walk(compileDir.toPath())) {
@@ -1315,6 +1319,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         int compileDirPrefixLength = compileDir.toPath().toString().length()+1;
         URL[] cp = {compileDir.toURL()};
         URLClassLoader clToUse = new URLClassLoader(cp, parentCL);
+        String testClazzName = testClazz.getName();
         for(File classFile : classFiles) {
             // The classFiles set includes parent directories, so skip those
             if(classFile.isDirectory())
@@ -1323,9 +1328,31 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             String className = classFile.getPath().replaceAll("/", ".");
             // Strip compileDir prefix and .class suffix
             className = className.substring(compileDirPrefixLength, className.length()-6);
-            Class<?> clazz = clToUse.loadClass(className);
-            archive.deleteClass(clazz);
-            archive.addClass(clazz);
+            boolean exclude = false;
+            if (isAsClientMode() && (testClazzName.equals(className) || className.startsWith(testClazzName))) {
+                continue;
+            } else {
+                if (excludedClasses != null && !excludedClasses.isEmpty()) {
+                    for (String exludeClassName : excludedClasses) {
+                        // Handle annonymous inner classes
+                        if (className.equals(exludeClassName)) {
+                            exclude = true;
+                            break;
+                        } else if (className.startsWith(exludeClassName) && className.contains("$")) {
+                            exclude = true;
+                            break;
+                        } else if (!classes.contains(className)) {
+                            exclude = true;
+                        }
+                    }
+                }
+            }
+            // Add the class from the recompilation if not excluded
+            if(!exclude) {
+                Class<?> clazz = clToUse.loadClass(className);
+                archive.deleteClass(clazz);
+                archive.addClass(clazz);
+            }
         }
         if (this.isDebugMode) {
             logger.info(archive.toString(true));

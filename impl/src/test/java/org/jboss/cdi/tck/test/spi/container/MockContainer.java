@@ -46,9 +46,6 @@ public class MockContainer implements DeployableContainer<MockConfiguration> {
         System.out.printf("MockContainer.deploy, %s\n", archive.getName());
         // TODO, deployment classloader to validate generated classes?
         ShrinkWrapClassLoader classLoader = new ShrinkWrapClassLoader(archive.getClass().getClassLoader(), archive);
-        if(!(archive instanceof JavaArchive)) {
-            throw new DeploymentException("MockContainer required JavaArchive, saw: "+archive.getClass());
-        }
         return new ProtocolMetaData();
     }
 
