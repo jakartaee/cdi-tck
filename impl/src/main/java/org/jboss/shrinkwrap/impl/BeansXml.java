@@ -47,7 +47,7 @@ public class BeansXml implements Asset {
     private final List<Exclude> excludeFilters;
 
     // defaults
-    private BeanDiscoveryMode mode = BeanDiscoveryMode.ALL;
+    private BeanDiscoveryMode mode = BeanDiscoveryMode.ANNOTATED;
     private BeansXmlVersion version = BeansXmlVersion.v30;
 
     public static class Exclude {
