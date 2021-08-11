@@ -94,6 +94,7 @@ public class WebArchiveBuilderTest {
 
         archive = new WebArchiveBuilder().withTestClassPackage(TestClass.class).setAsClientMode(true).withExcludedClass(Excluded.class.getName()).build();
 
+        System.out.printf("Archive: %s\n", archive.toString(true));
         assertContainsClass(archive, Qux.class);
         assertDoesNotContainClass(archive, Excluded.class);
         assertDoesNotContainClass(archive, TestClass.class);
@@ -131,7 +132,8 @@ public class WebArchiveBuilderTest {
     }
 
     private <A extends Archive<?>, T> void assertDoesNotContainClass(A archive, Class<T> clazz) {
-        assertFalse(archive.contains("/WEB-INF/classes/" + StringUtils.replace(clazz.getName(), ".", "/") + ".class"));
+        String path = "/WEB-INF/classes/" + StringUtils.replace(clazz.getName(), ".", "/") + ".class";
+        assertFalse(archive.contains(path), path);
     }
 
     private <A extends Archive<?>, T> void assertContainsInnerClass(A archive, Class<T> clazz) {

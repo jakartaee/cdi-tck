@@ -49,7 +49,7 @@ public class VersionProcessor extends AbstractProcessor {
                             JavaFileObject setterFile = processingEnv.getFiler().createSourceFile(versionSetterClass);
                             PrintWriter writer = new PrintWriter(setterFile.openWriter());
                             writer.println("package "+pkg+";");
-                            writer.println("class VersionSetter {");
+                            writer.println("public class VersionSetter {");
                                 writer.println("  static {");
                                     writer.print("    "+enclosingClass.getQualifiedName().toString()+"."+varElement.getSimpleName());
                                         writer.println(" = \"2.0\";");
