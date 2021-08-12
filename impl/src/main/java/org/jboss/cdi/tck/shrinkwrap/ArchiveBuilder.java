@@ -44,6 +44,7 @@ import org.jboss.shrinkwrap.api.container.ClassContainer;
 import org.jboss.shrinkwrap.api.container.LibraryContainer;
 import org.jboss.shrinkwrap.api.container.ManifestContainer;
 import org.jboss.shrinkwrap.api.container.ResourceContainer;
+import org.jboss.shrinkwrap.api.container.ServiceProviderContainer;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -68,6 +69,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -941,7 +943,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param archive - the test archive
      * @param <P> - test archive type
      */
-    protected <P extends Archive<?> & ClassContainer<?>> void processSources(P archive) {
+    protected <P extends Archive<?> & ClassContainer<?> & ServiceProviderContainer<?>> void processSources(P archive) {
         Configuration configuration = ConfigurationFactory.get();
         SourceProcessor sourceProcessor = configuration.getSourceProcessor();
         // If this is not running in cdi-lite mode or there is no source processor, skip source attachment
@@ -1304,7 +1306,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @param <P> - the type of archive
      * @throws Exception on ClassLoading or class access failure
      */
-    protected <P extends Archive<?> & ClassContainer<?>> void reloadCompiledClasses(P archive) throws Exception {
+    protected <P extends Archive<?> & ClassContainer<?> & ServiceProviderContainer<?>> void reloadCompiledClasses(P archive) throws Exception {
         // Reload classes from the Javac build of source processed classes
         File compileDir = getCompileDir(archive);
         ArrayList<File> classFiles = new ArrayList<>();
@@ -1322,10 +1324,18 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         String testClazzName = testClazz.getName();
         for(File classFile : classFiles) {
             // The classFiles set includes parent directories, so skip those
-            if(classFile.isDirectory())
+            String path = classFile.getPath();
+            if (classFile.isDirectory()) {
+                if (path.endsWith("/META-INF/services")) {
+                    for (File f : classFile.listFiles()) {
+                        String[] serviceEntries = Files.readString(f.toPath()).split("\n");
+                        archive.addAsServiceProvider(f.getName(), serviceEntries);
+                    }
+                }
                 continue;
+            }
 
-            String className = classFile.getPath().replaceAll("/", ".");
+            String className = path.replaceAll("/", ".");
             // Strip compileDir prefix and .class suffix
             className = className.substring(compileDirPrefixLength, className.length()-6);
             boolean exclude = false;

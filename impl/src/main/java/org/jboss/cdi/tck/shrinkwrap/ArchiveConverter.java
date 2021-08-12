@@ -13,6 +13,7 @@ import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.impl.BeansXml;
+import org.jboss.shrinkwrap.impl.base.asset.ServiceProviderAsset;
 import org.jboss.shrinkwrap.impl.base.path.BasicPath;
 
 /**
@@ -45,6 +46,8 @@ public class ArchiveConverter {
             } else if(asset instanceof ClassAsset) {
                 jar.add(asset, apath);
             } else if(asset instanceof ClassLoaderAsset) {
+                jar.add(asset, apath);
+            } else if(asset instanceof ServiceProviderAsset) {
                 jar.add(asset, apath);
             } else if(asset instanceof BeansXml) {
                 jar.add(asset, "META-INF/beans.xml");
