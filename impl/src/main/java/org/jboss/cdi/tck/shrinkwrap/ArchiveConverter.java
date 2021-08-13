@@ -13,6 +13,7 @@ import org.jboss.shrinkwrap.api.asset.StringAsset;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.impl.BeansXml;
+import org.jboss.shrinkwrap.impl.base.asset.ServiceProviderAsset;
 import org.jboss.shrinkwrap.impl.base.path.BasicPath;
 
 /**
@@ -46,6 +47,8 @@ public class ArchiveConverter {
                 jar.add(asset, apath);
             } else if(asset instanceof ClassLoaderAsset) {
                 jar.add(asset, apath);
+            } else if(asset instanceof ServiceProviderAsset) {
+                jar.add(asset, apath);
             } else if(asset instanceof BeansXml) {
                 jar.add(asset, "META-INF/beans.xml");
             } else if(asset instanceof StringAsset) {
@@ -53,7 +56,8 @@ public class ArchiveConverter {
                     jar.add(asset, apath);
                 }
             } else {
-                throw new IllegalArgumentException("Unhandled asset type: "+asset.getClass());
+                System.out.printf("+++ WARN(?): %s/%s\n", apath, asset.getClass());
+                jar.add(asset, apath);
             }
         }
         return jar;
