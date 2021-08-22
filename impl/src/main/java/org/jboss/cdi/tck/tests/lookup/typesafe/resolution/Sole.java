@@ -16,8 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
+import jakarta.enterprise.context.Dependent;
+
 @Whitefish
 @Expensive(veryExpensive = false, cost = 100)
+@Dependent
 public class Sole implements ScottishFish {
 
 }

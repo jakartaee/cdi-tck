@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
-class BarSubBazFooImpl extends BarBazImpl implements SubBaz, Foo {
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+public class BarSubBazFooImpl extends BarBazImpl implements SubBaz, Foo {
 }

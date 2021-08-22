@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 
 @Specializes
+@Dependent
 public class FarmShop extends Shop {
 
     @Override

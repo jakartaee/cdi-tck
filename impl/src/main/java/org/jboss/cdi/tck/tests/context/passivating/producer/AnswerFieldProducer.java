@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.producer;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class AnswerFieldProducer {
 
     @Produces

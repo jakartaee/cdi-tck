@@ -18,6 +18,9 @@ package org.jboss.cdi.tck.tests.context.passivating;
 
 import java.io.Serializable;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class SerializableCity extends City implements Serializable {
 
     /**

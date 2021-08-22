@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.event.observer.wildcardAndTypeVariable;
 
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
+@Dependent
 public class BostonTerrier {
 
     public static boolean observedTypeVariable;

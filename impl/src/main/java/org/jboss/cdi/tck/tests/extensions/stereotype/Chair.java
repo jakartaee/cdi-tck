@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.stereotype;
 
+import jakarta.enterprise.context.Dependent;
+
 @StereotypeCandidate
+@Dependent
 public class Chair {
 
     public int breakUpToPieces() {

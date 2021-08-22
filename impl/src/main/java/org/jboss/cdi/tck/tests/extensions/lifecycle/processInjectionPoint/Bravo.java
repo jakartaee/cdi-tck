@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint;
 
+import jakarta.enterprise.context.Dependent;
+
 @Bar
+@Dependent
 public class Bravo<T> {
 
 }

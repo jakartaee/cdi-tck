@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nodecoratedtypes;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Foo {
 
     public void ping() {

@@ -16,10 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author pmuir
  * 
  */
+@Dependent
 public class AnimalImpl implements Animal {
 
 }

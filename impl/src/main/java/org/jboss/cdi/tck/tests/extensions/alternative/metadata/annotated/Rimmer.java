@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata.annotated;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Rimmer extends Human {
 
 }

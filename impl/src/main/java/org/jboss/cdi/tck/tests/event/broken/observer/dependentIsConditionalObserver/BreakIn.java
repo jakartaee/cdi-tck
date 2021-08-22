@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.dependentIsConditionalObserver;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class BreakIn {
 
 }

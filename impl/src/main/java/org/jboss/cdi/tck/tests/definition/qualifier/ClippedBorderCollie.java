@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
+import jakarta.enterprise.context.Dependent;
+
 @Hairy(clipped = true)
+@Dependent
 public class ClippedBorderCollie extends BorderCollie {
 
 }

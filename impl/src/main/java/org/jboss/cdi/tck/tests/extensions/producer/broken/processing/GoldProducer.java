@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.broken.processing;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class GoldProducer {
 
     @Produces

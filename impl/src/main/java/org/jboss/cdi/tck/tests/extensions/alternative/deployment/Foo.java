@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.deployment;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Foo {
     @Inject
     private Bar bar;

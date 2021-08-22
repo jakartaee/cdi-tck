@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.BeanManager;
 
+@Dependent
 public class BrownRecluse {
     public @Produces
     @FirstBorn

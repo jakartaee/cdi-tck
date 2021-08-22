@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.broken.binding;
 
+import jakarta.enterprise.context.Dependent;
+
 @LandingBinding
+@Dependent
 public class Jumbojet {
 
     public final void land() {

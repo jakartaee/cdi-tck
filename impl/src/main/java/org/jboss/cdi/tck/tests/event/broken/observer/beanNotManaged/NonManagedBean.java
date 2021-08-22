@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.beanNotManaged;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Any;
 
@@ -25,6 +26,7 @@ import jakarta.enterprise.inject.Any;
  * 
  * @author David Allen
  */
+@Dependent
 public class NonManagedBean {
     public NonManagedBean(String name) {
     }

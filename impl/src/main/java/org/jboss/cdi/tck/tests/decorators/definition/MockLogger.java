@@ -16,10 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author pmuir
  * 
  */
+@Dependent
 public class MockLogger implements Logger {
 
     private static String log = "";

@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class Sausage {
 
     @Produces

@@ -21,6 +21,8 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.AnnotatedField;
@@ -28,6 +30,7 @@ import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.PassivationCapable;
 
+@Dependent
 public class FooBean implements Bean<Foo>, PassivationCapable {
 
     public static CustomInjectionPoint integerInjectionPoint;

@@ -17,11 +17,13 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 
 @Vetoed
 @Wanted
+@Dependent
 public class Phoenix {
 
     @Inject

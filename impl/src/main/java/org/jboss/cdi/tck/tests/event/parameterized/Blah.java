@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.parameterized;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Blah<B1, B2> extends Bar<B1> {
 
 }

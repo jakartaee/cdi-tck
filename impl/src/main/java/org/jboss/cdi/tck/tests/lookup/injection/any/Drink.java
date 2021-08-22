@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.any;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Drink {
 
 }

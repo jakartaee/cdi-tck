@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bootstrap.unavailable.methods;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.enterprise.event.Observes;
 
 @Named("foo")
+@Dependent
 public class Foo {
 
     @Inject

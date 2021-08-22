@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class BasicLogger implements Logger {
 
     private static String message;

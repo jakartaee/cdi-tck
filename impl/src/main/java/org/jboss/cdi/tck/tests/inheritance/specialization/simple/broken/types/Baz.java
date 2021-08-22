@@ -16,11 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.types;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 import jakarta.enterprise.inject.Typed;
 
 @Typed(value = { Baz.class, Bar.class })
 @Specializes
+@Dependent
 public class Baz extends Bar {
 
 }

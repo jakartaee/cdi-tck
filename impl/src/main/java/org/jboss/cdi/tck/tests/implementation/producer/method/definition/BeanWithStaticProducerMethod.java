@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class BeanWithStaticProducerMethod {
     static boolean stringDestroyed;
     static boolean yummyDestroyed;

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.exclude.haircut;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Chonmage {
 
 }

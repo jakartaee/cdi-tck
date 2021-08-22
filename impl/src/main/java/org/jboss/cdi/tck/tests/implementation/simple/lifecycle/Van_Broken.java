@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Van_Broken {
 
     public Van_Broken() {

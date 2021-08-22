@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
+import jakarta.enterprise.context.Dependent;
 
+@Dependent
 public class FunnelWeaver<T> {
     String name;
 

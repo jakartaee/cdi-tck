@@ -16,8 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 
+import jakarta.enterprise.context.Dependent;
+
 @GuardedBySquirrel
 @GuardedByWoodpecker
+@Dependent
 public class Tree extends Plant {
 
     @Override

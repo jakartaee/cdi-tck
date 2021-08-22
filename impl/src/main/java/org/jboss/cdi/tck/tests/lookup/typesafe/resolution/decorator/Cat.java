@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.decorator;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Cat implements Animal {
     public String hello() {
         return "hello";

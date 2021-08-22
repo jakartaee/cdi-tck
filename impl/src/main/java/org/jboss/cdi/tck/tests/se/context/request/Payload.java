@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.se.context.request;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Payload {
 
     public int getI() {

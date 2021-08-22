@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.decorators.custom.broken.finalBeanClass;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Truck implements Vehicle {
 
     public void start() {

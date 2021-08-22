@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
+import jakarta.enterprise.context.Dependent;
+
 @Felid
+@Dependent
 public class Cat {
 
     protected int age = 0;

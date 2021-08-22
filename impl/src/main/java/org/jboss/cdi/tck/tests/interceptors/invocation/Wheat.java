@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Wheat {
     public Wheat(String type) {
     }

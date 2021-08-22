@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
-class Sheep {
+@Dependent
+public class Sheep {
     @Interceptors(SheepInterceptor.class)
     public String foo() {
         return "bar";

@@ -18,9 +18,11 @@ package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.
 
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class Foo<T> {
     @Produces
     @RequestScoped

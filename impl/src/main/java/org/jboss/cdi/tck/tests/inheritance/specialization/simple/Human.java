@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Human {
 
     public String getClassName() {

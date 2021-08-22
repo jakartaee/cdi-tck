@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 
 @Vetoed
+@Dependent
 public class Werewolf {
 }

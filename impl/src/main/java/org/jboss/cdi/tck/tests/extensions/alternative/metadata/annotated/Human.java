@@ -17,7 +17,10 @@
 
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata.annotated;
 
+import jakarta.enterprise.context.Dependent;
+
 @Mortal
+@Dependent
 public class Human extends Being {
 
 }

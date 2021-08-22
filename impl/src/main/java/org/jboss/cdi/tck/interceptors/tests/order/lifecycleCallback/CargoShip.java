@@ -17,8 +17,10 @@
 package org.jboss.cdi.tck.interceptors.tests.order.lifecycleCallback;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
 
-class CargoShip extends Ship {
+@Dependent
+public class CargoShip extends Ship {
     @PostConstruct
     void postConstruct2() {
         assert LakeCargoShip.getSequence() == 5;

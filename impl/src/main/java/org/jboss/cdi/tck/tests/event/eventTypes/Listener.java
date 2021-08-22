@@ -24,7 +24,7 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Any;
 
 @RequestScoped
-class Listener {
+public class Listener {
     List<Object> objectsFired = new ArrayList<Object>();
 
     public void registerNumberFired(@Observes @Extra Integer i) {

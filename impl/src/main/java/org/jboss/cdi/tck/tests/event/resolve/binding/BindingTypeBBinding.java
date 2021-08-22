@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.binding;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 
+@Dependent
 public class BindingTypeBBinding extends AnnotationLiteral<BindingTypeB> implements BindingTypeB {
 }

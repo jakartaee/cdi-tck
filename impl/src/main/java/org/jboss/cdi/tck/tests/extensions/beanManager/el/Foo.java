@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.el;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 import org.jboss.cdi.tck.util.ActionSequence;
@@ -29,6 +30,7 @@ import org.jboss.cdi.tck.util.SimpleLogger;
  * 
  */
 @Named
+@Dependent
 public class Foo {
 
     private SimpleLogger logger = new SimpleLogger(Foo.class);

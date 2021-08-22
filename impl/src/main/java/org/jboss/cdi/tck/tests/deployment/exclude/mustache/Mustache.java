@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.deployment.exclude.mustache;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Mustache {
 
 }

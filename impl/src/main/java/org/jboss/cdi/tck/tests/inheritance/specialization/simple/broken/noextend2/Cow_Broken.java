@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.noextend2;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 
 @Specializes
+@Dependent
 public class Cow_Broken {
 
 }

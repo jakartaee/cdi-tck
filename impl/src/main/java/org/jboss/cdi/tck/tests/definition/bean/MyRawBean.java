@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
+import jakarta.enterprise.context.Dependent;
+
 @SuppressWarnings("rawtypes")
-class MyRawBean extends MyBean {
+@Dependent
+public class MyRawBean extends MyBean {
 }

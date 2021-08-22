@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
 @Cheap
+@Dependent
 public class TropicalFruit implements Fruit {
     @Inject
     private InjectionPoint metadata;

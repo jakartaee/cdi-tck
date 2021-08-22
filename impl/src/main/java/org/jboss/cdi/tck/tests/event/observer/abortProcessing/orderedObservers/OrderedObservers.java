@@ -17,9 +17,11 @@
 package org.jboss.cdi.tck.tests.event.observer.abortProcessing.orderedObservers;
 
 import jakarta.annotation.Priority;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.interceptor.Interceptor;
 
+@Dependent
 public class OrderedObservers {
 
     public static boolean bestFriendsInvited = false;

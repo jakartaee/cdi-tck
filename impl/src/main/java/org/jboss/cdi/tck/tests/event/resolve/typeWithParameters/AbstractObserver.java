@@ -17,8 +17,10 @@
 
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
+import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.util.ActionSequence;
 
+@Dependent
 public abstract class AbstractObserver {
 
     protected void addAction(String sequenceName, Object event) {

@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.se.container.testPackage.nestedPackage;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Pear {
 }

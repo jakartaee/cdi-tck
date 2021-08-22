@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
  * @author pmuir
  * 
  */
+@Dependent
 public class MockLogger implements Logger {
 
     @Inject
@@ -45,7 +47,6 @@ public class MockLogger implements Logger {
     }
 
     /**
-     * @param log the log to set
      */
     public static void reset() {
         MockLogger.message = null;

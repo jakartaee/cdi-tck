@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Daphnia {
 
     private String name;

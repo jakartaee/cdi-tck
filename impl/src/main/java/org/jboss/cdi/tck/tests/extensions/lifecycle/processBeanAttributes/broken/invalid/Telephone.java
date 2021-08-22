@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken.invalid;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Telephone {
 
 }

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Bravo implements BravoInterface {
 
     @Override

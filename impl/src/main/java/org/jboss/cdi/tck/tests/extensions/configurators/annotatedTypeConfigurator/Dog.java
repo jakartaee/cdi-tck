@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
+import jakarta.enterprise.context.Dependent;
+
+//@Dependent
 public class Dog {
 
     private Feed feed;

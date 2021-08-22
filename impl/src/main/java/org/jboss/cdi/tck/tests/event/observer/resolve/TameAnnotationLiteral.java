@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 
+@Dependent
 public class TameAnnotationLiteral extends AnnotationLiteral<Tame> implements Tame {
 
 }

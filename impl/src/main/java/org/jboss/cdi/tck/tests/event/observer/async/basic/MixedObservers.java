@@ -19,13 +19,16 @@ package org.jboss.cdi.tck.tests.event.observer.async.basic;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import jakarta.annotation.Priority;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.ObservesAsync;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
+@Dependent
 public class MixedObservers {
 
+    @Dependent
     public static class MassachusettsInstituteObserver {
 
         public static final AtomicInteger threadId = new AtomicInteger();
@@ -37,6 +40,7 @@ public class MixedObservers {
         }
     }
 
+    @Dependent
     public static class OxfordUniversityObserver {
 
         public static final AtomicInteger threadId = new AtomicInteger();
@@ -48,6 +52,7 @@ public class MixedObservers {
         }
     }
 
+    @Dependent
     public static class YaleUniversityObserver {
 
         public void observes(@ObservesAsync @American Experiment experiment) {
@@ -57,6 +62,7 @@ public class MixedObservers {
 
     }
 
+    @Dependent
     public static class StandfordUniversityObserver {
 
         public static final AtomicInteger threadId = new AtomicInteger();

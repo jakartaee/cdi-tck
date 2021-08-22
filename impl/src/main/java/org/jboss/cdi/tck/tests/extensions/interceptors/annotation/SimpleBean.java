@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptors.annotation;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class SimpleBean {
 
     public String simpleMethod() {

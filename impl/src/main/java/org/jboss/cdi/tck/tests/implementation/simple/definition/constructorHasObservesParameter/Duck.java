@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasObservesParameter;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Duck {
 
 }

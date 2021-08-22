@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.decorator;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class Bar implements Foo {
 
     public boolean foo() {

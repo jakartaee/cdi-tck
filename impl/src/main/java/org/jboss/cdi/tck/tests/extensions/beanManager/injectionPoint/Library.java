@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.injectionPoint;
 
+import jakarta.enterprise.context.Dependent;
+
 @SuppressWarnings("unused")
+@Dependent
 public class Library {
 
     @Monograph

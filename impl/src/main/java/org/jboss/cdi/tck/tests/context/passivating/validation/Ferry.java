@@ -18,12 +18,15 @@ package org.jboss.cdi.tck.tests.context.passivating.validation;
 
 import java.io.Serializable;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * This bean is passivation capable although it is not required to be (it does not declare a passivating scope).
  * 
  */
 @EnginePowered
 @SuppressWarnings("serial")
+@Dependent
 public class Ferry implements Vessel, Serializable {
 
     public void sail() {

@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.inject.delegateField;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
  * @author pmuir
  * 
  */
+@Dependent
 public class CowShed {
 
     public static final String MESSAGE = "cowShed";

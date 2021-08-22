@@ -16,7 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent.transientreference;
 
+import jakarta.enterprise.context.Dependent;
 
+@Dependent
 public class Meal {
 
     private String name;

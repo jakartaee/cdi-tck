@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Logged
 @Interceptor
+@Dependent
 public class NetworkLogger {
     public static boolean intercepted = false;
 

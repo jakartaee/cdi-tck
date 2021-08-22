@@ -15,6 +15,7 @@ import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.PassivationCapable;
 
+@Dependent
 public class CowBean implements Bean<Cow>, PassivationCapable, Serializable {
     private static final long serialVersionUID = 6249623250272328272L;
     public static final String PASSIVATION_ID = "Cow-6249623250272328272L";

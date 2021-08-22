@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.inconsistent;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Employee {
 
 }

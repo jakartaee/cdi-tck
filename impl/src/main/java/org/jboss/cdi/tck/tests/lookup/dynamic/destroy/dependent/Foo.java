@@ -22,8 +22,10 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Foo {
 
     private static final AtomicInteger generator = new AtomicInteger();

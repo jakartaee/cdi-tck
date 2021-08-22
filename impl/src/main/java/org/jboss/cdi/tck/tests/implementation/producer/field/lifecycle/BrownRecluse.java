@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class BrownRecluse extends Spider {
     public BrownRecluse(Integer numberOfEyes) {
 

@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.parameterAnnotatedObserves;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Grouse_Broken {
 
     @Inject

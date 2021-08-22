@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Egg {
 
     private final Chicken mother;

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Lorry {
 
 }

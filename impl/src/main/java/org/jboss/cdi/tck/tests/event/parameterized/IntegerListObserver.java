@@ -18,5 +18,8 @@ package org.jboss.cdi.tck.tests.event.parameterized;
 
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class IntegerListObserver extends AbstractParameterizedObserver<List<Integer>> {
 }

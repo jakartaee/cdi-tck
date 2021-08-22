@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.event.resolve.binding;
 
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBSERVER_METHOD_RESOLUTION;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,9 +37,11 @@ public class DuplicateBindingTypesWhenResolvingTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DuplicateBindingTypesWhenResolvingTest.class).build();
     }
 
+    @Dependent
     public static class AnEventType {
     }
 
+    @Dependent
     public static class AnObserver {
         public boolean wasNotified = false;
 

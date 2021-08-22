@@ -19,12 +19,14 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Destructive
 @Airborne
+@Dependent
 public class Rocket extends Weapon {
 
     @Inject

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 
@@ -24,6 +25,7 @@ import jakarta.inject.Inject;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Vetoed
+@Dependent
 public class Skeleton {
     
     private int healthPoints;

@@ -17,9 +17,11 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Alternative
+@Dependent
 public class Soy implements Food {
 
 }

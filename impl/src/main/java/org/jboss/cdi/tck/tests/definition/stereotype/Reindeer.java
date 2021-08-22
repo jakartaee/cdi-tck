@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype;
 
+import jakarta.enterprise.context.Dependent;
+
 @HornedMammalStereotype
+@Dependent
 public class Reindeer implements Animal {
 
 }

@@ -18,7 +18,10 @@ package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
+
 @IntegerPowered
+@Dependent
 public class IntegerListOfStringsDao extends Dao<Integer, List<String>> {
 
     @Override

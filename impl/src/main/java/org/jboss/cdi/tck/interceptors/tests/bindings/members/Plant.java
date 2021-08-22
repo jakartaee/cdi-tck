@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.members;
 
+import jakarta.enterprise.context.Dependent;
+
 @PlantInterceptorBinding(age = 1, name = Plant.TEST)
+@Dependent
 public class Plant {
 
     public static final String TEST = "TEST";

@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.observer.broken.definitionError;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
+@Dependent
 public class EventBObserver {
     public void observeEvent(@Observes EventB event) {
 

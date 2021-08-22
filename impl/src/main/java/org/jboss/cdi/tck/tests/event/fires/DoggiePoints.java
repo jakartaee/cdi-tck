@@ -21,7 +21,7 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Any;
 
 @RequestScoped
-class DoggiePoints {
+public class DoggiePoints {
     private int numPraiseReceived;
 
     private int numTamed;

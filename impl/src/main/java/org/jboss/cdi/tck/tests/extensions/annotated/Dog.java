@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Dog extends Mammal {
 
     public void bite() {

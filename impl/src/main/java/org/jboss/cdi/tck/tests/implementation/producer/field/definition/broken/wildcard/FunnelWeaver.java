@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.wildcard;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class FunnelWeaver<T> {
 
 }

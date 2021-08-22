@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionTargetFactory;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 
 /**
@@ -23,6 +24,7 @@ import jakarta.enterprise.inject.Vetoed;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Vetoed
+@Dependent
 public class NotOurClass {
 
     private SomeService service;

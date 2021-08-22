@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
+import jakarta.enterprise.context.Dependent;
+
 @Room
+@Dependent
 public class InteriorRoom implements Interior {
     public void foo() {
 

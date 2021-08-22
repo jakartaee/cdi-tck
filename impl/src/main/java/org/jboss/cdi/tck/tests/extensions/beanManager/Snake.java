@@ -17,12 +17,14 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
  */
+@Dependent
 public class Snake {
 
     @Inject

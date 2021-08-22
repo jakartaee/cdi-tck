@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.invocation;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 @AlmightyBinding
+@Dependent
 public class Missile {
     @Inject
     private Warhead warhead;

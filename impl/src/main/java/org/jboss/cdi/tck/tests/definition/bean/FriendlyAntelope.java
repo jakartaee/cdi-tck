@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class FriendlyAntelope extends AbstractAntelope {
     @Override
     public String getGreeting() {

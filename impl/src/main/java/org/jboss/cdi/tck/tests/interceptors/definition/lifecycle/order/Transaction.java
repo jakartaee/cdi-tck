@@ -20,8 +20,10 @@ package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.order;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 
+import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.util.ActionSequence;
 
+@Dependent
 public class Transaction {
 
     @PreDestroy

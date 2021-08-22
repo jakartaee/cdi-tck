@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class City {
     public void ping() {
 

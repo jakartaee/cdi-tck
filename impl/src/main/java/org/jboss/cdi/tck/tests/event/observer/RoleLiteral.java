@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("all")
+@Dependent
 public class RoleLiteral extends AnnotationLiteral<Role> implements Role {
 
     private static final long serialVersionUID = 1L;

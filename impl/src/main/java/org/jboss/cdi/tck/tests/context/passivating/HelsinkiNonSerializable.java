@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Alternative
+@Dependent
 public class HelsinkiNonSerializable {
 
     public void ping() {

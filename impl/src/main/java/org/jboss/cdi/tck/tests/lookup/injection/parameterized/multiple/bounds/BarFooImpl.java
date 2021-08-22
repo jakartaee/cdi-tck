@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized.multiple.bounds;
 
-class BarFooImpl extends BarImpl implements Foo {
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+public class BarFooImpl extends BarImpl implements Foo {
 }

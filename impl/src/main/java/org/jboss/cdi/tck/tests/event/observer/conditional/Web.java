@@ -16,8 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.conditional;
 
+import jakarta.enterprise.context.Dependent;
+
 @Spun
-class Web {
+@Dependent
+public class Web {
     private int rings = 0;
 
     public void addRing() {

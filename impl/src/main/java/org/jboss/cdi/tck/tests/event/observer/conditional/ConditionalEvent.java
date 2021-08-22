@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.conditional;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class ConditionalEvent {
 
 }

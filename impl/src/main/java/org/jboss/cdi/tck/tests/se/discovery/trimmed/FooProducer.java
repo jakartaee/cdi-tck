@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.se.discovery.trimmed;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class FooProducer {
 
     @Produces

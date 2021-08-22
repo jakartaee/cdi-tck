@@ -20,6 +20,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
@@ -28,6 +30,7 @@ import jakarta.inject.Qualifier;
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
 public @interface Wild {
 
+    @Dependent
     public static class WildLiteral extends AnnotationLiteral<Wild> implements Wild {
 
         public static WildLiteral INSTANCE = new WildLiteral();

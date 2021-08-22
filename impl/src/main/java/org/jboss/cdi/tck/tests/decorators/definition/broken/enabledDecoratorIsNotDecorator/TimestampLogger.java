@@ -16,10 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.enabledDecoratorIsNotDecorator;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author pmuir
  * 
  */
+@Dependent
 public abstract class TimestampLogger implements Logger {
 
 }

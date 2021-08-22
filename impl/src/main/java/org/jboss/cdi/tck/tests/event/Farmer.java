@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
+@Dependent
 public class Farmer {
 
     public void observeEggLaying(@Observes Egg egg) {

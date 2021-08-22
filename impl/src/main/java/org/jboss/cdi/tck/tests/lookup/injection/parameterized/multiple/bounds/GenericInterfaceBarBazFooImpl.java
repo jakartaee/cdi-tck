@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized.multiple.bounds;
 
-class GenericInterfaceBarBazFooImpl<T extends Bar & Baz & Foo> implements GenericInterface<T> {
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+public class GenericInterfaceBarBazFooImpl<T extends Bar & Baz & Foo> implements GenericInterface<T> {
 
     @Override
     public String getId() {

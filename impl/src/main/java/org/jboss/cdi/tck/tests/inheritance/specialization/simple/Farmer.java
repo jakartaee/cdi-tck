@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 import jakarta.inject.Named;
 
 @Specializes
 @Landowner
 @Named
+@Dependent
 public class Farmer extends Human {
 
     public String getClassName() {

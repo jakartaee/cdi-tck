@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 
 @SuppressWarnings("serial")
+@Dependent
 public class TameLiteral extends AnnotationLiteral<Tame> implements Tame {
 
 }

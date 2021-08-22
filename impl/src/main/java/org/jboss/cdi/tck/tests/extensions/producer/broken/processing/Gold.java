@@ -17,6 +17,9 @@
 package org.jboss.cdi.tck.tests.extensions.producer.broken.processing;
 
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Gold {
 
     public Gold(int carats) {

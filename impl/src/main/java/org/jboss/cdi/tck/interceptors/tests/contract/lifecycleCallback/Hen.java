@@ -23,7 +23,7 @@ import jakarta.interceptor.Interceptors;
 
 @Interceptors(AnimalInterceptor.class)
 @ApplicationScoped
-class Hen extends Animal {
+public class Hen extends Animal {
     protected static final String HEN = "Hen";
 
     private static boolean postConstructInterceptorCalled = false;

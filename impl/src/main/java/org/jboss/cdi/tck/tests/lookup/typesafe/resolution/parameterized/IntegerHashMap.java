@@ -18,6 +18,9 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
 import java.util.HashMap;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class IntegerHashMap extends HashMap<Integer, Integer> {
 
     private static final long serialVersionUID = 1L;

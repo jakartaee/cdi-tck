@@ -16,11 +16,13 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.interceptor.Interceptors;
 
 @WarriorBinding
 @Interceptors(WarriorPDInterceptor.class)
+@Dependent
 public class Warrior {
 
     @Inject

@@ -19,14 +19,20 @@ package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Qux<T> {
 
+    @Dependent
     protected static class QuxString extends Qux<String> {
     }
 
+    @Dependent
     protected static class QuxNumber extends Qux<Number> {
     }
 
+    @Dependent
     protected static class QuxStringList extends Qux<List<String>> {
     }
 

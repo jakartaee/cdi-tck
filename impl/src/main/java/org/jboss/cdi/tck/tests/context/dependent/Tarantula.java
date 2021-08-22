@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.context.dependent;
 
 import jakarta.annotation.PreDestroy;
 
+import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 
+@Dependent
 public class Tarantula extends Spider implements DeadlySpider {
 
     private static boolean destroyed;

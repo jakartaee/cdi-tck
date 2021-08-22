@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class FinalProduct {
 
     public int ping() {

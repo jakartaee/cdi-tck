@@ -21,7 +21,7 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Any;
 
 @RequestScoped
-class AlarmSystem {
+public class AlarmSystem {
     private int numSecurityEvents = 0;
 
     private int numSystemTests = 0;

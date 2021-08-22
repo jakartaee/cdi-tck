@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.parameters;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Idea {
 
     private String summary;

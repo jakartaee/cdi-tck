@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.Typed;
 
@@ -23,6 +24,7 @@ import jakarta.enterprise.inject.Typed;
  * 
  * @author Martin Kouba
  */
+@Dependent
 public class BoulderFieldProducer {
 
     @Typed(Animal.class)
