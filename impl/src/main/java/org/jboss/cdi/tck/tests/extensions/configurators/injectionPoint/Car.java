@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
+import jakarta.enterprise.context.Dependent;
+
 @Driving
+@Dependent
 public class Car implements Vehicle {
 
 }

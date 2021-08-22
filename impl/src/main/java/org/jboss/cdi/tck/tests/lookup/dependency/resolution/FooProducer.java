@@ -17,10 +17,12 @@
 
 package org.jboss.cdi.tck.tests.lookup.dependency.resolution;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
 
 @Alternative
+@Dependent
 public class FooProducer {
 
     @Produces

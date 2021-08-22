@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.dependency.resolution;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Bar {
 
     private int id = 1;

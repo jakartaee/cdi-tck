@@ -21,6 +21,7 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Reception;
 import jakarta.enterprise.event.TransactionPhase;
 import jakarta.enterprise.inject.Any;
@@ -30,6 +31,7 @@ import jakarta.enterprise.inject.spi.ObserverMethod;
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
+@Dependent
 public class BoxObserverMethod implements ObserverMethod<Box> {
 
     @Override

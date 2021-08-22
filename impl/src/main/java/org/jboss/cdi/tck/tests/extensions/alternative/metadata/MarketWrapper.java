@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
+import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.util.annotated.*;
 
 import jakarta.enterprise.inject.Any;
@@ -28,6 +29,7 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
+@Dependent
 public class MarketWrapper extends AnnotatedTypeWrapper<Market> {
 
     private final Set<Type> typeClosure = new HashSet<Type>();

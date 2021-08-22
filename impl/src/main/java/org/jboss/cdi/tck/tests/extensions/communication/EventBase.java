@@ -17,10 +17,13 @@
 
 package org.jboss.cdi.tck.tests.extensions.communication;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author Martin Kouba
  * 
  */
+@Dependent
 public abstract class EventBase {
 
     public static final String PAT_SEQ = "pat";

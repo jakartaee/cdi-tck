@@ -17,9 +17,11 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.interceptor.Interceptors;
 
+@Dependent
 public class Baz {
 
     public final Bar bar;

@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.Produces;
@@ -28,6 +29,7 @@ import jakarta.enterprise.inject.Produces;
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
+@Dependent
 public class MonsterController {
 
     public static boolean zombieKilled = false;

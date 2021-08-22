@@ -16,8 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
+import jakarta.enterprise.context.Dependent;
+
 @Domestic
 @CatInterceptorBinding
+@Dependent
 public class Cat {
 
 }

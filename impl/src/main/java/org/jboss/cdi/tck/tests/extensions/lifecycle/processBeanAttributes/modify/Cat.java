@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.modify;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Cat implements Animal {
 }

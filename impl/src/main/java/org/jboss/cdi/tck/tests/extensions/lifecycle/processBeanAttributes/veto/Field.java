@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.veto;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
 /**
@@ -24,6 +25,7 @@ import jakarta.enterprise.inject.Produces;
  * @author Jozef Hartinger
  * 
  */
+@Dependent
 public class Field {
 
     @Produces

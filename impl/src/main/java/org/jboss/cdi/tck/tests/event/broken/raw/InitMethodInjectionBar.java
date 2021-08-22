@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.event.broken.raw;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 
@@ -25,6 +26,7 @@ import jakarta.inject.Inject;
  * 
  */
 @SuppressWarnings("rawtypes")
+@Dependent
 public class InitMethodInjectionBar {
 
     Event event;

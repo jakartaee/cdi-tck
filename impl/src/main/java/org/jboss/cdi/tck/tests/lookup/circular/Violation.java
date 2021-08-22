@@ -18,6 +18,9 @@ package org.jboss.cdi.tck.tests.lookup.circular;
 
 import java.io.Serializable;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Violation implements Serializable {
 
     private static final long serialVersionUID = 1L;

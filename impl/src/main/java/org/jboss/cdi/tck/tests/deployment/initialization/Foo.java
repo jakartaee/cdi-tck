@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.deployment.initialization;
 
+import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.util.ActionSequence;
 
+@Dependent
 public class Foo {
 
     public static long pingPerformedAt = 0l;

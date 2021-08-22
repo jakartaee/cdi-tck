@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.se.container;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
+@Dependent
 public class QuxObserver {
 
     public static boolean isNotified = false;

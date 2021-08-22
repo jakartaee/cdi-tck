@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.event.observer.inheritance;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.BeanManager;
 
@@ -26,6 +27,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
  * @author Martin Kouba
  * 
  */
+@Dependent
 public abstract class AbstractEggObserver {
 
     public void observeNewEgg(@Observes Egg egg, BeanManager beanManager) {

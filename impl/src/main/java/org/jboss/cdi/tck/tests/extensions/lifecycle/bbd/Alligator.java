@@ -16,11 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author pmuir
  * 
  */
 @Tame
+@Dependent
 public class Alligator {
 
 }

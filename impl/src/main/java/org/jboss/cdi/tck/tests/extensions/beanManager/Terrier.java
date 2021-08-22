@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Terrier extends Dog {
     @Inject
     private InjectionPoint injectedMetadata;

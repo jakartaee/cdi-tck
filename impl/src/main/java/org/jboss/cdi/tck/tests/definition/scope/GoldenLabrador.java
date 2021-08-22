@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class GoldenLabrador extends Labrador {
 
 }

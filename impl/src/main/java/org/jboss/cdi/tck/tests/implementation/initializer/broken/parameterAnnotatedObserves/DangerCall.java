@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.parameterAnnotatedObserves;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class DangerCall {
 
 }

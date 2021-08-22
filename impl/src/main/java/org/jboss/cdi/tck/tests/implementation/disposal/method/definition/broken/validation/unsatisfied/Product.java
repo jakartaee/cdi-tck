@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.validation.unsatisfied;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Product {
 
     public Product(String name) {

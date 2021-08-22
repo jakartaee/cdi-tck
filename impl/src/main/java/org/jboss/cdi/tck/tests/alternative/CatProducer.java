@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.alternative;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class CatProducer {
 
     @Produces

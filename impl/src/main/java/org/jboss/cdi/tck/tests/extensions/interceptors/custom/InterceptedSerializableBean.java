@@ -18,10 +18,12 @@ package org.jboss.cdi.tck.tests.extensions.interceptors.custom;
 
 import java.io.Serializable;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Typed;
 
 @SuppressWarnings("serial")
 @Typed(InterceptedSerializableBean.class)
+@Dependent
 public class InterceptedSerializableBean extends InterceptedBean implements Serializable {
 
     @FooInterceptorBinding

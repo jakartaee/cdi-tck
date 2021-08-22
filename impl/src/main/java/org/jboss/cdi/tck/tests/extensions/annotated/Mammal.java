@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Mammal implements Animal {
 
     public Integer drinkMilk() {

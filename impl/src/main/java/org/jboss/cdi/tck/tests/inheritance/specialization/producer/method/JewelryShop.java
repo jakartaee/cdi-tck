@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.Specializes;
 
+@Dependent
 public class JewelryShop extends Shop {
     @Override
     @Produces

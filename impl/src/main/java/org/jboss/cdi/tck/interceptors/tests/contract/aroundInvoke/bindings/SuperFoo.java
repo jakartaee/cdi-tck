@@ -16,11 +16,13 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.bindings;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
+@Dependent
 public class SuperFoo {
 
     @AroundInvoke

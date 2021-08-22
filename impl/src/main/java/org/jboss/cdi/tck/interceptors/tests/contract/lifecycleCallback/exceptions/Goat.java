@@ -17,10 +17,12 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptions;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
 @Interceptors(GoatInterceptor.class)
-class Goat {
+@Dependent
+public class Goat {
     @PostConstruct
     public void postConstruct() {
         throw new IllegalStateException();

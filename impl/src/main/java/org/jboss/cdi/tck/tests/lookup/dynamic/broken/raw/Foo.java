@@ -17,10 +17,13 @@
     
 package org.jboss.cdi.tck.tests.lookup.dynamic.broken.raw;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author Martin Kouba
  *
  */
+@Dependent
 public class Foo {
 
 }

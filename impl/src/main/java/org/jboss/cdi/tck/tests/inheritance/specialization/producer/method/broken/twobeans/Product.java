@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.broken.twobeans;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Product {
 
 }

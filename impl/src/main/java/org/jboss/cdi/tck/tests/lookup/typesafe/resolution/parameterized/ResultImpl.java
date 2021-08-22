@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
-class ResultImpl<T1 extends Exception, T2 extends Exception> implements Result<T1, T2> {
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+public class ResultImpl<T1 extends Exception, T2 extends Exception> implements Result<T1, T2> {
 }

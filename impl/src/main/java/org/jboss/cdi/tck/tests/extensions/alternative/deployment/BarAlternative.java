@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.deployment;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Alternative
+@Dependent
 public class BarAlternative extends Bar {
     @Override
     public String ping() {

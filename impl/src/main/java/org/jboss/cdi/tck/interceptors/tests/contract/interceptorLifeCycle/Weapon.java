@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
+@Dependent
 public class Weapon {
     
     private WeaponAIInterceptor wi;

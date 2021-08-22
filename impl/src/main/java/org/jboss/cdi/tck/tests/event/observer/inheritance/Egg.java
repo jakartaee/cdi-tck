@@ -18,10 +18,13 @@
 package org.jboss.cdi.tck.tests.event.observer.inheritance;
 
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author Martin Kouba
  * 
  */
+@Dependent
 public class Egg {
 
 }

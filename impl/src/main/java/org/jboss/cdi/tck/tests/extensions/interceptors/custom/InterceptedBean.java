@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptors.custom;
 
+import jakarta.enterprise.context.Dependent;
+
 @FooInterceptorBinding
+@Dependent
 public class InterceptedBean {
 
     public boolean foo() {

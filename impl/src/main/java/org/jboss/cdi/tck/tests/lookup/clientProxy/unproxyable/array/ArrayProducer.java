@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.array;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class ArrayProducer {
 
     @Produces

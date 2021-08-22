@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct.withAroundInvoke;
 
+import jakarta.enterprise.context.Dependent;
+
 @FooBinding
+@Dependent
 public class Foo {
 
     public int ping(){

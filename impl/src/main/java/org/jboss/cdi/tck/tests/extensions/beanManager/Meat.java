@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Meat implements Food {
 
 }

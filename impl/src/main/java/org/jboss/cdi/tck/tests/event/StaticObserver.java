@@ -20,7 +20,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Observes;
 
 @RequestScoped
-class StaticObserver {
+public class StaticObserver {
     private static boolean deliveryReceived = false;
     private static Thread threadObservingEvent = null;
 

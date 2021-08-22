@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Tiger implements Mammal<String> {
 
 }

@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct.returnValueIgnored;
 
+import jakarta.enterprise.context.Dependent;
+
 @FooBinding
+@Dependent
 public class Foo {
 
     private String name;

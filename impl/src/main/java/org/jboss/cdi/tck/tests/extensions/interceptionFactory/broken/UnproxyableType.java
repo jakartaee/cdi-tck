@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory.broken;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 
 @Vetoed
+@Dependent
 public class UnproxyableType {
 
     public final void unproxyable(String name){

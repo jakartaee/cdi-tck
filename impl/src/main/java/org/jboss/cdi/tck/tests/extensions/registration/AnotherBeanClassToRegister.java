@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.registration;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class AnotherBeanClassToRegister {
     @Inject
     private BeanClassToRegister collaborator;

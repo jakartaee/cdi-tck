@@ -26,7 +26,7 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Any;
 
 @RequestScoped
-class Housekeeping {
+public class Housekeeping {
     private Set<Item> itemsTainted = new HashSet<Item>();
 
     private Set<Item> itemsMissing = new HashSet<Item>();

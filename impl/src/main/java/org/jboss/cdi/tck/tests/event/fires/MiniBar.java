@@ -19,11 +19,13 @@ package org.jboss.cdi.tck.tests.event.fires;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Inject;
 
+@Dependent
 public class MiniBar {
 
     private Set<Item> items = new HashSet<Item>();

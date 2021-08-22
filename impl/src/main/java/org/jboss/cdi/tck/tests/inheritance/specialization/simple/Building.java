@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class Building {
 
     protected String getClassName() {

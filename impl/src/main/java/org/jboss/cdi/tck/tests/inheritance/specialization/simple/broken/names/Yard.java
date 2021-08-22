@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.names;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Named("backyard")
+@Dependent
 public class Yard {
 
 }

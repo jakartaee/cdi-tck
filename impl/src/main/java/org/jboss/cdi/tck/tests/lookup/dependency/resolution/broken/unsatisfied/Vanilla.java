@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dependency.resolution.broken.unsatisfied;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Vanilla {
 
 }

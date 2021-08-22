@@ -17,7 +17,9 @@
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 
+@Dependent
 public class Egg {
     private static boolean eggDestroyed = false;
 

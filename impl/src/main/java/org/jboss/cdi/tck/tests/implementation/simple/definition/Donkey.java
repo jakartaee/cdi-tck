@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Donkey {
 
     public static boolean constructedCorrectly = false;

@@ -18,6 +18,9 @@ package org.jboss.cdi.tck.tests.definition.qualifier;
 
 import java.io.Serializable;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Tarantula extends Spider implements DeadlySpider, Serializable {
 
     /**

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Box <A,B,C> {
 
 }

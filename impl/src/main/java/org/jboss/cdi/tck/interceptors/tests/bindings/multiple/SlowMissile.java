@@ -16,8 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.multiple;
 
+import jakarta.enterprise.context.Dependent;
+
 @Slow
 @Deadly
+@Dependent
 public class SlowMissile implements Missile {
     public void fire() {
     }

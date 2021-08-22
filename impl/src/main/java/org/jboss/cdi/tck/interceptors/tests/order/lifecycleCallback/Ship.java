@@ -17,7 +17,9 @@
 package org.jboss.cdi.tck.interceptors.tests.order.lifecycleCallback;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
 
+@Dependent
 class Ship {
     @PostConstruct
     void postConstruct1() {

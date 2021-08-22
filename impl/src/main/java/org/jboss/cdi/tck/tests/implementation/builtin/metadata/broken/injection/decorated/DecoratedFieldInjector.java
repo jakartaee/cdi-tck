@@ -17,10 +17,12 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection.decorated;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Decorated;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.inject.Inject;
 
+@Dependent
 public class DecoratedFieldInjector {
 
     @Inject

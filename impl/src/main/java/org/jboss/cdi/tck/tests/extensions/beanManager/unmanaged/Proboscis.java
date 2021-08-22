@@ -18,11 +18,13 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 
 /**
  * @author Kirill Gaevskii
  *
  */
+@Dependent
 public class Proboscis {
 
     public static boolean postConstructCalled = false;

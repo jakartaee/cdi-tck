@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.deployment;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Bar {
     public String ping() {
         return "bar";

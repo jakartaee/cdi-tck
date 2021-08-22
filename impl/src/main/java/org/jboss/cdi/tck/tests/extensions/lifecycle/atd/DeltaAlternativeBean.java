@@ -30,6 +30,7 @@ import java.util.Set;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.Prioritized;
 
+@Dependent
 public class DeltaAlternativeBean implements Bean<DeltaAlternative>, Prioritized {
 
     public Class<?> getBeanClass() {

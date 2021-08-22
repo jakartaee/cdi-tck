@@ -16,11 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.extensions.registration;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  *
  * @author rsmeral
  */
 @BeanieType("basic")
+@Dependent
 public class Beanie {
     
 }

@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasAsyncObservesParameter;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Food {
 }

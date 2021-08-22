@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.implementation.initializer.broken.generic;
 
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Foo {
     private List<?> injectedList;
 

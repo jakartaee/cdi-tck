@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint;
 
-class ProducedBean {
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+public class ProducedBean {
 
     private ProducedBean() {
     }

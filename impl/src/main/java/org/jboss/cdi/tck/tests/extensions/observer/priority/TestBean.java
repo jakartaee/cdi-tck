@@ -17,5 +17,8 @@
 
 package org.jboss.cdi.tck.tests.extensions.observer.priority;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class TestBean {
 }

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class WebSpider extends Spider implements DeadlySpider {
 
 }

@@ -17,7 +17,10 @@
 
 package org.jboss.cdi.tck.tests.extensions.beanManager.equivalence.qualifier;
 
+import jakarta.enterprise.context.Dependent;
+
 @Monster(numberOfVictims = 10, position = "bridge", armorClass = @ArmorClass(100))
+@Dependent
 public class Troll {
 
 }

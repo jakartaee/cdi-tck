@@ -17,10 +17,13 @@
 
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.decorator;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author Martin Kouba
  * 
  */
+@Dependent
 public class Charlie implements Alpha, Bravo {
 
     @Override

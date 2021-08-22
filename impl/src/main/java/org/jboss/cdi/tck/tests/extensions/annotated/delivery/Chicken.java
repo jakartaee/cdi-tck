@@ -17,7 +17,10 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
+import jakarta.enterprise.context.Dependent;
+
 @Baby
+@Dependent
 public class Chicken {
 
 }

@@ -25,6 +25,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
@@ -34,6 +35,7 @@ import jakarta.inject.Qualifier;
 public @interface Mock {
 
     @SuppressWarnings("all")
+    @Dependent
     public static class MockLiteral extends AnnotationLiteral<Mock> implements Mock {
 
         public MockLiteral() {

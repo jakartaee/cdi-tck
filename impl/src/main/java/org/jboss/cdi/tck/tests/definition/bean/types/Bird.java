@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public abstract class Bird<E, T> implements Animal<T> {
 
 }

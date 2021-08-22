@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
-class SimpleBean {
+@Dependent
+public class SimpleBean {
     @Interceptors(PrivateInterceptor.class)
     public int zero() {
         return 0;

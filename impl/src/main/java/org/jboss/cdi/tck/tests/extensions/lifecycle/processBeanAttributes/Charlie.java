@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes;
 
-class Charlie implements CharlieInterface {
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+public class Charlie implements CharlieInterface {
 }

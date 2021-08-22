@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class ItalianFood {
 }

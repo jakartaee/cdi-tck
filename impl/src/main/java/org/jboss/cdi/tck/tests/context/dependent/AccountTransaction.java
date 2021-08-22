@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
+import jakarta.enterprise.context.Dependent;
+
 @Transactional
+@Dependent
 public class AccountTransaction {
     public void execute() {
     }

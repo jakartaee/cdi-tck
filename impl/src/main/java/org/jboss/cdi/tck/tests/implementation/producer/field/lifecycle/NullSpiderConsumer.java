@@ -19,12 +19,15 @@ package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
 import java.io.Serializable;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * Simple bean that has an injection point for a spider
  * 
  * @author David Allen
  * 
  */
+@Dependent
 public class NullSpiderConsumer implements Serializable {
     private static final long serialVersionUID = 1L;
 

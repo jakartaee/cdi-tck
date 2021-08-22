@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
+import jakarta.enterprise.context.Dependent;
+
 @Loggable
+@Dependent
 public class SecureTransaction {
     public void transact() {
     }

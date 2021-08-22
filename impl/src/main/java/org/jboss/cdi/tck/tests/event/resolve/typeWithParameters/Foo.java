@@ -18,17 +18,24 @@ package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Foo<T> {
 
+    @Dependent
     protected static class FooString extends Foo<String> {
     }
 
+    @Dependent
     protected static class FooInteger extends Foo<Integer> {
     }
 
+    @Dependent
     protected static class FooStringList extends Foo<List<String>> {
     }
 
+    @Dependent
     protected static class FooObject extends Foo<Object> {
     }
 

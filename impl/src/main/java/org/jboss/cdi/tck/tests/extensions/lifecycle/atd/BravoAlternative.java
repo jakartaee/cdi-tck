@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class BravoAlternative implements Alternatives {
 
 }

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.metadata.injectionpoint;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Info {
 
 }

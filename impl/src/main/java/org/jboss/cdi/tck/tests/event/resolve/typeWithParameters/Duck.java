@@ -17,11 +17,16 @@
 
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Duck<T> {
 
+    @Dependent
     protected static class DuckString extends Duck<String> {
     }
 
+    @Dependent
     protected static class DuckInteger extends Duck<Integer> {
     }
 

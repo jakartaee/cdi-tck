@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
-class Bar implements Common {
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+public class Bar implements Common {
 
     @Override
     public boolean ping() {

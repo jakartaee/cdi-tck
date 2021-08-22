@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.interceptor.Interceptors;
 
 @Interceptors({ AroundInvokeInterceptor.class, PostConstructInterceptor.class, PreDestroyInterceptor.class })
+@Dependent
 public class Baz {
 
     @Inject

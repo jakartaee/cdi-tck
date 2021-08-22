@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class AnEventType {
 }

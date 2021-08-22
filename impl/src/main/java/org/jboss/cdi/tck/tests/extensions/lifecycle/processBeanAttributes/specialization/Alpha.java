@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.specialization;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Foo
 @Named("alpha")
+@Dependent
 public class Alpha {
 
 }

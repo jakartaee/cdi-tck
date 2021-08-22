@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
@@ -24,6 +25,7 @@ import jakarta.inject.Named;
  * 
  * @author Martin Kouba
  */
+@Dependent
 public class BugProducer {
 
     @Produces

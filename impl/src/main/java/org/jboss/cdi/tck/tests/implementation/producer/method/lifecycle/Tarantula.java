@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Tarantula extends Spider implements DeadlySpider {
     private final String value;
     private static int numberCreated = 0;

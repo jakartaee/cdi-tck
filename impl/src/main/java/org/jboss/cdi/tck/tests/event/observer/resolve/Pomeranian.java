@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Named;
 
 @Named("Teddy")
+@Dependent
 public class Pomeranian {
     public static Thread notificationThread;
 

@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Instance;
 
+@Dependent
 public class Baz {
 
     Instance<Bar> barInstance;

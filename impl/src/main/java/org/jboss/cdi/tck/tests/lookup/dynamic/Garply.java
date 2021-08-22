@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Garply implements Uncommon {
     @Override
     public boolean ping() {

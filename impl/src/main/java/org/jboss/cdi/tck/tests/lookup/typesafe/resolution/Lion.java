@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Lion extends Cat<African> {
 
     public Lion(String name) {

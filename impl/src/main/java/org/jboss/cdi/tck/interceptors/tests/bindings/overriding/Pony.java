@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.overriding;
 
+import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.interceptors.tests.bindings.overriding.Aging.Speed;
 
 @Aging(Speed.FAST)
 @Negating
+@Dependent
 // verifies that this interceptor binding is not removed (overriden)
-class Pony {
+public class Pony {
 
     @Aging(Speed.SLOW)
     public int getAge() {

@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
-class BarBazImpl implements Bar, Baz {
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+public class BarBazImpl implements Bar, Baz {
 }

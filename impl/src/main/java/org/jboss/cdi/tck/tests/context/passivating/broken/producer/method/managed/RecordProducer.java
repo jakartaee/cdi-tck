@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.producer.method.managed;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class RecordProducer {
     public final @Produces
     @SessionScoped

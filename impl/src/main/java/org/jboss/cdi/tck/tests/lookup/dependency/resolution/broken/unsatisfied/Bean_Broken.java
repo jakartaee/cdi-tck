@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dependency.resolution.broken.unsatisfied;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 @SuppressWarnings("unused")
+@Dependent
 public class Bean_Broken {
 
     @Inject

@@ -18,7 +18,10 @@ package org.jboss.cdi.tck.tests.context.passivating;
 
 import java.io.Serializable;
 
+import jakarta.enterprise.context.Dependent;
+
 @SuppressWarnings("serial")
+@Dependent
 public class Wheat implements Serializable {
 
 }

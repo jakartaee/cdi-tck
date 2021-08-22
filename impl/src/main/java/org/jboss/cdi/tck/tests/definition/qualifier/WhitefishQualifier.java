@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 
+@Dependent
 public class WhitefishQualifier extends AnnotationLiteral<Whitefish> implements Whitefish {
 
 }

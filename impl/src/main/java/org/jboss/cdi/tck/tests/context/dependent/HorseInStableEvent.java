@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class HorseInStableEvent {
 
 }

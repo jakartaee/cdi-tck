@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.event.metadata;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Duck<T> {
 
 }

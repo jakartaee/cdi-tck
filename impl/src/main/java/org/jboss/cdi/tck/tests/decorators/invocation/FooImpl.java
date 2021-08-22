@@ -16,10 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author pmuir
  * 
  */
+@Dependent
 public class FooImpl implements Foo {
 
     private static String message;
@@ -32,7 +35,6 @@ public class FooImpl implements Foo {
     }
 
     /**
-     * @param message the message to set
      */
     public static void reset() {
         FooImpl.message = null;

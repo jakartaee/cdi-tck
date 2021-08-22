@@ -22,6 +22,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.Set;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.Annotated;
@@ -29,6 +30,7 @@ import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
+@Dependent
 public class CustomEventInjectionPoint implements InjectionPoint {
 
     private Bean<?> bean;
