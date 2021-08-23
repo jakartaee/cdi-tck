@@ -23,6 +23,7 @@ import jakarta.enterprise.context.Dependent;
  * @author Martin Kouba
  * 
  */
+// deliberately annotated so that it triggers PAT in extension processing
 @Dependent
 public class PatEvent extends EventBase {
 

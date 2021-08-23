@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
+@DummyStereotype
 public class BorderCollie extends Dog {
 
 }

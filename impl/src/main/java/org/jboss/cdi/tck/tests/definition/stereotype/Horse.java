@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype;
 
-import jakarta.enterprise.context.Dependent;
-
 @AnotherStereotype
-@Dependent
 public class Horse {
 
 }

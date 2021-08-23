@@ -19,14 +19,15 @@ package org.jboss.cdi.tck.tests.inheritance.specialization.qualifiers;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 
-@Dependent
 public class StaticNestedClassesParent {
     @Mock
+    @Dependent
     public static class StaticSpecializationBean {
 
     }
 
     @Specializes
+    @Dependent
     public static class StaticMockSpecializationBean extends StaticSpecializationBean {
 
     }

@@ -28,7 +28,6 @@ import java.util.Set;
 
 import jakarta.enterprise.inject.Default;
 
-@Dependent
 public class DeltaDecoratorBean implements Decorator<DeltaDecorator>, Prioritized {
 
     private AnnotatedField<? super DeltaDecorator> annotatedField = null;
