@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype;
 
-import jakarta.enterprise.context.Dependent;
-
 @AnimalStereotype
-@Dependent
 public class Moose implements Animal {
 
 }

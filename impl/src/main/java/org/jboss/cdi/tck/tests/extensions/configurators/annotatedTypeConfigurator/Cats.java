@@ -21,7 +21,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
@@ -30,7 +29,6 @@ import jakarta.inject.Qualifier;
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE, ElementType.PARAMETER })
 public @interface Cats {
 
-    @Dependent
     public static class CatsLiteral extends AnnotationLiteral<Cats> implements Cats {
             public static CatsLiteral INSTANCE = new CatsLiteral();
     }

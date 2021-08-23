@@ -35,7 +35,9 @@ import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Baz;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Boss;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Foo;
 import org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib.Pro;
+import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -54,6 +56,7 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(BeforeBeanDiscoveryTest.class)
                 .withExtension(BeforeBeanDiscoveryObserver.class)
                 .withLibrary(Boss.class, Foo.class, Bar.class, Baz.class, Pro.class)
+                .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
                 .build();
     }
 

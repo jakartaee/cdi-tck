@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Clydesdale extends Horse {
 
 }

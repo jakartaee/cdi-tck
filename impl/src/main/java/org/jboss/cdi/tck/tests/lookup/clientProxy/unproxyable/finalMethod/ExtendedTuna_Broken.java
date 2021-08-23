@@ -16,8 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.finalMethod;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.RequestScoped;
 
-@Dependent
+@RequestScoped
 public class ExtendedTuna_Broken extends Tuna_Broken {
 }
