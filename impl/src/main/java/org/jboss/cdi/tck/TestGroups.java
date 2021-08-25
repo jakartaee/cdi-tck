@@ -21,6 +21,7 @@ package org.jboss.cdi.tck;
  *
  * The most important groups (used by TCK runner) are:
  * <ul>
+ * <li>{@link #CDI_FULL} - used to exclude the superset of CDI tests that do not apply to CDI-lite implementations</li>
  * <li>{@link #INTEGRATION} - used to exclude integration tests when running standalone container</li>
  * <li>{@link #JAVAEE_FULL} - subset of integration tests used to exclude tests that require full Java EE platform; tests that
  * belong to this group are also considered to be integration tests</li>
@@ -29,6 +30,11 @@ package org.jboss.cdi.tck;
  * @author Martin Kouba
  */
 public final class TestGroups {
+
+    /**
+     * Integration test - cannot run in embedded arquillian container
+     */
+    public static final String CDI_FULL = "cdi-full";
 
     /**
      * Integration test - cannot run in embedded arquillian container
