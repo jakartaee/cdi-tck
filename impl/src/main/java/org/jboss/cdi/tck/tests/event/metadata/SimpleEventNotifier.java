@@ -27,15 +27,15 @@ import org.jboss.cdi.tck.tests.event.metadata.Bravo.BravoLiteral;
 public class SimpleEventNotifier {
 
     @Inject
-    SimpleEventObserver observer;
+    public SimpleEventObserver observer;
 
     @Inject
     @Any
-    Event<SimpleEvent> event;
+    public Event<SimpleEvent> event;
 
     @Inject
     @Alpha
-    Event<SimpleEvent> alphaEvent;
+    public Event<SimpleEvent> alphaEvent;
 
     public void fireSimpleEvent() {
         observer.reset();

@@ -32,17 +32,17 @@ public class MiniBar {
 
     @Inject
     @Any
-    Event<MiniBar> miniBarEvent;
+    public Event<MiniBar> miniBarEvent;
 
     @Inject
     @Lifted
-    Event<Item> itemLiftedEvent;
+    public Event<Item> itemLiftedEvent;
 
     @Inject
     @Any
-    Event<Item> itemEvent;
+    public Event<Item> itemEvent;
 
-    Event<Item> getItemEvent() {
+    public Event<Item> getItemEvent() {
         return itemEvent;
     }
 

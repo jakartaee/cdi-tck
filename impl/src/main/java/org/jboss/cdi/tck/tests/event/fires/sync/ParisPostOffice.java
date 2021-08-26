@@ -24,7 +24,7 @@ import jakarta.inject.Inject;
 public class ParisPostOffice {
 
     @Inject
-    Helper helper;
+    public Helper helper;
 
     public void observeLetter(@Observes Letter letter) {
         helper.addThreadID((int) Thread.currentThread().getId());

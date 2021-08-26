@@ -36,10 +36,10 @@ import org.testng.annotations.Test;
 public class FireSyncEventTest extends AbstractTest {
 
     @Inject
-    Helper helper;
+    public Helper helper;
 
     @Inject
-    Event<Letter> event;
+    public Event<Letter> event;
 
     @Deployment
     public static WebArchive createTestArchive() {

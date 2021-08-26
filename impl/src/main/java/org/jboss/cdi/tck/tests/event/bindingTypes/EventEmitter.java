@@ -24,16 +24,16 @@ import jakarta.inject.Inject;
 public class EventEmitter {
     @Inject
     @Extra
-    Event<String> stringEvent;
+    public Event<String> stringEvent;
 
     @Inject
     @Extra
     @NonRuntimeBindingType
-    Event<String> stringEventWithAnyAndNonRuntimeBindingType;
+    public Event<String> stringEventWithAnyAndNonRuntimeBindingType;
 
     @Inject
     @NonRuntimeBindingType
-    Event<String> stringEventWithOnlyNonRuntimeBindingType;
+    public Event<String> stringEventWithOnlyNonRuntimeBindingType;
 
     public void fireEvent() {
         stringEvent.fire("event");

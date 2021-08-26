@@ -53,7 +53,7 @@ import jakarta.inject.Inject;
 public class ContainerLifecycleEventDispatcher {
 
     @Inject
-    Event<Object> event;
+    public Event<Object> event;
 
     public void fireContainerLifecycleEvents() {
         tryFire(AfterBeanDiscovery.class, AFTER_BEAN_DISCOVERY);

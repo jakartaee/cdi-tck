@@ -22,5 +22,5 @@ package org.jboss.cdi.tck.tests.event.eventTypes;
  * 
  * @author David Allen
  */
-abstract class AbstractEvent implements GeneralEvent {
+public abstract class AbstractEvent implements GeneralEvent {
 }

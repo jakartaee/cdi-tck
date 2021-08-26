@@ -30,22 +30,22 @@ import jakarta.inject.Inject;
 public class DuckNotifier {
 
     @Inject
-    DuckObserver observer;
+    public DuckObserver observer;
 
     @Inject
-    BeanManager beanManager;
+    public BeanManager beanManager;
 
     @Inject
     @Any
-    Event<Duck<String>> event;
+    public Event<Duck<String>> event;
 
     @Inject
     @Bravo
-    Event<Duck<Map<String, Integer>>> mapDuckEvent;
+    public Event<Duck<Map<String, Integer>>> mapDuckEvent;
 
     @Inject
     @Any
-    Event<List<Duck<Number>>> listDuckEvent;
+    public Event<List<Duck<Number>>> listDuckEvent;
 
     public void fireStringDuck() {
         observer.reset();

@@ -25,7 +25,7 @@ import jakarta.inject.Inject;
 public class Bar {
 
     @Inject
-    BeanManager beanManager;
+    public BeanManager beanManager;
 
     public <T extends Number> void fireWithTypeVariable() {
         beanManager.getEvent().select(new TypeLiteral<Foo<T>>() {

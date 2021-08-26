@@ -24,7 +24,7 @@ public class LastObserver {
 
     static boolean wasNotified = false;
 
-    void observer(@Observes AnEventType event) {
+    public void observer(@Observes AnEventType event) {
         wasNotified = true;
     }
 }

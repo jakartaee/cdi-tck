@@ -27,11 +27,11 @@ public class DogWhisperer {
     @Any
     @Tame
     @Role("Master")
-    Event<TamingCommand> tamingEvent;
+    public Event<TamingCommand> tamingEvent;
 
     @Inject
     @Any
-    Event<Praise> praiseEvent;
+    public Event<Praise> praiseEvent;
 
     public void issueTamingCommand() {
         tamingEvent.fire(new TamingCommand());

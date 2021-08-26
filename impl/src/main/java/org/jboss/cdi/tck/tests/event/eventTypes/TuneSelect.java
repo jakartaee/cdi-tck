@@ -25,15 +25,15 @@ import jakarta.inject.Inject;
 public class TuneSelect<T> {
     @Inject
     @Any
-    Event<Artist<T>> soloArtistEvent;
+    public Event<Artist<T>> soloArtistEvent;
 
     @Inject
     @Any
-    Event<Song> songEvent;
+    public Event<Song> songEvent;
 
     @Inject
     @Any
-    Event<Broadcast> broadcastEvent;
+    public Event<Broadcast> broadcastEvent;
 
     public void songPlaying(Song s) {
         songEvent.fire(s);

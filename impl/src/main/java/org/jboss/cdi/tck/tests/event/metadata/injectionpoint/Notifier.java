@@ -24,7 +24,7 @@ import jakarta.inject.Inject;
 public class Notifier {
 
     @Inject
-    InfoObserver infoObserver;
+    public InfoObserver infoObserver;
 
     @Inject
     private Event<Info> infoEvent;

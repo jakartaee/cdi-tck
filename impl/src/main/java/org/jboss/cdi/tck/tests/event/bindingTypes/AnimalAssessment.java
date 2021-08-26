@@ -25,16 +25,16 @@ import jakarta.inject.Inject;
 public class AnimalAssessment {
     @Inject
     @Any
-    Event<Animal> animalEvent;
+    public Event<Animal> animalEvent;
 
     @Inject
     @Tame
-    Event<Animal> tameAnimalEvent;
+    public Event<Animal> tameAnimalEvent;
 
     @Inject
     @Any
     @Wild
-    Event<Animal> wildAnimalEvent;
+    public Event<Animal> wildAnimalEvent;
 
     public void classifyAsTame(Animal animal) {
         tameAnimalEvent.fire(animal);

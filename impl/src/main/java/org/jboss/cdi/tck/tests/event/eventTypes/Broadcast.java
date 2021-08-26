@@ -16,5 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.event.eventTypes;
 
-abstract class Broadcast {
+public abstract class Broadcast {
 }

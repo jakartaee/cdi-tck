@@ -24,7 +24,7 @@ public class AnotherObserver {
 
     static boolean wasNotified = false;
 
-    void observer(@Observes @Role("Admin") AnEventType event) {
+    public void observer(@Observes @Role("Admin") AnEventType event) {
         wasNotified = true;
     }
 }
