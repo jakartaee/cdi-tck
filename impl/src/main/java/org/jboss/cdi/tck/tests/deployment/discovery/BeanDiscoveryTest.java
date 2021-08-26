@@ -123,7 +123,7 @@ public class BeanDiscoveryTest extends AbstractTest {
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bb"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
             @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
-    public void testExplicitBeanArchiveEmptyDescriptor(Bravo bravo) {
+    public void testImplicitBeanArchiveEmptyDescriptor(Bravo bravo) {
         assertDiscoveredAndAvailable(bravo, Bravo.class);
     }
 
