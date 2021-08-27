@@ -24,7 +24,7 @@ import jakarta.inject.Inject;
 /**
  * @author Martin Kouba
  */
-@Dependent
+// @Dependent - don't add bean defining annotion for this test
 public class Snake {
 
     @Inject
