@@ -16,11 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.multiple;
 
-import jakarta.enterprise.context.Dependent;
-
 @Fast
 @Deadly
-@Dependent
 public class FastAndDeadlyMissile implements Missile {
     public void fire() {
     }

@@ -18,10 +18,8 @@ package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
 import java.util.List;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class ConsumerActualType {
 
     @Inject

@@ -17,14 +17,12 @@
 
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.interceptor;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
  * 
  */
-@Dependent
 public class Foo {
 
     @Inject

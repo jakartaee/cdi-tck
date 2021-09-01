@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.any;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Any;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Customer {
     @Inject
     @Any

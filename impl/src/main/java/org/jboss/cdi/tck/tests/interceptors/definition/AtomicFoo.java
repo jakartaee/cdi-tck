@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class AtomicFoo {
     @Atomic
     void doAction() {

@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.se.container;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
-@Dependent
 public class FooProducer {
 
     @AlternativeStereotype

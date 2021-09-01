@@ -18,9 +18,6 @@ package org.jboss.cdi.tck.interceptors.tests.order.overriden.lifecycleCallback;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Falcon extends Bird {
 
     private static AtomicInteger initFalconCalled = new AtomicInteger();

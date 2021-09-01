@@ -24,7 +24,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.ObserverMethod;
@@ -180,22 +179,18 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
 
     }
 
-    @Dependent
     public static class CharacterList extends ArrayList<Character> {
         private static final long serialVersionUID = 1L;
     }
 
-    @Dependent
     public static class StringList extends ArrayList<String> {
         private static final long serialVersionUID = 1L;
     }
 
-    @Dependent
     public static class IntegerList extends ArrayList<Integer> {
         private static final long serialVersionUID = 1L;
     }
 
-    @Dependent
     public static class StringListObserver {
         public boolean wasNotified = false;
 
@@ -204,7 +199,6 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
         }
     }
 
-    @Dependent
     public static class IntegerListObserver {
         public boolean wasNotified = false;
 

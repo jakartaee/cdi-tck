@@ -18,14 +18,12 @@ package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 
 import static org.testng.Assert.assertEquals;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptors;
 import jakarta.interceptor.InvocationContext;
 
 @Interceptors({ Interceptor1.class, Interceptor3.class })
-@Dependent
-public class Tram extends RailVehicle {
+class Tram extends RailVehicle {
 
     @Interceptors({ Interceptor4.class, Interceptor5.class })
     public int getId() {

@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
-import jakarta.enterprise.context.Dependent;
-
 @Hairy(clipped = false)
-@Dependent
 public class LongHairedDog {
 
 }

@@ -17,9 +17,6 @@
 
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class MonitorService extends LoggedService {
 
     @PingBinding

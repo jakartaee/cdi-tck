@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Corge implements Uncommon {
     @Override
     public boolean ping() {

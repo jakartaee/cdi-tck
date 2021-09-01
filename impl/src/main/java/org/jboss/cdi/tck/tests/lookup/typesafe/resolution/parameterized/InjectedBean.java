@@ -18,10 +18,8 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
 import java.util.HashMap;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class InjectedBean {
     @Inject
     private HashMap<? extends Number, ? super Integer> map;

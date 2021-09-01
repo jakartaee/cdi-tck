@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.custom;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Bus implements Vehicle {
 
     public String start() {

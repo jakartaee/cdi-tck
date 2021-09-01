@@ -53,7 +53,9 @@ public class ExtensionsCommunicationTest extends AbstractTest {
         // Fired by alpha, recorder by beta
         ActionSequence patSeq = ActionSequence.getSequence(EventBase.PAT_SEQ);
         assertNotNull(patSeq);
-        patSeq.assertDataContainsAll(Foo.class.getName(), Bar.class.getName(), PatEvent.class.getName());
+        patSeq.assertDataContainsAll(Foo.class.getName(), Bar.class.getName(), EventBase.class.getName(),
+                PatEvent.class.getName(), PbEvent.class.getName(), ExtensionAlpha.class.getName(),
+                ExtensionBeta.class.getName());
 
         // Fired by beta, recorder by alpha
         ActionSequence pbSeq = ActionSequence.getSequence(EventBase.PB_SEQ);

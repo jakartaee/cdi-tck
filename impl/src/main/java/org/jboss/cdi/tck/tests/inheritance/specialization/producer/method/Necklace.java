@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Necklace extends Product {
 
     public Necklace(int price) {

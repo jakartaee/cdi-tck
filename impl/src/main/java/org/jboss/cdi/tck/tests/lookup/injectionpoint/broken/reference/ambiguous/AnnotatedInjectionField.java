@@ -21,12 +21,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.Set;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
-@Dependent
 public class AnnotatedInjectionField implements AnnotatedField<InjectedBean> {
 
     private final InjectionPoint injectionPoint;

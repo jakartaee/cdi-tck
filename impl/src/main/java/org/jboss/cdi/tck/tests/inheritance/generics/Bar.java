@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.inheritance.generics;
 
 import java.util.List;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
@@ -28,7 +27,6 @@ import jakarta.inject.Inject;
  *
  */
 @Vetoed
-@Dependent
 public class Bar<T1, T2> {
 
     @Inject

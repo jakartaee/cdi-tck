@@ -17,10 +17,7 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.nonDependent;
 
-import jakarta.enterprise.context.Dependent;
-
 @SomeBinding
-@Dependent
 public class Foo {
 
     public void foo() {

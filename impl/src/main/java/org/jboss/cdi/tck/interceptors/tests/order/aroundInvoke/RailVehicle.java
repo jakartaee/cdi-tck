@@ -18,12 +18,10 @@ package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 
 import static org.testng.Assert.assertEquals;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
-@Dependent
-public class RailVehicle extends Vehicle {
+class RailVehicle extends Vehicle {
 
     @AroundInvoke
     public Object intercept2(InvocationContext ctx) throws Exception {

@@ -17,14 +17,12 @@
 
 package org.jboss.cdi.tck.tests.event.observer.method;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
 /**
  * @author Martin Kouba
  * 
  */
-@Dependent
 public class IntegerObserver {
 
     public static boolean wasNotified = false;

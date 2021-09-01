@@ -16,15 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.beanAttributes;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Melee
 @TwoHanded
-@Dependent
 public class Hoe {
     
 }

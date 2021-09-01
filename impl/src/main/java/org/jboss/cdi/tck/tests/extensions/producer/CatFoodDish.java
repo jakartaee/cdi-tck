@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class CatFoodDish {
 
 }

@@ -17,10 +17,7 @@
 
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
-import jakarta.enterprise.context.Dependent;
-
 @ServiceStereotype
-@Dependent
 public class Service {
 
 }

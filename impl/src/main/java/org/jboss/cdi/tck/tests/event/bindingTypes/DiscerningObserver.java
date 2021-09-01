@@ -20,7 +20,7 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Observes;
 
 @RequestScoped
-public class DiscerningObserver {
+class DiscerningObserver {
     private int numTimesAnyBindingTypeEventObserved = 0;
     private int numTimesNonRuntimeBindingTypeObserved = 0;
 

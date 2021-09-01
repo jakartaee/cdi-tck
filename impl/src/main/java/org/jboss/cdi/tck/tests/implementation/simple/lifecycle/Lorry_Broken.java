@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Lorry_Broken {
 
     public Lorry_Broken() throws Exception {

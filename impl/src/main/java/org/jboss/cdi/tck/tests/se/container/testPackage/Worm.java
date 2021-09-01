@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.se.container.testPackage;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Worm {
 }

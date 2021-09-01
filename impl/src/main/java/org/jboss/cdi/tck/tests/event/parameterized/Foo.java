@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.parameterized;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Foo<F> implements Fooable<F> {
 
 }

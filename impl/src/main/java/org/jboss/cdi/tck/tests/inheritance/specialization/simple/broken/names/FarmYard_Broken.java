@@ -16,13 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.names;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 import jakarta.inject.Named;
 
 @Specializes
 @Named
-@Dependent
 public class FarmYard_Broken extends Yard {
 
 }

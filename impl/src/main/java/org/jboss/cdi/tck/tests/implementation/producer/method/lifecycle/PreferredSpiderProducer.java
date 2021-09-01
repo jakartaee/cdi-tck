@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.Specializes;
@@ -24,7 +23,6 @@ import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
 @Specializes
-@Dependent
 public class PreferredSpiderProducer extends SpiderProducer {
     @Inject
     private Web web;

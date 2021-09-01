@@ -18,9 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.unmanaged;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 
-@Dependent
 public class Nail {
 
     public static boolean postConstructCalled = false;

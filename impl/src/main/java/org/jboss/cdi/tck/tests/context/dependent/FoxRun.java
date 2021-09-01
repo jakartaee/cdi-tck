@@ -17,14 +17,12 @@
 package org.jboss.cdi.tck.tests.context.dependent;
 
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named("foxRun")
 @Default
-@Dependent
 public class FoxRun {
     private static boolean destroyed = false;
 

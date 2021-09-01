@@ -18,11 +18,9 @@ package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
 import java.io.Serializable;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 @SuppressWarnings("rawtypes")
-@Dependent
 public class ConsumerWildcard {
 
     @Inject

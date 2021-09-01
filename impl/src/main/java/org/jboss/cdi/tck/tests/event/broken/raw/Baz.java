@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.event.broken.raw;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 
@@ -25,7 +24,6 @@ import jakarta.inject.Inject;
  * @author Martin Kouba
  * 
  */
-@Dependent
 public class Baz {
 
     @SuppressWarnings({ "unused" })

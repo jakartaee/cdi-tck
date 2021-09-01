@@ -19,9 +19,6 @@ package org.jboss.cdi.tck.tests.event.observer.async.executor;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class CustomExecutor implements Executor {
     
     public static final AtomicBoolean executed = new AtomicBoolean(false);

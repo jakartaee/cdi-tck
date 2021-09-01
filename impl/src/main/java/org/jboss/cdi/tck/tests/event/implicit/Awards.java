@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.implicit;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Any;
 
-@Dependent
 public class Awards {
     private @Any
     @Honors

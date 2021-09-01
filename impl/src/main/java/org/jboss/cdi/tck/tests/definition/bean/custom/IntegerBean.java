@@ -29,7 +29,6 @@ import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.PassivationCapable;
 
-@Dependent
 public class IntegerBean implements Bean<Integer>, PassivationCapable {
 
     private boolean getQualifiersCalled = false;

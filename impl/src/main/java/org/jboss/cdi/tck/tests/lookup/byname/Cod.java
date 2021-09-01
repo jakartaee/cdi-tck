@@ -16,13 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Named;
 
 @Named("whitefish")
 @Alternative
-@Dependent
 public class Cod implements Animal {
 
 }

@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.injectionPoint;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Magazine {
 
 }

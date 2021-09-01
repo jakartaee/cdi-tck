@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class SpiderProducer {
 
     private static Spider[] ALL_SPIDERS = { new Tarantula(), new LadybirdSpider(), new DaddyLongLegs() };

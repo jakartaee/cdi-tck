@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.wildcard;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class SpiderProducerWildCardType_Broken {
     @Produces
     public FunnelWeaver<?> getAnotherFunnelWeaver = new FunnelWeaver<Object>();

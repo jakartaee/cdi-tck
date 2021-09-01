@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.atd.lib;
 
 import jakarta.enterprise.inject.Instance;
 
+
 public class Baz {
 
     Instance<Bar> barInstance;

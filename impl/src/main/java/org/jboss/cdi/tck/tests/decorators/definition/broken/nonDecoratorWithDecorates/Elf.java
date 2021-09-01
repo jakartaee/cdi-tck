@@ -17,10 +17,8 @@
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nonDecoratorWithDecorates;
 
 import jakarta.decorator.Delegate;
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Elf {
     @Inject
     @Delegate

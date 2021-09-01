@@ -17,14 +17,12 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
 /**
  * @author Martin Kouba
  */
-@Dependent
 public final class Spruce extends Conifer {
 
     @Produces

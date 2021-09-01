@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.injectionPoint;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-@Dependent
 public class NotABean {
 
     public NotABean(String name) {

@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class SimpleEvent {
 
     private long timestamp;

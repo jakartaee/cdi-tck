@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.decorators.custom.broken.finalBeanClass;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class BusGarage {
     @Inject
     private Bus bus;

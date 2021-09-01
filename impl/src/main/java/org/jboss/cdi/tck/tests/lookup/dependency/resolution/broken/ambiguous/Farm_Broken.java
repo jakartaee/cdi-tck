@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dependency.resolution.broken.ambiguous;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Farm_Broken {
     @SuppressWarnings("unused")
     @Inject

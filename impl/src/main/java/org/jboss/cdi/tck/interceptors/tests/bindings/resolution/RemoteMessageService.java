@@ -17,11 +17,8 @@
 
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
-import jakarta.enterprise.context.Dependent;
-
 @MessageBinding
 @BasketBinding(requiresBall = true)
-@Dependent
 public class RemoteMessageService extends RemoteService {
 
     public void ping() {

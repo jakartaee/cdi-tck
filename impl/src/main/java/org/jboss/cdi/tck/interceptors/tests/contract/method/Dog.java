@@ -16,13 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.method;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.ExcludeClassInterceptors;
 import jakarta.interceptor.Interceptors;
 
 @Interceptors(DogInterceptor.class)
-@Dependent
-public class Dog {
+class Dog {
     public String foo() {
         return "bar";
     }

@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 
 @Vetoed
-@Dependent
 public class Lion {
 
     public void foo() {

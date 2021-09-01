@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.inject;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 
-@Dependent
 public class InitializerBean_Broken {
     @Inject
     public void initialize(@Observes String string) {

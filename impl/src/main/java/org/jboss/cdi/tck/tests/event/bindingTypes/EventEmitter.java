@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.bindingTypes;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 
-@Dependent
 public class EventEmitter {
     @Inject
     @Extra

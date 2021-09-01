@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct.bindings;
 
-import jakarta.enterprise.context.Dependent;
-
 @CharlieBinding
-@Dependent
 public class Charlie {
 
 }

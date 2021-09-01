@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.types;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Bar implements Foo {
 
 }

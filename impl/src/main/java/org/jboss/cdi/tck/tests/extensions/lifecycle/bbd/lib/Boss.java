@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd.lib;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class Boss {
 
     @Produces

@@ -22,7 +22,6 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.Annotated;
@@ -30,7 +29,6 @@ import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
-@Dependent
 public class UnsatisfiedInjectionPoint implements InjectionPoint {
 
     private final Bean<SimpleBean> bean;

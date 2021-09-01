@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.primitive;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class NumberProducer {
 
     @Produces

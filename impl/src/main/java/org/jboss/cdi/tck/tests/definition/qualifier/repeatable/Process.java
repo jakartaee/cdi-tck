@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.repeatable;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Process {
 }

@@ -24,7 +24,7 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Any;
 
 @RequestScoped
-public class StudentDirectory {
+class StudentDirectory {
     private Set<Student> students = new HashSet<Student>();
 
     public void addStudent(@Observes @Any StudentRegisteredEvent event) {

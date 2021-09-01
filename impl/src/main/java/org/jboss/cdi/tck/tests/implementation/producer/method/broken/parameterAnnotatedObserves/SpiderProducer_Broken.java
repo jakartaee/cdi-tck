@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.parameterAnnotatedObserves;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class SpiderProducer_Broken {
 
     @Produces

@@ -18,14 +18,12 @@ package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.order;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Transactional
 @Interceptors(AnotherInterceptor.class)
-@Dependent
 public class AccountTransaction extends Transaction {
 
     public void execute() {

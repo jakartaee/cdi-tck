@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class ScottishFishFarmer extends Farmer<ScottishFish> {
     ScottishFishFarmer() {
         super("ScottishFishFarmer");

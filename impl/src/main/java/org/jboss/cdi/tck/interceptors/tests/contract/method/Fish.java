@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.method;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
-@Dependent
-public class Fish {
+class Fish {
     @Interceptors(FishInterceptor.class)
     public String foo() {
         return "bar";

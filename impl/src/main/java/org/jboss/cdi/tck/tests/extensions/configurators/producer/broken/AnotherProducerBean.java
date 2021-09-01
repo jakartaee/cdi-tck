@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.producer.broken;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Produces;
 
@@ -24,7 +23,6 @@ import jakarta.enterprise.inject.Produces;
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@Dependent
 public class AnotherProducerBean {
 
     @Produces

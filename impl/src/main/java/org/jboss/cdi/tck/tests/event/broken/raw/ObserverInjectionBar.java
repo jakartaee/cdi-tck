@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.event.broken.raw;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.event.Observes;
 
@@ -25,7 +24,6 @@ import jakarta.enterprise.event.Observes;
  * @author Martin Kouba
  * 
  */
-@Dependent
 public class ObserverInjectionBar {
 
     @SuppressWarnings("rawtypes")

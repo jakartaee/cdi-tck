@@ -17,12 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * @author Martin Kouba
  */
-@Dependent
 public class Needle {
 
 }

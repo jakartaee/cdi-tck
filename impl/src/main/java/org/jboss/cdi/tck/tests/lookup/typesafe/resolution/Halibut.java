@@ -16,11 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import jakarta.enterprise.context.Dependent;
-
 @Expensive(cost = 50, veryExpensive = true)
 @Whitefish
-@Dependent
 public class Halibut implements Animal {
 
 }

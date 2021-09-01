@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
-import jakarta.enterprise.context.Dependent;
-
 @StandardVariety
-@Dependent
 public class StandardChicken implements ChickenInterface {
 
     public String getName() {

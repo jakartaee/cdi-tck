@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.custom;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 
 /**
@@ -24,7 +23,6 @@ import jakarta.enterprise.inject.Vetoed;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Vetoed
-@Dependent
 public class AlternativeSomeBean extends SomeBean {
 
     @Override

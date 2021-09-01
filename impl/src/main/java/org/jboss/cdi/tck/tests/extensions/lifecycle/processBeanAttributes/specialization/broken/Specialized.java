@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.specialization.broken;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Specialized {
 
 }

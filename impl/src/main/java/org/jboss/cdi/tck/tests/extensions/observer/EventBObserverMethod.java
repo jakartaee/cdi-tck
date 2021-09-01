@@ -21,13 +21,11 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Reception;
 import jakarta.enterprise.event.TransactionPhase;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.spi.ObserverMethod;
 
-@Dependent
 public class EventBObserverMethod implements ObserverMethod<EventB>{
     @Override
     public Class<?> getBeanClass() {

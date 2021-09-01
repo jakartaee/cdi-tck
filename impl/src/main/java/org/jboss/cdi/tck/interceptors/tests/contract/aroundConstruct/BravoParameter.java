@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class BravoParameter {
 
     public final String value;

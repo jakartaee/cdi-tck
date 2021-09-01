@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Tank {
 }

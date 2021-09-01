@@ -21,10 +21,8 @@ import static jakarta.enterprise.event.TransactionPhase.AFTER_FAILURE;
 import static jakarta.enterprise.event.TransactionPhase.AFTER_SUCCESS;
 import static jakarta.enterprise.event.TransactionPhase.BEFORE_COMPLETION;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
-@Dependent
 public class TransactionalObservers {
     public void train(@Observes(during = BEFORE_COMPLETION) DisobedientDog dog) {
     }

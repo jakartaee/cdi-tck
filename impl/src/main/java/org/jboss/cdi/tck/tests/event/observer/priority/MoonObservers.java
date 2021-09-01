@@ -17,37 +17,31 @@
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
 import jakarta.annotation.Priority;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.interceptor.Interceptor;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-@Dependent
 public class MoonObservers {
 
-    @Dependent
     public static class Observer1 {
         public void observeMoon(@Observes @Priority(Interceptor.Priority.APPLICATION) MoonActivity moonActivity) {
             ActionSequence.addAction(getClass().getName());
         }
     }
 
-    @Dependent
     public static class Observer2 {
         public void observeMoon(@Observes Moonrise moonrise) {
             ActionSequence.addAction(getClass().getName());
         }
     }
 
-    @Dependent
     public static class Observer3 {
         public void observeMoon(@Observes @Priority(Interceptor.Priority.APPLICATION + 900) MoonActivity moonActivity) {
             ActionSequence.addAction(getClass().getName());
         }
     }
 
-    @Dependent
     public static class Observer4 {
         public void observeMoon(@Observes @Priority(Interceptor.Priority.APPLICATION + 950) Moonrise moonrise) {
             ActionSequence.addAction(getClass().getName());

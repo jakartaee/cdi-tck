@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Spider implements Animal {
 
     private static final long serialVersionUID = 1L;

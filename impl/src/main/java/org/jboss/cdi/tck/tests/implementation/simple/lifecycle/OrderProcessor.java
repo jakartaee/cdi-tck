@@ -18,9 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 
-@Dependent
 public class OrderProcessor {
 
     public static boolean postConstructCalled = false;

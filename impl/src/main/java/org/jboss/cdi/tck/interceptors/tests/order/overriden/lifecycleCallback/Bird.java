@@ -20,9 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 
-@Dependent
 public class Bird {
 
     private static AtomicInteger initBirdCalled = new AtomicInteger();

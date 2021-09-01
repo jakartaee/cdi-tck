@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.member;
 
-import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.tests.interceptors.definition.member.AnimalCountInterceptorBinding.Operation;
 
-@Dependent
 public class Farm {
     @AnimalCountInterceptorBinding(Operation.INCREASE)
     public int getAnimalCount() {

@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 @SuppressWarnings("rawtypes")
-@Dependent
 public class ConsumerRaw {
 
     @Inject

@@ -16,13 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * @author pmuir
  * 
  */
-@Dependent
 public class DataAccessImpl implements DataAccess {
 
     public void delete() {

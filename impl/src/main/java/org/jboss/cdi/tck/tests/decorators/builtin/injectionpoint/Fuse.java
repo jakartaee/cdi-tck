@@ -17,11 +17,9 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.injectionpoint;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Fuse {
 
     @Inject

@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.fires;
 
-import jakarta.enterprise.context.Dependent;
 
-@Dependent
 public class Item_Illegal<T> extends Item {
 
     public Item_Illegal(String name, int price) {

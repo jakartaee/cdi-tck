@@ -18,10 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.producer;
 
 import static org.testng.Assert.assertNotNull;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.BeanManager;
 
-@Dependent
 public class AnotherFactory {
 
     final Toy jessie = new Toy("Jessie");

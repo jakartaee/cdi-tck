@@ -23,14 +23,12 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.Annotated;
 import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
-@Dependent
 public class CustomInjectionPoint implements InjectionPoint {
 
     private Type type;

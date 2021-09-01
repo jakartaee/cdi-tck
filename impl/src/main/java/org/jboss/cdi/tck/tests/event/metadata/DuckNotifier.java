@@ -20,13 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
-@Dependent
 public class DuckNotifier {
 
     @Inject

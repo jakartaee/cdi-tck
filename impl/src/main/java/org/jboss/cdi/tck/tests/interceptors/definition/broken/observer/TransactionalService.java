@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.observer;
 
-import jakarta.enterprise.context.Dependent;
-
 @Transactional
-@Dependent
 public class TransactionalService {
 
     public void doSomething() {

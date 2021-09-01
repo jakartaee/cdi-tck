@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
-@Dependent
 public class Cloud {
     public void allocateNewDisk(@Observes DiskSpaceEvent event) {
     }

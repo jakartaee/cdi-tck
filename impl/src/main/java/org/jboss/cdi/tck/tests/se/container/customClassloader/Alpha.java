@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.se.container.customClassloader;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Alpha {
 
     public void ping() {

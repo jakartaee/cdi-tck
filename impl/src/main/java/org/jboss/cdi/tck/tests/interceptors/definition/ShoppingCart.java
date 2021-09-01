@@ -16,11 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
-import jakarta.enterprise.context.Dependent;
-
 @Transactional
 @Secure
-@Dependent
 public class ShoppingCart {
     public void placeOrder() {
 

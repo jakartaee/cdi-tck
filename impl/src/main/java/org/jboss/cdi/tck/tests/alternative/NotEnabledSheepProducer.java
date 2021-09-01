@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.alternative;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
 
 @Alternative
-@Dependent
 public class NotEnabledSheepProducer {
     @Produces
     @Tame

@@ -19,9 +19,6 @@ package org.jboss.cdi.tck.tests.event.observer.async.basic;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Experiment {
 
     public List<Class<?>> getUniversities() {

@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
-public class OverridenInterceptor {
+class OverridenInterceptor {
     private static boolean overridenMethodCalled = false;
 
     @AroundInvoke

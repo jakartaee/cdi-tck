@@ -16,15 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * Simple bean that is not serializable.
  * 
  * @author David Allen
  * 
  */
-@Dependent
 public class Sysma {
 
 }

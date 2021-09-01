@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 
-import jakarta.enterprise.context.Dependent;
-
 @Culinary
-@Dependent
 public class Thyme extends Herb {
 
 }

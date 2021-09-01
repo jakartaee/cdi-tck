@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
-import jakarta.enterprise.context.Dependent;
-
 @Preferred
-@Dependent
 public class PreferredChicken implements ChickenInterface {
 
     public String getName() {

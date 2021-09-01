@@ -27,7 +27,6 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
@@ -36,7 +35,6 @@ import jakarta.inject.Qualifier;
 @Documented
 @Qualifier
 public @interface ProducedWithMethod {
-    @Dependent
     public static class ProducedWithMethoddLiteral extends AnnotationLiteral<ProducedWithMethod> implements ProducedWithMethod {
 
         public static ProducedWithMethoddLiteral INSTANCE = new ProducedWithMethoddLiteral();

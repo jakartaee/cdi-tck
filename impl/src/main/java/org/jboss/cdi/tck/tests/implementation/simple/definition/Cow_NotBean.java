@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 abstract class Cow_NotBean {
 
 }

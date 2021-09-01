@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class DogProducer {
     public static final String QUIET_DOG_COLOR = "Black";
     public static final String NOISY_DOG_COLOR = "White";

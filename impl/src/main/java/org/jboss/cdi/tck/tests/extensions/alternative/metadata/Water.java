@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import jakarta.enterprise.context.Dependent;
-
 @Cheap
-@Dependent
 public class Water {
 
 }

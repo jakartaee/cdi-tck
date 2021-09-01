@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
-@Dependent
 public class SpiderProducer {
 
     private static Spider[] ALL_SPIDERS = { new Tarantula(), new LadybirdSpider(), new DaddyLongLegs() };

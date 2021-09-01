@@ -16,8 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.registration;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * A valid bean class which will be registered manually using a CDI extension rather than auto-discovered by inclusion in a bean
  * archive.
@@ -25,7 +23,6 @@ import jakarta.enterprise.context.Dependent;
  * @author <a href="http://community.jboss.org/people/LightGuard">Jason Porter</a>
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  */
-@Dependent
 public class BeanClassToRegister {
     public boolean isInvokable() {
         return true;

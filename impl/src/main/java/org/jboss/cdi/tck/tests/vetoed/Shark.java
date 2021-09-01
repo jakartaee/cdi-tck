@@ -17,11 +17,9 @@
 
 package org.jboss.cdi.tck.tests.vetoed;
 
-import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.tests.vetoed.aquarium.Fishy;
 
 @Fishy
-@Dependent
 public class Shark {
 
 }

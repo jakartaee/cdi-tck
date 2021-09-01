@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope;
 
-@DummyStereotype
 public class Clydesdale extends Horse {
 
 }

@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
-import jakarta.enterprise.context.Dependent;
-
 @Logged
-@Dependent
 public class AccountTransaction {
     public void transfer() {
     }

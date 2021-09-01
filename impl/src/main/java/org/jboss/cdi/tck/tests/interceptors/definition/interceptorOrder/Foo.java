@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
 
-import jakarta.enterprise.context.Dependent;
-
 @Secure
-@Dependent
 public class Foo {
     public void bar() {
     }

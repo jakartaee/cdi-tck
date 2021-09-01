@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class BankAccount implements Account {
 
     int balance = 0;

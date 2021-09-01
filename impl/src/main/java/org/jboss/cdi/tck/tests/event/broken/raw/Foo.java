@@ -17,13 +17,10 @@
     
 package org.jboss.cdi.tck.tests.event.broken.raw;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * @author Martin Kouba
  *
  */
-@Dependent
 public class Foo {
 
 }

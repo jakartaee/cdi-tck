@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.synthetic;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Orange implements Fruit {
 
 }

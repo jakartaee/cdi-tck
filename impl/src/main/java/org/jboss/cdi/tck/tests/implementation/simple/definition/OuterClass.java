@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class OuterClass {
 
     class InnerClass_NotBean {
@@ -29,7 +26,6 @@ public class OuterClass {
 
     }
 
-    @Dependent
     static class StaticInnerClass {
 
     }

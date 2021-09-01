@@ -17,10 +17,8 @@
 
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
-@Dependent
 public class TypeVariableObserver extends AbstractObserver {
 
     public static final String SEQUENCE_UPPER = "barTypeVariable";

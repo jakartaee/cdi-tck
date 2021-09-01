@@ -16,13 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * 
  * @author Martin Kouba
  */
-@Dependent
 public class Boulder {
 
     public Boulder(String name) {

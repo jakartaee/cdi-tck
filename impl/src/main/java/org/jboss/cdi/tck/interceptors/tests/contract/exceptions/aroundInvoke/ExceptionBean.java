@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
-@Dependent
-public class ExceptionBean {
+class ExceptionBean {
 
     private static int count = 0;
 

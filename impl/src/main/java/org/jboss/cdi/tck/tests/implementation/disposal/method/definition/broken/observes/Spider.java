@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.observes;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Spider {
 }

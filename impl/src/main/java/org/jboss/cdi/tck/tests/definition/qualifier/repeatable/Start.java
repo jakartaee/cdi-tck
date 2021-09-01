@@ -21,8 +21,6 @@ import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
@@ -34,7 +32,6 @@ public @interface Start {
 
     String value();
 
-    @Dependent
     public static class StartLiteral extends AnnotationLiteral<Start> implements Start {
 
         private final String value;

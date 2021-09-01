@@ -1,9 +1,6 @@
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.interceptor;
 
-import jakarta.enterprise.context.Dependent;
-
 @Fish
-@Dependent
 public class Tuna {
 
 	public String name;

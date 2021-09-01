@@ -17,12 +17,10 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
 import jakarta.annotation.Priority;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Priority(2500)
 @Alternative
-@Dependent
 public class AlphaAlternative {
 
 }

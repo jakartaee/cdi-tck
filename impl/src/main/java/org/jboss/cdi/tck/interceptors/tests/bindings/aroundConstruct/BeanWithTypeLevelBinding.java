@@ -16,14 +16,12 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @AlphaBinding(1)
-@Dependent
 public class BeanWithTypeLevelBinding {
 
     @Inject

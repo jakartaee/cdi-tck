@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Charlie {
 
 }

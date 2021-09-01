@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.nonbinding;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 
-@Dependent
 public class AnimalStereotypeAnnotationLiteral extends AnnotationLiteral<AnimalStereotype> implements AnimalStereotype {
 }

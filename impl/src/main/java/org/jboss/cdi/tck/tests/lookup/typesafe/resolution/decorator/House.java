@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.decorator;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class House {
     @SuppressWarnings("unused")
     @Inject

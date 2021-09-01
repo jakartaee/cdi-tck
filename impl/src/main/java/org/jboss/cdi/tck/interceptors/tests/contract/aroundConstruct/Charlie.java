@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
 @Interceptors({CharlieInterceptor1.class, CharlieInterceptor2.class})
-@Dependent
 public class Charlie {
 
 }

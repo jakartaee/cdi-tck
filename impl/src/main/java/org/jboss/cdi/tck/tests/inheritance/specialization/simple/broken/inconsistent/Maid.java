@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.inconsistent;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 
 @Specializes
-@Dependent
 public class Maid extends Employee {
 
 }

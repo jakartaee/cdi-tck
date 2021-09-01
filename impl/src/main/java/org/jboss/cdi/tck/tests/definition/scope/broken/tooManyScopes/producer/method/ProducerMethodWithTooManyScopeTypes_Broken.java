@@ -20,7 +20,6 @@ import jakarta.enterprise.context.ConversationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class ProducerMethodWithTooManyScopeTypes_Broken {
     @Produces
     @ConversationScoped

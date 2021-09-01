@@ -17,13 +17,11 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
 @Alternative
-@Dependent
 public class CharlieProducer {
     @Produces
     @ApplicationScoped

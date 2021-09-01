@@ -17,13 +17,11 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-@Dependent
 public class Transaction {
 
     @AroundInvoke

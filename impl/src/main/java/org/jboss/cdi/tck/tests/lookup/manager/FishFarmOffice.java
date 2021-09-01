@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.manager;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
-@Dependent
 public class FishFarmOffice {
 
     @Inject

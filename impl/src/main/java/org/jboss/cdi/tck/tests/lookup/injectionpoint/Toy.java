@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Toy {
 
     @Inject

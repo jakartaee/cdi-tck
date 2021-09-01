@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
@@ -27,7 +26,6 @@ import jakarta.inject.Inject;
  * @author David Allen
  * 
  */
-@Dependent
 public class BeanWithInjectionPointMetadata {
 
     private static boolean isDestroyed;

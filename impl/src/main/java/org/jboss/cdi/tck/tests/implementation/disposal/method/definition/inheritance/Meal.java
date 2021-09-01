@@ -19,9 +19,6 @@ package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheri
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Meal {
 
     public static List<Class<?>> disposedBy = new ArrayList<Class<?>>();

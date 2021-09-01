@@ -19,14 +19,12 @@ package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
 /**
  * @author pmuir
  * 
  */
-@Dependent
 public class MapProducer {
 
     @Produces

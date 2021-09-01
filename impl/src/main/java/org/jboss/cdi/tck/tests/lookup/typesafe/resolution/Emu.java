@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Typed;
 
 @Typed(FlightlessBird.class)
-@Dependent
 public class Emu extends FlightlessBird<Australian> {
     public Emu() {
         super("Emu");

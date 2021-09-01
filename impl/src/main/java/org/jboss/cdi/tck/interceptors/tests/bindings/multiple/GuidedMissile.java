@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.multiple;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class GuidedMissile implements Missile {
     @Slow
     @Deadly

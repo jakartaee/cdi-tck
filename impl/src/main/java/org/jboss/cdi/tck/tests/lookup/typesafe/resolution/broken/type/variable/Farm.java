@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.type.variable;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 @SuppressWarnings("unused")
-@Dependent
 public class Farm {
     @Inject
     public <T extends Animal> void setAnimal(T animal) {

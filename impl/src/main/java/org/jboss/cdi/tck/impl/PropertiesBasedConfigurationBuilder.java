@@ -68,7 +68,7 @@ public class PropertiesBasedConfigurationBuilder {
         configuration.setContexts((Contexts<?>)getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
         // Source processor is optional
         configuration.setSourceProcessor(getInstanceValue(SourceProcessor.PROPERTY_NAME, SourceProcessor.class, false));
-        configuration.setCDILiteModeFlag(getBooleanValue(Configuration.CDI_LITE_MODE_FLAG, Boolean.FALSE, deploymentPhase));
+        configuration.setCDILiteModeFlag(getBooleanValue(Configuration.CDI_LITE_MODE_FLAG, Boolean.FALSE, false));
 
         configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, deploymentPhase));
 

@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.clientProxy.unproxyable.privateConstructor;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class InjectionPointBean {
     @Inject
     Unproxyable_Broken foo;

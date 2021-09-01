@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.annotatedTypeConfigurator;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Countryside {
 
     private final Dog wildDog;

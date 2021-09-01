@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class IntermediateOrderProcessor extends OrderProcessor {
 
 }

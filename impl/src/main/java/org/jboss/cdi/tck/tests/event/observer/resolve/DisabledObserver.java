@@ -19,7 +19,7 @@ package org.jboss.cdi.tck.tests.event.observer.resolve;
 import jakarta.enterprise.event.Observes;
 
 @NotEnabled
-public class DisabledObserver {
+class DisabledObserver {
     public void observeSecret(@Observes @Secret String secretString) {
         if ("fail if disabled observer invoked".equals(secretString)) {
             assert false : "This observer should not be invoked since it resides on a bean with a policy that is not enabled.";

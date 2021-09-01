@@ -17,13 +17,11 @@
 
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Model;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.BeanManager;
 
 @Model
-@Dependent
 public class Hummingbird extends Bird {
 
     public int ping() {

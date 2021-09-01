@@ -19,10 +19,8 @@ package org.jboss.cdi.tck.tests.implementation.initializer.broken.generic;
 import java.util.Collections;
 import java.util.List;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class Bar {
     @Produces
     public List<Integer> produceInts() {

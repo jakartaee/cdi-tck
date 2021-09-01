@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionPoint;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Helicopter {
 
     @Inject

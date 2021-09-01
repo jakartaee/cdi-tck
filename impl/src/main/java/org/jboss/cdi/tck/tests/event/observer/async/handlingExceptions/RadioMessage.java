@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.async.handlingExceptions;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class RadioMessage {
 }

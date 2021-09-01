@@ -17,9 +17,6 @@
 
 package org.jboss.cdi.tck.tests.event.observer.broken.validation.ambiguous;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Cow extends Animal {
 
 }

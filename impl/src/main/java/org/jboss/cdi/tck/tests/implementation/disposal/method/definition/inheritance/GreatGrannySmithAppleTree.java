@@ -16,13 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
 /**
  * Test that {@link AppleTree#disposeApple(Apple)} is not inherited.
  */
-@Dependent
 public class GreatGrannySmithAppleTree extends GrannySmithAppleTree {
 
     @Produces

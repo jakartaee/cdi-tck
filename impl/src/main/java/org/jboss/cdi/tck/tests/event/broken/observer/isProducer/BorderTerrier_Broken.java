@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.isProducer;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
 
-@Dependent
 public class BorderTerrier_Broken {
     public @Produces
     String observesAfterBeanDiscovery(@Observes AfterBeanDiscovery event) {

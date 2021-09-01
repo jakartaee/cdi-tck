@@ -18,12 +18,10 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
 import java.io.Serializable;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 
 @Vetoed
-@Dependent
 public class SerializableOffice extends Office implements Serializable {
 
     private static final long serialVersionUID = 22685424608978110L;

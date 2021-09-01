@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
-import jakarta.enterprise.context.Dependent;
-
 @Species
-@Dependent
 public class Horse {
 
 }

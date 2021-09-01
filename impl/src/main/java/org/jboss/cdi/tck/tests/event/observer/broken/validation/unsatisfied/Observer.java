@@ -18,10 +18,8 @@ package org.jboss.cdi.tck.tests.event.observer.broken.validation.unsatisfied;
 
 import java.io.File;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
-@Dependent
 public class Observer {
     public void observe(@Observes String event, File file) {
     }

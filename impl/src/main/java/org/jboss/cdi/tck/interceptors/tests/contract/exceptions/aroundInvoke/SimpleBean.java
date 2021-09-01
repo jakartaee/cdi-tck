@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
 @Interceptors({ Interceptor1.class, Interceptor2.class })
-@Dependent
-public class SimpleBean {
+class SimpleBean {
 
     public boolean foo() throws NoSuchMethodException {
         throw new RuntimeException();

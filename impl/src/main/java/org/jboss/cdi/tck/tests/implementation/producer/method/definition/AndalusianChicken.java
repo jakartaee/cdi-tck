@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 
 @Specializes
-@Dependent
 public class AndalusianChicken extends Chicken {
 
 }

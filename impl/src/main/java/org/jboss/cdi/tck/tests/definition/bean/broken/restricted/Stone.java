@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean.broken.restricted;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Typed;
 
 /**
@@ -24,7 +23,6 @@ import jakarta.enterprise.inject.Typed;
  * @author Martin Kouba
  */
 @Typed(value = Animal.class)
-@Dependent
 public class Stone {
 
 }

@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Duke {
 
 }

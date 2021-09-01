@@ -21,7 +21,7 @@ import java.io.Serializable;
 import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
-public class AnotherSessionBean implements Serializable {
+class AnotherSessionBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public void ping() {

@@ -21,7 +21,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.util.AnnotationLiteral;
 
 /** @Qualifier annotation is deliberately missing, will be registered as one in extension
@@ -31,7 +30,6 @@ import jakarta.enterprise.util.AnnotationLiteral;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
 public @interface CustomQualifier {
-    @Dependent
     public static class CustomQualifierLiteral extends AnnotationLiteral<CustomQualifier> implements CustomQualifier {
 
         public static CustomQualifierLiteral INSTANCE = new CustomQualifierLiteral();

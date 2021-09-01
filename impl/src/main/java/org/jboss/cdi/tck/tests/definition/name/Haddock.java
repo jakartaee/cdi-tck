@@ -16,13 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.definition.name;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.inject.Named;
 
 @Named
 @Default
-@Dependent
 public class Haddock implements Animal {
 
 }

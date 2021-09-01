@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class TransactionLogger implements Logger {
 
     @Inject

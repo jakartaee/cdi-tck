@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.bbd;
 
-import jakarta.enterprise.context.Dependent;
-
 @Skill(language = "Java", level = "guru")
-@Dependent
 public class Programmer {
 }

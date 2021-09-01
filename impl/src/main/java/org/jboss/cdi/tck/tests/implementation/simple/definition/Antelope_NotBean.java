@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Antelope_NotBean {
     public Antelope_NotBean(String name) {
 

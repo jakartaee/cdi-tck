@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.tooManyParameters;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Boxer {
 }

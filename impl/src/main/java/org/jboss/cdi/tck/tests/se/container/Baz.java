@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.se.container;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Baz {
 
     @Inject

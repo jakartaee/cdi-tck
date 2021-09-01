@@ -17,11 +17,8 @@
 package org.jboss.cdi.tck.tests.decorators.interceptor;
 
 
-import jakarta.enterprise.context.Dependent;
-
 @FooBinding1
 @FooBinding2
-@Dependent
 public class FooStuff implements Foo {
 
     public void doSomething() {

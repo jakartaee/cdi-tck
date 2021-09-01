@@ -17,12 +17,9 @@
 
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * 
  */
-@Dependent
 public class Qux extends Baz<String> {
 
     public Qux(String name) {

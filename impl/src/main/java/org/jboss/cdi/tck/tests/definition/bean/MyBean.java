@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
-public class MyBean<T> implements MyInterface {
+class MyBean<T> implements MyInterface {
 }

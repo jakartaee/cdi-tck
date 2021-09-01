@@ -17,13 +17,10 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.beanmanager;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * @author Martin Kouba
  * 
  */
-@Dependent
 public class Foo {
 
     public boolean decorated;

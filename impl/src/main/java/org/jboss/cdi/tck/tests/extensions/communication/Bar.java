@@ -17,12 +17,9 @@
 
 package org.jboss.cdi.tck.tests.extensions.communication;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  *
  */
-@Dependent
 public class Bar {
 
 }

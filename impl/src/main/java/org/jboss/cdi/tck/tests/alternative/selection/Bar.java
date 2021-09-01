@@ -18,12 +18,10 @@
 package org.jboss.cdi.tck.tests.alternative.selection;
 
 import jakarta.annotation.Priority;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Priority(2000)
 @Alternative
-@Dependent
 public class Bar implements TestBean {
 
     @Override

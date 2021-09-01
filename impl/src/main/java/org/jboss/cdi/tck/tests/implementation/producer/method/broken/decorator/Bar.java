@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.decorator;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Bar implements Foo {
 
     public boolean foo() {

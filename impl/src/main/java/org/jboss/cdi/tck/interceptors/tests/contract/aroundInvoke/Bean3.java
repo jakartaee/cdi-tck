@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
-@Dependent
-public class Bean3 {
+class Bean3 {
     public int zero() {
         return 0;
     }

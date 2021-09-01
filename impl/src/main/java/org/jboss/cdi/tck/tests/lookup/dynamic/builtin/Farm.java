@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Farm {
 
     @Inject

@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterceptor;
 
-import jakarta.enterprise.context.Dependent;
-
 @FooBinding
-@Dependent
 public final class FinalClassClassLevelMissile {
 
     public void fire() {

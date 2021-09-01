@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.afterBeanDiscovery;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Talk {
 
     public Talk(String word) {

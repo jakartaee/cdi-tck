@@ -48,9 +48,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.DisposesLiteral;
 import org.jboss.cdi.tck.literals.ProducesLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -72,7 +70,7 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(AnnotatedTypeConfiguratorTest.class)
                 .withClasses(ProducesLiteral.class, DisposesLiteral.class)
                 .withExtensions(ProcessAnnotatedTypeObserver.class
-                ).withBeansXml(new BeansXml(BeanDiscoveryMode.ALL)).build();
+                ).build();
     }
 
     @Test

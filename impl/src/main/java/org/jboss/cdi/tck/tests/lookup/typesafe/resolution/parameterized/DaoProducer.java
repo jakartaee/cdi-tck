@@ -16,14 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
 /**
  * @author pmuir
  * 
  */
-@Dependent
 public class DaoProducer {
 
     @Produces

@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.noextend3;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 
 @Specializes
-@Dependent
 public class Cow_Broken extends Mammal {
     public Cow_Broken() {
         super("Herbivore");

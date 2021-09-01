@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
 @Interceptors(TransactionInterceptor.class)
-@Dependent
 public class FooImpl implements Foo {
     public static boolean interceptorCalledFirst;
     public static boolean decoratorCalledFirst;

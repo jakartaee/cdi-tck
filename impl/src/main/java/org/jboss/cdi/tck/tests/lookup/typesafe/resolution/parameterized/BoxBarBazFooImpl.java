@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
-public class BoxBarBazFooImpl<T extends Bar & Baz & Foo> implements Box<T> {
+class BoxBarBazFooImpl<T extends Bar & Baz & Foo> implements Box<T> {
 }

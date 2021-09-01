@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.producer.method.broken.indirectoverride;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Product {
 
 }

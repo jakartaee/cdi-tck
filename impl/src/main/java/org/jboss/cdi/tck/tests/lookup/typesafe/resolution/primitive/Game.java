@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.primitive;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Game {
 
     @Inject

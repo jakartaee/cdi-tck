@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.async.basic;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class ScientificExperiment extends Experiment {
 }

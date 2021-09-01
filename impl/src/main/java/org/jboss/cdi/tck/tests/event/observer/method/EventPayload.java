@@ -19,9 +19,6 @@ package org.jboss.cdi.tck.tests.event.observer.method;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class EventPayload {
     private List<Class<?>> classesVisited = new ArrayList<Class<?>>();
 

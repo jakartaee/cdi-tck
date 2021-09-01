@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nonDecoratorWithDecorates;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class ChristmasTree {
 
 }

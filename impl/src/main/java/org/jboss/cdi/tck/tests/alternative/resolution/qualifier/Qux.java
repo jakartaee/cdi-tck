@@ -17,10 +17,8 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Qux {
 
     @Inject

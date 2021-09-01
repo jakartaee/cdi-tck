@@ -22,9 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Flock implements List<Vulture<Integer>> {
 
     @Override

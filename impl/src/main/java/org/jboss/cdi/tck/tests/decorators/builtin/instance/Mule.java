@@ -17,9 +17,6 @@
 
 package org.jboss.cdi.tck.tests.decorators.builtin.instance;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Mule {
 
 }

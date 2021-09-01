@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.runtimeException;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
-@Dependent
 public class TeaCupPomeranian {
 
     public static class OversizedException extends RuntimeException {

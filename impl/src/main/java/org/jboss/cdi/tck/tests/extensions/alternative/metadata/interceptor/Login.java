@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata.interceptor;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Login {
 
     public String login() {

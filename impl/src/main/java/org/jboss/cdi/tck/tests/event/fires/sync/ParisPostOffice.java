@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.fires.sync;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 
-@Dependent
 public class ParisPostOffice {
 
     @Inject

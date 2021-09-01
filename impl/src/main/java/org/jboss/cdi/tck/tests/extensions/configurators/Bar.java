@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Bar {
 }

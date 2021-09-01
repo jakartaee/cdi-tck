@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.event.observer.abortProcessing;
 
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -37,11 +36,9 @@ public class ObserverExceptionAbortsProcessingTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ObserverExceptionAbortsProcessingTest.class).build();
     }
 
-    @Dependent
     public static class AnEventType {
     }
 
-    @Dependent
     public static class AnObserverWithException {
         public static boolean wasNotified = false;
         public static final RuntimeException theException = new RuntimeException("RE1");
@@ -52,7 +49,6 @@ public class ObserverExceptionAbortsProcessingTest extends AbstractTest {
         }
     }
 
-    @Dependent
     public static class AnotherObserverWithException {
         public static boolean wasNotified = false;
         public static final RuntimeException theException = new RuntimeException("RE2");

@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
-import jakarta.enterprise.context.Dependent;
 
-@Dependent
 public class Sunrise {
 
 }

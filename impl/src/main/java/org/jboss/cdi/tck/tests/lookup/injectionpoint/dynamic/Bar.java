@@ -17,7 +17,6 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Instance;
@@ -28,7 +27,6 @@ import jakarta.inject.Inject;
 /**
  * @author Martin Kouba
  */
-@Dependent
 public class Bar {
 
     @Inject

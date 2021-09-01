@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer.broken.parameterAnnotatedAsyncObserves;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Food {
 }

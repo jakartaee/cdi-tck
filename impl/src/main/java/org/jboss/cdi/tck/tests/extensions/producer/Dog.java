@@ -18,10 +18,8 @@ package org.jboss.cdi.tck.tests.extensions.producer;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Dog {
     private static boolean constructorCalled = false;
     private static boolean postConstructCalled;

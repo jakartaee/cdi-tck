@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorNotListedInBeansXml;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class AccountHolder {
 
     @Transactional

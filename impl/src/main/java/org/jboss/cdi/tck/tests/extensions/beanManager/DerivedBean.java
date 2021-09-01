@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 
 @Specializes
 @Tame
-@Dependent
 public class DerivedBean extends SimpleBean {
     protected int simpleField;
 }

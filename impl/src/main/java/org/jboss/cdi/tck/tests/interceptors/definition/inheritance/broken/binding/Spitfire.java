@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.broken.binding;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Spitfire extends Fighter {
 
     public final void fire() {

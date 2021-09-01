@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.broken.passivation;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 
 /**
@@ -26,7 +25,6 @@ import jakarta.enterprise.context.SessionScoped;
  * @author Jozef Hartinger
  *
  */
-@Dependent
 public class Laptop {
 
 }

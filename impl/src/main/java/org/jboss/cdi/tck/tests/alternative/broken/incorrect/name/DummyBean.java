@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.incorrect.name;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class DummyBean {
 }

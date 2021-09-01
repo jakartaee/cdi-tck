@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.dependency.builtin;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class InspectorAssistant {
 
     public Inspector getInspector() {

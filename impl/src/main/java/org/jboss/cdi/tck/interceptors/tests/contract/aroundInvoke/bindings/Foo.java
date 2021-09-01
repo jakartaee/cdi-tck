@@ -16,14 +16,12 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.bindings;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Binding
-@Dependent
 public class Foo extends MiddleFoo {
 
     public void ping() {

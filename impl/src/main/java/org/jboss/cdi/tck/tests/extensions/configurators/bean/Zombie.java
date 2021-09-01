@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 
 /** @Vetoed makes sure this bean does not get picked up by CDI
@@ -24,7 +23,6 @@ import jakarta.enterprise.inject.Vetoed;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Vetoed
-@Dependent
 public class Zombie {
     
     private boolean decaying;

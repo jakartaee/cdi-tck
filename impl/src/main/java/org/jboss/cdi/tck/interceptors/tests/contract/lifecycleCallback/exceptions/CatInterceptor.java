@@ -20,7 +20,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.interceptor.InvocationContext;
 
-public class CatInterceptor {
+class CatInterceptor {
     public static boolean preDestroyCalled = false;
 
     @PostConstruct

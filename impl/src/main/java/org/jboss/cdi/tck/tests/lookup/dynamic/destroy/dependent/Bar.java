@@ -17,10 +17,8 @@
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.dependent;
 
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 
 @Transactional
-@Dependent
 public class Bar {
 
     private static boolean destroyed;

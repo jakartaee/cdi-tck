@@ -18,12 +18,9 @@
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
 
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * @author Martin Kouba
  */
-@Dependent
 public class Bug {
 
     public static final String NAME_GRAHAM = "Graham";

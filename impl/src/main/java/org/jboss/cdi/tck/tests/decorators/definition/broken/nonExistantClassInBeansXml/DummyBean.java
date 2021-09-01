@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.decorators.definition.broken.nonExistantClassInBeansXml;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class DummyBean {
 }

@@ -16,13 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class SpiderProducer {
 
     private static boolean tameSpiderDestroyed = false;

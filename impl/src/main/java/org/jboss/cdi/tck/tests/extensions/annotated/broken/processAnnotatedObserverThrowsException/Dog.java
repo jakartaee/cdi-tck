@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.broken.processAnnotatedObserverThrowsException;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Dog {
 
 }

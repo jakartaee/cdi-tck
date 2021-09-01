@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Calisoga extends Spider {
     private String name;
 

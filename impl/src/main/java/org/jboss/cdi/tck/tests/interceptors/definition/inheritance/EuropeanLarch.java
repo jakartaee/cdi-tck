@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 
-import jakarta.enterprise.context.Dependent;
-
 @European
-@Dependent
 public class EuropeanLarch extends Larch {
 
 }

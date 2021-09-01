@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated.delivery.broken;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.WithAnnotations;
 
-@Dependent
 public class ApplicationObserver {
 
     public void observeAnything(@WithAnnotations(RequestScoped.class) @Observes String event) {

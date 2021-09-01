@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
 @Interceptors(PostConstructInterceptor.class)
-@Dependent
-public class SimpleBean {
+class SimpleBean {
     private int id = 0;
     private static boolean echoCalled = false;
 

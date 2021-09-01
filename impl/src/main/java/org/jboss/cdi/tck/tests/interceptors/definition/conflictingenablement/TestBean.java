@@ -16,11 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.conflictingenablement;
 
-import jakarta.enterprise.context.Dependent;
-
 @Logged
 @Transactional
-@Dependent
 public class TestBean implements Test {
 
     public void ping() {

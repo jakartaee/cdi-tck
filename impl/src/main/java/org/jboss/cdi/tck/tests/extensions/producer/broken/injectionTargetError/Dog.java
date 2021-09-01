@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.producer.broken.injectionTargetError;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Dog {
 
 }

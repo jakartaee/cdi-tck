@@ -17,13 +17,10 @@
     
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * @author Martin Kouba
  *
  */
-@Dependent
 public class Cream {
 
 }

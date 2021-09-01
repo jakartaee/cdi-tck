@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 
-@Dependent
 public class DisposalNonBean {
     private static boolean tarantulaDestroyed = false;
     private static boolean webSpiderdestroyed = false;

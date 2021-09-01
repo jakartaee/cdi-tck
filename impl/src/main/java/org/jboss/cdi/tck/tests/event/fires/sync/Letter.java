@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.event.fires.sync;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Letter {
 }

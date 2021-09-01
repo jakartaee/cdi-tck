@@ -16,14 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
  * @author pmuir
  * 
  */
-@Dependent
 public class CowShed {
 
     public static final String MESSAGE = "cowShed";

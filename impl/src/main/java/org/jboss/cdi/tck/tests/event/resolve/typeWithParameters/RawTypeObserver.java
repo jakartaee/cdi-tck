@@ -18,10 +18,8 @@ package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
 import java.util.Random;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
-@Dependent
 public class RawTypeObserver {
 
     public static boolean OBSERVED = false;
@@ -31,11 +29,9 @@ public class RawTypeObserver {
          OBSERVED = true;
     }
 
-    @Dependent
     protected static class BoxWithObjectTypeParameters extends Box<Object, Object, Object> {
     }
 
-    @Dependent
     protected static class BoxWithDifferentTypeParameters extends Box<Number, String, Random> {
     }
 }

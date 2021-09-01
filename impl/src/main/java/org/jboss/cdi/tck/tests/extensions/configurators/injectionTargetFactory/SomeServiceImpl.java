@@ -16,13 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.injectionTargetFactory;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@Dependent
 public class SomeServiceImpl implements SomeService {
 
     public void ping() {

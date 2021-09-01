@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
-@Dependent
-public class Vehicle {
+class Vehicle {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();

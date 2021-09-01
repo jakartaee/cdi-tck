@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.circular;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 @SuppressWarnings("unused")
-@Dependent
 public class Planet {
 
     private Space space;

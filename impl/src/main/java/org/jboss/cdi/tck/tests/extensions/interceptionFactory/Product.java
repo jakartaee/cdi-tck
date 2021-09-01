@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.interceptionFactory;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 
 @Vetoed
-@Dependent
 public class Product {
 
     public int ping() {

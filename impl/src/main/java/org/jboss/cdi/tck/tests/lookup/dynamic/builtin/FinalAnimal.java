@@ -17,9 +17,6 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public final class FinalAnimal implements Animal {
 
 }

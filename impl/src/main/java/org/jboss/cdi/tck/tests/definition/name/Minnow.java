@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.name;
 
-import jakarta.enterprise.context.Dependent;
-
 @RiverFishStereotype
-@Dependent
 public class Minnow implements Animal {
 
 }

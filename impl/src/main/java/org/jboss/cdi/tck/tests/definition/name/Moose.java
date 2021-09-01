@@ -16,13 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.definition.name;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.inject.Named;
 
 @Named("aMoose")
 @Default
-@Dependent
 public class Moose implements Animal {
 
 }

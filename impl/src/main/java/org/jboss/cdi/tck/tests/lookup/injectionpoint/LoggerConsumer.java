@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class LoggerConsumer {
     @Inject
     private Logger logger;

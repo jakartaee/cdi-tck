@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasAsyncObservesParameter;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.ObservesAsync;
 import jakarta.inject.Inject;
 
-@Dependent
 public class FoodConsumerBroken {
 
     @Inject

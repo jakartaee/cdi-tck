@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.alternative;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @NotEnabledAlternativeStereotype
 @Named
-@Dependent
 public class Dog implements Animal {
 
 }

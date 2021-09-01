@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.tooManyParameters;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
 
-@Dependent
 public class YorkshireTerrier_Broken {
     public void observesAfterBeanDiscovery(@Observes AfterBeanDiscovery beforeBeanDiscovery, @Observes Boxer anotherDog) {
     }

@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.validation;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Engine {
 
     public void start() {

@@ -16,13 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.specialization.broken;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 import jakarta.inject.Named;
 
 @Specializes
 @Named("specializing")
-@Dependent
 public class Specializing extends Specialized {
 
 }

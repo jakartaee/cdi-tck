@@ -16,14 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.metadata;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Any;
 import jakarta.inject.Inject;
 
 import org.jboss.cdi.tck.tests.event.metadata.Bravo.BravoLiteral;
 
-@Dependent
 public class SimpleEventNotifier {
 
     @Inject

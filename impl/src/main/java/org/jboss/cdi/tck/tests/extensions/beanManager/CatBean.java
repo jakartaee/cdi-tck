@@ -30,7 +30,6 @@ import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.PassivationCapable;
 
-@Dependent
 public class CatBean implements Bean<Cat>, PassivationCapable {
     public static final CatBean bean = new CatBean();
 

@@ -17,7 +17,6 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.atd.massOperations;
 
 import jakarta.annotation.Priority;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.Alternatives;
@@ -28,7 +27,6 @@ import org.jboss.cdi.tck.tests.extensions.lifecycle.atd.Alternatives;
  */
 @Alternative
 @Priority(2500)
-@Dependent
 public class AlphaAlternative implements Alternatives {
 
 }

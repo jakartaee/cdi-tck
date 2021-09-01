@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.qualifiers;
 
-import jakarta.enterprise.context.Dependent;
-
 @Mock
-@Dependent
 public class SpecializationBean {
 }

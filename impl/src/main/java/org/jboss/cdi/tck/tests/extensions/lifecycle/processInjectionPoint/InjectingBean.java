@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
-@Dependent
 public class InjectingBean {
 
     @Inject

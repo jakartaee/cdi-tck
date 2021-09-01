@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.processBean;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class ChickenHutch {
 
     @SuppressWarnings("unused")

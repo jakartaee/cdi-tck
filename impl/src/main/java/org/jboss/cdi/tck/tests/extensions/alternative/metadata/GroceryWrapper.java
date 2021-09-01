@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.Reception;
@@ -43,7 +42,6 @@ import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
 import org.jboss.cdi.tck.util.annotated.AnnotatedParameterWrapper;
 import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
-@Dependent
 public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
     private final Set<Type> typeClosure = new HashSet<Type>();
     private static boolean getBaseTypeOfFruitFieldUsed = false;

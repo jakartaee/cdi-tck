@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Named("whitefish")
 @Whitefish
-@Dependent
 public class Plaice implements Animal {
 
 }

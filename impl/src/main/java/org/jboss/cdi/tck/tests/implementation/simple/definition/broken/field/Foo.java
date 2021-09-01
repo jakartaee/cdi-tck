@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.broken.field;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Foo {
 
 }

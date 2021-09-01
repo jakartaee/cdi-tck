@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
-public class MyGenericBean<T> extends MyBean<T> {
+class MyGenericBean<T> extends MyBean<T> {
 }

@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Order {
     @Inject
     public Order(OrderProcessor processor) {

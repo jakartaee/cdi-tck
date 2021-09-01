@@ -17,13 +17,11 @@
 
 package org.jboss.cdi.tck.tests.inheritance.generics;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
 /**
  *
  */
-@Dependent
 public class Producer {
 
     @Produces

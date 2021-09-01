@@ -16,11 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized.multiple.bounds;
 
-import jakarta.enterprise.context.Dependent;
-
 @BazQualifier
-@Dependent
-public class GenericInterfaceSuperBazImpl<T extends SuperBaz> implements GenericInterface<T> {
+class GenericInterfaceSuperBazImpl<T extends SuperBaz> implements GenericInterface<T> {
 
     @Override
     public String getId() {

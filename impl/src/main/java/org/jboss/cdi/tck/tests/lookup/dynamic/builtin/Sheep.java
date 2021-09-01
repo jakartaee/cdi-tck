@@ -17,11 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Typed;
 
 @Typed()
-@Dependent
 public class Sheep extends AbstractAnimal {
 
 }

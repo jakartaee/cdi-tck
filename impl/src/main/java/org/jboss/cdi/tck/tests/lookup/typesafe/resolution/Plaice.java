@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
-import jakarta.enterprise.context.Dependent;
-
 @Whitefish
-@Dependent
 final class Plaice implements Animal {
 
 }

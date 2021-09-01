@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.initializerUnallowed;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
-@Dependent
 public class SpiderProducer_Broken {
 
     @Produces

@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.producer.field.managed;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 final class Broken_Record {
 
 }

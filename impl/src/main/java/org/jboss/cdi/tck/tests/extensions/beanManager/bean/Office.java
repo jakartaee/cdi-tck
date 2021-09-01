@@ -18,13 +18,11 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.bean;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 
 @Vetoed
 @Large
-@Dependent
 public class Office implements Building<String> {
 
     @Inject

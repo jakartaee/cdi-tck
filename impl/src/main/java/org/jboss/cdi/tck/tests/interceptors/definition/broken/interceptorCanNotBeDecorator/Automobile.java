@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.interceptorCanNotBeDecorator;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Automobile {
     public void start() {
 

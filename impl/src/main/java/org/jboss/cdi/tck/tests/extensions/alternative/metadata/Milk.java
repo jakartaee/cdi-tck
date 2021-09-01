@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Milk {
     @SuppressWarnings("unused")
     private boolean fresh;

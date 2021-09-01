@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.annotated;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class DogHouse {
     @Inject
     protected Dog dog;

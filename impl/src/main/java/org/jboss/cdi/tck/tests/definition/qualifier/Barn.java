@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-@Dependent
 public class Barn {
     @Inject
     @Tame

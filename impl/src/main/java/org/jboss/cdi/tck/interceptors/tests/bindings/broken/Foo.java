@@ -16,11 +16,8 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.broken;
 
-import jakarta.enterprise.context.Dependent;
-
 @FooBinding
 @BarBinding
-@Dependent
 public class Foo {
 
 }

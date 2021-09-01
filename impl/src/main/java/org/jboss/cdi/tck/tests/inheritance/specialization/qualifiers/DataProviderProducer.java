@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.qualifiers;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class DataProviderProducer {
 
     @Produces

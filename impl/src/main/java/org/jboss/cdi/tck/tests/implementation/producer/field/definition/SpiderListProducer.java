@@ -19,10 +19,8 @@ package org.jboss.cdi.tck.tests.implementation.producer.field.definition;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class SpiderListProducer<T extends Spider> {
     @Produces
     List<T> spiders = new ArrayList<T>();

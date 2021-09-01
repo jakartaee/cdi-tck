@@ -17,9 +17,6 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types.illegal;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class Bird<T> extends AnimalHolder<Animal<? extends T>> {
 
 }

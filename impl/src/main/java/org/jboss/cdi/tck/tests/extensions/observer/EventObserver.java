@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.observer;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
-@Dependent
 public class EventObserver {
     public void observeEventA(@Observes EventA event) {
 

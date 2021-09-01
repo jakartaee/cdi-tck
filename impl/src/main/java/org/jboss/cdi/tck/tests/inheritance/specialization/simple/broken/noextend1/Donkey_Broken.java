@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.inheritance.specialization.simple.broken.noextend1;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Specializes;
 
 @Specializes
-@Dependent
 public class Donkey_Broken implements Animal {
 
 }

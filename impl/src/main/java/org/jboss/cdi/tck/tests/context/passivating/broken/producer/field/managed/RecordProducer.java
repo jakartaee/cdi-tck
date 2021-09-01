@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.broken.producer.field.managed;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class RecordProducer {
     public @Produces
     @FooScoped

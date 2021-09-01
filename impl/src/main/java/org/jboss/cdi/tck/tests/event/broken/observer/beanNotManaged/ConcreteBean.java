@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.beanNotManaged;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class ConcreteBean extends AbstractBean {
     @Override
     public void observer(String event) {

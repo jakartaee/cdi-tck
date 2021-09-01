@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.invalid;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.AnnotatedType;
 
 import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
@@ -25,7 +24,6 @@ import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@Dependent
 public class TestAnnotatedType<X> extends ForwardingAnnotatedType<X> {
 
     private AnnotatedType<X> delegate;

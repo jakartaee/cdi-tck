@@ -22,12 +22,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Reception;
 import jakarta.enterprise.event.TransactionPhase;
 import jakarta.enterprise.inject.spi.ObserverMethod;
 
-@Dependent
 public class GiraffeObserver implements ObserverMethod<Giraffe> {
 
     private Giraffe receivedPayload;

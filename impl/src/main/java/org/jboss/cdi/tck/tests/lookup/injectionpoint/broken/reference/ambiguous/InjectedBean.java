@@ -16,8 +16,5 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.reference.ambiguous;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class InjectedBean {
 }

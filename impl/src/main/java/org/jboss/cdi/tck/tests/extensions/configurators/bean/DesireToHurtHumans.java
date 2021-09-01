@@ -16,13 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.extensions.configurators.bean;
 
-import jakarta.enterprise.context.Dependent;
-
 /** Dummy bean used to add as injection point into newly created beans
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
-@Dependent
 public class DesireToHurtHumans {
     
 }

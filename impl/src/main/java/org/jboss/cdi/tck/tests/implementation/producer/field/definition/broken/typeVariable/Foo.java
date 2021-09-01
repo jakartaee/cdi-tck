@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.typeVariable;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class Foo<T> {
     @Produces
     T foo = null;

@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.decorators.invocation;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class BarImpl implements Bar {
 
     public boolean foo() {

@@ -16,10 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.broken.binding;
 
-import jakarta.enterprise.context.Dependent;
-
 @FighterStereotype
-@Dependent
 public class Fighter {
 
     public void fire() {

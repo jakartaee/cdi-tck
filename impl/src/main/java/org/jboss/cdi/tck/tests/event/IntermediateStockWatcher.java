@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public class IntermediateStockWatcher extends StockWatcher {
 
 }

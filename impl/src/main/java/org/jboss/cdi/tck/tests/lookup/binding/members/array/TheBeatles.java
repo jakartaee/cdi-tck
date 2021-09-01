@@ -16,14 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.lookup.binding.members.array;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
  * @author pmuir
  * 
  */
-@Dependent
 public class TheBeatles {
 
     @Inject

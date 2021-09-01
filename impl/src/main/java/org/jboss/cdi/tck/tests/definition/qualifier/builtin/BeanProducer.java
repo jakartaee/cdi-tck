@@ -16,12 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.builtin;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
-@Dependent
 public class BeanProducer {
     
     @Produces

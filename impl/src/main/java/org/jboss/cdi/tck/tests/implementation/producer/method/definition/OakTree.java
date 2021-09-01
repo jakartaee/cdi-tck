@@ -20,7 +20,6 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 
-@Dependent
 public class OakTree {
     @Produces
     @Dependent

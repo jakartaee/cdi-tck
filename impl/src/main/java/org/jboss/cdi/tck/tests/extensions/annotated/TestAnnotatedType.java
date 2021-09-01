@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.extensions.annotated;
 
 import java.util.Set;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.AnnotatedConstructor;
 import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.AnnotatedMethod;
@@ -29,7 +28,6 @@ import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
 /** Makes use of util class ForwardingAnnotatedType<X>
  * 
  */
-@Dependent
 public class TestAnnotatedType<X> extends ForwardingAnnotatedType<X> {
     private AnnotatedType<X> delegate;
     private static boolean getConstructorsUsed = false;

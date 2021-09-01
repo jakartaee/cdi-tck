@@ -18,9 +18,7 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 
-@Dependent
 public class Web {
     private Boolean destroyed;
 

@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.broken.binding;
 
-import jakarta.enterprise.context.Dependent;
-
-@Dependent
 public final class Messerschmitt extends Fighter {
 
 }

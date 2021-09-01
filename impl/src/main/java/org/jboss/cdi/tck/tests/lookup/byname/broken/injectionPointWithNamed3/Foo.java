@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.broken.injectionPointWithNamed3;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
-@Dependent
 public class Foo {
     @Inject
     public void initialize(@Named Bar bar) {

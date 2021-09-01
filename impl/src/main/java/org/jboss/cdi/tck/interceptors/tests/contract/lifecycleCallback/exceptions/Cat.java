@@ -17,12 +17,10 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptions;
 
 import jakarta.annotation.PreDestroy;
-import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
 @Interceptors(CatInterceptor.class)
-@Dependent
-public class Cat {
+class Cat {
     public static boolean preDestroyCalled = false;
 
     @PreDestroy

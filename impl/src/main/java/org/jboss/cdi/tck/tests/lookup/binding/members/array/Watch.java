@@ -16,14 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.binding.members.array;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * @author pmuir
  * 
  */
 @Expensive(prices = { "TWO" })
-@Dependent
 public class Watch {
 
 }

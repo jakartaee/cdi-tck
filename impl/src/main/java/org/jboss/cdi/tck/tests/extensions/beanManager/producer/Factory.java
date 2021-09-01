@@ -18,13 +18,11 @@ package org.jboss.cdi.tck.tests.extensions.beanManager.producer;
 
 import static org.testng.Assert.assertNotNull;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
 @Vetoed
-@Dependent
 public class Factory {
 
     public static final Toy WOODY = new Toy("Woody");

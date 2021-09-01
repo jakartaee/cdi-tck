@@ -16,11 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.constructorHasDisposesParameter;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.inject.Inject;
 
-@Dependent
 public class DisposingConstructor {
     @Inject
     public DisposingConstructor(@Disposes Duck duck) {

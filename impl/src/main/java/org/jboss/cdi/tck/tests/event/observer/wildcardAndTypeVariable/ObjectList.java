@@ -18,14 +18,11 @@ package org.jboss.cdi.tck.tests.event.observer.wildcardAndTypeVariable;
 
 import java.util.ArrayList;
 
-import jakarta.enterprise.context.Dependent;
-
 /**
  * @author pmuir
  *
  */
 @SuppressWarnings("serial")
-@Dependent
 public class ObjectList extends ArrayList<Object> {
 
 }

@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.synth
 import java.util.Collections;
 import java.util.Set;
 
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.BeanAttributes;
@@ -27,7 +26,6 @@ import jakarta.enterprise.inject.spi.InjectionPoint;
 
 import org.jboss.cdi.tck.util.ForwardingBeanAttributes;
 
-@Dependent
 public class BicycleBean extends ForwardingBeanAttributes<Bicycle> implements Bean<Bicycle> {
 
     private BeanAttributes<Bicycle> delegate;

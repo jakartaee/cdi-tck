@@ -1,7 +1,5 @@
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 
-import jakarta.enterprise.context.Dependent;
-
 /*
  * JBoss, Home of Professional Open Source
  * Copyright 2010, Red Hat, Inc., and individual contributors
@@ -19,7 +17,6 @@ import jakarta.enterprise.context.Dependent;
  * limitations under the License.
  */
 @Culinary
-@Dependent
 public class Rosehip extends Shrub {
 
 }
