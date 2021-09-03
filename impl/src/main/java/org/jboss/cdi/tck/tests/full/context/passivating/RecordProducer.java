@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.full.context.passivating;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class RecordProducer {
     public @Produces
     @SessionScoped

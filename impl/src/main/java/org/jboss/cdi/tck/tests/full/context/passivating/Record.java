@@ -16,12 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.full.context.passivating;
 
-import jakarta.enterprise.context.Dependent;
-
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-@Dependent
 public class Record implements Serializable {
 
 }
