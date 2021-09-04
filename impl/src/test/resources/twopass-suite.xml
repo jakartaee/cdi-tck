@@ -1,10 +1,10 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="CDI TCK" verbose="0" configfailurepolicy="continue">
 
+<!-- Suite file for testing the two pass mode of running tests needed for annotation processor
+implementations that rely on the SourceProcessor SPI.
+-->
+<suite name="TwoPass Example TestSuite" verbose="1" >
     <listeners>
-        <!-- Required - avoid randomly mixed test method execution -->
-        <listener class-name="org.jboss.cdi.tck.impl.testng.SingleTestClassMethodInterceptor" />
-
         <!-- Optional - intended for debug purpose only -->
         <listener class-name="org.jboss.cdi.tck.impl.testng.ConfigurationLoggingListener"/>
         <listener class-name="org.jboss.cdi.tck.impl.testng.ProgressLoggingTestListener"/>
@@ -15,22 +15,13 @@
         <listener class-name="org.testng.reporters.EmailableReporter"/>
         <listener class-name="org.testng.reporters.TestHTMLReporter" />
     </listeners>
-
-    <test name="CDI TCK">
-
+    <test name="SourceProcessorTests" >
         <packages>
-            <package name="org.jboss.cdi.tck.tests.*" />
-            <package name="org.jboss.cdi.tck.interceptors.tests.*" />
+            <package name="org.jboss.cdi.tck.test.spi.*"/>
         </packages>
-
         <classes>
-            <!-- Add excluded tests here -->
-            <!-- End excludes -->
-
             <!-- The TestNG BeforeSuite implementation that tracks the run pass -->
-            <class name="org.jboss.cdi.tck.impl.testng.SourceProcessorSuite"/>
+            <class name="org.jboss.cdi.tck.impl.testng.SourceProcessorSuite" />
         </classes>
-
     </test>
-
 </suite>

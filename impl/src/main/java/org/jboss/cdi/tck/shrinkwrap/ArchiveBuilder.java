@@ -27,6 +27,7 @@ import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.impl.ConfigurationImpl;
 import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
+import org.jboss.cdi.tck.impl.testng.SourceProcessorSuite;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.SourceProcessor;
 import org.jboss.cdi.tck.util.Timer;
@@ -946,9 +947,11 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected <P extends Archive<?> & ClassContainer<?> & ServiceProviderContainer<?>> void processSources(P archive) {
         Configuration configuration = ConfigurationFactory.get();
         SourceProcessor sourceProcessor = configuration.getSourceProcessor();
-        // If this is not running in cdi-lite mode or there is no source processor, skip source attachment
+        /* If this is not running in cdi-lite mode or there is no source processor, or this is the
+            second pass, skip source attachment and processing
+        */
         Boolean isCDIlite = configuration.getCDILiteModeFlag();
-        if(!isCDIlite || sourceProcessor == null)
+        if(!isCDIlite || sourceProcessor == null || SourceProcessorSuite.currentPhase() == SourceProcessor.Phase.PASS_TWO)
             return;
 
         Path cwd = Paths.get("").toAbsolutePath();
@@ -981,15 +984,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             File outputDir = getCompileDir(archive);
             DiagnosticCollector<JavaFileObject> errors =  new DiagnosticCollector<>();
             sourceProcessor.process(sourceSet, outputDir, errors);
-            try {
-                reloadCompiledClasses(archive);
-                if(isDebugMode) {
-                    logger.fine("ArchiveBuilder.reloadCompiledClasses, archive: "+archive.toString(true));
-                }
-
-            } catch (Exception e) {
-                getLogger().log(Level.SEVERE, "Failed to reload SourceProcessor output", e);
-            }
         }
     }
 
@@ -1287,8 +1281,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * @return output dir for use by {@link javax.tools.JavaCompiler}
      */
     protected <P extends Archive<?>> File getCompileDir(P archive) {
+        Configuration configuration = ConfigurationFactory.get();
         String name = archive.getName();
-        File outputDir = new File("target/test-archives/"+name);
+        String outputPath = configuration.getSourceProcessorOutputDir();
+        File outputDir = new File(outputPath);
         if(outputDir.exists() == false && outputDir.mkdirs() == false) {
             getLogger().severe("Failed to create output directory; "+outputDir.getAbsolutePath());
         } else if(isDebugMode) {
@@ -1297,80 +1293,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         return outputDir;
     }
 
-    /**
-     * Called after the {@link org.jboss.cdi.tck.spi.SourceProcessor} has run to replace/add classes produced by the
-     * call. Currently this filters out all classes that did not exist before source processing, so if classes
-     * were actually added, we need a way to flag them.
-     *
-     * @param archive - the test archive
-     * @param <P> - the type of archive
-     * @throws Exception on ClassLoading or class access failure
-     */
-    protected <P extends Archive<?> & ClassContainer<?> & ServiceProviderContainer<?>> void reloadCompiledClasses(P archive) throws Exception {
-        // Reload classes from the Javac build of source processed classes
-        File compileDir = getCompileDir(archive);
-        ArrayList<File> classFiles = new ArrayList<>();
-        try (Stream<Path> walk = Files.walk(compileDir.toPath())) {
-            List<File> result = walk.filter(ArchiveBuilder::isClassFileOrDir).map(Path::toFile).collect(Collectors.toList());
-            classFiles.addAll(result);
-        }
-
-        final ClassLoader cl = testClazz.getClassLoader();
-        final ClassLoader parentCL = (cl != null ? cl : ClassLoader.getSystemClassLoader());
-        // Add +1 to include the trailing '/' that classes will see but this path does not have
-        int compileDirPrefixLength = compileDir.toPath().toString().length()+1;
-        URL[] cp = {compileDir.toURL()};
-        URLClassLoader clToUse = new URLClassLoader(cp, parentCL);
-        String testClazzName = testClazz.getName();
-        for(File classFile : classFiles) {
-            // The classFiles set includes parent directories, so skip those
-            String path = classFile.getPath();
-            if (classFile.isDirectory()) {
-                if (path.endsWith("/META-INF/services")) {
-                    for (File f : classFile.listFiles()) {
-                        String[] serviceEntries = Files.readString(f.toPath()).split("\n");
-                        archive.addAsServiceProvider(f.getName(), serviceEntries);
-                    }
-                }
-                continue;
-            }
-
-            String className = path.replaceAll("/", ".");
-            // Strip compileDir prefix and .class suffix
-            className = className.substring(compileDirPrefixLength, className.length()-6);
-            boolean exclude = false;
-            if (isAsClientMode() && (testClazzName.equals(className) || className.startsWith(testClazzName))) {
-                continue;
-            } else {
-                if (excludedClasses != null && !excludedClasses.isEmpty()) {
-                    for (String exludeClassName : excludedClasses) {
-                        // Handle annonymous inner classes
-                        if (className.equals(exludeClassName)) {
-                            exclude = true;
-                            break;
-                        } else if (className.startsWith(exludeClassName) && className.contains("$")) {
-                            exclude = true;
-                            break;
-                        } else if (!classes.contains(className)) {
-                            exclude = true;
-                        }
-                    }
-                }
-            }
-            // Add the class from the recompilation if not excluded
-            if(!exclude) {
-                Class<?> clazz = clToUse.loadClass(className);
-                archive.deleteClass(clazz);
-                archive.addClass(clazz);
-            }
-        }
-        if (this.isDebugMode) {
-            logger.info(archive.toString(true));
-        }
-    }
 
     /**
-     * {@link #reloadCompiledClasses} helper method
      * @param path - path under the test archive sources output dir
      * @return true if path is a directory or .class file
      */

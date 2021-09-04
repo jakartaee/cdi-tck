@@ -39,6 +39,9 @@ public class ConfigurationImpl implements Configuration {
 
     private Boolean cdiLiteModeFlag;
     private String libraryDirectory;
+    private String sourceOutputDirectory;
+    private Boolean sourceProcessingPassOne = Boolean.FALSE;
+    private Boolean sourceProcessingPassTwo = Boolean.FALSE;
 
     private String testDataSource;
     private String testJmsConnectionFactory;
@@ -148,6 +151,34 @@ public class ConfigurationImpl implements Configuration {
             throw new IllegalArgumentException("Test timeout factor must be greater than zero");
         }
         this.testTimeoutFactor = timeoutFactor;
+    }
+
+    @Override
+    public String getSourceProcessorOutputDir() {
+        return sourceOutputDirectory;
+    }
+
+    @Override
+    public void setSourceProcessorOutputDir(String outputDir) {
+        this.sourceOutputDirectory = outputDir;
+    }
+
+    @Override
+    public boolean isSourceProcessorPassOne() {
+        return sourceProcessingPassOne;
+    }
+    @Override
+    public void setSourceProcessorPassOne() {
+        this.sourceProcessingPassOne = true;
+    }
+
+    @Override
+    public boolean isSourceProcessorPassTwo() {
+        return sourceProcessingPassTwo;
+    }
+    @Override
+    public void setSourceProcessorPassTwo() {
+        this.sourceProcessingPassTwo = true;
     }
 
     @Override

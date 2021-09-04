@@ -38,8 +38,12 @@ import jakarta.inject.Inject;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
+import org.jboss.cdi.tck.impl.testng.SourceProcessorSuite;
+import org.jboss.cdi.tck.spi.SourceProcessor;
 import org.jboss.cdi.tck.util.BeanLookupUtils;
 import org.jboss.cdi.tck.util.DependentInstance;
+import org.testng.IHookCallBack;
+import org.testng.ITestResult;
 
 /**
  * Abstract CDI TCK test.
@@ -192,4 +196,19 @@ public abstract class AbstractTest extends Arquillian {
         }
     }
 
+    /**
+     * Override the Arquillian IHookable method to skip invocation of the test during a two pass
+     * run mode needed by implementations that use a SourceProcessor and annotation processing phase.
+     * @param callback - testng callback to run test
+     * @param testResult - test result object to pass to callback
+     */
+    @Override
+    public void run(IHookCallBack callback, ITestResult testResult) {
+        SourceProcessor.Phase phase = SourceProcessorSuite.currentPhase();
+        if(phase != null && phase == SourceProcessor.Phase.PASS_TWO) {
+            super.run(callback, testResult);
+        } else {
+            // Skip test run in PASS_ONE
+        }
+    }
 }

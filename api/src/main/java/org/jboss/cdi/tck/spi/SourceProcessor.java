@@ -15,6 +15,9 @@ import javax.tools.JavaFileObject;
 public interface SourceProcessor {
     public static final String PROPERTY_NAME = SourceProcessor.class.getName();
 
+    public static enum Phase {
+        PASS_ONE, PASS_TWO
+    }
     /**
      * Called to process the test archive source file. This is called after the base test classes have been added to
      * the test archive. Classes generated in this phase will be added to the test archive to augment or replace

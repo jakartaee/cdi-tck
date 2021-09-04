@@ -51,6 +51,8 @@ public interface Configuration {
     public static final String TEST_TIMEOUT_FACTOR = "org.jboss.cdi.tck.testTimeoutFactor";
 
     public static final String CDI_LITE_MODE_FLAG = "org.jboss.cdi.tck.cdiLiteModeFlag";
+    /** */
+    public static final String SOURCE_PROCESSOR_OUTPUT_DIR = "org.jboss.cdi.tck.sourceProcessorOutputDir";
 
     public static final int TEST_TIMEOUT_FACTOR_DEFAULT_VALUE = 100;
 
@@ -162,5 +164,27 @@ public interface Configuration {
      * @param timeoutFactor
      */
     public void setTestTimeoutFactor(int timeoutFactor);
+
+    /**
+     * Get the relative path to CWD for directory to use for output by the SourceProcessor and Java compiler.
+     * This defaults to target/test-classes2
+     *
+     * @return relative path for SourceProcessor output.
+     */
+    public String getSourceProcessorOutputDir();
+    public void setSourceProcessorOutputDir(String outputDir);
+
+    /**
+     * Is this the first pass of test source proccessing
+     * @return true if first pass
+     */
+    public boolean isSourceProcessorPassOne();
+    public void setSourceProcessorPassOne();
+    /**
+     * Is this the second pass of test source proccessing
+     * @return true if first pass
+     */
+    public boolean isSourceProcessorPassTwo();
+    public void setSourceProcessorPassTwo();
 
 }
