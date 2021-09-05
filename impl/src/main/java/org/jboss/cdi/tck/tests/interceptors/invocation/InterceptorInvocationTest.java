@@ -26,10 +26,7 @@ import static org.testng.Assert.assertTrue;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -80,32 +77,6 @@ public class InterceptorInvocationTest extends AbstractTest {
 
         assertFalse(AlmightyInterceptor.methodIntercepted);
         assertTrue(missile.initCalled()); // this call is intercepted
-        assertTrue(AlmightyInterceptor.methodIntercepted);
-    }
-
-    @Test
-    @SpecAssertion(section = BIZ_METHOD, id = "ia")
-    public void testProducerMethodsAreIntercepted() {
-
-        AlmightyInterceptor.reset();
-        getContextualReference(Wheat.class);
-
-        assertTrue(AlmightyInterceptor.methodIntercepted);
-    }
-
-    @Test
-    @SpecAssertion(section = BIZ_METHOD, id = "ic")
-    public void testDisposerMethodsAreIntercepted() {
-
-        AlmightyInterceptor.reset();
-
-        DependentInstance<Wheat> bean = newDependentInstance(Wheat.class);
-        Wheat instance = bean.get();
-        assertNotNull(instance);
-        AlmightyInterceptor.methodIntercepted = false;
-        bean.destroy();
-
-        assertTrue(WheatProducer.destroyed);
         assertTrue(AlmightyInterceptor.methodIntercepted);
     }
 

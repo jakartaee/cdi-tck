@@ -14,49 +14,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorCalledBeforeDecorator;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 @SpecVersion(spec = "cdi", version = "2.0")
-public class InterceptorOrderTest extends AbstractTest {
+public class InterceptorCalledBeforeDecoratorTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withTestClassPackage(InterceptorOrderTest.class)
-                .withBeansXml(new BeansXml().interceptors(SecondInterceptor.class, FirstInterceptor.class))
-                .build();
+        return new WebArchiveBuilder().withTestClassPackage(InterceptorCalledBeforeDecoratorTest.class)
+                .withBeansXml("beans.xml").build();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "b"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "c") })
-    public void testInterceptorsCalledInOrderDefinedByBeansXml(Foo foo) {
+    @Test(groups = CDI_FULL)
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS, id = "b"),
+            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g") })
+    public void testInterceptorCalledBeforeDecorator() {
+        FooImpl.interceptorCalledFirst = false;
+        FooImpl.decoratorCalledFirst = false;
 
-        assertNotNull(foo);
-        ActionSequence.reset();
-
+        Foo foo = getContextualReference(Foo.class);
         foo.bar();
 
-        List<String> sequence = ActionSequence.getSequenceData();
-        assertEquals(sequence.size(), 2);
-        assertEquals(sequence.get(0), SecondInterceptor.class.getName());
-        assertEquals(sequence.get(1), FirstInterceptor.class.getName());
+        assert FooImpl.interceptorCalledFirst;
+        assert !FooImpl.decoratorCalledFirst;
     }
-
 }
