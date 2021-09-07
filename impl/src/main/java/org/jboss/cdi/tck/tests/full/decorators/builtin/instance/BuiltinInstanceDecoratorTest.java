@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.full.decorators.instance;
+package org.jboss.cdi.tck.tests.full.decorators.builtin.instance;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_INVOCATION;

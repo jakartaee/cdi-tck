@@ -14,17 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.full.decorators.broken.finalBeanClass;
+package org.jboss.cdi.tck.tests.full.decorators.broken.custom.finalBeanClass;
 
-import jakarta.decorator.Delegate;
-import jakarta.inject.Inject;
-
-public class VehicleDecorator implements Vehicle {
-    @Inject
-    @Delegate
-    Vehicle delegate;
-
-    public void start() {
-        delegate.start();
-    }
+public interface Vehicle {
+    void start();
 }
