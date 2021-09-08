@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.full.decorators.broken.toomanydelegateinjectionpoints;
+package org.jboss.cdi.tck.tests.full.decorators.custom.broken.toomanydelegateinjectionpoints;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;

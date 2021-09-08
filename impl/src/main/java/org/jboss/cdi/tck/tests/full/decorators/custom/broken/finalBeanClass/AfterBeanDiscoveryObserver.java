@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.full.decorators.broken.custom.finalBeanClass;
+package org.jboss.cdi.tck.tests.full.decorators.custom.broken.finalBeanClass;
 
 import java.util.Set;
 

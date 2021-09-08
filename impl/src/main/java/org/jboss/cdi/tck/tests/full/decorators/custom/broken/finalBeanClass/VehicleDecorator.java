@@ -14,13 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.full.decorators.broken.custom.finalBeanClass;
+package org.jboss.cdi.tck.tests.full.decorators.custom.broken.finalBeanClass;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
-@Dependent
-final class Bus implements Vehicle {
+public class VehicleDecorator implements Vehicle {
+    @Inject
+    @Delegate
+    Vehicle delegate;
 
     public void start() {
+        delegate.start();
     }
 }
