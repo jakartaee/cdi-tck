@@ -14,15 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.full.decorators.broken.nodelegateinjectionpoint;
+package org.jboss.cdi.tck.tests.full.decorators.custom.broken.nodelegateinjectionpoint;
 
-public class Bus implements Vehicle {
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
+
+public class VehicleDecorator implements Vehicle {
+    @Inject
+    @Delegate
+    Vehicle delegate;
 
     public String start() {
-        return "Bus started";
+        return delegate.start() + " and decorated.";
     }
 
     public String stop() {
-        return "Bus stopped";
+        return delegate.stop() + " and decorated.";
     }
 }
