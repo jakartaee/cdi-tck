@@ -14,7 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD:impl/src/main/java/org/jboss/cdi/tck/tests/full/context/passivating/broken/producer/method/managed/dependent/Cow.java
+package org.jboss.cdi.tck.tests.full.context.passivating.broken.producer.method.managed.dependent;
+=======
 package org.jboss.cdi.tck.tests.full.context.passivating.broken.producer.field.managed.dependent;
+>>>>>>> upstream/master:impl/src/main/java/org/jboss/cdi/tck/tests/full/context/passivating/broken/producer/field/managed/dependent/Cow.java
 
 public class Cow {
 
