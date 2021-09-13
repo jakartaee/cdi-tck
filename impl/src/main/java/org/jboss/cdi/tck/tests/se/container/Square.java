@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.se.container;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Square implements Shape {
     public static String NAME = "Square";
 
