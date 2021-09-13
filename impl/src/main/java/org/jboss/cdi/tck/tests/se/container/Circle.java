@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.se.container;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Alternative
+@Dependent
 public class Circle implements Shape {
 
     public static String NAME = "Circle";

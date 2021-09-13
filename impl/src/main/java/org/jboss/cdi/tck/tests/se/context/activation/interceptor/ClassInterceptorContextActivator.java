@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.se.context.activation.interceptor;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.control.ActivateRequestContext;
 import jakarta.inject.Inject;
 
 @BeforeActivationBinding
 @ActivateRequestContext
 @AfterActivationBinding
+@Dependent
 public class ClassInterceptorContextActivator {
 
     @Inject
