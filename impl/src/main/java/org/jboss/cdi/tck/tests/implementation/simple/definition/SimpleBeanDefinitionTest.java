@@ -70,6 +70,7 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "g")
     public void testExtensionNotDiscoveredAsSimpleBean() {
+        // even though this test uses extension, it is a valid test for CDI Lite
         Assert.assertEquals(getBeans(SimpleExtension.class).size(), 0);
     }
 
