@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.full.decorators.broken.nodelegateinjectionpoint;
+package org.jboss.cdi.tck.tests.full.decorators.custom.broken.nodelegateinjectionpoint;
 
 import java.util.Set;
 

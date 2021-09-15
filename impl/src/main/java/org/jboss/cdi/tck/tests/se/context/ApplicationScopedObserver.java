@@ -18,10 +18,12 @@ package org.jboss.cdi.tck.tests.se.context;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.BeforeDestroyed;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.Destroyed;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
 
+@Dependent
 public class ApplicationScopedObserver {
 
     public static boolean isInitialized;
