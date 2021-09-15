@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.wrapped;
+package org.jboss.cdi.tck.interceptors.tests.full.contract.lifecycleCallback.wrapped;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
 import static org.testng.Assert.assertEquals;
 
@@ -39,7 +40,7 @@ public class LifecycleCallbackInterceptorTest extends AbstractTest {
                 .withExtension(WrappingExtension.class).build();
     }
 
-    @Test
+    @Test(groups = CDI_FULL)
     @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "b")
     @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "c")
     public void testLifecycleCallbackInterception() {

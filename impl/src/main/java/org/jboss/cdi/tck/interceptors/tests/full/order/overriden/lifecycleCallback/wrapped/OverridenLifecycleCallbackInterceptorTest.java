@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.order.overriden.lifecycleCallback.wrapped;
+package org.jboss.cdi.tck.interceptors.tests.full.order.overriden.lifecycleCallback.wrapped;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_ORDERING_RULES;
 import static org.testng.Assert.assertEquals;
 
@@ -24,6 +25,7 @@ import jakarta.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -39,7 +41,7 @@ public class OverridenLifecycleCallbackInterceptorTest extends AbstractTest {
                 .withExtension(WrappingExtension.class).build();
     }
 
-    @Test
+    @Test(groups = CDI_FULL)
     @SpecAssertion(section = INT_ORDERING_RULES, id = "j")
     public void testCallbackOverridenByCallback() {
 
@@ -59,7 +61,7 @@ public class OverridenLifecycleCallbackInterceptorTest extends AbstractTest {
         assertEquals(Eagle.getDestroyEagleCalled().get(), 1);
     }
 
-    @Test
+    @Test(groups = CDI_FULL)
     @SpecAssertion(section = INT_ORDERING_RULES, id = "j")
     public void testCallbackOverridenByNonCallback() {
 

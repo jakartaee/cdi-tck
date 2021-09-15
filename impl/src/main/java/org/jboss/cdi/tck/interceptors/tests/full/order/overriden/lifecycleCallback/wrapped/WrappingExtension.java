@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.interceptors.tests.order.overriden.lifecycleCallback.wrapped;
+package org.jboss.cdi.tck.interceptors.tests.full.order.overriden.lifecycleCallback.wrapped;
 
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.AnnotatedType;

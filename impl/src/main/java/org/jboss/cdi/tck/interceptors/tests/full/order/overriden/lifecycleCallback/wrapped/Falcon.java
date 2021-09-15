@@ -14,39 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.order.overriden.lifecycleCallback.wrapped;
+package org.jboss.cdi.tck.interceptors.tests.full.order.overriden.lifecycleCallback.wrapped;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
+public class Falcon extends Bird {
 
-public class Bird {
+    private static AtomicInteger initFalconCalled = new AtomicInteger();
+    private static AtomicInteger destroyFalconCalled = new AtomicInteger();
 
-    private static AtomicInteger initBirdCalled = new AtomicInteger();
-    private static AtomicInteger destroyBirdCalled = new AtomicInteger();
-
-    @PostConstruct
+    @Override
     public void init() {
-        initBirdCalled.incrementAndGet();
+        initFalconCalled.incrementAndGet();
     }
 
-    @PreDestroy
+    @Override
     public void destroy() {
-        destroyBirdCalled.incrementAndGet();
+        destroyFalconCalled.incrementAndGet();
+    }
+
+    public void ping() {
+    }
+
+    public static AtomicInteger getInitFalconCalled() {
+        return initFalconCalled;
+    }
+
+    public static AtomicInteger getDestroyFalconCalled() {
+        return destroyFalconCalled;
     }
 
     public static void reset() {
-        initBirdCalled.set(0);
-        destroyBirdCalled.set(0);
-    }
-
-    public static AtomicInteger getInitBirdCalled() {
-        return initBirdCalled;
-    }
-
-    public static AtomicInteger getDestroyBirdCalled() {
-        return destroyBirdCalled;
+        initFalconCalled.set(0);
+        destroyFalconCalled.set(0);
     }
 
 }

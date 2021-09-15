@@ -14,48 +14,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.wrapped;
+package org.jboss.cdi.tck.interceptors.tests.full.order.overriden.lifecycleCallback.wrapped;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import jakarta.inject.Inject;
 
-public class Eagle extends Bird {
+public class Bird {
 
-    private static AtomicInteger initEagleCalled = new AtomicInteger();
-    private static AtomicInteger destroyEagleCalled = new AtomicInteger();
-
-    @Inject
-    private void initEagleBar(Bar bar) {
-        eagleBar = bar;
-    }
+    private static AtomicInteger initBirdCalled = new AtomicInteger();
+    private static AtomicInteger destroyBirdCalled = new AtomicInteger();
 
     @PostConstruct
-    public void initEagle() {
-        initEagleCalled.incrementAndGet();
+    public void init() {
+        initBirdCalled.incrementAndGet();
     }
 
     @PreDestroy
-    public void destroyEagle() {
-        destroyEagleCalled.incrementAndGet();
-    }
-
-    public void ping() {
-    }
-
-    public static AtomicInteger getInitEagleCalled() {
-        return initEagleCalled;
-    }
-
-    public static AtomicInteger getDestroyEagleCalled() {
-        return destroyEagleCalled;
+    public void destroy() {
+        destroyBirdCalled.incrementAndGet();
     }
 
     public static void reset() {
-        initEagleCalled.set(0);
-        destroyEagleCalled.set(0);
+        initBirdCalled.set(0);
+        destroyBirdCalled.set(0);
+    }
+
+    public static AtomicInteger getInitBirdCalled() {
+        return initBirdCalled;
+    }
+
+    public static AtomicInteger getDestroyBirdCalled() {
+        return destroyBirdCalled;
     }
 
 }
