@@ -14,7 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.wrapped;
+package org.jboss.cdi.tck.interceptors.tests.full.contract.lifecycleCallback.wrapped;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Bar {
 }

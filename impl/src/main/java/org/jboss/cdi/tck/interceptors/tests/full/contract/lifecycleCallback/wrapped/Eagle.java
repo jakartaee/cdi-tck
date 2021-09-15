@@ -14,27 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.interceptors.tests.order.overriden.lifecycleCallback.wrapped;
+package org.jboss.cdi.tck.interceptors.tests.full.contract.lifecycleCallback.wrapped;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.inject.Inject;
 
 public class Eagle extends Bird {
 
     private static AtomicInteger initEagleCalled = new AtomicInteger();
     private static AtomicInteger destroyEagleCalled = new AtomicInteger();
 
-    @Override
+    @Inject
+    private void initEagleBar(Bar bar) {
+        eagleBar = bar;
+    }
+
     @PostConstruct
-    public void init() {
+    public void initEagle() {
         initEagleCalled.incrementAndGet();
     }
 
-    @Override
     @PreDestroy
-    public void destroy() {
+    public void destroyEagle() {
         destroyEagleCalled.incrementAndGet();
     }
 
