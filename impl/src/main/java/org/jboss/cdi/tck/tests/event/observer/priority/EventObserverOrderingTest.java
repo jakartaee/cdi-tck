@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
-import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_ORDERING;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -46,7 +45,7 @@ public class EventObserverOrderingTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(Sunrise.class).withExtension(ObserverExtension.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(Sunrise.class).build();
     }
 
     @Inject
@@ -54,20 +53,6 @@ public class EventObserverOrderingTest extends AbstractTest {
 
     @Inject
     private Event<Sunrise> sunrise;
-
-
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "a"),  @SpecAssertion(section = OBSERVER_METHOD, id = "ea")  })
-    public void testDefaultPriority(ObserverExtension observerExtension) {
-        assertEquals(observerExtension.getObserverMethodPriority("Observer2.observeMoon").intValue(), ObserverMethod.DEFAULT_PRIORITY);
-    }
-
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD, id = "ea") })
-    public void testProcessObserverMethodPriority(ObserverExtension observerExtension) {
-        assertEquals(observerExtension.getObserverMethodPriority("Observer3.observeMoon").intValue(), ObserverMethod.DEFAULT_PRIORITY + 400);
-    }
-
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_ORDERING, id = "b") })
