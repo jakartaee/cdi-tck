@@ -18,10 +18,15 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
 import static org.testng.Assert.fail;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 
+@Interceptor
+@CharlieBinding
+@Priority(100)
 public class CharlieInterceptor1 extends AbstractInterceptor {
 
     @AroundConstruct

@@ -20,8 +20,11 @@ import static org.testng.Assert.assertNotNull;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@BazBinding
 public class PreDestroyInterceptor {
 
     public static boolean called = false;

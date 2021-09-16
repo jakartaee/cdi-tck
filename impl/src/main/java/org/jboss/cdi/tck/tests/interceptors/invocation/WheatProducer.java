@@ -19,10 +19,10 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
-import jakarta.interceptor.Interceptors;
 
 @RequestScoped
-@Interceptors(AlmightyInterceptor.class)
+@AlmightyBinding
+//@Interceptors(AlmightyInterceptor.class)
 public class WheatProducer {
 
     public static boolean destroyed = false;

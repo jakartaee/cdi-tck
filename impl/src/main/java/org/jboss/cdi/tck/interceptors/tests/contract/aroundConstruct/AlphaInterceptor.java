@@ -25,9 +25,12 @@ import java.io.Serializable;
 
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @SuppressWarnings("serial")
+@Interceptor
+@AlphaBinding
 public class AlphaInterceptor extends AbstractInterceptor implements Serializable {
 
     @AroundConstruct

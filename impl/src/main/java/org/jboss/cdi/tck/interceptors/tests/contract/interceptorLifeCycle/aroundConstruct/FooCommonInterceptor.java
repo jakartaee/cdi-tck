@@ -21,8 +21,11 @@ import static org.testng.Assert.assertNotNull;
 
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@FooBinding
 public class FooCommonInterceptor {
 
     @Inject

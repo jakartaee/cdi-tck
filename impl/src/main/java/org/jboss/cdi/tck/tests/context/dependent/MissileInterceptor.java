@@ -16,9 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@MissleBinding
+@Priority(1)
 public class MissileInterceptor {
     @AroundInvoke
     public Object intercept(InvocationContext context) throws Exception {

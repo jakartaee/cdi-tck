@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.lifecycle.order;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
@@ -35,6 +36,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 @SpecVersion(spec = "cdi", version = "2.0")
+@Test(groups = CDI_FULL)
 public class LifecycleInterceptorOrderTest extends AbstractTest {
 
     @Deployment

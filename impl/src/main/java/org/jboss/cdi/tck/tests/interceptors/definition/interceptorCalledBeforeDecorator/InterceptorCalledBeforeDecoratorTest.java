@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorCalledBeforeDecorator;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 
@@ -29,6 +30,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
+// Decorators are not supported in Lite
+@Test(groups = CDI_FULL)
 public class InterceptorCalledBeforeDecoratorTest extends AbstractTest {
 
     @Deployment

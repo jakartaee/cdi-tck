@@ -29,7 +29,8 @@ public class Baz {
     public static boolean postConstructedCalled = false;
 
     @Inject
-    @Interceptors({ Baz1Interceptor.class, Baz2Interceptor.class })
+    //@Interceptors({ Baz1Interceptor.class, Baz2Interceptor.class })
+    @BazBinding
     public Baz(Bar bar) {
         this.bar = bar;
     }

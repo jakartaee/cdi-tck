@@ -20,8 +20,11 @@ import static org.testng.Assert.assertNotNull;
 
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@BazBinding
 public class AroundInvokeInterceptor {
 
     public static boolean called = false;

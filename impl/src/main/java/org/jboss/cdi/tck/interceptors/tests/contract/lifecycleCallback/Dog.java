@@ -18,9 +18,12 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
-@Interceptors({ AlmightyLifecycleInterceptor.class })
+//@Interceptors({ AlmightyLifecycleInterceptor.class })
+@DogBinding
+@Dependent
 class Dog extends Animal {
     protected static final String DOG = "Dog";
 

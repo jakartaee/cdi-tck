@@ -17,8 +17,11 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@SimplePCBinding
 public class PostConstructInterceptor {
     private static boolean getMethodReturnsNull = false;
     private static boolean ctxProceedReturnsNull = false;

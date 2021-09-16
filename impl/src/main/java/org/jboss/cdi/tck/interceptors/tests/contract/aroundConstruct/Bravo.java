@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.interceptor.Interceptors;
 
 @ApplicationScoped
 public class Bravo {
@@ -29,7 +28,7 @@ public class Bravo {
         this.parameter = null;
     }
 
-    @Interceptors({BravoInterceptor.class})
+    @BravoBinding
     @Inject
     public Bravo(BravoParameter parameter) {
         this.parameter = parameter;

@@ -17,8 +17,13 @@
 package org.jboss.cdi.tck.interceptors.tests.order.lifecycleCallback;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@LakeCargoShipClassBinding
+@Priority(4)
 public class Interceptor4 extends Interceptor3 {
     @PostConstruct
     void postConstruct(InvocationContext ctx) {

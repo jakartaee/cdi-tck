@@ -18,7 +18,8 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
 import jakarta.interceptor.Interceptors;
 
-@Interceptors({CharlieInterceptor1.class, CharlieInterceptor2.class})
+//@Interceptors({CharlieInterceptor1.class, CharlieInterceptor2.class})
+@CharlieBinding
 public class Charlie {
 
 }

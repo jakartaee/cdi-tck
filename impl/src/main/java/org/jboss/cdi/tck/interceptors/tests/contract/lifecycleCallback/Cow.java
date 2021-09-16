@@ -21,7 +21,8 @@ import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.interceptor.Interceptors;
 
-@Interceptors(AnimalInterceptor.class)
+//@Interceptors(AnimalInterceptor.class)
+@AnimalBinding
 @RequestScoped
 class Cow extends Animal {
     protected static final String COW = "Cow";

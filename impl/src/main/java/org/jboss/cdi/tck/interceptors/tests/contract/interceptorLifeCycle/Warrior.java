@@ -20,7 +20,7 @@ import jakarta.inject.Inject;
 import jakarta.interceptor.Interceptors;
 
 @WarriorBinding
-@Interceptors(WarriorPDInterceptor.class)
+//@Interceptors(WarriorPDInterceptor.class)
 public class Warrior {
 
     @Inject
@@ -34,13 +34,15 @@ public class Warrior {
     }
 
     @AttackBinding
-    @Interceptors(MethodInterceptor.class)
+    //@Interceptors(MethodInterceptor.class)
+    @MethodBinding
     public void attack1() {
         weapon1.use();
     }
 
     @AttackBinding
-    @Interceptors(MethodInterceptor.class)
+    //@Interceptors(MethodInterceptor.class)
+    @MethodBinding
     public void attack2() {
         weapon2.use();
     }

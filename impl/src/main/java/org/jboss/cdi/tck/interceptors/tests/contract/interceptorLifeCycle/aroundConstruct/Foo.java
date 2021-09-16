@@ -16,9 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
-import jakarta.interceptor.Interceptors;
-
 @FooBinding
-@Interceptors(FooCommonInterceptor.class)
+//@Interceptors(FooCommonInterceptor.class)
 public class Foo {
 }

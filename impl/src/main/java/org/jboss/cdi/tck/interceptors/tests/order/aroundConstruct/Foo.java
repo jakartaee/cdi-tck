@@ -16,13 +16,16 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.aroundConstruct;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
-import jakarta.interceptor.Interceptors;
 
-@Interceptors({ Interceptor1.class, Interceptor2.class })
+//@Interceptors({ Interceptor1.class, Interceptor2.class })
+@FooClassBinding
+@Dependent
 public class Foo {
 
-    @Interceptors({ Interceptor3.class, Interceptor4.class })
+    //@Interceptors({ Interceptor3.class, Interceptor4.class })
+    @FooCtorBinding
     @Inject
     public Foo() {
     }

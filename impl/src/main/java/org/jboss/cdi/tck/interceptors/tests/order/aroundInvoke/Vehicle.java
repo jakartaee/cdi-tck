@@ -19,11 +19,14 @@ package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
 
+import static org.testng.Assert.assertEquals;
+
 class Vehicle {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();
-        assert id == 2;
+        System.out.printf("Vehicle id == %d\n", id);
+        assertEquals(id, 2, "Vehicle id == 2");
         return id + 1;
     }
 }

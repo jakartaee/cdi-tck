@@ -19,7 +19,8 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptio
 import jakarta.annotation.PostConstruct;
 import jakarta.interceptor.Interceptors;
 
-@Interceptors(GoatInterceptor.class)
+//@Interceptors(GoatInterceptor.class)
+@GoatBinding
 class Goat {
     @PostConstruct
     public void postConstruct() {

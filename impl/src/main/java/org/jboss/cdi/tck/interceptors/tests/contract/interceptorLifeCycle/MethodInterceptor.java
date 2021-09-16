@@ -17,8 +17,11 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@MethodBinding
 public class MethodInterceptor {
 
     public static int count = 0;

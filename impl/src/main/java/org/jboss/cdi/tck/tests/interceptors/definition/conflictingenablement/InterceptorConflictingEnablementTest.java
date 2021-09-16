@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.interceptors.definition.conflictingenablement;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
@@ -52,7 +53,7 @@ public class InterceptorConflictingEnablementTest extends AbstractTest {
                 .build();
     }
 
-    @org.testng.annotations.Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @org.testng.annotations.Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = CDI_FULL)
     @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "k"), @SpecAssertion(section = ENABLED_DECORATORS, id = "d") })
     public void testInterception(TestBean testBean) {
         ActionSequence.reset();

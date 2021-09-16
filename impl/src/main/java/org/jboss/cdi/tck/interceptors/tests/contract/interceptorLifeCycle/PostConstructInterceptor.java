@@ -20,8 +20,11 @@ import static org.testng.Assert.assertNotNull;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@BazBinding
 public class PostConstructInterceptor {
 
     public static boolean called = false;

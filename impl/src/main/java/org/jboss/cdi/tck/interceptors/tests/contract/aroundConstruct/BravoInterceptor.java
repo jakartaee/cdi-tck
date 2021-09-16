@@ -22,8 +22,11 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@BravoBinding
 public class BravoInterceptor extends AbstractInterceptor {
 
     public static final String NEW_PARAMETER_VALUE = "enhanced parameter1";

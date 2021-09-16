@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.method;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.CONSTRUCTOR_AND_METHOD_LEVEL_INT;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.EXCLUDING_INTERCEPTORS;
@@ -49,7 +50,8 @@ public class MethodLevelInterceptorTest extends AbstractTest {
         assertEquals(FishInterceptor.getInstanceCount(), 1);
     }
 
-    @Test
+    // Use of @ExcludeClassInterceptors not supported in Lite
+    @Test(groups = CDI_FULL)
     @SpecAssertion(section = EXCLUDING_INTERCEPTORS, id = "b")
     public void testExcludeClassInterceptors() {
         assertEquals(getContextualReference(Dog.class).foo(), "Intercepted bar");

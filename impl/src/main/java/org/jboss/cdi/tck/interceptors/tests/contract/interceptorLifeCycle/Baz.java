@@ -19,7 +19,8 @@ package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 import jakarta.inject.Inject;
 import jakarta.interceptor.Interceptors;
 
-@Interceptors({ AroundInvokeInterceptor.class, PostConstructInterceptor.class, PreDestroyInterceptor.class })
+//@Interceptors({ AroundInvokeInterceptor.class, PostConstructInterceptor.class, PreDestroyInterceptor.class })
+@BazBinding
 public class Baz {
 
     @Inject

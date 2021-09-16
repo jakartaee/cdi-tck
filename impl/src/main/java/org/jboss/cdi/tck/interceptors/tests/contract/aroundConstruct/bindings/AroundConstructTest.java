@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct.bindings;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INVOCATIONCONTEXT;
@@ -46,6 +47,8 @@ import org.testng.annotations.Test;
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "interceptors", version = "1.2")
+// Use of interceptors in beans.xml not supported in Lite
+@Test(groups = CDI_FULL)
 public class AroundConstructTest extends AbstractTest {
 
     @Deployment

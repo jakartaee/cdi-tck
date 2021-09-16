@@ -69,7 +69,7 @@ public class InterceptorOrderTest extends AbstractTest {
         transaction.execute();
 
         List<String> sequence = ActionSequence.getSequenceData();
-        assertEquals(sequence.size(), 4);
+        assertEquals(sequence.size(), 4, sequence.toString());
         assertEquals(sequence.get(0), AnotherInterceptor.class.getName());
         assertEquals(sequence.get(1), TransactionalInterceptor.class.getName());
         assertEquals(sequence.get(2), Transaction.class.getName());

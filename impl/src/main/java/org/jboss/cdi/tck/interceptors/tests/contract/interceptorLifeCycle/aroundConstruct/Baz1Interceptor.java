@@ -17,8 +17,11 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@BazBinding
 public class Baz1Interceptor {
 
     @AroundConstruct
