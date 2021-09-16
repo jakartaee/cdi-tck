@@ -30,6 +30,7 @@ import jakarta.enterprise.inject.Default;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
@@ -52,7 +53,7 @@ public class BeanByTypeTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(BeanByTypeTest.class)
-                .withBeansXml(new BeansXml().alternatives(AlternativeConnector.class)).build();
+                .build();
     }
 
     @Test

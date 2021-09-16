@@ -17,9 +17,13 @@
 
 package org.jboss.cdi.tck.tests.extensions.bean.bytype;
 
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Alternative
+@Dependent
+@Priority(1)
 public class AlternativeConnector extends Connector {
 
 }
