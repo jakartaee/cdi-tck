@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.bindings;
 
+import jakarta.enterprise.context.Dependent;
+
 @Airborne
+@Dependent
 public class Missile {
 
     public void fire() {

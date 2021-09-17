@@ -25,7 +25,6 @@ class Vehicle {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();
-        System.out.printf("Vehicle id == %d\n", id);
         assertEquals(id, 2, "Vehicle id == 2");
         return id + 1;
     }

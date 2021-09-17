@@ -47,16 +47,12 @@ import org.testng.annotations.Test;
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "interceptors", version = "1.2")
-// Use of interceptors in beans.xml not supported in Lite
-@Test(groups = CDI_FULL)
 public class AroundConstructTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AroundConstructTest.class)
-                .withBeansXml(new BeansXml().interceptors(AlphaInterceptor.class, BravoInterceptor.class,
-                        CharlieInterceptor1.class, CharlieInterceptor2.class))
                 .build();
     }
 

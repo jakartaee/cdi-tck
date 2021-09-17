@@ -46,7 +46,8 @@ public class FinalClassClassLevelInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(FinalClassClassLevelInterceptorTest.class)
                 .withClasses(FooBinding.class, MissileInterceptor.class, FinalClassClassLevelMissile.class, FinalClassClassLevelIPBean.class)
-                .withBeansXml(new BeansXml().interceptors(MissileInterceptor.class)).build();
+//                .withBeansXml(new BeansXml().interceptors(MissileInterceptor.class))
+                .build();
     }
 
     @Test

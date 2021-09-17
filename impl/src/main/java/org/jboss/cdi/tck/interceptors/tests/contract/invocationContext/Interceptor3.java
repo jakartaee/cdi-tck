@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @Binding3
+@Priority(300)
 public class Interceptor3 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {

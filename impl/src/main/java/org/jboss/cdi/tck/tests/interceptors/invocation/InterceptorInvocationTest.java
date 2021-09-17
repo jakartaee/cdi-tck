@@ -47,8 +47,6 @@ public class InterceptorInvocationTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorInvocationTest.class)
-                // Use Priority on interceptor to enable for Lite/Full
-                //.withBeansXml(new BeansXml().interceptors(AlmightyInterceptor.class))
                 .build();
     }
 

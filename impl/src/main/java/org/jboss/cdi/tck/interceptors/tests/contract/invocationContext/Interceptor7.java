@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @Binding7
+@Priority(700)
 public class Interceptor7 {
     private static boolean proceedReturnsNull = false;
 

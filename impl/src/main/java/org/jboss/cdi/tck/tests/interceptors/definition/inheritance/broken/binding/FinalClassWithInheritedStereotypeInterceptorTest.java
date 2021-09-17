@@ -46,8 +46,6 @@ public class FinalClassWithInheritedStereotypeInterceptorTest extends AbstractTe
                 .withTestClassDefinition(FinalClassWithInheritedStereotypeInterceptorTest.class)
                 .withClasses(Fighter.class, FighterStereotype.class, Messerschmitt.class, LandingBinding.class,
                         LandingInterceptor.class)
-                .withBeansXml(
-                        new BeansXml().interceptors(LandingInterceptor.class))
                 .build();
     }
 

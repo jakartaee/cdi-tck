@@ -23,7 +23,6 @@ public class InterceptedBeanProxyTest extends AbstractTest {
 	public static WebArchive createTestArchive() {
 		return new WebArchiveBuilder()
 				.withTestClassPackage(InterceptedBeanProxyTest.class)
-				.withBeansXml(new BeansXml().interceptors(FishInterceptor.class))
 				.build();
 	}
 

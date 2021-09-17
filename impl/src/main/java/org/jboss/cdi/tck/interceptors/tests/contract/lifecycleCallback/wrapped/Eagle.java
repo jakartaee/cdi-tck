@@ -20,8 +20,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Eagle extends Bird {
 
     private static AtomicInteger initEagleCalled = new AtomicInteger();

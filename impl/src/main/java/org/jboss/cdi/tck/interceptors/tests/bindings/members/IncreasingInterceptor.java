@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.members;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -24,6 +25,7 @@ import org.jboss.cdi.tck.interceptors.tests.bindings.members.AnimalCountIntercep
 
 @Interceptor
 @AnimalCountInterceptorBinding(Operation.INCREASE)
+@Priority(Interceptor.Priority.APPLICATION)
 public class IncreasingInterceptor {
 
     private static boolean intercepted = false;

@@ -16,11 +16,13 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.exceptions.aroundInvoke;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 class ExceptionBean {
 
     private static int count = 0;
 
-    //@Interceptors({ Interceptor3.class, Interceptor4.class })
     @ExceptionBinding
     public boolean bar() {
         return false;

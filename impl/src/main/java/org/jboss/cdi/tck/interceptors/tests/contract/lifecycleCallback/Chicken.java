@@ -18,8 +18,6 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
 import jakarta.enterprise.context.Dependent;
 
-//@Interceptors({ PublicLifecycleInterceptor.class, ProtectedLifecycleInterceptor.class,
-//        PackagePrivateLifecycleInterceptor.class, PrivateLifecycleInterceptor.class })
 @ChickenBinding
 @Dependent
 class Chicken {

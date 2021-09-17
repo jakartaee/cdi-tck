@@ -31,7 +31,6 @@ public class Interceptor1 extends OverridenInterceptor {
     @Override
     public Object intercept(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();
-        System.out.printf("Interceptor1 id == %d\n", id);
         assertEquals(id, 7, "Interceptor1 id == 7");
         return id + 1;
     }

@@ -27,7 +27,6 @@ public class Interceptor2 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();
-        System.out.printf("Interceptor2 id == %d\n", id);
         assertEquals(id, 6, "Interceptor2 id == 6");
         return id + 1;
     }

@@ -47,7 +47,6 @@ public class InterceptorBindingOverridingTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorBindingOverridingTest.class)
-                .withBeansXml(new BeansXml().interceptors(NegatingInterceptor.class, FastAgingInterceptor.class, SlowAgingInterceptor.class))
                 .build();
     }
 

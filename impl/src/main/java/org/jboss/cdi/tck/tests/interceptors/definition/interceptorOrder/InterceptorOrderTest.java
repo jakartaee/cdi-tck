@@ -40,7 +40,6 @@ public class InterceptorOrderTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorOrderTest.class)
-                .withBeansXml(new BeansXml().interceptors(SecondInterceptor.class, FirstInterceptor.class, TransactionalInterceptor.class))
                 .build();
     }
 

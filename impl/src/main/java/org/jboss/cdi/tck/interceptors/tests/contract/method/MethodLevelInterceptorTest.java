@@ -31,6 +31,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "interceptors", version = "1.2")
+@Test(groups = CDI_FULL)
 public class MethodLevelInterceptorTest extends AbstractTest {
 
     @Deployment
@@ -51,7 +52,6 @@ public class MethodLevelInterceptorTest extends AbstractTest {
     }
 
     // Use of @ExcludeClassInterceptors not supported in Lite
-    @Test(groups = CDI_FULL)
     @SpecAssertion(section = EXCLUDING_INTERCEPTORS, id = "b")
     public void testExcludeClassInterceptors() {
         assertEquals(getContextualReference(Dog.class).foo(), "Intercepted bar");

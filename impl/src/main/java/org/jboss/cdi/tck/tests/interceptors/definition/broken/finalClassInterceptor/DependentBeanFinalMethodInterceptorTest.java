@@ -38,7 +38,8 @@ public class DependentBeanFinalMethodInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(DependentBeanFinalMethodInterceptorTest.class)
                 .withClasses(FooBinding.class, MissileInterceptor.class, NuclearMissileFinalMethod.class, NuclearMissileIPBean.class)
-                .withBeansXml(new BeansXml().interceptors(MissileInterceptor.class)).build();
+//                .withBeansXml(new BeansXml().interceptors(MissileInterceptor.class))
+                .build();
     }
 
     @Test

@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundConstruct;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @BazBinding
+@Priority(Interceptor.Priority.APPLICATION)
 public class Baz2Interceptor {
 
     private static boolean proceed = true;

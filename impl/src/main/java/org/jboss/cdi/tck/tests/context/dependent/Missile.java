@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-//@Interceptors(MissileInterceptor.class)
 @MissleBinding
 public class Missile {
 

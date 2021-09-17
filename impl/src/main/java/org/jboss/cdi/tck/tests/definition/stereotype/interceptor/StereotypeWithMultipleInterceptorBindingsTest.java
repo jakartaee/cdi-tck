@@ -42,7 +42,7 @@ public class StereotypeWithMultipleInterceptorBindingsTest extends AbstractTest 
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(StereotypeWithMultipleInterceptorBindingsTest.class)
-                .withBeansXml(new BeansXml().interceptors(AlphaInterceptor.class, OmegaInterceptor.class)).build();
+                .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

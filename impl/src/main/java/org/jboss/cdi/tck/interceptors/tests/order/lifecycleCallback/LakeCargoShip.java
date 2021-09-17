@@ -20,7 +20,6 @@ import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
-//@Interceptors({ Interceptor1.class, Interceptor4.class })
 @LakeCargoShipClassBinding
 @Dependent
 class LakeCargoShip extends CargoShip {

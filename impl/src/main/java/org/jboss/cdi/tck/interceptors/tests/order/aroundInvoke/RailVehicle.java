@@ -26,7 +26,6 @@ class RailVehicle extends Vehicle {
     @AroundInvoke
     public Object intercept2(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();
-        System.out.printf("RailVechice id == %d\n", id);
         assertEquals(id, 1, "RailVechice id == 1");
         return id + 1;
     }

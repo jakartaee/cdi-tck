@@ -21,7 +21,6 @@ import jakarta.interceptor.Interceptors;
 
 @Dependent
 class Sheep {
-    //@Interceptors(SheepInterceptor.class)
     @SheepBinding
     public String foo() {
         return "bar";

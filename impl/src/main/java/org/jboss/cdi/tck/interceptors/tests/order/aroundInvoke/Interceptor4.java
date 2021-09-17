@@ -30,7 +30,6 @@ public class Interceptor4 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();
-        System.out.printf("Interceptor4 id == %d\n", id);
         assertEquals(id, 4, "Interceptor4 id == 4");
         return id + 1;
     }

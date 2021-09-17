@@ -21,7 +21,6 @@ import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
-//@Interceptors({ AlmightyLifecycleInterceptor.class })
 @DogBinding
 @Dependent
 class Dog extends Animal {

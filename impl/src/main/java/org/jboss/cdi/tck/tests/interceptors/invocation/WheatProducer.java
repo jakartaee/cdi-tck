@@ -22,7 +22,6 @@ import jakarta.enterprise.inject.Produces;
 
 @RequestScoped
 @AlmightyBinding
-//@Interceptors(AlmightyInterceptor.class)
 public class WheatProducer {
 
     public static boolean destroyed = false;
