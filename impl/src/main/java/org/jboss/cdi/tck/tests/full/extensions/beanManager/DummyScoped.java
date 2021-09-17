@@ -9,26 +9,29 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class Dam extends Lake {
+import jakarta.enterprise.context.NormalScope;
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
-    }
-
+@Target({TYPE, METHOD, FIELD})
+@Retention(RUNTIME)
+@Documented
+@NormalScope
+@Inherited
+@interface DummyScoped {
 }

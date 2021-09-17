@@ -16,20 +16,20 @@
  */
 package org.jboss.cdi.tck.tests.event.fires;
 
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.AFTER_BEAN_DISCOVERY;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.AFTER_DEPLOYMENT_VALIDATION;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.BEFORE_BEAN_DISCOVERY;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.BEFORE_SHUTDOWN;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_ANNOTATED_TYPE;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_BEAN;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_BEAN_ATTRIBUTES;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_INJECTION_POINT;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_INJECTION_TARGET;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_OBSERVER_METHOD;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER_FIELD;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER_METHOD;
-import static org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_SESSION_BEAN;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.AFTER_BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.AFTER_DEPLOYMENT_VALIDATION;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.BEFORE_BEAN_DISCOVERY;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.BEFORE_SHUTDOWN;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_ANNOTATED_TYPE;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_BEAN;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_BEAN_ATTRIBUTES;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_INJECTION_POINT;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_INJECTION_TARGET;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_OBSERVER_METHOD;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER_FIELD;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_PRODUCER_METHOD;
+import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.PROCESS_SESSION_BEAN;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Event;

@@ -14,21 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.bean;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import java.io.Serializable;
 
-public class Dam extends Lake {
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Inject;
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+@Vetoed
+public class SerializableOffice extends Office implements Serializable {
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    private static final long serialVersionUID = 22685424608978110L;
+
+    @Inject
+    public SerializableOffice(Employee constructorEmployee) {
+        super(constructorEmployee);
     }
-
 }

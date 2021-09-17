@@ -14,21 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.bean;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+public interface Vehicle {
 
-public class Dam extends Lake {
-
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
-
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
-    }
-
+    boolean decorated();
+    
+    String foo();
 }

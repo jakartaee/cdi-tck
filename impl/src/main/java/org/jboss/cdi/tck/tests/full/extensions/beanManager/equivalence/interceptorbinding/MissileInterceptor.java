@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2012, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -9,26 +9,25 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.equivalence.interceptorbinding;
 
-public class Dam extends Lake {
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+@Interceptor
+@Missile(numberOfTargets = 10, level = Level.A, position = "sky")
+public class MissileInterceptor {
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    @AroundInvoke
+    public Object intercept(InvocationContext context) throws Exception {
+        return context.proceed();
     }
 
 }
