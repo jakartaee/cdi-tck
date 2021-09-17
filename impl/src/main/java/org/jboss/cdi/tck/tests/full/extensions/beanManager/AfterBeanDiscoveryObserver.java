@@ -14,21 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
+import jakarta.enterprise.inject.spi.Extension;
 
-public class Dam extends Lake {
+public class AfterBeanDiscoveryObserver implements Extension {
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+    private boolean afterBeanDiscoveryObserved = false;
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    public void addABean(@Observes AfterBeanDiscovery event) {
+        event.addBean(new CowBean());
+        event.addContext(new DummyContext());
+        afterBeanDiscoveryObserved = true;
+    }
+
+    public boolean getAfterBeanDiscoveryObserved() {
+        return afterBeanDiscoveryObserved;
     }
 
 }

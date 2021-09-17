@@ -14,21 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.beanContainer;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.inject.Inject;
 
-public class Dam extends Lake {
+@Dependent
+public class Terrier extends Dog {
+    @Inject
+    private InjectionPoint injectedMetadata;
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
-
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    public InjectionPoint getInjectedMetadata() {
+        return injectedMetadata;
     }
-
 }

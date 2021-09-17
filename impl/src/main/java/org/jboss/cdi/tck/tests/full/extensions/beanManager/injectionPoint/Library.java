@@ -14,21 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.injectionPoint;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+@SuppressWarnings("unused")
+public class Library {
 
-public class Dam extends Lake {
+    @Monograph
+    @Fictional
+    private transient Book<String> book;
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
-
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    public Library(@Monograph Book<Object> book1, @Fictional Book<String> book2, Book<Integer> book3) {
     }
 
+    public void foo(@Monograph Book<Object> book1, @Fictional Book<String> book2, Book<Integer> book3) {
+    }
 }

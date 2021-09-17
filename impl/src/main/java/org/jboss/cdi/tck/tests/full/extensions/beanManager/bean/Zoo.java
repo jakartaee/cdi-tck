@@ -14,21 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.bean;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.BeanManager;
 
-public class Dam extends Lake {
+@ApplicationScoped
+public class Zoo {
 
+    @Produces
     @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+    private Lion lion = new Lion();
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    @Produces
+    @RequestScoped
+    public Tiger getTiger(Lion lion, BeanManager manager) {
+        if (lion == null)
+            throw new RuntimeException("Lion not injected");
+        return new Tiger();
     }
-
 }

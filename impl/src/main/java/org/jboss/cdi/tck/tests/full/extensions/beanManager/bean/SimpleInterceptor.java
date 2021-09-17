@@ -14,21 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.bean;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import java.io.Serializable;
 
-public class Dam extends Lake {
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+@Interceptor
+@Simple
+public class SimpleInterceptor implements Serializable {
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    private static final long serialVersionUID = -989141440027595602L;
+
+    @AroundInvoke
+    Object intercept(InvocationContext ctx) throws Exception {
+        return true;
     }
-
 }

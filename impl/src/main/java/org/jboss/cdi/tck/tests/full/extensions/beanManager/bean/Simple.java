@@ -14,21 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.bean;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public class Dam extends Lake {
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+import jakarta.interceptor.InterceptorBinding;
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
-    }
+@InterceptorBinding
+@Inherited
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+public @interface Simple {
 
 }

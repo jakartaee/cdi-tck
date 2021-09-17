@@ -14,21 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.injectionPoint;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
-public class Dam extends Lake {
+public class NotABean {
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+    public NotABean(String name) {
+    }
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    @Inject
+    public void init(@Named Magazine magazine) {
     }
 
 }

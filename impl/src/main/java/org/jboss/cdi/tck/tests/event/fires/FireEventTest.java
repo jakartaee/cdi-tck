@@ -42,7 +42,7 @@ import jakarta.enterprise.inject.spi.InjectionPoint;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.extensions.beanManager.broken.event.ContainerLifecycleEvents;
+import org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;

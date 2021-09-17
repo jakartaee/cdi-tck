@@ -14,21 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
+package org.jboss.cdi.tck.tests.full.extensions.beanManager.bean;
 
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Fish;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes.Wild;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.inject.Inject;
 
-public class Dam extends Lake {
+@Vetoed
+@Decorator
+public class VehicleDecorator implements Vehicle {
 
-    @SuppressWarnings("unused")
-    @Wild
-    private Fish fish;
+    @Inject
+    @Any
+    @Delegate
+    private Vehicle delegate;
 
-    @Wild
-    @Override
-    public Fish getFish() {
-        return null;
+    public boolean decorated() {
+        return true;
+    }
+
+    public String foo() {
+        return "bar" + delegate.foo();
     }
 
 }
