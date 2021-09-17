@@ -38,13 +38,15 @@ public class ApplicationContextLifecycleEventObserverOrderingTest extends Abstra
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withClasses(ApplicationScopedObserver.class, TestExtension.class).withTestClass(ApplicationContextLifecycleEventObserverOrderingTest.class)
-                .withExtension(TestExtension.class).build();
+        return new WebArchiveBuilder().withClasses(ApplicationScopedObserver.class)
+                .withTestClass(ApplicationContextLifecycleEventObserverOrderingTest.class)
+                .build();
     }
 
     @Test
     @SpecAssertion(section = OBSERVER_ORDERING, id = "b")
     public void testContextLifecycleEventOrdering() {
+        // assumes the ActionSequence was empty before test execution
         String[] expectedArray = new String[] { A, B, C, D };
         ActionSequence.assertSequenceDataEquals(Arrays.asList(expectedArray));
     }

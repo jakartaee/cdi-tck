@@ -22,6 +22,7 @@ import static jakarta.enterprise.inject.spi.InterceptionType.POST_ACTIVATE;
 import static jakarta.enterprise.inject.spi.InterceptionType.POST_CONSTRUCT;
 import static jakarta.enterprise.inject.spi.InterceptionType.PRE_DESTROY;
 import static jakarta.enterprise.inject.spi.InterceptionType.PRE_PASSIVATE;
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.INTERCEPTOR_RESOLUTION_EE;
@@ -36,6 +37,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
+@Test(groups = CDI_FULL)
 public class CustomInterceptorTest extends AbstractTest {
 
     @Deployment

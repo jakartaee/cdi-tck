@@ -19,17 +19,17 @@ public class EmptyBeansXmlDiscoveryTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return ShrinkWrap.create(WebArchive.class).addClasses(Bravo.class, BravoUnannotated.class)
+        return ShrinkWrap.create(WebArchive.class).addClasses(SomeAnnotatedBean.class, SomeUnannotatedBean.class)
                 .addAsWebInfResource(new StringAsset(""), "beans.xml");
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     public void testBeanArchiveWithEmptyBeansXml() {
         Instance<Object> instance = CDI.current().getBeanContainer().createInstance();
-        Instance<Bravo> bravoInstance = instance.select(Bravo.class);
-        assertTrue(bravoInstance.isResolvable());
-        bravoInstance.get().pong();
-        Instance<BravoUnannotated> bravoUnannotatedInstance = instance.select(BravoUnannotated.class);
-        assertFalse(bravoUnannotatedInstance.isResolvable());
+        Instance<SomeAnnotatedBean> annotatedBeanInstance = instance.select(SomeAnnotatedBean.class);
+        assertTrue(annotatedBeanInstance.isResolvable());
+        annotatedBeanInstance.get().pong();
+        Instance<SomeUnannotatedBean> unannotatedBeanInstance = instance.select(SomeUnannotatedBean.class);
+        assertFalse(unannotatedBeanInstance.isResolvable());
     }
 }

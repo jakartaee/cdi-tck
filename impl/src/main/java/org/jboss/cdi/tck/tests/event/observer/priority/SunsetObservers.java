@@ -17,12 +17,14 @@
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
 import jakarta.annotation.Priority;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 public class SunsetObservers {
 
+    @Dependent
     public static class AsianObserver {
 
         public void observeSunset(@Observes @Priority(2599) Sunset sunset) {
@@ -30,6 +32,7 @@ public class SunsetObservers {
         }
     }
 
+    @Dependent
     public static class EuropeanObserver {
 
         public void observeSunset(@Observes @Priority(2600) Sunset sunset) {
@@ -37,6 +40,7 @@ public class SunsetObservers {
         }
     }
 
+    @Dependent
     public static class AmericanObserver {
 
         public void observeSunset(@Observes @Priority(2700) Sunset sunset) {
