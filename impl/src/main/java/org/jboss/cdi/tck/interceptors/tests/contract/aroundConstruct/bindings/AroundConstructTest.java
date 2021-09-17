@@ -16,7 +16,6 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct.bindings;
 
-import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.DECLARING_INTERCEPTOR_BINDINGS_OF_AN_INTERCEPTOR;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INVOCATIONCONTEXT;
@@ -32,7 +31,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
