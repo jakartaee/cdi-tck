@@ -23,7 +23,7 @@ import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
-//@Dependent
+@Dependent
 @Transactional
 @Interceptor
 @Priority(1)
