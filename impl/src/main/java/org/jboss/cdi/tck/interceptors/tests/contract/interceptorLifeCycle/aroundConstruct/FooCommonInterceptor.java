@@ -19,10 +19,15 @@ package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroun
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@FooBinding
+@Priority(Interceptor.Priority.APPLICATION)
 public class FooCommonInterceptor {
 
     @Inject

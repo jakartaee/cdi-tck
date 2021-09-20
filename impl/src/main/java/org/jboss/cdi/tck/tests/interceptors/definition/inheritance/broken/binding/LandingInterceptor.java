@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance.broken.binding;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @LandingBinding
+@Priority(Interceptor.Priority.APPLICATION)
 public class LandingInterceptor {
 
     @AroundInvoke

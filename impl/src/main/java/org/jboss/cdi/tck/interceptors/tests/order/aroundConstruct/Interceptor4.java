@@ -16,11 +16,16 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.order.aroundConstruct;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
+@Interceptor
+@FooCtorBinding
+@Priority(4)
 public class Interceptor4 {
 
     @AroundConstruct

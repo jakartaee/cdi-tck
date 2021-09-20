@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.interceptor;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Cat {
     @CatInterceptorBinding
     public String hello() {

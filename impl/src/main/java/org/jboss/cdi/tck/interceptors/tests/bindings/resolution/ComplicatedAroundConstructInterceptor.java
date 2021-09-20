@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundConstruct;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -25,6 +26,7 @@ import jakarta.interceptor.InvocationContext;
 @LoggedBinding
 @MachineBinding
 @ConstructorBinding
+@Priority(Interceptor.Priority.APPLICATION)
 // @CreativeBinding inherited from @ConstructorBinding
 public class ComplicatedAroundConstructInterceptor {
 

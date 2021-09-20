@@ -18,14 +18,16 @@ package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 
 import static org.testng.Assert.assertEquals;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptors;
 import jakarta.interceptor.InvocationContext;
 
-@Interceptors({ Interceptor1.class, Interceptor3.class })
+@TramClassBinding
+@Dependent
 class Tram extends RailVehicle {
 
-    @Interceptors({ Interceptor4.class, Interceptor5.class })
+    @TramMethodBinding
     public int getId() {
         return 0;
     }
@@ -33,7 +35,7 @@ class Tram extends RailVehicle {
     @AroundInvoke
     public Object intercept3(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();
-        assertEquals(id, 0);
+        assertEquals(id, 0, "Tram id == 0");
         return id + 1;
     }
 }

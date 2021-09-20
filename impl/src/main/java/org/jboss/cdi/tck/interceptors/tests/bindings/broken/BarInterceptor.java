@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.broken;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @BarBinding
 @Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
 public class BarInterceptor {
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {

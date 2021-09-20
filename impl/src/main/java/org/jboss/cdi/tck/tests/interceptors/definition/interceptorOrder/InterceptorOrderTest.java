@@ -40,7 +40,6 @@ public class InterceptorOrderTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorOrderTest.class)
-                .withBeansXml(new BeansXml().interceptors(SecondInterceptor.class, FirstInterceptor.class, TransactionalInterceptor.class))
                 .build();
     }
 
@@ -69,7 +68,7 @@ public class InterceptorOrderTest extends AbstractTest {
         transaction.execute();
 
         List<String> sequence = ActionSequence.getSequenceData();
-        assertEquals(sequence.size(), 4);
+        assertEquals(sequence.size(), 4, sequence.toString());
         assertEquals(sequence.get(0), AnotherInterceptor.class.getName());
         assertEquals(sequence.get(1), TransactionalInterceptor.class.getName());
         assertEquals(sequence.get(2), Transaction.class.getName());

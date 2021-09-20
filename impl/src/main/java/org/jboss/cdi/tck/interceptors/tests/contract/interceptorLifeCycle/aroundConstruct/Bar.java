@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.aroundConstruct;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Bar {
 
     public int five() {

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.multiple;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -23,6 +24,7 @@ import jakarta.interceptor.InvocationContext;
 @Interceptor
 @Slow
 @Deadly
+@Priority(Interceptor.Priority.APPLICATION)
 public class LockInterceptor {
     public static boolean intercepted = false;
 

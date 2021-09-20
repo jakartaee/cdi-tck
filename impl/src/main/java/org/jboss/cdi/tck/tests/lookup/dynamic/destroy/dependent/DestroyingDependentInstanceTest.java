@@ -54,7 +54,6 @@ public class DestroyingDependentInstanceTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DestroyingDependentInstanceTest.class)
-                .withBeansXml(new BeansXml().interceptors(TransactionalInterceptor.class))
                 .build();
     }
 

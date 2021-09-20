@@ -49,8 +49,7 @@ public class AlterableContextTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(AlterableContextTest.class)
-                .withExtension(CustomScopeExtension.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(AlterableContextTest.class).build();
     }
 
     @Test
@@ -63,12 +62,6 @@ public class AlterableContextTest extends AbstractTest {
     @SpecAssertion(section = CONTEXT, id = "t")
     public void testRequestScopedComponent() {
         testComponent(RequestScopedComponent.class);
-    }
-
-    @Test
-    @SpecAssertion(section = CONTEXT, id = "t")
-    public void testCustomScopedComponent() {
-        testComponent(CustomScopedComponent.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

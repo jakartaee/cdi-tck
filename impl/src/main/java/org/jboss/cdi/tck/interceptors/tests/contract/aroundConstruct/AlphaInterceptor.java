@@ -23,11 +23,16 @@ import static org.testng.Assert.assertTrue;
 
 import java.io.Serializable;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @SuppressWarnings("serial")
+@Interceptor
+@AlphaBinding
+@Priority(Interceptor.Priority.APPLICATION)
 public class AlphaInterceptor extends AbstractInterceptor implements Serializable {
 
     @AroundConstruct

@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Priority;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
@@ -26,6 +27,7 @@ import jakarta.interceptor.InvocationContext;
 @LoggedBinding
 @MessageBinding
 @BasketBinding(requiresBall = true)
+@Priority(Interceptor.Priority.APPLICATION)
 public class ComplicatedLifecycleInterceptor {
 
     public static boolean preDestroyCalled = false;

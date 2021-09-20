@@ -45,8 +45,6 @@ public class FinalMethodWithInheritedClassLevelInterceptorTest extends AbstractT
         return new WebArchiveBuilder()
                 .withTestClassDefinition(FinalMethodWithInheritedClassLevelInterceptorTest.class)
                 .withClasses(Jumbojet.class, Boeing.class, LandingBinding.class, LandingInterceptor.class)
-                .withBeansXml(
-                        new BeansXml().interceptors(LandingInterceptor.class))
                 .build();
     }
 

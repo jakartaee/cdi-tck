@@ -48,7 +48,6 @@ public class ConstructorInterceptionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ConstructorInterceptionTest.class)
-                .withBeansXml(new BeansXml().interceptors(AlphaInterceptor1.class, AlphaInterceptor2.class, BravoInterceptor.class))
                 .build();
     }
 

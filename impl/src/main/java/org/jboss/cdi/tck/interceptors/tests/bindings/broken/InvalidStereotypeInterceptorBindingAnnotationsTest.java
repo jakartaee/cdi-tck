@@ -45,7 +45,6 @@ public class InvalidStereotypeInterceptorBindingAnnotationsTest extends Abstract
                 .withClasses(Bar.class, FooBinding.class, BarBinding.class, BazBinding.class, FooInterceptor.class,
                         BarInterceptor.class, YesBazInterceptor.class, NoBazInterceptor.class, FooStereotype.class,
                         BarStereotype.class)
-                .withBeansXml(new BeansXml().interceptors(FooInterceptor.class, BarInterceptor.class, YesBazInterceptor.class, NoBazInterceptor.class))
                 .build();
     }
 

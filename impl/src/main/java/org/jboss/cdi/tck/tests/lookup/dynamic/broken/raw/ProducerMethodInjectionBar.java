@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.broken.raw;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.Produces;
 
@@ -24,6 +25,7 @@ import jakarta.enterprise.inject.Produces;
  * @author Martin Kouba
  * 
  */
+@Dependent
 public class ProducerMethodInjectionBar {
 
     @SuppressWarnings("rawtypes")

@@ -17,11 +17,14 @@
 package org.jboss.cdi.tck.tests.lookup.dynamic.destroy.dependent;
 
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
-@jakarta.interceptor.Interceptor
+@Interceptor
 @Transactional
+@Priority(Interceptor.Priority.APPLICATION)
 public class TransactionalInterceptor {
 
     private static boolean destroyed;

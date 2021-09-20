@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class PongPlant extends Plant {
 
     @GuardedBySquirrel

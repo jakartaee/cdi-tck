@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.vetoed.aquarium;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Piranha {
 
 }

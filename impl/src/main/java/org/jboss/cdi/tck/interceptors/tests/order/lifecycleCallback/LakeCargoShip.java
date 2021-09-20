@@ -17,9 +17,11 @@
 package org.jboss.cdi.tck.interceptors.tests.order.lifecycleCallback;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.Interceptors;
 
-@Interceptors({ Interceptor1.class, Interceptor4.class })
+@LakeCargoShipClassBinding
+@Dependent
 class LakeCargoShip extends CargoShip {
     // Every interceptor sets this property to a certain value.
     // The following interceptor verifies the correct order of the chain by

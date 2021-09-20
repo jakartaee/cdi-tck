@@ -18,9 +18,14 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundConstruct;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@DogBinding
+@Priority(1)
 public class AlmightyLifecycleInterceptor {
     private static int numberOfInterceptions = 0;
 
