@@ -17,8 +17,13 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@WarriorBinding
+@Priority(1000)
+@Interceptor
 public class WarriorPDInterceptor {
 
     public static int count = 0;

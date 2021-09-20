@@ -42,8 +42,6 @@ public class InvalidTransitiveInterceptorBindingAnnotationsTest extends Abstract
                 .withTestClass(InvalidTransitiveInterceptorBindingAnnotationsTest.class)
                 .withClasses(Foo.class, FooBinding.class, BarBinding.class, BazBinding.class, FooInterceptor.class,
                         BarInterceptor.class, YesBazInterceptor.class, NoBazInterceptor.class)
-                .withBeansXml(new BeansXml().interceptors(FooInterceptor.class, BarInterceptor.class,
-                        YesBazInterceptor.class, NoBazInterceptor.class))
                 .build();
     }
 

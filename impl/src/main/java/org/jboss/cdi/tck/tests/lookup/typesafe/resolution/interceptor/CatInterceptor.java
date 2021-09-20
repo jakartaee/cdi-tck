@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.interceptor;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @CatInterceptorBinding
+@Priority(Interceptor.Priority.APPLICATION)
 public class CatInterceptor extends Cat {
 
     @AroundInvoke

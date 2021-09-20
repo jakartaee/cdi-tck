@@ -18,14 +18,19 @@ package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 
 import static org.testng.Assert.assertEquals;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@TramMethodBinding
+@Priority(5)
 public class Interceptor5 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         int id = (Integer) ctx.proceed();
-        assertEquals(id, 3);
+        assertEquals(id, 3, "Interceptor5 id == 3");
         return id + 1;
     }
 }

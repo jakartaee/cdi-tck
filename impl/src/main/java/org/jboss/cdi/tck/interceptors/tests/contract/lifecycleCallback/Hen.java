@@ -21,7 +21,7 @@ import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.interceptor.Interceptors;
 
-@Interceptors(AnimalInterceptor.class)
+@AnimalBinding
 @ApplicationScoped
 class Hen extends Animal {
     protected static final String HEN = "Hen";

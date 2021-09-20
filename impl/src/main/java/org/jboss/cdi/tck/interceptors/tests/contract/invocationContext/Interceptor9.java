@@ -16,9 +16,14 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@SimpleBinding
+@Priority(900)
 public class Interceptor9 {
     private static boolean contextDataOK = false;
 

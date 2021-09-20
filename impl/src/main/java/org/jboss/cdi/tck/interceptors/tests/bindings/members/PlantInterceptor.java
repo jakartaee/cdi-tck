@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.members;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @PlantInterceptorBinding(age = 1, name = "TEST")
+@Priority(Interceptor.Priority.APPLICATION)
 public class PlantInterceptor {
 
     private static boolean intercepted = false;

@@ -60,7 +60,7 @@ public class DependentContextTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DependentContextTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(DependentContextTest.class).build();
     }
 
     @Test

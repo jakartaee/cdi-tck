@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Secure
 @Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
 public class SecureInterceptor {
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {

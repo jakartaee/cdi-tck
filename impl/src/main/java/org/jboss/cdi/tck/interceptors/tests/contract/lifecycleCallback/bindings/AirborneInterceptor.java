@@ -20,6 +20,7 @@ import java.io.Serializable;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundConstruct;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -29,6 +30,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 @SuppressWarnings("serial")
 @Airborne
 @Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
 public class AirborneInterceptor implements Serializable {
 
     @PreDestroy

@@ -47,7 +47,7 @@ public class InterceptorInvocationTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorInvocationTest.class)
-                .withBeansXml(new BeansXml().interceptors(AlmightyInterceptor.class)).build();
+                .build();
     }
 
     @Test

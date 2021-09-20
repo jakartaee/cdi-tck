@@ -16,8 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.broken;
 
+import jakarta.enterprise.context.Dependent;
+
 @FooStereotype
 @BarStereotype
+@Dependent
 public class Bar {
 
 }

@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.Interceptor;
 
 @Interceptor
 @AlphaBinding(1)
+@Priority(Interceptor.Priority.APPLICATION)
 public class AlphaInterceptor1 extends AbstractInterceptor {
 }
