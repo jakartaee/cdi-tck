@@ -18,9 +18,7 @@ package org.jboss.cdi.tck.interceptors.tests.order.aroundInvoke;
 
 import static org.testng.Assert.assertEquals;
 
-import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
-import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 public class Interceptor2 {

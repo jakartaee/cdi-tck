@@ -51,7 +51,6 @@ public class MethodLevelInterceptorTest extends AbstractTest {
         assertEquals(FishInterceptor.getInstanceCount(), 1);
     }
 
-    // Use of @ExcludeClassInterceptors not supported in Lite
     @SpecAssertion(section = EXCLUDING_INTERCEPTORS, id = "b")
     public void testExcludeClassInterceptors() {
         assertEquals(getContextualReference(Dog.class).foo(), "Intercepted bar");

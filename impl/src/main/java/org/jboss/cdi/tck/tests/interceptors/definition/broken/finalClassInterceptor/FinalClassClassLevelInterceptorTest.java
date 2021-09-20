@@ -25,9 +25,6 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -46,7 +43,6 @@ public class FinalClassClassLevelInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(FinalClassClassLevelInterceptorTest.class)
                 .withClasses(FooBinding.class, MissileInterceptor.class, FinalClassClassLevelMissile.class, FinalClassClassLevelIPBean.class)
-//                .withBeansXml(new BeansXml().interceptors(MissileInterceptor.class))
                 .build();
     }
 
