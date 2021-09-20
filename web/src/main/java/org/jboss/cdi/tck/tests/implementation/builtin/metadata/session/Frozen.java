@@ -14,21 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 
-import jakarta.enterprise.context.Dependent;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-@Dependent
-public class Donkey {
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.interceptor.InterceptorBinding;
 
-    public static boolean constructedCorrectly = false;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-    public Donkey() {
-        constructedCorrectly = true;
+@InterceptorBinding
+@Inherited
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+public @interface Frozen {
+
+    @SuppressWarnings("all")
+    public static class Literal extends AnnotationLiteral<Frozen> implements Frozen {
     }
-
-    public Donkey(String foo) {
-
-    }
-
 }

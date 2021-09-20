@@ -14,21 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.decorators.implementation.builtin.metadata;
 
-import jakarta.enterprise.context.Dependent;
+import java.io.Serializable;
 
-@Dependent
-public class Donkey {
+public interface MilkProduct extends Serializable {
 
-    public static boolean constructedCorrectly = false;
-
-    public Donkey() {
-        constructedCorrectly = true;
-    }
-
-    public Donkey(String foo) {
-
-    }
-
+    MilkProductDecorator getDecoratorInstance();
 }

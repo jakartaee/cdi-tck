@@ -14,21 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.broken.interceptorCanNotBeDecorator;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.annotation.Priority;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
+import jakarta.interceptor.Interceptor;
 
-@Dependent
-public class Donkey {
-
-    public static boolean constructedCorrectly = false;
-
-    public Donkey() {
-        constructedCorrectly = true;
-    }
-
-    public Donkey(String foo) {
-
-    }
-
+@Decorator
+@Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
+public class InterceptingDecorator {
+    @Inject
+    @Delegate
+    Automobile automobile;
 }

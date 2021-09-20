@@ -14,21 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.decorators.implementation.builtin.metadata;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Inject;
 
-@Dependent
-public class Donkey {
+@SuppressWarnings("serial")
+@SessionScoped
+public class Yoghurt implements MilkProduct {
 
-    public static boolean constructedCorrectly = false;
+    @Inject
+    private Bean<Yoghurt> bean;
 
-    public Donkey() {
-        constructedCorrectly = true;
+    public Bean<Yoghurt> getBeanBean() {
+        return bean;
     }
 
-    public Donkey(String foo) {
-
+    public MilkProductDecorator getDecoratorInstance() {
+        return null;
     }
 
+    @Frozen
+    public YoghurtInterceptor getInterceptorInstance() {
+        return null;
+    }
 }

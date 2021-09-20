@@ -14,21 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
 
-import jakarta.enterprise.context.Dependent;
+package org.jboss.cdi.tck.tests.full.decorators.implementation.producer.field.definition.broken.decorator;
 
-@Dependent
-public class Donkey {
-
-    public static boolean constructedCorrectly = false;
-
-    public Donkey() {
-        constructedCorrectly = true;
-    }
-
-    public Donkey(String foo) {
-
-    }
-
+public interface Foo {
+    boolean foo();
 }
