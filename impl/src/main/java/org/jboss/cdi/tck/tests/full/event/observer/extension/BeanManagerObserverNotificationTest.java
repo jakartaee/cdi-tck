@@ -42,7 +42,6 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
-@Test(groups = CDI_FULL)
 public class BeanManagerObserverNotificationTest extends AbstractObserverNotificationTest {
 
     @Deployment
@@ -57,7 +56,7 @@ public class BeanManagerObserverNotificationTest extends AbstractObserverNotific
         getCurrentManager().getEvent().select(Giraffe.class, qualifiers).fire(payload);
     }
 
-    @Test
+    @Test(groups = CDI_FULL)
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fb"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "eb"),
             @SpecAssertion(section = OBSERVER_RESOLUTION, id = "k") })
     public void testNotifyInvoked() {
