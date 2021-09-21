@@ -16,6 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
+@SomeBinding
 public class BasicLogger implements Logger {
 
     private static String message;
@@ -24,8 +28,9 @@ public class BasicLogger implements Logger {
         return message;
     }
 
-    public void log(String message) {
+    public String log(String message) {
         BasicLogger.message = message;
+        return message;
     }
 
 }

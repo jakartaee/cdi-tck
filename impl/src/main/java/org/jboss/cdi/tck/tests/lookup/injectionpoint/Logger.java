@@ -17,5 +17,5 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
 public interface Logger {
-    public void log(String message);
+    String log(String message);
 }

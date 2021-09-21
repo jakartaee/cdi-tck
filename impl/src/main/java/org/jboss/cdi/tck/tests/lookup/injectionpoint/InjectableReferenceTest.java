@@ -48,7 +48,6 @@ public class InjectableReferenceTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(InjectableReferenceTest.class)
-                .withBeansXml(new BeansXml().decorators(TimestampLogger.class))
                 .build();
     }
 
@@ -98,10 +97,10 @@ public class InjectableReferenceTest extends AbstractTest {
         assert injectedDelegateLogger instanceof Logger;
         Logger logger = (Logger) injectedDelegateLogger;
 
-        // User the logger
+        // Use the logger
         String message = "foo123";
-        TimestampLogger.reset();
+        LoggerInterceptor.reset();
         logger.log(message);
-        assert message.equals(TimestampLogger.getLoggedMessage());
+        assert message.equals(LoggerInterceptor.message);
     }
 }
