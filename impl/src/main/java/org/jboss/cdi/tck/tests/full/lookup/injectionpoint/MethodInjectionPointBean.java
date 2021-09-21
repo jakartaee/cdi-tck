@@ -14,7 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
@@ -26,11 +27,11 @@ import jakarta.inject.Inject;
  * 
  */
 @Dependent
-public class ConstructorInjectionPointBean {
+public class MethodInjectionPointBean {
     private BeanWithInjectionPointMetadata injectedBean;
 
     @Inject
-    public ConstructorInjectionPointBean(BeanWithInjectionPointMetadata injectedBean) {
+    public void methodWithInjectedMetadata(BeanWithInjectionPointMetadata injectedBean) {
         this.injectedBean = injectedBean;
     }
 

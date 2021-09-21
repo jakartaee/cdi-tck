@@ -14,17 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
-public class Cattery {
+/**
+ * Test bean to inject a bean using injection point metadata into a constructor
+ * 
+ * @author David Allen
+ * 
+ */
+@Dependent
+public class ConstructorInjectionPointBean {
+    private BeanWithInjectionPointMetadata injectedBean;
 
     @Inject
-    Cat cat;
-
-    public Cat getCat() {
-        return cat;
+    public ConstructorInjectionPointBean(BeanWithInjectionPointMetadata injectedBean) {
+        this.injectedBean = injectedBean;
     }
 
+    public BeanWithInjectionPointMetadata getInjectedBean() {
+        return injectedBean;
+    }
 }
