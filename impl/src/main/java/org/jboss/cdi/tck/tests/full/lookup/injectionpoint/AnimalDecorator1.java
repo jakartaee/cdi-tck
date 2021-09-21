@@ -9,28 +9,30 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
-@Dependent
-@SomeBinding
-public class BasicLogger implements Logger {
+@Decorator
+public abstract class AnimalDecorator1 implements Animal {
 
-    private static String message;
+    @Inject
+    @Delegate
+    private Animal animal;
 
-    public String getMessage() {
-        return message;
-    }
+    @Inject
+    @SuppressWarnings("unused")
+    private Toy toy;
 
-    public String log(String message) {
-        BasicLogger.message = message;
-        return message;
+    public String hello() {
+        return animal.hello() + "!";
     }
 
 }

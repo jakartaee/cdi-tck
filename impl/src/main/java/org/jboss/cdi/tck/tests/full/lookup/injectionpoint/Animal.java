@@ -14,23 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 
-@Dependent
-@SomeBinding
-public class BasicLogger implements Logger {
+public interface Animal {
 
-    private static String message;
+    public String hello();
 
-    public String getMessage() {
-        return message;
-    }
+    public InjectionPoint getDecorator1InjectionPoint();
 
-    public String log(String message) {
-        BasicLogger.message = message;
-        return message;
-    }
+    public InjectionPoint getDecorator2InjectionPoint();
 
+    public InjectionPoint getDecorator3InjectionPoint();
+    
+    public Toy getToy();
 }

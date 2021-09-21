@@ -14,23 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
 import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 
+/**
+ * Test bean to inject a bean using injection point metadata into a constructor
+ * 
+ * @author David Allen
+ * 
+ */
 @Dependent
-@SomeBinding
-public class BasicLogger implements Logger {
+public class MethodInjectionPointBean {
+    private BeanWithInjectionPointMetadata injectedBean;
 
-    private static String message;
-
-    public String getMessage() {
-        return message;
+    @Inject
+    public void methodWithInjectedMetadata(BeanWithInjectionPointMetadata injectedBean) {
+        this.injectedBean = injectedBean;
     }
 
-    public String log(String message) {
-        BasicLogger.message = message;
-        return message;
+    public BeanWithInjectionPointMetadata getInjectedBean() {
+        return injectedBean;
     }
-
 }

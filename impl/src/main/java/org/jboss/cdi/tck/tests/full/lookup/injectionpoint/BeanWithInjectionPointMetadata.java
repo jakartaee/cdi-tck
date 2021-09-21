@@ -14,17 +14,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
-public class Toy {
+/**
+ * Test bean with injection point on the constructor of the bean
+ * 
+ * @author David Allen
+ * 
+ */
+@Dependent
+public class BeanWithInjectionPointMetadata {
+
+    private static boolean isDestroyed;
 
     @Inject
-    private InjectionPoint injectionPoint;
+    private InjectionPoint injectedMetadata;
 
-    public InjectionPoint getInjectionPoint() {
-        return injectionPoint;
+    public InjectionPoint getInjectedMetadata() {
+        return injectedMetadata;
+    }
+
+    @PreDestroy
+    public void onDestroy() {
+        isDestroyed = true;
+    }
+
+    public static boolean isDestroyed() {
+        return isDestroyed;
+    }
+
+    public static void reset() {
+        isDestroyed = false;
     }
 }

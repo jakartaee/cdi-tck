@@ -14,23 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 
-@Dependent
-@SomeBinding
-public class BasicLogger implements Logger {
+public class Cattery {
 
-    private static String message;
+    @Inject
+    Cat cat;
 
-    public String getMessage() {
-        return message;
-    }
-
-    public String log(String message) {
-        BasicLogger.message = message;
-        return message;
+    public Cat getCat() {
+        return cat;
     }
 
 }

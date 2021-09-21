@@ -14,19 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
-import jakarta.enterprise.inject.spi.InjectionPoint;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-public interface Animal {
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Stereotype;
 
-    public String hello();
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    public InjectionPoint getDecorator1InjectionPoint();
+@Stereotype
+@Target({ TYPE, METHOD, FIELD })
+@Retention(RUNTIME)
+@RequestScoped
+public @interface AnimalStereotype {
 
-    public InjectionPoint getDecorator2InjectionPoint();
-
-    public InjectionPoint getDecorator3InjectionPoint();
-    
-    public Toy getToy();
 }

@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
 import jakarta.decorator.Decorator;
 import jakarta.decorator.Delegate;
 import jakarta.inject.Inject;
 
 @Decorator
-public abstract class AnimalDecorator1 implements Animal {
+public abstract class AnimalDecorator3 implements Animal {
 
     @Inject
     @Delegate

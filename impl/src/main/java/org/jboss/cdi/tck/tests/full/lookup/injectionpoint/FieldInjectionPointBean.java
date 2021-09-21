@@ -14,44 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import java.util.Date;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
-import jakarta.decorator.Decorator;
-import jakarta.decorator.Delegate;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
-@Decorator
-public class TimestampLogger implements Logger {
+/**
+ * Test bean to inject another bean which uses injection point metadata in a field
+ * 
+ * @author David Allen
+ * 
+ */
+@RequestScoped
+public class FieldInjectionPointBean {
     @Inject
-    @Delegate
-    private Logger logger;
+    @AnimalStereotype
+    private BeanWithInjectionPointMetadata injectedBean;
 
-    private static Logger staticLogger;
-
-    private static String loggedMessage;
-
-    public void log(String message) {
-        staticLogger = logger;
-        loggedMessage = message;
-        logger.log(new Date().toString() + ":  " + message);
+    public BeanWithInjectionPointMetadata getInjectedBean() {
+        return injectedBean;
     }
-
-    public static Logger getLogger() {
-        return staticLogger;
-    }
-
-    /**
-     * @return the loggedMessage
-     */
-    public static String getLoggedMessage() {
-        return loggedMessage;
-    }
-
-    public static void reset() {
-        loggedMessage = null;
-        staticLogger = null;
-    }
-
 }
