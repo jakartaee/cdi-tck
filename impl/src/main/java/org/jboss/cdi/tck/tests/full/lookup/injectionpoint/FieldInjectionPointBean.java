@@ -14,19 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
-import jakarta.enterprise.inject.spi.InjectionPoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
-public interface Animal {
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 
-    public String hello();
+/**
+ * Test bean to inject another bean which uses injection point metadata in a field
+ * 
+ * @author David Allen
+ * 
+ */
+@RequestScoped
+public class FieldInjectionPointBean {
+    @Inject
+    @AnimalStereotype
+    private BeanWithInjectionPointMetadata injectedBean;
 
-    public InjectionPoint getDecorator1InjectionPoint();
-
-    public InjectionPoint getDecorator2InjectionPoint();
-
-    public InjectionPoint getDecorator3InjectionPoint();
-    
-    public Toy getToy();
+    public BeanWithInjectionPointMetadata getInjectedBean() {
+        return injectedBean;
+    }
 }
