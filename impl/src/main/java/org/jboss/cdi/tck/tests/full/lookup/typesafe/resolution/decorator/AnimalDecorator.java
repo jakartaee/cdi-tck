@@ -14,21 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.lookup.typesafe.resolution.decorator;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
-@Dependent
-public class Donkey {
+@Decorator
+public class AnimalDecorator implements Animal {
+    @Inject
+    @Delegate
+    Animal bean;
 
-    public static boolean constructedCorrectly = false;
-
-    public Donkey() {
-        constructedCorrectly = true;
+    public String hello() {
+        return bean.hello() + " world!";
     }
-
-    public Donkey(String foo) {
-
-    }
-
 }

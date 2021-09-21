@@ -14,21 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.implementation.builtin.metadata;
 
-import jakarta.enterprise.context.Dependent;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Dependent
-public class Donkey {
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    public static boolean constructedCorrectly = false;
+import jakarta.enterprise.util.AnnotationLiteral;
+import jakarta.inject.Qualifier;
 
-    public Donkey() {
-        constructedCorrectly = true;
+@Qualifier
+@Target({ TYPE, METHOD, PARAMETER, FIELD })
+@Retention(RUNTIME)
+@Documented
+public @interface Fruit {
+
+    @SuppressWarnings("all")
+    public static class Literal extends AnnotationLiteral<Fruit> implements Fruit {
     }
-
-    public Donkey(String foo) {
-
-    }
-
 }

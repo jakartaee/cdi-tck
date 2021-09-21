@@ -19,8 +19,6 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata.session;
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.inject.Inject;
-import org.jboss.cdi.tck.tests.implementation.builtin.metadata.Frozen;
-import org.jboss.cdi.tck.tests.implementation.builtin.metadata.YoghurtInterceptor;
 
 @Stateless
 public class Yoghurt {

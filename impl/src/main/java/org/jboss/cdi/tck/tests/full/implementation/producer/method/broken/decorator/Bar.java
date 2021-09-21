@@ -14,21 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.implementation.producer.method.broken.decorator;
 
 import jakarta.enterprise.context.Dependent;
 
 @Dependent
-public class Donkey {
+public class Bar implements Foo {
 
-    public static boolean constructedCorrectly = false;
-
-    public Donkey() {
-        constructedCorrectly = true;
-    }
-
-    public Donkey(String foo) {
-
+    public boolean foo() {
+        return false;
     }
 
 }

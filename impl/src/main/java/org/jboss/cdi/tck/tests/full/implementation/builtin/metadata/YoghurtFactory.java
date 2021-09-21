@@ -14,34 +14,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.implementation.builtin.metadata;
 
-import jakarta.enterprise.context.Dependent;
+import java.io.Serializable;
+
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
-import jakarta.inject.Inject;
+import jakarta.enterprise.inject.spi.Bean;
 
-@Dependent
-public class Turkey {
+@SuppressWarnings("serial")
+@SessionScoped
+public class YoghurtFactory implements Serializable {
+
+    private Bean<Yoghurt> fruitYoghurtBean;
+    private Bean<Yoghurt> probioticYoghurtBean;
 
     @Produces
-    @Tame
-    public static String foo = "foo";
-
-    @Produces
-    @Tame
-    static Integer bar = 1;
-
-    public static boolean constructedCorrectly = false;
-
-    public Turkey() {
-
+    @Fruit
+    public Yoghurt produceFruitYoghurt(Bean<Yoghurt> bean) {
+        fruitYoghurtBean = bean;
+        return new Yoghurt();
     }
 
-    @Inject
-    public Turkey(@Tame String foo,@Tame Integer bar) {
-        if (foo.equals(Turkey.foo) && bar.equals(Turkey.bar)) {
-            constructedCorrectly = true;
-        }
+    @Produces
+    @Probiotic
+    public Yoghurt produceProbioticYoghurt(Bean<Yoghurt> bean) {
+        probioticYoghurtBean = bean;
+        return new Yoghurt();
+    }
+
+    public Bean<?> getFruitYoghurtBean() {
+        return fruitYoghurtBean;
+    }
+
+    public Bean<?> getProbioticYoghurtBean() {
+        return probioticYoghurtBean;
     }
 
 }

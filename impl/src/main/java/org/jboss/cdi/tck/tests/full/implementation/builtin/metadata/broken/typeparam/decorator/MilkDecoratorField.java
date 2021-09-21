@@ -14,21 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.implementation.builtin.metadata.broken.typeparam.decorator;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.annotation.Priority;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.inject.Inject;
 
-@Dependent
-public class Donkey {
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Cream;
+import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.Milk;
 
-    public static boolean constructedCorrectly = false;
+@Decorator
+@Priority(100)
+public class MilkDecoratorField implements Milk {
 
-    public Donkey() {
-        constructedCorrectly = true;
-    }
+    @Inject
+    @Delegate
+    Milk milk;
 
-    public Donkey(String foo) {
+    @Inject
+    jakarta.enterprise.inject.spi.Decorator<Cream> decorator;
 
+    @Override
+    public void ping() {
+        milk.ping();
     }
 
 }

@@ -14,21 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition;
+package org.jboss.cdi.tck.tests.full.implementation.producer.field.definition.broken.decorator;
 
-import jakarta.enterprise.context.Dependent;
+import jakarta.decorator.Decorator;
+import jakarta.decorator.Delegate;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
 
-@Dependent
-public class Donkey {
+@Decorator
+public class FooDecorator_Broken implements Foo {
+    @Inject
+    @Delegate
+    private Foo delegate;
 
-    public static boolean constructedCorrectly = false;
-
-    public Donkey() {
-        constructedCorrectly = true;
+    public boolean foo() {
+        return !delegate.foo();
     }
 
-    public Donkey(String foo) {
-
-    }
-
+    @SuppressWarnings("unused")
+    @Produces
+    @Number
+    private Integer zero = 0;
 }
