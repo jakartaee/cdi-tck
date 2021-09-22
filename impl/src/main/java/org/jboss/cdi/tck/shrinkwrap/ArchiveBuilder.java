@@ -56,7 +56,13 @@ import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
 import org.jboss.shrinkwrap.impl.BeansXml;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
@@ -107,6 +113,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     private static final JavaArchive supportLibrary = buildSupportLibrary();
 
     private static final JavaArchive incontainerLibrary = buildIncontainerLibrary();
+
+    public static final String SP_EXCEPTION = "SP_EXCEPTION";
 
     public static final String DEFAULT_EJB_VERSION = "3.1";
 
@@ -951,8 +959,23 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             second pass, skip source attachment and processing
         */
         Boolean isCDIlite = configuration.getCDILiteModeFlag();
-        if(!isCDIlite || sourceProcessor == null || SourceProcessorSuite.currentPhase() == SourceProcessor.Phase.PASS_TWO)
+        if(!isCDIlite || sourceProcessor == null) {
+            // Not Lite or has no SourceProcessor
             return;
+        } else if(SourceProcessorSuite.currentPhase() == SourceProcessor.Phase.PASS_TWO) {
+            // Look for any exception generated in PASS_ONE and attach it to archive
+            try {
+                Exception e = readSPException();
+                if(e != null) {
+                    ExceptionAsset exceptionAsset = new ExceptionAsset(e);
+                    archive.add(exceptionAsset, SP_EXCEPTION);
+                }
+            } catch (Exception e) {
+                throw new IllegalStateException("Failed to read SourceProcessor exception written in PHASE_ONE", e);
+            }
+            return;
+        }
+        // Call SourceProcessor...
 
         Path cwd = Paths.get("").toAbsolutePath();
         // TODO: externalize this location
@@ -981,9 +1004,21 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         // Call the sourceProcessor
         if(sourceSet.size() > 0) {
-            File outputDir = getCompileDir(archive);
+            File outputDir = getCompileDir();
             DiagnosticCollector<JavaFileObject> errors =  new DiagnosticCollector<>();
-            sourceProcessor.process(sourceSet, outputDir, errors);
+            try {
+                sourceProcessor.process(sourceSet, outputDir, errors);
+            } catch (Exception e) {
+                // For PHASE_ONE, write the exception out to test class pkg dir for inclusion into archive in PHASE_TWO when test is run
+                try {
+                    writeSPException(e);
+                    // We still need to attach the exception to satisfy the Arquillian logic for the @ShouldThrowException
+                    ExceptionAsset exceptionAsset = new ExceptionAsset(e);
+                    archive.add(exceptionAsset, SP_EXCEPTION);
+                } catch (Exception e2) {
+                    throw new IllegalStateException("Failed to write SourceProcessor exception in PHASE_ONE", e2);
+                }
+            }
         }
     }
 
@@ -1275,14 +1310,13 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Create a unique directory under target/test-archives/ using the unique archive name for use
-     * with the source processor phase
+     * Create get the root directory for source processor output as set in the configuration.
+     * @see Configuration#getSourceProcessorOutputDir()
      *
      * @return output dir for use by {@link javax.tools.JavaCompiler}
      */
-    protected <P extends Archive<?>> File getCompileDir(P archive) {
+    protected File getCompileDir() {
         Configuration configuration = ConfigurationFactory.get();
-        String name = archive.getName();
         String outputPath = configuration.getSourceProcessorOutputDir();
         File outputDir = new File(outputPath);
         if(outputDir.exists() == false && outputDir.mkdirs() == false) {
@@ -1355,6 +1389,29 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     private String getTestPackagePath() {
         return this.testClazz.getPackage().getName().replace('.', '/').concat("/");
+    }
+    private void writeSPException(Exception ex)throws IOException {
+        String testPath = getTestPackagePath();
+        File compileDir = getCompileDir();
+        File exRoot = new File(compileDir, testPath);
+        File exFile = new File(exRoot, SP_EXCEPTION);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(exFile))) {
+            oos.writeObject(ex);
+            oos.flush();
+        }
+    }
+    protected Exception readSPException() throws IOException, ClassNotFoundException {
+        Exception ex = null;
+        String testPath = getTestPackagePath();
+        File compileDir = getCompileDir();
+        File exRoot = new File(compileDir, testPath);
+        File exFile = new File(exRoot, SP_EXCEPTION);
+        if(exFile.exists()) {
+            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(exFile))) {
+                ex = (Exception) ois.readObject();
+            }
+        }
+        return ex;
     }
 
     /**

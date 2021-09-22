@@ -11,17 +11,20 @@ import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
+import javax.tools.Diagnostic;
 import javax.tools.JavaFileObject;
 
 
 import static javax.lang.model.SourceVersion.RELEASE_11;
 
 @SupportedAnnotationTypes({
-        "org.jboss.cdi.tck.test.spi.sp.VersionInfo"
+        "org.jboss.cdi.tck.test.spi.sp.VersionInfo",
+        "org.jboss.cdi.tck.test.spi.broken.BadBean"
 })
 @SupportedSourceVersion(RELEASE_11)
 //@SupportedOptions({CoverageProcessor.OUTDIR_OPTION_FLAG})
-public class VersionProcessor extends AbstractProcessor {
+public class TckAnnotationProcessor extends AbstractProcessor {
+    public static final String VERSION_PROCESSOR_PROPERTY = "org.jboss.cdi.tck.test.spi.container.VersionProcessor.ran";
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
@@ -36,7 +39,15 @@ public class VersionProcessor extends AbstractProcessor {
         for (TypeElement annotation : annotations) {
             Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(annotation);
             for(Element element : elements) {
-                if(element instanceof VariableElement) {
+                if(element instanceof TypeElement) {
+                    TypeElement typeElement = (TypeElement) element;
+                    System.out.printf("Class(%s) is annotated with %s\n", typeElement.getSimpleName(), annotation.getQualifiedName());
+                    if(annotation.getQualifiedName().contentEquals("org.jboss.cdi.tck.test.spi.broken.BadBean")) {
+                        // Generate an error
+                        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "Found a BadBean", element);
+                    }
+                }
+                else if(element instanceof VariableElement) {
                     VariableElement varElement = (VariableElement) element;
                     System.out.printf("Class(%s).%s is annotated with %s\n", varElement.getEnclosingElement().getSimpleName(), varElement.getSimpleName(), annotation.getQualifiedName());
                     if(annotation.getQualifiedName().contentEquals("org.jboss.cdi.tck.test.spi.sp.VersionInfo")) {
@@ -56,7 +67,7 @@ public class VersionProcessor extends AbstractProcessor {
                                 writer.println("}");
                             writer.println("}");
                             writer.close();
-                            System.setProperty("org.jboss.cdi.tck.test.spi.container.VersionProcessor.ran", "true");
+                            System.setProperty(VERSION_PROCESSOR_PROPERTY, "true");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

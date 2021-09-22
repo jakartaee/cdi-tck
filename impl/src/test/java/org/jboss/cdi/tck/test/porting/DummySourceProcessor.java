@@ -13,12 +13,13 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
+import jakarta.enterprise.inject.spi.DeploymentException;
 import org.jboss.cdi.tck.spi.SourceProcessor;
-import org.jboss.cdi.tck.test.spi.container.VersionProcessor;
+import org.jboss.cdi.tck.test.spi.container.TckAnnotationProcessor;
 
 /**
  * Implementation of SourceProcessor that invokes the JavaCompiler to process the test archive source. It also includes
- * a hardcoded reference to the {@link VersionProcessor} to validate that annotation processors can run on the
+ * a hardcoded reference to the {@link TckAnnotationProcessor} to validate that annotation processors can run on the
  * test archive.
  */
 public class DummySourceProcessor implements SourceProcessor {
@@ -49,7 +50,7 @@ public class DummySourceProcessor implements SourceProcessor {
             Iterable<? extends JavaFileObject> sources = mgr.getJavaFileObjectsFromFiles(testSources);
             JavaCompiler.CompilationTask task = compiler.getTask( null, mgr, errors, Arrays.asList(options), null, sources );
             ArrayList<Processor> processors = new ArrayList<>();
-            processors.add(new VersionProcessor());
+            processors.add(new TckAnnotationProcessor());
             task.setProcessors(processors);
             Boolean success = task.call();
             System.out.printf("JavaCompiler.success=%s, info=%s\n", success, errors.getDiagnostics());
@@ -57,5 +58,9 @@ public class DummySourceProcessor implements SourceProcessor {
             e.printStackTrace();
         }
         System.out.printf("End DummySourceProcessor.doCompile\n");
+        if(!errors.getDiagnostics().isEmpty()) {
+            String msg = errors.getDiagnostics().toString();
+            throw new DeploymentException(msg);
+        }
     }
 }
