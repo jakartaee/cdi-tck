@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.event.eventTypes;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
 /**
@@ -24,6 +25,7 @@ import jakarta.enterprise.event.Observes;
  * 
  * @author David Allen
  */
+@Dependent
 public class EventTypeFamilyObserver {
     private static int objectEventQuantity = 0;
     private static int generalEventQuantity = 0;

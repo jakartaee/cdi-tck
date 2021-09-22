@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.event;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.BeanManager;
 
@@ -24,6 +25,7 @@ import jakarta.enterprise.inject.spi.BeanManager;
  * @author Martin Kouba
  * 
  */
+@Dependent
 public class TerrierObserver {
 
     public static boolean eventObserved = false;

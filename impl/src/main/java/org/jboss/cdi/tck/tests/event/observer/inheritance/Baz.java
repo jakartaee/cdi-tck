@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.event.observer.inheritance;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.BeanManager;
 
 import org.jboss.cdi.tck.util.ActionSequence;
@@ -25,6 +26,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
  * @author Martin Kouba
  * 
  */
+@Dependent
 public class Baz extends Bar {
 
     @Override

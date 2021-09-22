@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.metadata.broken.initializer;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.EventMetadata;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Foo {
 
     @Inject

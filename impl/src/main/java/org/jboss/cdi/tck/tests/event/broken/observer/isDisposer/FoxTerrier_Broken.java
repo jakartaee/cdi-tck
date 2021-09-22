@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.isDisposer;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.spi.BeforeBeanDiscovery;
 
+@Dependent
 public class FoxTerrier_Broken {
     /*
      * (non-Javadoc)

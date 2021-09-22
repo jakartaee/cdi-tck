@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.eventTypes;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Any;
 import jakarta.inject.Inject;
 
+@Dependent
 public class TuneSelect<T> {
     @Inject
     @Any
