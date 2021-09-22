@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import javax.annotation.processing.Processor;
+import javax.tools.Diagnostic;
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
@@ -59,8 +60,14 @@ public class DummySourceProcessor implements SourceProcessor {
         }
         System.out.printf("End DummySourceProcessor.doCompile\n");
         if(!errors.getDiagnostics().isEmpty()) {
-            String msg = errors.getDiagnostics().toString();
-            throw new DeploymentException(msg);
+            // Ignore warnings such as the following when run on JVM versions post 11
+            // [warning: Supported source version 'RELEASE_11' from annotation processor 'org.jboss.cdi.tck.test.spi.container.TckAnnotationProcessor' less than -source '17']
+            for(Diagnostic diag : errors.getDiagnostics()) {
+                if(diag.getKind() == Diagnostic.Kind.ERROR) {
+                    String msg = errors.getDiagnostics().toString();
+                    throw new DeploymentException(msg);
+                }
+            }
         }
     }
 }
