@@ -14,22 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.alternative;
+package org.jboss.cdi.tck.tests.full.alternative;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.enterprise.inject.Stereotype;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import jakarta.inject.Qualifier;
-
-@Target({ TYPE, METHOD, PARAMETER, FIELD })
+@RequestScoped
+@Stereotype
+@Alternative
+@Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
-@Qualifier
-public @interface Tame {
+public @interface EnabledAlternativeStereotype {
 
 }

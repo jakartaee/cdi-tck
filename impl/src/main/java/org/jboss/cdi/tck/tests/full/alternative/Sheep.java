@@ -14,20 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.alternative;
+package org.jboss.cdi.tck.tests.full.alternative;
 
-import jakarta.enterprise.inject.Alternative;
-import jakarta.enterprise.inject.Produces;
+public class Sheep {
 
-@Alternative
-public class NotEnabledSheepProducer {
-    @Produces
-    @Tame
-    public static final Sheep sheep = new Sheep();
-
-    @Produces
-    @Tame
-    public Sheep produce() {
-        return sheep;
-    }
 }

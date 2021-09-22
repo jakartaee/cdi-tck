@@ -17,7 +17,10 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
+import jakarta.enterprise.context.Dependent;
+
 @True
+@Dependent
 public class Baz implements Foo {
 
     @Override

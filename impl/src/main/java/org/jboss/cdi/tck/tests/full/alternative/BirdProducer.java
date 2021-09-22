@@ -14,22 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.alternative;
+package org.jboss.cdi.tck.tests.full.alternative;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.PARAMETER;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+@Dependent
+public class BirdProducer {
 
-import jakarta.inject.Qualifier;
+    @EnabledAlternativeStereotype
+    @Produces
+    @Tame
+    public final Bird tameBird = new Bird();
 
-@Target({ TYPE, METHOD, PARAMETER, FIELD })
-@Retention(RUNTIME)
-@Qualifier
-public @interface Wild {
+    @NotEnabledAlternativeStereotype
+    @Produces
+    @Wild
+    public final Bird wildBird = new Bird();
+
+    @EnabledAlternativeStereotype
+    @Produces
+    @Tame
+    public Bird produceTame() {
+        return new Bird();
+    }
+
+    @NotEnabledAlternativeStereotype
+    @Produces
+    @Wild
+    public Bird produceWild() {
+        return new Bird();
+    }
 
 }

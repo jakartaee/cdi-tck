@@ -14,12 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.alternative;
+package org.jboss.cdi.tck.tests.full.alternative;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
 
 @Alternative
+@Dependent
 public class EnabledSheepProducer {
 
     @Produces

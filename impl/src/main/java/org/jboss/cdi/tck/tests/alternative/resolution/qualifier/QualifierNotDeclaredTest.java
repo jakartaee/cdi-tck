@@ -44,7 +44,6 @@ public class QualifierNotDeclaredTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(QualifierNotDeclaredTest.class)
                 .withClasses(Foo.class, Bar.class, Baz.class, Qux.class, True.class, TrueLiteral.class)
-                .withBeansXml(new BeansXml().alternatives(Bar.class))
                 .build();
     }
 

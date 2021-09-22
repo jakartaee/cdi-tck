@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier.repeatable;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
+@Dependent
 public class ProcessProducer {
 
     @Inject

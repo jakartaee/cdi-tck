@@ -14,32 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.alternative;
+package org.jboss.cdi.tck.tests.full.alternative;
 
-import jakarta.enterprise.inject.Alternative;
-import jakarta.enterprise.inject.Produces;
+public interface Animal {
 
-public class CatProducer {
-
-    @Produces
-    @Wild
-    public static final Cat wildCat = new Cat();
-
-    @Produces
-    @Tame
-    @Alternative
-    public static final Cat cat = new Cat();
-
-    @Produces
-    @Wild
-    public Cat produceWildCat() {
-        return cat;
-    }
-
-    @Produces
-    @Tame
-    @Alternative
-    public Cat produce() {
-        return cat;
-    }
 }
