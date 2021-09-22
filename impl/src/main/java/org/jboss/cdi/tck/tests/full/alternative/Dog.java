@@ -14,25 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.alternative;
+package org.jboss.cdi.tck.tests.full.alternative;
 
-import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import jakarta.inject.Named;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.inject.Alternative;
-import jakarta.enterprise.inject.Stereotype;
-
-@RequestScoped
-@Stereotype
-@Alternative
-@Target({ TYPE, METHOD, FIELD })
-@Retention(RUNTIME)
-public @interface EnabledAlternativeStereotype {
+@NotEnabledAlternativeStereotype
+@Named
+public class Dog implements Animal {
 
 }

@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.alternative;
+package org.jboss.cdi.tck.tests.full.alternative;
 
-import jakarta.inject.Named;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Alternative;
 
-@NotEnabledAlternativeStereotype
-@Named
-public class Dog implements Animal {
+@Alternative
+@RequestScoped
+public class Horse implements Animal {
 
 }

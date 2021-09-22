@@ -14,34 +14,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.alternative;
+package org.jboss.cdi.tck.tests.full.alternative;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
 
-public class BirdProducer {
+@Dependent
+public class CatProducer {
 
-    @EnabledAlternativeStereotype
-    @Produces
-    @Tame
-    public final Bird tameBird = new Bird();
-
-    @NotEnabledAlternativeStereotype
     @Produces
     @Wild
-    public final Bird wildBird = new Bird();
+    public static final Cat wildCat = new Cat();
 
-    @EnabledAlternativeStereotype
     @Produces
     @Tame
-    public Bird produceTame() {
-        return new Bird();
-    }
+    @Alternative
+    public static final Cat cat = new Cat();
 
-    @NotEnabledAlternativeStereotype
     @Produces
     @Wild
-    public Bird produceWild() {
-        return new Bird();
+    public Cat produceWildCat() {
+        return cat;
     }
 
+    @Produces
+    @Tame
+    @Alternative
+    public Cat produce() {
+        return cat;
+    }
 }

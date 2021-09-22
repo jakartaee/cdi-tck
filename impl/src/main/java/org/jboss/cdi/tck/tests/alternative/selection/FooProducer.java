@@ -17,11 +17,11 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Produces;
 
-import org.jboss.cdi.tck.tests.alternative.Wild;
-
+@Dependent
 public class FooProducer {
 
     @Alternative

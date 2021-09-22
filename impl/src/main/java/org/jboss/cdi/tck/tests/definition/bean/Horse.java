@@ -16,10 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author pmuir
  * 
  */
+@Dependent
 public class Horse {
 
 }

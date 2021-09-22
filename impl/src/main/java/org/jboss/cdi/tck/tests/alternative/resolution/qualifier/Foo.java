@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public interface Foo {
 
     public int ping();

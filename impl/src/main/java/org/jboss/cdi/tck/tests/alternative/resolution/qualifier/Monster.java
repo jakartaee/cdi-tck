@@ -17,7 +17,10 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
+import jakarta.enterprise.context.Dependent;
+
 @False
+@Dependent
 public class Monster {
 
     public int ping() {

@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Bravo extends AssertBean {
 
 }
