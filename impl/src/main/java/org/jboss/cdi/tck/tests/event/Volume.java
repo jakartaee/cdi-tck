@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event;
 
+import jakarta.enterprise.context.Dependent;
+
 @Tame
+@Dependent
 public class Volume {
 
 }

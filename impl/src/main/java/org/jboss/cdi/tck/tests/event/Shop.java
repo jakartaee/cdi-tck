@@ -19,8 +19,10 @@ package org.jboss.cdi.tck.tests.event;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
+@Dependent
 public class Shop {
 
     public static Set<String> observers = new HashSet<String>();
