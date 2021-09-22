@@ -31,7 +31,6 @@ import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIF
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
-import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -45,7 +44,6 @@ import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.IllegalProductException;
-import jakarta.enterprise.inject.UnsatisfiedResolutionException;
 import jakarta.enterprise.inject.literal.NamedLiteral;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.AnnotationLiteral;
@@ -54,6 +52,7 @@ import jakarta.enterprise.util.TypeLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.full.implementation.producer.method.definition.Yummy;
 import org.jboss.cdi.tck.util.Assert;
 import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -230,15 +229,6 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
         assertEquals(getBeans(WolfSpider.class, TAME_LITERAL).size(), 1);
         Bean<WolfSpider> wolfSpider = getBeans(WolfSpider.class, TAME_LITERAL).iterator().next();
         assertEquals(wolfSpider.getScope(), RequestScoped.class);
-    }
-
-    @Test(expectedExceptions = UnsatisfiedResolutionException.class)
-    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "da"), @SpecAssertion(section = SPECIALIZATION, id = "cb") })
-    public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() {
-        assertEquals(getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
-        }).size(), 0);
-        getContextualReference(Egg.class, new AnnotationLiteral<Yummy>() {
-        });
     }
 
     @Test

@@ -14,24 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.jboss.cdi.tck.tests.full.implementation.producer.method.lifecycle;
 
-package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 
-import jakarta.inject.Inject;
+@Dependent
+public class Web {
+    private Boolean destroyed;
 
-/**
- * This bean contains an injection point for a Tarantula that must be provided by the container via a (static) producer field.
- * 
- * @author David Allen
- * 
- */
-public class TarantulaConsumer {
-    @Inject
-    @Tame
-    private Tarantula consumedTarantula;
-
-    public Tarantula getConsumedTarantula() {
-        return consumedTarantula;
+    public boolean isSpun() {
+        return destroyed != null;
     }
 
+    public boolean isDestroyed() {
+        return Boolean.TRUE.equals(destroyed);
+    }
+
+    @PostConstruct
+    public void spin() {
+        destroyed = false;
+    }
+
+    @PreDestroy
+    public void destroy() {
+        destroyed = true;
+    }
 }

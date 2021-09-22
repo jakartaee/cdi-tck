@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.initializer;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class PremiumChickenHutch {
     private ChickenInterface chicken;
 

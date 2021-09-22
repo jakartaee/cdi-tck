@@ -14,8 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
+package org.jboss.cdi.tck.tests.full.implementation.producer.field.lifecycle;
 
-public class DefangedTarantula extends Tarantula {
+import org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle.DeadlySpider;
+import org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle.Spider;
+
+public class Tarantula extends Spider implements DeadlySpider {
 
 }

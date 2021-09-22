@@ -14,16 +14,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
+package org.jboss.cdi.tck.tests.full.implementation.producer.method.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
-public class Chicken {
+@Dependent
+public class SpiderProducer {
+    private static Tarantula tarantulaCreated;
 
     @Produces
-    @Yummy
-    public Egg produceEgg() {
-        return new Egg(this);
+    @Pet
+    public Tarantula produceTarantula() {
+        Tarantula tarantula = new Tarantula("Pete");
+        tarantulaCreated = tarantula;
+        return tarantula;
     }
 
+    @Produces
+    @Null
+    public Spider getNullSpider() {
+        return null;
+    }
+
+    public static boolean isTarantulaCreated() {
+        return tarantulaCreated != null;
+    }
+
+    public static void resetTarantulaCreated() {
+        SpiderProducer.tarantulaCreated = null;
+    }
+
+
+    public static Tarantula getTarantulaCreated() {
+        return tarantulaCreated;
+    }
+
+    public static void reset() {
+        resetTarantulaCreated();
+    }
 }

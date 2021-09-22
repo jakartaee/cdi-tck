@@ -16,16 +16,31 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.inject.Inject;
 
+@Dependent
 public class SpiderProducer {
+
+    @Inject
+    private Web web;
+
     private static Tarantula tarantulaCreated;
+    private static Web injectedWeb;
+    private static boolean destroyArgumentsSet;
+    private static Tarantula tarantulaDestroyed;
 
     @Produces
     @Pet
     public Tarantula produceTarantula() {
         Tarantula tarantula = new Tarantula("Pete");
         tarantulaCreated = tarantula;
+        injectedWeb = web;
+        tarantulaCreated = tarantula;
+        resetTarantulaDestroyed();
         return tarantula;
     }
 
@@ -33,6 +48,14 @@ public class SpiderProducer {
     @Null
     public Spider getNullSpider() {
         return null;
+    }
+
+    public void destroyTarantula(@Disposes @Pet Tarantula spider, BeanManager beanManager) {
+        tarantulaDestroyed = spider;
+        injectedWeb = web;
+        if (beanManager != null) {
+            destroyArgumentsSet = true;
+        }
     }
 
     public static boolean isTarantulaCreated() {
@@ -48,7 +71,33 @@ public class SpiderProducer {
         return tarantulaCreated;
     }
 
+    public static Tarantula getTarantulaDestroyed() {
+        return tarantulaDestroyed;
+    }
+
     public static void reset() {
         resetTarantulaCreated();
     }
+
+    public static void resetInjections() {
+        injectedWeb = null;
+    }
+
+    public static Web getInjectedWeb() {
+        return injectedWeb;
+    }
+
+    public static boolean isDestroyArgumentsSet() {
+        return destroyArgumentsSet;
+    }
+
+    public static void resetTarantulaDestroyed() {
+        tarantulaDestroyed = null;
+        destroyArgumentsSet = false;
+    }
+
+    public static boolean isTarantulaDestroyed() {
+        return tarantulaDestroyed != null;
+    }
+
 }

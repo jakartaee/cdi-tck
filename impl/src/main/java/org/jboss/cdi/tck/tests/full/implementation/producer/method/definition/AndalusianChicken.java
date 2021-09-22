@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
+package org.jboss.cdi.tck.tests.full.implementation.producer.method.definition;
 
-import jakarta.enterprise.inject.Produces;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Specializes;
 
-public class TarantulaProducer {
-    @Produces
-    @Tame
-    public Tarantula produceTarantula = new Tarantula();
+@Specializes
+@Dependent
+public class AndalusianChicken extends Chicken {
 
 }
