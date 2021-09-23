@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
 /**
@@ -25,6 +26,7 @@ import jakarta.enterprise.inject.Produces;
  * @author David Allen
  * 
  */
+@Dependent
 public class NullSpiderProducer {
     @Produces
     @Null

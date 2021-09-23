@@ -17,10 +17,12 @@
 
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.parameters;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.BeanManager;
 
+@Dependent
 public class IdeaFactory {
 
     @Produces

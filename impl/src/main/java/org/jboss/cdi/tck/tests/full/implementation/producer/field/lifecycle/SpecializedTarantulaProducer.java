@@ -14,11 +14,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
+package org.jboss.cdi.tck.tests.full.implementation.producer.field.lifecycle;
+
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.Specializes;
 
+/**
+ * This bean contains a producer field and specializes another bean which has the same producer field.
+ * 
+ * @author David Allen
+ * 
+ */
 @Specializes
-public class AndalusianChicken extends Chicken {
+@Dependent
+public class SpecializedTarantulaProducer extends TarantulaProducer {
+    @Produces
+    @Tame
+    public Tarantula produceTarantula = new DefangedTarantula();
 
 }

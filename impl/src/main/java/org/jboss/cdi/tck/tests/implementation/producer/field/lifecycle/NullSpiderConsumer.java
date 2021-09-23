@@ -17,6 +17,8 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
+
 import java.io.Serializable;
 
 /**
@@ -25,6 +27,7 @@ import java.io.Serializable;
  * @author David Allen
  * 
  */
+@Dependent
 public class NullSpiderConsumer implements Serializable {
     private static final long serialVersionUID = 1L;
 

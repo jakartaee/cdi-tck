@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class FunnelWeaverSpiderConsumer {
     @Inject
     @Spidery
