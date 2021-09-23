@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class FishPond {
     public boolean postConstructCalled;
 
