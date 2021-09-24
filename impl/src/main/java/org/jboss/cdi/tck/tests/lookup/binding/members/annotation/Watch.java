@@ -16,11 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.lookup.binding.members.annotation;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author pmuir
  * 
  */
 @Expensive(member = @SimpleAnnotation)
+@Dependent
 public class Watch {
 
 }

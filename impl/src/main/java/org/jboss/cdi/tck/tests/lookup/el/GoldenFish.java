@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Named("magic.golden.fish")
+@Dependent
 public class GoldenFish {
 }

@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.Interceptor;
 import jakarta.inject.Inject;
 
@@ -24,6 +25,7 @@ import jakarta.inject.Inject;
  * @author Martin Kouba
  * 
  */
+@Dependent
 public class Foo {
 
     @Inject

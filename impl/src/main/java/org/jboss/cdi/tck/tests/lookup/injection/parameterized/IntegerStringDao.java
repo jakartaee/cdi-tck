@@ -17,7 +17,10 @@
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
 
+import jakarta.enterprise.context.Dependent;
+
 @IntegerPowered
+@Dependent
 public class IntegerStringDao extends Dao<Integer, String> {
 
     @Override

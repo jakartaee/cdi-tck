@@ -17,12 +17,14 @@
 
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
  * 
  */
+@Dependent
 public class Sea {
 
     // Unsatisfied dependency - crab spider is not selected alternative

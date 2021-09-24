@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition.broken.inject;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
+@Dependent
 public class FooProducer {
     @SuppressWarnings("unused")
     @Produces

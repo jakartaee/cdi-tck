@@ -31,6 +31,8 @@ import jakarta.enterprise.util.AnnotationLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.full.implementation.producer.field.lifecycle.DefangedTarantula;
+import org.jboss.cdi.tck.tests.full.implementation.producer.field.lifecycle.TarantulaConsumer;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -73,14 +75,6 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
     public void testProducerFieldBeanCreate() throws Exception {
         BlackWidowConsumer spiderConsumer = getContextualReference(BlackWidowConsumer.class);
         assert spiderConsumer.getInjectedSpider().equals(BlackWidowProducer.blackWidow);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "cd") })
-    public void testProducerFieldFromSpecializingBeanUsed() throws Exception {
-        TarantulaConsumer spiderConsumer = getContextualReference(TarantulaConsumer.class);
-        assert spiderConsumer.getConsumedTarantula() != null;
-        assert spiderConsumer.getConsumedTarantula() instanceof DefangedTarantula;
     }
 
     @Test

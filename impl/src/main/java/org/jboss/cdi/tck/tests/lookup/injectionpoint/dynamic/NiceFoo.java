@@ -17,11 +17,14 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic;
 
+import jakarta.enterprise.context.Dependent;
+
 /**
  * @author Martin Kouba
  * 
  */
 @Nice
+@Dependent
 public class NiceFoo extends Foo {
 
 }

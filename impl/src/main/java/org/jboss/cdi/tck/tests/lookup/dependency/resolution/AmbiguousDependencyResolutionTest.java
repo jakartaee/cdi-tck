@@ -25,9 +25,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -44,7 +41,6 @@ public class AmbiguousDependencyResolutionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AmbiguousDependencyResolutionTest.class)
-                .withBeansXml(new BeansXml().alternatives(FooProducer.class, BarProducer.class))
                 .build();
     }
 

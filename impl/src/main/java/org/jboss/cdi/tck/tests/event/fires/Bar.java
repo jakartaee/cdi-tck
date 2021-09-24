@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.fires;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Bar {
 
     @Inject

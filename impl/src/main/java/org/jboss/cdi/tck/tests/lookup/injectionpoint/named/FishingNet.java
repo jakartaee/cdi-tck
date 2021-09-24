@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+@Dependent
 public class FishingNet {
 
     @Inject

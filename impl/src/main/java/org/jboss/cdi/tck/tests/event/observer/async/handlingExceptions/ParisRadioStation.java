@@ -19,8 +19,10 @@ package org.jboss.cdi.tck.tests.event.observer.async.handlingExceptions;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.ObservesAsync;
 
+@Dependent
 public class ParisRadioStation {
 
     public static AtomicBoolean observed = new AtomicBoolean(false);

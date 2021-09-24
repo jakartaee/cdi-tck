@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.reference.unresolved;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTABLE_REFERENCE;
 
 import jakarta.enterprise.context.spi.CreationalContext;
@@ -47,7 +48,7 @@ public class UnsatisfiedInjectableReferenceTest extends AbstractTest {
     }
 
     @SuppressWarnings("unchecked")
-    @Test(expectedExceptions = UnsatisfiedResolutionException.class)
+    @Test(groups = CDI_FULL, expectedExceptions = UnsatisfiedResolutionException.class)
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INJECTABLE_REFERENCE, id = "bb") })
     public void testUnsatisfiedReference() {
         Bean<SimpleBean> bean = this.getBeans(SimpleBean.class).iterator().next();

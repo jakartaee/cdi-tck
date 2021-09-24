@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
 @NotEnabled
+@Dependent
 class DisabledObserver {
     public void observeSecret(@Observes @Secret String secretString) {
         if ("fail if disabled observer invoked".equals(secretString)) {

@@ -29,9 +29,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -43,7 +40,6 @@ public class ResolutionByNameTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ResolutionByNameTest.class)
-                .withBeansXml(new BeansXml().alternatives(Sole.class))
                 .build();
     }
 
@@ -51,11 +47,10 @@ public class ResolutionByNameTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "ca"), @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "aa"),
             @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "b") })
     public void testAmbiguousELNamesResolved() throws Exception {
-        // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled alternative, AlaskaPlaice specializes
-        // Plaice
+        // Cod and Plaice are named "whitefish" - Cod is a not-enabled alternative
         Set<Bean<?>> beans = getCurrentManager().getBeans("whitefish");
         assertEquals(beans.size(), 1);
-        assertTrue(getCurrentManager().resolve(beans).getTypes().contains(AlaskaPlaice.class));
+        assertTrue(getCurrentManager().resolve(beans).getTypes().contains(Plaice.class));
         // Both Salmon and Sole are named "fish" - Sole is an enabled alternative
         beans = getCurrentManager().getBeans("fish");
         assertEquals(beans.size(), 2);

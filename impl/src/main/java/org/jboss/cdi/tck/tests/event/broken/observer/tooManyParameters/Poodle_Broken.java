@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.broken.observer.tooManyParameters;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.ObservesAsync;
 import jakarta.enterprise.inject.spi.AfterDeploymentValidation;
 
+@Dependent
 public class Poodle_Broken {
 
     public void observes(@Observes AfterDeploymentValidation beforeBeanDiscovery, @ObservesAsync Boxer anotherDog) {

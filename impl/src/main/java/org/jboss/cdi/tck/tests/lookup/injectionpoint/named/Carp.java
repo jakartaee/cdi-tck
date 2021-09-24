@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.named;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Named
 // -> @Named("carp")
+@Dependent
 public class Carp implements Animal {
 
     @Override

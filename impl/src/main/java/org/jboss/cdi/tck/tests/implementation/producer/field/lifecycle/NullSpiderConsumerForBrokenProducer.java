@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
 import java.io.Serializable;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
@@ -27,6 +28,7 @@ import jakarta.inject.Inject;
  * @author David Allen
  * 
  */
+@Dependent
 public class NullSpiderConsumerForBrokenProducer implements Serializable {
     private static final long serialVersionUID = 1L;
 

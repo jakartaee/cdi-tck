@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class Cook {
 
     @Produces

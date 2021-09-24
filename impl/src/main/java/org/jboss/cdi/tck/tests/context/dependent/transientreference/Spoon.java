@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent.transientreference;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.TransientReference;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Spoon {
 
     @Inject

@@ -16,8 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
+import jakarta.enterprise.context.Dependent;
+
 @Expensive(cost = 60, veryExpensive = true)
 @Whitefish
+@Dependent
 public class RoundWhitefish implements Animal {
 
 }

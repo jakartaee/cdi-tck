@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.definition.bean;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 final class Tarantula extends Spider implements DeadlySpider {
 
 }

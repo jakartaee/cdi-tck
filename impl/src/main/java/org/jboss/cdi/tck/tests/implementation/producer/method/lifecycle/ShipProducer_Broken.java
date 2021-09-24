@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class ShipProducer_Broken {
 
     public @Produces

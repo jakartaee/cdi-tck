@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class BrownRecluseProducer {
     @Produces
     protected BrownRecluse spider = new BrownRecluse(5);
