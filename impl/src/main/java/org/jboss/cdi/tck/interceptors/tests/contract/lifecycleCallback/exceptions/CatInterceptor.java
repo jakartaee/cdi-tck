@@ -18,8 +18,13 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptio
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@CatBinding
+@Priority(100)
 class CatInterceptor {
     public static boolean preDestroyCalled = false;
 

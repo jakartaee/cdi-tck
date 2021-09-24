@@ -54,7 +54,7 @@ public class DestroyingNormalScopedInstanceTest extends AbstractTest {
 	public static WebArchive createTestArchive() {
 		return new WebArchiveBuilder()
 				.withTestClassPackage(DestroyingNormalScopedInstanceTest.class)
-				.withExtension(CustomScopeExtension.class).build();
+				.build();
 	}
 
 	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -68,13 +68,6 @@ public class DestroyingNormalScopedInstanceTest extends AbstractTest {
 	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
 	public void testRequestScopedComponent(
 			Instance<RequestScopedComponent> instance) {
-		testComponent(instance);
-	}
-
-	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
-	public void testCustomScopedComponent(
-			Instance<AlterableComponent> instance) {
 		testComponent(instance);
 	}
 
@@ -98,26 +91,6 @@ public class DestroyingNormalScopedInstanceTest extends AbstractTest {
 		context.destroy(bean);
 		// Make sure subsequent calls do not raise exception
 		context.destroy(bean);
-	}
-
-	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, expectedExceptions = UnsupportedOperationException.class)
-	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "p") })
-	public void testUnsupportedOperationExceptionThrownIfUnderlyingContextNotAlterable(
-			Instance<NonAlterableComponent> instance,
-			CustomScopeExtension extension) {
-		NonAlterableComponent component = instance.get();
-		instance.destroy(component);
-		fail("expected exception not thrown");
-	}
-
-	@Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-	@SpecAssertions({ @SpecAssertion(section = DYNAMIC_LOOKUP, id = "o") })
-	public void testContextDestroyCalled(
-			Instance<AlterableComponent> instance) {
-		AlterableComponent component = instance.get();
-		CustomAlterableContext.reset();
-		instance.destroy(component);
-		assertTrue(CustomAlterableContext.isDestroyCalled());
 	}
 
 	@Test(expectedExceptions = NullPointerException.class, dataProvider = ARQUILLIAN_DATA_PROVIDER)

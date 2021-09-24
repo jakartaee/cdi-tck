@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.broken.prefix;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Named
+@Dependent
 public class Foo {
 }

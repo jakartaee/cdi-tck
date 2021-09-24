@@ -42,7 +42,6 @@ public class LifecycleInterceptorDefinitionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(LifecycleInterceptorDefinitionTest.class)
-                .withBeansXml(new BeansXml().interceptors(AirborneInterceptor.class, DestructionInterceptor.class))
                 .build();
     }
 

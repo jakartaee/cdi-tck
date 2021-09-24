@@ -17,6 +17,9 @@
 
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Wolf implements Predator<Sheep> {
 
     @Override

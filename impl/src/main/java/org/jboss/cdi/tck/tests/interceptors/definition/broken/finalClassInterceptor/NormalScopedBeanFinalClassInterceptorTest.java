@@ -38,7 +38,7 @@ public class NormalScopedBeanFinalClassInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(NormalScopedBeanFinalClassInterceptorTest.class)
                 .withClasses(FooBinding.class, MissileInterceptor.class, AntiAircraftMissileFinalClass.class, AntiAircraftIPBean.class)
-                .withBeansXml(new BeansXml().interceptors(MissileInterceptor.class)).build();
+                .build();
     }
 
     @Test

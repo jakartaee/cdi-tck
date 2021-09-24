@@ -17,7 +17,9 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.exceptions;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.Dependent;
 
+@Dependent
 class Sheep {
     @PostConstruct
     public void postConstruct() {

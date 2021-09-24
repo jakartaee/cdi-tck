@@ -17,9 +17,13 @@
 
 package org.jboss.cdi.tck.tests.alternative.resolution.qualifier;
 
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Alternative
+@Priority(1)
+@Dependent
 public class Larch extends Tree {
 
     public int ping() {

@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.member;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @VehicleCountInterceptorBinding(comment = "bar")
+@Priority(Interceptor.Priority.APPLICATION)
 public class VehicleCountInterceptor {
     private static boolean intercepted = false;
 

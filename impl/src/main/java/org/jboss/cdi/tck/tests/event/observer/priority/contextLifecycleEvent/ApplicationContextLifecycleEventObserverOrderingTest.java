@@ -17,20 +17,14 @@
 package org.jboss.cdi.tck.tests.event.observer.priority.contextLifecycleEvent;
 
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_ORDERING;
-import static org.jboss.cdi.tck.tests.event.observer.priority.contextLifecycleEvent.ApplicationScopedObserver.A;
-import static org.jboss.cdi.tck.tests.event.observer.priority.contextLifecycleEvent.ApplicationScopedObserver.B;
-import static org.jboss.cdi.tck.tests.event.observer.priority.contextLifecycleEvent.ApplicationScopedObserver.C;
-import static org.jboss.cdi.tck.tests.event.observer.priority.contextLifecycleEvent.ApplicationScopedObserver.D;
-
-import java.util.Arrays;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -38,15 +32,17 @@ public class ApplicationContextLifecycleEventObserverOrderingTest extends Abstra
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withClasses(ApplicationScopedObserver.class, TestExtension.class).withTestClass(ApplicationContextLifecycleEventObserverOrderingTest.class)
-                .withExtension(TestExtension.class).build();
+        return new WebArchiveBuilder().withClasses(ApplicationScopedObserver.class)
+                .withTestClass(ApplicationContextLifecycleEventObserverOrderingTest.class)
+                .build();
     }
 
     @Test
     @SpecAssertion(section = OBSERVER_ORDERING, id = "b")
     public void testContextLifecycleEventOrdering() {
-        String[] expectedArray = new String[] { A, B, C, D };
-        ActionSequence.assertSequenceDataEquals(Arrays.asList(expectedArray));
+        // ActionSequence was originally used, but we cannot reliably reset it without extensions
+        String expectedString = "ABCD";
+        Assert.assertEquals(ApplicationScopedObserver.getBuilder().toString(), expectedString);
     }
 
 }

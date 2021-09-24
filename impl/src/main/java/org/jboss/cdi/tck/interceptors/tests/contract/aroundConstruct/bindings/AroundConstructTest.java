@@ -31,7 +31,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -52,8 +51,6 @@ public class AroundConstructTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AroundConstructTest.class)
-                .withBeansXml(new BeansXml().interceptors(AlphaInterceptor.class, BravoInterceptor.class,
-                        CharlieInterceptor1.class, CharlieInterceptor2.class))
                 .build();
     }
 

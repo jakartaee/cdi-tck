@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.broken.observer;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.event.Observes;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -25,6 +26,7 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 
 @Transactional
 @Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
 public class TransactionalInterceptor {
 
     private static final SimpleLogger logger = new SimpleLogger(TransactionalInterceptor.class);

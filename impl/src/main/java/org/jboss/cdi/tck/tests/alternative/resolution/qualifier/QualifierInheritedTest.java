@@ -47,7 +47,6 @@ public class QualifierInheritedTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(QualifierInheritedTest.class)
                 .withClasses(Tree.class, Larch.class, Forest.class, True.class, TrueLiteral.class)
-                .withBeansXml(new BeansXml().alternatives(Larch.class))
                 .build();
     }
 

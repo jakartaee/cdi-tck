@@ -16,11 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname;
 
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Named;
 
 @Named("fish")
 @Alternative
+@Priority(1)
+@Dependent
 public class Sole implements Animal {
 
 }

@@ -43,8 +43,6 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorBindingInheritanceTest.class)
-                .withBeansXml(
-                        new BeansXml().interceptors(SquirrelInterceptor.class, WoodpeckerInterceptor.class))
                 .build();
     }
 

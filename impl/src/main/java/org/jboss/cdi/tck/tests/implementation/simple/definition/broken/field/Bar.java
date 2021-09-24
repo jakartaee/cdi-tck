@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.simple.definition.broken.field;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
 
+@Dependent
 public class Bar {
 
     @SuppressWarnings("unused")

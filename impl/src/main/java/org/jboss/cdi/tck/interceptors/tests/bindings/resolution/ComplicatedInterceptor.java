@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.resolution;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -27,6 +28,7 @@ import jakarta.interceptor.InvocationContext;
 @PingBinding
 // @PongBinding inherited from @PingBinding
 @BallBinding(requiresBall = true)
+@Priority(Interceptor.Priority.APPLICATION)
 public class ComplicatedInterceptor {
 
     public static boolean intercepted = false;

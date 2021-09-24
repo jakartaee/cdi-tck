@@ -60,7 +60,7 @@ public class DependentContextTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DependentContextTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(DependentContextTest.class).build();
     }
 
     @Test
@@ -442,22 +442,6 @@ public class DependentContextTest extends AbstractTest {
         assert Fox.isDestroyed();
     }
 
-    @Test
-    @SpecAssertion(section = DEPENDENT_OBJECTS, id = "ab")
-    public void testDependentScopedDecoratorsAreDependentObjectsOfBean() {
-        Bean<Interior> roomBean = getBeans(Interior.class, new RoomBinding()).iterator().next();
-
-        CreationalContext<Interior> roomCreationalContext = getCurrentManager().createCreationalContext(roomBean);
-        Interior room = (Interior) getCurrentManager().getReference(roomBean, Interior.class, roomCreationalContext);
-
-        InteriorDecorator.reset();
-
-        room.foo();
-
-        assert InteriorDecorator.getInstances().size() == 1;
-        roomCreationalContext.release();
-        assert InteriorDecorator.isDestroyed();
-    }
 
     @Test
     @SpecAssertion(section = DEPENDENT_OBJECTS, id = "aa")

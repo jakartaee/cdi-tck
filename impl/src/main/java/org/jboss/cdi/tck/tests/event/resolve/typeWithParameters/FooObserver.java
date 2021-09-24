@@ -18,8 +18,10 @@ package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 
+@Dependent
 public class FooObserver extends AbstractObserver {
 
     public static final String SEQUENCE = "fooString";

@@ -31,6 +31,7 @@ import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.inject.AmbiguousResolutionException;
 import jakarta.enterprise.inject.UnsatisfiedResolutionException;
 import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.BeanContainer;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
@@ -50,6 +51,7 @@ import org.testng.ITestResult;
  */
 public abstract class AbstractTest extends Arquillian {
 
+    // TODO this will have to be eventually changes as Lite implementations do not have BeanManager, only BeanContainer
     @Inject
     protected BeanManager beanManager;
 
@@ -62,6 +64,18 @@ public abstract class AbstractTest extends Arquillian {
      * @return the current {@link BeanManager}
      */
     protected BeanManager getCurrentManager() {
+        return beanManager;
+    }
+
+    /**
+     * Note that TCK uses Arquillian Servlet protocol and so the test class is instantiated/enriched from within the WAR module.
+     * This affects most of the {@link BeanContainer} methods functionality. For instance the method
+     * {@link BeanContainer#getBeans(Type, Annotation...)} returns the set of beans which are available for injection in the
+     * module or library containing the class into which the {@link BeanContainer} was injected (simplified).
+     *
+     * @return the current {@link BeanContainer}
+     */
+    protected BeanContainer getCurrentBeanContainer() {
         return beanManager;
     }
 

@@ -17,6 +17,7 @@
 package org.jboss.cdi.tck.tests.context.dependent;
 
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -25,6 +26,7 @@ import jakarta.interceptor.InvocationContext;
 @Dependent
 @Transactional
 @Interceptor
+@Priority(1)
 public class TransactionalInterceptor {
     public static boolean destroyed = false;
     public static boolean intercepted = false;

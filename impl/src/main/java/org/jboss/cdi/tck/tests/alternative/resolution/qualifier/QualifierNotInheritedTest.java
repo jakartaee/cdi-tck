@@ -47,7 +47,6 @@ public class QualifierNotInheritedTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(QualifierNotInheritedTest.class)
                 .withClasses(Monster.class, Troll.class, Dungeon.class, False.class, FalseLiteral.class)
-                .withBeansXml(new BeansXml().alternatives(Troll.class))
                 .build();
     }
 

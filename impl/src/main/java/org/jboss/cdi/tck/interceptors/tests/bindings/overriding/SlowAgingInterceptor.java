@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.overriding;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -24,6 +25,7 @@ import org.jboss.cdi.tck.interceptors.tests.bindings.overriding.Aging.Speed;
 
 @Interceptor
 @Aging(Speed.SLOW)
+@Priority(Interceptor.Priority.APPLICATION)
 public class SlowAgingInterceptor {
 
     @AroundInvoke

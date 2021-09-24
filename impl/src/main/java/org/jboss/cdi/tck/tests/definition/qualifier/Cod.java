@@ -16,11 +16,13 @@
  */
 package org.jboss.cdi.tck.tests.definition.qualifier;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Whitefish
 @Chunky(realChunky = true)
 @Named("whitefish")
+@Dependent
 public class Cod implements ScottishFish {
 
 }

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype;
 
+@DummyStereotype
 public class MiniatureClydesdale extends Clydesdale {
 
 }

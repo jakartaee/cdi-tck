@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.interceptor;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Omega
 @Interceptor
+@Priority(Interceptor.Priority.APPLICATION+1)
 public class OmegaInterceptor {
 
     @AroundInvoke

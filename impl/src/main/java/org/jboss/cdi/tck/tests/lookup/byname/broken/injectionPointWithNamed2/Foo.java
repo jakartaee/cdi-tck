@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.broken.injectionPointWithNamed2;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Named;
 
+@Dependent
 public class Foo {
     public void observe(@Observes Bar bar, @Named Bar bar1) {
 

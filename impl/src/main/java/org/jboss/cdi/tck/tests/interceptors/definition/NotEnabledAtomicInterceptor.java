@@ -22,6 +22,7 @@ import jakarta.interceptor.InvocationContext;
 
 @Atomic
 @Interceptor
+// No Priority
 public class NotEnabledAtomicInterceptor {
     public static boolean intercepted = false;
 

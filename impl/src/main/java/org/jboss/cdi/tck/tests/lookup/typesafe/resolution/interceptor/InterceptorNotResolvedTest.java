@@ -41,7 +41,6 @@ public class InterceptorNotResolvedTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(InterceptorNotResolvedTest.class)
                 .withClasses(Cat.class, CatInterceptor.class, CatInterceptorBinding.class, Foo.class)
-                .withBeansXml(new BeansXml().interceptors(CatInterceptor.class))
                 .build();
     }
 

@@ -16,14 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
-import jakarta.interceptor.Interceptors;
 import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Transactional
-@Interceptors(AnotherInterceptor.class)
+@AccountBinding
+@Dependent
 public class AccountTransaction extends Transaction {
 
     public void execute() {

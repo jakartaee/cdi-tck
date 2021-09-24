@@ -18,32 +18,42 @@ package org.jboss.cdi.tck.tests.event.observer.priority.contextLifecycleEvent;
 
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
 import jakarta.interceptor.Interceptor;
 
-import org.jboss.cdi.tck.util.ActionSequence;
-
+@Dependent
 public class ApplicationScopedObserver {
+
+    // we use builder instead of ActionSequence because we cannot reliably reset() the sequence without using extensions
+    public static StringBuilder builder;
 
     public static final String A = "A";
     public static final String B = "B";
     public static final String C = "C";
     public static final String D = "D";
 
+    public static StringBuilder getBuilder() {
+        if (builder == null) {
+            builder = new StringBuilder();
+        }
+        return builder;
+    }
+
     public void first(@Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION - 100) Object obj) {
-        ActionSequence.addAction(A);
+        getBuilder().append(A);
     }
 
     public void second(@Observes @Initialized(ApplicationScoped.class) Object obj) {
-        ActionSequence.addAction(B);
+        getBuilder().append(B);
     }
 
     public void third(@Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION + 600) Object obj) {
-        ActionSequence.addAction(C);
+        getBuilder().append(C);
     }
 
     public void forth(@Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION + 700) Object obj) {
-        ActionSequence.addAction(D);
+        getBuilder().append(D);
     }
 }

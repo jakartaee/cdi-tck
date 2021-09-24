@@ -82,8 +82,6 @@ public class InterceptorDefinitionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorDefinitionTest.class)
-                .withBeansXml(new BeansXml().interceptors(AtomicInterceptor.class, MissileInterceptor.class,
-                        SecureInterceptor.class, TransactionalInterceptor.class, FileLogger.class, NetworkLogger.class))
                 .build();
     }
 

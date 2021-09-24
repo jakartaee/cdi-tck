@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 import java.io.Serializable;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.AroundTimeout;
 import jakarta.interceptor.Interceptor;
@@ -27,6 +28,7 @@ import jakarta.interceptor.InvocationContext;
 @SuppressWarnings("serial")
 @Interceptor
 @AlmightyBinding
+@Priority(0)
 public class AlmightyInterceptor implements Serializable {
 
     public static boolean methodIntercepted = false;

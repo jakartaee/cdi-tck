@@ -19,8 +19,6 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.lifecycle;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_LIFECYCLE;
-import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
-import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 
 import java.util.Set;
 
@@ -55,20 +53,20 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ProducerMethodLifecycleTest.class).withBeansXml("beans.xml")
+        return new WebArchiveBuilder().withTestClassPackage(ProducerMethodLifecycleTest.class)
                 .build();
     }
 
     @Test
     @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "ea")
     public void testProducerMethodBeanCreate() {
-        PreferredSpiderProducer.reset();
+        SpiderProducer.reset();
         Bean<Tarantula> tarantulaBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();
         CreationalContext<Tarantula> tarantulaCc = getCurrentManager().createCreationalContext(tarantulaBean);
         Tarantula tarantula = tarantulaBean.create(tarantulaCc);
-        assert PreferredSpiderProducer.getTarantulaCreated() == tarantula;
-        assert PreferredSpiderProducer.getInjectedWeb() != null;
-        assert PreferredSpiderProducer.getInjectedWeb().isDestroyed();
+        assert SpiderProducer.getTarantulaCreated() == tarantula;
+        assert SpiderProducer.getInjectedWeb() != null;
+        assert SpiderProducer.getInjectedWeb().isDestroyed();
     }
 
     @Test
@@ -89,18 +87,6 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         }
 
         assert false : "The BeanManager should not have been injected into the producer method";
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "c"), @SpecAssertion(section = SPECIALIZATION, id = "cb") })
-    public void testProducerMethodFromSpecializedBeanUsed() {
-        SpiderProducer.reset();
-        PreferredSpiderProducer.reset();
-        Bean<Tarantula> spiderBean = getBeans(Tarantula.class, PET_LITERAL).iterator().next();
-        CreationalContext<Tarantula> spiderBeanCc = getCurrentManager().createCreationalContext(spiderBean);
-        Tarantula tarantula = spiderBean.create(spiderBeanCc);
-        assert PreferredSpiderProducer.getTarantulaCreated() == tarantula;
-        assert !SpiderProducer.isTarantulaCreated();
     }
 
     @Test
@@ -125,20 +111,20 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "ma"), @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "r") })
     public void testProducerMethodBeanDestroy() {
-        PreferredSpiderProducer.reset();
+        SpiderProducer.reset();
         Set<Bean<?>> beans = getCurrentManager().getBeans(Tarantula.class, PET_LITERAL);
         Bean<?> bean = getCurrentManager().resolve(beans);
-        assert bean.getBeanClass().equals(PreferredSpiderProducer.class);
+        assert bean.getBeanClass().equals(SpiderProducer.class);
         assert bean.getTypes().contains(Tarantula.class);
         Bean<Tarantula> tarantulaBean = (Bean<Tarantula>) bean;
         CreationalContext<Tarantula> tarantulaCc = getCurrentManager().createCreationalContext(tarantulaBean);
         Tarantula tarantula = tarantulaBean.create(tarantulaCc);
-        PreferredSpiderProducer.resetInjections();
+        SpiderProducer.resetInjections();
         tarantulaBean.destroy(tarantula, tarantulaCc);
-        assert PreferredSpiderProducer.getTarantulaDestroyed() == tarantula;
-        assert PreferredSpiderProducer.isDestroyArgumentsSet();
-        assert PreferredSpiderProducer.getInjectedWeb() != null;
-        assert PreferredSpiderProducer.getInjectedWeb().isDestroyed();
+        assert SpiderProducer.getTarantulaDestroyed() == tarantula;
+        assert SpiderProducer.isDestroyArgumentsSet();
+        assert SpiderProducer.getInjectedWeb() != null;
+        assert SpiderProducer.getInjectedWeb().isDestroyed();
     }
 
     @Test(expectedExceptions = FooException.class)

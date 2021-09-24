@@ -1,0 +1,17 @@
+<beans xmlns="https://jakarta.ee/xml/ns/jakartaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/beans_3_0.xsd" version="3.0" bean-discovery-mode="all">
+   <decorators>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.BarDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.FooDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.FooObjectDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.QuxDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.QuxListDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.BazDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.GraultExtendsDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.GraultSuperDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.CorgeDecorator2</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.CorgeDecorator</class>
+      <class>org.jboss.cdi.tck.tests.full.decorators.resolution.GarplyDecorator</class>
+   </decorators>
+</beans>

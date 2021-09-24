@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.field.definition;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
+@Dependent
 public class BlackWidowProducer {
     public static BlackWidow blackWidow = new BlackWidow();
     @Produces

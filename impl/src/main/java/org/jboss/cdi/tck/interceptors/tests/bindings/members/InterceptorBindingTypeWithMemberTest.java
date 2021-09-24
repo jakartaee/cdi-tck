@@ -53,8 +53,6 @@ public class InterceptorBindingTypeWithMemberTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorBindingTypeWithMemberTest.class)
-                .withBeansXml(new BeansXml()
-                        .interceptors(IncreasingInterceptor.class, DecreasingInterceptor.class, VehicleCountInterceptor.class, PlantInterceptor.class))
                 .build();
     }
 

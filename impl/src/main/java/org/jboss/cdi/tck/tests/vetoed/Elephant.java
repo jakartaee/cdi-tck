@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.vetoed;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Vetoed;
 
 @Vetoed
+@Dependent
 public class Elephant {
 
 }

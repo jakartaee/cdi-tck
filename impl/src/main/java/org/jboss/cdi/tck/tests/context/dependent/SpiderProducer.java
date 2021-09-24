@@ -23,6 +23,7 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
+@Dependent
 public class SpiderProducer {
     @Inject
     private BeanManager beanManager;

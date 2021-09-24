@@ -23,9 +23,14 @@ import java.util.Set;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@AnimalBinding
+@Priority(1)
 public class AnimalInterceptor {
     private static Set<String> postConstructInterceptorCalledFor = new HashSet<String>();
     private static Set<String> preDestroyInterceptorCalledFor = new HashSet<String>();

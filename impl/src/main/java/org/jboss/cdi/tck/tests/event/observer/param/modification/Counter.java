@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.param.modification;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Counter {
 
     private int i = 0;

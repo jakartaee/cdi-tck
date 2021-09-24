@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
@@ -24,6 +25,7 @@ import jakarta.inject.Inject;
  * @author David Allen
  * 
  */
+@Dependent
 public class ConstructorInjectionPointBean {
     private BeanWithInjectionPointMetadata injectedBean;
 

@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized.raw;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
 @SuppressWarnings("rawtypes")
+@Dependent
 public class RawProducer {
 
     @Produces

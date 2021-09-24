@@ -42,7 +42,7 @@ public class InterceptorWithObserverMethodTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorWithObserverMethodTest.class)
-                .withBeansXml(new BeansXml().interceptors(TransactionalInterceptor.class)).build();
+                .build();
     }
 
     @Test

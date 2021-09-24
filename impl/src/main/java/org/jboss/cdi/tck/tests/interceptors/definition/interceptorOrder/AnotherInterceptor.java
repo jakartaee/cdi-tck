@@ -16,11 +16,16 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
+@Interceptor
+@AccountBinding
+@Priority(1)
 public class AnotherInterceptor {
 
     @AroundInvoke

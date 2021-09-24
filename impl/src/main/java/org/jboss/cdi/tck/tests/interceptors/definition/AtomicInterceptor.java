@@ -16,12 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
 @Atomic
 @Interceptor
+@Priority(Interceptor.Priority.APPLICATION)
 public class AtomicInterceptor {
     public static boolean intercepted = false;
 

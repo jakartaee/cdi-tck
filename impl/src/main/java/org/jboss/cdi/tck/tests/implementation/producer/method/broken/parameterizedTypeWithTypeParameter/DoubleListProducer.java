@@ -3,9 +3,11 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.broken.parameteri
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class DoubleListProducer<T> {
 
     @Produces

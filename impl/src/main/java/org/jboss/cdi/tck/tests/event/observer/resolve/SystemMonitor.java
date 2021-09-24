@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.resolve;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.ObservesAsync;
 
+@Dependent
 public class SystemMonitor {
     public void lowBattery(@Observes BatteryEvent e) {
     }

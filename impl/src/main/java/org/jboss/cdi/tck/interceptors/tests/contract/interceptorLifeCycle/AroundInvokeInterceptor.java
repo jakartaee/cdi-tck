@@ -18,10 +18,15 @@ package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle;
 
 import static org.testng.Assert.assertNotNull;
 
+import jakarta.annotation.Priority;
 import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@BazBinding
+@Priority(1000)
 public class AroundInvokeInterceptor {
 
     public static boolean called = false;

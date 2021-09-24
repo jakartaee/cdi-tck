@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.bindings.aroundConstruct;
 
+import jakarta.annotation.Priority;
 import jakarta.interceptor.Interceptor;
 
 @Interceptor
 @BravoBinding
+@Priority(Interceptor.Priority.APPLICATION)
 public class BravoInterceptor extends AbstractInterceptor {
 }

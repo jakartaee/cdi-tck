@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class IntegerDao extends Dao<Integer, Integer> {
 
 }

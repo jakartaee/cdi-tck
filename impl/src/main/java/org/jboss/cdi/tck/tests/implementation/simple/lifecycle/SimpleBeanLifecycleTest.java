@@ -33,13 +33,10 @@ import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_LIFECYCLE;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
-import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
-
-import java.lang.annotation.Annotation;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
@@ -48,9 +45,7 @@ import jakarta.enterprise.context.spi.Contextual;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.CreationException;
 import jakarta.enterprise.inject.Instance;
-import jakarta.enterprise.inject.Specializes;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -65,12 +60,10 @@ import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
 public class SimpleBeanLifecycleTest extends AbstractTest {
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(SimpleBeanLifecycleTest.class).withBeansXml("beans.xml").build();
+        return new WebArchiveBuilder().withTestClassPackage(SimpleBeanLifecycleTest.class).build();
     }
 
     @Test
@@ -111,25 +104,6 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     public void testQualifierTypeAnnotatedConstructor() {
         getContextualReference(Duck.class);
         assert Duck.constructedCorrectly;
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac") })
-    public void testSpecializedBeanExtendsManagedBean() {
-        assert MountainLion.class.getAnnotation(Specializes.class) != null;
-        Bean<Lion> bean = null;
-        Bean<Lion> specializedBean = null;
-        for (Bean<Lion> lionBean : getBeans(Lion.class, TAME_LITERAL)) {
-            if (lionBean.getBeanClass().equals(Lion.class)) {
-                bean = lionBean;
-            } else if (lionBean.getBeanClass().equals(MountainLion.class)) {
-                specializedBean = lionBean;
-            }
-        }
-
-        assert bean == null;
-        assert specializedBean != null;
-        assert specializedBean.getBeanClass().getSuperclass().equals(Lion.class);
     }
 
     @Test

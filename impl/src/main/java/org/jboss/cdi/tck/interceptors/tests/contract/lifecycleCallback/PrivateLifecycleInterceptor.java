@@ -17,8 +17,13 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+@Interceptor
+@ChickenBinding
+@Priority(4)
 public class PrivateLifecycleInterceptor {
     private static boolean intercepted = false;
 
