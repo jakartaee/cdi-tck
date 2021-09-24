@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.lookup.el;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 @Named
+@Dependent
 public class Game {
     @Inject
     public void initialize(Counter counter) {

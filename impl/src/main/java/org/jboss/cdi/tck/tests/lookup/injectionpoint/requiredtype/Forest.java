@@ -17,12 +17,14 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 /**
  * @author Martin Kouba
  */
+@Dependent
 public class Forest {
 
     @Inject

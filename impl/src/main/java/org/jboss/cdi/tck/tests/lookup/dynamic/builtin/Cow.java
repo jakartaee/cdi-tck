@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
+import jakarta.enterprise.context.Dependent;
+
 @FarmBased
+@Dependent
 public class Cow extends AbstractAnimal {
 
 }

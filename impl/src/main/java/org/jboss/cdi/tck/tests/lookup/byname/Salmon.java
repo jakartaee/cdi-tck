@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Named("fish")
+@Dependent
 public class Salmon implements Animal {
 
 }

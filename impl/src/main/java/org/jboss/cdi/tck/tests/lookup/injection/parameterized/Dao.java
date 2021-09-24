@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Dao<T1, T2> {
 
     public String getId() {

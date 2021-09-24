@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Alternative;
 
 @Alternative
+@Dependent
 public class DaddyLongLegs extends Spider {
 
 }

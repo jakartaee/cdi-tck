@@ -17,11 +17,13 @@
 
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
+import jakarta.enterprise.context.Dependent;
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba
  */
+@Dependent
 public abstract class Conifer implements Tree {
 
     private static final SimpleLogger logger = new SimpleLogger(Conifer.class);

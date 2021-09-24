@@ -16,5 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.parameterized;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class ObjectDao extends Dao<Object, Object> {
 }
