@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.byname.broken.duplicity;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Named("whitefish")
+@Dependent
 public class Sole {
 
 }

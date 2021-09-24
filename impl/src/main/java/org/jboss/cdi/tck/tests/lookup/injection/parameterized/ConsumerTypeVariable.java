@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.parameterized;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class ConsumerTypeVariable<T1, T2> {
 
     @Inject

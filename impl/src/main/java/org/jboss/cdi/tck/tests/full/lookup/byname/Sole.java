@@ -14,11 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.byname;
+package org.jboss.cdi.tck.tests.full.lookup.byname;
 
-import jakarta.enterprise.inject.Specializes;
+import jakarta.annotation.Priority;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Alternative;
+import jakarta.inject.Named;
 
-@Specializes
-public class AlaskaPlaice extends Plaice {
+@Named("fish")
+@Alternative
+@Priority(1)
+@Dependent
+public class Sole implements Animal {
 
 }

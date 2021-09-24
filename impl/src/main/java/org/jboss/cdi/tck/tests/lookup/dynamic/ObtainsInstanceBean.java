@@ -18,10 +18,12 @@ package org.jboss.cdi.tck.tests.lookup.dynamic;
 
 import static org.jboss.cdi.tck.tests.lookup.dynamic.PayBy.PaymentMethod.CHEQUE;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
 
+@Dependent
 public class ObtainsInstanceBean {
     @Inject
     @PayBy(CHEQUE)

@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.type.variable;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 public class Sheep implements Animal {
 
 }

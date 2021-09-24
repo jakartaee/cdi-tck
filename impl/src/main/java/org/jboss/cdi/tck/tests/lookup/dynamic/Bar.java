@@ -16,6 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic;
 
+import jakarta.enterprise.context.Dependent;
+
+@Dependent
 class Bar implements Common {
 
     @Override

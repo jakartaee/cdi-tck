@@ -16,8 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection.visibility;
 
+import jakarta.enterprise.context.Dependent;
+
 import java.io.Serializable;
 
+@Dependent
 public class Foo implements Serializable {
 
     private static final long serialVersionUID = 5L;
