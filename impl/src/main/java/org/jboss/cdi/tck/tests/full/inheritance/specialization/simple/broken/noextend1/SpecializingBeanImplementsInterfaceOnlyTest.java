@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.full.inheritance.specialization.simple.broken.noextend1;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
@@ -30,12 +31,13 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
-public class SpecializingBeanImplementsInterfaceOnly extends AbstractTest {
+@Test(groups = CDI_FULL)
+public class SpecializingBeanImplementsInterfaceOnlyTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(SpecializingBeanImplementsInterfaceOnly.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(SpecializingBeanImplementsInterfaceOnlyTest.class).build();
     }
 
     @Test
