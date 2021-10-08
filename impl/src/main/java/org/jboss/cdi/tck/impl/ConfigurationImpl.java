@@ -22,7 +22,6 @@ import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
 import org.jboss.cdi.tck.spi.EL;
-import org.jboss.cdi.tck.spi.SourceProcessor;
 
 /**
  * CDI TCK configuration implementation.
@@ -32,21 +31,30 @@ import org.jboss.cdi.tck.spi.SourceProcessor;
  */
 public class ConfigurationImpl implements Configuration {
 
+    private Boolean cdiLiteMode;
+
     private Beans beans;
     private Contexts<? extends Context> contexts;
     private EL el;
-    private SourceProcessor sourceProcessor;
 
-    private Boolean cdiLiteModeFlag;
     private String libraryDirectory;
 
     private String testDataSource;
     private String testJmsConnectionFactory;
     private String testJmsQueue;
     private String testJmsTopic;
+
     private int testTimeoutFactor;
 
     protected ConfigurationImpl() {
+    }
+
+    public Boolean getCdiLiteMode() {
+        return cdiLiteMode;
+    }
+
+    public void setCdiLiteMode(Boolean cdiLiteMode) {
+        this.cdiLiteMode = cdiLiteMode;
     }
 
     public Beans getBeans() {
@@ -55,23 +63,6 @@ public class ConfigurationImpl implements Configuration {
 
     public void setBeans(Beans beans) {
         this.beans = beans;
-    }
-
-    @Override
-    public SourceProcessor getSourceProcessor() {
-        return sourceProcessor;
-    }
-
-    public void setSourceProcessor(SourceProcessor sourceProcessor) {
-        this.sourceProcessor = sourceProcessor;
-    }
-
-    public Boolean getCDILiteModeFlag() {
-        return cdiLiteModeFlag;
-    }
-
-    public void setCDILiteModeFlag(Boolean cdiLiteModeFlag) {
-        this.cdiLiteModeFlag = cdiLiteModeFlag;
     }
 
     @SuppressWarnings("unchecked")
@@ -155,11 +146,10 @@ public class ConfigurationImpl implements Configuration {
         StringBuilder configuration = new StringBuilder();
         configuration.append("Jakarta CDI 4.0 TCK Configuration\n");
         configuration.append("-----------------\n");
+        configuration.append("\tCDI Lite mode: ").append(getCdiLiteMode()).append("\n");
         configuration.append("\tBeans: ").append(getBeans()).append("\n");
         configuration.append("\tContexts: ").append(getContexts()).append("\n");
         configuration.append("\tEL: ").append(getEl()).append("\n");
-        configuration.append("\tSourceProcessor: ").append(getSourceProcessor()).append("\n");
-        configuration.append("\tCDI-lite mode: ").append(getCDILiteModeFlag()).append("\n");
         configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");
         configuration.append("\tTest DS: ").append(getTestDataSource()).append("\n");
         configuration.append("\tTest JMS connection factory: ").append(getTestJmsConnectionFactory()).append("\n");
