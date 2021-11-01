@@ -70,11 +70,12 @@ public class BeanDiscoveryTest extends AbstractTest {
         // Empty beans.xml, since CDI 4.0 this is discovery mode "annotated"
         JavaArchive bravo = ShrinkWrap.create(JavaArchive.class).addClass(Bravo.class)
                 .addAsManifestResource(new StringAsset(""), "beans.xml");
-        // No version beans.xml
+        // No version beans.xml, since CDI 4.0 this is "annotated" unless explicitly stated otherwise
         JavaArchive charlie = ShrinkWrap
                 .create(JavaArchive.class)
                 .addClass(Charlie.class)
-                .addAsManifestResource(new BeansXml(BeanDiscoveryMode.ALL),"beans.xml");
+                // using null values enforces missing attribute in resulting XML file
+                .addAsManifestResource(new BeansXml().setBeansXmlVersion(null).setBeanDiscoveryMode(null),"beans.xml");
         // Bean defining annotation and no beans.xml
         JavaArchive delta = ShrinkWrap.create(JavaArchive.class).addClasses(Delta.class, Golf.class, India.class, Kilo.class,
                 Mike.class, Interceptor1.class, Decorator1.class);
@@ -130,9 +131,10 @@ public class BeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    // TODO might require change of @SpecAssertions value due to spec wording changes
     @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"), @SpecAssertion(section = BEAN_ARCHIVE, id = "bc"),
             @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
-    public void testExplicitBeanArchiveLegacyDescriptor(Charlie charlie) {
+    public void testArchiveWithNoVersionBeansXml(Charlie charlie) {
         assertDiscoveredAndAvailable(charlie, Charlie.class);
     }
 

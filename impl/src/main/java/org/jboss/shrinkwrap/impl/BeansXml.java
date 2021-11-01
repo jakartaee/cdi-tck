@@ -218,6 +218,12 @@ public class BeansXml implements Asset {
         return this;
     }
 
+    /**
+     * Sets the version. Use {@code null} to enforce a beans.xml without version attribute.
+     *
+     * @param version value of version attribute. {@code null} if the attribute is to be omitted
+     * @return this
+     */
     public BeansXml setBeansXmlVersion(BeansXmlVersion version) {
         this.version = version;
         return this;
@@ -231,6 +237,12 @@ public class BeansXml implements Asset {
         return version;
     }
 
+    /**
+     * Sets the discovery mode. Use {@code null} to enforce a beans.xml without bean discovery mode attribute.
+     *
+     * @param mode value of bean discovery mode attribute. {@code null} if the attribute is to be omitted
+     * @return this
+     */
     public BeansXml setBeanDiscoveryMode(BeanDiscoveryMode mode) {
         this.mode = mode;
         return this;
@@ -239,9 +251,19 @@ public class BeansXml implements Asset {
     @Override
     public InputStream openStream() {
         StringBuilder xml = new StringBuilder();
-        xml.append("<beans version=\"" + getBeansXmlVersion().getValue() + "\" bean-discovery-mode=\"");
-        xml.append(getBeanDiscoveryMode().getValue());
-        xml.append("\">\n");
+        xml.append("<beans");
+        BeansXmlVersion version = getBeansXmlVersion();
+        // add version if required
+        if (version != null) {
+            xml.append(" version=\"" + version.getValue() + "\"");
+        }
+        BeanDiscoveryMode mode = getBeanDiscoveryMode();
+        // add bean discovery mode if required
+        if (mode != null) {
+            xml.append(" bean-discovery-mode=\"" + mode.getValue() + "\"");
+        }
+        // append enclosing bracket ">" and newline
+        xml.append(">\n");
         appendExcludeFilters(excludeFilters, xml);
         appendAlternatives(alternatives, stereotypes, xml);
         appendSection("interceptors", CLASS, interceptors, xml);
