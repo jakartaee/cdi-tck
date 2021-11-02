@@ -90,6 +90,7 @@
     <modules>
         <module>api</module>
         <module>ext-lib</module>
+        <module>lang-model</module>
         <module>impl</module>
         <module>web</module>
     </modules>
