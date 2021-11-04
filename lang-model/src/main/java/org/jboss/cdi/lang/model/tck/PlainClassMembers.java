@@ -4,10 +4,17 @@ import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import jakarta.enterprise.lang.model.declarations.FieldInfo;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
 import jakarta.enterprise.lang.model.types.PrimitiveType;
+import jakarta.enterprise.lang.model.types.Type;
 
 import java.lang.reflect.Modifier;
 
 abstract class PlainAbstractClass {
+    PlainAbstractClass(boolean disambiguate) {
+    }
+
+    PlainAbstractClass(String disambiguate) {
+    }
+
     abstract void abstractMethod();
 }
 
@@ -58,10 +65,18 @@ public final class PlainClassMembers extends PlainAbstractClass {
 
     // constructors
 
-    public PlainClassMembers(boolean disambiguate) {}
-    protected PlainClassMembers(int disambiguate) {}
-    PlainClassMembers(double disambiguate) {}
-    private PlainClassMembers(char disambiguate) {}
+    public PlainClassMembers(boolean disambiguate) {
+        super(false);
+    }
+    protected PlainClassMembers(int disambiguate) {
+        super(false);
+    }
+    PlainClassMembers(double disambiguate) {
+        super(false);
+    }
+    private PlainClassMembers(char disambiguate) {
+        super(false);
+    }
 
     // inherited
 
@@ -100,30 +115,31 @@ public final class PlainClassMembers extends PlainAbstractClass {
         }
 
         private static void verifyFields(ClassInfo clazz) {
+            // 16 explicitly declared fields
             assert clazz.fields().size() == 16;
 
-            assertField(clazz, "publicStaticFinalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "publicStaticField", Modifier.PUBLIC, true, false);
-            assertField(clazz, "publicFinalField", Modifier.PUBLIC, false, true);
-            assertField(clazz, "publicField", Modifier.PUBLIC, false, false);
+            assertField(clazz, "publicStaticFinalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "publicStaticField", Modifier.PUBLIC, true, false, true);
+            assertField(clazz, "publicFinalField", Modifier.PUBLIC, false, true, true);
+            assertField(clazz, "publicField", Modifier.PUBLIC, false, false, true);
 
-            assertField(clazz, "protectedStaticFinalField", Modifier.PROTECTED, true, true);
-            assertField(clazz, "protectedStaticField", Modifier.PROTECTED, true, false);
-            assertField(clazz, "protectedFinalField", Modifier.PROTECTED, false, true);
-            assertField(clazz, "protectedField", Modifier.PROTECTED, false, false);
+            assertField(clazz, "protectedStaticFinalField", Modifier.PROTECTED, true, true, true);
+            assertField(clazz, "protectedStaticField", Modifier.PROTECTED, true, false, true);
+            assertField(clazz, "protectedFinalField", Modifier.PROTECTED, false, true, true);
+            assertField(clazz, "protectedField", Modifier.PROTECTED, false, false, true);
 
-            assertField(clazz, "packagePrivateStaticFinalField", 0, true, true);
-            assertField(clazz, "packagePrivateStaticField", 0, true, false);
-            assertField(clazz, "packagePrivateFinalField", 0, false, true);
-            assertField(clazz, "packagePrivateField", 0, false, false);
+            assertField(clazz, "packagePrivateStaticFinalField", 0, true, true, true);
+            assertField(clazz, "packagePrivateStaticField", 0, true, false, true);
+            assertField(clazz, "packagePrivateFinalField", 0, false, true, true);
+            assertField(clazz, "packagePrivateField", 0, false, false, true);
 
-            assertField(clazz, "privateStaticFinalField", Modifier.PRIVATE, true, true);
-            assertField(clazz, "privateStaticField", Modifier.PRIVATE, true, false);
-            assertField(clazz, "privateFinalField", Modifier.PRIVATE, false, true);
-            assertField(clazz, "privateField", Modifier.PRIVATE, false, false);
+            assertField(clazz, "privateStaticFinalField", Modifier.PRIVATE, true, true, true);
+            assertField(clazz, "privateStaticField", Modifier.PRIVATE, true, false, true);
+            assertField(clazz, "privateFinalField", Modifier.PRIVATE, false, true, true);
+            assertField(clazz, "privateField", Modifier.PRIVATE, false, false, true);
         }
 
-        static void assertField(ClassInfo clazz, String name, int accesibility, boolean isStatic, boolean isFinal) {
+        static void assertField(ClassInfo clazz, String name, int accesibility, boolean isStatic, boolean isFinal, boolean testStringType) {
             FieldInfo field = LangModelUtils.singleField(clazz, name);
 
             assert field.declaringClass().equals(clazz);
@@ -138,12 +154,16 @@ public final class PlainClassMembers extends PlainAbstractClass {
             assert field.isStatic() == isStatic;
             assert Modifier.isStatic(field.modifiers()) == isStatic;
 
-            assert field.type().isClass();
-            assert field.type().asClass().declaration().name().equals("java.lang.String");
+            assertType(field.type(), Type.Kind.CLASS);
+            if (testStringType) {
+                assert field.type().asClass().declaration().name().equals("java.lang.String");
+            }
         }
 
         private static void verifyMethods(ClassInfo clazz) {
-            assert clazz.methods().size() == 16 + 2; // abstractMethod is present twice
+            // 16 explicitly declared methods (without `abstractMethod`)
+            // 2 occurences of explicitly declared `abstractMethod`
+            assert clazz.methods().size() == 16 + 2;
 
             assertMethod(clazz, "publicStaticFinalMethod", Modifier.PUBLIC, true, true, false);
             assertMethod(clazz, "publicStaticMethod", Modifier.PUBLIC, true, false, false);
@@ -186,10 +206,12 @@ public final class PlainClassMembers extends PlainAbstractClass {
             assert method.isAbstract() == isAbstract;
             assert Modifier.isAbstract(method.modifiers()) == isAbstract;
 
-            assert method.returnType().isVoid();
+            assertType(method.returnType(), Type.Kind.VOID);
         }
 
         private static void verifyConstructors(ClassInfo clazz) {
+            // 4 explicitly declared constructors
+            // constructors on the superclass are not returned
             assert clazz.constructors().size() == 4;
 
             assertConstructor(clazz, PrimitiveType.PrimitiveKind.BOOLEAN, Modifier.PUBLIC);
@@ -220,6 +242,18 @@ public final class PlainClassMembers extends PlainAbstractClass {
             assert !ctor.isFinal();
 
             assert ctor.returnType().asClass().declaration().equals(clazz);
+        }
+
+        static void assertType(Type type, Type.Kind expectedKind) {
+            assert type.kind() == expectedKind;
+
+            assert type.isVoid() == (expectedKind == Type.Kind.VOID);
+            assert type.isPrimitive() == (expectedKind == Type.Kind.PRIMITIVE);
+            assert type.isClass() == (expectedKind == Type.Kind.CLASS);
+            assert type.isArray() == (expectedKind == Type.Kind.ARRAY);
+            assert type.isParameterizedType() == (expectedKind == Type.Kind.PARAMETERIZED_TYPE);
+            assert type.isTypeVariable() == (expectedKind == Type.Kind.TYPE_VARIABLE);
+            assert type.isWildcardType() == (expectedKind == Type.Kind.WILDCARD_TYPE);
         }
     }
 }

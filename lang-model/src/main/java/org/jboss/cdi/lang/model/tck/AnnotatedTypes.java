@@ -13,6 +13,8 @@ import java.lang.annotation.Target;
 import java.util.List;
 import java.util.Map;
 
+import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertType;
+
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @interface AnnClass {
@@ -317,6 +319,11 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().hasAnnotation(AnnTypeVariableClass8.class);
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().declaration().isInterface();
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().declaration().name().equals("java.lang.CharSequence");
+
+        assertType(clazz.typeParameters().get(0), Type.Kind.TYPE_VARIABLE);
+        assertType(clazz.typeParameters().get(1), Type.Kind.TYPE_VARIABLE);
+        assertType(clazz.typeParameters().get(2), Type.Kind.TYPE_VARIABLE);
+        assertType(clazz.typeParameters().get(3), Type.Kind.TYPE_VARIABLE);
     }
 
     private static void verifyConstructor(ClassInfo clazz) {
@@ -359,6 +366,8 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.parameters().get(0).type().asClass().annotations().size() == 1;
         assert method.parameters().get(0).type().asClass().hasAnnotation(AnnMethodParameter.class);
         assert method.parameters().get(0).type().asClass().declaration().name().equals("java.lang.String");
+
+        assertType(method.returnType(), Type.Kind.VOID);
     }
 
     private static void verifyPrimitiveField(ClassInfo clazz) {
@@ -373,6 +382,8 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert field.type().asPrimitive().annotations().size() == 1;
         assert field.type().asPrimitive().hasAnnotation(AnnPrimitiveField.class);
         assert field.type().asPrimitive().primitiveKind() == PrimitiveType.PrimitiveKind.INT;
+
+        assertType(field.type(), Type.Kind.PRIMITIVE);
     }
 
     private static void verifyClassField(ClassInfo clazz) {
@@ -387,6 +398,8 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert field.type().asClass().annotations().size() == 1;
         assert field.type().asClass().hasAnnotation(AnnClassField.class);
         assert field.type().asClass().declaration().name().equals("java.lang.String");
+
+        assertType(field.type(), Type.Kind.CLASS);
     }
 
     private static void verifyArrayField(ClassInfo clazz) {
@@ -436,6 +449,8 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert type.asClass().annotations().size() == 1;
         assert type.asClass().hasAnnotation(AnnArrayField4.class);
         assert type.asClass().declaration().name().equals("java.lang.String");
+
+        assertType(field.type(), Type.Kind.ARRAY);
     }
 
     private static void verifyParameterizedField(ClassInfo clazz) {
@@ -476,6 +491,8 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert typearg3.asTypeVariable().annotations().size() == 1;
         assert typearg3.asTypeVariable().hasAnnotation(AnnParameterizedField4.class);
         assert typearg3.asTypeVariable().name().equals("A");
+
+        assertType(field.type(), Type.Kind.PARAMETERIZED_TYPE);
     }
 
     private static void verifyTypeVariableField(ClassInfo clazz) {
@@ -494,6 +511,8 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert field.type().asTypeVariable().bounds().size() == 1;
         assert field.type().asTypeVariable().bounds().get(0).isTypeVariable();
         assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().name().equals("A");
+
+        assertType(field.type(), Type.Kind.TYPE_VARIABLE);
     }
 
     private static void verifyTypeVariableMethod(ClassInfo clazz) {
@@ -555,6 +574,11 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().annotations().size() == 1;
         assert method.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().hasAnnotation(AnnTypeVariableMethod8.class);
         assert method.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().declaration().name().equals("java.lang.CharSequence");
+
+        assertType(method.typeParameters().get(0), Type.Kind.TYPE_VARIABLE);
+        assertType(method.typeParameters().get(1), Type.Kind.TYPE_VARIABLE);
+        assertType(method.typeParameters().get(2), Type.Kind.TYPE_VARIABLE);
+        assertType(method.typeParameters().get(3), Type.Kind.TYPE_VARIABLE);
     }
 
     private static void verifyWildcardMethod(ClassInfo clazz) {
@@ -624,5 +648,10 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asClass().hasAnnotation(AnnWildcardMethod7.class);
         assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asClass().declaration().name().equals("java.lang.Object");
         assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound() == null;
+
+        assertType(method.parameters().get(0).type().asParameterizedType().typeArguments().get(0), Type.Kind.WILDCARD_TYPE);
+        assertType(method.parameters().get(1).type().asParameterizedType().typeArguments().get(0), Type.Kind.WILDCARD_TYPE);
+        assertType(method.parameters().get(2).type().asParameterizedType().typeArguments().get(0), Type.Kind.WILDCARD_TYPE);
+        assertType(method.parameters().get(3).type().asParameterizedType().typeArguments().get(0), Type.Kind.WILDCARD_TYPE);
     }
 }

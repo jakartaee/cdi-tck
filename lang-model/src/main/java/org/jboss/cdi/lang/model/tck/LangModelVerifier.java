@@ -24,6 +24,8 @@ import java.lang.annotation.RetentionPolicy;
 public class LangModelVerifier {
     AnnotatedTypes annotatedTypes;
     AnnotatedSuperTypes annotatedSuperTypes;
+    AnnotatedThrowsTypes annotatedThrowsTypes;
+    AnnotatedReceiverTypes annotatedReceiverTypes;
     AnnotationInstances annotationInstances;
 
     PlainClassMembers plainClassMembers;
@@ -32,10 +34,15 @@ public class LangModelVerifier {
     EnumMembers enumMembers;
     // TODO records -- but how?
 
-    PrimitiveTypes primitiveTypes;
-
     InheritedMethods inheritedMethods;
     InheritedFields inheritedFields;
+    InheritedAnnotations inheritedAnnotations;
+
+    PrimitiveTypes primitiveTypes;
+    BridgeMethods bridgeMethods;
+    RepeatableAnnotations repeatableAnnotations;
+    DefaultConstructors defaultConstructors;
+    Equality equality;
 
     /**
      * To run the language model TCK, this method must be called with a {@code ClassInfo} object
@@ -46,28 +53,33 @@ public class LangModelVerifier {
         ensureAssertionsEnabled();
         ensureOnlyRuntimeAnnotations(clazz);
 
-        // some classes have an extra Verifier nested class so that verification methods do not interfere
-        // with "regular" methods whose presence is tested
+        // some classes have an extra Verifier nested class so that the verification methods
+        // do not interfere with "regular" methods whose presence is tested
 
-        AnnotatedTypes.verify(classOfField(clazz, "annotatedTypes"));
-        AnnotatedSuperTypes.verify(classOfField(clazz, "annotatedSuperTypes"));
-        AnnotationInstances.verify(classOfField(clazz, "annotationInstances"));
+        AnnotatedTypes.verify(LangModelUtils.classOfField(clazz, "annotatedTypes"));
+        AnnotatedSuperTypes.verify(LangModelUtils.classOfField(clazz, "annotatedSuperTypes"));
+        AnnotatedThrowsTypes.verify(LangModelUtils.classOfField(clazz, "annotatedThrowsTypes"));
+        AnnotatedReceiverTypes.verify(LangModelUtils.classOfField(clazz, "annotatedReceiverTypes"));
+        AnnotationInstances.verify(LangModelUtils.classOfField(clazz, "annotationInstances"));
 
-        PlainClassMembers.Verifier.verify(classOfField(clazz, "plainClassMembers"));
-        InterfaceMembers.Verifier.verify(classOfField(clazz, "interfaceMembers"));
-        AnnotationMembers.Verifier.verify(classOfField(clazz, "annotationMembers"));
-        EnumMembers.Verifier.verify(classOfField(clazz, "enumMembers"));
+        PlainClassMembers.Verifier.verify(LangModelUtils.classOfField(clazz, "plainClassMembers"));
+        InterfaceMembers.Verifier.verify(LangModelUtils.classOfField(clazz, "interfaceMembers"));
+        AnnotationMembers.Verifier.verify(LangModelUtils.classOfField(clazz, "annotationMembers"));
+        EnumMembers.Verifier.verify(LangModelUtils.classOfField(clazz, "enumMembers"));
 
-        PrimitiveTypes.verify(classOfField(clazz, "primitiveTypes"));
+        InheritedMethods.Verifier.verify(LangModelUtils.classOfField(clazz, "inheritedMethods"));
+        InheritedFields.Verifier.verify(LangModelUtils.classOfField(clazz, "inheritedFields"));
+        InheritedAnnotations.verify(LangModelUtils.classOfField(clazz, "inheritedAnnotations"));
 
-        InheritedMethods.Verifier.verify(classOfField(clazz, "inheritedMethods"));
-        InheritedFields.Verifier.verify(classOfField(clazz, "inheritedFields"));
+        PrimitiveTypes.verify(LangModelUtils.classOfField(clazz, "primitiveTypes"));
+        BridgeMethods.verify(LangModelUtils.classOfField(clazz, "bridgeMethods"));
+        RepeatableAnnotations.verify(LangModelUtils.classOfField(clazz, "repeatableAnnotations"));
+        DefaultConstructors.verify(LangModelUtils.classOfField(clazz, "defaultConstructors"));
+        Equality.verify(LangModelUtils.classOfField(clazz, "equality"));
 
         verifyPackageAnnotation(clazz);
-    }
 
-    private static ClassInfo classOfField(ClassInfo clazz, String fieldName) {
-        return LangModelUtils.singleField(clazz, fieldName).type().asClass().declaration();
+        System.out.println(LangModelVerifier.class.getSimpleName() + " succeeded");
     }
 
     private static void ensureAssertionsEnabled() {
@@ -98,5 +110,10 @@ public class LangModelVerifier {
         assert pkg.annotation(AnnPackage.class).hasValue();
         assert pkg.annotation(AnnPackage.class).value().isString();
         assert pkg.annotation(AnnPackage.class).value().asString().equals("lang-model-tck");
+        assert pkg.repeatableAnnotation(AnnPackage.class).size() == 1;
+
+        assert !pkg.hasAnnotation(MissingAnnotation.class);
+        assert pkg.annotation(MissingAnnotation.class) == null;
+        assert pkg.repeatableAnnotation(MissingAnnotation.class).isEmpty();
     }
 }
