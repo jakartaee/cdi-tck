@@ -9,16 +9,6 @@ import java.lang.reflect.Modifier;
 import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertField;
 
 @Retention(RetentionPolicy.RUNTIME)
-@interface SimpleAnnotation {
-    String value();
-}
-
-enum SimpleEnum {
-    YES,
-    NO,
-}
-
-@Retention(RetentionPolicy.RUNTIME)
 public @interface AnnotationMembers {
     // fields
 
@@ -87,21 +77,25 @@ public @interface AnnotationMembers {
         }
 
         private static void verifyFields(ClassInfo clazz) {
-            assert clazz.fields().size() == 8; // no field declarations are inherited from java.lang.Annotation
+            // 8 explicitly declared fields
+            // no fields present on the `java.lang.Annotation` superinterface
+            assert clazz.fields().size() == 8;
 
-            assertField(clazz, "publicStaticFinalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "publicStaticField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "publicFinalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "publicField", Modifier.PUBLIC, true, true);
+            assertField(clazz, "publicStaticFinalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "publicStaticField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "publicFinalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "publicField", Modifier.PUBLIC, true, true, true);
 
-            assertField(clazz, "staticFinalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "staticField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "finalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "field", Modifier.PUBLIC, true, true);
+            assertField(clazz, "staticFinalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "staticField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "finalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "field", Modifier.PUBLIC, true, true, true);
         }
 
         private static void verifyMethods(ClassInfo clazz) {
-            assert clazz.methods().size() >= 24; // some method declarations are inherited from java.lang.Annotation
+            // 24 explicitly declared methods
+            // some method declarations are inherited from java.lang.Annotation
+            assert clazz.methods().size() >= 24;
 
             // just verify that the methods can be found
 

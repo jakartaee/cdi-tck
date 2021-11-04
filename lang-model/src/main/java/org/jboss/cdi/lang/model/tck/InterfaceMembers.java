@@ -54,20 +54,22 @@ public interface InterfaceMembers {
         }
 
         private static void verifyFields(ClassInfo clazz) {
+            // 8 explicitly declared fields
             assert clazz.fields().size() == 8;
 
-            assertField(clazz, "publicStaticFinalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "publicStaticField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "publicFinalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "publicField", Modifier.PUBLIC, true, true);
+            assertField(clazz, "publicStaticFinalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "publicStaticField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "publicFinalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "publicField", Modifier.PUBLIC, true, true, true);
 
-            assertField(clazz, "staticFinalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "staticField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "finalField", Modifier.PUBLIC, true, true);
-            assertField(clazz, "field", Modifier.PUBLIC, true, true);
+            assertField(clazz, "staticFinalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "staticField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "finalField", Modifier.PUBLIC, true, true, true);
+            assertField(clazz, "field", Modifier.PUBLIC, true, true, true);
         }
 
         private static void verifyMethods(ClassInfo clazz) {
+            // 8 explicitly declared methods
             assert clazz.methods().size() == 8;
 
             assertMethod(clazz, "publicStaticMethod", Modifier.PUBLIC, true, false, false);
