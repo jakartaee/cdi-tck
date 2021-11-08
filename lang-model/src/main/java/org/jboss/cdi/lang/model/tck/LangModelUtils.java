@@ -51,10 +51,10 @@ class LangModelUtils {
         return result;
     }
 
-    static Collection<FieldInfo> collectFields(ClassInfo clazz, String methodName) {
+    static Collection<FieldInfo> collectFields(ClassInfo clazz, String name) {
         List<FieldInfo> result = new ArrayList<>();
         for (FieldInfo field : clazz.fields()) {
-            if (field.name().equals(methodName)) {
+            if (field.name().equals(name)) {
                 result.add(field);
             }
         }
@@ -99,10 +99,10 @@ class LangModelUtils {
         return result;
     }
 
-    static Collection<MethodInfo> collectMethods(ClassInfo clazz, String methodName) {
+    static Collection<MethodInfo> collectMethods(ClassInfo clazz, String name) {
         List<MethodInfo> result = new ArrayList<>();
         for (MethodInfo method : clazz.methods()) {
-            if (method.name().equals(methodName)) {
+            if (method.name().equals(name)) {
                 result.add(method);
             }
         }

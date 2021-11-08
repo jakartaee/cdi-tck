@@ -68,16 +68,13 @@ public class AnnotatedReceiverTypes<T> {
     private static void verifyMethodWithReceiverOnGenericClass(ClassInfo clazz) {
         MethodInfo method = LangModelUtils.singleMethod(clazz, "methodWithReceiver");
 
+        // reflection returns `AnnotatedType` which is not `AnnotatedParameterizedType`,
+        // so here, we expect the same -- `ClassType`, not `ParameterizedType`
         assert method.receiverType() != null;
-        // TODO need to check!
         assert method.receiverType().isClass();
         assert method.receiverType().asClass().annotations().size() == 1;
         assert method.receiverType().asClass().hasAnnotation(AnnReceiver1.class);
         assert method.receiverType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
-        //assert method.receiverType().isParameterizedType();
-        //assert method.receiverType().asParameterizedType().annotations().size() == 1;
-        //assert method.receiverType().asParameterizedType().hasAnnotation(AnnReceiver1.class);
-        //assert method.receiverType().asParameterizedType().declaration().name().equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
     }
 
     private static void verifyMethodWithReceiverOnClass(ClassInfo clazz) {
