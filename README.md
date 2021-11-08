@@ -19,6 +19,7 @@ Master branch contains the work-in-progress on CDI TCK 4.0
 * ext-lib - A sample library used by some integration tests
 * ide-configs - useful settings for Eclipse and Intellij IDEs
 * impl - The core set of tests, excluding those that depend on web and full platform containers
+* lang-model - A standalone test suite for the CDI language model; see its [README](./lang-model/README.adoc)
 * web - The extra tests that depend on the web and full platform
 * README.md - this doc
 * README-list.adoc - Notes on changes being introduced by the CDI-lite effort

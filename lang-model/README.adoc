@@ -1,0 +1,32 @@
+= CDI Language Model TCK
+
+The Language Model TCK does not depend on any test framework or test runner.
+Assertions are made using Java `assert`.
+The tests are executed in an implementation-defined manner.
+
+To run the Language Model TCK, implementations must call the `org.jboss.cdi.lang.model.tck.LangModelVerifier#verify()` static method and pass it a `ClassInfo` object for the `LangModelVerifier` class.
+The way how this method is called and how the `ClassInfo` object is obtained are not specified, so that implementations are free to use whatever works best for them.
+Two conditions must be satisfied:
+
+- assertions are enabled;
+- the language model under test is configured to only return runtime-retained annotations.
+
+If the `verify` method returns successfully, the TCK passed.
+If it throws an exception, the TCK failed.
+
+To aid with debugging, the `verify` method prints a message to the JVM standard output in case of a success.
+
+== Recommendation
+
+For CDI implementations, it is easiest to run the Language Model TCK using a build compatible extension.
+For example:
+
+[source,java]
+----
+public class LangModelVerifierExtension implements BuildCompatibleExtension {
+    @Enhancement(types = LangModelVerifier.class, withAnnotations = Annotation.class)
+    public void run(ClassInfo clazz) {
+        LangModelVerifier.verify(clazz);
+    }
+}
+----
