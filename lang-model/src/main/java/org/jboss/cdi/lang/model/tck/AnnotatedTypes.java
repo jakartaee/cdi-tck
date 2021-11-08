@@ -20,45 +20,54 @@ import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertType
 @interface AnnClass {
 }
 
-// TYPE is probably useless here
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableClass1 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableClass2 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableClass3 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableClass4 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableClass5 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableClass6 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableClass7 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableClass8 {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE_USE)
+@interface AnnTypeVariableClass9 {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE_USE)
+@interface AnnTypeVariableClass10 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
@@ -136,80 +145,78 @@ import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertType
 @interface AnnTypeVariableField {
 }
 
-// METHOD is probably useless here
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableMethod1 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableMethod2 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableMethod3 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableMethod4 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableMethod5 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableMethod6 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableMethod7 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnTypeVariableMethod8 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.PARAMETER, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnWildcardMethod1 {
 }
 
-// PARAMETER is probably useless here
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.PARAMETER, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnWildcardMethod2 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.PARAMETER, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnWildcardMethod3 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.PARAMETER, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnWildcardMethod4 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.PARAMETER, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnWildcardMethod5 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.PARAMETER, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnWildcardMethod6 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.PARAMETER, ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
+@Target(ElementType.TYPE_USE)
 @interface AnnWildcardMethod7 {
 }
 
@@ -217,7 +224,8 @@ import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertType
 public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         @AnnTypeVariableClass2 B extends @AnnTypeVariableClass3 A,
         @AnnTypeVariableClass4 C extends @AnnTypeVariableClass5 Number,
-        @AnnTypeVariableClass6 D extends @AnnTypeVariableClass7 Number & @AnnTypeVariableClass8 CharSequence> {
+        @AnnTypeVariableClass6 D extends @AnnTypeVariableClass7 Number & @AnnTypeVariableClass8 CharSequence,
+        @AnnTypeVariableClass9 E extends @AnnTypeVariableClass10 C> {
 
     @AnnConstructor
     AnnotatedTypes(@AnnConstructorParameter String parameter) {
@@ -270,7 +278,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
     }
 
     private static void verifyTypeParameters(ClassInfo clazz) {
-        assert clazz.typeParameters().size() == 4;
+        assert clazz.typeParameters().size() == 5;
 
         // @AnnTypeVariableClass1 A
         assert clazz.typeParameters().get(0).isTypeVariable();
@@ -320,10 +328,28 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().declaration().isInterface();
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().declaration().name().equals("java.lang.CharSequence");
 
+        // @AnnTypeVariableClass9 E extends @AnnTypeVariableClass10 C
+        assert clazz.typeParameters().get(4).isTypeVariable();
+        assert clazz.typeParameters().get(4).asTypeVariable().annotations().size() == 1;
+        assert clazz.typeParameters().get(4).asTypeVariable().hasAnnotation(AnnTypeVariableClass9.class);
+        assert clazz.typeParameters().get(4).asTypeVariable().name().equals("E");
+        assert clazz.typeParameters().get(4).asTypeVariable().bounds().size() == 1;
+        assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).isTypeVariable();
+        assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().annotations().size() == 1;
+        assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().hasAnnotation(AnnTypeVariableClass10.class);
+        assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().name().equals("C");
+        assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().size() == 1;
+        assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).isClass();
+        // TODO need to check! reflection does return an annotation here
+        //assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().annotations().size() == 1;
+        //assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().hasAnnotation(AnnTypeVariableClass5.class);
+        assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().declaration().name().equals("java.lang.Number");
+
         assertType(clazz.typeParameters().get(0), Type.Kind.TYPE_VARIABLE);
         assertType(clazz.typeParameters().get(1), Type.Kind.TYPE_VARIABLE);
         assertType(clazz.typeParameters().get(2), Type.Kind.TYPE_VARIABLE);
         assertType(clazz.typeParameters().get(3), Type.Kind.TYPE_VARIABLE);
+        assertType(clazz.typeParameters().get(4), Type.Kind.TYPE_VARIABLE);
     }
 
     private static void verifyConstructor(ClassInfo clazz) {
@@ -334,9 +360,13 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // AnnotatedTypes(@AnnConstructorParameter String parameter)
         assert ctor.annotations().size() == 1;
         assert ctor.hasAnnotation(AnnConstructor.class);
-        // TODO need to check!
-        //assert ctor.returnType().annotations().size() == 1;
-        //assert ctor.returnType().hasAnnotation(AnnConstructor.class);
+        assert !ctor.hasAnnotation(MissingAnnotation.class);
+
+        assert ctor.returnType().isClass();
+        assert ctor.returnType().asClass().declaration().equals(clazz);
+        assert ctor.returnType().annotations().size() == 1;
+        assert ctor.returnType().hasAnnotation(AnnConstructor.class);
+
         assert ctor.parameters().size() == 1;
         assert ctor.parameters().get(0).annotations().size() == 1;
         assert ctor.parameters().get(0).hasAnnotation(AnnConstructorParameter.class);
@@ -353,11 +383,12 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // void voidMethod(@AnnMethodParameter String parameter)
         assert method.annotations().size() == 1;
         assert method.hasAnnotation(AnnVoidMethod.class);
+        assert !method.hasAnnotation(MissingAnnotation.class);
 
+        // a type annotation does not apply to the `void` pseudotype per JLS
         assert method.returnType().isVoid();
-        // TODO need to check!
-        //assert method.returnType().annotations().size() == 1;
-        //assert method.returnType().hasAnnotation(AnnVoidMethod.class);
+        assert method.returnType().annotations().isEmpty();
+        assert !method.returnType().hasAnnotation(AnnVoidMethod.class);
 
         assert method.parameters().size() == 1;
         assert method.parameters().get(0).annotations().size() == 1;
@@ -377,6 +408,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // int primitiveField
         assert field.annotations().size() == 1;
         assert field.hasAnnotation(AnnPrimitiveField.class);
+        assert !field.hasAnnotation(MissingAnnotation.class);
 
         assert field.type().isPrimitive();
         assert field.type().asPrimitive().annotations().size() == 1;
@@ -393,6 +425,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // String classField
         assert field.annotations().size() == 1;
         assert field.hasAnnotation(AnnClassField.class);
+        assert !field.hasAnnotation(MissingAnnotation.class);
 
         assert field.type().isClass();
         assert field.type().asClass().annotations().size() == 1;
@@ -409,6 +442,10 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // String[] @AnnArrayField1 [][] @AnnArrayField2 [][] @AnnArrayField3 [] arrayField
         assert field.annotations().size() == 1;
         assert field.hasAnnotation(AnnArrayField4.class);
+        assert !field.hasAnnotation(AnnArrayField3.class);
+        assert !field.hasAnnotation(AnnArrayField2.class);
+        assert !field.hasAnnotation(AnnArrayField1.class);
+        assert !field.hasAnnotation(MissingAnnotation.class);
 
         // @AnnArrayField4 String [] @AnnArrayField1 [][] @AnnArrayField2 [][] @AnnArrayField3 []
         Type type = field.type();
@@ -460,6 +497,10 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // List<@AnnParameterizedField2 Map<@AnnParameterizedField3 String, @AnnParameterizedField4 A>> parameterizedField
         assert field.annotations().size() == 1;
         assert field.hasAnnotation(AnnParameterizedField1.class);
+        assert !field.hasAnnotation(AnnParameterizedField2.class);
+        assert !field.hasAnnotation(AnnParameterizedField3.class);
+        assert !field.hasAnnotation(AnnParameterizedField4.class);
+        assert !field.hasAnnotation(MissingAnnotation.class);
 
         // @AnnParameterizedField1 List<@AnnParameterizedField2 Map<@AnnParameterizedField3 String, @AnnParameterizedField4 A>>
         assert field.type().isParameterizedType();
@@ -502,21 +543,29 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // B typeVariableField
         assert field.annotations().size() == 1;
         assert field.hasAnnotation(AnnTypeVariableField.class);
+        assert !field.hasAnnotation(MissingAnnotation.class);
 
         assert field.type().isTypeVariable();
         assert field.type().asTypeVariable().annotations().size() == 1;
         assert field.type().asTypeVariable().hasAnnotation(AnnTypeVariableField.class);
         assert field.type().asTypeVariable().name().equals("B");
-        // TODO need to check!
         assert field.type().asTypeVariable().bounds().size() == 1;
         assert field.type().asTypeVariable().bounds().get(0).isTypeVariable();
+        assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().annotations().isEmpty();
         assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().name().equals("A");
+        assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().bounds().size() == 1;
+        assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).isClass();
+        assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().annotations().isEmpty();
+        assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().declaration().name().equals("java.lang.Object");
 
         assertType(field.type(), Type.Kind.TYPE_VARIABLE);
     }
 
     private static void verifyTypeVariableMethod(ClassInfo clazz) {
         MethodInfo method = LangModelUtils.singleMethod(clazz, "typeVariableMethod");
+
+        assert method.annotations().isEmpty();
+        assert !method.hasAnnotation(MissingAnnotation.class);
 
         // <@AnnTypeVariableMethod1 T,
         //     @AnnTypeVariableMethod2 U extends @AnnTypeVariableMethod3 C,
@@ -544,9 +593,11 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().annotations().size() == 1;
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().hasAnnotation(AnnTypeVariableMethod3.class);
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().name().equals("C");
-        // TODO need to check!
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().size() == 1;
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).isClass();
+        // TODO need to check! reflection does return an annotation here
+        //assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().annotations().size() == 1;
+        //assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().hasAnnotation(AnnTypeVariableClass5.class);
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().declaration().name().equals("java.lang.Number");
 
         // @AnnTypeVariableMethod4 V extends @AnnTypeVariableMethod5 Number
@@ -583,6 +634,9 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
 
     private static void verifyWildcardMethod(ClassInfo clazz) {
         MethodInfo method = LangModelUtils.singleMethod(clazz, "wildcardMethod");
+
+        assert method.annotations().isEmpty();
+        assert !method.hasAnnotation(MissingAnnotation.class);
 
         // void wildcardMethod(
         //     List<@AnnWildcardMethod1 ? extends @AnnWildcardMethod2 D> p1,
