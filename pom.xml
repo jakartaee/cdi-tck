@@ -100,7 +100,7 @@
         <cdi.api.version>4.0.0.Beta2</cdi.api.version>
         <maven.compiler.release>11</maven.compiler.release>
         <!-- Jakarta EE APIs Core -->
-        <annotations.api.version>2.0.0</annotations.api.version>
+        <annotations.api.version>2.1.0-B1</annotations.api.version>
         <interceptors.api.version>2.0.0</interceptors.api.version>
         <atinject.api.version>2.0.0</atinject.api.version>
         <el.api.version>4.0.0</el.api.version>
