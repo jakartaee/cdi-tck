@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.shrinkwrap;
 
+import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
 import jakarta.enterprise.inject.spi.Extension;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -222,6 +223,16 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withExtensions(Class<? extends Extension>... extensionClasses) {
         return withServiceProvider(new ServiceProviderDescriptor(Extension.class, extensionClasses));
+    }
+
+    /**
+     * Add CDI build compatible extension. This method does not add the specified extension class to the archive.
+     *
+     * @param extensionClass
+     * @return self
+     */
+    public T withBuildCompatibleExtension(Class<? extends BuildCompatibleExtension> extensionClass) {
+        return withServiceProvider(new ServiceProviderDescriptor(BuildCompatibleExtension.class, extensionClass));
     }
 
     /**
