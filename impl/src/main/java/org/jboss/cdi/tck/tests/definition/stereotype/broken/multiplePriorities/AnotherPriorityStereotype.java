@@ -1,7 +1,8 @@
-package org.jboss.cdi.tck.tests.definition.stereotype.priority;
+package org.jboss.cdi.tck.tests.definition.stereotype.broken.multiplePriorities;
 
 import jakarta.annotation.Priority;
 import jakarta.enterprise.inject.Stereotype;
+import org.jboss.cdi.tck.tests.definition.stereotype.priority.PriorityStereotype;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
