@@ -63,11 +63,4 @@ public class StereotypeWithPriorityTest extends AbstractTest {
         // injected Charlie should be instance of CharlieAlternative
         assertEquals(charlie.ping(), CharlieAlternative.class.getSimpleName());
     }
-
-    @Test
-    //@SpecAssertion(section = "TODO", id = "TODO")
-    public void testSeveralPrioritiesInSingleStereotypeHierarchy() {
-        // injected Delta should be instance of DeltaAlt2
-        assertEquals(delta.ping(), DeltaAlt2.class.getSimpleName());
-    }
 }

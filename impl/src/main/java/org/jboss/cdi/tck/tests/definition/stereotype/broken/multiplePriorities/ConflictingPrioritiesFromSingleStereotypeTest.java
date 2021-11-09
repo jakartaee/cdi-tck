@@ -11,21 +11,24 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+/**
+ * A single stereotype which indirectly declares multiple different priorities.
+ */
 @SpecVersion(spec = "cdi", version = "4.0")
-public class ConflictingPriorityStereotypesTest extends AbstractTest {
+public class ConflictingPrioritiesFromSingleStereotypeTest extends AbstractTest {
 
     @Deployment
     @ShouldThrowException(DefinitionException.class)
     public static WebArchive deploy() {
-        return new WebArchiveBuilder().withTestClass(ConflictingPriorityStereotypesTest.class)
-                .withClasses(PriorityStereotype.class, SomeBean.class, PriorityStereotype2.class)
+        return new WebArchiveBuilder().withTestClass(ConflictingPrioritiesFromSingleStereotypeTest.class)
+                .withClasses(SomeOtherBean.class, AnotherPriorityStereotype.class, PriorityStereotype.class)
                 .withBeansXml(new BeansXml())
                 .build();
     }
 
     @Test
     //@SpecAssertion(section = "TODO", id = "TODO")
-    public void testConflictingPrioritiesFromStereotypes() {
+    public void testConflictingPrioritiesFromStereotype() {
         // test should throw an exception
     }
 }
