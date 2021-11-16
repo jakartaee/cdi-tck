@@ -242,6 +242,8 @@ public final class PlainClassMembers extends PlainAbstractClass {
             assert !ctor.isFinal();
 
             assert ctor.returnType().asClass().declaration().equals(clazz);
+
+            assert ctor.parameters().size() == 1;
         }
 
         static void assertType(Type type, Type.Kind expectedKind) {

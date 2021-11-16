@@ -91,17 +91,79 @@ public class InheritedMethods extends SuperClassWithMethods implements SuperInte
             assert clazz.methods().size() == 19;
 
             assert LangModelUtils.collectMethods(clazz, "interfaceStaticMethod1").size() == 2;
+            assert LangModelUtils.collectMethods(clazz, "interfaceStaticMethod1").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperSuperInterfaceWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "interfaceStaticMethod1").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperInterfaceWithMethods"))
+                    .count() == 1;
+
             assert LangModelUtils.collectMethods(clazz, "interfaceStaticMethod2").size() == 2;
+            assert LangModelUtils.collectMethods(clazz, "interfaceStaticMethod2").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperSuperInterfaceWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "interfaceStaticMethod2").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperInterfaceWithMethods"))
+                    .count() == 1;
 
             assert LangModelUtils.collectMethods(clazz, "interfaceMethod1").size() == 3;
+            assert LangModelUtils.collectMethods(clazz, "interfaceMethod1").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperSuperInterfaceWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "interfaceMethod1").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperInterfaceWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "interfaceMethod1").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("InheritedMethods"))
+                    .count() == 1;
+
             assert LangModelUtils.collectMethods(clazz, "interfaceMethod2").size() == 3;
+            assert LangModelUtils.collectMethods(clazz, "interfaceMethod2").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperSuperInterfaceWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "interfaceMethod2").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperInterfaceWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "interfaceMethod2").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("InheritedMethods"))
+                    .count() == 1;
+
             assert LangModelUtils.collectMethods(clazz, "interfaceMethod3").size() == 2;
+            assert LangModelUtils.collectMethods(clazz, "interfaceMethod3").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperSuperInterfaceWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "interfaceMethod3").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperInterfaceWithMethods"))
+                    .count() == 1;
 
             assert LangModelUtils.collectMethods(clazz, "staticMethod").size() == 2;
+            assert LangModelUtils.collectMethods(clazz, "staticMethod").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperSuperClassWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "staticMethod").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperClassWithMethods"))
+                    .count() == 1;
 
             assert LangModelUtils.collectMethods(clazz, "instanceMethod1").size() == 2;
+            assert LangModelUtils.collectMethods(clazz, "instanceMethod1").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperSuperClassWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "instanceMethod1").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperClassWithMethods"))
+                    .count() == 1;
+
             assert LangModelUtils.collectMethods(clazz, "instanceMethod2").size() == 2;
+            assert LangModelUtils.collectMethods(clazz, "instanceMethod2").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperSuperClassWithMethods"))
+                    .count() == 1;
+            assert LangModelUtils.collectMethods(clazz, "instanceMethod2").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("SuperClassWithMethods"))
+                    .count() == 1;
+
             assert LangModelUtils.collectMethods(clazz, "instanceMethod3").size() == 1;
+            assert LangModelUtils.collectMethods(clazz, "instanceMethod3").stream()
+                    .filter(it -> it.declaringClass().simpleName().equals("InheritedMethods"))
+                    .count() == 1;
         }
     }
 }
