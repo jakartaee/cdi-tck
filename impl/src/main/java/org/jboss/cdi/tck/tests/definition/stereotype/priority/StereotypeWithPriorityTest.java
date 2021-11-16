@@ -33,9 +33,6 @@ public class StereotypeWithPriorityTest extends AbstractTest {
     @Inject
     Charlie charlie;
 
-    @Inject
-    Delta delta;
-
     @Test
     //@SpecAssertion(section = "TODO", id = "TODO")
     public void testStereotypeWithPriority() {

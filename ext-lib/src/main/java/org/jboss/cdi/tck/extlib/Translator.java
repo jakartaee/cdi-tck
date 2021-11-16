@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.extlib;
 
+import jakarta.enterprise.context.Dependent;
+
 @Strict
+@Dependent
 public class Translator {
     
     public String echo(String text) {

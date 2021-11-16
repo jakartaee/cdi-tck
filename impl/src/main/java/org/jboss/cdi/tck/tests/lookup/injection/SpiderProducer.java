@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 
+@Dependent
 public class SpiderProducer {
 
     @Produces

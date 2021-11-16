@@ -16,10 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.event.observer;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Alternative;
 
 @Alternative
+@Dependent
 public class DisabledObserver {
 
     static boolean wasNotified = false;
