@@ -16,7 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.event.parameterized;
 
+import jakarta.enterprise.context.ApplicationScoped;
+
 import java.util.List;
 
+@ApplicationScoped
 public class StringListObserver extends AbstractParameterizedObserver<List<String>> {
 }
