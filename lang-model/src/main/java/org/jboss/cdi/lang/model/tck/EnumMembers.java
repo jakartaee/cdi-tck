@@ -1,19 +1,70 @@
 package org.jboss.cdi.lang.model.tck;
 
 import jakarta.enterprise.lang.model.declarations.ClassInfo;
+import jakarta.enterprise.lang.model.declarations.FieldInfo;
+import jakarta.enterprise.lang.model.declarations.MethodInfo;
 import jakarta.enterprise.lang.model.types.PrimitiveType;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Repeatable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.lang.reflect.Modifier;
 
 import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertConstructor;
 import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertField;
 import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertMethod;
 
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+@interface AnnEnumConstant1 {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+@interface AnnEnumConstant2 {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@interface AnnEnumConstructor1 {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@interface AnnEnumConstructor2 {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@interface AnnEnumConstructor3 {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@interface AnnEnumConstructor4 {
+}
+
+@Repeatable(AnnEnumConstructorRepeatableContainer.class)
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@interface AnnEnumConstructorRepeatable {
+    String value();
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@interface AnnEnumConstructorRepeatableContainer {
+    AnnEnumConstructorRepeatable[] value();
+}
+
 interface EnumInterface {
     void interfaceMethod();
 }
 
 public enum EnumMembers implements EnumInterface {
+    @AnnEnumConstant1
     FOO(true) {
         @Override
         public void publicMethod() {
@@ -35,6 +86,7 @@ public enum EnumMembers implements EnumInterface {
         protected void protectedAbstractMethod() {
         }
     },
+    @AnnEnumConstant2
     BAR(1) {
         @Override
         void packagePrivateMethod() {
@@ -108,8 +160,10 @@ public enum EnumMembers implements EnumInterface {
 
     // constructors
 
-    EnumMembers(boolean disambiguate) {}
-    private EnumMembers(int disambiguate) {}
+    @AnnEnumConstructor1
+    EnumMembers(@AnnEnumConstructor2 @AnnEnumConstructorRepeatable("foo") boolean disambiguate) {}
+    @AnnEnumConstructor3
+    private EnumMembers(@AnnEnumConstructor4 @AnnEnumConstructorRepeatable("bar") @AnnEnumConstructorRepeatable("baz") int disambiguate) {}
 
     // inherited
 
@@ -150,6 +204,16 @@ public enum EnumMembers implements EnumInterface {
             // 2 public static final fields implicitly declared, corresponding to enum constants
             // some field declarations are inherited from `java.lang.Enum`
             assert clazz.fields().size() >= 16 + 2;
+
+            FieldInfo fooConstant = LangModelUtils.singleField(clazz, "FOO");
+            assert fooConstant.annotations().size() == 1;
+            assert fooConstant.hasAnnotation(AnnEnumConstant1.class);
+            assert !fooConstant.hasAnnotation(MissingAnnotation.class);
+
+            FieldInfo barConstant = LangModelUtils.singleField(clazz, "BAR");
+            assert barConstant.annotations().size() == 1;
+            assert barConstant.hasAnnotation(AnnEnumConstant2.class);
+            assert !barConstant.hasAnnotation(MissingAnnotation.class);
 
             assertField(clazz, "FOO", Modifier.PUBLIC, true, true, false);
             assertField(clazz, "BAR", Modifier.PUBLIC, true, true, false);
@@ -216,6 +280,53 @@ public enum EnumMembers implements EnumInterface {
             // 2 explicitly declared constructors
             // constructors on the `java.lang.Enum` superclass are not returned
             assert clazz.constructors().size() == 2;
+
+            // enum constructors often have synthetic parameters, but the language model demands
+            // that these are _not_ presented; that is, both constructors have exactly 1 parameter
+
+            // @AnnEnumConstructor1
+            // EnumMembers(@AnnEnumConstructor2 @AnnEnumConstructorRepeatable("foo") boolean disambiguate) {}
+            MethodInfo ctor = clazz.constructors()
+                    .stream()
+                    .filter(it -> it.parameters().get(0).type().asPrimitive().primitiveKind() == PrimitiveType.PrimitiveKind.BOOLEAN)
+                    .findAny()
+                    .get();
+            assert ctor.annotations().size() == 1;
+            assert ctor.hasAnnotation(AnnEnumConstructor1.class);
+            assert !ctor.hasAnnotation(MissingAnnotation.class);
+            assert ctor.parameters().size() == 1;
+            assert ctor.parameters().get(0).annotations().size() == 2;
+            assert ctor.parameters().get(0).hasAnnotation(AnnEnumConstructor2.class);
+            assert ctor.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatable.class);
+            assert !ctor.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
+            assert ctor.parameters().get(0).repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 1;
+            assert ctor.parameters().get(0).type().annotations().size() == 2;
+            assert ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructor2.class);
+            assert ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatable.class);
+            assert !ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
+            assert ctor.parameters().get(0).type().repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 1;
+
+            // @AnnEnumConstructor3
+            // private EnumMembers(@AnnEnumConstructor4 @AnnEnumConstructorRepeatable("bar") @AnnEnumConstructorRepeatable("baz") int disambiguate) {}
+            MethodInfo ctor2 = clazz.constructors()
+                    .stream()
+                    .filter(it -> it.parameters().get(0).type().asPrimitive().primitiveKind() == PrimitiveType.PrimitiveKind.INT)
+                    .findAny()
+                    .get();
+            assert ctor2.annotations().size() == 1;
+            assert ctor2.hasAnnotation(AnnEnumConstructor3.class);
+            assert !ctor2.hasAnnotation(MissingAnnotation.class);
+            assert ctor2.parameters().size() == 1;
+            assert ctor2.parameters().get(0).annotations().size() == 2;
+            assert ctor2.parameters().get(0).hasAnnotation(AnnEnumConstructor4.class);
+            assert !ctor2.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatable.class);
+            assert ctor2.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
+            assert ctor2.parameters().get(0).repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 2;
+            assert ctor2.parameters().get(0).type().annotations().size() == 2;
+            assert ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructor4.class);
+            assert !ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatable.class);
+            assert ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
+            assert ctor2.parameters().get(0).type().repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 2;
 
             assertConstructor(clazz, PrimitiveType.PrimitiveKind.BOOLEAN, Modifier.PRIVATE);
             assertConstructor(clazz, PrimitiveType.PrimitiveKind.INT, Modifier.PRIVATE);
