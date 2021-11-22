@@ -787,8 +787,6 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert param3.asParameterizedType().typeArguments().get(0).isWildcardType();
         assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().annotations().size() == 1;
         assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().hasAnnotation(AnnWildcardMethod5.class);
-        // TODO this currently does NOT reflect the spec, but shows that perhaps the spec needs to be changed!
-        //assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound() == null;
         assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound() != null;
         assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().isClass();
         assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asClass().annotations().isEmpty();
@@ -796,7 +794,6 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound() == null;
 
         // List<@AnnWildcardMethod6 ? extends @AnnWildcardMethod7 Object> p4
-        // TODO this currently does NOT reflect the spec, but shows that perhaps the spec needs to be changed!
         Type param4 = method.parameters().get(3).type();
         assert param4.isParameterizedType();
         assert param4.asParameterizedType().typeArguments().size() == 1;
