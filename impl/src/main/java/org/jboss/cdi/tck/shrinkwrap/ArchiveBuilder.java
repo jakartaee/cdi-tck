@@ -118,6 +118,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     protected BeansXml beansDescriptor = null;
 
+    protected boolean includeBeansXml = true;
+
     protected ResourceDescriptor webXml = null;
 
     protected WebAppDescriptor webXmlDescriptor = null;
@@ -187,6 +189,18 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withBeansXml(BeansXml beansDescriptor) {
         this.beansDescriptor = beansDescriptor;
+        return self();
+    }
+
+    /**
+     * Suppresses adding the {@code beans.xml} descriptor to the archive.
+     * If this method is called, any previous or following calls to
+     * {@link #withBeansXml(String)} or {@link #withBeansXml(BeansXml)} are ignored.
+     *
+     * @return self
+     */
+    public T withoutBeansXml() {
+        this.includeBeansXml = false;
         return self();
     }
 
