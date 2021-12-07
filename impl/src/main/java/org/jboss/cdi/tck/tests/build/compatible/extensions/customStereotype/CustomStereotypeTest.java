@@ -9,6 +9,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 @SpecVersion(spec = "cdi", version = "4.0")
 public class CustomStereotypeTest extends AbstractTest {
@@ -27,5 +28,7 @@ public class CustomStereotypeTest extends AbstractTest {
     public void test() {
         assertEquals(ApplicationScoped.class, getUniqueBean(MyService.class).getScope());
         assertEquals("Hello!", getContextualReference(MyService.class).hello());
+
+        assertTrue(getBeans(NotDiscoveredBean.class).isEmpty());
     }
 }
