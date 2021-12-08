@@ -16,10 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.method;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Alternative;
 
 @Dependent
+@Alternative
+@Priority(1)
 public class StockWatcher {
 
     private static Class<?> observerClazz;
