@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.interceptors.invocation;
 
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @SuppressWarnings("serial")
-@SessionScoped
+@RequestScoped
 @AlmightyBinding
 public class Rye implements Serializable {
 

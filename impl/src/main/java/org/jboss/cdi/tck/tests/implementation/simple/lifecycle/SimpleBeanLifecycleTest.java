@@ -78,28 +78,6 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "b") })
-    public void testSerializeRequestScoped() throws Exception {
-        Cod codInstance = getContextualReference(Cod.class);
-
-        byte[] bytes = passivate(codInstance);
-        Object object = activate(bytes);
-        codInstance = (Cod) object;
-        assert getCurrentConfiguration().getBeans().isProxy(codInstance);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "b") })
-    public void testSerializeSessionScoped() throws Exception {
-        Bream instance = getContextualReference(Bream.class);
-
-        byte[] bytes = passivate(instance);
-        Object object = activate(bytes);
-        instance = (Bream) object;
-        assert getCurrentConfiguration().getBeans().isProxy(instance);
-    }
-
-    @Test
     @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "g")
     public void testQualifierTypeAnnotatedConstructor() {
         getContextualReference(Duck.class);

@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.context;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
 import jakarta.enterprise.context.ContextNotActiveException;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.context.spi.Contextual;
@@ -42,12 +43,12 @@ public class GetOnInactiveContextTest extends AbstractTest {
     @Test(expectedExceptions = { ContextNotActiveException.class })
     @SpecAssertion(section = CONTEXT, id = "m")
     public void testInvokingGetOnInactiveContextFails() {
-        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
-        assert sessionContext.isActive();
-        setContextInactive(sessionContext);
+        Context requestContext = getCurrentManager().getContext(RequestScoped.class);
+        assert requestContext.isActive();
+        setContextInactive(requestContext);
 
-        Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-        sessionContext.get(mySessionBean);
+        Contextual<MyRequestBean> myRequestBean = getBeans(MyRequestBean.class).iterator().next();
+        requestContext.get(myRequestBean);
     }
 
 }

@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.context;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.context.spi.Contextual;
 import jakarta.enterprise.context.spi.CreationalContext;
@@ -43,15 +44,15 @@ public class GetFromContextualTest extends AbstractTest {
     @Test
     @SpecAssertion(section = CONTEXT, id = "o")
     public void testGetMayNotCreateNewInstanceUnlessCreationalContextGiven() {
-        Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-        assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean) == null;
+        Contextual<MyRequestBean> myRequestBean = getBeans(MyRequestBean.class).iterator().next();
+        assert getCurrentManager().getContext(RequestScoped.class).get(myRequestBean) == null;
 
         Contextual<MyApplicationBean> myApplicationBean = getBeans(MyApplicationBean.class).iterator().next();
         assert getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean) == null;
 
         // Now try same operation with a CreationalContext
-        CreationalContext<MySessionBean> myCreationalContext = new MockCreationalContext<MySessionBean>();
-        assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, myCreationalContext) != null;
+        CreationalContext<MyRequestBean> myCreationalContext = new MockCreationalContext<MyRequestBean>();
+        assert getCurrentManager().getContext(RequestScoped.class).get(myRequestBean, myCreationalContext) != null;
 
         CreationalContext<MyApplicationBean> myOtherCreationalContext = new MockCreationalContext<MyApplicationBean>();
         assert getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean, myOtherCreationalContext) != null;

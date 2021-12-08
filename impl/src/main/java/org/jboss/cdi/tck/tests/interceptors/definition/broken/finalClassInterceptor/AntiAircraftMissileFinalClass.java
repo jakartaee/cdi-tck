@@ -18,9 +18,9 @@ package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterce
 
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 @FooBinding
-@SessionScoped
+@RequestScoped
 public final class AntiAircraftMissileFinalClass implements Serializable{
 }
