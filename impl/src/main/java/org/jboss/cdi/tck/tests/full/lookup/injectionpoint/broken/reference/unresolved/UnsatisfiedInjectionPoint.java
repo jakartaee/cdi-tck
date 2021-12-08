@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.reference.ambiguous;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint.broken.reference.unresolved;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
@@ -29,12 +29,13 @@ import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 
-public class AmbiguousInjectionPoint implements InjectionPoint {
+public class UnsatisfiedInjectionPoint implements InjectionPoint {
+
     private final Bean<SimpleBean> bean;
     private final Set<Annotation> bindings = new HashSet<Annotation>();
 
-    public AmbiguousInjectionPoint(Bean<SimpleBean> bean) {
-        this.bean = bean;
+    public UnsatisfiedInjectionPoint(Bean<SimpleBean> beanWithInjectionPoint) {
+        this.bean = beanWithInjectionPoint;
         bindings.add(Default.Literal.INSTANCE);
         bindings.add(Any.Literal.INSTANCE);
     }

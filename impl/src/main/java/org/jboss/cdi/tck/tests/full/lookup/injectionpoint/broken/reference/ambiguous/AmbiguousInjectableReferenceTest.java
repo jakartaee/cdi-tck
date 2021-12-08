@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.reference.ambiguous;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint.broken.reference.ambiguous;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTABLE_REFERENCE;
