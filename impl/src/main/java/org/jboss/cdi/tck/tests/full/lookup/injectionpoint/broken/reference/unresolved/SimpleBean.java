@@ -14,13 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.reference.unresolved;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint.broken.reference.unresolved;
 
 import jakarta.enterprise.context.Dependent;
 
 @Dependent
-public class InjectedBean {
-    public InjectedBean(String name) {
+public class SimpleBean {
+    private InjectedBean injectedBean;
 
+    public InjectedBean getInjectedBean() {
+        return injectedBean;
+    }
+
+    public void setInjectedBean(InjectedBean injectedBean) {
+        this.injectedBean = injectedBean;
     }
 }

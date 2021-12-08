@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.reference.ambiguous;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint.broken.reference.unresolved;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -54,7 +54,7 @@ public class AnnotatedInjectionField implements AnnotatedField<InjectedBean> {
     }
 
     @Override
-    public <T extends Annotation> Set<T> getAnnotations(Class<T> aClass) {
+    public <T extends Annotation> Set<T> getAnnotations(Class<T> annotationType) {
         return null;
     }
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injectionpoint.broken.reference.unresolved;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint.broken.reference.ambiguous;
 
 import jakarta.enterprise.context.Dependent;
 
