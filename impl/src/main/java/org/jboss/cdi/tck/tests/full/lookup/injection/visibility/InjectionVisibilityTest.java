@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.injection.visibility;
+package org.jboss.cdi.tck.tests.full.lookup.injection.visibility;
 
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_EE;
 import static org.testng.Assert.assertEquals;

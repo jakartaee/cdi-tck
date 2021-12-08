@@ -27,9 +27,9 @@ import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
 
 import java.lang.annotation.Annotation;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.AnnotationLiteral;
 
@@ -120,13 +120,13 @@ public class StereotypeDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "hhh")
     public void testStereotypeScopeIsOverriddenByInheritedScope() {
-        assert getBeans(Chihuahua.class).iterator().next().getScope().equals(SessionScoped.class);
+        assert getBeans(Chihuahua.class).iterator().next().getScope().equals(ApplicationScoped.class);
     }
 
     @Test
     @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "hhi")
     public void testStereotypeScopeIsOverriddenByIndirectlyInheritedScope() {
-        assert getBeans(MexicanChihuahua.class).iterator().next().getScope().equals(SessionScoped.class);
+        assert getBeans(MexicanChihuahua.class).iterator().next().getScope().equals(ApplicationScoped.class);
     }
 
 }

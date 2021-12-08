@@ -16,12 +16,12 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype;
 
+import jakarta.enterprise.context.ApplicationScoped;
+
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
-
 @AnimalStereotype
-@SessionScoped
+@ApplicationScoped
 public class ShortHairedDog implements Animal, Serializable {
 
     /**

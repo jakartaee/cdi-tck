@@ -14,21 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context;
+package org.jboss.cdi.tck.tests.full.lookup.injection.visibility;
+
+import jakarta.enterprise.context.Dependent;
 
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
+@Dependent
+public class Foo implements Serializable {
 
-@SessionScoped
-public class SimpleBeanA implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 5L;
 
-    @Inject
-    private SimpleBeanZ z;
-
-    public SimpleBeanZ getZ() {
-        return z;
-    }
 }

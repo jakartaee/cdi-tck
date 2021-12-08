@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context;
-
-import java.io.Serializable;
+package org.jboss.cdi.tck.tests.full.context;
 
 import jakarta.enterprise.context.SessionScoped;
+
+import java.io.Serializable;
 
 @SessionScoped
 class AnotherSessionBean implements Serializable {

@@ -1,6 +1,7 @@
 package org.jboss.cdi.tck.tests.full.implementation.simple.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
 
 import jakarta.enterprise.inject.Specializes;
@@ -46,6 +47,28 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
         assert bean == null;
         assert specializedBean != null;
         assert specializedBean.getBeanClass().getSuperclass().equals(Lion.class);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "b") })
+    public void testSerializeRequestScoped() throws Exception {
+        Cod codInstance = getContextualReference(Cod.class);
+
+        byte[] bytes = passivate(codInstance);
+        Object object = activate(bytes);
+        codInstance = (Cod) object;
+        assert getCurrentConfiguration().getBeans().isProxy(codInstance);
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "b") })
+    public void testSerializeSessionScoped() throws Exception {
+        Bream instance = getContextualReference(Bream.class);
+
+        byte[] bytes = passivate(instance);
+        Object object = activate(bytes);
+        instance = (Bream) object;
+        assert getCurrentConfiguration().getBeans().isProxy(instance);
     }
 
 }

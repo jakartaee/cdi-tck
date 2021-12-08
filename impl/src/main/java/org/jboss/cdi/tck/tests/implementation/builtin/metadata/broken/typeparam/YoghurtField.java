@@ -18,12 +18,12 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam
 
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.inject.Inject;
 
 @SuppressWarnings("serial")
-@SessionScoped
+@Dependent
 public class YoghurtField implements Serializable {
 
     @SuppressWarnings("unused")

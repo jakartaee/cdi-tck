@@ -16,16 +16,15 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes.producer.field;
 
-import jakarta.enterprise.context.ConversationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.Produces;
 
 @Dependent
 public class ProducerFieldWithTooManyScopeTypes_Broken {
     @Produces
-    @SessionScoped
-    @ConversationScoped
+    @Dependent
+    @ApplicationScoped
     @Word
     public String word = "producer_field";
 }

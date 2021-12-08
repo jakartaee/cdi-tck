@@ -18,10 +18,10 @@ package org.jboss.cdi.tck.tests.lookup.circular;
 
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
-@SessionScoped
+@RequestScoped
 public class Pig implements Serializable {
 
     private static final long serialVersionUID = 2445308247858178311L;

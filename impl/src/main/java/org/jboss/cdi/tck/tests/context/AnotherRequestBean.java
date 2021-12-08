@@ -18,17 +18,12 @@ package org.jboss.cdi.tck.tests.context;
 
 import java.io.Serializable;
 
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
+import jakarta.enterprise.context.RequestScoped;
 
-@SessionScoped
-public class SimpleBeanB implements Serializable {
+@RequestScoped
+class AnotherRequestBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Inject
-    private SimpleBeanZ z;
-
-    public SimpleBeanZ getZ() {
-        return z;
+    public void ping() {
     }
 }
