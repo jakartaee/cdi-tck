@@ -1,8 +1,6 @@
 # CDI TCK Development
 
 
-[![Travis CI Build Status](https://img.shields.io/travis/cdi-spec/cdi-tck/master.svg)](https://travis-ci.org/cdi-spec/cdi-tck)
-
 Check out the [TCK Reference Guide](https://eclipse-ee4j.github.io/cdi-tck/) to get acquainted with the CDI TCK and learn how to execute and debug it.
 
 ## Sources in GIT
@@ -20,6 +18,5 @@ Master branch contains the work-in-progress on CDI TCK 4.0
 * ide-configs - useful settings for Eclipse and Intellij IDEs
 * impl - The core set of tests, excluding those that depend on web and full platform containers
 * lang-model - A standalone test suite for the CDI language model; see its [README](./lang-model/README.adoc)
-* web - The extra tests that depend on the web and full platform
+* web - The extra tests that depend on the web profile and full platform
 * README.md - this doc
-* README-list.adoc - Notes on changes being introduced by the CDI-lite effort
