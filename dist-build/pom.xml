@@ -200,14 +200,6 @@
          <type>html</type>
          <optional>true</optional>
       </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>sigtest-jdk11</classifier>
-         <type>sig</type>
-         <optional>true</optional>
-      </dependency>
 
       <dependency>
          <groupId>jakarta.enterprise</groupId>
