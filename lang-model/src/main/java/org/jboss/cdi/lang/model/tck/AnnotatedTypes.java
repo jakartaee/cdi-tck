@@ -1,15 +1,19 @@
 package org.jboss.cdi.lang.model.tck;
 
+import jakarta.enterprise.lang.model.AnnotationInfo;
 import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import jakarta.enterprise.lang.model.declarations.FieldInfo;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
 import jakarta.enterprise.lang.model.types.PrimitiveType;
 import jakarta.enterprise.lang.model.types.Type;
+import jakarta.enterprise.lang.model.types.TypeVariable;
 
+import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -630,6 +634,9 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert field.type().asTypeVariable().name().equals("B");
         assert field.type().asTypeVariable().bounds().size() == 1;
         assert field.type().asTypeVariable().bounds().get(0).isTypeVariable();
+        TypeVariable ftype = field.type().asTypeVariable();
+        Type bound0 = ftype.bounds().get(0);
+        Collection<AnnotationInfo> annotations = bound0.annotations();
         assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().annotations().isEmpty();
         assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().name().equals("A");
         assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().bounds().size() == 1;

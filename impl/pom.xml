@@ -151,9 +151,9 @@
                                     <classifier>audit-int</classifier>
                                 </artifact>
                                 <artifact>
-                                    <file>${basedir}/src/main/resources/cdi-api-jdk8.sig</file>
+                                    <file>${basedir}/src/main/resources/cdi-api-jdk11.sig</file>
                                     <type>sig</type>
-                                    <classifier>sigtest-jdk8</classifier>
+                                    <classifier>sigtest-jdk11</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
@@ -356,7 +356,7 @@
             </activation>
             <properties>
                 <!--Default assumed JDK version, can be overriden via -Dmajor.jdk.version=X-->
-                <jdk.major.version>8</jdk.major.version>
+                <jdk.major.version>11</jdk.major.version>
             </properties>
             <build>
                 <plugins>
@@ -407,11 +407,15 @@
                                 jakarta.enterprise.context.spi,
                                 jakarta.enterprise.event,
                                 jakarta.enterprise.inject,
+                                jakarta.enterprise.inject.build.compatible.spi,
                                 jakarta.enterprise.inject.literal,
                                 jakarta.enterprise.inject.se,
                                 jakarta.enterprise.inject.spi,
                                 jakarta.enterprise.inject.spi.configurator,
-                                jakarta.enterprise.util
+                                jakarta.enterprise.util,
+                                jakarta.enterprise.lang.model,
+                                jakarta.enterprise.lang.model.declarations,
+                                jakarta.enterprise.lang.model.types
                             </packages>
                             <attach>false</attach>
                             <sigfile>${project.build.directory}/cdi-api-jdk${jdk.major.version}.sig</sigfile>

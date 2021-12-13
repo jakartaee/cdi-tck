@@ -240,7 +240,7 @@
                 <plugin>
                     <groupId>org.netbeans.tools</groupId>
                     <artifactId>sigtest-maven-plugin</artifactId>
-                    <version>1.2</version>
+                    <version>1.5</version>
                 </plugin>
                 <!-- Plugin versions since ee4j parent no longer declares them-->
                 <plugin>

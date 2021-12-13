@@ -2,18 +2,25 @@
 <!-- Sample maven pom to verify signatures -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <!-- For access to staging repos, add -Pstaging -->
+  <parent>
+    <groupId>org.eclipse.ee4j</groupId>
+    <artifactId>project</artifactId>
+    <version>1.0.6</version>
+  </parent>
+
   <groupId>jakarta.enterprise</groupId>
   <artifactId>cdi-tck-sigtest</artifactId>
-  <version>3.0</version>
+  <version>4.0</version>
   <name>CDI TCK Signature Tests</name>
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
     <!-- Set the api jar artifact versions here -->
-    <annotation.api.version>2.0.0-RC1</annotation.api.version>
-    <atinject.api.version>2.0.0-RC3</atinject.api.version>
-    <interceptor.api.version>2.0.0-RC2</interceptor.api.version>
-    <el.api.version>4.0.0-RC1</el.api.version>
-    <cdi.api.version>3.0.0-M2</cdi.api.version>
+    <annotation.api.version>2.1.0</annotation.api.version>
+    <atinject.api.version>2.0.1</atinject.api.version>
+    <interceptor.api.version>2.0.1-RC1</interceptor.api.version>
+    <el.api.version>5.0.0</el.api.version>
+    <cdi.api.version>4.0.0-RC1</cdi.api.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
@@ -37,6 +44,11 @@
       <groupId>jakarta.inject</groupId>
       <artifactId>jakarta.inject-api</artifactId>
       <version>${atinject.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.enterprise</groupId>
+      <artifactId>jakarta.enterprise.lang-model</artifactId>
+      <version>${cdi.api.version}</version>
     </dependency>
     <dependency>
       <groupId>jakarta.enterprise</groupId>
@@ -68,7 +80,7 @@
       <plugin>
         <groupId>org.netbeans.tools</groupId>
         <artifactId>sigtest-maven-plugin</artifactId>
-        <version>1.2</version>
+        <version>1.5</version>
         <executions>
           <execution>
             <id>sigtest</id>
@@ -79,7 +91,7 @@
           </execution>
         </executions>
         <configuration>
-          <sigfile>cdi-api-jdk8.sig</sigfile>
+          <sigfile>cdi-api-jdk11.sig</sigfile>
           <packages>jakarta.decorator,jakarta.enterprise</packages>
           <classes>target/classes</classes>
           <report>cdi-sig-report.txt</report>

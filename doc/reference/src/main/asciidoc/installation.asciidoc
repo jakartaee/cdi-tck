@@ -12,7 +12,7 @@ You can obtain a release of the CDI TCK project from the link:$$https://download
 
 You can also download the current source code from link:$$https://github.com/eclipse-ee4j/cdi-tck$$[GitHub repository].
 
-Executing the TCK requires a Jakarta EE 8 or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK does not depend on any particular Jakarta EE implementation.
+Executing the TCK requires a Jakarta EE 10 or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK does not depend on any particular Jakarta EE implementation.
 
 A Jakarta Contexts and Dependency Injection for compatible implementation project is named Weld. The release stream for Jakarta CDI {revnumber} is named _{revmajor}.x_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
 
@@ -25,16 +25,16 @@ Weld is not required for running the CDI TCK, but it can be used as a reference 
 ====
 
 
-Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 8 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website.
+Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 11 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website.
 
 
 === The TCK Environment
 
 The TCK requires the following two Java runtime environments: 
 
-*  Java SE 8 or better
+*  Java SE 11 or better
 
-*  Jakarta EE 8 or better (e.g., WildFly 22.x or GlassFish V6)
+*  Jakarta EE 10 or better (e.g., WildFly 28.x or GlassFish V7)
 
 You should refer to vendor instructions for how to install the runtime environment. 
 

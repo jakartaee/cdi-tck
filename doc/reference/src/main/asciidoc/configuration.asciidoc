@@ -164,7 +164,7 @@ Tests within the _jms_ test group require some basic Java Message Service config
 
 Tests within the _persistence_ test group require basic data source configuration. The data source has to be valid and JTA-based. The JNDI name of the DataSource is specified with configuration property - see <<tck-properties>>. 
 
-Tests within the _installedLib_ test group require the CDI TCK +cdi-tck-ext-lib+ artifact to be installed as a library (see also Jakarta EE 8 specification, section EE.8.2.2 "Installed Libraries").
+Tests within the _installedLib_ test group require the CDI TCK +cdi-tck-ext-lib+ artifact to be installed as a library (see also Jakarta EE 10 specification, section EE.10.2.2 "Installed Libraries").
 
 Tests within the _systemProperties_ test group require the following system properties to be set: 
 
