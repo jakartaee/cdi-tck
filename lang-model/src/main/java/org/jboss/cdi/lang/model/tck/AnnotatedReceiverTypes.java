@@ -68,13 +68,18 @@ public class AnnotatedReceiverTypes<T> {
     private static void verifyMethodWithReceiverOnGenericClass(ClassInfo clazz) {
         MethodInfo method = LangModelUtils.singleMethod(clazz, "methodWithReceiver");
 
-        // reflection returns `AnnotatedType` which is not `AnnotatedParameterizedType`,
-        // so here, we expect the same -- `ClassType`, not `ParameterizedType`
         assert method.receiverType() != null;
-        assert method.receiverType().isClass();
-        assert method.receiverType().asClass().annotations().size() == 1;
-        assert method.receiverType().asClass().hasAnnotation(AnnReceiver1.class);
-        assert method.receiverType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
+        // Following assertions yield different results with JDK 11 and JDK 17 when accessed through reflection, TCK accepts both variants
+        assert method.receiverType().isClass() || method.receiverType().isParameterizedType();
+        if (method.receiverType().isClass()) { // JDK 11 reflection sees this as a class
+            assert method.receiverType().asClass().annotations().size() == 1;
+            assert method.receiverType().asClass().hasAnnotation(AnnReceiver1.class);
+            assert method.receiverType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
+        } else if (method.receiverType().isParameterizedType()) { // JDK 17 reflection correctly evaluates this as a parameterized type
+            assert method.receiverType().asParameterizedType().annotations().size() == 1;
+            assert method.receiverType().asParameterizedType().hasAnnotation(AnnReceiver1.class);
+            assert method.receiverType().asParameterizedType().declaration().name().equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
+        }
     }
 
     private static void verifyMethodWithReceiverOnClass(ClassInfo clazz) {
@@ -91,9 +96,15 @@ public class AnnotatedReceiverTypes<T> {
         MethodInfo method = LangModelUtils.singleMethod(clazz, "methodWithoutReceiver");
 
         assert method.receiverType() != null;
-        assert method.receiverType().isClass();
-        assert method.receiverType().asClass().annotations().isEmpty();
-        assert method.receiverType().asClass().declaration().equals(clazz);
+        // Following assertions yield different results with JDK 11 and JDK 17 when accessed through reflection, TCK accepts both variants
+        assert method.receiverType().isClass() || method.receiverType().isParameterizedType();
+        if (method.receiverType().isClass()) { // JDK 11 reflection sees this as a class
+            assert method.receiverType().asClass().annotations().isEmpty();
+            assert method.receiverType().asClass().declaration().equals(clazz);
+        } else if (method.receiverType().isParameterizedType()) { // JDK 17 reflection correctly evaluates this as a parameterized type
+            assert method.receiverType().asParameterizedType().annotations().isEmpty();
+            assert method.receiverType().asParameterizedType().declaration().equals(clazz);
+        }
     }
 
     private static void verifyStaticMethod(ClassInfo clazz) {

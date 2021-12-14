@@ -634,10 +634,13 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert field.type().asTypeVariable().name().equals("B");
         assert field.type().asTypeVariable().bounds().size() == 1;
         assert field.type().asTypeVariable().bounds().get(0).isTypeVariable();
-        TypeVariable ftype = field.type().asTypeVariable();
-        Type bound0 = ftype.bounds().get(0);
-        Collection<AnnotationInfo> annotations = bound0.annotations();
-        assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().annotations().isEmpty();
+        // JDK 11 and JDK 17, when accessed through reflection, disagree on annotations declared on generic bounds; TCK accepts both variants
+        Collection<AnnotationInfo> annotationInfos = field.type().asTypeVariable().bounds().get(0).asTypeVariable().annotations();
+        assert annotationInfos.isEmpty() || annotationInfos.size() == 1; // JDK 11 reflection doesn't see any annotation
+        if (annotationInfos.size() == 1) {
+            // JDK 17 reflection correctly recognizes one annotation
+            assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().hasAnnotation(AnnTypeVariableClass3.class);
+        }
         assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().name().equals("A");
         assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().bounds().size() == 1;
         assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).isClass();
