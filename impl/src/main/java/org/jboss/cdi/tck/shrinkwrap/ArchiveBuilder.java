@@ -236,6 +236,16 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
+     * Add CDI build compatible extensions. This method does not add the specified extension classes to the archive.
+     *
+     * @param extensionClasses
+     * @return self
+     */
+    public T withBuildCompatibleExtensions(Class<? extends BuildCompatibleExtension>... extensionClasses) {
+        return withServiceProvider(new ServiceProviderDescriptor(BuildCompatibleExtension.class, extensionClasses));
+    }
+
+    /**
      * Add service provider.
      *
      * @param serviceProvider
