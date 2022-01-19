@@ -70,7 +70,7 @@
 
     <ciManagement>
         <system>Jenkins</system>
-        <url>https://projects.eclipse.org/projects/ee4j.cdi</url>
+        <url>https://ci.eclipse.org/cdi/</url>
     </ciManagement>
 
     <issueManagement>
@@ -97,11 +97,11 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>4.0.0-RC1</cdi.api.version>
+        <cdi.api.version>4.0.0-RC2</cdi.api.version>
         <maven.compiler.release>11</maven.compiler.release>
         <!-- Jakarta EE APIs Core -->
-        <annotations.api.version>2.1.0</annotations.api.version>
-        <interceptors.api.version>2.0.1-RC1</interceptors.api.version>
+        <annotations.api.version>2.1.0-B1</annotations.api.version>
+        <interceptors.api.version>2.1.0-RC3</interceptors.api.version>
         <atinject.api.version>2.0.1</atinject.api.version>
         <el.api.version>5.0.0</el.api.version>
 
@@ -302,9 +302,9 @@
     </build>
 
     <scm>
-        <connection>scm:git:git://github.com/cdi-spec/cdi-tck.git</connection>
-        <developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
-        <url>https://github.com/cdi-spec/cdi-tck</url>
+        <connection>https://github.com/eclipse-ee4j/cdi-tck</connection>
+        <developerConnection>git@github.com:eclipse-ee4j/cdi-tck.git</developerConnection>
+        <url>https://github.com/eclipse-ee4j/cdi-tck</url>
         <tag>HEAD</tag>
     </scm>
 
