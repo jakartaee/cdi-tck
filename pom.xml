@@ -302,8 +302,8 @@
     </build>
 
     <scm>
-        <connection>git@github.com:eclipse-ee4j/cdi-tck.git</connection>
-        <developerConnection>git@github.com:eclipse-ee4j/cdi-tck.git</developerConnection>
+        <connection>scm:git@github.com:eclipse-ee4j/cdi-tck.git</connection>
+        <developerConnection>scm:git@github.com:eclipse-ee4j/cdi-tck.git</developerConnection>
         <url>https://github.com/eclipse-ee4j/cdi-tck</url>
         <tag>HEAD</tag>
     </scm>
