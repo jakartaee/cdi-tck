@@ -1,10 +1,10 @@
 
 # Sample shell script to setup and run the sigtest generation
 M2=~/.m2/repository
-CDI_VERSION=4.0.0-RC1
+CDI_VERSION=4.0.0-RC3
 ATINJECT_VERSION=2.0.1
 EL_VERSON=5.0.0
-INTERCEPTOR_VERSION=2.1.0-RC1
+INTERCEPTOR_VERSION=2.1.0-RC3
 SIGTEST_VERSION=1.2
 
 CDI_API_JAR=${M2}/jakarta/enterprise/jakarta.enterprise.cdi-api/${CDI_VERSION}/jakarta.enterprise.cdi-api-${CDI_VERSION}.jar
