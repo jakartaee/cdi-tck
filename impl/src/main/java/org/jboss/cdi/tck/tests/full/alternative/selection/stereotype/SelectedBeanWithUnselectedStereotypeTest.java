@@ -1,6 +1,6 @@
 /*
  * JBoss, Home of Professional Open Source
- * Copyright 2010, Red Hat, Inc., and individual contributors
+ * Copyright 2012, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
  *
@@ -14,49 +14,49 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.definition.stereotype.inheritance;
 
-import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES_WITH_ADDITIONAL_STEREOTYPES;
+package org.jboss.cdi.tck.tests.full.alternative.selection.stereotype;
+
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
+import static org.testng.Assert.assertEquals;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.Bean;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 import java.util.Set;
 
 /**
- * @author pmuir
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
-public class StereotypeInheritenceTest extends AbstractTest {
+@Test(groups = TestGroups.CDI_FULL)
+public class SelectedBeanWithUnselectedStereotypeTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder()
-                .withTestClassPackage(StereotypeInheritenceTest.class)
-                .withBeansXml(new BeansXml(BeanDiscoveryMode.ANNOTATED))
+        return new WebArchiveBuilder().withTestClassPackage(SelectedBeanWithUnselectedStereotypeTest.class)
+                .withBeansXml(new BeansXml().alternatives(Bar.class))
                 .build();
     }
 
     @Test
-    @SpecAssertions({@SpecAssertion(section = STEREOTYPES_WITH_ADDITIONAL_STEREOTYPES, id = "a"), @SpecAssertion(section = STEREOTYPES_WITH_ADDITIONAL_STEREOTYPES, id = "b")})
-    public void testInheritence() {
-        Set<Bean<Horse>> beans = getBeans(Horse.class);
-        assert beans.size() == 1;
-        Bean<Horse> bean = beans.iterator().next();
-        assert bean.getScope().equals(RequestScoped.class);
-        assert bean.isAlternative();
-        assert bean.getName().equals("horse");
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba")
+    public void testSingleAlternativeIsSelected() {
+        // Bar is selected
+        Set<Bean<Bar>> barBeans = getBeans(Bar.class);
+        assertEquals(barBeans.size(), 1);
+        assertEquals(barBeans.iterator().next().getScope(), RequestScoped.class);
+        // Foo is not selected
+        Set<Bean<Foo>> fooBeans = getBeans(Foo.class);
+        assertEquals(fooBeans.size(), 0);
     }
-
 }

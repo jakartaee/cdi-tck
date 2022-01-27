@@ -25,6 +25,7 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.enterprise.inject.Stereotype;
 
@@ -33,6 +34,7 @@ import jakarta.enterprise.inject.Stereotype;
 @Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
 @Alternative
+@Priority(1)
 @Inherited
 public @interface NamedRequestPolicyStereotype {
 

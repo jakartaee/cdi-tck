@@ -14,26 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.producer.method.broken.interceptor;
+package org.jboss.cdi.tck.tests.full.alternative.broken.same.type.twice;
 
-import jakarta.annotation.Priority;
-import jakarta.enterprise.inject.Produces;
-import jakarta.interceptor.AroundInvoke;
-import jakarta.interceptor.Interceptor;
-import jakarta.interceptor.InvocationContext;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Alternative;
 
-@Interceptor
-@Secure
-@Priority(1)
-public class SimpleInterceptor_Broken {
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        return ctx.proceed();
-    }
+@RequestScoped
+@Alternative
+public class Cat {
 
-    @Produces
-    @Number
-    public Integer foo() {
-        return 0;
-    }
 }

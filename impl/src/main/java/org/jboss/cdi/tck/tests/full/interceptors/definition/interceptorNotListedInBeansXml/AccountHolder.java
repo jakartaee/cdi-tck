@@ -14,26 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.producer.method.broken.interceptor;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorNotListedInBeansXml;
 
-import jakarta.annotation.Priority;
-import jakarta.enterprise.inject.Produces;
-import jakarta.interceptor.AroundInvoke;
-import jakarta.interceptor.Interceptor;
-import jakarta.interceptor.InvocationContext;
+public class AccountHolder {
 
-@Interceptor
-@Secure
-@Priority(1)
-public class SimpleInterceptor_Broken {
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        return ctx.proceed();
-    }
-
-    @Produces
-    @Number
-    public Integer foo() {
-        return 0;
+    @Transactional
+    public void transfer(double amount) {
     }
 }
