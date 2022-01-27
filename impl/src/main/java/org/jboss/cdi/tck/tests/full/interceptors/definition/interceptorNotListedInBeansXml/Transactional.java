@@ -14,26 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.producer.method.broken.interceptor;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorNotListedInBeansXml;
 
-import jakarta.annotation.Priority;
-import jakarta.enterprise.inject.Produces;
-import jakarta.interceptor.AroundInvoke;
-import jakarta.interceptor.Interceptor;
-import jakarta.interceptor.InvocationContext;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Interceptor
-@Secure
-@Priority(1)
-public class SimpleInterceptor_Broken {
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        return ctx.proceed();
-    }
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-    @Produces
-    @Number
-    public Integer foo() {
-        return 0;
-    }
+import jakarta.interceptor.InterceptorBinding;
+
+@Target({ TYPE, METHOD })
+@Retention(RUNTIME)
+@Documented
+@InterceptorBinding
+public @interface Transactional {
+
 }

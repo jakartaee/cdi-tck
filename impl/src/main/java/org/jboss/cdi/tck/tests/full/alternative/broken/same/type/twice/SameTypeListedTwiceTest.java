@@ -9,44 +9,44 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.interceptor;
+package org.jboss.cdi.tck.tests.full.alternative.broken.same.type.twice;
 
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 
-import jakarta.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
-public class DisposerMethodOnInterceptorTest extends AbstractTest {
+@Test(groups = TestGroups.CDI_FULL)
+public class SameTypeListedTwiceTest extends AbstractTest {
 
-    @ShouldThrowException(DefinitionException.class)
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClassPackage(DisposerMethodOnInterceptorTest.class)
-                .withBeansXml(new BeansXml(BeanDiscoveryMode.ANNOTATED)).build();
+                .withTestClassPackage(SameTypeListedTwiceTest.class)
+                .withBeansXml(new BeansXml().alternatives(Dog.class, Cat.class, Cat.class))
+                .build();
     }
 
     @Test
-    @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "ga")
-    // WELD-424
-    public void testDisposerMethodNotAllowedOnInterceptor() {
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "g")
+    public void test() {
     }
+
 }
