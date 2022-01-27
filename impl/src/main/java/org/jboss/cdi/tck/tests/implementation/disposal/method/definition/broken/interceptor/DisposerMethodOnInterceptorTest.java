@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.interceptor;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_DISPOSER_METHOD;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
@@ -33,6 +34,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
+@Test(groups = CDI_FULL)
 public class DisposerMethodOnInterceptorTest extends AbstractTest {
 
     @ShouldThrowException(DefinitionException.class)

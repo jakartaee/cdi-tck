@@ -17,6 +17,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection.stereotype;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.testng.Assert.assertEquals;
 
@@ -37,6 +38,7 @@ import java.util.Set;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
+@Test(groups = CDI_FULL)
 public class SelectedBeanWithUnselectedStereotypeTest extends AbstractTest {
 
     @Deployment

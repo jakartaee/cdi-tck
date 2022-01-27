@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.inheritance;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES_WITH_ADDITIONAL_STEREOTYPES;
 
 import java.util.Set;
@@ -37,6 +38,7 @@ import org.testng.annotations.Test;
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
+@Test(groups = CDI_FULL)
 public class StereotypeInheritenceTest extends AbstractTest {
 
     @Deployment

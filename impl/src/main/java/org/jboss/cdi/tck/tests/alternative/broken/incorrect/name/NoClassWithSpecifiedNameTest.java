@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.alternative.broken.incorrect.name;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.EXCEPTIONS;
 
@@ -30,6 +31,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
+@Test(groups = CDI_FULL)
 public class NoClassWithSpecifiedNameTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
