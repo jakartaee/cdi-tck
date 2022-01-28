@@ -21,7 +21,7 @@ You should set the following required properties:
                      The directory containing extra JARs to be placed in
                      the test archive library directory such as the porting package
                      implementation.
-                  
+|+org.jboss.cdi.tck.cdiLiteMode=true+| Enable the CDI Lite mode. When enabled, none of the org.jboss.cdi.tck.test* properties below related to Jakarta EE tests are required.
 |+org.jboss.cdi.tck.testDataSource=java:jboss/datasources/ExampleDS+|
                      A few TCK tests work with Jakarta Persistence services and require a data source to be provided.
                      This property defines JNDI name of such resource. Required for the tests within the _persistence_ test group.

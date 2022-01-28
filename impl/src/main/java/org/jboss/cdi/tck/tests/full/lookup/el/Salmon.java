@@ -14,19 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.el;
+package org.jboss.cdi.tck.tests.full.lookup.el;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Named;
 
-@ApplicationScoped
-public class Counter {
-    private int count = 0;
+@Named
+@Default
+@RequestScoped
+public class Salmon {
+    private int age = 0;
 
-    public void add() {
-        count++;
+    public int getAge() {
+        return age;
     }
 
-    public int getCount() {
-        return count;
+    public void setAge(int age) {
+        this.age = age;
     }
 }
