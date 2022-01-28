@@ -292,7 +292,8 @@ public class PropertiesBasedConfigurationBuilder {
         Set<String> values = getPropertyValues(propertyName);
         if (values.size() == 0) {
             if (required) {
-                throw new IllegalArgumentException("Cannot find required property " + propertyName + ", check that it is specified");
+                throw new IllegalArgumentException("Cannot find required property " + propertyName
+                    + ", check that it is specified. See cdiLiteMode flag if testing CDI Lite.");
             }
             return null;
         } else if (values.size() > 1) {
