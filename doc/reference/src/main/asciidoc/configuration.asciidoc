@@ -17,8 +17,7 @@ You should set the following required properties:
 [options="header"]
 |===============
 |Property = Example Value|Description
-|+org.jboss.cdi.tck.libraryDirectory=/path/to/extra/libraries
-                     +|
+|+org.jboss.cdi.tck.libraryDirectory=/path/to/extra/libraries+|
                      The directory containing extra JARs to be placed in
                      the test archive library directory such as the porting package
                      implementation.
@@ -85,14 +84,26 @@ The SPI classes in the CDI TCK are as follows:
 Please consult the JavaDoc for these interfaces for the implementation requirements. 
 
 
-
-=== Using the CDI TCK with the Jakarta EE Web Profile
-
-You can configure the CDI TCK to just run tests appropriate to the Jakarta EE Web Profile by excluding TestNG group _javaee-full_, e.g. via maven-surefire-plugin configuration:
+=== Using the CDI TCK with the Jakarta EE Core Profile
+You can configure the CDI TCK to just run tests related to the CDI Lite specification appropriate for the Jakarta EE Core Profile by excluding TestNG groups _cdi-full_, _integration_, _javaee-full_, _se_, e.g. via a maven-surefire-plugin configuration like:
 
 [source.XML, xml]
 ----
+      <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+                <excludedGroups>cdi-full,integration,javaee-full,se</excludedGroups>
+            </configuration>
+       </plugin>
+----
 
+=== Using the CDI TCK with the Jakarta EE Web Profile
+
+You can configure the CDI TCK to just run tests appropriate to the Jakarta EE Web Profile by excluding TestNG group _javaee-full_, e.g. via a maven-surefire-plugin configuration like:
+
+[source.XML, xml]
+----
       <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
@@ -100,7 +111,6 @@ You can configure the CDI TCK to just run tests appropriate to the Jakarta EE We
                 <excludedGroups>javaee-full</excludedGroups>
             </configuration>
        </plugin>
-        
 ----
 
 
