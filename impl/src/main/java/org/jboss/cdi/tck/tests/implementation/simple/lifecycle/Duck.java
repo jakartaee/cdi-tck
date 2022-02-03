@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.implementation.simple.lifecycle;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Inject;
-import org.jboss.cdi.tck.tests.full.implementation.simple.lifecycle.Tame;
 
 @Dependent
 public class Duck {

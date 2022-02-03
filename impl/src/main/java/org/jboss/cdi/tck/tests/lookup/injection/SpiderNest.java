@@ -16,8 +16,10 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
+@Dependent
 public class SpiderNest {
 
     public Integer numberOfSpiders;

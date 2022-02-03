@@ -377,8 +377,8 @@
         </assertion>
 
         <assertion id="da">
-            <text>If there are two different stereotypes declared by the bean that declare different default scopes, then there is no default scope and the bean
-                must explicitly declare a scope. If it does not explicitly declare a scope, the container automatically
+            <text>If there are two different stereotypes present on the bean, directly, indirectly, or transitively, that declare different default scopes,
+                then there is no default scope and the bean must explicitly declare a scope. If it does not explicitly declare a scope, the container automatically
                 detects the problem and treats it as a definition error.
             </text>
         </assertion>

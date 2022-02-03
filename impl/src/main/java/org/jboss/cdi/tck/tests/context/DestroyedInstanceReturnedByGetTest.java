@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.context;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.context.spi.CreationalContext;
@@ -44,16 +45,16 @@ public class DestroyedInstanceReturnedByGetTest extends AbstractTest {
     @SpecAssertion(section = CONTEXT, id = "q")
     @SpecAssertion(section = BEAN, id = "aa")
     public void testDestroyedInstanceMustNotBeReturnedByGet() {
-        assert getBeans(MySessionBean.class).size() == 1;
-        Bean<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-        CreationalContext<MySessionBean> sessionCreationalContext = getCurrentManager().createCreationalContext(mySessionBean);
-        MySessionBean beanInstance = mySessionBean.create(sessionCreationalContext);
+        assert getBeans(MyRequestBean.class).size() == 1;
+        Bean<MyRequestBean> myRequestBean = getBeans(MyRequestBean.class).iterator().next();
+        CreationalContext<MyRequestBean> sessionCreationalContext = getCurrentManager().createCreationalContext(myRequestBean);
+        MyRequestBean beanInstance = myRequestBean.create(sessionCreationalContext);
         assert beanInstance != null;
-        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
-        destroyContext(sessionContext);
-        setContextActive(sessionContext);
+        Context requestContext = getCurrentManager().getContext(RequestScoped.class);
+        destroyContext(requestContext);
+        setContextActive(requestContext);
 
-        beanInstance = sessionContext.get(mySessionBean);
+        beanInstance = requestContext.get(myRequestBean);
         assert beanInstance == null;
     }
 

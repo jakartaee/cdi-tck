@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.disposal.method.definition.broken.interceptor;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -23,6 +24,7 @@ import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @Secure
+@Priority(2)
 public class SimpleInterceptor_Broken {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {

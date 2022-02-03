@@ -21,7 +21,6 @@ import jakarta.enterprise.context.spi.Context;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
 import org.jboss.cdi.tck.spi.EL;
-import org.jboss.cdi.tck.spi.SourceProcessor;
 
 /**
  * The configuration of the TCK.
@@ -38,6 +37,8 @@ import org.jboss.cdi.tck.spi.SourceProcessor;
  */
 public interface Configuration {
 
+    public static final String CDI_LITE_MODE = "org.jboss.cdi.tck.cdiLiteMode";
+
     public static final String LIBRARY_DIRECTORY_PROPERTY_NAME = "org.jboss.cdi.tck.libraryDirectory";
 
     public static final String TEST_DATASOURCE_PROPERTY_NAME = "org.jboss.cdi.tck.testDataSource";
@@ -50,9 +51,23 @@ public interface Configuration {
 
     public static final String TEST_TIMEOUT_FACTOR = "org.jboss.cdi.tck.testTimeoutFactor";
 
-    public static final String CDI_LITE_MODE_FLAG = "org.jboss.cdi.tck.cdiLiteModeFlag";
-
     public static final int TEST_TIMEOUT_FACTOR_DEFAULT_VALUE = 100;
+
+    /**
+     * The CDI Lite mode setting.
+     * If enabled, the following settings are ignored and don't have to be provided:
+     * <ul>
+     * <li>{@link #TEST_DATASOURCE_PROPERTY_NAME}</li>
+     * <li>{@link #TEST_JMS_CONNECTION_FACTORY}</li>
+     * <li>{@link #TEST_JMS_QUEUE}</li>
+     * <li>{@link #TEST_JMS_TOPIC}</li>
+     * </ul>
+     *
+     * @return true if running in a CDI Lite environment
+     */
+    public Boolean getCdiLiteMode();
+
+    public void setCdiLiteMode(Boolean cdiLiteMode);
 
     /**
      * The implementation of {@link Beans} in use.
@@ -76,14 +91,6 @@ public interface Configuration {
     public EL getEl();
 
     /**
-     * The implementation of the {@link SourceProcessor} in use.
-     * @return
-     */
-    SourceProcessor getSourceProcessor();
-
-    void setSourceProcessor(SourceProcessor sourceProcessor);
-
-    /**
      * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the implementation). Any jars in this
      * directory will be added to the deployed artifact.
      *
@@ -94,13 +101,6 @@ public interface Configuration {
     public String getLibraryDirectory();
 
     public void setLibraryDirectory(String libraryDir);
-
-    /**
-     * The CDI-lite mode setting
-     * @return true if running in a CDI-lite environment
-     */
-    public Boolean getCDILiteModeFlag();
-    public void setCDILiteModeFlag(Boolean modeFlag);
 
     /**
      * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided. These tests belong to testng group

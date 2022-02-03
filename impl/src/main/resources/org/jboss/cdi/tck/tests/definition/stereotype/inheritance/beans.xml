@@ -1,5 +1,0 @@
-<beans> 
-   <alternatives>
-      <stereotype>org.jboss.cdi.tck.tests.definition.stereotype.inheritance.NamedRequestPolicyStereotype</stereotype>
-   </alternatives>
-</beans>

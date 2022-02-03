@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.implementation.producer.field.lifecycle;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
-import org.jboss.cdi.tck.tests.full.implementation.producer.field.lifecycle.Tarantula;
 
 @Dependent
 public class StaticTarantulaProducer {

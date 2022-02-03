@@ -16,10 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.event.parameterized;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 
-@ApplicationScoped
 public abstract class AbstractParameterizedObserver<T> {
 
     private boolean fooableObserved;
