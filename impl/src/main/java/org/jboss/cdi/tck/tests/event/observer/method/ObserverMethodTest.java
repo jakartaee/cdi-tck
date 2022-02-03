@@ -20,12 +20,15 @@ package org.jboss.cdi.tck.tests.event.observer.method;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHOD;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import java.util.Set;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Reception;
 import jakarta.enterprise.event.TransactionPhase;
+import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.ObserverMethod;
 import jakarta.enterprise.util.AnnotationLiteral;
 
@@ -56,6 +59,19 @@ public class ObserverMethodTest extends AbstractTest {
         assertEquals(observers.size(), 1);
         ObserverMethod<? super StockPrice> observerMethod = observers.iterator().next();
         assertEquals(observerMethod.getBeanClass(), StockWatcher.class);
+    }
+
+    @Test
+    //@SpecAssertion(section = TODO, id = "TODO")
+    public void testGetDeclaringBeanOnObserverMethod() {
+        Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
+        assertEquals(observers.size(), 1);
+        ObserverMethod<? super StockPrice> observerMethod = observers.iterator().next();
+        Bean<?> declaringBean = observerMethod.getDeclaringBean();
+        assertNotNull(declaringBean);
+        assertEquals(declaringBean.getBeanClass(), StockWatcher.class);
+        assertEquals(declaringBean.getScope(), Dependent.class);
+        assertTrue(declaringBean.isAlternative());
     }
 
     @Test

@@ -16,9 +16,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.injection;
 
+import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Named;
 
 @Named
+@Dependent
 public class Wolf {
 
 }

@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
  */
 public class BeansXmlTest {
 
-    // prepared String representation of expected outcome
+    // prepared String representations of expected outcomes
     private final String expectedBeansXmlFormat = "<beans version=\"1.1\" bean-discovery-mode=\"annotated\">\n" +
             "<scan>\n" +
             "<exclude name=\"org.jboss.cdi.tck.test.shrinkwrap.beansxml.*\" />\n" +
@@ -31,6 +31,15 @@ public class BeansXmlTest {
             "</decorators>\n" +
             "</beans>\n";
 
+    private final String expectedNoVersionBeanXmlFormat = "<beans>\n" +
+            "<alternatives>\n" +
+            "<class>org.jboss.cdi.tck.test.shrinkwrap.beansxml.DummyReferenceClass</class>\n" +
+            "</alternatives>\n" +
+            "<interceptors>\n" +
+            "<class>org.jboss.cdi.tck.test.shrinkwrap.beansxml.DummyReferenceClass</class>\n" +
+            "</interceptors>\n" +
+            "</beans>\n";
+
     @Test
     public void testGeneratedBeansXml() {
         BeansXml asset = new BeansXml(BeanDiscoveryMode.ANNOTATED)
@@ -41,6 +50,17 @@ public class BeansXmlTest {
                 .interceptors(DummyReferenceClass.class)
                 .excludeFilters(BeansXml.Exclude.match(BeansXmlTest.class.getPackage().getName() + ".*"));
         String stringRepresentation = AssetUtil.readAssetContent(asset);
-        Assert.assertEquals(expectedBeansXmlFormat, stringRepresentation);
+        Assert.assertEquals(stringRepresentation, expectedBeansXmlFormat);
+    }
+
+    @Test
+    public void testNoVersionNoModeBeansXml() {
+        BeansXml asset = new BeansXml()
+                .setBeansXmlVersion(null)
+                .setBeanDiscoveryMode(null)
+                .alternatives(DummyReferenceClass.class)
+                .interceptors(DummyReferenceClass.class);
+        String stringRepresentation = AssetUtil.readAssetContent(asset);
+        Assert.assertEquals(stringRepresentation, expectedNoVersionBeanXmlFormat);
     }
 }

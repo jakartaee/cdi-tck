@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.shrinkwrap;
 
+import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
 import jakarta.enterprise.inject.spi.Extension;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -28,7 +29,6 @@ import org.jboss.cdi.tck.impl.ConfigurationFactory;
 import org.jboss.cdi.tck.impl.ConfigurationImpl;
 import org.jboss.cdi.tck.impl.PropertiesBasedConfigurationBuilder;
 import org.jboss.cdi.tck.spi.Beans;
-import org.jboss.cdi.tck.spi.SourceProcessor;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.annotated.AnnotatedWrapper;
 import org.jboss.shrinkwrap.api.Archive;
@@ -44,7 +44,6 @@ import org.jboss.shrinkwrap.api.container.ClassContainer;
 import org.jboss.shrinkwrap.api.container.LibraryContainer;
 import org.jboss.shrinkwrap.api.container.ManifestContainer;
 import org.jboss.shrinkwrap.api.container.ResourceContainer;
-import org.jboss.shrinkwrap.api.container.ServiceProviderContainer;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
@@ -58,26 +57,15 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.tools.DiagnosticCollector;
-import javax.tools.JavaFileObject;
 
 /**
  * Abstract ShrinkWrap archive builder for CDI TCK Arquillian test.
@@ -130,6 +118,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected ResourceDescriptor beansXml = null;
 
     protected BeansXml beansDescriptor = null;
+
+    protected boolean includeBeansXml = true;
 
     protected ResourceDescriptor webXml = null;
 
@@ -204,6 +194,18 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
+     * Suppresses adding the {@code beans.xml} descriptor to the archive.
+     * If this method is called, any previous or following calls to
+     * {@link #withBeansXml(String)} or {@link #withBeansXml(BeansXml)} are ignored.
+     *
+     * @return self
+     */
+    public T withoutBeansXml() {
+        this.includeBeansXml = false;
+        return self();
+    }
+
+    /**
      * Add CDI extension. This method does not add the specified extension class to the archive.
      *
      * @param extensionClass
@@ -221,6 +223,26 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withExtensions(Class<? extends Extension>... extensionClasses) {
         return withServiceProvider(new ServiceProviderDescriptor(Extension.class, extensionClasses));
+    }
+
+    /**
+     * Add CDI build compatible extension. This method does not add the specified extension class to the archive.
+     *
+     * @param extensionClass
+     * @return self
+     */
+    public T withBuildCompatibleExtension(Class<? extends BuildCompatibleExtension> extensionClass) {
+        return withServiceProvider(new ServiceProviderDescriptor(BuildCompatibleExtension.class, extensionClass));
+    }
+
+    /**
+     * Add CDI build compatible extensions. This method does not add the specified extension classes to the archive.
+     *
+     * @param extensionClasses
+     * @return self
+     */
+    public T withBuildCompatibleExtensions(Class<? extends BuildCompatibleExtension>... extensionClasses) {
+        return withServiceProvider(new ServiceProviderDescriptor(BuildCompatibleExtension.class, extensionClasses));
     }
 
     /**
@@ -785,17 +807,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         logger.log(Level.INFO, "Test archive built [info: {0}, time: {1} ms]",
                 new Object[] { testClazz != null ? testClazz.getName() : archive.getName(), Long.valueOf(System.currentTimeMillis() - start) });
 
-        // test some archive conversions
-        if(ConfigurationFactory.get().getCDILiteModeFlag() && isDebugMode) {
-            if (archive instanceof WebArchive) {
-                try {
-                    JavaArchive jar = ArchiveConverter.toJar((WebArchive) archive);
-                    logger.info(jar.toString(true));
-                } catch (Throwable t) {
-                    logger.info("War to jar error: " + t.getMessage());
-                }
-            }
-        }
         return archive;
     }
 
@@ -931,64 +942,6 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                     continue;
                 }
                 archive.addClass(clazz);
-            }
-        }
-    }
-
-    /**
-     * Go through paths added by processPackages and processClasses if CDI-lite is true and there is a
-     * {@link SourceProcessor} configured to located the corresponding source files and call the source
-     * processor.
-     *
-     * @param archive - the test archive
-     * @param <P> - test archive type
-     */
-    protected <P extends Archive<?> & ClassContainer<?> & ServiceProviderContainer<?>> void processSources(P archive) {
-        Configuration configuration = ConfigurationFactory.get();
-        SourceProcessor sourceProcessor = configuration.getSourceProcessor();
-        // If this is not running in cdi-lite mode or there is no source processor, skip source attachment
-        Boolean isCDIlite = configuration.getCDILiteModeFlag();
-        if(!isCDIlite || sourceProcessor == null)
-            return;
-
-        Path cwd = Paths.get("").toAbsolutePath();
-        // TODO: externalize this location
-        Path suiteSrc = cwd.resolve("target/suites/src");
-        // This is just to pickup local tests of source processor
-        Path testSrc = cwd.resolve("src/test/java");
-
-        HashSet<File> sourceSet = new HashSet<>();
-        // Go through paths added by processPackages and processClasses
-        String classesPrefix = archive instanceof WebArchive ? "WEB-INF/classes/" : "";
-        for(ArchivePath apath : archive.getContent().keySet()) {
-            String path = apath.get();
-            if(path.endsWith(".class")) {
-                // Strip leading / and .class
-                String testClassPath = path.substring(classesPrefix.length()+1, path.length()-6);
-                testClassPath += ".java";
-                Path tstPath = testSrc.resolve(testClassPath);
-                Path tstPath2 = suiteSrc.resolve(testClassPath);
-                if (tstPath.toFile().exists()) {
-                    sourceSet.add(tstPath.toFile());
-                } else if (tstPath2.toFile().exists()) {
-                    sourceSet.add(tstPath2.toFile());
-                }
-            }
-        }
-
-        // Call the sourceProcessor
-        if(sourceSet.size() > 0) {
-            File outputDir = getCompileDir(archive);
-            DiagnosticCollector<JavaFileObject> errors =  new DiagnosticCollector<>();
-            sourceProcessor.process(sourceSet, outputDir, errors);
-            try {
-                reloadCompiledClasses(archive);
-                if(isDebugMode) {
-                    logger.fine("ArchiveBuilder.reloadCompiledClasses, archive: "+archive.toString(true));
-                }
-
-            } catch (Exception e) {
-                getLogger().log(Level.SEVERE, "Failed to reload SourceProcessor output", e);
             }
         }
     }
@@ -1276,116 +1229,13 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     }
 
-    protected Logger getLogger() {
-        return logger;
-    }
-
-    /**
-     * Create a unique directory under target/test-archives/ using the unique archive name for use
-     * with the source processor phase
-     *
-     * @return output dir for use by {@link javax.tools.JavaCompiler}
-     */
-    protected <P extends Archive<?>> File getCompileDir(P archive) {
-        String name = archive.getName();
-        File outputDir = new File("target/test-archives/"+name);
-        if(outputDir.exists() == false && outputDir.mkdirs() == false) {
-            getLogger().severe("Failed to create output directory; "+outputDir.getAbsolutePath());
-        } else if(isDebugMode) {
-            getLogger().fine("Using compile dir: "+outputDir.getAbsolutePath());
-        }
-        return outputDir;
-    }
-
-    /**
-     * Called after the {@link org.jboss.cdi.tck.spi.SourceProcessor} has run to replace/add classes produced by the
-     * call. Currently this filters out all classes that did not exist before source processing, so if classes
-     * were actually added, we need a way to flag them.
-     *
-     * @param archive - the test archive
-     * @param <P> - the type of archive
-     * @throws Exception on ClassLoading or class access failure
-     */
-    protected <P extends Archive<?> & ClassContainer<?> & ServiceProviderContainer<?>> void reloadCompiledClasses(P archive) throws Exception {
-        // Reload classes from the Javac build of source processed classes
-        File compileDir = getCompileDir(archive);
-        ArrayList<File> classFiles = new ArrayList<>();
-        try (Stream<Path> walk = Files.walk(compileDir.toPath())) {
-            List<File> result = walk.filter(ArchiveBuilder::isClassFileOrDir).map(Path::toFile).collect(Collectors.toList());
-            classFiles.addAll(result);
-        }
-
-        final ClassLoader cl = testClazz.getClassLoader();
-        final ClassLoader parentCL = (cl != null ? cl : ClassLoader.getSystemClassLoader());
-        // Add +1 to include the trailing '/' that classes will see but this path does not have
-        int compileDirPrefixLength = compileDir.toPath().toString().length()+1;
-        URL[] cp = {compileDir.toURL()};
-        URLClassLoader clToUse = new URLClassLoader(cp, parentCL);
-        String testClazzName = testClazz.getName();
-        for(File classFile : classFiles) {
-            // The classFiles set includes parent directories, so skip those
-            String path = classFile.getPath();
-            if (classFile.isDirectory()) {
-                if (path.endsWith("/META-INF/services")) {
-                    for (File f : classFile.listFiles()) {
-                        String[] serviceEntries = Files.readString(f.toPath()).split("\n");
-                        archive.addAsServiceProvider(f.getName(), serviceEntries);
-                    }
-                }
-                continue;
-            }
-
-            String className = path.replaceAll("/", ".");
-            // Strip compileDir prefix and .class suffix
-            className = className.substring(compileDirPrefixLength, className.length()-6);
-            boolean exclude = false;
-            if (isAsClientMode() && (testClazzName.equals(className) || className.startsWith(testClazzName))) {
-                continue;
-            } else {
-                if (excludedClasses != null && !excludedClasses.isEmpty()) {
-                    for (String exludeClassName : excludedClasses) {
-                        // Handle annonymous inner classes
-                        if (className.equals(exludeClassName)) {
-                            exclude = true;
-                            break;
-                        } else if (className.startsWith(exludeClassName) && className.contains("$")) {
-                            exclude = true;
-                            break;
-                        } else if (!classes.contains(className)) {
-                            exclude = true;
-                        }
-                    }
-                }
-            }
-            // Add the class from the recompilation if not excluded
-            if(!exclude) {
-                Class<?> clazz = clToUse.loadClass(className);
-                archive.deleteClass(clazz);
-                archive.addClass(clazz);
-            }
-        }
-        if (this.isDebugMode) {
-            logger.info(archive.toString(true));
-        }
-    }
-
-    /**
-     * {@link #reloadCompiledClasses} helper method
-     * @param path - path under the test archive sources output dir
-     * @return true if path is a directory or .class file
-     */
-    private static boolean isClassFileOrDir(Path path) {
-        File file = path.toFile();
-        return file.isDirectory() || file.getName().endsWith(".class");
-    }
-
     /**
      * Add default libraries from lib directory specified with <code>org.jboss.cdi.tck.libraryDirectory</code> property in <b>cdi-tck.properties</b>.
      */
     private void addDefaultLibraries() {
 
         String libDir = ConfigurationFactory.get(true).getLibraryDirectory();
-        if(libDir != null) {
+        if (libDir != null) {
             File directory = new File(libDir);
             logger.log(Level.FINE, "Scanning default library dir {0}", directory.getPath());
 

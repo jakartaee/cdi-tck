@@ -8,7 +8,7 @@ This chapter explains how to run the TCK on Weld as well as your own implementat
 
 === The Test Suite Runner
 
-The test suite is executed by the Maven Surefire plugin during the test phase of the Maven life cycle. The execution happens within a TCK runner project (as opposed to the TCK project itself). Weld includes a TCK runner project that executes the CDI TCK on Weld running inside WildFly 22.x. To execute the CDI TCK on your own CDI implementation, you could modify the TCK runner project included with Weld to use your CDI implementation.
+The test suite is executed by the Maven Surefire plugin during the test phase of the Maven life cycle. The execution happens within a TCK runner project (as opposed to the TCK project itself). Weld includes a TCK runner project that executes the CDI TCK on Weld running inside WildFly 28.x. To execute the CDI TCK on your own CDI implementation, you could modify the TCK runner project included with Weld to use your CDI implementation.
 
 
 
@@ -66,7 +66,7 @@ To specify particular TCK version:
 
 [source, console]
 ----
-mvn test -Dincontainer -Dcdi.tck.version=3.0.0-RC1
+mvn test -Dincontainer -Dcdi.tck.version=4.0.0-RC1
 ----
 
 
@@ -98,7 +98,7 @@ mvn test -Dincontainer=se
 
 The profile needs to provide RI dependencies as well as Arquillian settings (`arquillian.xml`).
 These two need to be stored into a directory so that Arquillian container can then be instructed to pick them up.
-link:$$https://github.com/weld/core/blob/3.0.0.Final/jboss-tck-runner/pom.xml#L424$$[In RI], this orchestration is done using `maven-dependency-plugin` along with `maven-surefire-plugin`.
+link:$$https://github.com/weld/core/blob/b530cf78275c618d9d866ee2d4a7fa81d59220e0/jboss-tck-runner/pom.xml#L561$$[In Weld], this orchestration is done using `maven-dependency-plugin` along with `maven-surefire-plugin`.
 
 
 === Dumping the Test Archives
@@ -123,5 +123,60 @@ To enable the export for just a single test, use the VM argument +arquillian.dep
 [source, console]
 ----
 -Darquillian.deploymentExportPath=target/deployments/
+----
+
+== Executing the Lang Model Test Suite
+The Language Model TCK does not depend on any test framework or test runner.
+Assertions are made using Java `assert`.
+The tests are executed in an implementation-defined manner.
+
+To run the Language Model TCK, implementations must call the `org.jboss.cdi.lang.model.tck.LangModelVerifier#verify()` static method and pass it a `ClassInfo` object for the `LangModelVerifier` class.
+The way how this method is called and how the `ClassInfo` object is obtained are not specified, so that implementations are free to use whatever works best for them.
+Two conditions must be satisfied:
+
+- assertions are enabled;
+- the language model under test is configured to only return runtime-retained annotations.
+
+If the `verify` method returns successfully, the TCK passed.
+If it throws an exception, the TCK failed.
+
+To aid with debugging, the `verify` method prints a message to the JVM standard output in case of a success.
+
+=== Recommendation
+
+For CDI implementations, it is easiest to run the Language Model TCK using a build compatible extension.
+For example:
+
+[source,java]
+----
+public class LangModelVerifierExtension implements BuildCompatibleExtension {
+    @Enhancement(types = LangModelVerifier.class, withAnnotations = Annotation.class)
+    public void run(ClassInfo clazz) {
+        LangModelVerifier.verify(clazz);
+    }
+}
+----
+
+=== Example Weld Test Suite Runner
+
+To execute the TCK test suite against Weld, first switch to the jboss-tck-runner directory in the extracted TCK distribution:
+
+[source, console]
+----
+cd jakartacdi/tck/weld/lang-model-tck
+----
+
+
+[NOTE]
+====
+These instructions assume you have extracted the Jakarta CDI TCK software according to the recommendation given in <<The TCK Environment>>.
+
+====
+
+Then, execute the TCK runner with Maven as follows:
+
+[source, console]
+----
+mvn test
 ----
 

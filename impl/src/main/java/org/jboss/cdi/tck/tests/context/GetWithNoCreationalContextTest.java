@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.context;
 
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.context.spi.Contextual;
 
@@ -41,8 +42,8 @@ public class GetWithNoCreationalContextTest extends AbstractTest {
     @SpecAssertion(section = CONTEXT, id = "na")
     @SpecAssertion(section = CONTEXT, id = "k")
     public void testGetWithoutCreationalContextReturnsNull() {
-        Contextual<MySessionBean> mySessionBean = getBeans(MySessionBean.class).iterator().next();
-        assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean) == null;
+        Contextual<MyRequestBean> myRequestBean = getBeans(MyRequestBean.class).iterator().next();
+        assert getCurrentManager().getContext(RequestScoped.class).get(myRequestBean) == null;
     }
 
 }

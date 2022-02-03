@@ -44,8 +44,7 @@ public class DummyExpressionFactory extends ExpressionFactory {
     }
 
     @Override
-    public Object coerceToType(Object obj, Class<?> targetType) {
+    public <T> T coerceToType(Object o, Class<T> aClass) {
         return null;
     }
-
 }

@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.implementation.producer.method.broken.interceptor;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.inject.Produces;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
@@ -23,6 +24,7 @@ import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @Secure
+@Priority(1)
 public class SimpleInterceptor_Broken {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {

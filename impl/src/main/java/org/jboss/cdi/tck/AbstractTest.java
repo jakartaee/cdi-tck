@@ -47,7 +47,6 @@ import org.jboss.cdi.tck.util.DependentInstance;
  */
 public abstract class AbstractTest extends Arquillian {
 
-    // TODO this will have to be eventually changes as Lite implementations do not have BeanManager, only BeanContainer
     @Inject
     protected BeanManager beanManager;
 

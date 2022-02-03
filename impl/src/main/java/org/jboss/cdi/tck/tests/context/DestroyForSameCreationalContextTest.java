@@ -18,6 +18,7 @@ package org.jboss.cdi.tck.tests.context;
 
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.context.spi.CreationalContext;
@@ -52,16 +53,16 @@ public class DestroyForSameCreationalContextTest extends AbstractTest {
     public void testDestroyForSameCreationalContextOnly() {
         // Check that the mock cc is called (via cc.release()) when we request a context destroyed
         // Note that this is an indirect effect
-        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
+        Context requestContext = getCurrentManager().getContext(RequestScoped.class);
 
-        Bean<AnotherSessionBean> sessionBean = getBeans(AnotherSessionBean.class).iterator().next();
+        Bean<AnotherRequestBean> requestBean = getBeans(AnotherRequestBean.class).iterator().next();
 
         MockCreationalContext.reset();
-        CreationalContext<AnotherSessionBean> creationalContext = new MockCreationalContext<AnotherSessionBean>();
-        AnotherSessionBean instance = sessionContext.get(sessionBean, creationalContext);
+        CreationalContext<AnotherRequestBean> creationalContext = new MockCreationalContext<AnotherRequestBean>();
+        AnotherRequestBean instance = requestContext.get(requestBean, creationalContext);
         instance.ping();
 
-        destroyContext(sessionContext);
+        destroyContext(requestContext);
         assert MockCreationalContext.isReleaseCalled();
 
     }

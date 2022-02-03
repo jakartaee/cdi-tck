@@ -18,7 +18,6 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.definition;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
-import org.jboss.cdi.tck.tests.full.implementation.producer.method.definition.Yummy;
 
 @Dependent
 public class AppleTree {
