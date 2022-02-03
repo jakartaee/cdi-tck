@@ -14,23 +14,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.el;
+package org.jboss.cdi.tck.tests.full.context.dependent;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.inject.Named;
 
+@Dependent
 @Named
 @Default
-@RequestScoped
-public class Salmon {
-    private int age = 0;
+public class Fox {
 
-    public int getAge() {
-        return age;
+    private static boolean destroyed = false;
+
+    private static int destroyCount = 0;
+
+    public static boolean isDestroyed() {
+        return destroyed;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public static void reset() {
+        destroyed = false;
+        destroyCount = 0;
     }
+
+    public static int getDestroyCount() {
+        return destroyCount;
+    }
+
+    @PreDestroy
+    public void destroy() {
+        destroyed = true;
+        destroyCount++;
+    }
+
+    public String getName() {
+        return "gavin";
+    }
+
 }
