@@ -20,9 +20,7 @@ import static org.jboss.cdi.tck.cdi.Sections.BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.CREATIONAL_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT;
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION;
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_OBJECTS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_METHOD_INVOCATION;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
@@ -94,16 +92,6 @@ public class DependentContextTest extends AbstractTest {
         assert !foxHole.fox.equals(foxHole.initializerFox);
     }
 
-    @Test
-    @SpecAssertion(section = DEPENDENT_CONTEXT_EE, id = "ca")
-    public void testInstanceUsedForElEvaluationNotShared() throws Exception {
-        Set<Bean<Fox>> foxBeans = getBeans(Fox.class);
-        assert foxBeans.size() == 1;
-
-        Fox fox1 = getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{fox}", Fox.class);
-        Fox fox2 = getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{fox}", Fox.class);
-        assert !fox1.equals(fox2);
-    }
 
     @Test
     @SpecAssertion(section = DEPENDENT_CONTEXT, id = "da")
@@ -358,17 +346,7 @@ public class DependentContextTest extends AbstractTest {
         assert Fox.getDestroyCount() == 2;
     }
 
-    @Test
-    @SpecAssertion(section = DEPENDENT_DESTRUCTION_EE, id = "eee")
-    public void testDependentsDestroyedWhenElEvaluationCompletes() throws Exception {
-        // Reset test class
-        Fox.reset();
-        FoxRun.setDestroyed(false);
 
-        getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{foxRun}", FoxRun.class);
-        assert FoxRun.isDestroyed();
-        assert Fox.isDestroyed();
-    }
 
     @Test
     @SpecAssertion(section = DEPENDENT_DESTRUCTION, id = "ddd")

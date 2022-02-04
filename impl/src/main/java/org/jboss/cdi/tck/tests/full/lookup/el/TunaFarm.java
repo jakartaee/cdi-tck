@@ -14,27 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.lookup.el;
+package org.jboss.cdi.tck.tests.full.lookup.el;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
-@RequestScoped
-public class Tuna {
+@Named
+@Dependent
+public class TunaFarm {
 
-    long timestamp;
+    @SuppressWarnings("unused")
+    @Inject
+    public Tuna tuna;
 
-    @PostConstruct
-    public void create() {
-        timestamp = System.currentTimeMillis();
-    }
-
-    public String getName() {
-        return "Ophir";
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
+    public Tuna notInjectedTuna = new Tuna();
 
 }
