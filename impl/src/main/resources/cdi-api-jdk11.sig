@@ -778,7 +778,7 @@ CLSS public abstract interface !annotation jakarta.enterprise.inject.build.compa
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE])
 intf java.lang.annotation.Annotation
-meth public abstract java.lang.String value()
+meth public abstract java.lang.Class<? extends jakarta.enterprise.inject.spi.Extension> value()
 
 CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.StereotypeInfo
 meth public abstract boolean isAlternative()
@@ -1813,11 +1813,68 @@ CLSS public abstract interface !annotation jakarta.inject.Singleton
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
 intf java.lang.annotation.Annotation
 
+CLSS public abstract interface !annotation jakarta.interceptor.AroundConstruct
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[METHOD])
+intf java.lang.annotation.Annotation
+
+CLSS public abstract interface !annotation jakarta.interceptor.AroundInvoke
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[METHOD])
+intf java.lang.annotation.Annotation
+
+CLSS public abstract interface !annotation jakarta.interceptor.AroundTimeout
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[METHOD])
+intf java.lang.annotation.Annotation
+
+CLSS public abstract interface !annotation jakarta.interceptor.ExcludeClassInterceptors
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[METHOD, CONSTRUCTOR])
+intf java.lang.annotation.Annotation
+
+CLSS public abstract interface !annotation jakarta.interceptor.ExcludeDefaultInterceptors
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE, METHOD, CONSTRUCTOR])
+intf java.lang.annotation.Annotation
+
+CLSS public abstract interface !annotation jakarta.interceptor.Interceptor
+ anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE])
+innr public static Priority
+intf java.lang.annotation.Annotation
+
+CLSS public static jakarta.interceptor.Interceptor$Priority
+ outer jakarta.interceptor.Interceptor
+fld public final static int APPLICATION = 2000
+fld public final static int LIBRARY_AFTER = 3000
+fld public final static int LIBRARY_BEFORE = 1000
+fld public final static int PLATFORM_AFTER = 4000
+fld public final static int PLATFORM_BEFORE = 0
+supr java.lang.Object
+
 CLSS public abstract interface !annotation jakarta.interceptor.InterceptorBinding
  anno 0 java.lang.annotation.Documented()
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[ANNOTATION_TYPE])
 intf java.lang.annotation.Annotation
+
+CLSS public abstract interface !annotation jakarta.interceptor.Interceptors
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE, METHOD, CONSTRUCTOR])
+intf java.lang.annotation.Annotation
+meth public abstract java.lang.Class[] value()
+
+CLSS public abstract interface jakarta.interceptor.InvocationContext
+meth public abstract java.lang.Object getTarget()
+meth public abstract java.lang.Object getTimer()
+meth public abstract java.lang.Object proceed() throws java.lang.Exception
+meth public abstract java.lang.Object[] getParameters()
+meth public abstract java.lang.reflect.Constructor<?> getConstructor()
+meth public abstract java.lang.reflect.Method getMethod()
+meth public abstract java.util.Map<java.lang.String,java.lang.Object> getContextData()
+meth public abstract void setParameters(java.lang.Object[])
 
 CLSS public abstract interface java.io.Serializable
 

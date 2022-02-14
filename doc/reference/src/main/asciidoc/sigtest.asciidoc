@@ -23,8 +23,7 @@ https://github.com/jtulach/netbeans-apitest
 
 === Running the signature test
 To run the signature test, use a pom file like that found in
-https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigtest-pom.xml
-and shown here:
+https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigtest-pom.xml and shown here:
 [source, xml]
 ----
 <?xml version="1.0"?>
@@ -47,9 +46,9 @@ and shown here:
     <!-- Set the api jar artifact versions here -->
     <annotation.api.version>2.1.0</annotation.api.version>
     <atinject.api.version>2.0.1</atinject.api.version>
-    <interceptor.api.version>2.0.1-RC1</interceptor.api.version>
+    <interceptor.api.version>2.1.0</interceptor.api.version>
     <el.api.version>5.0.0</el.api.version>
-    <cdi.api.version>4.0.0-RC1</cdi.api.version>
+    <cdi.api.version>4.0.0-RC5</cdi.api.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
@@ -121,7 +120,7 @@ and shown here:
         </executions>
         <configuration>
           <sigfile>cdi-api-jdk11.sig</sigfile>
-          <packages>jakarta.decorator,jakarta.enterprise</packages>
+          <packages>jakarta.decorator,jakarta.enterprise,jakarta.interceptor</packages>
           <classes>target/classes</classes>
           <report>cdi-sig-report.txt</report>
         </configuration>
@@ -130,6 +129,7 @@ and shown here:
   </build>
 </project>
 ----
+Your version should specifiy the dependies on these jars as used in your compatible implementation.
 
 [source, console]
 ----
@@ -167,6 +167,86 @@ You can ignore the following warnings:
 +"The return type java.lang.reflect.Member can't be resolved"+
 
 The important thing is that the mvn version shows "BUILD SUCCESS".
+
+Another example that just specifies a compatible implementation test as the dependency to validate the API artifact signatures from the transitive dependencies is pom file like that found in
+https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigtest-weld-pom.xml and shown here:
+[source, xml]
+----
+<?xml version="1.0"?>
+<!-- Sample maven pom to verify signatures using only the weld-core-imp artifiact and its dependencies -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <!-- For access to staging repos, add -Pstaging -->
+  <parent>
+    <groupId>org.eclipse.ee4j</groupId>
+    <artifactId>project</artifactId>
+    <version>1.0.6</version>
+  </parent>
+
+  <groupId>jakarta.enterprise</groupId>
+  <artifactId>cdi-tck-weld-sigtest</artifactId>
+  <version>4.0</version>
+  <name>CDI TCK Signature Tests</name>
+  <description>CDI TCK Signature test validation of CDI dependent API jars</description>
+  <properties>
+    <!-- Set the Weld version to test -->
+    <weld.version>5.0.0.Beta1</weld.version>
+  </properties>
+
+  <!-- Set the api jar artifact dependencies here -->
+  <dependencies>
+    <dependency>
+      <groupId>org.jboss.weld</groupId>
+      <artifactId>weld-core-impl</artifactId>
+      <version>${weld.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-dependencies</id>
+            <phase>package</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>target/classes</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.netbeans.tools</groupId>
+        <artifactId>sigtest-maven-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sigtest</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <sigfile>cdi-api-jdk11.sig</sigfile>
+          <packages>jakarta.decorator,jakarta.enterprise,jakarta.interceptor</packages>
+          <classes>target/classes</classes>
+          <report>cdi-sig-report.txt</report>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+----
 
 === Forcing a signature test failure
 
