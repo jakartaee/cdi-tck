@@ -248,6 +248,9 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
 </project>
 ----
 
+=== CDI Lite Signature Tests
+CDI Lite requires the same signature tests as Full. Even though CDI Lite does not require some of the Jakarta Interceptors behaviors, we did not want to restrict what CDI Lite implementations might provide in the way of interceptors, for example, an implementation that supports for Lite and Full. An implementation of CDI Lite can simply depend on the Jakarta Interceptors API artifact to meet the signature test requirements.
+
 === Forcing a signature test failure
 
 Just for fun (and to confirm that the signature test is working correctly), you can try the following:
