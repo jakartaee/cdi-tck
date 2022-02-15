@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- Sample maven pom to verify signatures -->
+<!-- Sample maven pom to verify signatures using only the weld-core-imp artifiact and its dependencies -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <!-- For access to staging repos, add -Pstaging -->
@@ -10,50 +10,21 @@
   </parent>
 
   <groupId>jakarta.enterprise</groupId>
-  <artifactId>cdi-tck-sigtest</artifactId>
+  <artifactId>cdi-tck-weld-sigtest</artifactId>
   <version>4.0</version>
   <name>CDI TCK Signature Tests</name>
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
-    <!-- Set the api jar artifact versions here -->
-    <annotation.api.version>2.1.0</annotation.api.version>
-    <atinject.api.version>2.0.1</atinject.api.version>
-    <interceptor.api.version>2.1.0</interceptor.api.version>
-    <el.api.version>5.0.0</el.api.version>
-    <cdi.api.version>4.0.0-RC5</cdi.api.version>
+    <!-- Set the Weld version to test -->
+    <weld.version>5.0.0.Beta1</weld.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
   <dependencies>
     <dependency>
-      <groupId>jakarta.annotation</groupId>
-      <artifactId>jakarta.annotation-api</artifactId>
-      <version>${annotation.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.el</groupId>
-      <artifactId>jakarta.el-api</artifactId>
-      <version>${el.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.interceptor</groupId>
-      <artifactId>jakarta.interceptor-api</artifactId>
-      <version>${interceptor.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.inject</groupId>
-      <artifactId>jakarta.inject-api</artifactId>
-      <version>${atinject.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.lang-model</artifactId>
-      <version>${cdi.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.cdi-api</artifactId>
-      <version>${cdi.api.version}</version>
+      <groupId>org.jboss.weld</groupId>
+      <artifactId>weld-core-impl</artifactId>
+      <version>${weld.version}</version>
     </dependency>
   </dependencies>
 
@@ -70,9 +41,10 @@
               <goal>unpack-dependencies</goal>
             </goals>
             <configuration>
-              <stripVersion>true</stripVersion>
-              <overWriteReleases>true</overWriteReleases>
               <outputDirectory>target/classes</outputDirectory>
+              <overWriteReleases>false</overWriteReleases>
+              <overWriteSnapshots>false</overWriteSnapshots>
+              <overWriteIfNewer>true</overWriteIfNewer>
             </configuration>
           </execution>
         </executions>

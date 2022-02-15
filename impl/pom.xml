@@ -381,6 +381,15 @@
                                             <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
                                             <includes>**/*.class,**/*.xml</includes>
                                         </artifactItem>
+                                        <artifactItem>
+                                            <groupId>jakarta.interceptor</groupId>
+                                            <artifactId>jakarta.interceptor-api</artifactId>
+                                            <version>${interceptors.api.version}</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
+                                            <includes>**/*.class,**/*.xml</includes>
+                                        </artifactItem>
                                     </artifactItems>
                                     <includes>**/*.java</includes>
                                     <excludes>**/*.properties</excludes>
@@ -415,7 +424,8 @@
                                 jakarta.enterprise.util,
                                 jakarta.enterprise.lang.model,
                                 jakarta.enterprise.lang.model.declarations,
-                                jakarta.enterprise.lang.model.types
+                                jakarta.enterprise.lang.model.types,
+                                jakarta.interceptor
                             </packages>
                             <attach>false</attach>
                             <sigfile>${project.build.directory}/cdi-api-jdk${jdk.major.version}.sig</sigfile>
