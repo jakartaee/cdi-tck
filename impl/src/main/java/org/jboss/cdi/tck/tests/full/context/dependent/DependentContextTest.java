@@ -12,6 +12,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION_EE;
 
@@ -45,5 +46,15 @@ public class DependentContextTest extends AbstractTest {
         getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{foxRun}", FoxRun.class);
         assert FoxRun.isDestroyed();
         assert Fox.isDestroyed();
+    }
+
+    @Test
+    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g")
+    // Dependent context is now always active
+    public void testContextIsActiveWhenEvaluatingElExpression() {
+        String foxName = getCurrentConfiguration().getEl().evaluateMethodExpression(getCurrentManager(),
+                "#{sensitiveFox.getName}", String.class, new Class[0], new Object[0]);
+        assert foxName != null;
+        assert SensitiveFox.isDependentContextActiveDuringEval();
     }
 }
