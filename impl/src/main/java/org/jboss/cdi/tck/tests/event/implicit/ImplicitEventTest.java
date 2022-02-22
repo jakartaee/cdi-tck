@@ -30,6 +30,7 @@ import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -108,7 +109,7 @@ public class ImplicitEventTest extends AbstractTest {
         assert directory.getStudents().contains(student);
     }
 
-    @Test
+    @Test(groups = TestGroups.CDI_FULL)
     @SpecAssertions({ @SpecAssertion(section = BUILTIN_EVENT, id = "g"),
             @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "eb") })
     public void testImplicitEventIsPassivationCapable() throws IOException, ClassNotFoundException {

@@ -29,6 +29,7 @@ import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -104,7 +105,7 @@ public class BuiltinInstanceTest extends AbstractTest {
         farm.getCow().get().ping();
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = TestGroups.CDI_FULL)
     @SpecAssertion(section = BUILTIN_INSTANCE, id = "g")
     public void testInstanceIsPassivationCapable(Field field) throws Exception {
 

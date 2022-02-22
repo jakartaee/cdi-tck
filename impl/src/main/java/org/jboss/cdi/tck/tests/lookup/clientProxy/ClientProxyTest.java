@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -44,7 +45,7 @@ public class ClientProxyTest extends AbstractTest {
         assert getCurrentConfiguration().getBeans().isProxy(tuna);
     }
 
-    @Test
+    @Test(groups = TestGroups.CDI_FULL)
     @SpecAssertion(section = CLIENT_PROXIES, id = "c")
     public void testSimpleBeanClientProxyIsSerializable() throws IOException, ClassNotFoundException {
         TunedTuna tuna = getContextualReference(TunedTuna.class);

@@ -261,16 +261,6 @@ public class DependentContextTest extends AbstractTest {
     @Test
     @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g")
     // Dependent context is now always active
-    public void testContextIsActiveWhenEvaluatingElExpression() {
-        String foxName = getCurrentConfiguration().getEl().evaluateMethodExpression(getCurrentManager(),
-                "#{sensitiveFox.getName}", String.class, new Class[0], new Object[0]);
-        assert foxName != null;
-        assert SensitiveFox.isDependentContextActiveDuringEval();
-    }
-
-    @Test
-    @SpecAssertion(section = DEPENDENT_CONTEXT, id = "g")
-    // Dependent context is now always active
     public void testContextIsActiveDuringBeanCreation() {
         SensitiveFox fox1 = getContextualReference(SensitiveFox.class);
         assert fox1 != null;
