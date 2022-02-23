@@ -260,7 +260,7 @@ This section lists the applicable requirements and specifications for the CDI TC
 
 *  *Jarkarta Dependency Injection (DI)* - CDI builds on DI, and as such CDI implementations must additionally pass the Jakarta Dependency Injection TCK.
 
-* *Jakarta Interceptors* - CDI is an implementation of the Jakarta Interceptors specification. Jakarta Interceptors has no TCK of its own, so the CDI TCK includes an extension set of tests that validate the Jakarta Interceptors concepts.
+* *Jakarta Interceptors* - CDI is an implementation of the Jakarta Interceptors specification. Jakarta Interceptors has no TCK of its own, so the CDI TCK includes an extensive set of tests that validate the Jakarta Interceptors concepts.
 [TIP]
 ====
 The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar+ which contains two classes showing how the Weld compatible implementation passes the CDI TCK. The source for these classes is available from link:$$hhttps://github.com/weld/core/tree/5.0.0.Alpha2/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck$$[]
