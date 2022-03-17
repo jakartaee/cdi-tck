@@ -300,11 +300,13 @@ public enum EnumMembers implements EnumInterface {
             assert ctor.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatable.class);
             assert !ctor.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
             assert ctor.parameters().get(0).repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 1;
-            assert ctor.parameters().get(0).type().annotations().size() == 2;
-            assert ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructor2.class);
-            assert ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatable.class);
-            assert !ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
-            assert ctor.parameters().get(0).type().repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 1;
+            if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+                assert ctor.parameters().get(0).type().annotations().size() == 2;
+                assert ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructor2.class);
+                assert ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatable.class);
+                assert !ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
+                assert ctor.parameters().get(0).type().repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 1;
+            }
 
             // @AnnEnumConstructor3
             // private EnumMembers(@AnnEnumConstructor4 @AnnEnumConstructorRepeatable("bar") @AnnEnumConstructorRepeatable("baz") int disambiguate) {}
@@ -322,11 +324,13 @@ public enum EnumMembers implements EnumInterface {
             assert !ctor2.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatable.class);
             assert ctor2.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
             assert ctor2.parameters().get(0).repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 2;
-            assert ctor2.parameters().get(0).type().annotations().size() == 2;
-            assert ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructor4.class);
-            assert !ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatable.class);
-            assert ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
-            assert ctor2.parameters().get(0).type().repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 2;
+            if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+                assert ctor2.parameters().get(0).type().annotations().size() == 2;
+                assert ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructor4.class);
+                assert !ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatable.class);
+                assert ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
+                assert ctor2.parameters().get(0).type().repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 2;
+            }
 
             assertConstructor(clazz, PrimitiveType.PrimitiveKind.BOOLEAN, Modifier.PRIVATE);
             assertConstructor(clazz, PrimitiveType.PrimitiveKind.INT, Modifier.PRIVATE);
