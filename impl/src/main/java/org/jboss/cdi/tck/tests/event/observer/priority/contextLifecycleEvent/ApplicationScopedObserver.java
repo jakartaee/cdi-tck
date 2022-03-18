@@ -21,7 +21,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.Initialized;
 import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.event.Shutdown;
 import jakarta.interceptor.Interceptor;
+import jakarta.enterprise.event.Startup;
 
 @Dependent
 public class ApplicationScopedObserver {
@@ -33,6 +35,8 @@ public class ApplicationScopedObserver {
     public static final String B = "B";
     public static final String C = "C";
     public static final String D = "D";
+    public static final String SU = "Su";
+    public static final String SD = "Sd";
 
     public static StringBuilder getBuilder() {
         if (builder == null) {
@@ -55,5 +59,14 @@ public class ApplicationScopedObserver {
 
     public void forth(@Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION + 700) Object obj) {
         getBuilder().append(D);
+    }
+
+    public void startup(@Observes @Priority(Interceptor.Priority.APPLICATION - 100) Startup startup) {
+        getBuilder().append(SU);
+        Thread.dumpStack();
+    }
+    public void shutdown(@Observes @Priority(Interceptor.Priority.APPLICATION - 100) Shutdown shutdown) {
+        getBuilder().append(SD);
+        Thread.dumpStack();
     }
 }
