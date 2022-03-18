@@ -129,7 +129,7 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
   </build>
 </project>
 ----
-Your version should specifiy the dependies on these jars as used in your compatible implementation.
+Your version should specify the dependencies on these jars as used in your compatible implementation.
 
 [source, console]
 ----
