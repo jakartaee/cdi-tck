@@ -34,7 +34,7 @@ public class AnnotatedThrowsTypes<E extends Exception> {
 
         // @AnnThrows1 Exception
         assert method.throwsTypes().get(0).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.throwsTypes().get(0).asClass().annotations().size() == 1;
             assert method.throwsTypes().get(0).asClass().hasAnnotation(AnnThrows1.class);
         }
@@ -42,7 +42,7 @@ public class AnnotatedThrowsTypes<E extends Exception> {
 
         // @AnnThrows2 E
         assert method.throwsTypes().get(1).isTypeVariable();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.throwsTypes().get(1).asTypeVariable().annotations().size() == 1;
             assert method.throwsTypes().get(1).asTypeVariable().hasAnnotation(AnnThrows2.class);
         }
@@ -50,7 +50,7 @@ public class AnnotatedThrowsTypes<E extends Exception> {
 
         // @AnnThrows3 F
         assert method.throwsTypes().get(2).isTypeVariable();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.throwsTypes().get(2).asTypeVariable().annotations().size() == 1;
             assert method.throwsTypes().get(2).asTypeVariable().hasAnnotation(AnnThrows3.class);
         }

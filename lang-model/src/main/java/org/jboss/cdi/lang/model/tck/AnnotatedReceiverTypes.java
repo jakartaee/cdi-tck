@@ -76,7 +76,7 @@ public class AnnotatedReceiverTypes<T> {
             assert method.receiverType().asClass().hasAnnotation(AnnReceiver1.class);
             assert method.receiverType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
         } else if (method.receiverType().isParameterizedType()) { // JDK 17 reflection correctly evaluates this as a parameterized type
-            if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+            if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
                 assert method.receiverType().asParameterizedType().annotations().size() == 1;
                 assert method.receiverType().asParameterizedType().hasAnnotation(AnnReceiver1.class);
             }
@@ -89,7 +89,7 @@ public class AnnotatedReceiverTypes<T> {
 
         assert method.receiverType() != null;
         assert method.receiverType().isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.receiverType().asClass().annotations().size() == 1;
             assert method.receiverType().asClass().hasAnnotation(AnnReceiver2.class);
         }

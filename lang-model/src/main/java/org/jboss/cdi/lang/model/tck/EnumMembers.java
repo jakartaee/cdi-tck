@@ -300,7 +300,7 @@ public enum EnumMembers implements EnumInterface {
             assert ctor.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatable.class);
             assert !ctor.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
             assert ctor.parameters().get(0).repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 1;
-            if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+            if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
                 assert ctor.parameters().get(0).type().annotations().size() == 2;
                 assert ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructor2.class);
                 assert ctor.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatable.class);
@@ -324,7 +324,7 @@ public enum EnumMembers implements EnumInterface {
             assert !ctor2.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatable.class);
             assert ctor2.parameters().get(0).hasAnnotation(AnnEnumConstructorRepeatableContainer.class);
             assert ctor2.parameters().get(0).repeatableAnnotation(AnnEnumConstructorRepeatable.class).size() == 2;
-            if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+            if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
                 assert ctor2.parameters().get(0).type().annotations().size() == 2;
                 assert ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructor4.class);
                 assert !ctor2.parameters().get(0).type().hasAnnotation(AnnEnumConstructorRepeatable.class);

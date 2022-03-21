@@ -67,14 +67,14 @@ public class AnnotatedSuperTypes<T>
 
         // @AnnSuperClass AnnotatedSuperClass<@AnnSuperClassTypeParam T>
         assert clazz.superClass().isParameterizedType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.superClass().asParameterizedType().annotations().size() == 1;
             assert clazz.superClass().asParameterizedType().hasAnnotation(AnnSuperClass.class);
         }
         assert clazz.superClass().asParameterizedType().declaration().name().equals("org.jboss.cdi.lang.model.tck.SuperClass");
         assert clazz.superClass().asParameterizedType().typeArguments().size() == 1;
         assert clazz.superClass().asParameterizedType().typeArguments().get(0).isTypeVariable();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.superClass().asParameterizedType().typeArguments().get(0).asTypeVariable().annotations().size() == 1;
             assert clazz.superClass().asParameterizedType().typeArguments().get(0).asTypeVariable().hasAnnotation(AnnSuperClassTypeParam.class);
         }
@@ -88,7 +88,7 @@ public class AnnotatedSuperTypes<T>
 
         // @AnnSuperInterface1 AnnotatedSuperInterface1<@AnnSuperInterfaceTypeParam1 List<@AnnSuperInterfaceTypeParam2 String>>,
         assert clazz.superInterfaces().get(0).isParameterizedType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.superInterfaces().get(0).asParameterizedType().annotations().size() == 1;
             assert clazz.superInterfaces().get(0).asParameterizedType().hasAnnotation(AnnSuperInterface1.class);
         }
@@ -96,14 +96,14 @@ public class AnnotatedSuperTypes<T>
         assert clazz.superInterfaces().get(0).asParameterizedType().typeArguments().size() == 1;
         Type typearg = clazz.superInterfaces().get(0).asParameterizedType().typeArguments().get(0);
         assert typearg.isParameterizedType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert typearg.asParameterizedType().annotations().size() == 1;
             assert typearg.asParameterizedType().hasAnnotation(AnnSuperInterfaceTypeParam1.class);
         }
         assert typearg.asParameterizedType().declaration().name().equals("java.util.List");
         assert typearg.asParameterizedType().typeArguments().size() == 1;
         assert typearg.asParameterizedType().typeArguments().get(0).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert typearg.asParameterizedType().typeArguments().get(0).asClass().annotations().size() == 1;
             assert typearg.asParameterizedType().typeArguments().get(0).asClass().hasAnnotation(AnnSuperInterfaceTypeParam2.class);
         }
@@ -111,7 +111,7 @@ public class AnnotatedSuperTypes<T>
 
         // @AnnSuperInterface2 AnnotatedSuperInterface2
         assert clazz.superInterfaces().get(1).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.superInterfaces().get(1).asClass().annotations().size() == 1;
             assert clazz.superInterfaces().get(1).asClass().hasAnnotation(AnnSuperInterface2.class);
         }

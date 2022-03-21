@@ -8,7 +8,6 @@ import jakarta.enterprise.lang.model.types.PrimitiveType;
 import jakarta.enterprise.lang.model.types.Type;
 import jakarta.enterprise.lang.model.types.TypeVariable;
 
-import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -355,7 +354,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert clazz.typeParameters().get(1).asTypeVariable().bounds().get(0).isTypeVariable();
         if (!reflectionBug) {
             assert clazz.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().annotations().size() == 1; // @AnnTypeVariableClass1
-            if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+            if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
                 assert clazz.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().hasAnnotation(AnnTypeVariableClass3.class);
             }
         }
@@ -368,7 +367,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert clazz.typeParameters().get(2).asTypeVariable().name().equals("C");
         assert clazz.typeParameters().get(2).asTypeVariable().bounds().size() == 1;
         assert clazz.typeParameters().get(2).asTypeVariable().bounds().get(0).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.typeParameters().get(2).asTypeVariable().bounds().get(0).asClass().annotations().size() == 1;
             assert clazz.typeParameters().get(2).asTypeVariable().bounds().get(0).asClass().hasAnnotation(AnnTypeVariableClass5.class);
         }
@@ -382,14 +381,14 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert clazz.typeParameters().get(3).asTypeVariable().name().equals("D");
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().size() == 2;
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(0).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(0).asClass().annotations().size() == 1;
             assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(0).asClass().hasAnnotation(AnnTypeVariableClass7.class);
         }
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(0).asClass().declaration().isPlainClass();
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(0).asClass().declaration().name().equals("java.lang.Number");
         assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(1).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().annotations().size() == 1;
             assert clazz.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().hasAnnotation(AnnTypeVariableClass8.class);
         }
@@ -405,14 +404,14 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).isTypeVariable();
         if (!reflectionBug) {
             assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().annotations().size() == 1; // @AnnTypeVariableClass4
-            if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+            if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
                 assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().hasAnnotation(AnnTypeVariableClass10.class);
             }
         }
         assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().name().equals("C");
         assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().size() == 1;
         assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().annotations().size() == 1;
             assert clazz.typeParameters().get(4).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().hasAnnotation(AnnTypeVariableClass5.class);
         }
@@ -425,7 +424,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert clazz.typeParameters().get(5).asTypeVariable().name().equals("F");
         assert clazz.typeParameters().get(5).asTypeVariable().bounds().size() == 1;
         assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).isParameterizedType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().annotations().size() == 1;
             assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().hasAnnotation(AnnTypeVariableClass12.class);
         }
@@ -433,13 +432,13 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().declaration().name().equals("java.util.List");
         assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().size() == 1;
         assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).isWildcardType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().annotations().size() == 1;
             assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().hasAnnotation(AnnTypeVariableClass13.class);
         }
         assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().upperBound() != null;
         assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asClass().annotations().size() == 1;
             assert clazz.typeParameters().get(5).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asClass().hasAnnotation(AnnTypeVariableClass14.class);
         }
@@ -466,7 +465,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert ctor.returnType().isClass();
         assert ctor.returnType().asClass().declaration().equals(clazz);
         assert ctor.returnType().annotations().size() == 1;
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert ctor.returnType().hasAnnotation(AnnConstructor.class);
         }
 
@@ -474,7 +473,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert ctor.parameters().get(0).annotations().size() == 1;
         assert ctor.parameters().get(0).hasAnnotation(AnnConstructorParameter.class);
         assert ctor.parameters().get(0).type().isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert ctor.parameters().get(0).type().asClass().annotations().size() == 1;
             assert ctor.parameters().get(0).type().asClass().hasAnnotation(AnnConstructorParameter.class);
         }
@@ -499,7 +498,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.parameters().get(0).annotations().size() == 1;
         assert method.parameters().get(0).hasAnnotation(AnnMethodParameter.class);
         assert method.parameters().get(0).type().isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.parameters().get(0).type().asClass().annotations().size() == 1;
             assert method.parameters().get(0).type().asClass().hasAnnotation(AnnMethodParameter.class);
         }
@@ -518,7 +517,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert !field.hasAnnotation(MissingAnnotation.class);
 
         assert field.type().isPrimitive();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert field.type().asPrimitive().annotations().size() == 1;
             assert field.type().asPrimitive().hasAnnotation(AnnPrimitiveField.class);
         }
@@ -537,7 +536,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert !field.hasAnnotation(MissingAnnotation.class);
 
         assert field.type().isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert field.type().asClass().annotations().size() == 1;
             assert field.type().asClass().hasAnnotation(AnnClassField.class);
         }
@@ -566,7 +565,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // @AnnArrayField4 String @AnnArrayField1 [][] @AnnArrayField2 [][] @AnnArrayField3 []
         type = type.asArray().componentType();
         assert type.isArray();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert type.asArray().annotations().size() == 1;
             assert type.asArray().hasAnnotation(AnnArrayField1.class);
         }
@@ -579,7 +578,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // @AnnArrayField4 String @AnnArrayField2 [][] @AnnArrayField3 []
         type = type.asArray().componentType();
         assert type.isArray();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert type.asArray().annotations().size() == 1;
             assert type.asArray().hasAnnotation(AnnArrayField2.class);
         }
@@ -592,7 +591,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // @AnnArrayField4 String @AnnArrayField3 []
         type = type.asArray().componentType();
         assert type.isArray();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert type.asArray().annotations().size() == 1;
             assert type.asArray().hasAnnotation(AnnArrayField3.class);
         }
@@ -600,7 +599,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         // @AnnArrayField4 String
         type = type.asArray().componentType();
         assert type.isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert type.asClass().annotations().size() == 1;
             assert type.asClass().hasAnnotation(AnnArrayField4.class);
         }
@@ -623,7 +622,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
 
         // @AnnParameterizedField1 List<@AnnParameterizedField2 Map<@AnnParameterizedField3 String, @AnnParameterizedField4 A>>
         assert field.type().isParameterizedType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert field.type().asParameterizedType().annotations().size() == 1;
             assert field.type().asParameterizedType().hasAnnotation(AnnParameterizedField1.class);
         }
@@ -634,7 +633,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
 
         // @AnnParameterizedField2 Map<@AnnParameterizedField3 String, @AnnParameterizedField4 A>
         assert typearg1.isParameterizedType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert typearg1.asParameterizedType().annotations().size() == 1;
             assert typearg1.asParameterizedType().hasAnnotation(AnnParameterizedField2.class);
         }
@@ -646,7 +645,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
 
         // @AnnParameterizedField3 String
         assert typearg2.isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert typearg2.asClass().annotations().size() == 1;
             assert typearg2.asClass().hasAnnotation(AnnParameterizedField3.class);
         }
@@ -654,7 +653,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
 
         // @AnnParameterizedField4 A
         assert typearg3.isTypeVariable();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert typearg3.asTypeVariable().annotations().size() == 1;
             assert typearg3.asTypeVariable().hasAnnotation(AnnParameterizedField4.class);
         }
@@ -673,7 +672,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert !field.hasAnnotation(MissingAnnotation.class);
 
         assert field.type().isTypeVariable();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert field.type().asTypeVariable().annotations().size() == 1;
             assert field.type().asTypeVariable().hasAnnotation(AnnTypeVariableField.class);
         }
@@ -685,7 +684,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert annotationInfos.isEmpty() || annotationInfos.size() == 1; // JDK 11 reflection doesn't see any annotation
         if (annotationInfos.size() == 1) {
             // JDK 17 reflection correctly recognizes one annotation
-            if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+            if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
                 assert field.type().asTypeVariable().bounds().get(0).asTypeVariable().hasAnnotation(AnnTypeVariableClass3.class);
             }
         }
@@ -728,14 +727,14 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.typeParameters().get(1).asTypeVariable().name().equals("U");
         assert method.typeParameters().get(1).asTypeVariable().bounds().size() == 1;
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).isTypeVariable();
-        if (!reflectionBug && !LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (!reflectionBug && LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().annotations().size() == 1;
             assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().hasAnnotation(AnnTypeVariableMethod3.class);
         }
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().name().equals("C");
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().size() == 1;
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().annotations().size() == 1;
         assert method.typeParameters().get(1).asTypeVariable().bounds().get(0).asTypeVariable().bounds().get(0).asClass().hasAnnotation(AnnTypeVariableClass5.class);
         }
@@ -748,7 +747,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.typeParameters().get(2).asTypeVariable().name().equals("V");
         assert method.typeParameters().get(2).asTypeVariable().bounds().size() == 1;
         assert method.typeParameters().get(2).asTypeVariable().bounds().get(0).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.typeParameters().get(2).asTypeVariable().bounds().get(0).asClass().annotations().size() == 1;
             assert method.typeParameters().get(2).asTypeVariable().bounds().get(0).asClass().hasAnnotation(AnnTypeVariableMethod5.class);
         }
@@ -762,14 +761,14 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.typeParameters().get(3).asTypeVariable().name().equals("W");
         assert method.typeParameters().get(3).asTypeVariable().bounds().size() == 2;
         assert method.typeParameters().get(3).asTypeVariable().bounds().get(0).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.typeParameters().get(3).asTypeVariable().bounds().get(0).asClass().annotations().size() == 1;
             assert method.typeParameters().get(3).asTypeVariable().bounds().get(0).asClass().hasAnnotation(AnnTypeVariableMethod7.class);
         }
         assert method.typeParameters().get(3).asTypeVariable().bounds().get(0).asClass().declaration().isPlainClass();
         assert method.typeParameters().get(3).asTypeVariable().bounds().get(0).asClass().declaration().name().equals("java.lang.Number");
         assert method.typeParameters().get(3).asTypeVariable().bounds().get(1).isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().annotations().size() == 1;
             assert method.typeParameters().get(3).asTypeVariable().bounds().get(1).asClass().hasAnnotation(AnnTypeVariableMethod8.class);
         }
@@ -783,7 +782,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.typeParameters().get(4).asTypeVariable().name().equals("X");
         assert method.typeParameters().get(4).asTypeVariable().bounds().size() == 1;
         assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).isParameterizedType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().annotations().size() == 1;
             assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().hasAnnotation(AnnTypeVariableMethod10.class);
         }
@@ -791,12 +790,12 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().declaration().name().equals("java.util.List");
         assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().size() == 1;
         assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).isWildcardType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().annotations().size() == 1;
             assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().hasAnnotation(AnnTypeVariableMethod11.class);
         }
         assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound() != null;
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound().annotations().size() == 1;
             assert method.typeParameters().get(4).asTypeVariable().bounds().get(0).asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound().hasAnnotation(AnnTypeVariableMethod12.class);
         }
@@ -829,13 +828,13 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert param1.isParameterizedType();
         assert param1.asParameterizedType().typeArguments().size() == 1;
         assert param1.asParameterizedType().typeArguments().get(0).isWildcardType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert param1.asParameterizedType().typeArguments().get(0).asWildcardType().annotations().size() == 1;
             assert param1.asParameterizedType().typeArguments().get(0).asWildcardType().hasAnnotation(AnnWildcardMethod1.class);
         }
         assert param1.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound() != null;
         assert param1.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().isTypeVariable();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert param1.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asTypeVariable().annotations().size() == 1;
             assert param1.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asTypeVariable().hasAnnotation(AnnWildcardMethod2.class);
         }
@@ -847,14 +846,14 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert param2.isParameterizedType();
         assert param2.asParameterizedType().typeArguments().size() == 1;
         assert param2.asParameterizedType().typeArguments().get(0).isWildcardType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert param2.asParameterizedType().typeArguments().get(0).asWildcardType().annotations().size() == 1;
             assert param2.asParameterizedType().typeArguments().get(0).asWildcardType().hasAnnotation(AnnWildcardMethod3.class);
         }
         assert param2.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound() == null;
         assert param2.asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound() != null;
         assert param2.asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound().isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert param2.asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound().asClass().annotations().size() == 1;
             assert param2.asParameterizedType().typeArguments().get(0).asWildcardType().lowerBound().asClass().hasAnnotation(AnnWildcardMethod4.class);
         }
@@ -865,7 +864,7 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert param3.isParameterizedType();
         assert param3.asParameterizedType().typeArguments().size() == 1;
         assert param3.asParameterizedType().typeArguments().get(0).isWildcardType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().annotations().size() == 1;
             assert param3.asParameterizedType().typeArguments().get(0).asWildcardType().hasAnnotation(AnnWildcardMethod5.class);
         }
@@ -880,13 +879,13 @@ public class AnnotatedTypes<@AnnTypeVariableClass1 A,
         assert param4.isParameterizedType();
         assert param4.asParameterizedType().typeArguments().size() == 1;
         assert param4.asParameterizedType().typeArguments().get(0).isWildcardType();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().annotations().size() == 1;
             assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().hasAnnotation(AnnWildcardMethod6.class);
         }
         assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound() != null;
         assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().isClass();
-        if (!LangModelVerifier.EXCLUDE_TYPE_ANNOTATION_CHECKS) {
+        if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
             assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asClass().annotations().size() == 1;
             assert param4.asParameterizedType().typeArguments().get(0).asWildcardType().upperBound().asClass().hasAnnotation(AnnWildcardMethod7.class);
         }
