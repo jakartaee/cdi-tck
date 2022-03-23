@@ -17,11 +17,11 @@
 
 package org.jboss.cdi.tck.tests.context.dependent.instance;
 
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Instance;
 
-@RequestScoped
+@ApplicationScoped
 public class Bar {
 
     public void observeGoodEvents(Instance<Foo> instance, @Observes GoodEvent goodEvent) {
