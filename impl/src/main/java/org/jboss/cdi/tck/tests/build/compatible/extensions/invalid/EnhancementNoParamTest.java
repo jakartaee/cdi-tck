@@ -12,6 +12,8 @@ public class EnhancementNoParamTest extends AbstractInvalidExtensionParamTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return prepareArchiveBuilder().withBuildCompatibleExtension(EnhancementNoParamExtension.class).build();
+        return prepareArchiveBuilder().withBuildCompatibleExtension(EnhancementNoParamExtension.class)
+                                      .withClass(EnhancementNoParamExtension.class)
+                                      .build();
     }
 }
