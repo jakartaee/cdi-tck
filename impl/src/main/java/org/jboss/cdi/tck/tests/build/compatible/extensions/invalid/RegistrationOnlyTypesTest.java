@@ -12,6 +12,8 @@ public class RegistrationOnlyTypesTest extends AbstractInvalidExtensionParamTest
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return prepareArchiveBuilder().withBuildCompatibleExtension(RegistrationOnlyTypesExtension.class).build();
+        return prepareArchiveBuilder().withBuildCompatibleExtension(RegistrationOnlyTypesExtension.class)
+                        .withClass(RegistrationOnlyTypesExtension.class)
+                        .build();
     }
 }
