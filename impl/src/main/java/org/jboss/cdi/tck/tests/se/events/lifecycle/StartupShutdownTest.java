@@ -11,9 +11,11 @@ import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -34,7 +36,10 @@ public class StartupShutdownTest {
     }
 
     @Test
-    // @SpecAssertion(section = TODO, id = "TODO")
+    @SpecAssertion(section = Sections.STARTUP_EVENT, id = "aa")
+    @SpecAssertion(section = Sections.STARTUP_EVENT, id = "ab")
+    @SpecAssertion(section = Sections.SHUTDOWN_EVENT, id = "aa")
+    @SpecAssertion(section = Sections.SHUTDOWN_EVENT, id = "ab")
     public void testEvents() {
         // assert initial state
         Assert.assertTrue(ObservingBean.OBSERVED_STARTING_EVENTS.isEmpty());

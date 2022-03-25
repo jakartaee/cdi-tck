@@ -62,7 +62,7 @@ public class ObserverMethodTest extends AbstractTest {
     }
 
     @Test
-    //@SpecAssertion(section = TODO, id = "TODO")
+    @SpecAssertion(section = OBSERVER_METHOD, id = "h")
     public void testGetDeclaringBeanOnObserverMethod() {
         Set<ObserverMethod<? super StockPrice>> observers = getCurrentManager().resolveObserverMethods(new StockPrice());
         assertEquals(observers.size(), 1);
