@@ -15,7 +15,9 @@ public class EnhancementMultipleParams2Test extends AbstractInvalidExtensionPara
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return prepareArchiveBuilder().withBuildCompatibleExtension(EnhancementMultipleParamsExtension2.class).build();
+        return prepareArchiveBuilder().withBuildCompatibleExtension(EnhancementMultipleParamsExtension2.class)
+                .withClass(EnhancementMultipleParamsExtension2.class)
+                .build();
     }
 
     @Test
