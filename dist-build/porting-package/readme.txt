@@ -5,4 +5,4 @@ Run the build to copy all Weld Porting Package dependencies into /target/depende
 
 Specify the version of Weld and CDI TCK explicitly.
 
-> mvn clean package -Dweld.version=5.0.0.Beta1 -Dcdi.tck.version=4.0.0-RC3
+> mvn clean package -Dweld.version=5.0.0.CR2 -Dcdi.tck.version=4.0.0-RC7

@@ -1,5 +1,7 @@
 package org.jboss.cdi.tck.tests.lookup.dynamic.handle;
 
+import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
+import static org.jboss.cdi.tck.cdi.Sections.HANDLE_INTERFACE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -15,6 +17,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -29,7 +32,7 @@ public class InstanceHandleTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(InstanceHandleTest.class).build();
     }
 
-    //@SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "TODO")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ma")
     @Test
     public void testIsResolvable() {
         Client client = getContextualReference(Client.class);
@@ -39,7 +42,8 @@ public class InstanceHandleTest extends AbstractTest {
         assertFalse(client.getBigDecimalInstance().isResolvable());
     }
 
-    //@SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "TODO")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "qa")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "qa")
     @Test
     public void testGetHandle() {
         Client client = getContextualReference(Client.class);
@@ -86,7 +90,8 @@ public class InstanceHandleTest extends AbstractTest {
         assertEquals(bravoId, sequence.get(0));
     }
 
-    //@SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "TODO")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "qa")
+    @SpecAssertion(section = HANDLE_INTERFACE, id = "ab", note = "get called after destroy")
     @Test
     public void testGetAfterDestroyingContextualInstance() {
         ActionSequence.reset();
@@ -111,7 +116,8 @@ public class InstanceHandleTest extends AbstractTest {
         }
     }
 
-    //@SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "TODO")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m", note = "when isAmbiguous is true")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ra", note = "handles() iteration")
     @Test
     public void testHandles() {
         Instance<Processor> instance = getCurrentManager().createInstance().select(Processor.class);

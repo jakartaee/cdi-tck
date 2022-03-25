@@ -1,6 +1,6 @@
 package org.jboss.cdi.tck.tests.event.lifecycle;
 
-import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_EVENT;
+import static org.jboss.cdi.tck.cdi.Sections.STARTUP_EVENT;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Startup;
@@ -8,6 +8,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -28,7 +29,8 @@ public class StartupShutdownTest extends AbstractTest {
     }
 
     @Test
-    //@SpecAssertion(section = TODO, id = "TODO")
+    @SpecAssertion(section = STARTUP_EVENT, id = "aa")
+    @SpecAssertion(section = STARTUP_EVENT, id = "ab")
     public void testEventsObserved() {
         Assert.assertTrue(ObservingBean.OBSERVED_STARTING_EVENTS.size() == 2);
         Assert.assertTrue(ObservingBean.OBSERVED_STARTING_EVENTS.get(0).equals(ApplicationScoped.class.getSimpleName()));

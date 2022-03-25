@@ -2,8 +2,10 @@ package org.jboss.cdi.tck.tests.build.compatible.extensions.customQualifier;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -20,7 +22,7 @@ public class CustomQualifierTest extends AbstractTest {
     }
 
     @Test
-    //@SpecAssertion(section = TODO, id = "TODO")
+    @SpecAssertion(section = Sections.DISCOVERY_PHASE, id = "a", note = "MyCustomQualifier.value is @Nonbinding")
     public void test() {
         assertEquals("bar", getContextualReference(MyService.class,
                 new MyCustomQualifier.Literal("something")).hello());
