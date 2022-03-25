@@ -15,7 +15,9 @@ public class RegistrationMultipleParams2Test extends AbstractInvalidExtensionPar
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return prepareArchiveBuilder().withBuildCompatibleExtension(RegistrationMultipleParamsExtension2.class).build();
+        return prepareArchiveBuilder().withBuildCompatibleExtension(RegistrationMultipleParamsExtension2.class)
+                .withClass(RegistrationMultipleParamsExtension2.class)
+                .build();
     }
 
     @Test
