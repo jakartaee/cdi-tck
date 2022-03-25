@@ -41,7 +41,7 @@ public class ApplicationContextLifecycleEventObserverOrderingTest extends Abstra
     @SpecAssertion(section = OBSERVER_ORDERING, id = "b")
     public void testContextLifecycleEventOrdering() {
         // ActionSequence was originally used, but we cannot reliably reset it without extensions
-        String expectedString = "ABCDSu";
+        String expectedString = "ABCD";
         Assert.assertEquals(ApplicationScopedObserver.getBuilder().toString(), expectedString);
     }
 

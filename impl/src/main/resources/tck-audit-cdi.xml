@@ -723,6 +723,20 @@
         </assertion>
     </section>
 
+    <section id="declaring_stereotype_with_priority" title="Declaring stereotype with @Priority" level="4">
+        <assertion id="a">
+            <text>A stereotype may declare a @Priority annotation which functions as a means of enabling and ordering affected beans.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>If there are two different stereotypes present on a bean, directly, indirectly, or transitively, that declare
+                different priority values, then the bean must explicitly declare a @Priority annotation. If the bean does not
+                explicitly declare priority, the container automatically detects the problem and treats it as a definition error.
+            </text>
+        </assertion>
+
+    </section>
+
     <section id="stereotypes_with_additional_stereotypes" title="Stereotypes with additional stereotypes" level="4">
         <assertion id="a">
             <text>A stereotype may declare other stereotypes.</text>
@@ -3262,6 +3276,7 @@
             <assertion id="ma">
                 <text>The method |isResolvable()| returns true if there is exactly one bean found, or false otherwise.</text>
             </assertion>
+
         </group>
 
         <group>
@@ -3282,6 +3297,60 @@
             </assertion>
         </group>
 
+        <group>
+            <text>The |getHandle()| method must:</text>
+            <assertion id="qa">
+                <text>Return an initialized contextual reference |Handle| for a bean that has the required type and qualifiers
+                    and is eligible for injection. The contextual reference must be resolved lazily, i.e. when first needed.
+                    </text>
+            </assertion>
+            <assertion id="qb">
+                <text>Throw UnsatisfiedResolutionException if there is no bean with given type and qualifiers.</text>
+            </assertion>
+            <assertion id="qc">
+                <text>Throw AmbiguousResolutionException if there is more than one bean given type and qualifiers.
+                </text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>The |handles()| method must:</text>
+            <assertion id="ra">
+                <text>Allow iterating over contextual reference handles for all beans that have the required type and required qualifiers and are eligible for injection.
+                </text>
+            </assertion>
+            <assertion id="rb">
+                <text>Return stateless Iterable. Therefore, each Iterable#iterator() produces a new set of handles.</text>
+            </assertion>
+        </group>
+
+    </section>
+
+    <section id="handle_interface" title="The Handle interface" level="4">
+        <group>
+            <text>The get() method returns a contextual reference object.</text>
+            <assertion id="aa" testable="false">
+                <text>The contextual reference is resolved lazily.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test IllegalStateException is thrown if invoked on Handle that previously successfully destroyed its underlying contextual reference.</text>
+            </assertion>
+        </group>
+        <group>
+            <text>
+                The destroy() method destroys the contextual instance and is a no-op if:
+            </text>
+            <assertion id="ba">
+                <text>called multiple times</text>
+            </assertion>
+            <assertion id="bb">
+                <text>the producing Instance does not exist</text>
+                the handle does not hold a contextual reference, i.e. get() was never called
+            </assertion>
+            <assertion id="bc">
+                <text>the handle does not hold a contextual reference, i.e. get() was never called</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="builtin_instance" title="The built-in Instance" level="3">
@@ -5307,7 +5376,7 @@
 
         <assertion id="g">
             <text>The built-in implementation must be a passivation capable dependency, as defined in Section 6.6.2, "Passivation capable
-                dependencies".
+                dependencies (CDI Full)".
             </text>
         </assertion>
     </section>
@@ -5775,6 +5844,150 @@
         </assertion>
     </section>
 
+    <section id="observable_container_lifecycle_events" title="Observable container lifecycle events" level="2"/>
+
+    <section id="startup_event" title="Startup event" level="3">
+
+        <group>
+            <text>Implementations are required to fire a startup event during application initialization.</text>
+            <assertion id="aa">
+                <text>This must be done synchronously with an event payload of jakarta.enterprise.event.Startup and qualifier jakarta.enterprise.inject.Any</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>This event is fired after the event with qualifier @Initialized(ApplicationScope.class) but before processing requests.</text>
+            </assertion>
+        </group>
+        <assertion id="b">
+            <text>Applications must never manually fire any events with payload type jakarta.enterprise.event.Startup.</text>
+        </assertion>
+    </section>
+
+    <section id="shutdown_event" title="Shutdown event" level="3">
+
+        <group>
+            <text>Implementations are required to fire a shutdown event during application shutdown.</text>
+            <assertion id="aa" testable="false">
+                <text>This must be done synchronously with an event payload of jakarta.enterprise.event.Shutdown and qualifier jakarta.enterprise.inject.Any.</text>
+            </assertion>
+
+            <assertion id="ab" testable="false">
+                <text>This event is fired during CDI container shutdown but not later than the event with qualifier @BeforeDestroyed(ApplicationScoped.class).</text>
+            </assertion>
+        </group>
+        <assertion id="b">
+            <text>Applications must never manually fire any events with payload type jakarta.enterprise.event.Shutdown.</text>
+        </assertion>
+    </section>
+
+    <!-- Core CDI/CDI Lite/Build compatible extensions -->
+    <section id="build_spi" title="Build compatible extensions" level="2">
+    </section>
+
+    <section id="bce_interface" title="The BuildCompatibleExtension interface" level="3">
+        <group>
+            <text>A build compatible extension is a service provider of the jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension interface, declared in META-INF/services.</text>
+        </group>
+        <assertion id="a">
+            <text>The invocation order for extension methods may be controlled using the @Priority annotation. If an extension
+            method does not have the @Priority annotation, the default priority jakarta.interceptor.Interceptor.Priority.APPLICATION + 500 is assumed.
+            If two extension methods have equal priority, the ordering between them is undefined. Note that priority only affects
+                order of extension methods in a single phase.</text>
+        </assertion>
+        <assertion id="x" testable="false">
+            <text>At deployment time, CDI container does not have to be running, so calling CDI.current() from an extension
+                method, or attempting to access a running CDI container in any other way, results in non-portable behavior.</text>
+        </assertion>
+    </section>
+
+    <section id="discovery_phase" title="The @Discovery phase" level="3">
+        <assertion id="a">
+            <text>Test that discovery phase changes are seen</text>
+        </assertion>
+        <assertion id="b">
+            <text>Test that classes with bean defining annotations not added to scan are not seen in non-bean archives</text>
+        </assertion>
+        <assertion id="c">
+            <text>Test that classes added to scan are seen in non-bean archives</text>
+        </assertion>
+    </section>
+    <section id="enhancement_phase" title="The @Enhancement phase" level="3">
+        <group>
+            <text>Extension methods annotated @Enhancement must declare exactly one parameter of one of the following types:
+                ClassConfig or ClassInfo
+                MethodConfig or MethodInfo
+                FieldConfig or FieldInfo
+            </text>
+            <assertion id="aa">
+                <text>Test that a method with none of these parameters fails deployment.</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>Test that a method with more than one of these parameters fails deployment.</text>
+            </assertion>
+
+            <assertion id="ac">
+                <text>Test that a method with more than one of these parameters fails deployment.</text>
+            </assertion>
+        </group>
+        <assertion id="b">
+            <text>Test that enhancment phase annotation changes are seen</text>
+        </assertion>
+        <assertion id="c">
+            <text>When an extension method declares a parameter of type ClassConfig or ClassInfo, it will be called for each
+                discovered class matching the criteria defined on the @Enhancement annotation</text>
+        </assertion>
+    </section>
+    <section id="registration_phase" title="The @Registration phase" level="3">
+        <group>
+            <text>Extension methods annotated @Registration must declare exactly one parameter of one of the following types:
+                BeanInfo
+                InterceptorInfo
+                ObserverInfo
+            </text>
+            <assertion id="aa">
+                <text>Test that a method with none of these parameters fails deployment.</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>Test that a method with more than one of these parameters fails deployment.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>When an extension method declares a parameter of type BeanInfo, it will be called for each bean whose set
+                    of bean types matches the criteria defined on the @Registration annotation.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>When an extension method declares a parameter of type InterceptorInfo, it will be called for each
+                    interceptor whose set of bean types matches the criteria defined on the @Registration annotation.</text>
+            </assertion>
+            <assertion id="ae">
+                <text>When an extension method declares a parameter of type ObserverInfo, it will be called for each observer
+                    whose observed event type matches the criteria defined on the @Registration annotation.</text>
+            </assertion>
+        </group>
+
+        <assertion id="b">
+            <text>Test that enhancment phase annotation changes are seen</text>
+        </assertion>
+    </section>
+    <section id="synthesis_phase" title="The @Synthesis phase" level="3">
+        <assertion id="a">
+            <text>Test that synthesis phase beans are availalble for use by runtime</text>
+        </assertion>
+        <assertion id="b">
+            <text>Test that synthesis observers are notified of fired events</text>
+        </assertion>
+    </section>
+    <section id="validation_phase" title="The @Validation phase" level="3">
+        <assertion id="a">
+            <text>Test that validation phase controls test outcome</text>
+        </assertion>
+    </section>
+
+<!-- Core CDI/CDI Lite/Packaging and deployment -->
+    <section id="packaging_and_deployment" title="Packaging and deployment" level="2">
+    </section>
+
     <section id="spi" title="Portable extensions" level="1">
         <assertion id="a" testable="false">
             <text>A portable extension may integrate with the container by providing its own beans, interceptors and decorators to the container.</text>
@@ -5930,6 +6143,10 @@
 
         <assertion id="ga">
             <text>An instance of |ObserverMethod| exists for every observer method of every enabled bean.</text>
+        </assertion>
+
+        <assertion id="h">
+            <text>|getDeclaringBean()| returns the Bean object that declares the observer method. Return value is undefined for synthetic observers.</text>
         </assertion>
     </section>
 
@@ -7222,6 +7439,14 @@
                 interfaces.
             </text>
         </assertion>
+
+        <assertion id="g">
+            <text>As these lifecycle events are fired, the container must also execute build compatible extensions. Which phase
+                of build compatible extensions should be executed when is indicated in the description of the corresponding
+                lifecycle events. Build compatible extensions annotated @SkipIfPortableExtensionPresent must be ignored in
+                CDI Full, if given portable extension is present.
+            </text>
+        </assertion>
     </section>
 
     <section id="before_bean_discovery" title="BeforeBeanDiscovery event" level="3">
@@ -7522,6 +7747,9 @@
             </assertion>
             <assertion id="g">
                 <text>Set a callback to destroy a bean instance with destroyWith() or disposeWith() method.</text>
+            </assertion>
+            <assertion id="h">
+                <text>Set the priority of the bean, if it is an alternative, with priority() method.</text>
             </assertion>
         </group>
         <assertion id="h">

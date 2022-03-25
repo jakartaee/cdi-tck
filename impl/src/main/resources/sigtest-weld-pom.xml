@@ -16,7 +16,7 @@
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
     <!-- Set the Weld version to test -->
-    <weld.version>5.0.0.Beta1</weld.version>
+    <weld.version>5.0.0.CR2</weld.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
