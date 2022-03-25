@@ -22,6 +22,14 @@ import java.lang.annotation.RetentionPolicy;
 @ClassAnnotation
 @RuntimeAnnotation
 public class LangModelVerifier {
+
+    /**
+     * The option allows to bypass the type annotation checks.
+     * There is a bug in the annotation processor not providing type annotations for classes loaded from the classpath.
+     * https://bugs.openjdk.java.net/browse/JDK-8225377
+     */
+    public static boolean RUN_TYPE_ANNOTATION_TESTS = true;
+
     AnnotatedTypes annotatedTypes;
     AnnotatedSuperTypes annotatedSuperTypes;
     AnnotatedThrowsTypes annotatedThrowsTypes;

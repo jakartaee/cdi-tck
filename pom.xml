@@ -4,7 +4,7 @@
     <groupId>jakarta.enterprise</groupId>
     <artifactId>cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.1-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <name>Jakarta CDI TCK</name>
 
     <parent>
@@ -97,13 +97,13 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>4.0.0</cdi.api.version>
+        <cdi.api.version>4.0.0-RC5</cdi.api.version>
         <maven.compiler.release>11</maven.compiler.release>
         <!-- Jakarta EE APIs Core -->
-        <annotations.api.version>2.1.0</annotations.api.version>
-        <interceptors.api.version>2.1.0</interceptors.api.version>
+        <annotations.api.version>2.1.0-B1</annotations.api.version>
+        <interceptors.api.version>2.1.0-RC3</interceptors.api.version>
         <atinject.api.version>2.0.1</atinject.api.version>
-        <el.api.version>5.0.0</el.api.version>
+        <el.api.version>5.0.0-RC1</el.api.version>
 
         <!-- Test tools/dependencies -->
         <testng.version>7.4.0</testng.version>
