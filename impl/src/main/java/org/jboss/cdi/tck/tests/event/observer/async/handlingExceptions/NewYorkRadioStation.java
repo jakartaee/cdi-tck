@@ -30,9 +30,11 @@ public class NewYorkRadioStation {
     
     public void observe(@ObservesAsync RadioMessage radioMessage) throws Exception {
         observed.set(true);
-        exception = new AtomicReference<>(new IllegalStateException(NewYorkRadioStation.class.getName()));
-        throw exception.get();
-        
+        // throw exception only on certain condition
+        if (radioMessage.getMessage().equals("ping")) {
+            exception = new AtomicReference<>(new IllegalStateException(NewYorkRadioStation.class.getName()));
+            throw exception.get();
+        }
     }
     
 }
