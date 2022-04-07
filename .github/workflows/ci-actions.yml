@@ -1,6 +1,7 @@
 name: Jakarta Contexts and Dependency Injection TCK CI
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [ master ]
 
@@ -21,3 +22,6 @@ jobs:
       - name: "Maven install"
         run: |
           mvn clean install -B -V
+      - name: "Maven install(staging)"
+        run: |
+          mvn clean install -Pstaging -B -V
