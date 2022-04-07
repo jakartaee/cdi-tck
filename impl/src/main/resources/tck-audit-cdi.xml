@@ -5775,16 +5775,17 @@
 
     </section>
 
-    <section id="async_exception" title="Handling multiple exceptions thrown during an asynchronous event" level="3">
+    <section id="async_exception" title="Handling exceptions thrown during an asynchronous event" level="3">
         <assertion id="a">
-            <text>If an event is asynchronous, and an exception is thrown by any of its notified observers, the CompletionStage returned by fireAsync will
-                complete exceptionally with java.util.concurrent.CompletionException exception.
+            <text>If an event is asynchronous, and an exception is thrown by one or more of its notified observers, the
+                `CompletionStage` returned by `fireAsync` will complete exceptionally with
+                `java.util.concurrent.CompletionException`.
             </text>
         </assertion>
 
         <assertion id="b">
             <text>java.util.concurrent.CompletionException contains all exceptions thrown by observers as suppressed exceptions. They can be accessed as an
-                array of throwable with the getSuppressed method.
+                array of `Throwable` with the `getSuppressed` method.
             </text>
         </assertion>
     </section>
