@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Allows to create a beans.xml file programmatically.
- * By default it uses discovery mode all and has version 3.0
+ * By default it uses discovery mode annotated and has version 3.0
  */
 public class BeansXml implements Asset {
 
