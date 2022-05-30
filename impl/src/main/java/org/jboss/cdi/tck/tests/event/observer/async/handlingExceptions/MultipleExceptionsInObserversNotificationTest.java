@@ -55,8 +55,9 @@ public class MultipleExceptionsInObserversNotificationTest extends AbstractTest 
     @SpecAssertions({ @SpecAssertion(section = ASYNC_EXCEPTION, id = "a"), @SpecAssertion(section = ASYNC_EXCEPTION, id = "b"),
             @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cb") })
     public void testMultipleExceptionsDuringVariousObserversNotification() throws InterruptedException {
+        cleanup();
         BlockingQueue<Throwable> queue = new LinkedBlockingQueue<>();
-        event.fireAsync(new RadioMessage()).handle((event, throwable) -> queue.offer(throwable));
+        event.fireAsync(new RadioMessage("ping")).handle((event, throwable) -> queue.offer(throwable));
 
         Throwable throwable = queue.poll(2, TimeUnit.SECONDS);
         assertNotNull(throwable);
@@ -67,9 +68,41 @@ public class MultipleExceptionsInObserversNotificationTest extends AbstractTest 
         assertTrue(throwable instanceof CompletionException);
 
         List<Throwable> suppressedExceptions = Arrays.asList(throwable.getSuppressed());
+        assertTrue(suppressedExceptions.size() == 2);
         assertTrue(suppressedExceptions.contains(ParisRadioStation.exception.get()));
         assertTrue(suppressedExceptions.contains(NewYorkRadioStation.exception.get()));
         assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(ParisRadioStation.class.getName())));
         assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(NewYorkRadioStation.class.getName())));
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = ASYNC_EXCEPTION, id = "a"), @SpecAssertion(section = ASYNC_EXCEPTION, id = "b"),
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cb") })
+    public void testSingleExceptionDuringVariousObserversNotification() throws InterruptedException {
+        cleanup();
+        BlockingQueue<Throwable> queue = new LinkedBlockingQueue<>();
+        event.fireAsync(new RadioMessage("pong")).handle((event, throwable) -> queue.offer(throwable));
+
+        Throwable throwable = queue.poll(2, TimeUnit.SECONDS);
+        assertNotNull(throwable);
+        assertTrue(NewYorkRadioStation.observed.get());
+        assertTrue(ParisRadioStation.observed.get());
+        assertTrue(PragueRadioStation.observed.get());
+
+        assertTrue(throwable instanceof CompletionException);
+
+        List<Throwable> suppressedExceptions = Arrays.asList(throwable.getSuppressed());
+        assertTrue(suppressedExceptions.size() == 1);
+        assertTrue(suppressedExceptions.contains(ParisRadioStation.exception.get()));
+        assertTrue(suppressedExceptions.stream().anyMatch(t -> t.getMessage().equals(ParisRadioStation.class.getName())));
+    }
+
+    public void cleanup() {
+        NewYorkRadioStation.exception = null;
+        ParisRadioStation.exception = null;
+
+        NewYorkRadioStation.observed.set(false);
+        ParisRadioStation.observed.set(false);
+        PragueRadioStation.observed.set(false);
     }
 }

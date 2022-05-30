@@ -101,7 +101,7 @@ public class ExcludeFiltersTest extends AbstractTest {
         assertTypeIsNotExcluded(Meat.class);
     }
 
-    @Test(groups = { INTEGRATION, SYSTEM_PROPERTIES })
+    @Test(groups = { INTEGRATION, SYSTEM_PROPERTIES, CDI_FULL })
     @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "d"), @SpecAssertion(section = EXCLUDE_FILTERS, id = "e") })
     public void testExcludeSystemPropertyActivator() {
         assertTypeIsExcluded(Charlie.class);

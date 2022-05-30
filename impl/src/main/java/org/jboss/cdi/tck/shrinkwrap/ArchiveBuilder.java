@@ -563,7 +563,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      */
     public T withDefaultPersistenceXml() {
         return withPersistenceXml(Descriptors.create(PersistenceDescriptor.class).createPersistenceUnit().name("test")
-                .jtaDataSource(ConfigurationFactory.get().getTestDataSource()).up());
+                .jtaDataSource(ConfigurationFactory.get(true).getTestDataSource()).up());
     }
 
     /**

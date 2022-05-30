@@ -30,6 +30,7 @@ public class ParisRadioStation {
 
     public void observe(@ObservesAsync RadioMessage radioMessage) throws Exception {
         observed.set(true);
+        // always throw an exception
         exception = new AtomicReference<>(new RuntimeException(ParisRadioStation.class.getName()));
         throw exception.get();
     }

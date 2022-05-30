@@ -15,7 +15,9 @@ public class RegistrationOnlyMessagesTest extends AbstractInvalidExtensionParamT
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return prepareArchiveBuilder().withBuildCompatibleExtension(RegistrationOnlyMessagesExtension.class).build();
+        return prepareArchiveBuilder().withBuildCompatibleExtension(RegistrationOnlyMessagesExtension.class)
+                .withClass(RegistrationOnlyMessagesExtension.class)
+                .build();
     }
 
     @Test
