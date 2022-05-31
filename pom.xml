@@ -107,7 +107,7 @@
 
         <!-- Test tools/dependencies -->
         <testng.version>7.4.0</testng.version>
-        <jboss.test.audit.version>2.0.0.Final</jboss.test.audit.version>
+        <jboss.test.audit.version>2.0.1.Final</jboss.test.audit.version>
         <arquillian.version>1.7.0.Alpha10</arquillian.version>
         <arquillian.container.se.api.version>1.0.1.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
@@ -355,18 +355,18 @@
         </profile>
 
         <profile>
-            <id>jboss-public-repository</id>
+            <id>jakartaredhat-repository</id>
             <activation>
                 <property>
-                    <name>jboss-public-repository</name>
+                    <name>jakartaredhat-repository</name>
                     <value>!false</value>
                 </property>
             </activation>
             <repositories>
                 <repository>
-                    <id>jboss-public-repository-group</id>
-                    <name>JBoss Public Maven Repository Group</name>
-                    <url>https://repository.jboss.org/nexus/content/groups/public</url>
+                    <id>jakartaredhat-github</id>
+                    <name>Jakarta RedHat Repo</name>
+                    <url>https://maven.pkg.github.com/jakartaredhat/maven-packages/</url>
                     <releases>
                         <enabled>true</enabled>
                         <updatePolicy>never</updatePolicy>

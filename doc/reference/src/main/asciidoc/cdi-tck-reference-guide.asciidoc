@@ -1,5 +1,11 @@
-== Technology Compatibility Kit Reference Guide for Jakarta Contexts and Dependency Injection
-
+[id=title]
+= Technology Compatibility Kit Reference Guide for Jakarta Contexts and Dependency Injection
+:doctype: book
+:icons: font
+:toc:
+:toclevels: 3
+:numbered:
+:title-logo-image: image:cdi_logo.png[]
 
 [preface]
 == Preface
