@@ -10,7 +10,7 @@
     <parent>
         <groupId>jakarta.enterprise</groupId>
         <artifactId>cdi-tck-parent</artifactId>
-        <version>4.0.2-SNAPSHOT</version>
+        <version>4.0.3-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -62,9 +62,9 @@
                                 <pdf-style>cditck</pdf-style>
                                 <source-highlighter>coderay</source-highlighter>
                                 <icons>font</icons>
-                                <pagenums/>
-                                <toc/>
-                                <idprefix/>
+                                <pagenums />
+                                <toc />
+                                <idprefix />
                                 <idseparator>-</idseparator>
                             </attributes>
                         </configuration>
@@ -88,7 +88,7 @@
                                 <sectanchors>true</sectanchors>
                                 <stylesheet>${project.basedir}/src/main/style/css/cditck.css</stylesheet>
                                 <!-- set the idprefix to blank -->
-                                <idprefix/>
+                                <idprefix />
                                 <idseparator>-</idseparator>
                                 <docinfo1>true</docinfo1>
                             </attributes>
