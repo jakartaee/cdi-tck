@@ -11,8 +11,8 @@
          <directory>${project.build.directory}</directory>
          <outputDirectory>/</outputDirectory>
          <includes>
-            <include>generated-docs-html</include>
-            <include>generated-docs-pdf</include>
+            <include>generated-docs-html/**</include>
+            <include>generated-docs-pdf/**</include>
          </includes>
       </fileSet>
    </fileSets>

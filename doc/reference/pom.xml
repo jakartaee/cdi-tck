@@ -77,8 +77,9 @@
                         </goals>
                         <configuration>
                             <backend>html5</backend>
+                            <outputDirectory>${project.build.directory}/generated-docs-html</outputDirectory>
+                            <outputFile>cdi-tck-reference-guide.html</outputFile>
                             <attributes>
-                                <outputDirectory>${project.build.directory}/generated-docs-html</outputDirectory>
                                 <source-highlighter>coderay</source-highlighter>
                                 <!--embedAssets>true</embedAssets-->
                                 <imagesdir>${project.basedir}/src/main/asciidoc/images</imagesdir>

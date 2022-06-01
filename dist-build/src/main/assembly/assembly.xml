@@ -61,7 +61,7 @@
       </dependencySet>
       <dependencySet>
          <includes>
-            <include>jakarta.enterprise:cdi-tck-reference-guide</include>
+            <include>jakarta.enterprise:cdi-tck-reference-guide:zip</include>
          </includes>
          <unpack>true</unpack>
          <unpackOptions>
