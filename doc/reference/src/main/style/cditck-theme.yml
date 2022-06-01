@@ -1,0 +1,9 @@
+extends: default
+footer:
+  recto:
+    right:
+      content: '{chapter-title} | *{page-number}*'
+  verso:
+    left:
+      content: '*{page-number}* | {chapter-title}'
+

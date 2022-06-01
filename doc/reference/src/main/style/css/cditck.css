@@ -4,7 +4,7 @@
 
 body {
  font-size: 14px;
- max-width: 60em;
+ max-width: 120em;
 }
 
 div.note, div.tip, div.warning {
@@ -30,12 +30,11 @@ code.literal {
  white-space: nowrap;
  color: #333;
 }
-p#title {
- height: 95px;
-}
 
-p#title a.site_href {
- display: block;
- float: left;
- background: url(../images/cdi_logo.png) left center no-repeat;
+div#header::before {
+ content: url(images/cdi_logo.png);
+}
+body > div > h1:first-of-type {
+ height: 95px;
+ color: blue;
 }
