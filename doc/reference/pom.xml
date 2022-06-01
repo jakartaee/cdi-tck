@@ -78,6 +78,7 @@
                         <configuration>
                             <backend>html5</backend>
                             <attributes>
+                                <outputDirectory>${project.build.directory}/generated-docs-html</outputDirectory>
                                 <source-highlighter>coderay</source-highlighter>
                                 <!--embedAssets>true</embedAssets-->
                                 <imagesdir>${project.basedir}/src/main/asciidoc/images</imagesdir>
@@ -97,22 +98,20 @@
 
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
+                <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>attach-zip</id>
+                        <id>bundle-docs</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>attach-artifact</goal>
+                            <goal>single</goal>
                         </goals>
                         <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>${project.build.outputDirectory}/${project.artifactId}-${project.version}.war</file>
-                                    <type>war</type>
-                                </artifact>
-                            </artifacts>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            </descriptors>
+                            <finalName>cdi-tck-${cdi.tck.version}</finalName>
                         </configuration>
                     </execution>
                 </executions>

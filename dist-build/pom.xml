@@ -49,7 +49,7 @@
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-reference-guide</artifactId>
          <version>${cdi.tck.version}</version>
-         <type>war</type>
+         <type>zip</type>
          <optional>true</optional>
       </dependency>
       <!-- core impl -->
