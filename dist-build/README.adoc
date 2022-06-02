@@ -13,7 +13,8 @@ artifacts/
 
  – TCK binaries and sources, packaged as jars
  – specification audit (source and report)
- – TestNG suite.xml file for running the TCK (probably outdated)
+ – TestNG suite.xml file for running the TCK
+ - pom.xml to install the TCK artifacts into local maven repository
 
 doc/
 
@@ -45,7 +46,7 @@ porting-package-lib/
 To install the zip file distribution of TCK into local repository:
 
 * unzip/untar the distribution file to create a cdi-tck-x.y.z directory.
-* Use the artifacts/artifact-install.sh script to install the TCK artifacts into a local maven repo.
+* Use the artifacts/pom.xml file to install the TCK artifacts into a local maven repo.
 * Read the doc/cdi-tck-reference-guide.pdf for setup against your compatible implementation
 
 Note that you can also simply consume CDI-TCK artifacts from Maven Central.
