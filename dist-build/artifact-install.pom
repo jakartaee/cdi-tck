@@ -51,7 +51,7 @@
             </goals>
             <configuration>
               <groupId>jakarta.enterprise</groupId>
-              <artifactId>core-tck-jsonp-extension</artifactId>
+              <artifactId>cdi-tck-api</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
               <file>cdi-tck-api-${project.version}.jar</file>
@@ -68,7 +68,7 @@
               <goal>install-file</goal>
             </goals>
             <configuration>
-              <groupId>jakarta.ee.tck</groupId>
+              <groupId>jakarta.enterprise</groupId>
               <artifactId>cdi-tck-ext-lib</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
