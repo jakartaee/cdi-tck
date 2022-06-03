@@ -176,18 +176,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.jboss.test-audit</groupId>
-                <artifactId>jboss-test-audit-api</artifactId>
-                <version>${jboss.test.audit.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.test-audit</groupId>
-                <artifactId>jboss-test-audit-impl</artifactId>
-                <version>${jboss.test.audit.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>commons-httpclient</groupId>
                 <artifactId>commons-httpclient</artifactId>
                 <version>${apache.httpclient.version}</version>
