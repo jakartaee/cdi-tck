@@ -4,7 +4,7 @@
     <groupId>jakarta.enterprise</groupId>
     <artifactId>cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.3-SNAPSHOT</version>
+    <version>4.0.4-SNAPSHOT</version>
     <name>Jakarta CDI TCK</name>
 
     <parent>
@@ -173,18 +173,6 @@
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
                 <version>${testng.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.test-audit</groupId>
-                <artifactId>jboss-test-audit-api</artifactId>
-                <version>${jboss.test.audit.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.test-audit</groupId>
-                <artifactId>jboss-test-audit-impl</artifactId>
-                <version>${jboss.test.audit.version}</version>
             </dependency>
 
             <dependency>

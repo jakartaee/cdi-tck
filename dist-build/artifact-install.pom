@@ -51,7 +51,7 @@
             </goals>
             <configuration>
               <groupId>jakarta.enterprise</groupId>
-              <artifactId>core-tck-jsonp-extension</artifactId>
+              <artifactId>cdi-tck-api</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
               <file>cdi-tck-api-${project.version}.jar</file>
@@ -68,7 +68,7 @@
               <goal>install-file</goal>
             </goals>
             <configuration>
-              <groupId>jakarta.ee.tck</groupId>
+              <groupId>jakarta.enterprise</groupId>
               <artifactId>cdi-tck-ext-lib</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
@@ -88,7 +88,7 @@
               <artifactId>cdi-tck-core-impl</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
-              <file>cdi-tck-ext-lib-${project.version}.jar</file>
+              <file>cdi-tck-core-impl-${project.version}.jar</file>
               <generatePom>true</generatePom>
             </configuration>
           </execution>
@@ -100,7 +100,7 @@
             </goals>
             <configuration>
               <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-core-tck-impl</artifactId>
+              <artifactId>cdi-tck-core-impl</artifactId>
               <version>${project.version}</version>
               <packaging>xml</packaging>
               <classifier>suite</classifier>
@@ -132,7 +132,7 @@
             </goals>
             <configuration>
               <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-web-tck-impl</artifactId>
+              <artifactId>cdi-tck-web-impl</artifactId>
               <version>${project.version}</version>
               <packaging>xml</packaging>
               <classifier>suite</classifier>
