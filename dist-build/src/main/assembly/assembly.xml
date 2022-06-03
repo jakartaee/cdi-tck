@@ -14,8 +14,10 @@
          <destName>LICENSE</destName>
       </file>
       <file>
-         <source>artifact-install.sh</source>
+         <source>artifact-install.pom</source>
          <outputDirectory>artifacts</outputDirectory>
+         <destName>pom.xml</destName>
+         <filtered>true</filtered>
       </file>
    </files>
    <fileSets>
