@@ -90,7 +90,7 @@ You can configure the CDI TCK to just run tests related to the CDI Lite specific
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <excludedGroups>cdi-full,integration,javaee-full,se</excludedGroups>
+              <excludedGroups>cdi-full,se</excludedGroups>
               <dependenciesToScan>
                 <dependency>jakarta.enterprise:cdi-tck-core-impl</dependency>
               </dependenciesToScan>
