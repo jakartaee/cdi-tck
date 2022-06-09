@@ -8,7 +8,6 @@
       <relativePath>../pom.xml</relativePath>
    </parent>
 
-   <groupId>jakarta.enterprise</groupId>
    <artifactId>cdi-tck-dist</artifactId>
    <packaging>pom</packaging>
    <name>CDI TCK Distribution</name>

@@ -236,7 +236,9 @@
       <!-- Copies the TCK testsuite xml artifacts into the target/suites directory for use by profiles -->
       <id>copy-test-suites</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <property>
+          <name>!skipCopyTestSuites</name>
+        </property>
       </activation>
       <build>
         <plugins>
