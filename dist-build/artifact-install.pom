@@ -105,7 +105,7 @@
               <packaging>xml</packaging>
               <classifier>suite</classifier>
               <file>cdi-tck-core-impl-${project.version}-suite.xml</file>
-              <generatePom>true</generatePom>
+              <generatePom>false</generatePom>
             </configuration>
           </execution>
 
@@ -137,7 +137,7 @@
               <packaging>xml</packaging>
               <classifier>suite</classifier>
               <file>cdi-tck-web-impl-${project.version}-suite.xml</file>
-              <generatePom>true</generatePom>
+              <generatePom>false</generatePom>
             </configuration>
           </execution>
 
