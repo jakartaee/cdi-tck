@@ -19,6 +19,13 @@
          <destName>pom.xml</destName>
          <filtered>true</filtered>
       </file>
+      <file>
+         <source>jboss-runner.pom</source>
+         <outputDirectory>weld/jboss-tck-runner</outputDirectory>
+         <destName>pom.xml</destName>
+         <filtered>true</filtered>
+      </file>
+
    </files>
    <fileSets>
       <fileSet>
@@ -60,6 +67,11 @@
          <outputDirectory>/weld</outputDirectory>
          <useProjectArtifact>false</useProjectArtifact>
          <unpack>true</unpack>
+         <unpackOptions>
+            <excludes>
+               <exclude>jboss-tck-runner/pom.xml</exclude>
+            </excludes>
+         </unpackOptions>
       </dependencySet>
       <dependencySet>
          <includes>
