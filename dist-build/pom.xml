@@ -8,7 +8,6 @@
       <relativePath>../pom.xml</relativePath>
    </parent>
 
-   <groupId>jakarta.enterprise</groupId>
    <artifactId>cdi-tck-dist</artifactId>
    <packaging>pom</packaging>
    <name>CDI TCK Distribution</name>
@@ -198,6 +197,12 @@
          <version>${cdi.tck.version}</version>
          <classifier>coverage-interceptors</classifier>
          <type>html</type>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>jakarta.enterprise</groupId>
+         <artifactId>cdi-tck-lang-model</artifactId>
+         <version>${cdi.tck.version}</version>
          <optional>true</optional>
       </dependency>
 

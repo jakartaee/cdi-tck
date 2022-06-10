@@ -34,13 +34,11 @@ The TCK requires the following two Java runtime environments:
 
 *  Java SE 11 or better
 
-*  Jakarta EE 10 or better (e.g., WildFly 28.x or GlassFish V7)
+*  Jakarta EE 10 or better (e.g., WildFly 27.x or GlassFish V7)
 
 You should refer to vendor instructions for how to install the runtime environment. 
 
-The rest of the TCK software can simply be extracted. It's recommended that you create a folder named _jakartacdi_ to hold all
-of the jakartacdi-related projects. Then, extract the TCK distribution into a subfolder named _tck_. If you have downloaded
-the Weld distribution, extract it into a sibling folder named _weld_. The resulting folder structure is shown here:
+The rest of the TCK software can simply be extracted. Extract the TCK distribution to create a _core-tck-4.x.y_ directory. The resulting folder structure is shown here:
 
 
 [NOTE]
@@ -51,9 +49,13 @@ This layout is assumed through all descriptions in this reference guide.
 
 [source, console]
 ----
-jakartacdi/
+core-tck-4.x.y/
+   artifacts/
+   doc/
+   lib/
    weld/
-   tck/
+   LICENSE
+   README.adoc
 ----
 
 Each test class is treated as an individual artifact. All test methods (i.e., methods annotated with +@Test+) in the test class are run in the application, meaning bean discovery occurs exactly once per artifact and the same BeanManager is used by each test method in the class. 
@@ -63,26 +65,43 @@ Each test class is treated as an individual artifact. All test methods (i.e., me
 [[running-against-weld, Running the TCK against Weld and WildFly]]
 Running the TCK against Weld and WildFly
 
-* First, you should download WildFly 22.x from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
+* First, you should download WildFly 27.x from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
 
 * Set the JBOSS_HOME environment variable to the location of the WildFly software. 
 
 The CDI TCK distribution includes a TCK runner that executes the TCK using Weld as the CDI implementation and WildFly as the Jakarta EE runtime. To run the TCK:
 
-* You need to install Maven. You can find documentation on how to install Maven in the link:$$http://books.sonatype.com/mvnref-book/reference/installation.html$$[Maven: The Definitive Guide] book published by Sonatype. 
+* You need to install Maven. You can find documentation on how to install Maven in the link:$$http://books.sonatype.com/mvnref-book/reference/installation.html$$[Maven: The Definitive Guide] book published by Sonatype.
+
+* Next, integrate the Weld jars into WildFly:
+
+[source, console]
+----
+cd core-tck-4.x.y/weld/jboss-as
+mvn -Pupdate-jboss-as package
+----
+
+* Next, integrate the TCK ext jar into WildFly:
+
+[source, console]
+----
+cd core-tck-4.x.y/weld/jboss-as
+mvn -Dtck package
+----
 
 * Next, instruct Maven to run the TCK: 
 
 [source, console]
 ----
-cd jakartacdi/tck/weld/jboss-tck-runner
+cd core-tck-4.x.y/weld/jboss-tck-runner
 mvn test -Dincontainer
 ----
-* Use +cdi.tck.version+ system property to specify particular TCK version: 
+
+* Use +cdi.tck-4-0.versionn+ system property to specify particular TCK version:
 
 [source, console]
 ----
-mvn test -Dincontainer -Dcdi.tck.version=3.0.0-RC1
+mvn test -Dincontainer -Dcdi.tck-4-0.version=4.0.5
 ----
 * TestNG will report, via Maven, the outcome of the run, and report any failures on the console. Details can be found in target/surefire-reports/TestSuite.txt.
  
