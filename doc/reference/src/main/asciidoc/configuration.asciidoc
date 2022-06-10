@@ -73,16 +73,14 @@ The CDI TCK relies on an implementation of the porting package to function. Ther
 The SPI classes in the CDI TCK are as follows: 
 
 *  +org.jboss.cdi.tck.spi.Beans+
-
 *  +org.jboss.cdi.tck.spi.Contexts+
-
 *  +org.jboss.cdi.tck.spi.EL+
 
 Please consult the JavaDoc for these interfaces for the implementation requirements.
 
 
 === Using the CDI TCK with the Jakarta EE Core Profile
-You can configure the CDI TCK to just run tests related to the CDI Lite specification appropriate for the Jakarta EE Core Profile by excluding TestNG groups _cdi-full_, _integration_, _javaee-full_, _se_, e.g. via a maven-surefire-plugin configuration like:
+You can configure the CDI TCK to just run tests related to the CDI Lite specification appropriate for the Jakarta EE Core Profile by excluding TestNG groups _javaee-full_, _se_, e.g. via a maven-surefire-plugin configuration like:
 
 [source.XML, xml]
 ----
@@ -149,6 +147,7 @@ You can configure the CDI TCK to just run tests appropriate to the Java SE runti
               <groups>se,arquillian</groups>
               <dependenciesToScan>
                 <dependency>jakarta.enterprise:cdi-tck-core-impl</dependency>
+              </dependenciesToScan>
             </configuration>
        </plugin>
 ----
