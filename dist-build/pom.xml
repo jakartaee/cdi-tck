@@ -199,6 +199,12 @@
          <type>html</type>
          <optional>true</optional>
       </dependency>
+      <dependency>
+         <groupId>jakarta.enterprise</groupId>
+         <artifactId>cdi-tck-lang-model</artifactId>
+         <version>${cdi.tck.version}</version>
+         <optional>true</optional>
+      </dependency>
 
       <dependency>
          <groupId>jakarta.enterprise</groupId>

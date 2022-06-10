@@ -141,6 +141,21 @@
             </configuration>
           </execution>
 
+          <execution>
+            <id>install-cdi-tck-lang-model</id>
+            <phase>package</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <groupId>jakarta.enterprise</groupId>
+              <artifactId>cdi-tck-lang-model</artifactId>
+              <version>${project.version}</version>
+              <packaging>jar</packaging>
+              <file>cdi-tck-lang-model-${project.version}.jar</file>
+              <generatePom>true</generatePom>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>

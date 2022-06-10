@@ -35,6 +35,14 @@
             <include>README.adoc</include>
          </includes>
       </fileSet>
+      <fileSet>
+         <directory>${project.basedir}/lang-model-tck-runner</directory>
+         <outputDirectory>weld/lang-model-tck-runner</outputDirectory>
+         <includes>
+            <include>src/**</include>
+            <include>pom.xml</include>
+         </includes>
+      </fileSet>
    </fileSets>
 
    <dependencySets>
@@ -45,6 +53,7 @@
             <include>jakarta.enterprise:cdi-tck-web-impl</include>
             <include>jakarta.enterprise:cdi-tck-api</include>
             <include>jakarta.enterprise:cdi-tck-ext-lib</include>
+            <include>jakarta.enterprise:cdi-tck-lang-model</include>
          </includes>
          <useTransitiveDependencies>true</useTransitiveDependencies>
          <outputDirectory>artifacts</outputDirectory>

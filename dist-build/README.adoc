@@ -56,11 +56,8 @@ Note that you can also simply consume CDI-TCK artifacts from Maven Central.
 * download Wildfly https://wildfly.org/downloads/[server in respective version] and unzip to create
 a wildfly-{$version}.Final directory
 * Set the JBOSS_HOME environment variable to the path of the wildfly-{$version}.Final directory
-* Checkout the weld-core repository `git clone https://github.com/weld/core.git weld-core`
-* Change directory to weld-core
-* git checkout a version that is present in the WildFly server you downloaded, http://weld.cdi-spec.org/[Weld website]
-shows a table that captures which Weld versions are in which WildFly servers
-* Run `mvn clean package -Dtck -f jboss-as/pom.xml` to install TCK ext lib into wildfly-{$version}.Final (needed for 4 tests)
+* Run `mvn clean package -Pupdate-jboss-as -f jboss-as/pom.xml` to install weld jars into wildfly-{$version}.Final
+* Run `mvn package -f jboss-as/pom.xml` to install TCK ext lib into wildfly-{$version}.Final (needed for 4 tests)
 * Run embedded container tests:
 `mvn clean verify -f jboss-tck-runner/pom.xml`
 * Run incontainer, full EE set [1800+ tests]
