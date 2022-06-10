@@ -218,7 +218,9 @@
         <profile>
             <id>tck-audit</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>!skipTckAudit</name>
+                </property>
             </activation>
             <dependencies>
                 <dependency>
