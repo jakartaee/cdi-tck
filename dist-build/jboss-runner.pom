@@ -157,7 +157,7 @@
               <includeArtifactIds>weld-porting-package-tck</includeArtifactIds>
               <stripVersion>true</stripVersion>
               <overWriteReleases>true</overWriteReleases>
-              <outputDirectory>${project.build.directory}/dependency/lib</outputDirectory>
+              <outputDirectory>target/dependency/lib</outputDirectory>
             </configuration>
           </execution>
         </executions>
@@ -197,7 +197,7 @@
           </execution>
         </executions>
         <configuration>
-          <outputDirectory>${project.build.directory}/surefire-reports</outputDirectory>
+          <outputDirectory>target/surefire-reports</outputDirectory>
           <outputName>test-report</outputName>
         </configuration>
       </plugin>
@@ -595,7 +595,7 @@
                 <configuration>
                   <stripVersion>true</stripVersion>
                   <overWriteReleases>true</overWriteReleases>
-                  <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                  <outputDirectory>target</outputDirectory>
                   <includeGroupIds>org.jboss.weld.se</includeGroupIds>
                 </configuration>
               </execution>
@@ -609,7 +609,7 @@
               <groups>se,arquillian</groups>
               <systemPropertyVariables>
                 <arquillian.launch>weld-se</arquillian.launch>
-                <libPath>${project.build.outputDirectory}</libPath>
+                <libPath>target</libPath>
               </systemPropertyVariables>
               <suiteXmlFiles>
                 <suiteXmlFile>target/suites/tck-core-suite.xml</suiteXmlFile>
