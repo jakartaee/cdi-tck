@@ -143,7 +143,7 @@ public class DependentContextTest extends AbstractTest {
         Tarantula nextTarantula = tarantulaBean.create(nextCreationalContext);
         assert nextTarantula != null;
 
-        tarantulaBean.destroy(nextTarantula, creationalContext);
+        tarantulaBean.destroy(nextTarantula, nextCreationalContext);
         Integer thirdFoxHash = SpiderProducer.getFoxUsedForDisposalHashcode();
 
         assertNotEquals(firstFoxHash, secondFoxHash);
