@@ -1,5 +1,6 @@
 package org.jboss.cdi.tck.tests.build.compatible.extensions.validation;
 
+import jakarta.enterprise.inject.spi.DefinitionException;
 import jakarta.enterprise.inject.spi.DeploymentException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -14,7 +15,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "4.0")
 public class ValidationTest extends AbstractTest {
     @Deployment
-    @ShouldThrowException(DeploymentException.class)
+    @ShouldThrowException(DefinitionException.class)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(ValidationTest.class)
