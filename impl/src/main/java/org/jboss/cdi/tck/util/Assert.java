@@ -22,6 +22,7 @@ import static org.testng.Assert.fail;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -35,6 +36,18 @@ public class Assert {
     }
 
     /**
+     * Validate that types match.
+     *
+     * @param type The provided type
+     * @param requiredType The expected type
+     */
+    public static void assertTypeEquals(Type type, Type requiredType) {
+        if (!isTypesEqual(type, requiredType)) {
+            fail(String.format("Type '%s' does not match type '%s'", type, requiredType));
+        }
+    }
+
+    /**
      *
      * @param annotations
      * @param requiredAnnotationTypes
@@ -43,10 +56,9 @@ public class Assert {
     public static void assertAnnotationSetMatches(Set<? extends Annotation> annotations,
             Class<? extends Annotation>... requiredAnnotationTypes) {
 
-        if(annotations == null) {
+        if (annotations == null) {
             throw new IllegalArgumentException();
         }
-
 
         if (annotations.size() != requiredAnnotationTypes.length) {
             fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(), Arrays.toString(requiredAnnotationTypes), requiredAnnotationTypes.length));
@@ -59,7 +71,7 @@ public class Assert {
         List<Class<? extends Annotation>> requiredAnnotationTypesList = Arrays.asList(requiredAnnotationTypes);
 
         for (Annotation annotation : annotations) {
-            if (!requiredAnnotationTypesList.contains(annotation.annotationType())) {
+            if (!isInstanceOf(annotation, requiredAnnotationTypesList)) {
                 fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(), requiredAnnotationTypesList, requiredAnnotationTypesList.size()));
             }
         }
@@ -78,7 +90,7 @@ public class Assert {
 
         List<Type> requiredTypeList = Arrays.asList(requiredTypes);
 
-        if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
+        if (requiredTypes.length != types.size() || !containsAllTypes(types, requiredTypeList)) {
             fail(String.format("Set %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList, requiredTypeList.size()));
         }
     }
@@ -96,9 +108,49 @@ public class Assert {
 
         List<Type> requiredTypeList = Arrays.asList(requiredTypes);
 
-        if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
+        if (requiredTypes.length != types.size() || !containsAllTypes(types, requiredTypeList)) {
             fail(String.format("List %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList, requiredTypeList.size()));
         }
+    }
+
+    private static boolean containsAllTypes(Collection<? extends Type> existingTypes, Collection<? extends Type> requiredTypes) {
+        if (requiredTypes.isEmpty()) {
+            return false;
+        }
+        for (Type requiredType : requiredTypes) {
+            if (!containsType(existingTypes, requiredType)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean containsType(Collection<? extends Type> existingTypes, Type requiredType) {
+        if (existingTypes.isEmpty()) {
+            return false;
+        }
+        for (Type existingType : existingTypes) {
+            if (isTypesEqual(requiredType, existingType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static Boolean isTypesEqual(Type type, Type requiredType) {
+        return type.getTypeName().equals(requiredType.getTypeName());
+    }
+
+    private static boolean isInstanceOf(Annotation annotation, Collection<? extends Class<? extends Annotation>> requiredTypes) {
+        if (requiredTypes.isEmpty()) {
+            return false;
+        }
+        for (Class<? extends Annotation> requiredType : requiredTypes) {
+            if (requiredType.isInstance(annotation)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

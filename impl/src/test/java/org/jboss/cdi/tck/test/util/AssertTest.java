@@ -18,8 +18,10 @@
 package org.jboss.cdi.tck.test.util;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -106,5 +108,11 @@ public class AssertTest {
                 new HashSet<Type>(Arrays.asList(Integer.class, String.class, new TypeLiteral<List<Boolean>>() {
                 }.getType())), String.class, Integer.class, new TypeLiteral<List<Boolean>>() {
                 }.getType());
+    }
+
+    @Test
+    public void testCustomAnnotationMatches() {
+        Annotation injectAnnotation = (Annotation) Proxy.newProxyInstance(getClass().getClassLoader(), new Class[]{Inject.class}, (proxy, method, args) -> null);
+        Assert.assertAnnotationSetMatches(Collections.singleton(injectAnnotation), Inject.class);
     }
 }
