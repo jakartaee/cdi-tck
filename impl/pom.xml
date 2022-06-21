@@ -215,11 +215,14 @@
     </build>
 
     <profiles>
+        <!-- This profile is needed to build the test artifact as it generates the spec SpecAssertion*/SpecVersion annotations.
+        It is disabled by default because the org.jboss.test-audit:* should not be dependencies of the test artifact.
+        -->
         <profile>
             <id>tck-audit</id>
             <activation>
                 <property>
-                    <name>generateSource</name>
+                    <name>tckAuditSourceGen</name>
                 </property>
             </activation>
             <dependencies>

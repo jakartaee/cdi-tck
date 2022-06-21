@@ -39,4 +39,3 @@ Master branch contains the CDI TCK 4.0
 * lang-model - A standalone test suite for the CDI language model; see its [README](./lang-model/README.adoc)
 * web - The extra tests that depend on the web profile and full platform
 * README.md - this doc
-* settings.xml - 
