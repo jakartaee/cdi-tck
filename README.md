@@ -6,17 +6,17 @@ Check out the [TCK Reference Guide](https://eclipse-ee4j.github.io/cdi-tck/) to 
 ## Building CDI TCK artifacts
 To build the CDI TCK artifacts, use:
 
-`mvn -DgenerateSource install`
+`mvn -DtckAuditSourceGen install`
 
 or when compiling against staged Jakarta artifacts:
 
-`mvn -DgenerateSource -Pstaging install`
+`mvn -DtckAuditSourceGen -Pstaging install`
 
 ## Building the CDI TCK distribution
 The CDI TCK distribution artifact is built by specifing an additional `-Drelease` property to build the TCK reference
 documentation and distribution bundle, e.g.:
 
-`mvn -DgenerateSource -Drelease install`
+`mvn -DtckAuditSourceGen -Drelease install`
 
 ## Eclipse Continuous Integration Environment
 The Eclipse continuous integration environment interface for the CDI project is located at https://ci.eclipse.org/cdi/
