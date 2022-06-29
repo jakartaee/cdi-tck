@@ -94,7 +94,7 @@ intended for any other purpose.
                      any previous Exclude Lists for that Test Suite.
 |Libraries   +|
                      The class libraries for the Technology Under Test.
-                     The Libraries for Jakarta Contexts and Dependency Injection Version {revnumver} are listed in <<libraries>>.
+                     The Libraries for Jakarta Contexts and Dependency Injection Version {revnumber} are listed in <<libraries>>.
 |Location Resource   +|
                      A location of classes or native libraries that are components of the test
                      tools or tests, such that these classes or libraries may be required to
@@ -260,6 +260,8 @@ This section lists the applicable requirements and specifications for the CDI TC
 
 *  *Jarkarta Dependency Injection (DI)* - CDI builds on DI, and as such CDI implementations must additionally pass the Jakarta Dependency Injection TCK.
 
+*  *The Jakarta Contexts and Dependency Injection Language Model TCK* - The CDI Language Model TCK included in the CDI TCK distribution must be run and passed by every CDI cmpatible implementation.
+
 * *Jakarta Interceptors* - CDI is an implementation of the Jakarta Interceptors specification. Jakarta Interceptors has no TCK of its own, so the CDI TCK includes an extensive set of tests that validate the Jakarta Interceptors concepts.
 [TIP]
 ====
@@ -322,4 +324,7 @@ Jakarta Contexts and Dependency Injection Version {revnumber}:
 * jakarta.enterprise.inject.se
 * jakarta.enterprise.inject.spi
 * jakarta.enterprise.inject.spi.configurator
+* jakarta.enterprise.lang.model
+* jakarta.enterprise.lang.model.declarations
+* jakarta.enterprise.lang.model.types
 * jakarta.enterprise.util
