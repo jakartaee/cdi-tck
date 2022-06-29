@@ -19,6 +19,7 @@
         <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
         <asciidoctorj.pdf.version>1.6.2</asciidoctorj.pdf.version>
         <pdf.name>cdi-tck-reference-guide.pdf</pdf.name>
+        <revnumber>4.0</revnumber>
     </properties>
 
     <build>
