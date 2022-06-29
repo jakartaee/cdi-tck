@@ -57,6 +57,7 @@
                             <outputDirectory>${project.build.directory}/generated-docs-pdf</outputDirectory>
                             <outputFile>cdi-tck-reference-guide.pdf</outputFile>
                             <attributes>
+                                <revnumber>${revnumber}</revnumber>
                                 <imagesdir>images</imagesdir>
                                 <pdf-stylesdir>${project.basedir}/src/main/style</pdf-stylesdir>
                                 <pdf-style>cditck</pdf-style>
@@ -80,6 +81,7 @@
                             <outputDirectory>${project.build.directory}/generated-docs-html</outputDirectory>
                             <outputFile>cdi-tck-reference-guide.html</outputFile>
                             <attributes>
+                                <revnumber>${revnumber}</revnumber>
                                 <source-highlighter>coderay</source-highlighter>
                                 <!--embedAssets>true</embedAssets-->
                                 <imagesdir>${project.basedir}/src/main/asciidoc/images</imagesdir>
