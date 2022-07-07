@@ -1,7 +1,7 @@
 # CDI TCK Development
 
 
-Check out the [TCK Reference Guide](https://eclipse-ee4j.github.io/cdi-tck/) to get acquainted with the CDI TCK and learn how to execute and debug it.
+Check out the [TCK Reference Guide](https://jakartaee.github.io/cdi-tck/) to get acquainted with the CDI TCK and learn how to execute and debug it.
 
 ## Building CDI TCK artifacts
 To build the CDI TCK artifacts, use:
