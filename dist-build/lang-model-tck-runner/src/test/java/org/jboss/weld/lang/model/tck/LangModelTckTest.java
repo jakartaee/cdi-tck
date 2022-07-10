@@ -18,6 +18,7 @@
 package org.jboss.weld.lang.model.tck;
 
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
+import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -27,7 +28,7 @@ import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.impl.BeansXml;
-import org.jboss.weld.tests.util.Assert;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -51,8 +52,11 @@ public class LangModelTckTest {
                 // beans.xml with discovery mode "all"
                 .addAsWebInfResource(new BeansXml(BeanDiscoveryMode.ALL), "beans.xml")
                 .addAsServiceProvider(BuildCompatibleExtension.class, LangModelExtension.class)
-                // add this class into the deployment so that it's subject to discovery
-                .addClasses(LangModelVerifier.class);
+                .addClasses(LangModelExtension.class)
+                // add this package into the deployment so that it's subject to discovery, including its dependencies
+                .addPackage(LangModelVerifier.class.getPackage())
+                .addAsServiceProvider(Extension.class, BuildtimeVetoExtension.class)
+                .addClass(BuildtimeVetoExtension.class);
     }
 
     @Test
