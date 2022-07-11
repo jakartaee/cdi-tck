@@ -21,7 +21,7 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: "Maven install(staging)"
         run: |
-          mvn clean install -Pstaging -B -V -DtckAuditSourceGen
+          mvn clean install -Pstaging -B -V
       - name: "Maven install"
         run: |
-          mvn clean install -B -V -DtckAuditSourceGen
+          mvn clean install -B -V
