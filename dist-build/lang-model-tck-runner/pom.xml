@@ -172,7 +172,7 @@
                         <directory>src/test/resources</directory>
                     </resource>
                     <resource>
-                        <directory>src/test/wildfly8</directory>
+                        <directory>src/test/wildfly</directory>
                     </resource>
                 </resources>
                 <plugins>
