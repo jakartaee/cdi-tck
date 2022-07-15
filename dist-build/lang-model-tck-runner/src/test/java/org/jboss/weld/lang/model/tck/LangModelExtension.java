@@ -14,11 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.jboss.weld.lang.model.tck;
 
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
+import jakarta.enterprise.inject.build.compatible.spi.Discovery;
 import jakarta.enterprise.inject.build.compatible.spi.Enhancement;
+import jakarta.enterprise.inject.build.compatible.spi.ScannedClasses;
 import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import org.jboss.cdi.lang.model.tck.LangModelVerifier;
 
@@ -30,5 +31,10 @@ public class LangModelExtension implements BuildCompatibleExtension {
     public void run(ClassInfo clazz) {
         ENHANCEMENT_INVOKED++;
         LangModelVerifier.verify(clazz);
+    }
+
+    @Discovery
+    public void addVerifier(ScannedClasses sc) {
+        sc.add(LangModelVerifier.class.getName());
     }
 }
