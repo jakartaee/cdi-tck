@@ -50,13 +50,11 @@ public class LangModelTckTest {
     public static Archive<?> deploy() {
         return ShrinkWrap.create(WebArchive.class, LangModelTckTest.class.getSimpleName() + ".war")
                 // beans.xml with discovery mode "all"
-                .addAsWebInfResource(new BeansXml(BeanDiscoveryMode.ALL), "beans.xml")
+                .addAsWebInfResource(new BeansXml(BeanDiscoveryMode.ANNOTATED), "beans.xml")
                 .addAsServiceProvider(BuildCompatibleExtension.class, LangModelExtension.class)
                 .addClasses(LangModelExtension.class)
                 // add this package into the deployment so that it's subject to discovery, including its dependencies
-                .addPackage(LangModelVerifier.class.getPackage())
-                .addAsServiceProvider(Extension.class, BuildtimeVetoExtension.class)
-                .addClass(BuildtimeVetoExtension.class);
+                .addPackage(LangModelVerifier.class.getPackage());
     }
 
     @Test
