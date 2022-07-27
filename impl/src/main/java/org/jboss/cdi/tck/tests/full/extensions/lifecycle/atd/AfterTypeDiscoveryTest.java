@@ -22,6 +22,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
 import static org.jboss.cdi.tck.cdi.Sections.TYPE_DISCOVERY_STEPS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -43,6 +44,8 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * @author Martin Kouba
@@ -78,20 +81,61 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "b"), @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ha") })
     public void testInitialAlternatives() {
-        assertEquals(extension.getAlternatives().size(), 3);
-        assertEquals(extension.getAlternatives().get(0), AlphaAlternative.class);
-        assertEquals(extension.getAlternatives().get(1), EchoAlternative.class);
-        assertEquals(extension.getAlternatives().get(2), DeltaAlternative.class);
+        // frameworks might add their own alternatives, we cannot assert positions in list but rather just ordering
+        assertTrue(extension.getAlternatives().size() >= 3);
+        List<Class<?>> alternatives = extension.getAlternatives();
+        Integer alphaAltIndex = null;
+        Integer echoAltIndex = null;
+        Integer deltaAltIndex = null;
+        for (int i = 0; i < alternatives.size(); i++) {
+            if (alternatives.get(i).equals(AlphaAlternative.class)) {
+                alphaAltIndex = i;
+            }
+            if (alternatives.get(i).equals(EchoAlternative.class)) {
+                echoAltIndex = i;
+            }
+            if (alternatives.get(i).equals(DeltaAlternative.class)) {
+                deltaAltIndex = i;
+            }
+        }
+        assertNotNull(alphaAltIndex);
+        assertNotNull(echoAltIndex);
+        assertNotNull(deltaAltIndex);
+        assertTrue(alphaAltIndex < echoAltIndex);
+        assertTrue(echoAltIndex < deltaAltIndex);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "d"), @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hc") })
     public void testInitialDecorators() {
-        assertEquals(extension.getDecorators().size(), 4);
-        assertEquals(extension.getDecorators().get(0), AlphaDecorator.class);
-        assertEquals(extension.getDecorators().get(1), BravoDecorator.class);
-        assertEquals(extension.getDecorators().get(2), EchoDecorator.class);
-        assertEquals(extension.getDecorators().get(3), DeltaDecorator.class);
+        // frameworks might add their own decorators, we cannot assert positions in list but rather just ordering
+        assertTrue(extension.getDecorators().size() >= 4);
+        List<Class<?>> decorators = extension.getDecorators();
+        Integer alphaDecIndex = null;
+        Integer bravoDecIndex = null;
+        Integer echoDecIndex = null;
+        Integer deltaDecIndex = null;
+        for (int i = 0; i < decorators.size(); i++) {
+            if (decorators.get(i).equals(AlphaDecorator.class)) {
+                alphaDecIndex = i;
+            }
+            if (decorators.get(i).equals(BravoDecorator.class)) {
+                bravoDecIndex = i;
+            }
+            if (decorators.get(i).equals(EchoDecorator.class)) {
+                echoDecIndex = i;
+            }
+            if (decorators.get(i).equals(DeltaDecorator.class)) {
+                deltaDecIndex = i;
+            }
+        }
+        assertNotNull(alphaDecIndex);
+        assertNotNull(bravoDecIndex);
+        assertNotNull(echoDecIndex);
+        assertNotNull(deltaDecIndex);
+        assertTrue(alphaDecIndex < bravoDecIndex);
+        assertTrue(bravoDecIndex < echoDecIndex);
+        assertTrue(echoDecIndex < deltaDecIndex);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
