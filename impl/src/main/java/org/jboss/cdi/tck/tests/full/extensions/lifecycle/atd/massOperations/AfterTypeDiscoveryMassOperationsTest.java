@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.tests.full.extensions.lifecycle.atd.massOperations;
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_TYPE_DISCOVERY;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import jakarta.inject.Inject;
@@ -36,6 +37,8 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 /**
  * Complementary test to AfterTypeDiscoveryTest using the same classes but focusing on mass operations on List
@@ -74,10 +77,28 @@ public class AfterTypeDiscoveryMassOperationsTest extends AbstractTest {
         @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "b"),
         @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ha") })
     public void testInitialAlternatives() {
-        assertEquals(extension.getAlternatives().size(), 3);
-        assertEquals(extension.getAlternatives().get(0), AlphaAlternative.class);
-        assertEquals(extension.getAlternatives().get(1), BetaAlternative.class);
-        assertEquals(extension.getAlternatives().get(2), GammaAlternative.class);
+        // frameworks might add their own alternatives, we cannot assert positions in list but rather just ordering
+        assertTrue(extension.getAlternatives().size() >= 3);
+        List<Class<?>> alternatives = extension.getAlternatives();
+        Integer alphaAltIndex = null;
+        Integer betaLatIndex = null;
+        Integer gammaAltIndex = null;
+        for (int i = 0; i < alternatives.size(); i++) {
+            if (alternatives.get(i).equals(AlphaAlternative.class)) {
+                alphaAltIndex = i;
+            }
+            if (alternatives.get(i).equals(BetaAlternative.class)) {
+                betaLatIndex = i;
+            }
+            if (alternatives.get(i).equals(GammaAlternative.class)) {
+                gammaAltIndex = i;
+            }
+        }
+        assertNotNull(alphaAltIndex);
+        assertNotNull(betaLatIndex);
+        assertNotNull(gammaAltIndex);
+        assertTrue(alphaAltIndex < betaLatIndex);
+        assertTrue(betaLatIndex < gammaAltIndex);
     }
 
     @Test
@@ -85,10 +106,28 @@ public class AfterTypeDiscoveryMassOperationsTest extends AbstractTest {
         @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "d"),
         @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hc") })
     public void testInitialDecorators() {
-        assertEquals(extension.getDecorators().size(), 3);
-        assertEquals(extension.getDecorators().get(0), AlphaDecorator.class);
-        assertEquals(extension.getDecorators().get(1), BetaDecorator.class);
-        assertEquals(extension.getDecorators().get(2), GammaDecorator.class);
+        // frameworks might add their own decorators, we cannot assert positions in list but rather just ordering
+        assertTrue(extension.getDecorators().size() >= 3);
+        List<Class<?>> decorators = extension.getDecorators();
+        Integer alphaDecIndex = null;
+        Integer betaDecIndex = null;
+        Integer gammaDecIndex = null;
+        for (int i = 0; i < decorators.size(); i++) {
+            if (decorators.get(i).equals(AlphaDecorator.class)) {
+                alphaDecIndex = i;
+            }
+            if (decorators.get(i).equals(BetaDecorator.class)) {
+                betaDecIndex = i;
+            }
+            if (decorators.get(i).equals(GammaDecorator.class)) {
+                gammaDecIndex = i;
+            }
+        }
+        assertNotNull(alphaDecIndex);
+        assertNotNull(betaDecIndex);
+        assertNotNull(gammaDecIndex);
+        assertTrue(alphaDecIndex < betaDecIndex);
+        assertTrue(betaDecIndex < gammaDecIndex);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

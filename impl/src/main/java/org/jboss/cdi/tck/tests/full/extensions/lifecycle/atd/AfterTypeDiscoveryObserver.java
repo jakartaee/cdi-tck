@@ -74,8 +74,13 @@ public class AfterTypeDiscoveryObserver implements Extension {
         }
         // The order of decorators reverted
         Collections.reverse(event.getDecorators());
-        // Remove first alternative - AlphaAlternative
-        event.getAlternatives().remove(0);
+        // Remove first alternative based on index - AlphaAlternative
+        // There can be more alternatives in the deployment, calculate index first
+        for (int i = 0; i < event.getAlternatives().size(); i++) {
+            if (event.getAlternatives().get(i).equals(AlphaAlternative.class)) {
+                event.getAlternatives().remove(i);
+            }
+        }
 
         // add Baz annotatedType via AnnotatedTypeConfigurator
         event.addAnnotatedType(Baz.class, AfterTypeDiscoveryObserver.class.getName() + ":" + Baz.class.getName())
