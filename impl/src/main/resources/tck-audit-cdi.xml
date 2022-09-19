@@ -5882,6 +5882,24 @@
     </section>
 
     <!-- Core CDI/CDI Lite/Build compatible extensions -->
+    <section id="beancontainer" title="The BeanContainer object" level="2">
+        <group>
+            <text>The container provides a built-in bean with bean type |BeanContainer|, scope |@Dependent| and qualifier |@Default|.</text>
+
+            <assertion id="aa">
+                <text>Test the bean type.</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>Test the scope.</text>
+            </assertion>
+
+            <assertion id="ac">
+                <text>Test the qualifier.</text>
+            </assertion>
+        </group>
+    </section>
+
     <section id="build_spi" title="Build compatible extensions" level="2">
     </section>
 
