@@ -21,6 +21,7 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
 import static org.jboss.cdi.tck.cdi.Sections.BM_DETERMINING_ANNOTATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ANNOTATEDTYPE;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ELRESOLVER;
@@ -55,6 +56,7 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -192,5 +194,15 @@ public class BeanManagerTest extends AbstractTest {
             return;
         }
         fail();
+    }
+
+    @Test
+    @SpecAssertion(section = BEANMANAGER, id = "b")
+    public void testManagerBeanIsPassivationCapable() {
+        assertTrue(isSerializable(getCurrentManager().getClass()));
+    }
+
+    private boolean isSerializable(Class<?> clazz) {
+        return clazz.isPrimitive() || Serializable.class.isAssignableFrom(clazz);
     }
 }

@@ -19,7 +19,6 @@ package org.jboss.cdi.tck.tests.lookup.manager;
 import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CONTEXTUAL_REFERENCE;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import jakarta.enterprise.context.Dependent;
@@ -72,12 +71,6 @@ public class ManagerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BEANMANAGER, id = "b")
-    public void testManagerBeanIsPassivationCapable() {
-        assert isSerializable(getCurrentManager().getClass());
-    }
-
-    @Test
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_CONTEXTUAL_REFERENCE, id = "a"), @SpecAssertion(section = BM_OBTAIN_CONTEXTUAL_REFERENCE, id = "b") })
     public void testGetReferenceReturnsContextualInstance() {
         Bean<FishFarmOffice> bean = getBeans(FishFarmOffice.class).iterator().next();
@@ -89,10 +82,6 @@ public class ManagerTest extends AbstractTest {
     public void testGetReferenceWithIllegalBeanType() {
         Bean<FishFarmOffice> bean = getBeans(FishFarmOffice.class).iterator().next();
         getCurrentManager().getReference(bean, BigDecimal.class, getCurrentManager().createCreationalContext(bean));
-    }
-
-    private boolean isSerializable(Class<?> clazz) {
-        return clazz.isPrimitive() || Serializable.class.isAssignableFrom(clazz);
     }
 
 }
