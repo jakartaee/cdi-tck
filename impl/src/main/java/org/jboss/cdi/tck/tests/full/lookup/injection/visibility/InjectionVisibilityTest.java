@@ -16,6 +16,7 @@
  */
 package org.jboss.cdi.tck.tests.full.lookup.injection.visibility;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -32,6 +33,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+@Test(groups = CDI_FULL)
 @SpecVersion(spec = "cdi", version = "2.0")
 public class InjectionVisibilityTest extends AbstractTest {
 
