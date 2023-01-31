@@ -15,8 +15,9 @@
  * limitations under the License.
  */
 
-package org.jboss.cdi.tck.tests.lookup.injectionpoint;
+package org.jboss.cdi.tck.tests.full.lookup.injectionpoint;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CREATIONALCONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTABLE_REFERENCE;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTABLE_REFERENCE;
@@ -43,11 +44,13 @@ import org.testng.annotations.Test;
  * 
  */
 @SpecVersion(spec = "cdi", version = "2.0")
+@Test(groups = CDI_FULL)
 public class InjectableReferenceTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(InjectableReferenceTest.class)
+                .withBeansXml(new BeansXml().decorators(TimestampLogger.class))
                 .build();
     }
 
@@ -99,8 +102,8 @@ public class InjectableReferenceTest extends AbstractTest {
 
         // Use the logger
         String message = "foo123";
-        LoggerInterceptor.reset();
+        TimestampLogger.reset();
         logger.log(message);
-        assert message.equals(LoggerInterceptor.message);
+        assert message.equals(TimestampLogger.getLoggedMessage());
     }
 }
