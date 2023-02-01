@@ -16,14 +16,14 @@
  */
 package org.jboss.cdi.tck.tests.definition.scope.broken.tooManyScopes.producer.method;
 
-import jakarta.enterprise.context.ConversationScoped;
 import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.Produces;
 
 @Dependent
 public class ProducerMethodWithTooManyScopeTypes_Broken {
     @Produces
-    @ConversationScoped
+    @RequestScoped
     @Dependent
     @Word
     public String getWord() {
