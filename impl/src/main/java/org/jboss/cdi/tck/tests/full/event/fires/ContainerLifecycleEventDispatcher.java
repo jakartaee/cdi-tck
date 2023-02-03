@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event.fires;
+package org.jboss.cdi.tck.tests.full.event.fires;
 
 import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.AFTER_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents.AFTER_DEPLOYMENT_VALIDATION;
