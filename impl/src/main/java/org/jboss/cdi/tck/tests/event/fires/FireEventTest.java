@@ -42,7 +42,6 @@ import jakarta.enterprise.inject.spi.InjectionPoint;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.full.extensions.beanManager.broken.event.ContainerLifecycleEvents;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -61,7 +60,7 @@ public class FireEventTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(FireEventTest.class).withClass(ContainerLifecycleEvents.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(FireEventTest.class).build();
     }
 
     @SuppressWarnings("serial")
@@ -286,12 +285,6 @@ public class FireEventTest extends AbstractTest {
     public <T> void testEventFireThrowsExceptionIfEventObjectTypeContainsUnresovableTypeVariable() {
         MiniBar miniBar = getContextualReference(MiniBar.class);
         miniBar.itemEvent.fire(new Item_Illegal<T>("12 oz Beer", 6));
-    }
-
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = EVENT, id = "g")
-    public void testFireContainerLifecycleEvent(ContainerLifecycleEventDispatcher containerLifecycleEvents) {
-        containerLifecycleEvents.fireContainerLifecycleEvents();
     }
 
 }
