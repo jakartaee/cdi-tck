@@ -14,18 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event;
+package org.jboss.cdi.tck.tests.full.event;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.inject.Specializes;
-
-@Specializes
-@Dependent
-public class FarmShop extends Shop {
-
-    @Override
-    public String getClassName() {
-        return FarmShop.class.getName();
-    }
+public class Delivery {
 
 }
