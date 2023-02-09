@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.event;
-
-import java.util.HashSet;
-import java.util.Set;
+package org.jboss.cdi.tck.tests.full.event;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Dependent
 public class Shop {

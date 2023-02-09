@@ -25,8 +25,6 @@ import static org.jboss.cdi.tck.cdi.Sections.MULTIPLE_EVENT_QUALIFIERS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_METHOD_INVOCATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
-import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -98,16 +96,6 @@ public class EventTest extends AbstractTest {
         PrivateObserver.reset();
         getCurrentManager().getEvent().select(Delivery.class).fire(new Delivery());
         assertTrue(PrivateObserver.isObserved);
-    }
-
-    @Test
-    @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "cc"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa") })
-    public void testObserverCalledOnSpecializedBeanOnly() {
-        Shop.observers.clear();
-        getCurrentManager().getEvent().select(Delivery.class).fire(new Delivery());
-        // FarmShop specializes Shop
-        assertEquals(Shop.observers.size(), 1);
-        assertEquals(Shop.observers.iterator().next(), FarmShop.class.getName());
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
