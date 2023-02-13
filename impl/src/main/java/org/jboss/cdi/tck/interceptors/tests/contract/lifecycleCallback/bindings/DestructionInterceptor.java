@@ -32,7 +32,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 @SuppressWarnings("serial")
 @Destructive
 @Interceptor
-@Priority(Interceptor.Priority.APPLICATION)
+@Priority(Interceptor.Priority.APPLICATION + 200)
 public class DestructionInterceptor extends SuperDestructionInterceptor implements Serializable {
 
     @PreDestroy
