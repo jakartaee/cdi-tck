@@ -21,6 +21,6 @@ import jakarta.interceptor.Interceptor;
 
 @Interceptor
 @BravoBinding
-@Priority(Interceptor.Priority.APPLICATION)
+@Priority(Interceptor.Priority.APPLICATION + 100)
 public class BravoInterceptor extends AbstractInterceptor {
 }
