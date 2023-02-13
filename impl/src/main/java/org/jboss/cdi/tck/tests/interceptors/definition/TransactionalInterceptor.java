@@ -23,7 +23,7 @@ import jakarta.interceptor.InvocationContext;
 
 @Transactional
 @Interceptor
-@Priority(Interceptor.Priority.APPLICATION)
+@Priority(Interceptor.Priority.APPLICATION - 100)
 public class TransactionalInterceptor {
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {

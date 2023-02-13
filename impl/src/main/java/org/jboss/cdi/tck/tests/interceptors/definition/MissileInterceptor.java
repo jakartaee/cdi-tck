@@ -23,7 +23,7 @@ import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @MissileBinding
-@Priority(Interceptor.Priority.APPLICATION)
+@Priority(Interceptor.Priority.APPLICATION + 100)
 public class MissileInterceptor {
     public static boolean intercepted = false;
 
