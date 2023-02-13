@@ -23,7 +23,7 @@ import jakarta.interceptor.InvocationContext;
 
 @Secure
 @Interceptor
-@Priority(Interceptor.Priority.APPLICATION)
+@Priority(Interceptor.Priority.APPLICATION - 500)
 public class SecureInterceptor {
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
