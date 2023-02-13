@@ -23,7 +23,7 @@ import jakarta.interceptor.InvocationContext;
 
 @Interceptor
 @CharlieBinding
-@Priority(1000)
+@Priority(1001)
 public class CharlieInterceptor2 extends AbstractInterceptor {
 
     @AroundConstruct
