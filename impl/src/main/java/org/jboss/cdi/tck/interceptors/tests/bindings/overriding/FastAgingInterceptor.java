@@ -25,7 +25,7 @@ import org.jboss.cdi.tck.interceptors.tests.bindings.overriding.Aging.Speed;
 
 @Interceptor
 @Aging(Speed.FAST)
-@Priority(Interceptor.Priority.APPLICATION)
+@Priority(Interceptor.Priority.APPLICATION + 300)
 public class FastAgingInterceptor {
 
     @AroundInvoke
