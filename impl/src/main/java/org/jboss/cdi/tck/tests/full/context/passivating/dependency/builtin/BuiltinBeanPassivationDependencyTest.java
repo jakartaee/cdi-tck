@@ -97,7 +97,11 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
         assertEquals(inspectorCopy.getInjectionPoint().getQualifiers(), inspector.getInjectionPoint().getQualifiers());
         assertEquals(inspectorCopy.getInjectionPoint().getBean(), inspector.getInjectionPoint().getBean());
         assertEquals(inspectorCopy.getInjectionPoint().getMember(), inspector.getInjectionPoint().getMember());
-        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated(), inspector.getInjectionPoint().getAnnotated());
+
+        // Annotated does not necessarly implement equals()/hashcode()
+        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getBaseType(), inspector.getInjectionPoint().getAnnotated().getBaseType());
+        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getAnnotations(), inspector.getInjectionPoint().getAnnotated().getAnnotations());
+
         assertEquals(inspectorCopy.getInjectionPoint().isDelegate(), inspector.getInjectionPoint().isDelegate());
         assertEquals(inspectorCopy.getInjectionPoint().isTransient(), inspector.getInjectionPoint().isTransient());
     }
