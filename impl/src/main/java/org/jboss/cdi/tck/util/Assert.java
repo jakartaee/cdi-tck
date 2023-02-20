@@ -17,6 +17,12 @@
 
 package org.jboss.cdi.tck.util;
 
+import jakarta.enterprise.inject.spi.Annotated;
+import jakarta.enterprise.inject.spi.AnnotatedMember;
+import jakarta.enterprise.inject.spi.AnnotatedParameter;
+import jakarta.enterprise.inject.spi.AnnotatedType;
+
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
@@ -98,6 +104,29 @@ public class Assert {
 
         if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
             fail(String.format("List %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList, requiredTypeList.size()));
+        }
+    }
+
+    /**
+     * Helper method to compare 2 Annotated. They don't necessarily implement equals()/hashcode() so we need to
+     * compare the underlying java.lang.reflect objects.
+     *
+     * @param expected The expected Annotated instance
+     * @param actual The actual Annotated instance to compare
+     */
+    public static void assertAnnotated(final Annotated expected, final Annotated actual) {
+        assertEquals(unwrap(expected), unwrap(actual));
+    }
+
+    private static Object unwrap(final Annotated annotated) {
+        if (annotated instanceof AnnotatedMember) {
+            return ((AnnotatedMember) annotated).getJavaMember();
+        } else if (annotated instanceof AnnotatedParameter) {
+            return ((AnnotatedParameter) annotated).getJavaParameter();
+        } else if (annotated instanceof AnnotatedType) {
+            return ((AnnotatedType) annotated).getJavaClass();
+        } else {
+            throw new UnsupportedOperationException("Unknown Annotated instance: " + annotated);
         }
     }
 

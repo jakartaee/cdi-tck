@@ -7,11 +7,16 @@ import static org.testng.Assert.assertNotNull;
 
 import java.io.IOException;
 
+import jakarta.enterprise.inject.spi.Annotated;
+import jakarta.enterprise.inject.spi.AnnotatedMember;
+import jakarta.enterprise.inject.spi.AnnotatedParameter;
+import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.Assert;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -98,9 +103,8 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
         assertEquals(inspectorCopy.getInjectionPoint().getBean(), inspector.getInjectionPoint().getBean());
         assertEquals(inspectorCopy.getInjectionPoint().getMember(), inspector.getInjectionPoint().getMember());
 
-        // Annotated does not necessarly implement equals()/hashcode()
-        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getBaseType(), inspector.getInjectionPoint().getAnnotated().getBaseType());
-        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getAnnotations(), inspector.getInjectionPoint().getAnnotated().getAnnotations());
+        // Annotated does not necessarily implement equals()/hashcode() so we need to test the underlying Java reflection object
+        Assert.assertAnnotated(inspectorCopy.getInjectionPoint().getAnnotated(), inspector.getInjectionPoint().getAnnotated());
 
         assertEquals(inspectorCopy.getInjectionPoint().isDelegate(), inspector.getInjectionPoint().isDelegate());
         assertEquals(inspectorCopy.getInjectionPoint().isTransient(), inspector.getInjectionPoint().isTransient());
