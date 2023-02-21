@@ -20,8 +20,7 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEFORE_BEAN_DISCOVERY;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_VALIDATION;
 
-import jakarta.enterprise.inject.spi.DefinitionException;
-
+import jakarta.enterprise.inject.spi.DeploymentException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
@@ -43,7 +42,7 @@ import org.testng.annotations.Test;
 @Test(groups = CDI_FULL)
 public class AddingPassivatingScopeTest extends AbstractTest {
 
-    @ShouldThrowException(DefinitionException.class)
+    @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(AddingPassivatingScopeTest.class)
