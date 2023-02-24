@@ -130,7 +130,12 @@ public class BeanDefinitionTest extends AbstractTest {
         assertTrue(bean.getTypes().contains(MyRawBean.class));
         assertTrue(bean.getTypes().contains(MyBean.class));
         assertTrue(bean.getTypes().contains(MyInterface.class));
-        assertTrue(bean.getTypes().contains(MySuperInterface.class));
+
+        // CDI isn't clear whereas we should get MySuperInterface with or without Number parameter.
+        // It assumes JLS must be followed to determine the list of super types
+        // JLS isn't clear itself and Java implementations either. So we need to keep it open and support both
+        // https://bugs.openjdk.org/browse/JDK-8044366
+        assertTrue(containsClass(bean.getTypes(), MySuperInterface.class));
         assertTrue(bean.getTypes().contains(Object.class));
     }
 
