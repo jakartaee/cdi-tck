@@ -16,9 +16,6 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.lifecycle.processBeanAttributes.specialization;
 
-import java.lang.reflect.Type;
-import java.util.Set;
-
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.BeanAttributes;
 import jakarta.enterprise.inject.spi.Extension;
@@ -31,17 +28,11 @@ public class VerifyingExtension implements Extension {
     private BeanAttributes<Charlie> charlie;
 
     public void alpha(@Observes ProcessBeanAttributes<Alpha> event) {
-        Set<Type> types = event.getBeanAttributes().getTypes();
-        if (!types.contains(Bravo.class) && !types.contains(Charlie.class)) {
-            alpha = event.getBeanAttributes();
-        }
+        alpha = event.getBeanAttributes();
     }
 
     public void bravo(@Observes ProcessBeanAttributes<Bravo> event) {
-        Set<Type> types = event.getBeanAttributes().getTypes();
-        if (!types.contains(Charlie.class)) {
-            bravo = event.getBeanAttributes();
-        }
+        bravo = event.getBeanAttributes();
     }
 
     public void charlie(@Observes ProcessBeanAttributes<Charlie> event) {
