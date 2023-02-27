@@ -35,6 +35,7 @@ import java.util.Set;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.Bean;
 
+import jakarta.enterprise.util.TypeLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -135,7 +136,8 @@ public class BeanDefinitionTest extends AbstractTest {
         // It assumes JLS must be followed to determine the list of super types
         // JLS isn't clear itself and Java implementations either. So we need to keep it open and support both
         // https://bugs.openjdk.org/browse/JDK-8044366
-        assertTrue(containsClass(bean.getTypes(), MySuperInterface.class));
+        assertTrue(bean.getTypes().contains(MySuperInterface.class)
+                   || bean.getTypes().contains(new TypeLiteral<MySuperInterface<Number>>() {}.getType()));
         assertTrue(bean.getTypes().contains(Object.class));
     }
 
