@@ -14,22 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorOrder;
 
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import jakarta.annotation.Priority;
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.Interceptor;
+import jakarta.interceptor.InvocationContext;
+import org.jboss.cdi.tck.util.ActionSequence;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+@Interceptor
+@Secure
+@Priority(Interceptor.Priority.APPLICATION+1)
+public class FirstInterceptor {
 
-import jakarta.interceptor.InterceptorBinding;
-
-@Target({ TYPE, METHOD })
-@Retention(RUNTIME)
-@Documented
-@InterceptorBinding
-public @interface Transactional {
-
+    @AroundInvoke
+    public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
+        ActionSequence.addAction(FirstInterceptor.class.getName());
+        return ctx.proceed();
+    }
 }

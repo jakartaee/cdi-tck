@@ -14,11 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
-
-import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorOrder;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -33,19 +29,27 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
 @SpecVersion(spec = "cdi", version = "2.0")
+@Test(groups = CDI_FULL)
 public class InterceptorOrderTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorOrderTest.class)
+                .withBeansXml(new BeansXml().interceptors(SecondInterceptor.class, FirstInterceptor.class, TransactionalInterceptor.class))
                 .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "l")
-    public void testInterceptorsInvocationOrder(Foo foo) {
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "b"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "c") })
+    public void testInterceptorsCalledInOrderDefinedByBeansXml(Foo foo) {
+
         assertNotNull(foo);
         ActionSequence.reset();
 
@@ -57,4 +61,20 @@ public class InterceptorOrderTest extends AbstractTest {
         assertEquals(sequence.get(1), FirstInterceptor.class.getName());
     }
 
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g")
+    public void testInterceptorsInvocationOrder(AccountTransaction transaction) {
+
+        assertNotNull(transaction);
+        ActionSequence.reset();
+
+        transaction.execute();
+
+        List<String> sequence = ActionSequence.getSequenceData();
+        assertEquals(sequence.size(), 4, sequence.toString());
+        assertEquals(sequence.get(0), AnotherInterceptor.class.getName());
+        assertEquals(sequence.get(1), TransactionalInterceptor.class.getName());
+        assertEquals(sequence.get(2), Transaction.class.getName());
+        assertEquals(sequence.get(3), AccountTransaction.class.getName());
+    }
 }

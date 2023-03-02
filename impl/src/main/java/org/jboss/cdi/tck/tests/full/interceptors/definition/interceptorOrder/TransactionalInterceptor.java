@@ -14,23 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorOrder;
 
 import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
-
 import org.jboss.cdi.tck.util.ActionSequence;
 
+@Transactional
 @Interceptor
-@AccountBinding
-@Priority(1)
-public class AnotherInterceptor {
+@Priority(Interceptor.Priority.APPLICATION+2)
+public class TransactionalInterceptor {
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
-        ActionSequence.addAction(AnotherInterceptor.class.getName());
+        ActionSequence.addAction(TransactionalInterceptor.class.getName());
         return ctx.proceed();
     }
 

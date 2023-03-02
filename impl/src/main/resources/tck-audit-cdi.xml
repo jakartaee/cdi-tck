@@ -5157,6 +5157,13 @@
             </text>
         </assertion>
 
+        <assertion id="l">
+            <text>The Priority annotation can be used to enable and order interceptors associated with components that use interceptor bindings.
+                The required value element of the Priority annotation determines the ordering.
+                Interceptors with smaller priority values are called first.</text>
+            <note>This is defined in the Interceptors 2.0 spec, 5.2.1. Use of the Priority Annotation in Ordering Interceptors.</note>
+        </assertion>
+
     </section>
 
     <section id="interceptor_resolution" title="Interceptor resolution" level="2">
