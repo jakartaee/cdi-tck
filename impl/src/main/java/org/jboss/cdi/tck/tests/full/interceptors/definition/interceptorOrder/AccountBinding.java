@@ -1,4 +1,4 @@
-package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorOrder;
 
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;

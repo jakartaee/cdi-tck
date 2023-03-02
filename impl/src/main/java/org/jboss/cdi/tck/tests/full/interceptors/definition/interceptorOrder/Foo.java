@@ -14,25 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.interceptors.definition.interceptorOrder;
+package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorOrder;
 
 import jakarta.enterprise.context.Dependent;
-import jakarta.interceptor.AroundInvoke;
-import jakarta.interceptor.InvocationContext;
 
-import org.jboss.cdi.tck.util.ActionSequence;
-
-@Transactional
-@AccountBinding
+@Secure
 @Dependent
-public class AccountTransaction extends Transaction {
-
-    public void execute() {
-    }
-
-    @AroundInvoke
-    public Object intercept(InvocationContext ctx) throws Exception {
-        ActionSequence.addAction(AccountTransaction.class.getName());
-        return ctx.proceed();
+public class Foo {
+    public void bar() {
     }
 }
