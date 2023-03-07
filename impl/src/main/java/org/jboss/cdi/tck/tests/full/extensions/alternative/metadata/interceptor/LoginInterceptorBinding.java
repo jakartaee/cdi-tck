@@ -23,11 +23,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.interceptor.InterceptorBinding;
 
 @InterceptorBinding
 @Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 public @interface LoginInterceptorBinding {
-
+    class Literal extends AnnotationLiteral<LoginInterceptorBinding> implements LoginInterceptorBinding {
+    }
 }

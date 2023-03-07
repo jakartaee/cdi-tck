@@ -49,12 +49,10 @@ import org.testng.annotations.Test;
 public class DisposalMethodDefinitionTest extends AbstractTest {
 
     @SuppressWarnings("serial")
-    private static final Annotation DEADLIEST_LITERAL = new AnnotationLiteral<Deadliest>() {
-    };
+    private static final Annotation DEADLIEST_LITERAL = new Deadliest.Literal();
 
     @SuppressWarnings("serial")
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
+    private static final Annotation TAME_LITERAL = new Tame.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

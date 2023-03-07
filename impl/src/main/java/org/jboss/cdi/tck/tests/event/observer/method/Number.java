@@ -10,6 +10,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
 @Target({ TYPE, METHOD, PARAMETER, FIELD })
@@ -17,6 +18,7 @@ import jakarta.inject.Qualifier;
 @Documented
 @Qualifier
 public @interface Number {
-
+    class Literal extends AnnotationLiteral<Number> implements Number {
+    }
 }
 

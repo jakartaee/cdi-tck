@@ -80,13 +80,13 @@ public class EventBindingTypesTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "d")
     public void testFireEventWithNonRuntimeBindingTypeFails() {
-        getCurrentManager().getEvent().select(Animal.class, new AnnotationLiteral<NonRuntimeBindingType>() {}).fire(new Animal());
+        getCurrentManager().getEvent().select(Animal.class, new NonRuntimeBindingType.Literal()).fire(new Animal());
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "g")
     public void testFireEventWithNonBindingAnnotationsFails() {
-        getCurrentManager().getEvent().select(Animal.class, new AnnotationLiteral<NonBindingType>() {}).fire(new Animal());
+        getCurrentManager().getEvent().select(Animal.class, new NonBindingType.Literal()).fire(new Animal());
     }
 
     @Test

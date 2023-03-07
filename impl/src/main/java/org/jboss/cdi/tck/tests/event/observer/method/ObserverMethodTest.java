@@ -135,8 +135,7 @@ public class ObserverMethodTest extends AbstractTest {
     @SpecAssertion(section = OBSERVER_METHOD, id = "f")
     public void testNotifyOnObserverMethod() {
         Integer event = Integer.valueOf(1);
-        Set<ObserverMethod<? super Integer>> observerMethods = getCurrentManager().resolveObserverMethods(event, new AnnotationLiteral<Number>() {
-        });
+        Set<ObserverMethod<? super Integer>> observerMethods = getCurrentManager().resolveObserverMethods(event, new Number.Literal());
         assertEquals(observerMethods.size(), 1);
         observerMethods.iterator().next().notify(event);
         assertTrue(IntegerObserver.wasNotified);

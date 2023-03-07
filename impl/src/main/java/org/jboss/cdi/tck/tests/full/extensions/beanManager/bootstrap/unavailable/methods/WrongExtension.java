@@ -121,8 +121,7 @@ public class WrongExtension implements Extension {
 
         new Invocation() {
             void execute() {
-                beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>() {
-                });
+                beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new Transactional.Literal());
             }
         }.run();
 
@@ -178,8 +177,7 @@ public class WrongExtension implements Extension {
         beanManager.getBeans(Foo.class);
         beanManager.resolve(null);
         beanManager.resolveObserverMethods(new Foo());
-        beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Transactional>() {
-        });
+        beanManager.resolveInterceptors(InterceptionType.AROUND_INVOKE, new Transactional.Literal());
         beanManager.resolveDecorators(new HashSet<Type>(Arrays.asList(Foo.class)));
         beanManager.validate(injectionPoint);
         beanManager.getPassivationCapableBean("foo");

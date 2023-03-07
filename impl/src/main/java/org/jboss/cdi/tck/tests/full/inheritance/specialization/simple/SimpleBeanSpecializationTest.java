@@ -48,12 +48,10 @@ import org.testng.annotations.Test;
 public class SimpleBeanSpecializationTest extends AbstractTest {
 
     @SuppressWarnings("serial")
-    private static Annotation LANDOWNER_LITERAL = new AnnotationLiteral<Landowner>() {
-    };
+    private static Annotation LANDOWNER_LITERAL = new Landowner.Literal();
 
     @SuppressWarnings("serial")
-    private static Annotation LAZY_LITERAL = new AnnotationLiteral<Lazy>() {
-    };
+    private static Annotation LAZY_LITERAL = new Lazy.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

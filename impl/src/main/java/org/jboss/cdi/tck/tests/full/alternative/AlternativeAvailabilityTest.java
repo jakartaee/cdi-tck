@@ -59,12 +59,10 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     }
 
     @SuppressWarnings("serial")
-    private static final AnnotationLiteral<Wild> WILD_LITERAL = new AnnotationLiteral<Wild>() {
-    };
+    private static final AnnotationLiteral<Wild> WILD_LITERAL = new Wild.Literal();
 
     @SuppressWarnings("serial")
-    private static final AnnotationLiteral<Tame> TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
+    private static final AnnotationLiteral<Tame> TAME_LITERAL = new Tame.Literal();
 
     @Test
     @SpecAssertion(section = SELECTION, id = "e")

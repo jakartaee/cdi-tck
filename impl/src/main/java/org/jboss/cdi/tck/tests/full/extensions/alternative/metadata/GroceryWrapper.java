@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.jboss.cdi.tck.literals.ProducesLiteral;
 import org.jboss.cdi.tck.util.annotated.AnnotatedConstructorWrapper;
 import org.jboss.cdi.tck.util.annotated.AnnotatedFieldWrapper;
 import org.jboss.cdi.tck.util.annotated.AnnotatedMethodWrapper;
@@ -53,9 +55,8 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
     private static boolean getTypeClosureOfProducerMethodUsed = false;
 
     public GroceryWrapper(AnnotatedType<Grocery> delegate) {
-        super(delegate, false, RequestScoped.Literal.INSTANCE, new CheapLiteral(), new AnnotationLiteral<NamedStereotype>() {
-        }, new AnnotationLiteral<GroceryInterceptorBinding>() {
-        });
+        super(delegate, false, RequestScoped.Literal.INSTANCE, new CheapLiteral(), new NamedStereotype.Literal(),
+                new GroceryInterceptorBinding.Literal());
         typeClosure.add(Grocery.class);
         typeClosure.add(Object.class);
     }
@@ -91,8 +92,7 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
             } else if (field.getJavaMember().getName().equals("fruit")) {
                 fields.add(wrapFruitField(field, this, new CheapLiteral()));
             } else if (field.getBaseType().equals(Bread.class)) {
-                fields.add(wrapField(field, this, new AnnotationLiteral<Produces>() {
-                }));
+                fields.add(wrapField(field, this, ProducesLiteral.INSTANCE));
             } else {
                 fields.add(new AnnotatedFieldWrapper(field, this, true));
             }
@@ -108,14 +108,12 @@ public class GroceryWrapper extends AnnotatedTypeWrapper<Grocery> {
             if (method.getJavaMember().getName().equals("getMilk")) {
 
                 AnnotatedMethodWrapper<? super Grocery> wrappedMethod = new AnnotatedMethodWrapper(method, this, false,
-                        new AnnotationLiteral<Produces>() {
-                        });
+                        ProducesLiteral.INSTANCE);
                 methods.add(wrappedMethod);
             } else if (method.getJavaMember().getName().equals("getYogurt")) {
                 // wrap the method and its parameters
                 AnnotatedMethodWrapper<? super Grocery> wrappedMethod = new AnnotatedMethodWrapper(method, this, false, new ExpensiveLiteral(),
-                        new AnnotationLiteral<Produces>() {
-                        });
+                        ProducesLiteral.INSTANCE);
                 methods.add(wrapMethodParameters(method.getParameters(), wrappedMethod, false, new CheapLiteral()));
             } else if (method.getJavaMember().getName().equals("nonInjectAnnotatedInitializer")) {
                 AnnotatedMethodWrapper<? super Grocery> wrappedMethod = new AnnotatedMethodWrapper(method, this, true,

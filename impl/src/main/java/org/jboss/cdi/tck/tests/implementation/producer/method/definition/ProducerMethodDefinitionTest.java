@@ -64,14 +64,10 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ProducerMethodDefinitionTest extends AbstractTest {
 
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
-    private static final Annotation DEADLIEST_LITERAL = new AnnotationLiteral<Deadliest>() {
-    };
-    private static final Annotation NUMBER_LITERAL = new AnnotationLiteral<Number>() {
-    };
-    private static final Annotation YUMMY_LITERAL = new AnnotationLiteral<Yummy>() {
-    };
+    private static final Annotation TAME_LITERAL = new Tame.Literal();
+    private static final Annotation DEADLIEST_LITERAL = new Deadliest.Literal();
+    private static final Annotation NUMBER_LITERAL = new Number.Literal();
+    private static final Annotation YUMMY_LITERAL = new Yummy.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -233,10 +229,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "da"), @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dg") })
     public void testNonStaticProducerMethodNotInherited() {
-        assertEquals(getBeans(Apple.class, new AnnotationLiteral<Yummy>() {
-        }).size(), 1);
-        assertEquals(getContextualReference(Apple.class, new AnnotationLiteral<Yummy>() {
-        }).getTree().getClass(), AppleTree.class);
+        assertEquals(getBeans(Apple.class, new Yummy.Literal()).size(), 1);
+        assertEquals(getContextualReference(Apple.class, new Yummy.Literal()).getTree().getClass(), AppleTree.class);
     }
 
     /**
@@ -265,8 +259,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalProductException.class })
     @SpecAssertion(section = PRODUCER_METHOD, id = "f")
     public void testNonDependentProducerReturnsNullValue() {
-        getContextualReference(Pollen.class, new AnnotationLiteral<Yummy>() {
-        }).ping();
+        getContextualReference(Pollen.class, new Yummy.Literal()).ping();
         fail("IllegalProductException not thrown");
     }
 

@@ -52,8 +52,7 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
     @SpecAssertion(section = PRODUCER_METHOD_NAME, id = "a")
     public void testMethodName() {
         String name = "findTerry";
-        Bean<Bug> terry = getUniqueBean(Bug.class, new AnnotationLiteral<Crazy>() {
-        });
+        Bean<Bug> terry = getUniqueBean(Bug.class, new Crazy.Literal());
         assertEquals(terry.getName(), name);
     }
 
@@ -69,8 +68,7 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "ab") })
     public void testProducerMethodQualifiers() {
         String name = "produceJohn";
-        Bean<Bug> john = getUniqueBean(Bug.class, new AnnotationLiteral<Funny>() {
-        });
+        Bean<Bug> john = getUniqueBean(Bug.class, new Funny.Literal());
         assertEquals(john.getName(), name);
         assertTrue(annotationSetMatches(john.getQualifiers(), Any.Literal.INSTANCE, Default.Literal.INSTANCE));
     }

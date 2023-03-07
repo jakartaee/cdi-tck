@@ -36,10 +36,10 @@ import java.util.Set;
 
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.ObserverMethod;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.literals.OverrideLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -120,15 +120,13 @@ public class ResolveEventObserversTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "e")
     public void testBeanManagerResolveObserversWithIllegalQualifier() {
-        getCurrentManager().resolveObserverMethods(new SimpleEventType(), new AnnotationLiteral<Override>() {
-        });
+        getCurrentManager().resolveObserverMethods(new SimpleEventType(), OverrideLiteral.INSTANCE);
     }
 
     @Test
     @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "o")
     public void testObserverMethodAutomaticallyRegistered() {
-        assertFalse(getCurrentManager().resolveObserverMethods(new String(), new AnnotationLiteral<Secret>() {
-        }).isEmpty());
+        assertFalse(getCurrentManager().resolveObserverMethods(new String(), new Secret.Literal()).isEmpty());
     }
 
     @Test
@@ -138,8 +136,7 @@ public class ResolveEventObserversTest extends AbstractTest {
         assertEquals(ghostObservers.size(), 0);
 
         Set<ObserverMethod<? super String>> stringObservers = getCurrentManager().resolveObserverMethods(new String(),
-                new AnnotationLiteral<Secret>() {
-                });
+                new Secret.Literal());
         assertEquals(stringObservers.size(), 1);
         for (ObserverMethod<? super String> observer : stringObservers) {
             // an assertion error will be raised if an inappropriate observer is called

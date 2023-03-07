@@ -82,8 +82,7 @@ public class MiniBar {
             throw new IllegalArgumentException("Item already restored");
         }
 
-        itemEvent.select(new AnnotationLiteral<Restored>() {
-        }).fire(item);
+        itemEvent.select(new Restored.Literal()).fire(item);
     }
 
     public void stock() {

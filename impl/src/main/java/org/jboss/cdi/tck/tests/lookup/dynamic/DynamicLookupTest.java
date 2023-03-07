@@ -90,8 +90,7 @@ public class DynamicLookupTest extends AbstractTest {
     public void testNonBindingThrowsException() {
         try {
             ObtainsInstanceBean injectionPoint = getContextualReference(ObtainsInstanceBean.class);
-            injectionPoint.getAnyPaymentProcessor().select(new AnnotationLiteral<NonBinding>() {
-            });
+            injectionPoint.getAnyPaymentProcessor().select(new NonBinding.Literal());
         } catch (Throwable t) {
             assertTrue(isThrowablePresent(IllegalArgumentException.class, t));
             return;

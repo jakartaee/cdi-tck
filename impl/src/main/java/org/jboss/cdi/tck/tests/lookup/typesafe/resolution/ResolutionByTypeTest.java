@@ -57,12 +57,9 @@ public class ResolutionByTypeTest extends AbstractTest {
     };
     private static final TypeLiteral<Cat<African>> AFRICAN_CAT = new TypeLiteral<Cat<African>>() {
     };
-    private static final Annotation TAME = new AnnotationLiteral<Tame>() {
-    };
-    private static final Annotation WILD = new AnnotationLiteral<Wild>() {
-    };
-    private static final Annotation NUMBER = new AnnotationLiteral<Number>() {
-    };
+    private static final Annotation TAME = new Tame.Literal();
+    private static final Annotation WILD = new Wild.Literal();
+    private static final Annotation NUMBER = new Number.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -83,13 +80,11 @@ public class ResolutionByTypeTest extends AbstractTest {
             @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "a"), @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "d") })
     public void testAllQualifiersSpecifiedForResolutionMustAppearOnBean() {
 
-        Set<Bean<Animal>> animalBeans = getBeans(Animal.class, new ChunkyLiteral(), new AnnotationLiteral<Whitefish>() {
-        });
+        Set<Bean<Animal>> animalBeans = getBeans(Animal.class, new ChunkyLiteral(), new Whitefish.Literal());
         assertEquals(animalBeans.size(), 1);
         assertTrue(animalBeans.iterator().next().getTypes().contains(Cod.class));
 
-        Set<Bean<ScottishFish>> scottishFishBeans = getBeans(ScottishFish.class, new AnnotationLiteral<Whitefish>() {
-        });
+        Set<Bean<ScottishFish>> scottishFishBeans = getBeans(ScottishFish.class, new Whitefish.Literal());
         assertEquals(scottishFishBeans.size(), 2);
 
         for (Bean<ScottishFish> bean : scottishFishBeans) {
@@ -124,10 +119,8 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertEquals(getBeans(Double.class, NUMBER).size(), 2);
         assertEquals(getBeans(double.class, NUMBER).size(), 2);
 
-        Double min = getContextualReference(Double.class, new AnnotationLiteral<Min>() {
-        });
-        double max = getContextualReference(double.class, new AnnotationLiteral<Max>() {
-        });
+        Double min = getContextualReference(Double.class, new Min.Literal());
+        double max = getContextualReference(double.class, new Max.Literal());
 
         assertEquals(min, Double.valueOf(NumberProducer.min));
         assertEquals(Double.valueOf(max), NumberProducer.max);
@@ -146,8 +139,7 @@ public class ResolutionByTypeTest extends AbstractTest {
                 return true;
             }
 
-        }, new AnnotationLiteral<Whitefish>() {
-        });
+        }, new Whitefish.Literal());
         assertEquals(beans.size(), 2);
 
         Set<Type> classes = new HashSet<Type>();

@@ -85,8 +85,7 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
     public void testAddingQualifierByClass() {
         assertTrue(BeforeBeanDiscoveryObserver.isObserved());
         assertEquals(getBeans(Alligator.class).size(), 0);
-        assertEquals(getBeans(Alligator.class, new AnnotationLiteral<Tame>() {
-        }).size(), 1);
+        assertEquals(getBeans(Alligator.class, new Tame.Literal()).size(), 1);
         assertTrue(getCurrentManager().isQualifier(Tame.class));
     }
 
@@ -129,11 +128,9 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
     public void testAddAnnotatedType() {
         getUniqueBean(Boss.class);
         assertEquals(getBeans(Bar.class).size(), 0);
-        assertEquals(getBeans(Bar.class, new AnnotationLiteral<Pro>() {
-        }).size(), 1);
+        assertEquals(getBeans(Bar.class, Pro.ProLiteral.INSTANCE).size(), 1);
         assertEquals(getBeans(Foo.class).size(), 0);
-        assertEquals(getBeans(Foo.class, new AnnotationLiteral<Pro>() {
-        }).size(), 1);
+        assertEquals(getBeans(Foo.class, Pro.ProLiteral.INSTANCE).size(), 1);
     }
 
     @SuppressWarnings("serial")

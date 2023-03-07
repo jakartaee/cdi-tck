@@ -44,8 +44,7 @@ import org.testng.annotations.Test;
 public class BuiltinInstanceTest extends AbstractTest {
 
     @SuppressWarnings("serial")
-    private static final AnnotationLiteral<FarmBased> farmBasedLiteral = new AnnotationLiteral<FarmBased>() {
-    };
+    private static final AnnotationLiteral<FarmBased> farmBasedLiteral = new FarmBased.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

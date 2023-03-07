@@ -22,6 +22,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
 import java.lang.annotation.Documented;
@@ -33,5 +34,6 @@ import java.lang.annotation.Target;
 @Documented
 @Qualifier
 public @interface Pet {
-
+    class Literal extends AnnotationLiteral<Pet> implements Pet {
+    }
 }

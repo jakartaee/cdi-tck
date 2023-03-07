@@ -39,10 +39,8 @@ public class CustomInterceptorImplementation implements Interceptor<SimpleInterc
 
     public CustomInterceptorImplementation(InterceptionType type) {
         this.type = type;
-        interceptorBindingTypes.add(new AnnotationLiteral<Secure>() {
-        });
-        interceptorBindingTypes.add(new AnnotationLiteral<Transactional>() {
-        });
+        interceptorBindingTypes.add(new Secure.Literal());
+        interceptorBindingTypes.add(new Transactional.Literal());
     }
 
     public Set<InjectionPoint> getInjectionPoints() {

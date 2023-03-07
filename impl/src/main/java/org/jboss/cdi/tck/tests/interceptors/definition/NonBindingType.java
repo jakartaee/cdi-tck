@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.interceptors.definition;
 
+import jakarta.enterprise.util.AnnotationLiteral;
+
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
@@ -30,5 +32,6 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Documented
 public @interface NonBindingType {
-
+    class Literal extends AnnotationLiteral<NonBindingType> implements NonBindingType {
+    }
 }

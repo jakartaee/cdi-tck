@@ -46,7 +46,9 @@ import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.interceptor.InterceptorBinding;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.literals.InheritedLiteral;
 import org.jboss.cdi.tck.literals.RetentionLiteral;
+import org.jboss.cdi.tck.literals.StereotypeLiteral;
 import org.jboss.cdi.tck.literals.TargetLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.beanContainer.BeanContainerTest;
@@ -101,11 +103,9 @@ public class BeanManagerTest extends AbstractTest {
     public void testGetMetaAnnotationsForStereotype() {
         Set<Annotation> stereotypeAnnotations = getCurrentManager().getStereotypeDefinition(AnimalStereotype.class);
         assertEquals(stereotypeAnnotations.size(), 5);
-        assertTrue(stereotypeAnnotations.contains(new AnnotationLiteral<Stereotype>() {
-        }));
+        assertTrue(stereotypeAnnotations.contains(StereotypeLiteral.INSTANCE));
         assertTrue(stereotypeAnnotations.contains(RequestScoped.Literal.INSTANCE));
-        assertTrue(stereotypeAnnotations.contains(new AnnotationLiteral<Inherited>() {
-        }));
+        assertTrue(stereotypeAnnotations.contains(InheritedLiteral.INSTANCE));
         assertTrue(stereotypeAnnotations.contains(new RetentionLiteral() {
 
             public RetentionPolicy value() {

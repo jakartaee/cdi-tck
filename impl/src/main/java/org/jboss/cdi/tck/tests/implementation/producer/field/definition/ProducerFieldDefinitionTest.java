@@ -58,14 +58,10 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ProducerFieldDefinitionTest extends AbstractTest {
 
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
-    private static final Annotation PET_LITERAL = new AnnotationLiteral<Pet>() {
-    };
-    private static final Annotation FOO_LITERAL = new AnnotationLiteral<Foo>() {
-    };
-    private static final Annotation STATIC_LITERAL = new AnnotationLiteral<Static>() {
-    };
+    private static final Annotation TAME_LITERAL = new Tame.Literal();
+    private static final Annotation PET_LITERAL = new Pet.Literal();
+    private static final Annotation FOO_LITERAL = new Foo.Literal();
+    private static final Annotation STATIC_LITERAL = new Static.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -117,8 +113,7 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
    @Test
     @SpecAssertion(section = PRODUCER_FIELD_TYPES, id = "a")
     public void testApiTypeForInterfaceReturn() {
-        Set<Bean<Animal>> animalBeans = getBeans(Animal.class, new AnnotationLiteral<AsAnimal>() {
-        });
+        Set<Bean<Animal>> animalBeans = getBeans(Animal.class, new AsAnimal.Literal());
         assert animalBeans.size() == 1;
         Bean<Animal> animalModel = animalBeans.iterator().next();
         assert animalModel.getTypes().size() == 2;

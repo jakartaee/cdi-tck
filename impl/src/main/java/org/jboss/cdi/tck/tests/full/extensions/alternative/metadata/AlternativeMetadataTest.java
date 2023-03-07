@@ -318,10 +318,8 @@ public class AlternativeMetadataTest extends AbstractTest {
     public void testContainerUsesOperationsOfAnnotatedNotReflectionApi() {
         assertEquals(getBeans(Sausage.class, Any.Literal.INSTANCE).size(), 1);
         // Overriding annotated type has no methods and fields and thus there are no cheap and expensive sausages
-        assertTrue(getBeans(Sausage.class, new AnnotationLiteral<Expensive>() {
-        }).isEmpty());
-        assertTrue(getBeans(Sausage.class, new AnnotationLiteral<Cheap>() {
-        }).isEmpty());
+        assertTrue(getBeans(Sausage.class, new Expensive.Literal()).isEmpty());
+        assertTrue(getBeans(Sausage.class, new Cheap.Literal()).isEmpty());
     }
 
 }

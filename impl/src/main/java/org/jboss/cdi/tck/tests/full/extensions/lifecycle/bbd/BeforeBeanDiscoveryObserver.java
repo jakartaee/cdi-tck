@@ -82,8 +82,7 @@ public class BeforeBeanDiscoveryObserver implements Extension {
                 for (final AnnotatedMethod<? super Skill> method : super.getMethods()) {
                     if ("level".equals(method.getJavaMember().getName())) {
                         methods.add(new AnnotatedMethodWrapper<Skill>((AnnotatedMethod<Skill>) method, this, true,
-                                new AnnotationLiteral<Nonbinding>() {
-                                }));
+                                new Nonbinding.Literal()));
                     } else {
                         methods.add(new AnnotatedMethodWrapper<Skill>((AnnotatedMethod<Skill>) method, this, true));
                     }

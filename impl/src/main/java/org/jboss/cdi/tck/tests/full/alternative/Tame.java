@@ -22,6 +22,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
 import java.lang.annotation.Retention;
@@ -31,5 +32,6 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Qualifier
 public @interface Tame {
-
+    class Literal extends AnnotationLiteral<Tame> implements Tame {
+    }
 }

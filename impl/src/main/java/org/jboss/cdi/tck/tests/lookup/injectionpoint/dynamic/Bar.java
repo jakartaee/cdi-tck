@@ -63,8 +63,7 @@ public class Bar {
 
     @SuppressWarnings("serial")
     public Foo getQualifierNiceFoo() {
-        return fooInstance.select(new AnnotationLiteral<Nice>() {
-        }).get();
+        return fooInstance.select(new Nice.Literal()).get();
     }
 
     public Foo getConstructorInjectionFoo() {

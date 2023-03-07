@@ -16,6 +16,8 @@
  */
 package org.jboss.cdi.tck.tests.full.decorators.definition;
 
+import jakarta.enterprise.util.AnnotationLiteral;
+
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
@@ -30,5 +32,6 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Documented
 public @interface NonMeta {
-
+    class Literal extends AnnotationLiteral<NonMeta> implements NonMeta {
+    }
 }
