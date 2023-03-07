@@ -23,10 +23,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
 @Target({ FIELD, PARAMETER })
 @Qualifier
 @Retention(RetentionPolicy.CLASS)
 public @interface NonRuntimeBindingType {
+    class Literal extends AnnotationLiteral<NonRuntimeBindingType> implements NonRuntimeBindingType {
+    }
 }

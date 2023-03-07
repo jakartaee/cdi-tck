@@ -69,8 +69,7 @@ public class SelectEventTest extends AbstractTest {
         assert alarm.getNumBreakIns() == 1;
         assert alarm.getNumViolentBreakIns() == 0;
 
-        sensor.securityEvent.select(BreakInEvent.class, new AnnotationLiteral<Violent>() {
-        }).fire(new BreakInEvent());
+        sensor.securityEvent.select(BreakInEvent.class, new Violent.Literal()).fire(new BreakInEvent());
         assert alarm.getNumSecurityEvents() == 4;
         assert alarm.getNumSystemTests() == 1;
         assert alarm.getNumBreakIns() == 2;
@@ -107,15 +106,13 @@ public class SelectEventTest extends AbstractTest {
     @SpecAssertion(section = EVENT, id = "ec")
     public void testEventSelectThrowsExceptionIfAnnotationIsNotBindingType() {
         SecuritySensor sensor = getContextualReference(SecuritySensor.class);
-        sensor.securityEvent.select(new AnnotationLiteral<NotABindingType>() {
-        });
+        sensor.securityEvent.select(new NotABindingType.Literal());
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = EVENT, id = "ec")
     public void testEventSelectWithSubtypeThrowsExceptionIfAnnotationIsNotBindingType() {
         SecuritySensor sensor = getContextualReference(SecuritySensor.class);
-        sensor.securityEvent.select(BreakInEvent.class, new AnnotationLiteral<NotABindingType>() {
-        });
+        sensor.securityEvent.select(BreakInEvent.class, new NotABindingType.Literal());
     }
 }

@@ -29,9 +29,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test(expectedExceptions = UnsatisfiedResolutionException.class)
     @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "da"), @SpecAssertion(section = SPECIALIZATION, id = "cb") })
     public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() {
-        assertEquals(getBeans(Egg.class, new AnnotationLiteral<Yummy>() {
-        }).size(), 0);
-        getContextualReference(Egg.class, new AnnotationLiteral<Yummy>() {
-        });
+        assertEquals(getBeans(Egg.class, new Yummy.Literal()).size(), 0);
+        getContextualReference(Egg.class, new Yummy.Literal());
     }
 }

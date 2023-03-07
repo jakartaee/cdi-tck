@@ -155,24 +155,21 @@ public class DecoratorDefinitionTest extends AbstractTest {
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "c")
     public void testDuplicateBindingsOnResolveDecoratorsFails() {
-        Annotation binding = new AnnotationLiteral<Meta>() {
-        };
+        Annotation binding = new Meta.Literal();
         getCurrentManager().resolveDecorators(FooBar.TYPES, binding, binding);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "d")
     public void testNonBindingsOnResolveDecoratorsFails() {
-        Annotation binding = new AnnotationLiteral<NonMeta>() {
-        };
+        Annotation binding = new NonMeta.Literal();
         getCurrentManager().resolveDecorators(FooBar.TYPES, binding);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
     @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "e")
     public void testEmptyTypeSetOnResolveDecoratorsFails() {
-        Annotation binding = new AnnotationLiteral<NonMeta>() {
-        };
+        Annotation binding = new NonMeta.Literal();
         getCurrentManager().resolveDecorators(new HashSet<Type>(), binding);
     }
 

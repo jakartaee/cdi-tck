@@ -61,8 +61,7 @@ public class VetoedTest extends AbstractTest {
     public void testPackageLevelVeto() {
         assertEquals(getCurrentManager().getBeans(Piranha.class, Any.Literal.INSTANCE).size(), 0);
         assertEquals(getCurrentManager().getBeans(Shark.class, Any.Literal.INSTANCE).size(), 1);
-        assertEquals(getCurrentManager().getBeans(Shark.class, new AnnotationLiteral<Fishy>() {
-        }).size(), 1);
+        assertEquals(getCurrentManager().getBeans(Shark.class, new Fishy.Literal()).size(), 1);
     }
 
 }

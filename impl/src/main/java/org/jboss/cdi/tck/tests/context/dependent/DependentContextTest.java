@@ -51,10 +51,8 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class DependentContextTest extends AbstractTest {
 
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
-    private static final Annotation PET_LITERAL = new AnnotationLiteral<Pet>() {
-    };
+    private static final Annotation TAME_LITERAL = new Tame.Literal();
+    private static final Annotation PET_LITERAL = new Pet.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

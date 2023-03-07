@@ -42,14 +42,10 @@ import org.testng.annotations.Test;
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ProducerMethodLifecycleTest extends AbstractTest {
-    private AnnotationLiteral<Pet> PET_LITERAL = new AnnotationLiteral<Pet>() {
-    };
-    private AnnotationLiteral<FirstBorn> FIRST_BORN_LITERAL = new AnnotationLiteral<FirstBorn>() {
-    };
-    private AnnotationLiteral<Fail> FAIL_LITERAL = new AnnotationLiteral<Fail>() {
-    };
-    private AnnotationLiteral<Null> NULL_LITERAL = new AnnotationLiteral<Null>() {
-    };
+    private AnnotationLiteral<Pet> PET_LITERAL = new Pet.Literal();
+    private AnnotationLiteral<FirstBorn> FIRST_BORN_LITERAL = new FirstBorn.Literal();
+    private AnnotationLiteral<Fail> FAIL_LITERAL = new Fail.Literal();
+    private AnnotationLiteral<Null> NULL_LITERAL = new Null.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

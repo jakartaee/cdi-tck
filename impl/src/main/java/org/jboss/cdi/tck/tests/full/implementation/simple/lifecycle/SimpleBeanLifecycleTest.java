@@ -22,8 +22,7 @@ import java.lang.annotation.Annotation;
 @Test(groups = CDI_FULL)
 public class SimpleBeanLifecycleTest extends AbstractTest {
 
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
+    private static final Annotation TAME_LITERAL = new Tame.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

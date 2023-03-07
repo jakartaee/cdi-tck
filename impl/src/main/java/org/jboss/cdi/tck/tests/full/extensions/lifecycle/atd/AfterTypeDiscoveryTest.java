@@ -181,12 +181,10 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
         getUniqueBean(Boss.class);
 
         assertEquals(getBeans(Bar.class).size(), 0);
-        assertEquals(getBeans(Bar.class, new AnnotationLiteral<Pro>() {
-        }).size(), 1);
+        assertEquals(getBeans(Bar.class, Pro.ProLiteral.INSTANCE).size(), 1);
 
         assertEquals(getBeans(Foo.class).size(), 0);
-        assertEquals(getBeans(Foo.class, new AnnotationLiteral<Pro>() {
-        }).size(), 1);
+        assertEquals(getBeans(Foo.class, Pro.ProLiteral.INSTANCE).size(), 1);
     }
 
     @SuppressWarnings("serial")

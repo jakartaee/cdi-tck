@@ -44,8 +44,7 @@ import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "2.0")
 public class StereotypeDefinitionTest extends AbstractTest {
-    private static final Annotation TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
+    private static final Annotation TAME_LITERAL = new Tame.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

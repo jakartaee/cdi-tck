@@ -41,8 +41,7 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class EventTypesTest extends AbstractTest {
 
-    private AnnotationLiteral<Extra> extraLiteral = new AnnotationLiteral<Extra>() {
-    };
+    private AnnotationLiteral<Extra> extraLiteral = new Extra.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

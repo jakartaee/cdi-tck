@@ -141,8 +141,7 @@ public class ProducerTest extends AbstractTest {
             @SpecAssertion(section = PROCESS_PRODUCER, id = "da"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jb") })
     public void testProduceCallsProducerMethod() {
         Producer<Dog> producer = ProducerProcessor.getNoisyDogProducer();
-        Bean<Dog> dogBean = getUniqueBean(Dog.class, new AnnotationLiteral<Noisy>() {
-        });
+        Bean<Dog> dogBean = getUniqueBean(Dog.class, new Noisy.Literal());
         DogProducer.reset();
         Dog dog = producer.produce(getCurrentManager().createCreationalContext(dogBean));
         assert DogProducer.isNoisyDogProducerCalled();
@@ -153,8 +152,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "e"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ga") })
     public void testSetProducerOverridesProducer() {
         ProducerProcessor.reset();
-        assert getContextualReference(Cow.class, new AnnotationLiteral<Noisy>() {
-        }) instanceof Cow;
+        assert getContextualReference(Cow.class, new Noisy.Literal()) instanceof Cow;
         assert ProducerProcessor.isOverriddenCowProducerCalled();
     }
 
@@ -164,8 +162,7 @@ public class ProducerTest extends AbstractTest {
             @SpecAssertion(section = PROCESS_PRODUCER, id = "db"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jb") })
     public void testProduceAccessesProducerField() {
         Producer<Dog> producer = ProducerProcessor.getQuietDogProducer();
-        Bean<Dog> dogBean = getUniqueBean(Dog.class, new AnnotationLiteral<Quiet>() {
-        });
+        Bean<Dog> dogBean = getUniqueBean(Dog.class, new Quiet.Literal());
         DogProducer.reset();
         Dog dog = producer.produce(getCurrentManager().createCreationalContext(dogBean));
         assert dog.getColor().equals(DogProducer.QUIET_DOG_COLOR);
@@ -175,8 +172,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "faa") })
     public void testProducerForMethodDisposesProduct() {
 
-        Bean<Dog> dogBean = getUniqueBean(Dog.class, new AnnotationLiteral<Noisy>() {
-        });
+        Bean<Dog> dogBean = getUniqueBean(Dog.class, new Noisy.Literal());
         Producer<Dog> producer = ProducerProcessor.getNoisyDogProducer();
         DogProducer.reset();
         Dog dog = producer.produce(getCurrentManager().createCreationalContext(dogBean));
@@ -212,8 +208,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "j"), @SpecAssertion(section = INJECTIONTARGET_EE, id = "b") })
     public void testInjectionTargetPostConstruct() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
-        Dog dog = getContextualReference(Dog.class, new AnnotationLiteral<Noisy>() {
-        });
+        Dog dog = getContextualReference(Dog.class, new Noisy.Literal());
         Dog.setPostConstructCalled(false);
         injectionTarget.postConstruct(dog);
         assert Dog.isPostConstructCalled();
@@ -223,8 +218,7 @@ public class ProducerTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "k"),  @SpecAssertion(section = INJECTIONTARGET_EE, id = "c") })
     public void testInjectionTargetPreDestroy() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
-        Dog dog = getContextualReference(Dog.class, new AnnotationLiteral<Noisy>() {
-        });
+        Dog dog = getContextualReference(Dog.class, new Noisy.Literal());
         Dog.setPreDestroyCalled(false);
         injectionTarget.preDestroy(dog);
         assert Dog.isPreDestroyCalled();

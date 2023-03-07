@@ -26,6 +26,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Qualifier;
 
 @Qualifier
@@ -33,5 +34,6 @@ import jakarta.inject.Qualifier;
 @Retention(RUNTIME)
 @Documented
 public @interface Nice {
-
+    class Literal extends AnnotationLiteral<Nice> implements Nice {
+    }
 }

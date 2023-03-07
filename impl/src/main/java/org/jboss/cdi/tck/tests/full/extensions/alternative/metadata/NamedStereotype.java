@@ -23,6 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import jakarta.enterprise.inject.Stereotype;
+import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Named;
 
 @Target(TYPE)
@@ -30,5 +31,6 @@ import jakarta.inject.Named;
 @Stereotype
 @Named
 public @interface NamedStereotype {
-
+    class Literal extends AnnotationLiteral<NamedStereotype> implements NamedStereotype {
+    }
 }

@@ -20,8 +20,7 @@ import org.testng.annotations.Test;
 @Test(groups = CDI_FULL)
 public class ProducerMethodLifecycleTest extends AbstractTest {
 
-    private AnnotationLiteral<Pet> PET_LITERAL = new AnnotationLiteral<Pet>() {
-    };
+    private AnnotationLiteral<Pet> PET_LITERAL = new Pet.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {

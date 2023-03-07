@@ -84,8 +84,7 @@ public class DynamicInjectionPointTest extends AbstractTest {
         Set<Annotation> niceFooQualifiers = bar.getQualifierNiceFoo().getInjectionPoint().getQualifiers();
 
         annotationSetMatches(fooQualifiers, Any.Literal.INSTANCE, Default.Literal.INSTANCE);
-        annotationSetMatches(niceFooQualifiers, Any.Literal.INSTANCE, new AnnotationLiteral<Nice>() {
-        });
+        annotationSetMatches(niceFooQualifiers, Any.Literal.INSTANCE, new Nice.Literal());
     }
 
     @Test

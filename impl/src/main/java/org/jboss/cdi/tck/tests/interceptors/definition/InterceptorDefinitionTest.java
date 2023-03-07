@@ -66,17 +66,13 @@ public class InterceptorDefinitionTest extends AbstractTest {
     private static final Transactional.TransactionalLiteral TRANSACTIONAL_LITERAL = new Transactional.TransactionalLiteral("") {
     };
 
-    private static final AnnotationLiteral<Secure> SECURE_LITERAL = new AnnotationLiteral<Secure>() {
-    };
+    private static final AnnotationLiteral<Secure> SECURE_LITERAL = new Secure.Literal();
 
-    private static final AnnotationLiteral<MissileBinding> MISSILE_LITERAL = new AnnotationLiteral<MissileBinding>() {
-    };
+    private static final AnnotationLiteral<MissileBinding> MISSILE_LITERAL = new MissileBinding.Literal();
 
-    private static final AnnotationLiteral<Logged> LOGGED_LITERAL = new AnnotationLiteral<Logged>() {
-    };
+    private static final AnnotationLiteral<Logged> LOGGED_LITERAL = new Logged.Literal();
 
-    private static final AnnotationLiteral<Atomic> ATOMIC_LITERAL = new AnnotationLiteral<Atomic>() {
-    };
+    private static final AnnotationLiteral<Atomic> ATOMIC_LITERAL = new Atomic.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {
@@ -177,8 +173,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     @Test(expectedExceptions = { IllegalArgumentException.class })
     @SpecAssertions({ @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "d") })
     public void testNonBindingTypeToResolveInterceptorsFails() {
-        Annotation nonBinding = new AnnotationLiteral<NonBindingType>() {
-        };
+        Annotation nonBinding = new NonBindingType.Literal();
         getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, nonBinding);
     }
 
@@ -233,8 +228,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     }
 
     private List<Interceptor<?>> getLoggedInterceptors() {
-        return getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new AnnotationLiteral<Logged>() {
-        });
+        return getCurrentManager().resolveInterceptors(InterceptionType.AROUND_INVOKE, new Logged.Literal());
     }
 
     private Set<Type> getInterfacesImplemented(Class<?> clazz) {

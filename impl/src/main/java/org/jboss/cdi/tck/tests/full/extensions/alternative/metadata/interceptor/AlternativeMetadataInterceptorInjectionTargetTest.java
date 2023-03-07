@@ -67,11 +67,9 @@ public class AlternativeMetadataInterceptorInjectionTargetTest extends AbstractT
         final AnnotatedType<Login> interceptedLogin = manager.createAnnotatedType(Login.class);
         AnnotatedType<Login> modifiedInterceptedLogin = new ForwardingAnnotatedType<Login>() {
             @SuppressWarnings("serial")
-            private final AnnotationLiteral<LoginInterceptorBinding> interceptorBinding = new AnnotationLiteral<LoginInterceptorBinding>() {
-            };
+            private final AnnotationLiteral<LoginInterceptorBinding> interceptorBinding = new LoginInterceptorBinding.Literal();
             @SuppressWarnings("serial")
-            private final AnnotationLiteral<Secured> securedAnnotation = new AnnotationLiteral<Secured>() {
-            };
+            private final AnnotationLiteral<Secured> securedAnnotation = new Secured.Literal();
 
             @Override
             public AnnotatedType<Login> delegate() {

@@ -40,14 +40,11 @@ import org.testng.annotations.Test;
 public class ProducerFieldLifecycleTest extends AbstractTest {
 
     @SuppressWarnings("serial")
-    private AnnotationLiteral<Null> NULL_LITERAL = new AnnotationLiteral<Null>() {
-    };
+    private AnnotationLiteral<Null> NULL_LITERAL = new Null.Literal();
     @SuppressWarnings("serial")
-    private AnnotationLiteral<Broken> BROKEN_LITERAL = new AnnotationLiteral<Broken>() {
-    };
+    private AnnotationLiteral<Broken> BROKEN_LITERAL = new Broken.Literal();
     @SuppressWarnings("serial")
-    private AnnotationLiteral<Tame> TAME_LITERAL = new AnnotationLiteral<Tame>() {
-    };
+    private AnnotationLiteral<Tame> TAME_LITERAL = new Tame.Literal();
 
     @Deployment
     public static WebArchive createTestArchive() {
