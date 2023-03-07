@@ -83,6 +83,13 @@ The Arquillian will also start and stop the application server automatically (pr
 Since Arquillian in-container tests are executed in a remote JVM, the results of the test must be communicated back to the runner over a container-supported protocol. The TCK utilizes servlet-based protocol (communication over HTTP). 
 
 
+[NOTE]
+====
+Some implementations of Jakarta Faces use modern Javascript that is incompatible with the TCK's default test tooling. In order to test these implementations, specify the property -Drun.selenium=true. An installation of Chrome is required.
+
+====
+
+
 === Running the Tests In the Container - SE part
 
 To execute full TCK testsuite you have to run tests within SE group as well. 
