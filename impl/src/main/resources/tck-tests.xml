@@ -23,7 +23,12 @@
         </packages>
 
         <classes>
-            <!-- Add excluded tests here -->
+            <!-- CDITCK-431 -->
+            <class name="org.jboss.cdi.tck.tests.full.extensions.lifecycle.bbd.broken.passivatingScope.AddingPassivatingScopeTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
         </classes>
 
     </test>
