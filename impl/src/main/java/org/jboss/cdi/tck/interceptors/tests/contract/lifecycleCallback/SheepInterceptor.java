@@ -30,8 +30,13 @@ public class SheepInterceptor {
     private static boolean aroundInvokeCalled = false;
 
     @PostConstruct
-    public void postConstruct() {
+    public void postConstruct(InvocationContext ctx) {
         postConstructCalled = true;
+        try {
+            ctx.proceed();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @AroundInvoke
