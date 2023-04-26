@@ -20,14 +20,12 @@ import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.context.spi.Contextual;
 import jakarta.enterprise.context.spi.CreationalContext;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -51,10 +49,10 @@ public class GetFromContextualTest extends AbstractTest {
         assert getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean) == null;
 
         // Now try same operation with a CreationalContext
-        CreationalContext<MyRequestBean> myCreationalContext = new MockCreationalContext<MyRequestBean>();
+        CreationalContext<MyRequestBean> myCreationalContext = getCurrentManager().createCreationalContext(myRequestBean);
         assert getCurrentManager().getContext(RequestScoped.class).get(myRequestBean, myCreationalContext) != null;
 
-        CreationalContext<MyApplicationBean> myOtherCreationalContext = new MockCreationalContext<MyApplicationBean>();
+        CreationalContext<MyApplicationBean> myOtherCreationalContext = getCurrentManager().createCreationalContext(myApplicationBean);
         assert getCurrentManager().getContext(ApplicationScoped.class).get(myApplicationBean, myOtherCreationalContext) != null;
     }
 

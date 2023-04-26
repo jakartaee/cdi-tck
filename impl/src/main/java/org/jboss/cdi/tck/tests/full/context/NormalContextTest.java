@@ -27,7 +27,6 @@ import jakarta.enterprise.inject.spi.Bean;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.impl.BeansXml;
@@ -77,7 +76,7 @@ public class NormalContextTest extends AbstractTest {
         MyContextual bean = AfterBeanDiscoveryObserver.getBean();
         bean.setShouldReturnNullInstances(false);
 
-        CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
+        CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(bean);
         MySessionBean newBean = getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext);
         assert newBean != null;
         assert bean.isCreateCalled();
@@ -91,7 +90,7 @@ public class NormalContextTest extends AbstractTest {
         MyContextual bean = AfterBeanDiscoveryObserver.getBean();
         bean.setShouldReturnNullInstances(true);
 
-        CreationalContext<MySessionBean> creationalContext = new MockCreationalContext<MySessionBean>();
+        CreationalContext<MySessionBean> creationalContext = getCurrentManager().createCreationalContext(bean);
         assert getCurrentManager().getContext(SessionScoped.class).get(bean, creationalContext) == null;
         assert bean.isCreateCalled();
     }
