@@ -20,6 +20,7 @@ import jakarta.enterprise.context.spi.Context;
 
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
+import org.jboss.cdi.tck.spi.CreationalContexts;
 import org.jboss.cdi.tck.spi.EL;
 
 /**
@@ -79,16 +80,23 @@ public interface Configuration {
      */
     public <T extends Context> Contexts<T> getContexts();
 
-    public void setBeans(Beans beans);
-
-    public <T extends Context> void setContexts(Contexts<T> contexts);
-
-    public void setEl(EL el);
+    /**
+     * The implementation of {@link CreationalContexts} in use.
+     */
+    public CreationalContexts getCreationalContexts();
 
     /**
      * The implementation of {@link EL} in use.
      */
     public EL getEl();
+
+    public void setBeans(Beans beans);
+
+    public <T extends Context> void setContexts(Contexts<T> contexts);
+
+    public void setCreationalContexts(CreationalContexts creationalContexts);
+
+    public void setEl(EL el);
 
     /**
      * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the implementation). Any jars in this

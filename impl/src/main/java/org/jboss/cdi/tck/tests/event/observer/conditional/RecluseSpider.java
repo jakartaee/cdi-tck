@@ -21,7 +21,7 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.Reception;
 
 /**
- * Simple web bean that conditionally listens to events.
+ * Simple bean that conditionally listens to events.
  * 
  */
 @RequestScoped

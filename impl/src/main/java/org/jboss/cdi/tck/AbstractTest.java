@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 import jakarta.enterprise.context.spi.Context;
+import jakarta.enterprise.context.spi.Contextual;
 import jakarta.enterprise.inject.AmbiguousResolutionException;
 import jakarta.enterprise.inject.UnsatisfiedResolutionException;
 import jakarta.enterprise.inject.spi.Bean;
@@ -39,6 +40,7 @@ import jakarta.inject.Inject;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
+import org.jboss.cdi.tck.spi.CreationalContexts;
 import org.jboss.cdi.tck.util.BeanLookupUtils;
 import org.jboss.cdi.tck.util.DependentInstance;
 
@@ -92,6 +94,10 @@ public abstract class AbstractTest extends Arquillian {
 
     protected void destroyContext(Context context) {
         getCurrentConfiguration().getContexts().destroyContext(context);
+    }
+
+    protected <T> CreationalContexts.Inspectable<T> createInspectableCreationalContext(Contextual<T> contextual) {
+        return getCurrentConfiguration().getCreationalContexts().create(contextual);
     }
 
     protected Configuration getCurrentConfiguration() {
