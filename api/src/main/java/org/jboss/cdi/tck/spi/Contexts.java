@@ -68,7 +68,7 @@ public interface Contexts<T extends Context> {
     public T getDependentContext();
 
     /**
-     * Destroy the context. This operation is defined by the Web Beans specification but has no API.
+     * Destroy the context. This operation is defined by the CDI specification but has no API.
      *
      * @param context the context to destroy
      */

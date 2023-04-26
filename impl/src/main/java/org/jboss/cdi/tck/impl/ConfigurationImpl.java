@@ -21,6 +21,7 @@ import jakarta.enterprise.context.spi.Context;
 import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
+import org.jboss.cdi.tck.spi.CreationalContexts;
 import org.jboss.cdi.tck.spi.EL;
 
 /**
@@ -35,6 +36,7 @@ public class ConfigurationImpl implements Configuration {
 
     private Beans beans;
     private Contexts<? extends Context> contexts;
+    private CreationalContexts creationalContexts;
     private EL el;
 
     private String libraryDirectory;
@@ -72,6 +74,14 @@ public class ConfigurationImpl implements Configuration {
 
     public <T extends Context> void setContexts(Contexts<T> contexts) {
         this.contexts = contexts;
+    }
+
+    public CreationalContexts getCreationalContexts() {
+        return creationalContexts;
+    }
+
+    public void setCreationalContexts(CreationalContexts creationalContexts) {
+        this.creationalContexts = creationalContexts;
     }
 
     public EL getEl() {
@@ -149,6 +159,7 @@ public class ConfigurationImpl implements Configuration {
         configuration.append("\tCDI Lite mode: ").append(getCdiLiteMode()).append("\n");
         configuration.append("\tBeans: ").append(getBeans()).append("\n");
         configuration.append("\tContexts: ").append(getContexts()).append("\n");
+        configuration.append("\tCreationalContexts: ").append(getCreationalContexts()).append("\n");
         configuration.append("\tEL: ").append(getEl()).append("\n");
         configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");
         configuration.append("\tTest DS: ").append(getTestDataSource()).append("\n");
