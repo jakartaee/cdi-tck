@@ -42,7 +42,6 @@ import jakarta.enterprise.util.AnnotationLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -187,8 +186,8 @@ public class DependentContextTest extends AbstractTest {
         assert foxBeans.size() == 1;
         Bean<Fox> foxBean = foxBeans.iterator().next();
         Context context = getCurrentManager().getContext(Dependent.class);
-        assert context.get(foxBean, new MockCreationalContext<Fox>()) != null;
-        assert context.get(foxBean, new MockCreationalContext<Fox>()) instanceof Fox;
+        assert context.get(foxBean, getCurrentManager().createCreationalContext(foxBean)) != null;
+        assert context.get(foxBean, getCurrentManager().createCreationalContext(foxBean)) instanceof Fox;
     }
 
     @Test
@@ -272,7 +271,7 @@ public class DependentContextTest extends AbstractTest {
     // Dependent context is now always active
     public void testContextIsActiveDuringInjection() {
         Bean<FoxRun> foxRunBean = getBeans(FoxRun.class).iterator().next();
-        FoxRun foxRun = foxRunBean.create(new MockCreationalContext<FoxRun>());
+        FoxRun foxRun = foxRunBean.create(getCurrentManager().createCreationalContext(foxRunBean));
         assert foxRun.fox != null;
     }
 

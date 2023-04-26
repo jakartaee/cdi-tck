@@ -9,7 +9,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -30,7 +29,7 @@ public class GetFromContextualTest extends AbstractTest {
         assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean) == null;
 
         // Now try same operation with a CreationalContext
-        CreationalContext<MySessionBean> myCreationalContext = new MockCreationalContext<MySessionBean>();
+        CreationalContext<MySessionBean> myCreationalContext = getCurrentManager().createCreationalContext(mySessionBean);
         assert getCurrentManager().getContext(SessionScoped.class).get(mySessionBean, myCreationalContext) != null;
     }
 

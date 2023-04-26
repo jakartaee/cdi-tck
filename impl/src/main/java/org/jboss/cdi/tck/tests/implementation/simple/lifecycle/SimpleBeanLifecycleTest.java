@@ -99,9 +99,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa") })
     public void testBeanCreateInjectsDependenciesAndInvokesInitializerToInstantiateInstance() {
-        MockCreationalContext.reset();
-        final CreationalContext<FishPond> creationalContext = new MockCreationalContext<FishPond>();
         final Contextual<FishPond> bean = getBeans(FishPond.class).iterator().next();
+        final CreationalContext<FishPond> creationalContext = getCurrentManager().createCreationalContext(bean);
         FishPond fishPond = bean.create(creationalContext);
         assert fishPond != null;
         assert fishPond.goldfish != null;
