@@ -49,7 +49,7 @@ public class DestroyForSameCreationalContext2Test extends AbstractTest {
     @Test(groups = CDI_FULL)
     @SpecAssertion(section = CONTEXT, id = "r")
     public void testDestroyForSameCreationalContextOnly() {
-        // Check that the mock cc is called (via cc.release()) when we request a context destroyed
+        // Check that the cc is called (via cc.release()) when we request a context destroyed
         // Note that this is an indirect effect
         Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
