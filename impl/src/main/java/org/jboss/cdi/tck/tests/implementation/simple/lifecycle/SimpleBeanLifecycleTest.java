@@ -32,7 +32,6 @@ import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_LIFECYCLE;
 import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
 import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS;
-import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -50,8 +49,8 @@ import jakarta.enterprise.inject.spi.Bean;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.spi.CreationalContexts;
 import org.jboss.cdi.tck.util.DependentInstance;
-import org.jboss.cdi.tck.util.MockCreationalContext;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
@@ -87,12 +86,11 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = CREATIONAL_CONTEXT, id = "d"), @SpecAssertion(section = CREATIONAL_CONTEXT, id = "g") })
     public void testCreateReturnsSameBeanPushed() {
-        final CreationalContext<ShoeFactory> creationalContext = new MockCreationalContext<ShoeFactory>();
         final Contextual<ShoeFactory> bean = getBeans(ShoeFactory.class).iterator().next();
-        MockCreationalContext.reset();
+        final CreationalContexts.Inspectable<ShoeFactory> creationalContext = createInspectableCreationalContext(bean);
         ShoeFactory instance = getCurrentManager().getContext(Dependent.class).get(bean, creationalContext);
-        if (MockCreationalContext.isPushCalled()) {
-            assert instance == MockCreationalContext.getLastBeanPushed();
+        if (creationalContext.isPushCalled()) {
+            assert instance == creationalContext.getLastBeanPushed();
         }
     }
 
