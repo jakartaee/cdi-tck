@@ -14,8 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.context;
+package org.jboss.cdi.tck.tests.full.context;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
 import jakarta.enterprise.context.RequestScoped;
@@ -45,7 +46,7 @@ public class DestroyForSameCreationalContext2Test extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DestroyForSameCreationalContext2Test.class).build();
     }
 
-    @Test
+    @Test(groups = CDI_FULL)
     @SpecAssertion(section = CONTEXT, id = "r")
     public void testDestroyForSameCreationalContextOnly() {
         // Check that the mock cc is called (via cc.release()) when we request a context destroyed
