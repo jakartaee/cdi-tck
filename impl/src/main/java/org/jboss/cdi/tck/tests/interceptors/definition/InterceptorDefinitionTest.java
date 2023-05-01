@@ -34,9 +34,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.HierarchyDiscovery;
-import org.jboss.cdi.tck.util.ParameterizedTypeImpl;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -45,6 +43,7 @@ import org.testng.annotations.Test;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,7 +89,7 @@ public class InterceptorDefinitionTest extends AbstractTest {
     public void testInterceptorsImplementInterceptorInterface() {
         boolean interfaceFound = false;
         for (Type type : getInterfacesImplemented(getTransactionalInterceptor().getClass())) {
-            if (type instanceof ParameterizedTypeImpl && ((ParameterizedTypeImpl) type).getRawType().equals(Interceptor.class)) {
+            if (type instanceof ParameterizedType && ((ParameterizedType) type).getRawType().equals(Interceptor.class)) {
                 interfaceFound = true;
                 break;
             }
