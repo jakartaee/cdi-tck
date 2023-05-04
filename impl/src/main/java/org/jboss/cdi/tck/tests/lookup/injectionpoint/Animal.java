@@ -24,13 +24,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.enterprise.inject.Stereotype;
-
-@Stereotype
 @Target({ TYPE, METHOD, FIELD })
 @Retention(RUNTIME)
-@RequestScoped
-public @interface AnimalStereotype {
-
+public @interface Animal {
 }
