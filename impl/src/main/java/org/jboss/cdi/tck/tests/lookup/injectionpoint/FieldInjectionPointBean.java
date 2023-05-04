@@ -29,7 +29,7 @@ import jakarta.inject.Inject;
 @RequestScoped
 public class FieldInjectionPointBean {
     @Inject
-    @AnimalStereotype
+    @Animal
     private BeanWithInjectionPointMetadata injectedBean;
 
     public BeanWithInjectionPointMetadata getInjectedBean() {

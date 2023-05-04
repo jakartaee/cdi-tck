@@ -152,7 +152,7 @@ public class InjectionPointTest extends AbstractTest {
         BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
         assert beanWithInjectionPoint.getInjectedMetadata() != null;
         assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedField<?>;
-        assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated().isAnnotationPresent(AnimalStereotype.class);
+        assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated().isAnnotationPresent(Animal.class);
     }
 
     @Test

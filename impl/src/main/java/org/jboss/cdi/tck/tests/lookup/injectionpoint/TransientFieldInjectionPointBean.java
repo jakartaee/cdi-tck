@@ -29,7 +29,6 @@ import jakarta.inject.Inject;
 @RequestScoped
 public class TransientFieldInjectionPointBean {
     @Inject
-    @AnimalStereotype
     private transient BeanWithInjectionPointMetadata injectedBean;
 
     public BeanWithInjectionPointMetadata getInjectedBean() {
