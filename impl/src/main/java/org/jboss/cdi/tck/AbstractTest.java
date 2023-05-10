@@ -40,6 +40,7 @@ import jakarta.inject.Inject;
 import org.jboss.arquillian.testng.Arquillian;
 import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
+import org.jboss.cdi.tck.spi.Contextuals;
 import org.jboss.cdi.tck.spi.CreationalContexts;
 import org.jboss.cdi.tck.util.BeanLookupUtils;
 import org.jboss.cdi.tck.util.DependentInstance;
@@ -98,6 +99,10 @@ public abstract class AbstractTest extends Arquillian {
 
     protected <T> CreationalContexts.Inspectable<T> createInspectableCreationalContext(Contextual<T> contextual) {
         return getCurrentConfiguration().getCreationalContexts().create(contextual);
+    }
+
+    protected <T> Contextuals.Inspectable<T> createInspectableContextual(T instance, Context context) {
+        return getCurrentConfiguration().getContextuals().create(instance, context);
     }
 
     protected Configuration getCurrentConfiguration() {
