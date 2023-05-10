@@ -1,5 +1,4 @@
 /*
- * JBoss, Home of Professional Open Source
  * Copyright 2010, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
@@ -14,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.full.context;
+package org.jboss.cdi.tck.tests.context;
 
-import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.spi.Context;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -46,17 +44,17 @@ public class DestroyForSameCreationalContext2Test extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(DestroyForSameCreationalContext2Test.class).build();
     }
 
-    @Test(groups = CDI_FULL)
+    @Test
     @SpecAssertion(section = CONTEXT, id = "r")
     public void testDestroyForSameCreationalContextOnly() {
         // Check that the cc is called (via cc.release()) when we request a context destroyed
         // Note that this is an indirect effect
-        Context sessionContext = getCurrentManager().getContext(SessionScoped.class);
+        Context requestContext = getCurrentManager().getContext(RequestScoped.class);
 
         // We also test this directly using an inspectable contextual, and ensuring that the same creational context is passed to both methods
-        Contextuals.Inspectable<String> contextual = createInspectableContextual("123", sessionContext);
-        sessionContext.get(contextual, getCurrentManager().createCreationalContext(contextual));
-        destroyContext(sessionContext);
+        Contextuals.Inspectable<String> contextual = createInspectableContextual("123", requestContext);
+        requestContext.get(contextual, getCurrentManager().createCreationalContext(contextual));
+        destroyContext(requestContext);
         assert contextual.getCreationalContextPassedToCreate() == contextual.getCreationalContextPassedToDestroy();
     }
 
