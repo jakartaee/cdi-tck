@@ -19,6 +19,7 @@ package org.jboss.cdi.tck.impl;
 import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
+import org.jboss.cdi.tck.spi.Contextuals;
 import org.jboss.cdi.tck.spi.CreationalContexts;
 import org.jboss.cdi.tck.spi.EL;
 
@@ -67,6 +68,7 @@ public class PropertiesBasedConfigurationBuilder {
         configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, !deploymentPhase));
         configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, !deploymentPhase));
         configuration.setContexts((Contexts<?>)getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
+        configuration.setContextuals(getInstanceValue(Contextuals.PROPERTY_NAME, Contextuals.class, !deploymentPhase));
         configuration.setCreationalContexts(getInstanceValue(CreationalContexts.PROPERTY_NAME, CreationalContexts.class, !deploymentPhase));
 
         configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, deploymentPhase));

@@ -21,6 +21,7 @@ import jakarta.enterprise.context.spi.Context;
 import org.jboss.cdi.tck.api.Configuration;
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
+import org.jboss.cdi.tck.spi.Contextuals;
 import org.jboss.cdi.tck.spi.CreationalContexts;
 import org.jboss.cdi.tck.spi.EL;
 
@@ -36,6 +37,7 @@ public class ConfigurationImpl implements Configuration {
 
     private Beans beans;
     private Contexts<? extends Context> contexts;
+    private Contextuals contextuals;
     private CreationalContexts creationalContexts;
     private EL el;
 
@@ -74,6 +76,14 @@ public class ConfigurationImpl implements Configuration {
 
     public <T extends Context> void setContexts(Contexts<T> contexts) {
         this.contexts = contexts;
+    }
+
+    public Contextuals getContextuals() {
+        return contextuals;
+    }
+
+    public void setContextuals(Contextuals contextuals) {
+        this.contextuals = contextuals;
     }
 
     public CreationalContexts getCreationalContexts() {
@@ -159,6 +169,7 @@ public class ConfigurationImpl implements Configuration {
         configuration.append("\tCDI Lite mode: ").append(getCdiLiteMode()).append("\n");
         configuration.append("\tBeans: ").append(getBeans()).append("\n");
         configuration.append("\tContexts: ").append(getContexts()).append("\n");
+        configuration.append("\tContextuals: ").append(getContextuals()).append("\n");
         configuration.append("\tCreationalContexts: ").append(getCreationalContexts()).append("\n");
         configuration.append("\tEL: ").append(getEl()).append("\n");
         configuration.append("\tLibrary dir: ").append(getLibraryDirectory()).append("\n");

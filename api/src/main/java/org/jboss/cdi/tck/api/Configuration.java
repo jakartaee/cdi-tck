@@ -20,6 +20,7 @@ import jakarta.enterprise.context.spi.Context;
 
 import org.jboss.cdi.tck.spi.Beans;
 import org.jboss.cdi.tck.spi.Contexts;
+import org.jboss.cdi.tck.spi.Contextuals;
 import org.jboss.cdi.tck.spi.CreationalContexts;
 import org.jboss.cdi.tck.spi.EL;
 
@@ -81,6 +82,11 @@ public interface Configuration {
     public <T extends Context> Contexts<T> getContexts();
 
     /**
+     * The implementation of {@link Contextuals} in use.
+     */
+    public Contextuals getContextuals();
+
+    /**
      * The implementation of {@link CreationalContexts} in use.
      */
     public CreationalContexts getCreationalContexts();
@@ -93,6 +99,8 @@ public interface Configuration {
     public void setBeans(Beans beans);
 
     public <T extends Context> void setContexts(Contexts<T> contexts);
+
+    public void setContextuals(Contextuals contextuals);
 
     public void setCreationalContexts(CreationalContexts creationalContexts);
 
