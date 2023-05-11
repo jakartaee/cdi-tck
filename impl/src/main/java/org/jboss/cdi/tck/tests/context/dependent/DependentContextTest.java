@@ -414,7 +414,13 @@ public class DependentContextTest extends AbstractTest {
     @Test
     @SpecAssertion(section = DEPENDENT_OBJECTS, id = "aa")
     public void testDependentScopedInterceptorsAreDependentObjectsOfBean() {
-        TransactionalInterceptor.destroyed = false;
+        // since interceptors can't declare `@PreDestroy` callbacks for themselves, we inject
+        // another dependent-scoped bean into the interceptor and add a `@PreDestroy` callback
+        // there -- this dependency will be a dependent instance of the interceptor, and so
+        // if destroying the intercepted bean will destroy the other bean, we have a proof
+        // that the interceptor was also destroyed
+
+        TransactionalInterceptorDependency.destroyed = false;
         TransactionalInterceptor.intercepted = false;
 
         Bean<AccountTransaction> bean = getBeans(AccountTransaction.class).iterator().next();
@@ -427,6 +433,6 @@ public class DependentContextTest extends AbstractTest {
 
         ctx.release();
 
-        assert TransactionalInterceptor.destroyed;
+        assert TransactionalInterceptorDependency.destroyed;
     }
 }

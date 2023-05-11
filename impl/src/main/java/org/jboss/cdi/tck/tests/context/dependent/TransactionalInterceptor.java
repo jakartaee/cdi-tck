@@ -16,9 +16,9 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent;
 
-import jakarta.annotation.PreDestroy;
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
@@ -28,23 +28,14 @@ import jakarta.interceptor.InvocationContext;
 @Interceptor
 @Priority(1)
 public class TransactionalInterceptor {
-    public static boolean destroyed = false;
     public static boolean intercepted = false;
+
+    @Inject
+    TransactionalInterceptorDependency dependency;
 
     @AroundInvoke
     public Object alwaysReturnThis(InvocationContext ctx) throws Exception {
         intercepted = true;
         return ctx.proceed();
-    }
-
-    @PreDestroy
-    public void destroy(InvocationContext ctx) {
-        destroyed = true;
-        try {
-            ctx.proceed();
-        } catch (Exception e) {
-            // catch and wrap
-            throw new RuntimeException(e);
-        }
     }
 }
