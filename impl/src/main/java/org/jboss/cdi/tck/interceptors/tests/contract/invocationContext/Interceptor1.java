@@ -25,21 +25,16 @@ import jakarta.interceptor.InvocationContext;
 @Binding1
 @Priority(100)
 public class Interceptor1 {
-    private static boolean getTargetOK = false;
+    private static SimpleBean target;
 
     @AroundInvoke
     public Object aroundInvoke(InvocationContext ctx) throws Exception {
-        SimpleBean target = (SimpleBean) ctx.getTarget();
-        int id1 = target.getId();
-        int id2 = (Integer) ctx.proceed();
-
-        if (id1 == id2) {
-            getTargetOK = true;
-        }
-        return id1;
+        // bean is not normal scoped therefore getTarget() will return contextual instance
+        target = (SimpleBean) ctx.getTarget();
+        return ctx.proceed();
     }
 
-    public static boolean isGetTargetOK() {
-        return getTargetOK;
+    public static SimpleBean getTarget() {
+        return target;
     }
 }

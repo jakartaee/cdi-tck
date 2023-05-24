@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.interceptors.InterceptorsSections.CONSTRUCTOR_AN
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INVOCATIONCONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -48,10 +49,11 @@ public class InvocationContextTest extends AbstractTest {
     @SpecAssertion(section = CONSTRUCTOR_AND_METHOD_LEVEL_INT, id = "aa")
     @SpecAssertion(section = INVOCATIONCONTEXT, id = "c")
     public void testGetTargetMethod() {
+        // bean is dependent, contextual ref = contextual instance
         SimpleBean instance = getContextualReference(SimpleBean.class);
         instance.setId(10);
         assertEquals(instance.getId(), 10);
-        assertTrue(Interceptor1.isGetTargetOK());
+        assertSame(Interceptor1.getTarget(), instance);
     }
 
     @Test
