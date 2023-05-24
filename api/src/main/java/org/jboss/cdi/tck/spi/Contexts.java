@@ -34,14 +34,20 @@ public interface Contexts<T extends Context> {
     public static final String PROPERTY_NAME = Contexts.class.getName();
 
     /**
-     * Sets the specified context as active
+     * Sets the specified context as active.
+     * <p>
+     * The set of existing contextual instances of the context is preserved
+     * across invocations of {@link #setActive(Context)} and {@link #setInactive(Context)}.
      *
      * @param context The context to set active
      */
     public void setActive(T context);
 
     /**
-     * Sets the specified context as inactive
+     * Sets the specified context as inactive.
+     * <p>
+     * The set of existing contextual instances of the context is preserved
+     * across invocations of {@link #setActive(Context)} and {@link #setInactive(Context)}.
      *
      * @param context The context to set inactive
      */
