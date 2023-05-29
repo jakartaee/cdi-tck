@@ -23,12 +23,14 @@ public abstract class Plant implements Ping {
 
     private List<String> inspections = new ArrayList<String>();
 
-    public void inspect(String id) {
-        inspections.add(id);
+    // all beans of type `Plant` are `@Dependent`, so accessing the field is OK
+
+    public static void inspect(Plant plant, String id) {
+        plant.inspections.add(id);
     }
 
-    public boolean inspectedBy(String id) {
-        return inspections.contains(id);
+    public static boolean inspectedBy(Plant plant, String id) {
+        return plant.inspections.contains(id);
     }
 
 }
