@@ -4,7 +4,7 @@
     <groupId>jakarta.enterprise</groupId>
     <artifactId>cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.10-SNAPSHOT</version>
+    <version>4.0.10</version>
     <name>Jakarta CDI TCK</name>
 
     <parent>
@@ -312,7 +312,7 @@
         <connection>scm:git:git@github.com:eclipse-ee4j/cdi-tck.git</connection>
         <developerConnection>scm:git:git@github.com:eclipse-ee4j/cdi-tck.git</developerConnection>
         <url>https://github.com/eclipse-ee4j/cdi-tck</url>
-        <tag>HEAD</tag>
+        <tag>4.0.10</tag>
     </scm>
 
     <profiles>
