@@ -171,7 +171,9 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}.
      * <p/>
      * <p>
-     * Do not use this in new tests - use {@link #withBeansXml(BeansXml)} instead.
+     * In most cases, the alternative method {@link #withBeansXml(BeansXml)} should be used instead.
+     * However, this variant is still useful if the test needs a very specific beans.xml file such as completely empty
+     * file or one with invalid format.
      * </p>
      *
      * @param beansXml
