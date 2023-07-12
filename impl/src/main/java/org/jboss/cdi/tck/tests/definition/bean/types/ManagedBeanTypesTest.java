@@ -76,10 +76,9 @@ public class ManagedBeanTypesTest extends AbstractTest {
         // Nested generic class inheritance
         Bean<Flock> flockBean = getUniqueBean(Flock.class);
         assertNotNull(flockBean);
-        // Object, Flock, List<Vulture<Integer>>, Collection<Vulture<Integer>>, Iterable<Vulture<Integer>>
-        assertTypeSetMatches(flockBean.getTypes(), Object.class, Flock.class, new TypeLiteral<List<Vulture<Integer>>>() {
-        }.getType(), new TypeLiteral<Collection<Vulture<Integer>>>() {
-        }.getType(), new TypeLiteral<Iterable<Vulture<Integer>>>() {
+        // Object, Flock, Gathering<Vulture<Integer>>, GroupingOfCertainType<Vulture<Integer>>
+        assertTypeSetMatches(flockBean.getTypes(), Object.class, Flock.class, new TypeLiteral<Gathering<Vulture<Integer>>>() {
+        }.getType(), new TypeLiteral<GroupingOfCertainType<Vulture<Integer>>>() {
         }.getType());
     }
 
