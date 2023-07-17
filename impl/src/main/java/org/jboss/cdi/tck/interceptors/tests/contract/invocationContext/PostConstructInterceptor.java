@@ -21,12 +21,17 @@ import jakarta.annotation.Priority;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
+import java.lang.annotation.Annotation;
+import java.util.Set;
+
 @Interceptor
 @SimplePCBinding
 @Priority(100)
 public class PostConstructInterceptor {
     private static boolean getMethodReturnsNull = false;
     private static boolean ctxProceedReturnsNull = false;
+
+    private static Set<Annotation> allBindings = null;
 
     @PostConstruct
     public void postConstruct(InvocationContext ctx) {
@@ -35,6 +40,8 @@ public class PostConstructInterceptor {
             ctxProceedReturnsNull = ctx.proceed() == null;
         } catch (Exception e) {
         }
+
+        allBindings = ctx.getInterceptorBindings();
     }
 
     public static boolean isGetMethodReturnsNull() {
@@ -43,5 +50,9 @@ public class PostConstructInterceptor {
 
     public static boolean isCtxProceedReturnsNull() {
         return ctxProceedReturnsNull;
+    }
+
+    public static Set<Annotation> getAllBindings() {
+        return allBindings;
     }
 }

@@ -19,10 +19,16 @@ package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 import jakarta.enterprise.context.Dependent;
 
 @SimplePCBinding
+@PseudoBinding
+@AroundConstructBinding1
 @Dependent
 class SimpleBean {
     private int id = 0;
     private static boolean echoCalled = false;
+
+    @AroundConstructBinding2
+    public SimpleBean() {
+    }
 
     @Binding1
     public int getId() {
@@ -70,6 +76,14 @@ class SimpleBean {
     public String echo(String s) {
         echoCalled = true;
         return s;
+    }
+
+    @Binding11
+    @Binding12
+    @Binding13("ko") // does not associate `Interceptor13` with this bean due to different annotation member
+    @Binding14("foobar")
+    public boolean bindings() {
+        return true;
     }
 
     public static boolean isEchoCalled() {

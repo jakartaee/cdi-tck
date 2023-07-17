@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.interceptors.InterceptorsSections.CONSTRUCTOR_AN
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INVOCATIONCONTEXT;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertSame;
 import static org.testng.Assert.assertTrue;
 
@@ -31,13 +32,15 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+import java.util.Set;
+
 /**
  * Tests for the InvocationContext implementation
  *
  * @author Jozef Hartinger
  *
  */
-@SpecVersion(spec = "interceptors", version = "1.2")
+@SpecVersion(spec = "interceptors", version = "2.2")
 public class InvocationContextTest extends AbstractTest {
 
     @Deployment
@@ -121,5 +124,25 @@ public class InvocationContextTest extends AbstractTest {
     public void testBusinessMethodNotCalledWithoutProceedInvocation() {
         assertEquals(getContextualReference(SimpleBean.class).echo("foo"), "foo");
         assertFalse(SimpleBean.isEchoCalled());
+    }
+
+    @Test
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "n")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "o")
+    public void testGetInterceptorBindings() {
+        assertTrue(getContextualReference(SimpleBean.class).bindings());
+        assertEquals(AroundConstructInterceptor1.getAllBindings(), Set.of(new SimplePCBinding.Literal(),
+                new PseudoBinding.Literal(), new AroundConstructBinding1.Literal(),
+                new AroundConstructBinding2.Literal()));
+        assertEquals(AroundConstructInterceptor1.getAllBindings(), AroundConstructInterceptor2.getAllBindings());
+        assertEquals(PostConstructInterceptor.getAllBindings(), Set.of(new SimplePCBinding.Literal(),
+                new PseudoBinding.Literal(), new AroundConstructBinding1.Literal()));
+        assertEquals(Interceptor12.getAllBindings(), Set.of(new SimplePCBinding.Literal(), new PseudoBinding.Literal(),
+                new AroundConstructBinding1.Literal(), new Binding11.Literal(), new Binding12.Literal(),
+                new Binding13.Literal("ko"), new Binding14.Literal("foobar")));
+        assertEquals(Interceptor12.getBinding12s(), Set.of(new Binding12.Literal()));
+        assertEquals(Interceptor12.getBinding12(), new Binding12.Literal());
+        assertEquals(Interceptor12.getBinding5s(), Set.of());
+        assertNull(Interceptor12.getBinding6());
     }
 }
