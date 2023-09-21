@@ -23,14 +23,6 @@
         </packages>
 
         <classes>
-            <!-- https://github.com/jakartaee/cdi-tck/issues/431 -->
-            <!-- This test is disabled in 4.0 not to break existing impls and should be re-enabled for 4.1 release -->
-            <class name="org.jboss.cdi.tck.tests.full.extensions.lifecycle.bbd.broken.passivatingScope.AddingPassivatingScopeTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
-
             <!-- https://github.com/jakartaee/cdi-tck/issues/440 -->
             <class name="org.jboss.cdi.tck.tests.full.extensions.lifecycle.processBeanAttributes.specialization.VetoTest">
                 <methods>
