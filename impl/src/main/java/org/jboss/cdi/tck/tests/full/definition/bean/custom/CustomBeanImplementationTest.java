@@ -140,9 +140,12 @@ public class CustomBeanImplementationTest extends AbstractTest {
         Assert.assertEquals(passCapBean.getFoo().getId(), actCapBean.getFoo().getId());
     }
 
-    @Test(enabled = false) // disabled due to CDITCK-579
-   // @SpecAssertion(section = INTER_MODULE_INJECTION, id = "r")
+    @Test
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "r")
     public void testInjectionPointGetMemberIsUsedToDetermineTheClassThatDeclaresAnInjectionPoint(){
+        // resolve the bean and invoke a method on it to make sure it was created/used
+        Foo foo = getContextualReference(Foo.class, new PassivableLiteral());
+        foo.getId();
         Assert.assertEquals(CustomInjectionPoint.getMembersClasses().size(),2);
         Assert.assertTrue(CustomInjectionPoint.getMembersClasses().contains(Bar.class));
         Assert.assertTrue(CustomInjectionPoint.getMembersClasses().contains(Integer.class));
