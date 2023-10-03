@@ -6810,6 +6810,14 @@
         </assertion>
     </section>
 
+    <section id="bm_obtain_contexts" title="Obtaining Contexts for a scope" level="3">
+        <assertion id="a">
+            <text>The method `BeanContainer.getContexts()` retrieves all context objects, active and inactive,
+                associated with the given scope, as defined in Section 2.5, "Scopes and contexts".
+            </text>
+        </assertion>
+    </section>
+
     <section id="bm_obtain_elresolver" title="Obtaining the ELResolver" level="3">
         <assertion id="a">
             <text>The method |BeanManager.getELResolver()| returns the |jakarta.el.ELResolver| specified in Section 12.4, "Integration with Unified EL".</text>
