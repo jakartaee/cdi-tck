@@ -18,21 +18,23 @@
 package org.jboss.cdi.tck.tests.beanContainer;
 
 import static org.jboss.cdi.tck.cdi.Sections.BM_DETERMINING_ANNOTATION;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CONTEXTS;
 import static org.jboss.cdi.tck.cdi.Sections.BM_RESOLVE_AMBIGUOUS_DEP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.fail;
-
+    
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.inject.AmbiguousResolutionException;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.spi.Bean;
+import jakarta.inject.Singleton;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.RetentionLiteral;
@@ -43,6 +45,7 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -61,7 +64,8 @@ public class BeanContainerTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanContainerTest.class)
-                .withClasses(RetentionLiteral.class, TargetLiteral.class).build();
+                .withClasses(RetentionLiteral.class, TargetLiteral.class)
+                .withBuildCompatibleExtension(ContextRegisteringExtension.class).build();
     }
 
     @Test
@@ -140,6 +144,23 @@ public class BeanContainerTest extends AbstractTest {
     public void testResolveWithEmptySet() {
         assertNull(getCurrentBeanContainer().resolve(Collections.<Bean<? extends Integer>> emptySet()));
         assertNull(getCurrentBeanContainer().resolve(new HashSet<Bean<? extends String>>()));
+    }
+
+    @Test
+    @SpecAssertion(section = BM_OBTAIN_CONTEXTS, id = "a")
+    public void testGetContexts() {
+        // test for scope without any impl, this should be empty set
+        Collection<Context> noImpl = getCurrentBeanContainer().getContexts(NoImplScope.class);
+        assertEquals(noImpl.size(), 0);
+
+        // custom scope with two existing implementations
+        Collection<Context> customContextImpls = getCurrentBeanContainer().getContexts(CustomScoped.class);
+        assertEquals(customContextImpls.size(), 2);
+
+        // test any built-in scope for completeness
+        // deliberately skips assertions on exact number of implementations as that can differ
+        Collection<Context> builtInContextImpls = getCurrentBeanContainer().getContexts(Singleton.class);
+        assertTrue(builtInContextImpls.size() >= 1);
     }
 
 }
