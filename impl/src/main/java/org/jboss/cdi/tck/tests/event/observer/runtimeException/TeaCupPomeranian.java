@@ -22,16 +22,14 @@ import jakarta.enterprise.event.Observes;
 @Dependent
 public class TeaCupPomeranian {
 
-    static final String TRIGGER = "string event";
-    
     public static class OversizedException extends RuntimeException {
         private static final long serialVersionUID = 1L;
     }
 
-    public void observeSimpleEvent(@Observes String someEvent) {
-        if (TRIGGER.equals(someEvent)) {
-            throw new OversizedException();
-        }
+    static class Trigger {};
+
+    public void observeSimpleEvent(@Observes Trigger someEvent) {
+        throw new OversizedException();
     }
 
 }
