@@ -22,6 +22,7 @@ import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_NOTIFICATION;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.event.observer.runtimeException.TeaCupPomeranian.Trigger;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -44,7 +45,7 @@ public class ObserverExceptionRethrownTest extends AbstractTest {
     @Test(expectedExceptions = { TeaCupPomeranian.OversizedException.class })
     @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cd")
     public void testNonTransactionalObserverThrowsNonCheckedExceptionIsRethrown() {
-        getCurrentManager().getEvent().select(String.class).fire("string event");
+        getCurrentManager().getEvent().select(Trigger.class).fire(new Trigger());
     }
 
 }
