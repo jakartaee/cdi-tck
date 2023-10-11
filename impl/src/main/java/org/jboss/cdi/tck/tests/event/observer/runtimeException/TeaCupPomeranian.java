@@ -26,7 +26,9 @@ public class TeaCupPomeranian {
         private static final long serialVersionUID = 1L;
     }
 
-    public void observeSimpleEvent(@Observes String someEvent) {
+    static class Trigger {};
+
+    public void observeSimpleEvent(@Observes Trigger someEvent) {
         throw new OversizedException();
     }
 
