@@ -57,6 +57,8 @@ import jakarta.enterprise.inject.spi.configurator.BeanConfigurator;
 import jakarta.enterprise.inject.spi.configurator.InjectionPointConfigurator;
 import jakarta.enterprise.inject.spi.configurator.ObserverMethodConfigurator;
 import jakarta.enterprise.inject.spi.configurator.ProducerConfigurator;
+import jakarta.enterprise.invoke.Invoker;
+import jakarta.enterprise.invoke.InvokerBuilder;
 
 public class ContainerLifecycleEvents {
 
@@ -328,6 +330,11 @@ public class ContainerLifecycleEvents {
 
         @Override
         public AnnotatedType<Object> getAnnotatedBeanClass() {
+            return null;
+        }
+
+        @Override
+        public InvokerBuilder<Invoker<Object, ?>> createInvoker(AnnotatedMethod<? super Object> annotatedMethod) {
             return null;
         }
 
