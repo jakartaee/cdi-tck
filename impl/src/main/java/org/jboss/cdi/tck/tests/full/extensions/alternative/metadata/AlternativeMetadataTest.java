@@ -30,6 +30,7 @@ import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.AnnotationLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.literals.ProducesLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.impl.BeansXml;
@@ -56,6 +57,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AlternativeMetadataTest.class)
+                .withClasses(ProducesLiteral.class)
                 .withBeansXml(new BeansXml().interceptors(GroceryInterceptor.class))
                 .withExtension(ProcessAnnotatedTypeObserver.class).build();
     }
