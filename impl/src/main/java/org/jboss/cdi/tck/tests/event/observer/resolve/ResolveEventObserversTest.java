@@ -53,7 +53,8 @@ public class ResolveEventObserversTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(ResolveEventObserversTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(ResolveEventObserversTest.class)
+                .withClasses(OverrideLiteral.class).build();
     }
 
     @Test
