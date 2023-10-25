@@ -84,7 +84,7 @@ public class BeanManagerTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BeanManagerTest.class)
-                .withClasses(RetentionLiteral.class, TargetLiteral.class, StereotypeLiteral.class)
+                .withClasses(RetentionLiteral.class, TargetLiteral.class, StereotypeLiteral.class, InheritedLiteral.class)
                 .withExtensions(AfterBeanDiscoveryObserver.class).build();
     }
 
