@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.implementation.simple.definition.dependentWithPublicField;
+package org.jboss.cdi.tck.tests.implementation.simple.definition.normalScopedWithPublicField;
 
 import jakarta.enterprise.context.RequestScoped;
 
