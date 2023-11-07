@@ -118,4 +118,10 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
         Assert.assertEquals(getContextualReference(Tiger.class).name, "pete");
     }
 
+    @Test
+    @SpecAssertion(section = MANAGED_BEANS, id = "fa")
+    public void testSingletonScopedBeanCanHaveNonStaticPublicField() throws Exception {
+        Assert.assertEquals(getContextualReference(SnowTiger.class).name, "martin");
+    }
+
 }
