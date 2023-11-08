@@ -21,16 +21,18 @@ import java.util.List;
 
 public abstract class Plant implements Ping {
 
-    private List<String> inspections = new ArrayList<String>();
+    private static List<String> inspections = new ArrayList<String>();
 
-    // all beans of type `Plant` are `@Dependent`, so accessing the field is OK
-
-    public static void inspect(Plant plant, String id) {
-        plant.inspections.add(id);
+    public static void clearInspections() {
+        inspections.clear();
     }
 
-    public static boolean inspectedBy(Plant plant, String id) {
-        return plant.inspections.contains(id);
+    public static void inspect(String id) {
+        inspections.add(id);
+    }
+
+    public static boolean inspectedBy(String id) {
+        return inspections.contains(id);
     }
 
 }

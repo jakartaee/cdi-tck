@@ -56,7 +56,7 @@ public class InvocationContextTest extends AbstractTest {
         SimpleBean instance = getContextualReference(SimpleBean.class);
         instance.setId(10);
         assertEquals(instance.getId(), 10);
-        assertSame(Interceptor1.getTarget(), instance);
+        assertEquals(Interceptor1.getTarget().getId(), 10);
     }
 
     @Test

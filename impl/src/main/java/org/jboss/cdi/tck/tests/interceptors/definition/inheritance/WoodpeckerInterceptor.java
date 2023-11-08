@@ -32,7 +32,7 @@ public class WoodpeckerInterceptor {
         Object target = ctx.getTarget();
 
         if (target instanceof Plant) {
-            Plant.inspect((Plant) target, WoodpeckerInterceptor.class.getName());
+            Plant.inspect(WoodpeckerInterceptor.class.getName());
         }
         return ctx.proceed();
     }
