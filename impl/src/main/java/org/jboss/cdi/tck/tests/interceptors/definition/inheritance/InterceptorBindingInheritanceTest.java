@@ -52,48 +52,54 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ad"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ada") })
     public void testInterceptorBindingDirectlyInheritedFromManagedBean(Larch larch) throws Exception {
+        Plant.clearInspections();
         larch.pong();
-        assertTrue(Plant.inspectedBy(larch, squirrel));
-        assertFalse(Plant.inspectedBy(larch, woodpecker));
+        assertTrue(Plant.inspectedBy(squirrel));
+        assertFalse(Plant.inspectedBy(woodpecker));
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aj"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "aja") })
     public void testInterceptorBindingIndirectlyInheritedFromManagedBean(@European Larch europeanLarch) throws Exception {
+        Plant.clearInspections();
         europeanLarch.pong();
         assertTrue(europeanLarch instanceof EuropeanLarch);
-        assertTrue(Plant.inspectedBy(europeanLarch, squirrel));
-        assertFalse(Plant.inspectedBy(europeanLarch, woodpecker));
+        assertTrue(Plant.inspectedBy(squirrel));
+        assertFalse(Plant.inspectedBy(woodpecker));
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ka")
     public void testMethodInterceptorBindingDirectlyInheritedFromManagedBean(Herb herb) {
+        Plant.clearInspections();
         herb.pong();
-        assertTrue(Plant.inspectedBy(herb, squirrel));
+        assertTrue(Plant.inspectedBy(squirrel));
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kc")
     public void testMethodInterceptorBindingIndirectlyInheritedFromManagedBean(@Culinary Herb thyme) {
+        Plant.clearInspections();
         thyme.pong();
         assertTrue(thyme instanceof Thyme);
-        assertTrue(Plant.inspectedBy(thyme, squirrel));
+        assertTrue(Plant.inspectedBy(squirrel));
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "ka")
     public void testMethodInterceptorBindingDirectlyNotInheritedFromManagedBean(Shrub shrub) {
+        Plant.clearInspections();
         shrub.pong();
-        assertFalse(Plant.inspectedBy(shrub, squirrel));
+        assertFalse(Plant.inspectedBy(squirrel));
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "kc")
     public void testMethodInterceptorBindingIndirectlyNotInheritedFromManagedBean(@Culinary Shrub rosehip) {
+        Plant.clearInspections();
         rosehip.pong();
         assertTrue(rosehip instanceof Rosehip);
-        assertFalse(Plant.inspectedBy(rosehip, squirrel));
+        assertFalse(Plant.inspectedBy(squirrel));
     }
 
 }

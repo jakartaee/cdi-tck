@@ -32,7 +32,7 @@ public class SquirrelInterceptor {
         Object target = ctx.getTarget();
 
         if (target instanceof Plant) {
-            Plant.inspect((Plant) target, SquirrelInterceptor.class.getName());
+            Plant.inspect(SquirrelInterceptor.class.getName());
         }
         return ctx.proceed();
     }
