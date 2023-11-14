@@ -14,6 +14,7 @@ public class RegistrationExtension implements BuildCompatibleExtension {
     private final AtomicInteger beanCounter = new AtomicInteger();
     private final AtomicInteger beanMyQualifierCounter = new AtomicInteger();
     private final AtomicInteger observerCounter = new AtomicInteger();
+    private final AtomicInteger interceptorCounter = new AtomicInteger();
 
     @Registration(types = MyService.class)
     public void beans(BeanInfo bean) {
@@ -31,6 +32,14 @@ public class RegistrationExtension implements BuildCompatibleExtension {
         }
     }
 
+    @Registration(types = MyInterceptor.class)
+    public void interceptors(BeanInfo interceptor, Messages msg) {
+        if (!interceptor.isInterceptor()) {
+            msg.error("Interceptor expected", interceptor);
+        }
+        interceptorCounter.incrementAndGet();
+    }
+
     @Validation
     public void test(Messages msg) {
         if (beanCounter.get() != 2) {
@@ -43,6 +52,10 @@ public class RegistrationExtension implements BuildCompatibleExtension {
 
         if (observerCounter.get() != 1) {
             msg.error("Should see 1 observer declared in class that implements MyService");
+        }
+
+        if (interceptorCounter.get() != 1) {
+            msg.error("Should see 1 interceptor of type MyInterceptor");
         }
     }
 }
