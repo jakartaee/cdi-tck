@@ -46,6 +46,8 @@ public class LangModelVerifier {
     InheritedFields inheritedFields;
     InheritedAnnotations inheritedAnnotations;
 
+    JavaLangObjectMethods javaLangObjectMethods;
+
     PrimitiveTypes primitiveTypes;
     BridgeMethods bridgeMethods;
     RepeatableAnnotations repeatableAnnotations;
@@ -78,6 +80,8 @@ public class LangModelVerifier {
         InheritedMethods.Verifier.verify(LangModelUtils.classOfField(clazz, "inheritedMethods"));
         InheritedFields.Verifier.verify(LangModelUtils.classOfField(clazz, "inheritedFields"));
         InheritedAnnotations.verify(LangModelUtils.classOfField(clazz, "inheritedAnnotations"));
+
+        JavaLangObjectMethods.Verifier.verify(LangModelUtils.classOfField(clazz, "javaLangObjectMethods"));
 
         PrimitiveTypes.verify(LangModelUtils.classOfField(clazz, "primitiveTypes"));
         BridgeMethods.verify(LangModelUtils.classOfField(clazz, "bridgeMethods"));
