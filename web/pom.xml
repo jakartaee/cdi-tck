@@ -34,7 +34,7 @@
             <jca.api.version>2.1.0</jca.api.version>
 
             <!-- Wave6 -->
-            <jsf.api.version>3.0.0</jsf.api.version>
+            <jsf.api.version>4.0.1</jsf.api.version>
     </properties>
 
     <dependencies>
