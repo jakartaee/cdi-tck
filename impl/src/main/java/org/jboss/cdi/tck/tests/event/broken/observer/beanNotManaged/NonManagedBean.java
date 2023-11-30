@@ -21,7 +21,7 @@ import jakarta.enterprise.inject.Any;
 
 /**
  * This class is not a bean since it does not have a default constructor nor does it have a constructor annotated with {@link
- * @Inject}. As such, an observer method is not detected on this class.
+ * jakarta.inject.Inject}. As such, an observer method is not detected on this class.
  * 
  * @author David Allen
  */

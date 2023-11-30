@@ -17,12 +17,18 @@ import org.testng.ITestContext;
 
 /**
  * This {@link IMethodInterceptor} fixes one or the other problem with CDI TCK test suite execution:
- * <ol>
- * <li>Run tests from single test class - it seems that Maven Surefire plugin is not able to run single test that is located outside src/test dir. If test class
- * system property is set all test methods that don't belong to specified test class are excluded.</li>
- * <li>Avoid randomly mixed test method execution - causing test archive deployments collisions. If test class system property is not set group test methods by
- * test class.</li>
- * <ol>
+ * <ul>
+ * <li>
+ *     Run tests from single test class - it seems that Maven Surefire plugin is not able to run single test that is located outside src/test dir. If test class
+ * </li>
+ * <li>
+ *     system property is set all test methods that don't belong to specified test class are excluded.
+ * </li>
+ * <li>
+ *     Avoid randomly mixed test method execution - causing test archive deployments collisions. If test class system property is not set group test methods by
+ * test class.
+ * </li>
+ * </ul>
  *
  * @author Stuart Douglas
  * @author Martin Kouba

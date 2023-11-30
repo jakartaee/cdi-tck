@@ -38,7 +38,7 @@ import java.util.List;
  * This test was originally part of Weld testsuite
  *
  * @author Martin Kouba
- * @see WELD-1780
+ * @see <a>WELD-1780</a>
  */
 
 @SpecVersion(spec = "cdi", version = "2.0")

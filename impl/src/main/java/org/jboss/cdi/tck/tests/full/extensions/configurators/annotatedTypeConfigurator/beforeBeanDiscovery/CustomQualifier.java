@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 
 import jakarta.enterprise.util.AnnotationLiteral;
 
-/** @Qualifier annotation is deliberately missing, will be registered as one in extension
+/** {@link jakarta.inject.Qualifier} annotation is deliberately missing, will be registered as one in extension
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */

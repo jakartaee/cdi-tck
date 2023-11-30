@@ -108,7 +108,7 @@ public class ModifyingExtension implements Extension {
     /**
      * Store the result, don't verify anything since it's more transparent to have assertions in the test class methods.
      *
-     * The methods {@link BeanManager#getAnnotatedType(Class, String)} and {@link BeanManager#getAnnotatedTypes(Class)} will be
+     * The methods {@link AfterBeanDiscovery#getAnnotatedType(Class, String)} and {@link AfterBeanDiscovery#getAnnotatedTypes(Class)} will be
      * probably placed on the {@link AfterBeanDiscovery}. See also CDI-83.
      *
      * @param event

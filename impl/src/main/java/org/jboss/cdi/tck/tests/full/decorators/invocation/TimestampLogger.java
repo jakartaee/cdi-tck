@@ -54,7 +54,6 @@ public class TimestampLogger implements Logger {
     }
 
     /**
-     * @param message the message to set
      */
     public static void reset() {
         TimestampLogger.message = null;

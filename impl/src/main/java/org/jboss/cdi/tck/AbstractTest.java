@@ -127,7 +127,7 @@ public abstract class AbstractTest extends Arquillian {
 
     /**
      * @param annotations The annotation set
-     * @param requiredAnnotationTypes The required annotations
+     * @param requiredAnnotations The required annotations
      * @return <code>true</code> if the specified set matches required annotations, <code>false</code> otherwise
      */
     protected boolean annotationSetMatches(Set<? extends Annotation> annotations, Annotation... requiredAnnotations) {

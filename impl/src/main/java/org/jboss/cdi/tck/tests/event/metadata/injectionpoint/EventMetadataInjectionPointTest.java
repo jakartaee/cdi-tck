@@ -52,7 +52,8 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Note that injection point is not available for {@link BeanManager#fireEvent()}.
+ * Note that injection point is not available for {@link BeanManager#getEvent()} {@link Event#select(Annotation...)}
+ * {@link Event#fire(Object)}.
  *
  * @author Martin Kouba
  */

@@ -51,9 +51,9 @@ import org.testng.annotations.Test;
 import java.lang.annotation.Annotation;
 
 /**
- * <p/>
+ * 
  * This test was originally part of Weld test suite.
- * <p/>
+ * 
  *
  * @author Jozef Hartinger
  * @author Martin Kouba

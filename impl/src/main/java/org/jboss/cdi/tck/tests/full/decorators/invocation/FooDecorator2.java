@@ -39,7 +39,6 @@ public class FooDecorator2 implements Foo {
     }
 
     /**
-     * @param message the message to set
      */
     public static void reset() {
         FooDecorator2.message = null;

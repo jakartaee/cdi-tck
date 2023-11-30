@@ -241,8 +241,8 @@ public final class ActionSequence {
     /**
      * Add actionId to specified sequence. Add new sequence if needed.
      *
-     * @param sequence
-     * @param actionId
+     * @param sequenceName - name of sequence
+     * @param actionId - action id
      * @return <code>true</code> if a new sequence was added, <code>false</code> otherwise
      */
     public static boolean addAction(String sequenceName, String actionId) {
@@ -278,7 +278,7 @@ public final class ActionSequence {
     }
 
     /**
-     * @param name
+     * @param sequenceName - name of sequence
      * @return specified sequence or <code>null</code> if no such sequence exists
      */
     public static ActionSequence getSequence(String sequenceName) {
@@ -312,7 +312,7 @@ public final class ActionSequence {
     }
 
     /**
-     * @param sequence
+     * @param sequenceName name of sequence
      * @return size of specified sequence
      */
     public static int getSequenceSize(String sequenceName) {

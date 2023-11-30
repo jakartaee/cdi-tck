@@ -69,7 +69,9 @@ public class URLPackageScanner {
      *            flag to add child packages
      * @param classLoader
      *            class loader that will have classes added
-     * @param pkg
+     * @param callback
+     *          found class callback
+     * @param packageName
      *            Package that will be scanned
      * @return new instance of URLPackageScanner
      */
@@ -77,7 +79,6 @@ public class URLPackageScanner {
         final Callback callback, final String packageName) {
 
         validateNotNull(packageName, "Package name must be specified");
-        validateNotNull(addRecursively, "AddRecursively must be specified");
         validateNotNull(classLoader, "ClassLoader must be specified");
         validateNotNull(callback, "Callback must be specified");
 
@@ -87,16 +88,15 @@ public class URLPackageScanner {
     /**
      * Factory method to create an instance of URLPackageScanner in the default package
      *
-     * @param pkg
-     *            Package that will be scanned
      * @param addRecursively
      *            flag to add child packages
      * @param classLoader
      *            class loader that will have classes added
+     * @param callback
+     *          found class callback
      * @return new instance of URLPackageScanner
      */
     public static URLPackageScanner newInstance(boolean addRecursively, ClassLoader classLoader, Callback callback) {
-        validateNotNull(addRecursively, "AddRecursively must be specified");
         validateNotNull(classLoader, "ClassLoader must be specified");
         validateNotNull(callback, "Callback must be specified");
 

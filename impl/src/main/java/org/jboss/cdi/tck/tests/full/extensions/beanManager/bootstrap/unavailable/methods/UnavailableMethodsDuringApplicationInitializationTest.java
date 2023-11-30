@@ -30,9 +30,9 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
 
 /**
- * <p/>
+ * 
  * This test was originally part of the Weld test suite.
- * <p/>
+ * 
  *
  * @author Martin Kouba
  * @author Tomas Remes

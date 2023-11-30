@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
 /**
  * <p>
  * This test was originally part of Weld test suite.
- * <p>
+ * </p>
  * 
  * Note that we have to declare test methods on test class (not abstract superclass) because of the way we analyze assertions
  * coverage.

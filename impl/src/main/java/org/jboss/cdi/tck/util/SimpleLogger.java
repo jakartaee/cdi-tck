@@ -43,8 +43,8 @@ public final class SimpleLogger implements Serializable {
      * Log message with specified parameters. {@link Level#FINE} is always used since the message is considered to be tracing
      * information.
      * 
-     * @param message
-     * @param parameters
+     * @param message - log message
+     * @param parameters - message parameters
      */
     public void log(String message, Object... parameters) {
         logger.log(Level.FINE, message, parameters);
@@ -53,8 +53,7 @@ public final class SimpleLogger implements Serializable {
     /**
      * Log message with specified throwed exception. {@link Level#FINE} is always used since the message is considered to be tracing information.
      * 
-     * @param message
-     * @param parameters
+     * @param thrown - exception to log
      */
     public void log(Throwable thrown) {
         logger.log(Level.FINE, thrown.getMessage(), thrown);

@@ -28,4 +28,4 @@ jobs:
           mvn clean install -Pstaging -B -V
       - name: "Maven install"
         run: |
-          mvn clean install -B -V
+          mvn clean install -B -V javadoc:javadoc

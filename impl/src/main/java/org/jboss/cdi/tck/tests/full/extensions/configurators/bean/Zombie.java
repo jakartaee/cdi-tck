@@ -18,7 +18,7 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.bean;
 
 import jakarta.enterprise.inject.Vetoed;
 
-/** @Vetoed makes sure this bean does not get picked up by CDI
+/** {@link Vetoed} makes sure this bean does not get picked up by CDI
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */

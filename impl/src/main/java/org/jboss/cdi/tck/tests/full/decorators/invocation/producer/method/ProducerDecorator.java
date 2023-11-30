@@ -36,7 +36,6 @@ public class ProducerDecorator implements Producer {
     }
 
     /**
-     * @param message the message to set
      */
     public static void reset() {
 

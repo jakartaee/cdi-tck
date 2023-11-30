@@ -26,7 +26,7 @@ import jakarta.enterprise.inject.spi.AnnotatedType;
 /**
  * Forwarding implementation of AnnotatedType
  *
- * @author Stuart Douglas <stuart@baileyroberts.com.au>
+ * @author Stuart Douglas stuart@baileyroberts.com.au
  * @author Ales Justin
  */
 public abstract class ForwardingAnnotatedType<X> extends ForwardingAnnotated implements AnnotatedType<X> {
