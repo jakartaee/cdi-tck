@@ -42,11 +42,11 @@ import java.util.Collections;
 /**
  * <p>
  * This test was originally part of Weld test suite.
- * <p>
+ * </p>
  * <p>
  * Note that we also test that all built-in beans are passivation capable dependencies - if validation of passivation capable
  * beans and dependencies fails test the deployment (and thus all test methods) will fail.
- *
+ * </p>
  * @author Jozef Hartinger
  * @author Martin Kouba
  */

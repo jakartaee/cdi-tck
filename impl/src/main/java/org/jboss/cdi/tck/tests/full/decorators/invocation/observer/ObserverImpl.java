@@ -27,7 +27,6 @@ public class ObserverImpl implements Observer {
     private static boolean observervedCorrectly = false;
 
     /**
-     * @param log the log to set
      */
     public static void reset() {
         observervedCorrectly = false;

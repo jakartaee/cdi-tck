@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite. Causes deployment error on Weld if an intercepted bean is passivation
  * capable - WELD-996.
- * <p>
+ * </p>
  * 
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba

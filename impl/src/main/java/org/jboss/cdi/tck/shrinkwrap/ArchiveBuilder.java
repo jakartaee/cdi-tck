@@ -169,7 +169,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add <code>beans.xml</code> located in src/main/resource/{testPackagePath}.
-     * <p/>
+     *
      * <p>
      * In most cases, the alternative method {@link #withBeansXml(BeansXml)} should be used instead.
      * However, this variant is still useful if the test needs a very specific beans.xml file such as completely empty
@@ -293,7 +293,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Specified class must be excluded from final archive unless also added via {@link #withClass(Class)} or {@link #withClasses(Class...)}. Useful for
      * exluding some classes from package added via {@link #withPackage(Package)}.
-     * <p/>
+     * 
      * Avoid using this feature if possible - the implementation has negative performance effects.
      *
      * @param clazz Fully qualified class name
@@ -310,7 +310,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     /**
      * Specified classes must be excluded from final archive unless also added via {@link #withClass(Class)} or {@link #withClasses(Class...)}. Useful for
      * exluding some classes from package added via {@link #withPackage(Package)}.
-     * <p/>
+     * 
      * Avoid using this feature if possible - the implementation has negative performance effects.
      *
      * @param classes Fully qualified class names
@@ -346,7 +346,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Set test class definition for configuration purpose. Do not add it to final archive.
-     * <p/>
+     * 
      * Always use this for as-client test archives, e.g. deployment method annotated with {@link ShouldThrowException}.
      *
      * @param testClazz
@@ -528,7 +528,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add web.xml located in src/main/resource/{testPackagePath}.
-     * <p/>
+     * 
      * <p>
      * Do not use this in new tests - use {@link #withWebXml(WebAppDescriptor)} instead.
      * </p>
@@ -1287,7 +1287,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Try to resolve as-client mode automatically unless it was set already.
-     * <p/>
+     * 
      * Set as-client mode to <code>true</code> provided that:
      * <ul>
      * <li>test class is annotated with {@link RunAsClient}</li>

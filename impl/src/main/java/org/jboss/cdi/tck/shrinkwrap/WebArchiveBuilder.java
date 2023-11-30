@@ -37,7 +37,7 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
     /**
      * Set the beans.xml descriptor target path base.
-     * <p/>
+     * 
      * By default the target base is <code>null</code> and the beans.xml descriptor is placed in WEB-INF dir. However CDI 1.1
      * allows an alternative location: WEB-INF/classes/META-INF.
      *

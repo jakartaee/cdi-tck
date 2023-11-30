@@ -95,7 +95,7 @@ public class FireEventTest extends AbstractTest {
 
 /**
      * This test verifies that the {@link Event} object capable of firing {@link Item} objects can be injected with the {@link
-     * @Any} binding type and that the injected object can be used to fire an event. The functionality is verified by checking
+     * Any} binding type and that the injected object can be used to fire an event. The functionality is verified by checking
      * that the corresponding observer gets invoked.
      */
     // Simplify assertions
@@ -174,7 +174,7 @@ public class FireEventTest extends AbstractTest {
     }
 
     /**
-     * This test verifies that the {@link Event} object representing an {@link Item} with the {@link @Lifted} binding type is
+     * This test verifies that the {@link Event} object representing an {@link Item} with the {@link Lifted} binding type is
      * properly injected and that this object can be used to fire an event. The functionality is verified by checking that the
      * cooresponding observer gets invoked.
      */

@@ -25,8 +25,6 @@ import jakarta.enterprise.inject.spi.Annotated;
 /**
  * Base class to allow implementation of the decorator pattern
  *
- * @param <T> the base type
- * @param <S> the annotated element type
  * @author Pete Muir
  */
 public abstract class ForwardingAnnotated implements Annotated {

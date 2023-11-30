@@ -42,7 +42,7 @@ import java.util.List;
  * 
  * <p>
  * This test was originally part of the Weld test suite.
- * <p>
+ * </p>
  * 
  * @author Jozef Hartinger
  * @author Martin Kouba

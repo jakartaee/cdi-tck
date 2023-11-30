@@ -44,15 +44,16 @@ import org.testng.annotations.Test;
 /**
  * Test that verifies that the container uses the runtime type of the event object as the event type. If the event type contains
  * an unresolved type variable the selected type is used to resolve it.
- * <p/>
- * <p/>
+ * 
+ * 
  * This test was originally part of the Weld test suite.
- * <p/>
+ * 
  *
  * @author Jozef Hartinger
  * @author Martin Kouba
- * @see WELD-1272
- * @see CDI-256
+ *
+ * @see <a >WELD-1272</a>
+ * @see <a>CDI-256</a>
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ParameterizedEventTest extends AbstractTest {

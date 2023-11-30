@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
  * 
  * <p>
  * This test was originally part of Weld test suite - WELD-997.
- * <p>
+ * </p>
  * 
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba

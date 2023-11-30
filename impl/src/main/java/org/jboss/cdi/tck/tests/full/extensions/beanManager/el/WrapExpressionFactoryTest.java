@@ -45,11 +45,11 @@ import org.testng.annotations.Test;
 /**
  * Test wrapping a Unified EL ExpressionFactory and enforcing rules defined in Section 6.4.3, Dependent pseudo-scope and Unified
  * EL.
- * <ol>
+ * <ul>
  * <li>Dependent bean is instantiated at most once</li>
  * <li>The resulting instance is reused for every appearance of the EL name</li>
  * <li>The resulting instance is destroyed when the evaluation completes</li>
- * </ol>
+ * </ul>
  * 
  * @author Martin Kouba
  */

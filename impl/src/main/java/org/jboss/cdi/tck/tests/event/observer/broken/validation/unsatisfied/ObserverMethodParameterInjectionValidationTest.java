@@ -36,7 +36,7 @@ import org.testng.annotations.Test;
  * 
  * <p>
  * This test was originally part of Seam Compatibility project.
- * <p>
+ * </p>
  * 
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  * @author Martin Kouba

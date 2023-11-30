@@ -47,7 +47,6 @@ public class MockLogger implements Logger {
     }
 
     /**
-     * @param log the log to set
      */
     public static void reset() {
         MockLogger.message = null;

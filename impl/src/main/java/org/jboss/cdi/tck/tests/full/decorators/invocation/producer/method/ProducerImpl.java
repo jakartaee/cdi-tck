@@ -28,7 +28,6 @@ public class ProducerImpl implements Producer {
     private static boolean disposedCorrectly = false;
 
     /**
-     * @param log the log to set
      */
     public static void reset() {
         disposedCorrectly = false;

@@ -37,6 +37,7 @@ public class InjectionPointTest extends AbstractTest {
      * CDI-78 reopened.
      * <p>
      * Base of this test was originally part of CDITCK-138 but disappeared during branch merge.
+     * </p>
      */
     @Test
     @SpecAssertion(section = INJECTION_POINT, id = "dba")

@@ -25,7 +25,7 @@ import jakarta.enterprise.inject.spi.AnnotatedType;
 
 import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
 
-/** Makes use of util class ForwardingAnnotatedType<X>
+/** Makes use of util class ForwardingAnnotatedType&lt;X&gt;
  * 
  */
 public class TestAnnotatedType<X> extends ForwardingAnnotatedType<X> {
