@@ -122,13 +122,14 @@
             </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <phase>process-classes</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <copy file="${basedir}/target/generated-docs-pdf/${pdf.name}" todir="${basedir}" />
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>

@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
         <artifactId>project</artifactId>
-        <version>1.0.6</version>
+        <version>1.0.9</version>
     </parent>
 
     <!-- Metadata -->
@@ -97,25 +97,25 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>4.1.0.Alpha1</cdi.api.version>
+        <cdi.api.version>4.1.0-M1</cdi.api.version>
         <maven.compiler.release>11</maven.compiler.release>
         <!-- Jakarta EE APIs Core -->
-        <annotations.api.version>2.1.0</annotations.api.version>
-        <interceptors.api.version>2.2.0-RC1</interceptors.api.version>
+        <annotations.api.version>3.0.0-M1</annotations.api.version>
+        <interceptors.api.version>2.2.0-M1</interceptors.api.version>
         <atinject.api.version>2.0.1</atinject.api.version>
-        <el.api.version>5.0.0</el.api.version>
+        <el.api.version>5.0.1</el.api.version>
 
         <!-- Test tools/dependencies -->
-        <testng.version>7.4.0</testng.version>
+        <testng.version>7.7.0</testng.version>
         <jboss.test.audit.version>2.0.0.Final</jboss.test.audit.version>
-        <arquillian.version>1.7.0.Alpha10</arquillian.version>
+        <arquillian.version>1.8.0.Final</arquillian.version>
         <arquillian.container.se.api.version>1.0.1.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
         <htmlunit.version>2.50.0</htmlunit.version>
-	<selenium.version>4.7.2</selenium.version>
+	    <selenium.version>4.7.2</selenium.version>
         <!-- Required for distribution build, should be overriden for each build -->
         <cdi.tck.version>${project.version}</cdi.tck.version>
-        <weld.version>5.0.0.SP2</weld.version>
+        <weld.version>5.1.2.Final</weld.version>
     </properties>
 
     <!-- Dependency management -->
@@ -252,26 +252,13 @@
                 <!-- Plugin versions since ee4j parent no longer declares them-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.1.1</version>
-                    <configuration>
-                        <doclint>none</doclint>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.2.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>3.6.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -297,12 +284,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>1.4.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
+                    <version>3.4.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -350,7 +332,7 @@
                                 <configuration>
                                     <rules>
                                         <requireJavaVersion>
-                                            <version>1.8</version>
+                                            <version>[11,)</version>
                                         </requireJavaVersion>
                                     </rules>
                                 </configuration>
