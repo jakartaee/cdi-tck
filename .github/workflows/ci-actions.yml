@@ -3,7 +3,6 @@ name: Jakarta Contexts and Dependency Injection TCK CI
 on:
   workflow_dispatch:
   pull_request:
-    branches: [ master ]
 
 jobs:
   build:
