@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="CDI TCK" verbose="0" configfailurepolicy="continue" useDefaultListeners="false">
+<suite name="CDI TCK" verbose="0" configfailurepolicy="continue">
 
     <listeners>
         <!-- Required - avoid randomly mixed test method execution -->
@@ -23,6 +23,51 @@
         </packages>
 
         <classes>
+            <!-- https://github.com/jakartaee/cdi-tck/issues/431 -->
+            <!-- This test is disabled in 4.0 not to break existing impls and should be re-enabled for 4.1 release -->
+            <class name="org.jboss.cdi.tck.tests.full.extensions.lifecycle.bbd.broken.passivatingScope.AddingPassivatingScopeTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- https://github.com/jakartaee/cdi-tck/issues/440 -->
+            <class name="org.jboss.cdi.tck.tests.full.extensions.lifecycle.processBeanAttributes.specialization.VetoTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- https://github.com/jakartaee/cdi-tck/issues/453 -->
+            <class name="org.jboss.cdi.tck.tests.implementation.simple.lifecycle.SimpleBeanLifecycleTest">
+                <methods>
+                    <exclude name="testCreateReturnsSameBeanPushed"/>
+                </methods>
+            </class>
+            <class name="org.jboss.cdi.tck.tests.context.DestroyForSameCreationalContextTest">
+                <methods>
+                    <exclude name="testDestroyForSameCreationalContextOnly"/>
+                </methods>
+            </class>
+
+            <!-- https://github.com/jakartaee/cdi-tck/issues/485 -->
+            <class name="org.jboss.cdi.tck.tests.definition.bean.types.ManagedBeanTypesTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
+
+            <!-- https://github.com/jakartaee/cdi-tck/issues/468 -->
+            <class name="org.jboss.cdi.tck.interceptors.tests.contract.invocationContext.InvocationContextTest">
+                <methods>
+                    <exclude name="testGetTargetMethod"/>
+                </methods>
+            </class>
+            <class name="org.jboss.cdi.tck.tests.interceptors.definition.inheritance.InterceptorBindingInheritanceTest">
+                <methods>
+                    <exclude name=".*"/>
+                </methods>
+            </class>
 
             <!-- CDITCK-587 -->
             <class name="org.jboss.cdi.tck.tests.event.observer.transactional.roolback.TransactionalObserverRollbackTest">
