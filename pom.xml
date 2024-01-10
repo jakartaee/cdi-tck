@@ -115,7 +115,7 @@
 	<selenium.version>4.7.2</selenium.version>
         <!-- Required for distribution build, should be overriden for each build -->
         <cdi.tck.version>${project.version}</cdi.tck.version>
-        <weld.version>5.0.0.SP2</weld.version>
+        <weld.version>5.1.2.Final</weld.version>
     </properties>
 
     <!-- Dependency management -->
