@@ -82,6 +82,7 @@ class SimpleBean {
     @Binding12
     @Binding13("ko") // does not associate `Interceptor13` with this bean due to different annotation member
     @Binding14("foobar")
+    @Binding15 // Associates both @Binding15 and @Binding15Additional("AdditionalBinding")
     public boolean bindings() {
         return true;
     }
