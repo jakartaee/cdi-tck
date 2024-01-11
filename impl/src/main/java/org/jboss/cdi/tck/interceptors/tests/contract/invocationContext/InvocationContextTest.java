@@ -133,14 +133,17 @@ public class InvocationContextTest extends AbstractTest {
         assertTrue(getContextualReference(SimpleBean.class).bindings());
         assertEquals(AroundConstructInterceptor1.getAllBindings(), Set.of(new SimplePCBinding.Literal(),
                 new PseudoBinding.Literal(), new AroundConstructBinding1.Literal(),
-                new AroundConstructBinding2.Literal()));
+                new AroundConstructBinding2.Literal(), new Binding16.Literal("class-level"),
+                new SuperBinding.Literal()));
         assertEquals(AroundConstructInterceptor1.getAllBindings(), AroundConstructInterceptor2.getAllBindings());
         assertEquals(PostConstructInterceptor.getAllBindings(), Set.of(new SimplePCBinding.Literal(),
-                new PseudoBinding.Literal(), new AroundConstructBinding1.Literal()));
+                new PseudoBinding.Literal(), new AroundConstructBinding1.Literal(),
+                new Binding16.Literal("class-level"), new SuperBinding.Literal()));
         assertEquals(Interceptor12.getAllBindings(), Set.of(new SimplePCBinding.Literal(), new PseudoBinding.Literal(),
                 new AroundConstructBinding1.Literal(), new Binding11.Literal(), new Binding12.Literal(),
                 new Binding13.Literal("ko"), new Binding14.Literal("foobar"),
-                new Binding15.Literal(), new Binding15Additional.Literal("AdditionalBinding")));
+                new Binding15.Literal(), new Binding15Additional.Literal("AdditionalBinding"),
+                new Binding16.Literal("method-level"), new SuperBinding.Literal()));
         assertEquals(Interceptor12.getBinding12s(), Set.of(new Binding12.Literal()));
         assertEquals(Interceptor12.getBinding12(), new Binding12.Literal());
         assertEquals(Interceptor12.getBinding5s(), Set.of());

@@ -21,8 +21,9 @@ import jakarta.enterprise.context.Dependent;
 @SimplePCBinding
 @PseudoBinding
 @AroundConstructBinding1
+@Binding16("class-level")
 @Dependent
-class SimpleBean {
+class SimpleBean extends SuperClass {
     private int id = 0;
     private static boolean echoCalled = false;
 
@@ -83,6 +84,7 @@ class SimpleBean {
     @Binding13("ko") // does not associate `Interceptor13` with this bean due to different annotation member
     @Binding14("foobar")
     @Binding15 // Associates both @Binding15 and @Binding15Additional("AdditionalBinding")
+    @Binding16("method-level")
     public boolean bindings() {
         return true;
     }
