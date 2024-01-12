@@ -7016,6 +7016,66 @@
         </assertion>
     </section>
 
+    <section id="bm_bean_event_assignability" title="Assignability of beans and events" level="3">
+        <group>
+            <text>The method |BeanContainer.isMatchingBean()| provides access to assignability rules defined in Typesafe Resolution.</text>
+            <assertion id="aa">
+                <text>
+                    The method |BeanManager.isMatchingBean| returns true if a bean with given bean types and qualifiers would be assignable to an injection
+                    point with given required type and required qualifiers, false otherwise.
+                </text>
+            </assertion>
+            <assertion id="ab">
+                <text>
+                    The set of |beanQualifiers| is considered to always include |@Any| and also include |@Default| when it contains no other qualifier but
+                    |@Any| and |@Named|.
+                </text>
+            </assertion>
+            <assertion id="ac">
+                <text>|BeanManager.isMatchingBean| throws |IllegalArgumentException| if any of the arguments are null.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>
+                    |BeanManager.isMatchingBean| throws |IllegalArgumentException| if any of the |beanQualifiers| or |requiredQualifiers| is not a qualifier
+                    annotation.
+                </text>
+            </assertion>
+            <assertion id="ae">
+                <text>Types in |beanTypes| that are not legal bean types are ignored.</text>
+            </assertion>
+            <assertion id="af">
+                <text>The set of |beanTypes| is considered to always include |java.lang.Object|.</text>
+            </assertion>
+        </group>
+        <group>
+            <text>The method |BeanContainer.isMatchingEvent()| provides access to assignability rules defined in Observer Resolution.</text>
+            <assertion id="ba">
+                <text>
+                    |BeanManager.isMatchingEvent| returns |true| if an event with given specified type and specified qualifiers would match an observer method
+                    with given observed event type and observed event qualifiers, |false| otherwise.
+                </text>
+            </assertion>
+            <assertion id="bb">
+                <text>The set of event qualifiers is considered to always include |@Any|</text>
+            </assertion>
+            <assertion id="bc">
+                <text>|BeanManager.isMatchingEvent| throws |IllegalArgumentException| if any of the arguments are null.</text>
+            </assertion>
+            <assertion id="bd">
+                <text>|BeanManager.isMatchingEvent| throws |IllegalArgumentException| if |specifiedType| contains a type variable.</text>
+            </assertion>
+            <assertion id="be">
+                <text>
+                    |BeanManager.isMatchingEvent| throws |IllegalArgumentException| if any of |specifiedQualifiers| or |observedEventQualifiers| is not a
+                    qualifier annotation.
+                </text>
+            </assertion>
+            <assertion id="bf">
+                <text>An empty set of |specifiedQualifiers| is considered to match the set of |observedEventQualifiers| which contains |@Default|.</text>
+            </assertion>
+        </group>
+    </section>
+
     <section id="alternative_metadata_sources" title="Alternative metadata sources" level="2">
         <assertion id="a" testable="false">
             <text>The interfaces |AnnotatedType|, |AnnotatedField|, |AnnotatedMethod|, |AnnotatedConstructor| and |AnnotatedParameter| in the package
