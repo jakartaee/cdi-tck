@@ -3,7 +3,6 @@ package org.jboss.cdi.tck.tests.interceptors.definition.inheritance;
 import jakarta.enterprise.context.Dependent;
 
 /*
- * JBoss, Home of Professional Open Source
  * Copyright 2010, Red Hat, Inc., and individual contributors
  * by the @authors tag. See the copyright.txt in the distribution for a
  * full listing of individual contributors.
