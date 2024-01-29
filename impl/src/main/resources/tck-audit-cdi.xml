@@ -6048,6 +6048,90 @@
         </assertion>
     </section>
 
+    <section id="configuring_lookups" title="Configuring lookups" level="3">
+        <assertion id="a">
+            <text>The |InvokerBuilder| allows specifying that the |instance| or any of the |arguments| passed to |Invoker.invoke()| should be ignored and a value should be looked up from the CDI container instead.</text>
+        </assertion>
+        <group>
+            <text>When |withInstanceLookup()| is called on an invoker builder and the target method is not |static|, the |invoke()| method of the built invoker shall ignore the |instance| argument and instead obtain and use a contextual reference for the target bean and the bean type that declares the target method.</text>
+            <assertion id="ba">
+                <text>Test with target bean that is |@ApplicationScoped|</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Test with target bean that is |@Dependent|</text>
+            </assertion>
+        </group>
+        <assertion id="c">
+            <text>Calling |withInstanceLookup()| on an invoker builder for a |static| target method has no effect.</text>
+        </assertion>
+        <group>
+            <text>
+                When |withArgumentLookup()| is called on an invoker builder, the |invoke()| method of the built invoker shall ignore the given element of the |arguments| array and instead:
+
+                1. identify a bean according to the rules of typesafe resolution, as defined in `Performing typesafe resolution`, where the required type is the declared type of the corresponding parameter of the target method and the required qualifiers are all qualifiers present on the parameter, resolving ambiguities according to `Unsatisfied and ambiguous dependencies`;
+                2. obtain and use a contextual reference for the identified bean and the declared type of the parameter.
+            </text>
+            <assertion id="da">
+                <text>Test with parameter that resolves to an |@ApplicationScoped| bean</text>
+            </assertion>
+            <assertion id="db">
+                <text>Test with parameter that resolves to a |@Dependent| bean</text>
+            </assertion>
+            <assertion id="dc">
+                <text>Test with parameter that resolves to an |Instance| bean</text>
+            </assertion>
+            <assertion id="dd">
+                <text>Test with parameter that resolves to an |Event| bean</text>
+            </assertion>
+            <assertion id="de">
+                <text>Test with parameter that resolves to a |BeanManager| bean</text>
+            </assertion>
+        </group>
+        <group>
+            <text>Calling |withArgumentLookup()| with |position| less than 0 or greater than or equal to the number of parameters of the target method leads to an |IllegalArgumentException|.</text>
+            <assertion id="ea">
+                <text>Test for position less than zero</text>
+            </assertion>
+            <assertion id="eb">
+                <text>Test for position greater than the number of parameters</text>
+            </assertion>
+            <assertion id="ec">
+                <text>Test for position equal to the number of parameters</text>
+            </assertion>
+        </group>
+        <assertion id="f">
+            <text>
+                Configuring a lookup using |withInstanceLookup()| or |withArgumentLookup()| does not relax the requirements defined in `Behavior of |invoke()|`.
+                Notably, the |arguments| array must still have an element for each argument, regardless of whether a lookup was configured for it.
+                This means that for a target method with N parameters, the |arguments| array must always have at least N elements.
+            </text>
+        </assertion>
+        <group>
+            <text>
+                During deployment validation, implementations are required to identify all looked up beans for all built invokers, as described above.
+                It is a deployment problem if an attempt to identify a looked up bean results in an unsatisfied dependency or an ambiguous dependency that is not resolvable.
+            </text>
+            <assertion id="ga">
+                <text>Test for unsatisfied lookup</text>
+            </assertion>
+            <assertion id="gb">
+                <text>Test for unresolvable ambiguous lookup</text>
+            </assertion>
+        </group>
+        <assertion id="h" testable="false">
+            <text>Implementations are permitted to remember the identified beans and not repeat the resolution process for each invocation of |Invoker.invoke()|.</text>
+        </assertion>
+        <assertion id="i">
+            <text>All instances of |@Dependent| looked up beans obtained during |Invoker.invoke()| are destroyed before the |invoke()| method returns or throws.</text>
+        </assertion>
+        <assertion id="j" testable="false">
+            <text>The order in which the instances of |@Dependent| looked up beans are destroyed is not specified.</text>
+        </assertion>
+        <assertion id="k" testable="false">
+            <text>The order in which instances of looked up beans are obtained during |Invoker.invoke()| in not specified.</text>
+        </assertion>
+    </section>
+
     <section id="method_invokers_full" title="Method invokers in CDI Full" level="1">
     </section>
 

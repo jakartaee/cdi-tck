@@ -19,20 +19,31 @@ import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.InvokerFactory;
 import jakarta.enterprise.inject.build.compatible.spi.InvokerInfo;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
+import jakarta.enterprise.invoke.InvokerBuilder;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public abstract class InvokerHolderExtensionBase {
     private final Map<String, InvokerInfo> invokers = new LinkedHashMap<>();
 
     protected final void registerInvokers(BeanInfo bean, InvokerFactory invokers, Set<String> methods) {
+        registerInvokers(bean, invokers, methods, builder -> {});
+    }
+
+    protected final void registerInvokers(BeanInfo bean, InvokerFactory invokers, Set<String> methods,
+            Consumer<InvokerBuilder<?>> action) {
         bean.declaringClass()
                 .methods()
                 .stream()
                 .filter(it -> methods.contains(it.name()))
-                .forEach(it -> registerInvoker(it.name(), invokers.createInvoker(bean, it).build()));
+                .forEach(it -> {
+                    InvokerBuilder<InvokerInfo> builder = invokers.createInvoker(bean, it);
+                    action.accept(builder);
+                    registerInvoker(it.name(), builder.build());
+                });
     }
 
     protected final void registerInvoker(String id, InvokerInfo invoker) {
