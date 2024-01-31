@@ -46,7 +46,7 @@ The CDI specification goes to great lengths to ensure that programs written for 
 
 === Compatibility Requirements
 
-The compatibility requirements for Jakarta Contexts and Dependency Injection Version 3.0 consist of meeting the
+The compatibility requirements for Jakarta Contexts and Dependency Injection Version {revnumber} consist of meeting the
 requirements set forth by the rules and associated definitions contained in this section.
 
 ==== Definitions
@@ -228,7 +228,7 @@ Each test class in the suite acts as a deployable unit. The deployable units, or
 [NOTE]
 ====
 The test archives are built with ShrinkWrap, a Java API for creating archives. 
-ShrinkWrap is a part of the Arqullian platform ecosystem. 
+ShrinkWrap is a part of the Arquillian platform ecosystem.
 
 ====
 
@@ -240,19 +240,19 @@ ShrinkWrap is a part of the Arqullian platform ecosystem.
 This section lists the applicable requirements and specifications for the CDI TCK. 
 
 
-*  *Specification requirements* - Software requirements for a CDI implementation are itemized in section 1.2, "Relationship to other specifications" in the CDI specification, with details provided throughout the specification. Generally, the CDI specification targets the Jakarta EE 10 platform and will be aligned with its specifications.
+*  *Specification requirements* - Software requirements for a CDI implementation are itemized in section 1.2, "Relationship to other specifications" in the CDI specification, with details provided throughout the specification. Generally, the CDI specification targets the {jakartaee-version} platform and will be aligned with its specifications.
 
 
 *  *Jakarta Contexts and Dependency Injection {revnumber} API* - The Java API defined in the CDI specification and provided by the compatible implementation.
 
 
-*  *Testing platform* - The CDI TCK requires version 1.7.0.Alpha10 of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG 7.4 (http://testng.org). .
+*  *Testing platform* - The CDI TCK requires version {arquillian-version} of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG {testng-version}(http://testng.org). .
 
 
 *  *Porting Package* - An implementation of SPIs that are required for the test suite to run the in-container tests and at times extend the CDI 4.0 API to provide extra information to the TCK.
 
 
-*  *TCK Audit Tool* - An itemization of the assertions in the specification documents which are cross referenced by the individual tests. Describes how well the TCK covers the specification. 
+*  *TCK Audit Tool* - An itemization of the assertions in the specification documents which are cross-referenced by the individual tests. Describes how well the TCK covers the specification.
 
 
 *  *Compatible implementation* - A compatible implementation runtime for compatibility testing of the CDI specification is the Jakarta Platform Enterprise Edition 10 compatible implementation.
@@ -263,9 +263,12 @@ This section lists the applicable requirements and specifications for the CDI TC
 *  *The Jakarta Contexts and Dependency Injection Language Model TCK* - The CDI Language Model TCK included in the CDI TCK distribution must be run and passed by every CDI cmpatible implementation.
 
 * *Jakarta Interceptors* - CDI is an implementation of the Jakarta Interceptors specification. Jakarta Interceptors has no TCK of its own, so the CDI TCK includes an extensive set of tests that validate the Jakarta Interceptors concepts.
+
+* *Jakarta EE Profiles* - Additional requirements for the Jakarta EE Web Profile and Jakarta EE Full Platform are specified in the CDI EE standalone TCK distributed by the Platform TCK group.
+
 [TIP]
 ====
-The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar+ which contains two classes showing how the Weld compatible implementation passes the CDI TCK. The source for these classes is available from link:$$hhttps://github.com/weld/core/tree/5.0.0.Alpha2/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck$$[]
+The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar+ which contains two classes showing how the Weld compatible implementation passes the CDI TCK. The source for these classes is available from link:$$hhttps://github.com/weld/core/tree/{weld-version}/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck$$[]
 
 
 ====
@@ -279,10 +282,10 @@ The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X
 The CDI TCK includes the following components:
 
 
-*  *Arquillian 1.7.0.Alpha10*
+*  *Arquillian {arquillian-version}*
 
 
-*  *TestNG 7.4.0*
+*  *TestNG {testng-version}*
 
 
 *  *Porting Package SPIs* - Extensions to the CDI SPIs to allow testing of a container. 
@@ -301,10 +304,12 @@ The audit document is provided along with the TCK; at least 95% of assertions ar
 
 The CDI TCK has been tested on following platforms:
 
+*  Weld {weld-version} using Eclipse Temurin Java SE 17 on Linux and MacOS
+*  WildFly {wildfly-version} using Eclipse Temurin Java SE 17 on Linux and MacOS
+*  Weld {weld-version} using Eclipse Temurin Java SE 21 on Linux and MacOS
+*  WildFly {wildfly-version} using Eclipse Temurin Java SE 21 on Linux and MacOS
 
-*  WildFly X using Oracle Java SE 11 on Red Hat Enterprise Linux 8.5
-
-CDI supports Jakarta EE 10, Jakarta EE 10 Web Profile, Embeddable Jakarta Enterprise Beans 4.0. The TCK will execute on any of these runtimes, but is only part of the CTS for Jakarta EE 10 and Jakarta EE 10 Web Profile.
+CDI supports {jakartaee-version}, {jakartaee-version} Web Profile, Embeddable Jakarta Enterprise Beans 4.0. The TCK will execute on any of these runtimes, but is only part of the CTS for {jakartaee-version} and {jakartaee-version} Web Profile.
 
 [[libraries]]
 

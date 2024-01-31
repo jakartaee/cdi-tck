@@ -13,7 +13,7 @@ or when compiling against staged Jakarta artifacts:
 `mvn -Pstaging install`
 
 ## Building the CDI TCK distribution
-The CDI TCK distribution artifact is built by specifing an additional `-Drelease` property to build the TCK reference
+The CDI TCK distribution artifact is built by specifying an additional `-Drelease` property to build the TCK reference
 documentation and distribution bundle, e.g.:
 
 `mvn -Drelease install`
@@ -24,7 +24,7 @@ The https://github.com/jakartaee/cdi/wiki/Eclipse-CI-Release-Jobs page describes
 
 ## Sources in GIT
 
-Master branch contains the CDI TCK 4.0
+Master branch contains the CDI TCK 4.1
 
 ### Source Layout
 
@@ -37,5 +37,4 @@ Master branch contains the CDI TCK 4.0
 * ide-configs - useful settings for Eclipse and Intellij IDEs
 * impl - The core set of tests, excluding those that depend on web and full platform containers
 * lang-model - A standalone test suite for the CDI language model; see its [README](./lang-model/README.adoc)
-* web - The extra tests that depend on the web profile and full platform
 * README.md - this doc

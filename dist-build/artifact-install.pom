@@ -110,38 +110,6 @@
           </execution>
 
           <execution>
-            <id>install-cdi-tck-web-impl</id>
-            <phase>package</phase>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <configuration>
-              <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-tck-web-impl</artifactId>
-              <version>${project.version}</version>
-              <packaging>jar</packaging>
-              <file>cdi-tck-web-impl-${project.version}.jar</file>
-              <generatePom>true</generatePom>
-            </configuration>
-          </execution>
-          <execution>
-            <id>install-cdi-web-tck-suite</id>
-            <phase>package</phase>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <configuration>
-              <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-tck-web-impl</artifactId>
-              <version>${project.version}</version>
-              <packaging>xml</packaging>
-              <classifier>suite</classifier>
-              <file>cdi-tck-web-impl-${project.version}-suite.xml</file>
-              <generatePom>false</generatePom>
-            </configuration>
-          </execution>
-
-          <execution>
             <id>install-cdi-tck-lang-model</id>
             <phase>package</phase>
             <goals>

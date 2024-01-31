@@ -8,11 +8,11 @@ This chapter explains how to obtain the TCK and supporting software and provides
 
 === Obtaining the Software
 
-You can obtain a release of the CDI TCK project from the link:$$https://download.eclipse.org/jakartaee/cdi/$$[download page] on the CDI specification website. The release stream for Jakarta CDI is named _4.0.x_. The CDI TCK is distributed as a ZIP file, which contains the TCK artifacts (the test suite binary and source, porting package API binary and source, the test suite configuration file, the audit source and report) in /artifacts and documentation in /doc. The TCK library dependencies are not part of the distribution and can be downloaded on demand (see readme.txt file in /lib).
+You can obtain a release of the CDI TCK project from the link:$$https://download.eclipse.org/jakartaee/cdi/$$[download page] on the CDI specification website. The release stream for Jakarta CDI is named _4.1.x_. The CDI TCK is distributed as a ZIP file, which contains the TCK artifacts (the test suite binary and source, porting package API binary and source, the test suite configuration file, the audit source and report) in /artifacts and documentation in /doc. The TCK library dependencies are not part of the distribution and can be downloaded on demand (see readme.txt file in /lib).
 
 You can also download the current source code from link:$$https://github.com/eclipse-ee4j/cdi-tck$$[GitHub repository].
 
-Executing the TCK requires a Jakarta EE 10 or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK does not depend on any particular Jakarta EE implementation.
+Executing the TCK requires a {jakartaee-version} or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK does not depend on any particular Jakarta EE implementation.
 
 A Jakarta Contexts and Dependency Injection for compatible implementation project is named Weld. The release stream for Jakarta CDI {revnumber} is named _{revmajor}.x_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
 
@@ -25,16 +25,16 @@ Weld is not required for running the CDI TCK, but it can be used as a reference 
 ====
 
 
-Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 11 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website.
+Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 17 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website.
 
 
 === The TCK Environment
 
 The TCK requires the following two Java runtime environments: 
 
-*  Java SE 11 or better
+*  Java SE 17 or better
 
-*  Jakarta EE 10 or better (e.g., WildFly 27.x or GlassFish V7)
+*  {jakartaee-version} or better (e.g., WildFly {wildfly-version} or GlassFish {glassfish-version}
 
 You should refer to vendor instructions for how to install the runtime environment. 
 
@@ -65,7 +65,7 @@ Each test class is treated as an individual artifact. All test methods (i.e., me
 [[running-against-weld, Running the TCK against Weld and WildFly]]
 Running the TCK against Weld and WildFly
 
-* First, you should download WildFly 27.x from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
+* First, you should download WildFly {wildfly-version} from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
 
 * Set the JBOSS_HOME environment variable to the location of the WildFly software. 
 
@@ -97,11 +97,11 @@ cd core-tck-4.x.y/weld/jboss-tck-runner
 mvn test -Dincontainer
 ----
 
-* Use +cdi.tck-4-0.versionn+ system property to specify particular TCK version:
+* Use +cdi.tck.version+ system property to specify particular TCK version:
 
 [source, console]
 ----
-mvn test -Dincontainer -Dcdi.tck-4-0.version=4.0.5
+mvn test -Dincontainer -Dcdi.tck.version=4.1.1
 ----
 * TestNG will report, via Maven, the outcome of the run, and report any failures on the console. Details can be found in target/surefire-reports/TestSuite.txt.
  

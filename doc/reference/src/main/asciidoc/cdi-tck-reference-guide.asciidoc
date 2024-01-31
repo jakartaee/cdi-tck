@@ -13,7 +13,7 @@ This guide describes how to download, install, configure, and run the
 Technology Compatibility Kit (TCK) used to verify the compatibility of an
 implementation of the Jakarta Contexts and Dependency Injection.
 
-The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses Arquillian version _1.7.0.Alpha10_ to execute the test suite.
+The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses Arquillian version _{arquillian-version}_ to execute the test suite.
 
 The CDI TCK is provided under link:$$http://www.apache.org/licenses/LICENSE-2.0$$[Apache Public License 2.0].
 

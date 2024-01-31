@@ -21,33 +21,33 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-parent</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <type>pom</type>
       </dependency>
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-api</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-api</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>sources</classifier>
          <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-api</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>javadoc</classifier>
          <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-reference-guide</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <type>zip</type>
          <optional>true</optional>
       </dependency>
@@ -55,13 +55,13 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <optional>true</optional>
       </dependency>
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>sources</classifier>
          <optional>true</optional>
       </dependency>
@@ -127,76 +127,6 @@
          <version>${cdi.tck.version}</version>
          <classifier>sigtest-jdk11</classifier>
          <type>sig</type>
-         <optional>true</optional>
-      </dependency>
-      <!-- web impl -->
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>sources</classifier>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>audit-cdi</classifier>
-         <type>xml</type>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>audit-mb</classifier>
-         <type>xml</type>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>audit-int</classifier>
-         <type>xml</type>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>suite</classifier>
-         <type>xml</type>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>coverage-cdi</classifier>
-         <type>html</type>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>coverage-mb</classifier>
-         <type>html</type>
-         <optional>true</optional>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-web-impl</artifactId>
-         <version>${cdi.tck.version}</version>
-         <classifier>coverage-interceptors</classifier>
-         <type>html</type>
          <optional>true</optional>
       </dependency>
       <dependency>

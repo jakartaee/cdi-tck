@@ -16,10 +16,10 @@
 
 
     <properties>
-        <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
+        <asciidoctor.maven.plugin.version>2.2.5</asciidoctor.maven.plugin.version>
         <asciidoctorj.pdf.version>2.3.10</asciidoctorj.pdf.version>
         <pdf.name>cdi-tck-reference-guide.pdf</pdf.name>
-        <revnumber>4.0</revnumber>
+        <revnumber>4.1</revnumber>
     </properties>
 
     <build>
@@ -42,7 +42,17 @@
                     <sourceDocumentName>cdi-tck-reference-guide.asciidoc</sourceDocumentName>
                     <!-- Attributes common to all output formats -->
                     <attributes>
+                        <revnumber>${revnumber}</revnumber>
                         <sourcedir>${project.build.sourceDirectory}</sourcedir>
+                        <source-highlighter>coderay</source-highlighter>
+                        <!-- Attributes for versions used in the reference docs -->
+                        <arquillian-version>${arquillian.version}</arquillian-version>
+                        <testng-version>${testng.version}</testng-version>
+                        <weld-version>${weld.version}</weld-version>
+                        <wildfly-version>33</wildfly-version>
+                        <glassfish-version>7.0.x</glassfish-version>
+                        <jakartaee-version>Jakarta EE 11</jakartaee-version>
+
                     </attributes>
                 </configuration>
                 <executions>
@@ -58,11 +68,9 @@
                             <outputDirectory>${project.build.directory}/generated-docs-pdf</outputDirectory>
                             <outputFile>cdi-tck-reference-guide.pdf</outputFile>
                             <attributes>
-                                <revnumber>${revnumber}</revnumber>
                                 <imagesdir>images</imagesdir>
                                 <pdf-stylesdir>${project.basedir}/src/main/style</pdf-stylesdir>
                                 <pdf-style>cditck</pdf-style>
-                                <source-highlighter>coderay</source-highlighter>
                                 <icons>font</icons>
                                 <pagenums />
                                 <toc />
@@ -82,8 +90,6 @@
                             <outputDirectory>${project.build.directory}/generated-docs-html</outputDirectory>
                             <outputFile>cdi-tck-reference-guide.html</outputFile>
                             <attributes>
-                                <revnumber>${revnumber}</revnumber>
-                                <source-highlighter>coderay</source-highlighter>
                                 <!--embedAssets>true</embedAssets-->
                                 <imagesdir>${project.basedir}/src/main/asciidoc/images</imagesdir>
                                 <toc>left</toc>
