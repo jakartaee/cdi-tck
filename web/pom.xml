@@ -23,7 +23,7 @@
             <interceptors.api.version>2.2.0-M1</interceptors.api.version>
             <servlet.api.version>6.0.0</servlet.api.version>
             <!-- Wave2 -->
-            <jsp.api.version>3.1.0</jsp.api.version>
+            <jsp.api.version>3.1.1</jsp.api.version>
 
             <!-- Wave4 -->
             <jaxrs.api.version>3.1.0</jaxrs.api.version>
