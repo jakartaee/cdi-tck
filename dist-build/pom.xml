@@ -68,7 +68,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>audit-cdi</classifier>
          <type>xml</type>
          <optional>true</optional>
@@ -76,7 +76,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>audit-mb</classifier>
          <type>xml</type>
          <optional>true</optional>
@@ -84,7 +84,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>audit-int</classifier>
          <type>xml</type>
          <optional>true</optional>
@@ -92,7 +92,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>suite</classifier>
          <type>xml</type>
          <optional>true</optional>
@@ -100,7 +100,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>coverage-cdi</classifier>
          <type>html</type>
          <optional>true</optional>
@@ -108,7 +108,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>coverage-mb</classifier>
          <type>html</type>
          <optional>true</optional>
@@ -116,7 +116,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>coverage-interceptors</classifier>
          <type>html</type>
          <optional>true</optional>
@@ -124,7 +124,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <classifier>sigtest-jdk11</classifier>
          <type>sig</type>
          <optional>true</optional>
@@ -132,7 +132,7 @@
       <dependency>
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-lang-model</artifactId>
-         <version>${cdi.tck.version}</version>
+         <version>${project.version}</version>
          <optional>true</optional>
       </dependency>
 
@@ -169,7 +169,7 @@
                      <descriptors>
                         <descriptor>src/main/assembly/assembly.xml</descriptor>
                      </descriptors>
-                     <finalName>cdi-tck-${cdi.tck.version}</finalName>
+                     <finalName>cdi-tck-${project.version}</finalName>
                   </configuration>
                </execution>
             </executions>

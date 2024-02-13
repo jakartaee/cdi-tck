@@ -75,6 +75,9 @@ Run the tests:
 * Run SE tests [30+ tests]
 `mvn clean verify -Dincontainer=se -f jboss-tck-runner/pom.xml`
 
+To run with an alternate version of the CDI TCK, you can pass in the cdi.tck.version property on the command line, e.g.:
+`mvn -Dcdi.tck.version=4.1.1 clean verify -f jboss-tck-runner/pom.xml`
+
 === Running the Language Model TCK against Wildfly / Weld
 
 Follow the `Configuration`` instructions as for the main TCK above.
@@ -83,11 +86,13 @@ Then:
 
 * `mvn install -f $CDI_TCK_ROOT/artifacts/pom.xml`
 * `mvn -Dtck package -f $CDI_TCK_ROOT/weld/jboss-as/pom.xml` - to enable CDI Extension
-* `mvn clean verify -Dincontainer -Dcdi.tck.version=${TCK_VERSION} -f $CDI_TCK_ROOT/weld/lang-model-tck-runner/pom.xml`` - to run the TCK against WildFly
+* `mvn clean verify -Dincontainer -f $CDI_TCK_ROOT/weld/lang-model-tck-runner/pom.xml`` - to run the TCK against WildFly
 
-Alternatively, run against Weld in plane Java SE:
+Alternatively, run against Weld in plain Java SE:
 
-* `mvn clean verify -Dcdi.tck.version=${TCK_VERSION} -f $CDI_TCK_ROOT/weld/lang-model-tck-runner/pom.xml`
+* `mvn clean verify -f $CDI_TCK_ROOT/weld/lang-model-tck-runner/pom.xml`
+
+You can specify the `cdi.tck.version` property on the command line to override the version from the CDI TCK bundle distribution.
 
 == Where to file challenges
 
