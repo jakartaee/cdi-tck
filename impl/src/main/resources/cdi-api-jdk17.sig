@@ -1,5 +1,5 @@
 #Signature file v4.1
-#Version 4.0.0-SNAPSHOT
+#Version 4.1.0-SNAPSHOT
 
 CLSS public abstract interface !annotation jakarta.decorator.Decorator
  anno 0 jakarta.enterprise.inject.Stereotype()
@@ -13,6 +13,8 @@ CLSS public abstract interface !annotation jakarta.decorator.Delegate
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[FIELD, PARAMETER])
 intf java.lang.annotation.Annotation
+
+CLSS abstract interface jakarta.decorator.package-info
 
 CLSS public abstract interface !annotation jakarta.enterprise.context.ApplicationScoped
  anno 0 jakarta.enterprise.context.NormalScope(boolean passivating=false)
@@ -221,6 +223,8 @@ CLSS public abstract interface jakarta.enterprise.context.control.RequestContext
 meth public abstract boolean activate()
 meth public abstract void deactivate()
 
+CLSS abstract interface jakarta.enterprise.context.package-info
+
 CLSS public abstract interface jakarta.enterprise.context.spi.AlterableContext
 intf jakarta.enterprise.context.spi.Context
 meth public abstract void destroy(jakarta.enterprise.context.spi.Contextual<?>)
@@ -238,6 +242,8 @@ meth public abstract {jakarta.enterprise.context.spi.Contextual%0} create(jakart
 CLSS public abstract interface jakarta.enterprise.context.spi.CreationalContext<%0 extends java.lang.Object>
 meth public abstract void push({jakarta.enterprise.context.spi.CreationalContext%0})
 meth public abstract void release()
+
+CLSS abstract interface jakarta.enterprise.context.spi.package-info
 
 CLSS public abstract interface jakarta.enterprise.event.Event<%0 extends java.lang.Object>
 meth public abstract !varargs <%0 extends {jakarta.enterprise.event.Event%0}> jakarta.enterprise.event.Event<{%%0}> select(jakarta.enterprise.util.TypeLiteral<{%%0}>,java.lang.annotation.Annotation[])
@@ -308,6 +314,8 @@ fld public final static jakarta.enterprise.event.TransactionPhase IN_PROGRESS
 meth public static jakarta.enterprise.event.TransactionPhase valueOf(java.lang.String)
 meth public static jakarta.enterprise.event.TransactionPhase[] values()
 supr java.lang.Enum<jakarta.enterprise.event.TransactionPhase>
+
+CLSS abstract interface jakarta.enterprise.event.package-info
 
 CLSS public abstract interface !annotation jakarta.enterprise.inject.Alternative
  anno 0 java.lang.annotation.Documented()
@@ -644,6 +652,12 @@ CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.Bu
 intf jakarta.enterprise.inject.spi.Prioritized
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.AnnotationBuilderFactory annotationBuilderFactory()
 
+CLSS public final jakarta.enterprise.inject.build.compatible.spi.BuildServicesResolver
+cons public init()
+meth public static void setBuildServices(jakarta.enterprise.inject.build.compatible.spi.BuildServices)
+supr java.lang.Object
+hfds configuredBuildServices,discoveredBuildServices,lock
+
 CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.ClassConfig
 intf jakarta.enterprise.inject.build.compatible.spi.DeclarationConfig
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.ClassConfig addAnnotation(jakarta.enterprise.lang.model.AnnotationInfo)
@@ -701,6 +715,11 @@ meth public abstract boolean intercepts(jakarta.enterprise.inject.spi.Intercepti
 meth public abstract java.util.Collection<jakarta.enterprise.lang.model.AnnotationInfo> interceptorBindings()
 meth public boolean isInterceptor()
 meth public jakarta.enterprise.inject.build.compatible.spi.InterceptorInfo asInterceptor()
+
+CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.InvokerFactory
+meth public abstract jakarta.enterprise.invoke.InvokerBuilder<jakarta.enterprise.inject.build.compatible.spi.InvokerInfo> createInvoker(jakarta.enterprise.inject.build.compatible.spi.BeanInfo,jakarta.enterprise.lang.model.declarations.MethodInfo)
+
+CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.InvokerInfo
 
 CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.Messages
 meth public abstract void error(java.lang.Exception)
@@ -813,6 +832,8 @@ meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBea
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> withParam(java.lang.String,double[])
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> withParam(java.lang.String,int)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> withParam(java.lang.String,int[])
+meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> withParam(java.lang.String,jakarta.enterprise.inject.build.compatible.spi.InvokerInfo)
+meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> withParam(java.lang.String,jakarta.enterprise.inject.build.compatible.spi.InvokerInfo[])
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> withParam(java.lang.String,jakarta.enterprise.lang.model.AnnotationInfo)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> withParam(java.lang.String,jakarta.enterprise.lang.model.AnnotationInfo[])
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> withParam(java.lang.String,jakarta.enterprise.lang.model.declarations.ClassInfo)
@@ -858,6 +879,8 @@ meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObs
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder%0}> withParam(java.lang.String,double[])
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder%0}> withParam(java.lang.String,int)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder%0}> withParam(java.lang.String,int[])
+meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder%0}> withParam(java.lang.String,jakarta.enterprise.inject.build.compatible.spi.InvokerInfo)
+meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder%0}> withParam(java.lang.String,jakarta.enterprise.inject.build.compatible.spi.InvokerInfo[])
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder%0}> withParam(java.lang.String,jakarta.enterprise.lang.model.AnnotationInfo)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder%0}> withParam(java.lang.String,jakarta.enterprise.lang.model.AnnotationInfo[])
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticObserverBuilder%0}> withParam(java.lang.String,jakarta.enterprise.lang.model.declarations.ClassInfo)
@@ -891,6 +914,8 @@ CLSS public abstract interface !annotation jakarta.enterprise.inject.build.compa
  anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[METHOD])
 intf java.lang.annotation.Annotation
+
+CLSS abstract interface jakarta.enterprise.inject.build.compatible.spi.package-info
 
 CLSS public final jakarta.enterprise.inject.literal.InjectLiteral
 cons public init()
@@ -1039,6 +1064,8 @@ meth public abstract !varargs java.util.Set<jakarta.enterprise.inject.spi.Bean<?
 meth public abstract <%0 extends java.lang.Object> jakarta.enterprise.context.spi.CreationalContext<{%%0}> createCreationalContext(jakarta.enterprise.context.spi.Contextual<{%%0}>)
 meth public abstract <%0 extends java.lang.Object> jakarta.enterprise.inject.spi.Bean<? extends {%%0}> resolve(java.util.Set<jakarta.enterprise.inject.spi.Bean<? extends {%%0}>>)
 meth public abstract boolean isInterceptorBinding(java.lang.Class<? extends java.lang.annotation.Annotation>)
+meth public abstract boolean isMatchingBean(java.util.Set<java.lang.reflect.Type>,java.util.Set<java.lang.annotation.Annotation>,java.lang.reflect.Type,java.util.Set<java.lang.annotation.Annotation>)
+meth public abstract boolean isMatchingEvent(java.lang.reflect.Type,java.util.Set<java.lang.annotation.Annotation>,java.lang.reflect.Type,java.util.Set<java.lang.annotation.Annotation>)
 meth public abstract boolean isNormalScope(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract boolean isQualifier(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract boolean isScope(java.lang.Class<? extends java.lang.annotation.Annotation>)
@@ -1047,11 +1074,11 @@ meth public abstract jakarta.enterprise.context.spi.Context getContext(java.lang
 meth public abstract jakarta.enterprise.event.Event<java.lang.Object> getEvent()
 meth public abstract jakarta.enterprise.inject.Instance<java.lang.Object> createInstance()
 meth public abstract java.lang.Object getReference(jakarta.enterprise.inject.spi.Bean<?>,java.lang.reflect.Type,jakarta.enterprise.context.spi.CreationalContext<?>)
+meth public abstract java.util.Collection<jakarta.enterprise.context.spi.Context> getContexts(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract java.util.Set<jakarta.enterprise.inject.spi.Bean<?>> getBeans(java.lang.String)
 
 CLSS public abstract interface jakarta.enterprise.inject.spi.BeanManager
 intf jakarta.enterprise.inject.spi.BeanContainer
-meth public abstract !varargs <%0 extends java.lang.Object> java.util.Set<jakarta.enterprise.inject.spi.ObserverMethod<? super {%%0}>> resolveObserverMethods({%%0},java.lang.annotation.Annotation[])
 meth public abstract !varargs java.util.List<jakarta.enterprise.inject.spi.Decorator<?>> resolveDecorators(java.util.Set<java.lang.reflect.Type>,java.lang.annotation.Annotation[])
 meth public abstract <%0 extends jakarta.enterprise.inject.spi.Extension> {%%0} getExtension(java.lang.Class<{%%0}>)
 meth public abstract <%0 extends java.lang.Object, %1 extends java.lang.Object> jakarta.enterprise.inject.spi.Bean<{%%0}> createBean(jakarta.enterprise.inject.spi.BeanAttributes<{%%0}>,java.lang.Class<{%%1}>,jakarta.enterprise.inject.spi.ProducerFactory<{%%1}>)
@@ -1068,7 +1095,9 @@ meth public abstract boolean isPassivatingScope(java.lang.Class<? extends java.l
 meth public abstract int getInterceptorBindingHashCode(java.lang.annotation.Annotation)
 meth public abstract int getQualifierHashCode(java.lang.annotation.Annotation)
 meth public abstract jakarta.el.ELResolver getELResolver()
+ anno 0 java.lang.Deprecated(boolean forRemoval=true, java.lang.String since="4.1")
 meth public abstract jakarta.el.ExpressionFactory wrapExpressionFactory(jakarta.el.ExpressionFactory)
+ anno 0 java.lang.Deprecated(boolean forRemoval=true, java.lang.String since="4.1")
 meth public abstract jakarta.enterprise.inject.spi.Bean<?> getPassivationCapableBean(java.lang.String)
 meth public abstract jakarta.enterprise.inject.spi.BeanAttributes<?> createBeanAttributes(jakarta.enterprise.inject.spi.AnnotatedMember<?>)
 meth public abstract jakarta.enterprise.inject.spi.InjectionPoint createInjectionPoint(jakarta.enterprise.inject.spi.AnnotatedField<?>)
@@ -1238,6 +1267,7 @@ meth public abstract void setInjectionTarget(jakarta.enterprise.inject.spi.Injec
 CLSS public abstract interface jakarta.enterprise.inject.spi.ProcessManagedBean<%0 extends java.lang.Object>
 intf jakarta.enterprise.inject.spi.ProcessBean<{jakarta.enterprise.inject.spi.ProcessManagedBean%0}>
 meth public abstract jakarta.enterprise.inject.spi.AnnotatedType<{jakarta.enterprise.inject.spi.ProcessManagedBean%0}> getAnnotatedBeanClass()
+meth public abstract jakarta.enterprise.invoke.InvokerBuilder<jakarta.enterprise.invoke.Invoker<{jakarta.enterprise.inject.spi.ProcessManagedBean%0},?>> createInvoker(jakarta.enterprise.inject.spi.AnnotatedMethod<? super {jakarta.enterprise.inject.spi.ProcessManagedBean%0}>)
 
 CLSS public abstract interface jakarta.enterprise.inject.spi.ProcessObserverMethod<%0 extends java.lang.Object, %1 extends java.lang.Object>
 meth public abstract jakarta.enterprise.inject.spi.AnnotatedMethod<{jakarta.enterprise.inject.spi.ProcessObserverMethod%1}> getAnnotatedMethod()
@@ -1453,6 +1483,16 @@ CLSS public abstract interface jakarta.enterprise.inject.spi.configurator.Produc
 meth public abstract <%0 extends {jakarta.enterprise.inject.spi.configurator.ProducerConfigurator%0}> jakarta.enterprise.inject.spi.configurator.ProducerConfigurator<{jakarta.enterprise.inject.spi.configurator.ProducerConfigurator%0}> produceWith(java.util.function.Function<jakarta.enterprise.context.spi.CreationalContext<{%%0}>,{%%0}>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.ProducerConfigurator<{jakarta.enterprise.inject.spi.configurator.ProducerConfigurator%0}> disposeWith(java.util.function.Consumer<{jakarta.enterprise.inject.spi.configurator.ProducerConfigurator%0}>)
 
+CLSS abstract interface jakarta.enterprise.inject.spi.package-info
+
+CLSS public abstract interface jakarta.enterprise.invoke.Invoker<%0 extends java.lang.Object, %1 extends java.lang.Object>
+meth public abstract {jakarta.enterprise.invoke.Invoker%1} invoke({jakarta.enterprise.invoke.Invoker%0},java.lang.Object[]) throws java.lang.Exception
+
+CLSS public abstract interface jakarta.enterprise.invoke.InvokerBuilder<%0 extends java.lang.Object>
+meth public abstract jakarta.enterprise.invoke.InvokerBuilder<{jakarta.enterprise.invoke.InvokerBuilder%0}> withArgumentLookup(int)
+meth public abstract jakarta.enterprise.invoke.InvokerBuilder<{jakarta.enterprise.invoke.InvokerBuilder%0}> withInstanceLookup()
+meth public abstract {jakarta.enterprise.invoke.InvokerBuilder%0} build()
+
 CLSS public abstract interface jakarta.enterprise.lang.model.AnnotationInfo
 meth public abstract boolean hasMember(java.lang.String)
 meth public abstract jakarta.enterprise.lang.model.AnnotationMember member(java.lang.String)
@@ -1637,6 +1677,10 @@ meth public abstract java.lang.String name()
 meth public jakarta.enterprise.lang.model.declarations.DeclarationInfo$Kind kind()
 meth public jakarta.enterprise.lang.model.declarations.RecordComponentInfo asRecordComponent()
 
+CLSS abstract interface jakarta.enterprise.lang.model.declarations.package-info
+
+CLSS abstract interface jakarta.enterprise.lang.model.package-info
+
 CLSS public abstract interface jakarta.enterprise.lang.model.types.ArrayType
 intf jakarta.enterprise.lang.model.types.Type
 meth public abstract jakarta.enterprise.lang.model.types.Type componentType()
@@ -1743,6 +1787,8 @@ meth public abstract jakarta.enterprise.lang.model.types.Type upperBound()
 meth public jakarta.enterprise.lang.model.types.Type$Kind kind()
 meth public jakarta.enterprise.lang.model.types.WildcardType asWildcardType()
 
+CLSS abstract interface jakarta.enterprise.lang.model.types.package-info
+
 CLSS public abstract jakarta.enterprise.util.AnnotationLiteral<%0 extends java.lang.annotation.Annotation>
 cons protected init()
 intf java.io.Serializable
@@ -1778,6 +1824,8 @@ meth public int hashCode()
 meth public java.lang.String toString()
 supr java.lang.Object
 hfds actualType,serialVersionUID
+
+CLSS abstract interface jakarta.enterprise.util.package-info
 
 CLSS public abstract interface !annotation jakarta.inject.Inject
  anno 0 java.lang.annotation.Documented()
@@ -1867,6 +1915,8 @@ intf java.lang.annotation.Annotation
 meth public abstract java.lang.Class[] value()
 
 CLSS public abstract interface jakarta.interceptor.InvocationContext
+meth public <%0 extends java.lang.annotation.Annotation> java.util.Set<{%%0}> getInterceptorBindings(java.lang.Class<{%%0}>)
+meth public <%0 extends java.lang.annotation.Annotation> {%%0} getInterceptorBinding(java.lang.Class<{%%0}>)
 meth public abstract java.lang.Object getTarget()
 meth public abstract java.lang.Object getTimer()
 meth public abstract java.lang.Object proceed() throws java.lang.Exception
@@ -1875,6 +1925,7 @@ meth public abstract java.lang.reflect.Constructor<?> getConstructor()
 meth public abstract java.lang.reflect.Method getMethod()
 meth public abstract java.util.Map<java.lang.String,java.lang.Object> getContextData()
 meth public abstract void setParameters(java.lang.Object[])
+meth public java.util.Set<java.lang.annotation.Annotation> getInterceptorBindings()
 
 CLSS public abstract interface java.io.Serializable
 

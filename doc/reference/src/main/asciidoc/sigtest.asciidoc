@@ -12,18 +12,18 @@ The sigtest plugin is availble from Maven Central using a dependency like:
 ----
 ...
     <plugin>
-    <groupId>org.netbeans.tools</groupId>
+    <groupId>jakarta.tck</groupId>
     <artifactId>sigtest-maven-plugin</artifactId>
-    <version>1.5</version>
+    <version>2.1</version>
     </plugin>
 ----
 
 The source for the sigtest plugin can be found here:
-https://github.com/jtulach/netbeans-apitest
+https://github.com/eclipse-ee4j/jakartaee-tck-tools/tree/master/tools/sigtest
 
 === Running the signature test
 To run the signature test, use a pom file like that found in
-https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigtest-pom.xml and shown here:
+https://github.com/jakartaee/cdi-tck/blob/master/impl/src/main/resources/sigtest-pom.xml and shown here:
 [source, xml]
 ----
 <?xml version="1.0"?>
@@ -34,21 +34,21 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
   <parent>
     <groupId>org.eclipse.ee4j</groupId>
     <artifactId>project</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.9</version>
   </parent>
 
   <groupId>jakarta.enterprise</groupId>
   <artifactId>cdi-tck-sigtest</artifactId>
-  <version>4.0</version>
+  <version>4.1</version>
   <name>CDI TCK Signature Tests</name>
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
     <!-- Set the api jar artifact versions here -->
-    <annotation.api.version>2.1.0</annotation.api.version>
+    <annotations.api.version>3.0.0-M1</annotations.api.version>
+    <interceptors.api.version>2.2.0-M1</interceptors.api.version>
     <atinject.api.version>2.0.1</atinject.api.version>
-    <interceptor.api.version>2.1.0</interceptor.api.version>
-    <el.api.version>5.0.0</el.api.version>
-    <cdi.api.version>4.0.1</cdi.api.version>
+    <el.api.version>5.0.1</el.api.version>
+    <cdi.api.version>4.1.0.Beta1</cdi.api.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
@@ -56,7 +56,7 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
     <dependency>
       <groupId>jakarta.annotation</groupId>
       <artifactId>jakarta.annotation-api</artifactId>
-      <version>${annotation.api.version}</version>
+      <version>${annotations.api.version}</version>
     </dependency>
     <dependency>
       <groupId>jakarta.el</groupId>
@@ -66,7 +66,7 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
     <dependency>
       <groupId>jakarta.interceptor</groupId>
       <artifactId>jakarta.interceptor-api</artifactId>
-      <version>${interceptor.api.version}</version>
+      <version>${interceptors.api.version}</version>
     </dependency>
     <dependency>
       <groupId>jakarta.inject</groupId>
@@ -106,9 +106,9 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.netbeans.tools</groupId>
+        <groupId>jakarta.tck</groupId>
         <artifactId>sigtest-maven-plugin</artifactId>
-        <version>1.5</version>
+        <version>2.1</version>
         <executions>
           <execution>
             <id>sigtest</id>
@@ -119,8 +119,8 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
           </execution>
         </executions>
         <configuration>
-          <sigfile>cdi-api-jdk11.sig</sigfile>
-          <packages>jakarta.decorator,jakarta.enterprise,jakarta.interceptor</packages>
+          <sigfile>cdi-api-jdk17.sig</sigfile>
+          <packages>jakarta.decorator,jakarta.enterprise.**,jakarta.interceptor</packages>
           <classes>target/classes</classes>
           <report>cdi-sig-report.txt</report>
         </configuration>
@@ -133,19 +133,15 @@ Your version should specify the dependencies on these jars as used in your compa
 
 [source, console]
 ----
-Scotts-iMacPro:resources starksm$ mvn -f sigtest-pom.xml verify
-[INFO] Scanning for projects...
-[INFO]
-[INFO] -----------------< jakarta.enterprise:cdi-tck-sigtest >-----------------
-[INFO] Building CDI TCK Signature Tests 4.0
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO]
+(base) starksm@Scotts-Mac-Studio impl % mvn -Djdk.major.version=21 -Dsignature process-resources
 ...
-[INFO] --- sigtest-maven-plugin:1.5:check (sigtest) @ cdi-tck-sigtest ---
-[INFO] Packages: jakarta.decorator,jakarta.enterprise
+[INFO] --- sigtest:2.1:check (sigtest) @ cdi-tck-sigtest ---
+[INFO] Packages: jakarta.decorator,jakarta.enterprise.**,jakarta.interceptor
+Feb 16, 2024 11:42:25 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
+INFO: SignatureTest.args: [-FileName, /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/cdi-api-jdk17.sig, -static, -b, -Mode, bin, -ApiVersion, 4.1, -PackageWithoutSubpackages, jakarta.decorator, -Package, jakarta.enterprise, -PackageWithoutSubpackages, jakarta.interceptor, -BootCP, -Classpath, /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/target/classes:/Users/starksm/.m2/repository/jakarta/annotation/jakarta.annotation-api/3.0.0-M1/jakarta.annotation-api-3.0.0-M1.jar:/Users/starksm/.m2/repository/jakarta/el/jakarta.el-api/5.0.1/jakarta.el-api-5.0.1.jar:/Users/starksm/.m2/repository/jakarta/interceptor/jakarta.interceptor-api/2.2.0-M1/jakarta.interceptor-api-2.2.0-M1.jar:/Users/starksm/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/starksm/.m2/repository/jakarta/enterprise/jakarta.enterprise.lang-model/4.1.0.Beta1/jakarta.enterprise.lang-model-4.1.0.Beta1.jar:/Users/starksm/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/4.1.0.Beta1/jakarta.enterprise.cdi-api-4.1.0.Beta1.jar]
 [INFO] SignatureTest report
-Base version: 4.0.0-SNAPSHOT
-Tested version: 4.0
+Base version: 4.1.0-SNAPSHOT
+Tested version: 4.1
 Check mode: bin [throws removed]
 Constant checking: on
 
@@ -154,13 +150,14 @@ Warning: The return type java.lang.reflect.Member can't be resolved
 Warning: The return type java.lang.reflect.Member can't be resolved
 
 
-[INFO] /Users/starksm/Dev/JBoss/Jakarta/cdi-tck/impl/src/main/resources/cdi-sig-report.txt: 0 failures in /Users/starksm/Dev/JBoss/Jakarta/cdi-tck/impl/src/main/resources/cdi-api-jdk11.sig
+[INFO] /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/cdi-sig-report.txt: 0 failures in /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/cdi-api-jdk17.sig
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  1.941 s
-[INFO] Finished at: 2021-12-13T11:38:06-06:00
+[INFO] Total time:  2.021 s
+[INFO] Finished at: 2024-02-16T23:42:25-06:00
 [INFO] ------------------------------------------------------------------------
+
 ----
 
 You can ignore the following warnings:
@@ -169,7 +166,7 @@ You can ignore the following warnings:
 The important thing is that the mvn version shows "BUILD SUCCESS".
 
 Another example that just specifies a compatible implementation test as the dependency to validate the API artifact signatures from the transitive dependencies is pom file like that found in
-https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigtest-weld-pom.xml and shown here:
+https://github.com/jakartaee/cdi-tck/blob/master/impl/src/main/resources/sigtest-weld-pom.xml and shown here:
 [source, xml]
 ----
 <?xml version="1.0"?>
@@ -180,7 +177,7 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
   <parent>
     <groupId>org.eclipse.ee4j</groupId>
     <artifactId>project</artifactId>
-    <version>1.0.6</version>
+    <version>1.0.9</version>
   </parent>
 
   <groupId>jakarta.enterprise</groupId>
@@ -190,7 +187,7 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
     <!-- Set the Weld version to test -->
-    <weld.version>5.0.0.CR2</weld.version>
+    <weld.version>6.0.0.Alpha2</weld.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
@@ -224,9 +221,9 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.netbeans.tools</groupId>
+        <groupId>jakarta.tck</groupId>
         <artifactId>sigtest-maven-plugin</artifactId>
-        <version>1.5</version>
+        <version>2.1</version>
         <executions>
           <execution>
             <id>sigtest</id>
@@ -237,10 +234,10 @@ https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/sigt
           </execution>
         </executions>
         <configuration>
-          <sigfile>cdi-api-jdk11.sig</sigfile>
-          <packages>jakarta.decorator,jakarta.enterprise,jakarta.interceptor</packages>
+          <sigfile>cdi-api-jdk17.sig</sigfile>
+          <packages>jakarta.decorator,jakarta.enterprise.**,jakarta.interceptor</packages>
           <classes>target/classes</classes>
-          <report>cdi-sig-report.txt</report>
+          <report>cdi-sig-report.xml</report>
         </configuration>
       </plugin>
     </plugins>

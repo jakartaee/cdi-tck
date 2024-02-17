@@ -359,8 +359,8 @@
                 </property>
             </activation>
             <properties>
-                <!--Default assumed JDK version, can be overriden via -Dmajor.jdk.version=X-->
-                <jdk.major.version>11</jdk.major.version>
+                <!--Default assumed JDK version, can be overriden via -Djdk.major.version=X-->
+                <jdk.major.version>17</jdk.major.version>
             </properties>
             <build>
                 <plugins>
@@ -402,13 +402,14 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <groupId>org.netbeans.tools</groupId>
+                        <groupId>jakarta.tck</groupId>
                         <artifactId>sigtest-maven-plugin</artifactId>
                         <executions>
                             <execution>
                                 <goals>
                                     <goal>generate</goal>
                                 </goals>
+                                <phase>process-resources</phase>
                             </execution>
                         </executions>
                         <configuration>
@@ -425,6 +426,7 @@
                                 jakarta.enterprise.inject.se,
                                 jakarta.enterprise.inject.spi,
                                 jakarta.enterprise.inject.spi.configurator,
+                                jakarta.enterprise.invoke,
                                 jakarta.enterprise.util,
                                 jakarta.enterprise.lang.model,
                                 jakarta.enterprise.lang.model.declarations,
