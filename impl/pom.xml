@@ -145,7 +145,7 @@
                                     <classifier>audit-int</classifier>
                                 </artifact>
                                 <artifact>
-                                    <file>${basedir}/src/main/resources/cdi-api-jdk11.sig</file>
+                                    <file>${basedir}/src/main/resources/cdi-api-jdk17.sig</file>
                                     <type>sig</type>
                                     <classifier>sigtest-jdk17</classifier>
                                 </artifact>
