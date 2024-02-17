@@ -377,8 +377,8 @@
         </assertion>
 
         <assertion id="da">
-            <text>If there are two different stereotypes declared by the bean that declare different default scopes, then there is no default scope and the bean
-                must explicitly declare a scope. If it does not explicitly declare a scope, the container automatically
+            <text>If there are two different stereotypes present on the bean, directly, indirectly, or transitively, that declare different default scopes,
+                then there is no default scope and the bean must explicitly declare a scope. If it does not explicitly declare a scope, the container automatically
                 detects the problem and treats it as a definition error.
             </text>
         </assertion>
@@ -721,6 +721,20 @@
         <assertion id="a">
             <text>A stereotype may declare an |@Alternative| annotation, which specifies that every bean with the stereotype is an alternative.</text>
         </assertion>
+    </section>
+
+    <section id="declaring_stereotype_with_priority" title="Declaring stereotype with @Priority" level="4">
+        <assertion id="a">
+            <text>A stereotype may declare a @Priority annotation which functions as a means of enabling and ordering affected beans.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>If there are two different stereotypes present on a bean, directly, indirectly, or transitively, that declare
+                different priority values, then the bean must explicitly declare a @Priority annotation. If the bean does not
+                explicitly declare priority, the container automatically detects the problem and treats it as a definition error.
+            </text>
+        </assertion>
+
     </section>
 
     <section id="stereotypes_with_additional_stereotypes" title="Stereotypes with additional stereotypes" level="4">
@@ -3282,6 +3296,7 @@
             <assertion id="ma">
                 <text>The method |isResolvable()| returns true if there is exactly one bean found, or false otherwise.</text>
             </assertion>
+
         </group>
 
         <group>
@@ -3302,6 +3317,60 @@
             </assertion>
         </group>
 
+        <group>
+            <text>The |getHandle()| method must:</text>
+            <assertion id="qa">
+                <text>Return an initialized contextual reference |Handle| for a bean that has the required type and qualifiers
+                    and is eligible for injection. The contextual reference must be resolved lazily, i.e. when first needed.
+                    </text>
+            </assertion>
+            <assertion id="qb">
+                <text>Throw UnsatisfiedResolutionException if there is no bean with given type and qualifiers.</text>
+            </assertion>
+            <assertion id="qc">
+                <text>Throw AmbiguousResolutionException if there is more than one bean given type and qualifiers.
+                </text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>The |handles()| method must:</text>
+            <assertion id="ra">
+                <text>Allow iterating over contextual reference handles for all beans that have the required type and required qualifiers and are eligible for injection.
+                </text>
+            </assertion>
+            <assertion id="rb">
+                <text>Return stateless Iterable. Therefore, each Iterable#iterator() produces a new set of handles.</text>
+            </assertion>
+        </group>
+
+    </section>
+
+    <section id="handle_interface" title="The Handle interface" level="4">
+        <group>
+            <text>The get() method returns a contextual reference object.</text>
+            <assertion id="aa" testable="false">
+                <text>The contextual reference is resolved lazily.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test IllegalStateException is thrown if invoked on Handle that previously successfully destroyed its underlying contextual reference.</text>
+            </assertion>
+        </group>
+        <group>
+            <text>
+                The destroy() method destroys the contextual instance and is a no-op if:
+            </text>
+            <assertion id="ba">
+                <text>called multiple times</text>
+            </assertion>
+            <assertion id="bb">
+                <text>the producing Instance does not exist</text>
+                the handle does not hold a contextual reference, i.e. get() was never called
+            </assertion>
+            <assertion id="bc">
+                <text>the handle does not hold a contextual reference, i.e. get() was never called</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="builtin_instance" title="The built-in Instance" level="3">
@@ -5108,6 +5177,13 @@
             </text>
         </assertion>
 
+        <assertion id="l">
+            <text>The Priority annotation can be used to enable and order interceptors associated with components that use interceptor bindings.
+                The required value element of the Priority annotation determines the ordering.
+                Interceptors with smaller priority values are called first.</text>
+            <note>This is defined in the Interceptors 2.0 spec, 5.2.1. Use of the Priority Annotation in Ordering Interceptors.</note>
+        </assertion>
+
     </section>
 
     <section id="interceptor_resolution" title="Interceptor resolution" level="2">
@@ -5327,7 +5403,7 @@
 
         <assertion id="g">
             <text>The built-in implementation must be a passivation capable dependency, as defined in Section 6.6.2, "Passivation capable
-                dependencies".
+                dependencies (CDI Full)".
             </text>
         </assertion>
     </section>
@@ -5726,16 +5802,17 @@
 
     </section>
 
-    <section id="async_exception" title="Handling multiple exceptions thrown during an asynchronous event" level="3">
+    <section id="async_exception" title="Handling exceptions thrown during an asynchronous event" level="3">
         <assertion id="a">
-            <text>If an event is asynchronous, and an exception is thrown by any of its notified observers, the CompletionStage returned by fireAsync will
-                complete exceptionally with java.util.concurrent.CompletionException exception.
+            <text>If an event is asynchronous, and an exception is thrown by one or more of its notified observers, the
+                `CompletionStage` returned by `fireAsync` will complete exceptionally with
+                `java.util.concurrent.CompletionException`.
             </text>
         </assertion>
 
         <assertion id="b">
             <text>java.util.concurrent.CompletionException contains all exceptions thrown by observers as suppressed exceptions. They can be accessed as an
-                array of throwable with the getSuppressed method.
+                array of `Throwable` with the `getSuppressed` method.
             </text>
         </assertion>
     </section>
@@ -5793,6 +5870,414 @@
                 |BeanManager.fireEvent()|.
             </text>
         </assertion>
+    </section>
+
+    <section id="observable_container_lifecycle_events" title="Observable container lifecycle events" level="2"/>
+
+    <section id="startup_event" title="Startup event" level="3">
+
+        <group>
+            <text>Implementations are required to fire a startup event during application initialization.</text>
+            <assertion id="aa">
+                <text>This must be done synchronously with an event payload of jakarta.enterprise.event.Startup and qualifier jakarta.enterprise.inject.Any</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>This event is fired after the event with qualifier @Initialized(ApplicationScope.class) but before processing requests.</text>
+            </assertion>
+        </group>
+        <assertion id="b">
+            <text>Applications must never manually fire any events with payload type jakarta.enterprise.event.Startup.</text>
+        </assertion>
+    </section>
+
+    <section id="shutdown_event" title="Shutdown event" level="3">
+
+        <group>
+            <text>Implementations are required to fire a shutdown event during application shutdown.</text>
+            <assertion id="aa" testable="false">
+                <text>This must be done synchronously with an event payload of jakarta.enterprise.event.Shutdown and qualifier jakarta.enterprise.inject.Any.</text>
+            </assertion>
+
+            <assertion id="ab" testable="false">
+                <text>This event is fired during CDI container shutdown but not later than the event with qualifier @BeforeDestroyed(ApplicationScoped.class).</text>
+            </assertion>
+        </group>
+        <assertion id="b">
+            <text>Applications must never manually fire any events with payload type jakarta.enterprise.event.Shutdown.</text>
+        </assertion>
+    </section>
+
+    <section id="method_invokers" title="Method invokers" level="1">
+        <assertion id="a">
+            <text>
+                CDI-based frameworks often need to invoke application methods declared on managed beans.
+                Frameworks cannot invoke application methods directly, because they are not compiled against the application code.
+                However, during application deployment, frameworks may observe application methods through CDI extensions and build an |Invoker| for each relevant method.
+                The invokers can then be used at application runtime to invoke the methods indirectly.
+            </text>
+            <note>Basic test of method invokers</note>
+        </assertion>
+    </section>
+
+    <section id="building_invoker" title="Building an invoker" level="2">
+        <assertion id="a">
+            <text>The CDI container allows building an |Invoker| for a method of an enabled managed bean.</text>
+        </assertion>
+        <group>
+            <text>
+                Invalid target methods are: private methods, constructors,
+                methods declared on the |java.lang.Object| class, except of the |toString()| method,
+                methods that are not declared on the bean class of the target bean or inherited from its supertypes.
+                Attempting to build an invoker for an invalid target method leads to a deployment problem.
+            </text>
+            <assertion id="ba">
+                <text>Test for private method</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Test for constructor</text>
+            </assertion>
+            <assertion id="bc">
+                <text>Test for |java.lang.Object| method</text>
+            </assertion>
+            <assertion id="bd">
+                <text>Test for method from a different class</text>
+            </assertion>
+            <assertion id="be">
+                <text>Test for public, protected and package-private methods</text>
+            </assertion>
+        </group>
+        <group>
+            <text>When the target bean is not a managed bean, attempting to build an invoker leads to a deployment problem.</text>
+            <assertion id="ca">
+                <text>Test for a producer method</text>
+            </assertion>
+            <assertion id="cb">
+                <text>Test for a producer field</text>
+            </assertion>
+        </group>
+        <assertion id="d">
+            <text>When the target bean is an interceptor, attempting to build an invoker leads to a deployment problem.</text>
+        </assertion>
+        <assertion id="e">
+            <text>The only way to build an invoker is using the |InvokerBuilder|.</text>
+        </assertion>
+    </section>
+
+    <section id="using_invoker" title="Using an invoker" level="2">
+        <assertion id="a">
+            <text>Calling |invoke()| invokes the target method on given |instance| of the target bean, passing given |arguments|, and propagates back the return value or thrown exception.</text>
+        </assertion>
+        <assertion id="b">
+            <text>The |instance| and |arguments| may be contextual or non-contextual objects.</text>
+        </assertion>
+        <assertion id="c">
+            <text>A single invoker instance may be used to perform multiple, possibly concurrent, invocations of the target method, possibly on different instances of the target bean, possibly with different arguments.</text>
+        </assertion>
+        <assertion id="d">
+            <text>Whenever a direct invocation of a method on an object is a business method invocation, an indirect invocation of that method on that object through an invoker is also a business method invocation.</text>
+        </assertion>
+    </section>
+
+    <section id="behavior_of_invoke" title="Behavior of invoke()" level="3">
+        <assertion id="a">
+            <text>If the target method is |static|, the |instance| is ignored; by convention, it should be |null|.</text>
+        </assertion>
+        <assertion id="b">
+            <text>If the target method is not |static| and |instance| is |null|, a |RuntimeException| is thrown.</text>
+        </assertion>
+        <assertion id="c">
+            <text>If the target method is not |static| and the |instance| is not permissible for the target method, a |RuntimeException| is thrown.</text>
+        </assertion>
+        <group>
+            <text>The |instance| is permissible for the target method when:</text>
+            <assertion id="da">
+                <text>the |instance| is a contextual reference for the target bean and the bean type that declares the target method</text>
+            </assertion>
+            <assertion id="db">
+                <text>the |instance| is a contextual reference for the target bean (regardless of the bean type) and the target method is declared on an interface that is present in the set of bean types of the target bean</text>
+            </assertion>
+            <assertion id="dc">
+                <text>the |instance| is a non-contextual object and the class of the |instance| declares the target method or inherits it from a supertype</text>
+            </assertion>
+        </group>
+        <assertion id="e">
+            <text>Correspondence between given |arguments| and declared parameters of the target method is positional: the Nth element of the |arguments| array is passed as the Nth argument to the target method.</text>
+        </assertion>
+        <assertion id="f">
+            <text>If the target method is a variable arity method, the last element of the |arguments| array corresponds to the variable arity parameter (and therefore must be an array).</text>
+        </assertion>
+        <assertion id="g">
+            <text>When passing an argument to the method, the applicable method invocation conversion is performed.</text>
+        </assertion>
+        <assertion id="h">
+            <text>If the target method declares no parameter, |arguments| are ignored.</text>
+        </assertion>
+        <assertion id="i">
+            <text>If the target method declares any parameter and |arguments| is |null|, |RuntimeException| is thrown.</text>
+        </assertion>
+        <assertion id="j">
+            <text>If the |arguments| array has fewer elements than the number of parameters of the target method, |RuntimeException| is thrown.</text>
+        </assertion>
+        <assertion id="k">
+            <text>If the |arguments| array has more elements than the number of parameters of the target method, the excess elements are ignored.</text>
+        </assertion>
+        <assertion id="l">
+            <text>If a method invocation conversion does not exist from the class of some of the |arguments| (or from the null type if the argument is |null|) to the declared type of the corresponding parameter of the target method, |RuntimeException| is thrown.</text>
+        </assertion>
+        <assertion id="m">
+            <text>If the target method returns normally, its return value is returned (after boxing conversion if the target method's return type is a primitive type), unless the target method is declared |void|, in which case |null| is returned.</text>
+        </assertion>
+        <assertion id="n">
+            <text>If the target method throws an exception, it is rethrown directly.</text>
+        </assertion>
+    </section>
+
+    <section id="using_invoker_builder" title="Using InvokerBuilder" level="2">
+        <assertion id="a">
+            <text>
+                |InvokerBuilder| can be obtained in build compatible extensions from |InvokerFactory.createInvoker()|.
+                An |InvokerFactory| may be declared as a parameter of |@Registration| extension methods.
+
+                The target bean of the created invoker is the bean represented by the |BeanInfo| object passed to |createInvoker()|.
+                The target method of the created invoker is the method represented by the |MethodInfo| object passed to |createInvoker()|.
+
+                Calling |InvokerBuilder.build()| produces an opaque token (|InvokerInfo|) that can be passed as a parameter to a |SyntheticBeanBuilder| or |SyntheticObserverBuilder| and materializes as an |Invoker| at application runtime.
+            </text>
+            <note>Basic test of method invokers.</note>
+        </assertion>
+    </section>
+
+    <section id="configuring_lookups" title="Configuring lookups" level="3">
+        <assertion id="a">
+            <text>The |InvokerBuilder| allows specifying that the |instance| or any of the |arguments| passed to |Invoker.invoke()| should be ignored and a value should be looked up from the CDI container instead.</text>
+        </assertion>
+        <group>
+            <text>When |withInstanceLookup()| is called on an invoker builder and the target method is not |static|, the |invoke()| method of the built invoker shall ignore the |instance| argument and instead obtain and use a contextual reference for the target bean and the bean type that declares the target method.</text>
+            <assertion id="ba">
+                <text>Test with target bean that is |@ApplicationScoped|</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Test with target bean that is |@Dependent|</text>
+            </assertion>
+        </group>
+        <assertion id="c">
+            <text>Calling |withInstanceLookup()| on an invoker builder for a |static| target method has no effect.</text>
+        </assertion>
+        <group>
+            <text>
+                When |withArgumentLookup()| is called on an invoker builder, the |invoke()| method of the built invoker shall ignore the given element of the |arguments| array and instead:
+
+                1. identify a bean according to the rules of typesafe resolution, as defined in `Performing typesafe resolution`, where the required type is the declared type of the corresponding parameter of the target method and the required qualifiers are all qualifiers present on the parameter, resolving ambiguities according to `Unsatisfied and ambiguous dependencies`;
+                2. obtain and use a contextual reference for the identified bean and the declared type of the parameter.
+            </text>
+            <assertion id="da">
+                <text>Test with parameter that resolves to an |@ApplicationScoped| bean</text>
+            </assertion>
+            <assertion id="db">
+                <text>Test with parameter that resolves to a |@Dependent| bean</text>
+            </assertion>
+            <assertion id="dc">
+                <text>Test with parameter that resolves to an |Instance| bean</text>
+            </assertion>
+            <assertion id="dd">
+                <text>Test with parameter that resolves to an |Event| bean</text>
+            </assertion>
+            <assertion id="de">
+                <text>Test with parameter that resolves to a |BeanManager| bean</text>
+            </assertion>
+        </group>
+        <group>
+            <text>Calling |withArgumentLookup()| with |position| less than 0 or greater than or equal to the number of parameters of the target method leads to an |IllegalArgumentException|.</text>
+            <assertion id="ea">
+                <text>Test for position less than zero</text>
+            </assertion>
+            <assertion id="eb">
+                <text>Test for position greater than the number of parameters</text>
+            </assertion>
+            <assertion id="ec">
+                <text>Test for position equal to the number of parameters</text>
+            </assertion>
+        </group>
+        <assertion id="f">
+            <text>
+                Configuring a lookup using |withInstanceLookup()| or |withArgumentLookup()| does not relax the requirements defined in `Behavior of |invoke()|`.
+                Notably, the |arguments| array must still have an element for each argument, regardless of whether a lookup was configured for it.
+                This means that for a target method with N parameters, the |arguments| array must always have at least N elements.
+            </text>
+        </assertion>
+        <group>
+            <text>
+                During deployment validation, implementations are required to identify all looked up beans for all built invokers, as described above.
+                It is a deployment problem if an attempt to identify a looked up bean results in an unsatisfied dependency or an ambiguous dependency that is not resolvable.
+            </text>
+            <assertion id="ga">
+                <text>Test for unsatisfied lookup</text>
+            </assertion>
+            <assertion id="gb">
+                <text>Test for unresolvable ambiguous lookup</text>
+            </assertion>
+        </group>
+        <assertion id="h" testable="false">
+            <text>Implementations are permitted to remember the identified beans and not repeat the resolution process for each invocation of |Invoker.invoke()|.</text>
+        </assertion>
+        <assertion id="i">
+            <text>All instances of |@Dependent| looked up beans obtained during |Invoker.invoke()| are destroyed before the |invoke()| method returns or throws.</text>
+        </assertion>
+        <assertion id="j" testable="false">
+            <text>The order in which the instances of |@Dependent| looked up beans are destroyed is not specified.</text>
+        </assertion>
+        <assertion id="k" testable="false">
+            <text>The order in which instances of looked up beans are obtained during |Invoker.invoke()| in not specified.</text>
+        </assertion>
+    </section>
+
+    <section id="method_invokers_full" title="Method invokers in CDI Full" level="1">
+    </section>
+
+    <section id="building_invoker_full" title="Building an invoker in CDI Full" level="2">
+        <assertion id="a">
+            <text>When the target bean is a decorator, attempting to build an invoker leads to a deployment problem.</text>
+        </assertion>
+    </section>
+
+    <section id="using_invoker_builder_full" title="Using InvokerBuilder in CDI Full" level="2">
+        <assertion id="a">
+            <text>
+                |InvokerBuilder| can be obtained in portable extensions from |ProcessManagedBean.createInvoker()|.
+
+                The target bean of the created invoker is the bean for which the |ProcessManagedBean| event was fired.
+                The target method of the created invoker is the method represented by the |AnnotatedMethod| object passed to |createInvoker()|.
+
+                Calling |InvokerBuilder.build()| produces an |Invoker| which should be stored for usage at application runtime.
+            </text>
+        </assertion>
+    </section>
+
+    <!-- Core CDI/CDI Lite/Build compatible extensions -->
+    <section id="beancontainer" title="The BeanContainer object" level="2">
+        <group>
+            <text>The container provides a built-in bean with bean type |BeanContainer|, scope |@Dependent| and qualifier |@Default|.</text>
+
+            <assertion id="aa">
+                <text>Test the bean type.</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>Test the scope.</text>
+            </assertion>
+
+            <assertion id="ac">
+                <text>Test the qualifier.</text>
+            </assertion>
+        </group>
+    </section>
+
+    <section id="build_spi" title="Build compatible extensions" level="2">
+    </section>
+
+    <section id="bce_interface" title="The BuildCompatibleExtension interface" level="3">
+        <group>
+            <text>A build compatible extension is a service provider of the jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension interface, declared in META-INF/services.</text>
+        </group>
+        <assertion id="a">
+            <text>The invocation order for extension methods may be controlled using the @Priority annotation. If an extension
+            method does not have the @Priority annotation, the default priority jakarta.interceptor.Interceptor.Priority.APPLICATION + 500 is assumed.
+            If two extension methods have equal priority, the ordering between them is undefined. Note that priority only affects
+                order of extension methods in a single phase.</text>
+        </assertion>
+        <assertion id="x" testable="false">
+            <text>At deployment time, CDI container does not have to be running, so calling CDI.current() from an extension
+                method, or attempting to access a running CDI container in any other way, results in non-portable behavior.</text>
+        </assertion>
+    </section>
+
+    <section id="discovery_phase" title="The @Discovery phase" level="3">
+        <assertion id="a">
+            <text>Test that discovery phase changes are seen</text>
+        </assertion>
+        <assertion id="b">
+            <text>Test that classes with bean defining annotations not added to scan are not seen in non-bean archives</text>
+        </assertion>
+        <assertion id="c">
+            <text>Test that classes added to scan are seen in non-bean archives</text>
+        </assertion>
+    </section>
+    <section id="enhancement_phase" title="The @Enhancement phase" level="3">
+        <group>
+            <text>Extension methods annotated @Enhancement must declare exactly one parameter of one of the following types:
+                ClassConfig or ClassInfo
+                MethodConfig or MethodInfo
+                FieldConfig or FieldInfo
+            </text>
+            <assertion id="aa">
+                <text>Test that a method with none of these parameters fails deployment.</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>Test that a method with more than one of these parameters fails deployment.</text>
+            </assertion>
+
+            <assertion id="ac">
+                <text>Test that a method with more than one of these parameters fails deployment.</text>
+            </assertion>
+        </group>
+        <assertion id="b">
+            <text>Test that enhancment phase annotation changes are seen</text>
+        </assertion>
+        <assertion id="c">
+            <text>When an extension method declares a parameter of type ClassConfig or ClassInfo, it will be called for each
+                discovered class matching the criteria defined on the @Enhancement annotation</text>
+        </assertion>
+    </section>
+    <section id="registration_phase" title="The @Registration phase" level="3">
+        <group>
+            <text>Extension methods annotated @Registration must declare exactly one parameter of one of the following types:
+                BeanInfo
+                InterceptorInfo
+                ObserverInfo
+            </text>
+            <assertion id="aa">
+                <text>Test that a method with none of these parameters fails deployment.</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>Test that a method with more than one of these parameters fails deployment.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>When an extension method declares a parameter of type BeanInfo, it will be called for each bean whose set
+                    of bean types matches the criteria defined on the @Registration annotation.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>When an extension method declares a parameter of type InterceptorInfo, it will be called for each
+                    interceptor whose set of bean types matches the criteria defined on the @Registration annotation.</text>
+            </assertion>
+            <assertion id="ae">
+                <text>When an extension method declares a parameter of type ObserverInfo, it will be called for each observer
+                    whose observed event type matches the criteria defined on the @Registration annotation.</text>
+            </assertion>
+        </group>
+
+        <assertion id="b">
+            <text>Test that enhancment phase annotation changes are seen</text>
+        </assertion>
+    </section>
+    <section id="synthesis_phase" title="The @Synthesis phase" level="3">
+        <assertion id="a">
+            <text>Test that synthesis phase beans are availalble for use by runtime</text>
+        </assertion>
+        <assertion id="b">
+            <text>Test that synthesis observers are notified of fired events</text>
+        </assertion>
+    </section>
+    <section id="validation_phase" title="The @Validation phase" level="3">
+        <assertion id="a">
+            <text>Test that validation phase controls test outcome</text>
+        </assertion>
+    </section>
+
+<!-- Core CDI/CDI Lite/Packaging and deployment -->
+    <section id="packaging_and_deployment" title="Packaging and deployment" level="2">
     </section>
 
     <section id="spi" title="Portable extensions" level="1">
@@ -5950,6 +6435,10 @@
 
         <assertion id="ga">
             <text>An instance of |ObserverMethod| exists for every observer method of every enabled bean.</text>
+        </assertion>
+
+        <assertion id="h">
+            <text>|getDeclaringBean()| returns the Bean object that declares the observer method. Return value is undefined for synthetic observers.</text>
         </assertion>
     </section>
 
@@ -6583,6 +7072,14 @@
         <assertion id="a">
             <text>The method |BeanManager.getContext()| retrieves an active context object associated with the a given scope, as defined in Section 6.5.1, "The
                 active context object for a scope".
+            </text>
+        </assertion>
+    </section>
+
+    <section id="bm_obtain_contexts" title="Obtaining Contexts for a scope" level="3">
+        <assertion id="a">
+            <text>The method `BeanContainer.getContexts()` retrieves all context objects, active and inactive,
+                associated with the given scope, as defined in Section 2.5, "Scopes and contexts".
             </text>
         </assertion>
     </section>
@@ -7242,6 +7739,14 @@
                 interfaces.
             </text>
         </assertion>
+
+        <assertion id="g">
+            <text>As these lifecycle events are fired, the container must also execute build compatible extensions. Which phase
+                of build compatible extensions should be executed when is indicated in the description of the corresponding
+                lifecycle events. Build compatible extensions annotated @SkipIfPortableExtensionPresent must be ignored in
+                CDI Full, if given portable extension is present.
+            </text>
+        </assertion>
     </section>
 
     <section id="before_bean_discovery" title="BeforeBeanDiscovery event" level="3">
@@ -7542,6 +8047,9 @@
             </assertion>
             <assertion id="g">
                 <text>Set a callback to destroy a bean instance with destroyWith() or disposeWith() method.</text>
+            </assertion>
+            <assertion id="h">
+                <text>Set the priority of the bean, if it is an alternative, with priority() method.</text>
             </assertion>
         </group>
         <assertion id="h">
@@ -8523,7 +9031,7 @@
                 |bean-discovery-mode| of |all|, or with no version number, or that is an empty file.
             </text>
             <assertion id="ba">
-                <text>Test an archive which contains a |beans.xml| file with a version number of 1.1, with the |bean-discovery-mode| of |all|.</text>
+                <text>Test an archive which contains a |beans.xml| file with a version number of 1.1 (or later), with the |bean-discovery-mode| of |all|.</text>
             </assertion>
             <assertion id="bb">
                 <text>Test an archive which contains a |beans.xml| file with no version number.</text>
