@@ -125,7 +125,7 @@
          <groupId>jakarta.enterprise</groupId>
          <artifactId>cdi-tck-core-impl</artifactId>
          <version>${cdi.tck.version}</version>
-         <classifier>sigtest-jdk11</classifier>
+         <classifier>sigtest-jdk17</classifier>
          <type>sig</type>
          <optional>true</optional>
       </dependency>
