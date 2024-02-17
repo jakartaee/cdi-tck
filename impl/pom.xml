@@ -147,7 +147,7 @@
                                 <artifact>
                                     <file>${basedir}/src/main/resources/cdi-api-jdk11.sig</file>
                                     <type>sig</type>
-                                    <classifier>sigtest-jdk11</classifier>
+                                    <classifier>sigtest-jdk17</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
