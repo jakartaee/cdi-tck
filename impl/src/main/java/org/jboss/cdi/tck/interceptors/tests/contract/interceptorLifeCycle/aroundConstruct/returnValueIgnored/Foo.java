@@ -21,12 +21,11 @@ public class Foo {
 
     private String name;
 
-    public Foo(){
+    public Foo() {
         this.name = "default";
     }
 
-
-    public Foo(String name){
+    public Foo(String name) {
         this.name = name;
     }
 

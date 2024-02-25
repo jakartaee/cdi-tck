@@ -24,6 +24,7 @@ import jakarta.jms.MessageListener;
 import jakarta.jms.TextMessage;
 
 import org.jboss.cdi.tck.util.SimpleLogger;
+
 public class AbstractMessageListener implements MessageListener {
 
     public static AtomicInteger processedMessages = new AtomicInteger(0);
@@ -61,7 +62,5 @@ public class AbstractMessageListener implements MessageListener {
     public void postConstruct() {
         initialized.set(true);
     }
-
-
 
 }

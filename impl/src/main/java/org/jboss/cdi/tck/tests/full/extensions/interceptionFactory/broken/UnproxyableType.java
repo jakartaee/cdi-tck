@@ -18,7 +18,7 @@ import jakarta.enterprise.inject.Vetoed;
 @Vetoed
 public class UnproxyableType {
 
-    public final void unproxyable(String name){
+    public final void unproxyable(String name) {
 
     }
 }

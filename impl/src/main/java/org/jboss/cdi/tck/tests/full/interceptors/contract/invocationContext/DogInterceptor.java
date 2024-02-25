@@ -13,11 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.full.interceptors.contract.invocationContext;
 
-import jakarta.interceptor.AroundInvoke;
-import jakarta.interceptor.InvocationContext;
-
 import java.lang.annotation.Annotation;
 import java.util.Set;
+
+import jakarta.interceptor.AroundInvoke;
+import jakarta.interceptor.InvocationContext;
 
 public class DogInterceptor {
     private static Set<Annotation> allBindings;

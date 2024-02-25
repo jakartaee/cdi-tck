@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.annotated;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public interface Animal {
 

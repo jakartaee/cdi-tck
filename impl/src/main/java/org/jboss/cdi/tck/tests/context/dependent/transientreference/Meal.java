@@ -13,7 +13,6 @@
  */
 package org.jboss.cdi.tck.tests.context.dependent.transientreference;
 
-
 public class Meal {
 
     private String name;

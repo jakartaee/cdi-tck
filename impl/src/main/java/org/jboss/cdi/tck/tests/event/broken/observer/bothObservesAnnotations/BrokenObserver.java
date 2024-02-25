@@ -20,7 +20,7 @@ import jakarta.enterprise.event.ObservesAsync;
 @Dependent
 public class BrokenObserver {
 
-    public void observe(@Observes @ObservesAsync Integer test){
+    public void observe(@Observes @ObservesAsync Integer test) {
 
     }
 }

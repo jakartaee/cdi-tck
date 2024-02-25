@@ -17,6 +17,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+import javax.naming.InitialContext;
+
 import jakarta.annotation.Resource;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.ejb.EJB;
@@ -24,7 +26,6 @@ import jakarta.ejb.SessionContext;
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.TransactionPhase;
-import javax.naming.InitialContext;
 import jakarta.transaction.TransactionSynchronizationRegistry;
 
 import org.jboss.cdi.tck.util.ActionSequence;
@@ -78,7 +79,7 @@ public class FooObserver implements ObserverLocal {
     }
 
     private void assertClientSecurityContext(TransactionPhase phase) {
-        
+
         assertTrue(sc.isCallerInRole("printer"));
 
         toner.spill();

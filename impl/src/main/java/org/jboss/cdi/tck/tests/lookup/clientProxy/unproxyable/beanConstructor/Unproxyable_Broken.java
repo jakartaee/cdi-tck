@@ -20,8 +20,8 @@ import jakarta.inject.Inject;
 @RequestScoped
 public class Unproxyable_Broken {
 
-	@Inject
-	public Unproxyable_Broken(BeanManager beanManager) {
+    @Inject
+    public Unproxyable_Broken(BeanManager beanManager) {
     }
 
 }

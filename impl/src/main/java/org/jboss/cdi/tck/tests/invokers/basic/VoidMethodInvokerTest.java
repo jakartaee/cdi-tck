@@ -15,6 +15,10 @@
  */
 package org.jboss.cdi.tck.tests.invokers.basic;
 
+import static org.testng.Assert.assertNull;
+
+import java.util.Set;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
@@ -23,6 +27,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.Invoker;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -34,10 +39,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Set;
-
-import static org.testng.Assert.assertNull;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class VoidMethodInvokerTest extends AbstractTest {
@@ -67,11 +68,11 @@ public class VoidMethodInvokerTest extends AbstractTest {
     @SpecAssertion(section = Sections.BEHAVIOR_OF_INVOKE, id = "m")
     public void test(MyService service, InvokerHolder invokers) throws Exception {
         Invoker<MyService, Integer> hello = invokers.get("hello");
-        assertNull(hello.invoke(service, new Object[]{1}));
-        assertNull(hello.invoke(new MyService(), new Object[]{2}));
+        assertNull(hello.invoke(service, new Object[] { 1 }));
+        assertNull(hello.invoke(new MyService(), new Object[] { 2 }));
 
         Invoker<MyService, Float> helloStatic = invokers.get("helloStatic");
-        assertNull(helloStatic.invoke(null, new Object[]{3}));
+        assertNull(helloStatic.invoke(null, new Object[] { 3 }));
     }
 
     @ApplicationScoped

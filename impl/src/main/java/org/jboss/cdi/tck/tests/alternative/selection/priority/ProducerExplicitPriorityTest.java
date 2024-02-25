@@ -18,6 +18,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -71,10 +72,9 @@ public class ProducerExplicitPriorityTest extends AbstractTest {
     @ProducedByField
     Delta deltaFieldProducer;
 
-
     @Test
-    @SpecAssertions({@SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ca"),
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "cb")})
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ca"),
+            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "cb") })
     public void testAlternativeProducerWithPriority() {
         assertNotNull(alphaMethodProducer);
         assertNotNull(alphaFieldProducer);

@@ -26,7 +26,6 @@ import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.cdi.tck.util.ForwardingAnnotatedType;
 
-
 public class InterceptorExtension implements Extension {
 
     public void registerAdditionalLoginAnnotatedType(@Observes BeforeBeanDiscovery event, BeanManager manager) {

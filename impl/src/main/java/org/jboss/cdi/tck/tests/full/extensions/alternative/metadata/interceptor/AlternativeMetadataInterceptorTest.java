@@ -31,10 +31,9 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-
 /**
  * This test class contains tests for adding meta data using extensions.
- * 
+ *
  * @author Matej Briskar
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -44,7 +43,8 @@ public class AlternativeMetadataInterceptorTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(AlternativeMetadataInterceptorTest.class)
-                .withClasses(InterceptorExtension.class, Login.class, LoginInterceptor.class, LoginInterceptorBinding.class, Secured.class)
+                .withClasses(InterceptorExtension.class, Login.class, LoginInterceptor.class, LoginInterceptorBinding.class,
+                        Secured.class)
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL).interceptors(LoginInterceptor.class))
                 .withExtension(InterceptorExtension.class).build();
     }
@@ -65,6 +65,4 @@ public class AlternativeMetadataInterceptorTest extends AbstractTest {
         assertEquals(securedLogin.login(), "intercepted");
     }
 
-
 }
-

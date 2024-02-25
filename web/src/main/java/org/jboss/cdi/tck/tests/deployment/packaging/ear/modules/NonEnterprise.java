@@ -28,7 +28,7 @@ import jakarta.inject.Qualifier;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Qualifier
 @Target({ TYPE, METHOD, PARAMETER, FIELD })

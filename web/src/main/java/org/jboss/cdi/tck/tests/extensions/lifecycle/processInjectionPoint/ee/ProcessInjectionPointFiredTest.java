@@ -13,22 +13,29 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.ee;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_POINT_EE;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget.Farm;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Alpha;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Bravo;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.BravoObserver;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Charlie;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Delta;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.InjectingBean;
-import org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget.Farm;
 import org.jboss.cdi.tck.util.HierarchyDiscovery;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -37,12 +44,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_POINT_EE;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 /**
  * This test was originally part of Weld test suite.
@@ -56,7 +57,8 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ProcessInjectionPointFiredTest.class)
-                .withClasses(Alpha.class, Bravo.class, BravoObserver.class, Charlie.class, Delta.class, InjectingBean.class, Farm.class)
+                .withClasses(Alpha.class, Bravo.class, BravoObserver.class, Charlie.class, Delta.class, InjectingBean.class,
+                        Farm.class)
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml")
                 .withExtension(VerifyingExtension.class).build();
@@ -64,8 +66,6 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
 
     @Inject
     private VerifyingExtension extension;
-
-
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_POINT_EE, id = "a") })
@@ -80,7 +80,6 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
         assertNotNull(listenerIp);
         verifyType(listenerIp, Charlie.class);
     }
-
 
     private static void verifyType(InjectionPoint ip, Class<?> rawType, Class<?>... typeParameters) {
         assertEquals(getRawType(ip.getType()), rawType);

@@ -17,7 +17,7 @@ public class Account {
 
     private final int balance = 1000;
 
-    public int withdraw(int withdrawal){
-        return  balance - withdrawal;
+    public int withdraw(int withdrawal) {
+        return balance - withdrawal;
     }
 }

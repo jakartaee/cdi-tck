@@ -20,7 +20,7 @@ public class Helicopter {
     @Inject
     Engine engine;
 
-    public Engine getEngine(){
+    public Engine getEngine() {
         return engine;
     }
 }

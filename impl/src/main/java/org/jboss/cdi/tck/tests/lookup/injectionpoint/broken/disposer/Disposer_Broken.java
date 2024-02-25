@@ -30,5 +30,4 @@ public class Disposer_Broken {
     public void disposeGreeting(@Disposes @Nice String greeting, InjectionPoint ip) {
     }
 
-
 }

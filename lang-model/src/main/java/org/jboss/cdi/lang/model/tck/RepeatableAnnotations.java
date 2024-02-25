@@ -13,10 +13,6 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
-import jakarta.enterprise.lang.model.AnnotationInfo;
-import jakarta.enterprise.lang.model.declarations.ClassInfo;
-
-import java.lang.annotation.Annotation;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
@@ -24,6 +20,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import jakarta.enterprise.lang.model.AnnotationInfo;
+import jakarta.enterprise.lang.model.declarations.ClassInfo;
 
 @Inherited
 @Repeatable(AnnRepeatableContainer.class)
@@ -89,7 +88,8 @@ public class RepeatableAnnotations extends SuperClassWithRepeatableAnnotation {
         verifyInheritedRepeatableAnnotations(inheritedClass);
         verifyInheritedRepeatableAnnotations(inheritedClass.superClassDeclaration());
         verifyInheritedRepeatableAnnotationsSuperSuperClass(inheritedClass.superClassDeclaration().superClassDeclaration());
-        verifyInheritedRepeatableAnnotationsSuperSuperSuperClass(inheritedClass.superClassDeclaration().superClassDeclaration().superClassDeclaration());
+        verifyInheritedRepeatableAnnotationsSuperSuperSuperClass(
+                inheritedClass.superClassDeclaration().superClassDeclaration().superClassDeclaration());
 
         verifySingleRepeatableAnnotation(LangModelUtils.classOfField(clazz, "singleRepeatableAnnotation"));
 
@@ -116,9 +116,12 @@ public class RepeatableAnnotations extends SuperClassWithRepeatableAnnotation {
         assert clazz.annotation(AnnRepeatableContainer.class) != null;
         assert clazz.annotation(AnnRepeatableContainer.class).value().isArray();
         assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().size() == 3;
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(0).asNestedAnnotation().value().asString().equals("qux");
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(1).asNestedAnnotation().value().asString().equals("quux");
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(2).asNestedAnnotation().value().asString().equals("quuz");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(0).asNestedAnnotation().value().asString()
+                .equals("qux");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(1).asNestedAnnotation().value().asString()
+                .equals("quux");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(2).asNestedAnnotation().value().asString()
+                .equals("quuz");
 
         assert clazz.annotation(AnnRepeatable.class) != null;
         assert clazz.annotation(AnnRepeatable.class).value().isString();
@@ -153,8 +156,10 @@ public class RepeatableAnnotations extends SuperClassWithRepeatableAnnotation {
         assert clazz.annotation(AnnRepeatableContainer.class) != null;
         assert clazz.annotation(AnnRepeatableContainer.class).value().isArray();
         assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().size() == 2;
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(0).asNestedAnnotation().value().asString().equals("foo");
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(1).asNestedAnnotation().value().asString().equals("bar");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(0).asNestedAnnotation().value().asString()
+                .equals("foo");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(1).asNestedAnnotation().value().asString()
+                .equals("bar");
 
         assert clazz.annotation(AnnRepeatable.class) != null;
         assert clazz.annotation(AnnRepeatable.class).value().isString();
@@ -187,8 +192,10 @@ public class RepeatableAnnotations extends SuperClassWithRepeatableAnnotation {
         assert clazz.annotation(AnnRepeatableContainer.class) != null;
         assert clazz.annotation(AnnRepeatableContainer.class).value().isArray();
         assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().size() == 2;
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(0).asNestedAnnotation().value().asString().equals("foo");
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(1).asNestedAnnotation().value().asString().equals("bar");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(0).asNestedAnnotation().value().asString()
+                .equals("foo");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(1).asNestedAnnotation().value().asString()
+                .equals("bar");
 
         assert clazz.annotation(AnnRepeatable.class) == null;
 
@@ -214,7 +221,8 @@ public class RepeatableAnnotations extends SuperClassWithRepeatableAnnotation {
         assert !clazz.hasAnnotation(AnnRepeatableContainer.class);
         assert clazz.hasAnnotation(AnnRepeatable.class);
 
-        assert !clazz.hasAnnotation(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnRepeatableContainer"));
+        assert !clazz
+                .hasAnnotation(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnRepeatableContainer"));
         assert clazz.hasAnnotation(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnRepeatable"));
 
         assert clazz.annotation(AnnRepeatableContainer.class) == null;
@@ -246,8 +254,10 @@ public class RepeatableAnnotations extends SuperClassWithRepeatableAnnotation {
         assert clazz.annotation(AnnRepeatableContainer.class) != null;
         assert clazz.annotation(AnnRepeatableContainer.class).value().isArray();
         assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().size() == 2;
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(0).asNestedAnnotation().value().asString().equals("b");
-        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(1).asNestedAnnotation().value().asString().equals("c");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(0).asNestedAnnotation().value().asString()
+                .equals("b");
+        assert clazz.annotation(AnnRepeatableContainer.class).value().asArray().get(1).asNestedAnnotation().value().asString()
+                .equals("c");
 
         assert clazz.annotation(AnnRepeatable.class) != null;
         assert clazz.annotation(AnnRepeatable.class).value().isString();

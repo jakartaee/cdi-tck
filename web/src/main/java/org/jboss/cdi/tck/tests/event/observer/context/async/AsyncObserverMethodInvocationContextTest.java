@@ -72,7 +72,8 @@ public class AsyncObserverMethodInvocationContextTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "aa"), @SpecAssertion(section = REQUEST_CONTEXT, id = "da") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_INVOCATION_CONTEXT, id = "aa"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "da") })
     public void testAsyncObserverIsCalledInNewRequestContext() throws Exception {
         counter.increment();
         BlockingQueue<String> queue = new LinkedBlockingQueue<>();

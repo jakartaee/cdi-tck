@@ -13,7 +13,6 @@
  */
 package org.jboss.cdi.tck.tests.full.event.observer.priority;
 
-
 public class Moonrise extends MoonActivity {
 
 }

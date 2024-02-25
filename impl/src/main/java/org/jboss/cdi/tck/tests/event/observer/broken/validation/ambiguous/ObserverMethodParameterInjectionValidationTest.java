@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
 
 /**
  * Validates that injection points on observer methods are validated.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -44,7 +44,8 @@ public class ObserverMethodParameterInjectionValidationTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"), @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "af") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"),
+            @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "af") })
     public void test() {
     }
 }

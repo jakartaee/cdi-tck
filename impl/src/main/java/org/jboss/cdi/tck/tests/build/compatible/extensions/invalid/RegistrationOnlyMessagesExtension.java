@@ -19,7 +19,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 
 public class RegistrationOnlyMessagesExtension implements BuildCompatibleExtension {
 
-    @Registration(types = {SomeBean.class})
+    @Registration(types = { SomeBean.class })
     public void register(Messages m) {
         // no-op, deployment should fail
     }

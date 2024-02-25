@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 
 /**
  * Validates that injection points on disposer methods are validated.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")

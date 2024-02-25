@@ -14,15 +14,15 @@
 
 package org.jboss.cdi.tck.tests.full.extensions.beanManager;
 
+import java.lang.annotation.Annotation;
+
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.context.spi.Contextual;
 import jakarta.enterprise.context.spi.CreationalContext;
 
-import java.lang.annotation.Annotation;
-
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class DummyContext implements Context {
 

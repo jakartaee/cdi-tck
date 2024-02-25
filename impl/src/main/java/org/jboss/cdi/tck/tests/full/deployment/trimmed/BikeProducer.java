@@ -18,7 +18,7 @@ import jakarta.enterprise.inject.Produces;
 public class BikeProducer {
 
     @Produces
-    public Bike createBike(){
+    public Bike createBike() {
         return new Bike();
     }
 }

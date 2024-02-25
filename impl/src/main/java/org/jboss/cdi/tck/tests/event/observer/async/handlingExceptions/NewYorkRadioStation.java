@@ -21,10 +21,10 @@ import jakarta.enterprise.event.ObservesAsync;
 
 @Dependent
 public class NewYorkRadioStation {
-    
+
     public static AtomicBoolean observed = new AtomicBoolean(false);
     public static AtomicReference<Exception> exception;
-    
+
     public void observe(@ObservesAsync RadioMessage radioMessage) throws Exception {
         observed.set(true);
         // throw exception only on certain condition
@@ -33,5 +33,5 @@ public class NewYorkRadioStation {
             throw exception.get();
         }
     }
-    
+
 }

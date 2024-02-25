@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.se.context.activation.interceptor;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.BeforeDestroyed;
 import jakarta.enterprise.context.Destroyed;

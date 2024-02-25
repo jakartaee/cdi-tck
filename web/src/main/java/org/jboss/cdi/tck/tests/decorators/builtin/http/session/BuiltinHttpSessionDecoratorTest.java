@@ -20,9 +20,14 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
+
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.inject.Inject;
 import jakarta.servlet.http.HttpSession;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.full.decorators.AbstractDecoratorTest;
@@ -32,10 +37,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Martin Kouba
@@ -50,7 +51,8 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinHttpSessionDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(HttpSessionDecorator1.class, HttpSessionDecorator2.class)).build();
+                        new BeansXml().decorators(HttpSessionDecorator1.class, HttpSessionDecorator2.class))
+                .build();
     }
 
     @Inject
@@ -60,7 +62,8 @@ public class BuiltinHttpSessionDecoratorTest extends AbstractDecoratorTest {
     HttpSessionObserver httpSessionObserver;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN_EE, id = "acj"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN_EE, id = "acj"),
+            @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
     public void testDecoratorIsResolved() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(HttpSession.class));
         assertEquals(2, decorators.size());

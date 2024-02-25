@@ -152,7 +152,7 @@ public class ConfigurationImpl implements Configuration {
 
     @Override
     public void setTestTimeoutFactor(int timeoutFactor) {
-        if(timeoutFactor <= 0) {
+        if (timeoutFactor <= 0) {
             throw new IllegalArgumentException("Test timeout factor must be greater than zero");
         }
         this.testTimeoutFactor = timeoutFactor;

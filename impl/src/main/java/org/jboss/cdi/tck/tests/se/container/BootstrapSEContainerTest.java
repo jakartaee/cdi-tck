@@ -64,7 +64,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"), @SpecAssertion(section = SE_BOOTSTRAP, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "a"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "c"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "do"),
             @SpecAssertion(section = SE_CONTAINER, id = "cb") })
@@ -87,7 +88,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"), @SpecAssertion(section = SE_BOOTSTRAP, id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "c"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "da"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "do"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "e") })
@@ -108,7 +110,8 @@ public class BootstrapSEContainerTest extends Arquillian {
             @SpecAssertion(section = SE_CONTAINER, id = "a"), @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
     public void testSyntheticArchive() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
-        try (SeContainer seContainer = seContainerInitializer.disableDiscovery().addBeanClasses(Baz.class, Qux.class, BazObserver.class).initialize()) {
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addBeanClasses(Baz.class, Qux.class, BazObserver.class).initialize()) {
             BeanManager beanManager = seContainer.getBeanManager();
             beanManager.getEvent().select(Baz.class, Any.Literal.INSTANCE).fire(new Baz());
             beanManager.getEvent().select(Qux.class, Any.Literal.INSTANCE).fire(new Qux());
@@ -120,7 +123,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"), @SpecAssertion(section = SE_BOOTSTRAP, id = "db"),
+    @SpecAssertions({ @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "a"),
+            @SpecAssertion(section = SE_BOOTSTRAP, id = "db"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "dh"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "di"), @SpecAssertion(section = SE_BOOTSTRAP, id = "dm"),
             @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
@@ -141,7 +145,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "dc"), @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "dc"),
+            @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
     public void testAddPackageNotRecursively() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
@@ -156,7 +161,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "dc"), @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "dc"),
+            @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
     public void testAddPackageRecursively() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
@@ -171,7 +177,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "de"), @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "de"),
+            @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
     public void testAddExtensionAsExtensionInstance() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         TestExtension testExtension = new TestExtension();
@@ -192,7 +199,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "de"), @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "de"),
+            @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
     public void testAddExtensionAsClass() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
@@ -212,7 +220,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "df"), @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "df"),
+            @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
     public void testAddInterceptor() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
@@ -229,7 +238,8 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "dg"), @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "dg"),
+            @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
     public void testAddDecorator() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()

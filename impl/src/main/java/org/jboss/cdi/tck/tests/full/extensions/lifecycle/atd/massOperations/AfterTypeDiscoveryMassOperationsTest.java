@@ -19,6 +19,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.List;
+
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -34,8 +36,6 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 /**
  * Complementary test to AfterTypeDiscoveryTest using the same classes but focusing on mass operations on List
@@ -60,9 +60,9 @@ public class AfterTypeDiscoveryMassOperationsTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "a"),
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "c"),
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hb") })
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "a"),
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "c"),
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hb") })
     public void testInitialInterceptors() {
         assertTrue(extension.getInterceptors().contains(AlphaInterceptor.class));
         assertTrue(extension.getInterceptors().contains(BetaInterceptor.class));
@@ -71,8 +71,8 @@ public class AfterTypeDiscoveryMassOperationsTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "b"),
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ha") })
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "b"),
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ha") })
     public void testInitialAlternatives() {
         // frameworks might add their own alternatives, we cannot assert positions in list but rather just ordering
         assertTrue(extension.getAlternatives().size() >= 3);
@@ -100,8 +100,8 @@ public class AfterTypeDiscoveryMassOperationsTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "d"),
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hc") })
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "d"),
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hc") })
     public void testInitialDecorators() {
         // frameworks might add their own decorators, we cannot assert positions in list but rather just ordering
         assertTrue(extension.getDecorators().size() >= 3);
@@ -129,7 +129,7 @@ public class AfterTypeDiscoveryMassOperationsTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "gb") })
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "gb") })
     public void testFinalInterceptors(TransactionLogger logger) {
 
         AlphaInterceptor.reset();
@@ -141,21 +141,21 @@ public class AfterTypeDiscoveryMassOperationsTest extends AbstractTest {
         assertTrue(AlphaInterceptor.isIntercepted());
         assertTrue(BetaInterceptor.isIntercepted());
         assertTrue(GammaInterceptor.isIntercepted());
-        
+
         assertTrue(extension.containsWorks());
         assertTrue(extension.containsAllWorks());
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "gc") })
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "gc") })
     public void testFinalDecorators(TransactionLogger logger) {
         assertEquals(logger.log("ping"), "pinggamma");
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({
-        @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ga") })
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ga") })
     public void testFinalAlternatives(TransactionLogger logger) {
         // assert that proper alternative is injected
         assertEquals(logger.getAlternativeClass(), GammaAlternative.class);

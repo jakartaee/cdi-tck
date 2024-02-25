@@ -53,7 +53,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(SessionContextAsyncListenerTest.class).build();
     }
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ad") })
     public void testSessionContextActiveOnComplete() throws Exception {
         WebClient webClient = new WebClient();
@@ -66,7 +66,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
         assertFalse(id.isEmpty());
     }
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ad") })
     public void testSessionContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
@@ -75,7 +75,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
         assertTrue(results.getContent().contains("onTimeout: true"));
     }
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ad") })
     public void testSessionContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
@@ -85,7 +85,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
         assertTrue(results.getContent().contains("onError: true"));
     }
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ad") })
     public void testSessionContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();
@@ -102,7 +102,7 @@ public class SessionContextAsyncListenerTest extends AbstractTest {
     private String extractSimpleSessionBeanId(String content) {
         // See SimpleAsyncListener#getInfo()
         Matcher matcher = Pattern.compile("^(.+)(simpleSessionBeanId: )(.+)$").matcher(content);
-        if(matcher.matches()) {
+        if (matcher.matches()) {
             return matcher.group(3);
         }
         return null;

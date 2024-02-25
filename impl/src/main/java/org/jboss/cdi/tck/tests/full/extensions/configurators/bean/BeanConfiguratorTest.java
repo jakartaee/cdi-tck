@@ -71,7 +71,8 @@ public class BeanConfiguratorTest extends AbstractTest {
         CreationalContext<Skeleton> skeletonCreationalContext = getCurrentManager().createCreationalContext(skeletonBean);
         Skeleton skeleton = skeletonBean.create(skeletonCreationalContext);
 
-        Bean<Zombie> zombieBean = getUniqueBean(Zombie.class, Undead.UndeadLiteral.INSTANCE, Dangerous.DangerousLiteral.INSTANCE);
+        Bean<Zombie> zombieBean = getUniqueBean(Zombie.class, Undead.UndeadLiteral.INSTANCE,
+                Dangerous.DangerousLiteral.INSTANCE);
         CreationalContext<Zombie> zombieCreationalContext = getCurrentManager().createCreationalContext(zombieBean);
         Zombie zombie = zombieBean.create(zombieCreationalContext);
 
@@ -99,7 +100,7 @@ public class BeanConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "b"),
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "c"),
             @SpecAssertion(section = BEAN_CONFIGURATOR, id = "d"),
-            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "de")})
+            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "de") })
     public void testInjectionPoints() {
         // Dungeon should have Skeleton, Zombie, Ghost and Vampire Injected
         assertTrue(dungeon.hasAllMonters());
@@ -107,7 +108,8 @@ public class BeanConfiguratorTest extends AbstractTest {
         // skeleton has one IP only
         assertTrue(getUniqueBean(Skeleton.class, Undead.UndeadLiteral.INSTANCE).getInjectionPoints().size() == 1);
         // zombie has two different
-        assertTrue(getUniqueBean(Zombie.class, Undead.UndeadLiteral.INSTANCE, Dangerous.DangerousLiteral.INSTANCE).getInjectionPoints().size() == 2);
+        assertTrue(getUniqueBean(Zombie.class, Undead.UndeadLiteral.INSTANCE, Dangerous.DangerousLiteral.INSTANCE)
+                .getInjectionPoints().size() == 2);
         // ghost has two but one was replaces with the other, resulting in only one IP
         Set<InjectionPoint> ghostIP = getUniqueBean(Ghost.class, Undead.UndeadLiteral.INSTANCE).getInjectionPoints();
         assertTrue(ghostIP.size() == 1);
@@ -125,7 +127,7 @@ public class BeanConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = BEAN_CONFIGURATOR, id = "h")
-    public void testDefaultScopeOfAddedBean(){
+    public void testDefaultScopeOfAddedBean() {
         Bean<Bogey> bogeyBean = getUniqueBean(Bogey.class, Undead.UndeadLiteral.INSTANCE);
         assertEquals(bogeyBean.getScope(), Dependent.class);
         Bean<Werewolf> werewolfBean = getUniqueBean(Werewolf.class);
@@ -133,7 +135,8 @@ public class BeanConfiguratorTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "da"), @SpecAssertion(section = PROCESS_BEAN, id = "eca") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "da"),
+            @SpecAssertion(section = PROCESS_BEAN, id = "eca") })
     public void processSynthethicBeanEventFired(LifecycleObserver extension) {
         assertTrue(extension.isSkeletonPSBFired());
         assertTrue(extension.isVampirePSBFired());

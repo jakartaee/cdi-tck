@@ -13,10 +13,10 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.beanManager.bootstrap.unavailable.methods;
 
+import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import jakarta.enterprise.event.Observes;
 
 @Named("foo")
 public class Foo {
@@ -24,7 +24,7 @@ public class Foo {
     @Inject
     BeanManager beanManager;
 
-    private void observe(@Observes Integer i){
+    private void observe(@Observes Integer i) {
 
     }
 

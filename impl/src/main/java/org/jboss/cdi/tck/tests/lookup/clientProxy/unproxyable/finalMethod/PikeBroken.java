@@ -17,9 +17,9 @@ import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class PikeBroken {
-    
-    final void swim(){
+
+    final void swim() {
 
     }
-    
+
 }

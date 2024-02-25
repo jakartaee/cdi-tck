@@ -14,16 +14,16 @@
 package org.jboss.cdi.tck.tests.se.context.activation.interceptor;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class SecondCounter {
 
-    private AtomicInteger i= new AtomicInteger(0);
+    private AtomicInteger i = new AtomicInteger(0);
 
-    public int add10(){
+    public int add10() {
         return i.addAndGet(10);
     }
-
 
 }

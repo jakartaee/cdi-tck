@@ -28,7 +28,7 @@ import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Decorator
 @SuppressWarnings("serial")

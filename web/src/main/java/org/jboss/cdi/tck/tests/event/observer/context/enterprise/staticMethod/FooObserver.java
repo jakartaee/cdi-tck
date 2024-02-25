@@ -17,12 +17,13 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+import javax.naming.InitialContext;
+
 import jakarta.annotation.security.DeclareRoles;
 import jakarta.ejb.EJBContext;
 import jakarta.ejb.Stateless;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.TransactionPhase;
-import javax.naming.InitialContext;
 import jakarta.transaction.TransactionSynchronizationRegistry;
 
 import org.jboss.cdi.tck.util.ActionSequence;
@@ -55,7 +56,8 @@ public class FooObserver {
         printer = (Printer) InitialContext.doLookup("java:module/Printer");
     }
 
-    public static void observeBeforeCompletion(@Observes(during = TransactionPhase.BEFORE_COMPLETION) Foo foo) throws Exception {
+    public static void observeBeforeCompletion(@Observes(during = TransactionPhase.BEFORE_COMPLETION) Foo foo)
+            throws Exception {
         assertEquals(tsr.getTransactionKey(), Printer.getKey(),
                 "Before completion transactional observer method was NOT called within the context of the transaction that was about to complete.");
         assertClientSecurityContext(TransactionPhase.BEFORE_COMPLETION);

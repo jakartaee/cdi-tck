@@ -37,7 +37,6 @@ public class Boss implements Serializable {
         this.id = UUID.randomUUID().toString();
     }
 
-
     public BeanManager getBeanManager() {
         return beanManager;
     }

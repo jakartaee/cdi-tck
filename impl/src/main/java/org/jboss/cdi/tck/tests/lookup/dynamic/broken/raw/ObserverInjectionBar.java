@@ -20,7 +20,7 @@ import jakarta.enterprise.inject.Instance;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class ObserverInjectionBar {

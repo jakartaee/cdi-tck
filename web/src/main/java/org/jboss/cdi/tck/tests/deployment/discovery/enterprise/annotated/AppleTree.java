@@ -20,22 +20,21 @@ import jakarta.enterprise.inject.Produces;
 
 @Stateless
 public class AppleTree implements AppleTreeLocal {
-    
+
     @Produces
     static Apple apple = new Apple();
-    
+
     @Produces
-    public Apple produceApple(){
-        return new Apple();        
+    public Apple produceApple() {
+        return new Apple();
     }
-    
-    public void eatApple(@Disposes Apple apple){
+
+    public void eatApple(@Disposes Apple apple) {
 
     }
-    
-    public void fallDown(@Observes Apple apple){
+
+    public void fallDown(@Observes Apple apple) {
 
     }
-    
-    
+
 }

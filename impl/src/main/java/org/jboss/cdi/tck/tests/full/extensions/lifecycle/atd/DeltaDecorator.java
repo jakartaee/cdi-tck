@@ -24,6 +24,6 @@ public class DeltaDecorator implements Logger {
 
     @Override
     public String log(String string) {
-       return logger.log(string + "delta");
+        return logger.log(string + "delta");
     }
 }

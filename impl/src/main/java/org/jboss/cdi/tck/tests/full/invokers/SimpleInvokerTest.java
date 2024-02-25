@@ -15,11 +15,19 @@
  */
 package org.jboss.cdi.tck.tests.full.invokers;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
+import static org.testng.Assert.assertEquals;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.inject.spi.ProcessManagedBean;
 import jakarta.enterprise.invoke.Invoker;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -28,13 +36,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
-import static org.testng.Assert.assertEquals;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 @Test(groups = CDI_FULL)
@@ -68,7 +69,7 @@ public class SimpleInvokerTest extends AbstractTest {
     @SpecAssertion(section = Sections.METHOD_INVOKERS_FULL, id = "a")
     public void test(MyService service) throws Exception {
         Invoker<MyService, String> hello = getCurrentManager().getExtension(TestExtension.class).getInvoker("hello");
-        assertEquals(hello.invoke(service, new Object[]{1, List.of()}), "foobar1[]");
+        assertEquals(hello.invoke(service, new Object[] { 1, List.of() }), "foobar1[]");
     }
 
     @ApplicationScoped

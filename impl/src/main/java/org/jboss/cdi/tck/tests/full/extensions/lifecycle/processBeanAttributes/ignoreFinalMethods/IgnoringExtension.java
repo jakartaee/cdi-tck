@@ -19,7 +19,7 @@ import jakarta.enterprise.inject.spi.ProcessBeanAttributes;
 
 public class IgnoringExtension implements Extension {
 
-    void observesPBA(@Observes ProcessBeanAttributes<Qux> event){
+    void observesPBA(@Observes ProcessBeanAttributes<Qux> event) {
         event.ignoreFinalMethods();
     }
 }

@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
 /**
  * Note that is't not possible to test that container maintains a reference to extension instance until the application shuts
  * down.
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = CDI_FULL)

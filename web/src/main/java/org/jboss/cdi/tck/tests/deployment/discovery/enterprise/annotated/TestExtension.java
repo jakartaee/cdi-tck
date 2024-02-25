@@ -49,5 +49,4 @@ public class TestExtension implements Extension {
         return producerField;
     }
 
-
 }

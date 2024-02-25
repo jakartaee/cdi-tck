@@ -13,14 +13,15 @@
  */
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
-import org.jboss.cdi.tck.util.SimpleLogger;
+import java.io.IOException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
+import org.jboss.cdi.tck.util.SimpleLogger;
 
 @SuppressWarnings("serial")
 @WebServlet(name = "FailingServlet", urlPatterns = { "/FailingServlet" }, asyncSupported = true)

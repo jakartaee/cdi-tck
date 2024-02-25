@@ -42,7 +42,7 @@ public class FinalMethodMethodLevelInterceptorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(FinalMethodMethodLevelInterceptorTest.class)
                 .withClasses(FooBinding.class, MissileInterceptor.class, FinalMethodMethodLevelMissile.class,
-                             FinalMethodMethodLevelMissileLocal.class)
+                        FinalMethodMethodLevelMissileLocal.class)
                 .withBeansXml(new BeansXml().interceptors(MissileInterceptor.class))
                 .build();
     }

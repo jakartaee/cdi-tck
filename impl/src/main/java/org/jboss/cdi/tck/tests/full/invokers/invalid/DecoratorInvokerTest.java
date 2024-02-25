@@ -15,6 +15,8 @@
  */
 package org.jboss.cdi.tck.tests.full.invokers.invalid;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
+
 import jakarta.annotation.Priority;
 import jakarta.decorator.Decorator;
 import jakarta.decorator.Delegate;
@@ -23,6 +25,7 @@ import jakarta.enterprise.inject.spi.DeploymentException;
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.inject.spi.ProcessManagedBean;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
@@ -32,8 +35,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 @Test(groups = CDI_FULL)

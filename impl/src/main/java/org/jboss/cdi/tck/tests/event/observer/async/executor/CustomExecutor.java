@@ -17,7 +17,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CustomExecutor implements Executor {
-    
+
     public static final AtomicBoolean executed = new AtomicBoolean(false);
 
     @Override

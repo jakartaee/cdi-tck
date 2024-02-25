@@ -15,10 +15,11 @@ package org.jboss.cdi.tck.interceptors.tests.contract.lifecycleCallback.ejb;
 
 import static org.testng.Assert.assertEquals;
 
+import javax.naming.InitialContext;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.interceptor.InvocationContext;
-import javax.naming.InitialContext;
 import jakarta.transaction.TransactionSynchronizationRegistry;
 
 public class CatInterceptor {

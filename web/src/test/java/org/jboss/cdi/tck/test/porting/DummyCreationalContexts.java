@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.test.porting;
 
 import jakarta.enterprise.context.spi.Contextual;
+
 import org.jboss.cdi.tck.spi.CreationalContexts;
 
 public class DummyCreationalContexts implements CreationalContexts {

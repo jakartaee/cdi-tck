@@ -27,12 +27,12 @@ import jakarta.inject.Qualifier;
  */
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
 public @interface Undead {
-    
+
     public static class UndeadLiteral extends AnnotationLiteral<Undead> implements Undead {
-        
+
         public static UndeadLiteral INSTANCE = new UndeadLiteral();
     }
-    
+
 }

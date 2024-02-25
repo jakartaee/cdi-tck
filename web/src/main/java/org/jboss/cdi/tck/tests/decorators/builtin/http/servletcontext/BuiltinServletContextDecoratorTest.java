@@ -19,9 +19,14 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
+
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.full.decorators.AbstractDecoratorTest;
@@ -32,13 +37,9 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -50,7 +51,8 @@ public class BuiltinServletContextDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinServletContextDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(ServletContextDecorator1.class, ServletContextDecorator2.class)).build();
+                        new BeansXml().decorators(ServletContextDecorator1.class, ServletContextDecorator2.class))
+                .build();
     }
 
     @Inject

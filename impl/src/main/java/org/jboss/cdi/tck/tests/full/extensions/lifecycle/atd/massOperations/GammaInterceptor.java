@@ -28,7 +28,7 @@ import org.jboss.cdi.tck.tests.full.extensions.lifecycle.atd.Monitored;
 @Priority(2700)
 @Monitored
 public class GammaInterceptor {
-    
+
     private static boolean intercepted = false;
 
     @AroundInvoke

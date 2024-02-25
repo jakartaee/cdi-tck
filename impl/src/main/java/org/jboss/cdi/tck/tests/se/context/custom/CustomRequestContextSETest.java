@@ -51,7 +51,8 @@ public class CustomRequestContextSETest extends Arquillian {
 
     //define custom request context which is always active
     @Test
-    @SpecAssertions({ @SpecAssertion(section = Sections.BUILTIN_CONTEXTS, id = "a"), @SpecAssertion(section = Sections.BUILTIN_CONTEXTS, id = "b")})
+    @SpecAssertions({ @SpecAssertion(section = Sections.BUILTIN_CONTEXTS, id = "a"),
+            @SpecAssertion(section = Sections.BUILTIN_CONTEXTS, id = "b") })
     public void defineCustomRequestContext() {
         try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
             RequestScopeCounter counter = seContainer.select(RequestScopeCounter.class).get();

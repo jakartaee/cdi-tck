@@ -30,9 +30,9 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Tomas Remes
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class BeanRegistrationByExtensionInWarLibraryTest extends AbstractTest {
@@ -48,7 +48,8 @@ public class BeanRegistrationByExtensionInWarLibraryTest extends AbstractTest {
         WebArchive webArchive = new WebArchiveBuilder()
                 .withTestClass(BeanRegistrationByExtensionInWarLibraryTest.class)
                 .withLibrary(BeanClassToRegister.class, ManualBeanRegistrationExtension.class,
-                        AnotherBeanClassToRegister.class, AnotherManualBeanRegistrationExtension.class).build();
+                        AnotherBeanClassToRegister.class, AnotherManualBeanRegistrationExtension.class)
+                .build();
 
         return webArchive;
     }

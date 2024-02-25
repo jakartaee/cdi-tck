@@ -44,8 +44,8 @@ public class ProducerMethodArrayWildcardTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = PRODUCER_METHOD, id = "hb"),
-        @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "ld")
+            @SpecAssertion(section = PRODUCER_METHOD, id = "hb"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "ld")
     })
     public void testBeanTypes() {
     }

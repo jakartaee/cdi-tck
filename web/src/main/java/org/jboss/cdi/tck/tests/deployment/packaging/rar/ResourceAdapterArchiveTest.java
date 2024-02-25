@@ -64,7 +64,8 @@ public class ResourceAdapterArchiveTest extends AbstractTest {
                         .vendorName("Red Hat Middleware LLC").eisType("Test RA").resourceadapterVersion("0.1")
                         .getOrCreateResourceadapter().resourceadapterClass(TestResourceAdapter.class.getName())
                         .getOrCreateOutboundResourceadapter().transactionSupport("NoTransaction")
-                        .reauthenticationSupport(false).up().up().exportAsString()), "ra.xml");
+                        .reauthenticationSupport(false).up().up().exportAsString()),
+                "ra.xml");
 
         enterpriseArchive.addAsModule(rar);
         return enterpriseArchive;

@@ -16,6 +16,9 @@ package org.jboss.cdi.tck.test.shrinkwrap;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.io.FileUtils;
 import org.jboss.cdi.tck.shrinkwrap.AssetUtil;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
@@ -25,16 +28,14 @@ import org.jboss.shrinkwrap.api.asset.ClassLoaderAsset;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.IOException;
-
 public class AssetUtilTest {
 
     @Test
     public void testReadAssetContentAsString() throws IOException {
 
         // TODO these are weak assertions because BeansXml cannot be translated to String easily
-        Asset asset = new BeansXml(BeanDiscoveryMode.ANNOTATED).alternatives(Engine.class).setBeansXmlVersion(BeansXmlVersion.v20);
+        Asset asset = new BeansXml(BeanDiscoveryMode.ANNOTATED).alternatives(Engine.class)
+                .setBeansXmlVersion(BeansXmlVersion.v20);
         String content = AssetUtil.readAssetContent(asset);
         assertTrue(content != null);
         assertTrue(content.length() > 0);

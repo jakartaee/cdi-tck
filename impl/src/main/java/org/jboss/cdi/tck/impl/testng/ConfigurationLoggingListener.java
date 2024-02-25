@@ -41,8 +41,10 @@ public class ConfigurationLoggingListener implements ISuiteListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.log(Level.INFO, "CDI-TCK Implementation version: {0}", Package.getPackage("org.jboss.cdi.tck.impl.testng").getImplementationVersion());
-        logger.log(Level.INFO, "CDI-TCK Specification version: {0}", Package.getPackage("org.jboss.cdi.tck.impl.testng").getSpecificationVersion());
+        logger.log(Level.INFO, "CDI-TCK Implementation version: {0}",
+                Package.getPackage("org.jboss.cdi.tck.impl.testng").getImplementationVersion());
+        logger.log(Level.INFO, "CDI-TCK Specification version: {0}",
+                Package.getPackage("org.jboss.cdi.tck.impl.testng").getSpecificationVersion());
         Configuration conf = ConfigurationFactory.get();
         logger.log(Level.INFO, conf.toString());
     }

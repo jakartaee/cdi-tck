@@ -33,7 +33,6 @@ import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.spi.Annotated;
 import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.AnnotatedParameter;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -85,7 +84,8 @@ public class DynamicInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "caa"), @SpecAssertion(section = INJECTION_POINT, id = "cba"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "caa"),
+            @SpecAssertion(section = INJECTION_POINT, id = "cba"),
             @SpecAssertion(section = INJECTION_POINT, id = "cca") })
     public void testInjectionPointGetMember() {
 
@@ -118,7 +118,7 @@ public class DynamicInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("rawtypes")
     @Test
-    @SpecAssertion(section=INJECTION_POINT, id="dab")
+    @SpecAssertion(section = INJECTION_POINT, id = "dab")
     public void testInjectionPointGetAnnotated() {
 
         Annotated fooFieldAnnotated = bar.getFoo().getInjectionPoint().getAnnotated();

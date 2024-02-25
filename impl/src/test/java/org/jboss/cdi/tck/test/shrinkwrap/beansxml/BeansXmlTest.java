@@ -20,7 +20,6 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
 /**
  * A very simple test that checks if {@link BeansXml} API constructs a valid descriptor with certain format.
  * Note that {@link BeansXml} doesn't include XML namespace.

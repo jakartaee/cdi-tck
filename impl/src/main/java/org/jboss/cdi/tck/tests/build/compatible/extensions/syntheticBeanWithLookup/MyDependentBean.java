@@ -13,11 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBeanWithLookup;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.Dependent;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Dependent
 public class MyDependentBean {

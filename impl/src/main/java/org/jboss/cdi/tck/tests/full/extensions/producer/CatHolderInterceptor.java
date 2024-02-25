@@ -33,6 +33,6 @@ public class CatHolderInterceptor implements Serializable {
 
     @AroundInvoke
     public Object increaseIt(InvocationContext ctx) throws Exception {
-        return (Integer)ctx.proceed() + 1;
+        return (Integer) ctx.proceed() + 1;
     }
 }

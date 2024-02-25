@@ -17,7 +17,6 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.injection
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
-import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -30,7 +29,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class InterceptedBeanConstructorInjectionTest extends AbstractTest {

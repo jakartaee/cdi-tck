@@ -15,6 +15,7 @@ package org.jboss.cdi.tck.tests.full.extensions.lifecycle.bbd;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Instance;
@@ -24,7 +25,6 @@ import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.inject.spi.BeforeBeanDiscovery;
 import jakarta.enterprise.inject.spi.Extension;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.enterprise.util.Nonbinding;
 
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.bbd.lib.Baz;
@@ -113,7 +113,8 @@ public class BeforeBeanDiscoveryObserver implements Extension {
         event.addAnnotatedType(Baz.class, BeforeBeanDiscoveryObserver.class.getName() + ":" + Baz.class.getName())
                 .add(Pro.ProLiteral.INSTANCE)
                 .add(RequestScoped.Literal.INSTANCE)
-                .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst().get()
+                .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst()
+                .get()
                 .add(InjectLiteral.INSTANCE)
                 .add(Pro.ProLiteral.INSTANCE);
 

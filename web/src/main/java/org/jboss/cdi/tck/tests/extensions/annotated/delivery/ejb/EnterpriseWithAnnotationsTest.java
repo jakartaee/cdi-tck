@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -56,7 +56,8 @@ public class EnterpriseWithAnnotationsTest extends AbstractTest {
                 .withTestClass(EnterpriseWithAnnotationsTest.class)
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
                 .withClasses(Baby.class, Desired.class, ProcessAnnotatedTypeObserver.class, Hawk.class, Wanted.class,
-                             Chicken.class, MetaAnnotation.class).withExtensions(ProcessAnnotatedTypeObserver.class).build();
+                        Chicken.class, MetaAnnotation.class)
+                .withExtensions(ProcessAnnotatedTypeObserver.class).build();
     }
 
     @Inject
@@ -77,7 +78,8 @@ public class EnterpriseWithAnnotationsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "g") })
     public void testDeliveryMetaAnnotation() {
         List<Class<?>> processedTypes = processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes();
         assertFalse(processedTypes.isEmpty());

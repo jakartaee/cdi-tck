@@ -14,9 +14,10 @@
 package org.jboss.cdi.tck.tests.full.definition.bean.custom;
 
 import java.io.Serializable;
+
 import jakarta.inject.Inject;
 
-public class PassivationCapableBean implements Serializable{
+public class PassivationCapableBean implements Serializable {
 
     @Inject
     @Passivable

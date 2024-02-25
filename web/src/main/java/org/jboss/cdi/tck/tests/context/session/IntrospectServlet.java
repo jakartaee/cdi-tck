@@ -34,40 +34,40 @@ import org.jboss.cdi.tck.util.ActionSequence;
 @WebServlet(name = "IntrospectServlet", urlPatterns = "/introspect")
 public class IntrospectServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public static final String MODE_INVALIDATE = "invalidate";
+    public static final String MODE_INVALIDATE = "invalidate";
 
-	public static final String MODE_VERIFY = "verify";
+    public static final String MODE_VERIFY = "verify";
 
-	public static final String MODE_TIMEOUT = "timeout";
+    public static final String MODE_TIMEOUT = "timeout";
 
-	@Inject
-	SimpleSessionBean simpleBean;
+    @Inject
+    SimpleSessionBean simpleBean;
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
-		resp.setContentType("text/text");
-		String mode = req.getParameter("mode");
+        resp.setContentType("text/text");
+        String mode = req.getParameter("mode");
 
-		if (mode == null) {
-			resp.getWriter().append(simpleBean.getId());
-		} else if (MODE_INVALIDATE.equals(mode)) {
-			ActionSequence.reset();
-			ActionSequence.addAction(IntrospectServlet.class.getName());
-			req.getSession().invalidate();
-		} else if (MODE_VERIFY.equals(mode)) {
-			resp.setStatus(HttpServletResponse.SC_OK);
-			resp.setContentType("text/plain");
-			resp.getWriter().write(ActionSequence.getSequence().toString());
-		} else if (MODE_TIMEOUT.equals(mode)) {
-			ActionSequence.reset();
-			req.getSession().setMaxInactiveInterval(1);
-		} else {
-			throw new ServletException("Unknown mode");
-		}
-	}
+        if (mode == null) {
+            resp.getWriter().append(simpleBean.getId());
+        } else if (MODE_INVALIDATE.equals(mode)) {
+            ActionSequence.reset();
+            ActionSequence.addAction(IntrospectServlet.class.getName());
+            req.getSession().invalidate();
+        } else if (MODE_VERIFY.equals(mode)) {
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.setContentType("text/plain");
+            resp.getWriter().write(ActionSequence.getSequence().toString());
+        } else if (MODE_TIMEOUT.equals(mode)) {
+            ActionSequence.reset();
+            req.getSession().setMaxInactiveInterval(1);
+        } else {
+            throw new ServletException("Unknown mode");
+        }
+    }
 
 }

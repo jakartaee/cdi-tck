@@ -51,15 +51,12 @@ public class DuckNotifier {
 
     public void fireMapDuck() {
         observer.reset();
-        mapDuckEvent.fire(new Duck<Map<String,Integer>>());
+        mapDuckEvent.fire(new Duck<Map<String, Integer>>());
     }
-
 
     public void fireListDuck() {
         observer.reset();
         listDuckEvent.fire(new ArrayList<Duck<Number>>());
     }
-
-
 
 }

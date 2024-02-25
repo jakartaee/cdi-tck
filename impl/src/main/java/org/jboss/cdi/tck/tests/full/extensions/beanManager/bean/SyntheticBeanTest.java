@@ -26,6 +26,7 @@ import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.PassivationCapable;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -54,7 +55,8 @@ public class SyntheticBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(SyntheticBeanTest.class)
                 .withBeansXml(
-                        new BeansXml(BeanDiscoveryMode.ALL).interceptors(SimpleInterceptor.class).decorators(VehicleDecorator.class))
+                        new BeansXml(BeanDiscoveryMode.ALL).interceptors(SimpleInterceptor.class)
+                                .decorators(VehicleDecorator.class))
                 .withExtension(BeanExtension.class).build();
     }
 

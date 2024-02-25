@@ -13,7 +13,6 @@
  */
 package org.jboss.cdi.tck.tests.full.decorators.definition.broken.enabledDecoratorIsNotDecorator;
 
-
 /**
  * @author pmuir
  *

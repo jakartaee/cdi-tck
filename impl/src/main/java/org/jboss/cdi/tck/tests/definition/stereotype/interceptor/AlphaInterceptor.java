@@ -18,7 +18,7 @@ import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
-@Alpha(value=true)
+@Alpha(value = true)
 @Interceptor
 @Priority(Interceptor.Priority.APPLICATION)
 public class AlphaInterceptor {

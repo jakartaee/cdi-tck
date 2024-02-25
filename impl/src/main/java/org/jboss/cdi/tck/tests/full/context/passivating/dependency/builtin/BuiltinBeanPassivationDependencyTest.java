@@ -20,10 +20,6 @@ import static org.testng.Assert.assertNotNull;
 
 import java.io.IOException;
 
-import jakarta.enterprise.inject.spi.Annotated;
-import jakarta.enterprise.inject.spi.AnnotatedMember;
-import jakarta.enterprise.inject.spi.AnnotatedParameter;
-import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -54,10 +50,9 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
 
     @Inject
     Boss boss;
-    
+
     @Inject
     InspectorAssistant inspectorAssist;
-
 
     @Test
     @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ea")
@@ -95,7 +90,7 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
         assertEquals(bossCopy.getId(), bossId);
         assertEquals(bossCopy.getBeanManager().getBeans(Boss.class).size(), 1);
     }
-    
+
     @Test
     @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "ec")
     public void testInjectionPoint() throws IOException, ClassNotFoundException {
@@ -107,7 +102,7 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
 
         byte[] serializedInspector = passivate(inspector);
         Inspector inspectorCopy = (Inspector) activate(serializedInspector);
-        
+
         assertNotNull(inspectorCopy);
         assertNotNull(inspectorCopy.getInjectionPoint());
         assertEquals(inspectorCopy.getId(), inspectorId);
@@ -118,8 +113,10 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
 
         // Annotated does not necessarily implement equals()/hashcode() so we need to test the underlying Java reflection object
         Assert.assertAnnotated(inspectorCopy.getInjectionPoint().getAnnotated(), inspector.getInjectionPoint().getAnnotated());
-        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getBaseType(), inspector.getInjectionPoint().getAnnotated().getBaseType());
-        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getAnnotations(), inspector.getInjectionPoint().getAnnotated().getAnnotations());
+        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getBaseType(),
+                inspector.getInjectionPoint().getAnnotated().getBaseType());
+        assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getAnnotations(),
+                inspector.getInjectionPoint().getAnnotated().getAnnotations());
 
         assertEquals(inspectorCopy.getInjectionPoint().isDelegate(), inspector.getInjectionPoint().isDelegate());
         assertEquals(inspectorCopy.getInjectionPoint().isTransient(), inspector.getInjectionPoint().isTransient());

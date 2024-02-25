@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  * @author Jozef Hartinger
- * 
+ *
  */
 @Decorator
 @SuppressWarnings("serial")
@@ -45,7 +45,5 @@ public abstract class HttpSessionDecorator2 implements HttpSession, Serializable
         }
         return delegate.getAttribute(name);
     }
-
-    
 
 }

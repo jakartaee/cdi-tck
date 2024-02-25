@@ -20,8 +20,12 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+
 import jakarta.enterprise.context.Conversation;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.full.decorators.AbstractDecoratorTest;
@@ -32,12 +36,9 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
@@ -49,7 +50,8 @@ public class BuiltinConversationDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinConversationDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(ConversationDecorator.class)).build();
+                        new BeansXml().decorators(ConversationDecorator.class))
+                .build();
     }
 
     @Inject
@@ -59,7 +61,8 @@ public class BuiltinConversationDecoratorTest extends AbstractDecoratorTest {
     Conversation conversation;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "ach"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "ach"),
+            @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
     public void testDecoratorIsResolved() {
         checkDecorator(resolveUniqueDecorator(Collections.<Type> singleton(Conversation.class)), ConversationDecorator.class,
                 Collections.<Type> singleton(Conversation.class), Conversation.class);

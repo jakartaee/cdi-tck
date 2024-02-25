@@ -14,10 +14,10 @@
 
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
+import jakarta.servlet.AsyncContext;
+
 import org.jboss.cdi.tck.util.SimpleLogger;
 import org.jboss.cdi.tck.util.Timer;
-
-import jakarta.servlet.AsyncContext;
 
 /**
  * @author Martin Kouba

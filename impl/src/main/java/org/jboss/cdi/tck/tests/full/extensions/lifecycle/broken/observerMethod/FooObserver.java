@@ -19,7 +19,7 @@ import jakarta.enterprise.event.Observes;
 @ApplicationScoped
 public class FooObserver {
 
-    public void observeFoo(@Observes Foo foo){
+    public void observeFoo(@Observes Foo foo) {
 
     }
 }

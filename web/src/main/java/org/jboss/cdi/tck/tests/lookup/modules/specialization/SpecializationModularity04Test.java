@@ -38,15 +38,15 @@ import org.testng.annotations.Test;
  * <li>1 WAR</li>
  * <li>2 shared libraries (can see each other)</li>
  * </ul>
- * 
+ *
  * Shared library 1 defines {@link Handler}. Shared library 2 defines {@link UppercaseHandler} which specializes {@link Handler}
  * . Bean {@link Alpha} packaged in WEB-INF/classes has an injection point of type {@link Handler}. Bean {@link Bravo} packaged
  * in the shared library 1 has an injection point of type {@link Handler}.
- * 
+ *
  * Expected result: {@link UppercaseHandler} injected into {@link Alpha} and {@link Bravo}
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class SpecializationModularity04Test extends AbstractTest {
@@ -71,7 +71,8 @@ public class SpecializationModularity04Test extends AbstractTest {
     Bravo bravo;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "aa"), @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia") })
+    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "aa"),
+            @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia") })
     public void testSpecialization() {
         assertNotNull(alpha);
         assertEquals(alpha.hello(), "HELLO");

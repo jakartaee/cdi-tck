@@ -15,13 +15,13 @@
  */
 package org.jboss.cdi.tck.tests.invokers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.build.compatible.spi.Parameters;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanCreator;
 import jakarta.enterprise.invoke.Invoker;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class InvokerHolderCreator implements SyntheticBeanCreator<InvokerHolder> {
     @Override

@@ -21,7 +21,7 @@ import jakarta.enterprise.inject.Produces;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class DisposerMethodInjectionBar {

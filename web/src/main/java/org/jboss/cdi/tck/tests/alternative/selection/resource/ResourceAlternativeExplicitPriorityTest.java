@@ -18,6 +18,7 @@ import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APP
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.tests.alternative.selection.Alpha;
@@ -47,7 +48,8 @@ public class ResourceAlternativeExplicitPriorityTest extends AbstractTest {
                 .withBeanLibrary(Charlie.class)
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName("test1")
-                                .envEntryType("java.lang.String").envEntryValue("hello").up()).build();
+                                .envEntryType("java.lang.String").envEntryValue("hello").up())
+                .build();
     }
 
     @Inject

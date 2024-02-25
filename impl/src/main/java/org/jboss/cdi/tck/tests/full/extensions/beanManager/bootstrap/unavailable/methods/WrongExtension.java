@@ -13,12 +13,8 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.beanManager.bootstrap.unavailable.methods;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.context.spi.CreationalContext;
-import jakarta.enterprise.event.Observes;
-import jakarta.enterprise.inject.Vetoed;
-import jakarta.enterprise.inject.spi.*;
-import jakarta.enterprise.util.AnnotationLiteral;
+import static org.testng.Assert.fail;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Type;
@@ -27,7 +23,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.testng.Assert.fail;
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.event.Observes;
+import jakarta.enterprise.inject.Vetoed;
+import jakarta.enterprise.inject.spi.*;
 
 public class WrongExtension implements Extension {
 
@@ -156,7 +156,8 @@ public class WrongExtension implements Extension {
         new Invocation() {
             void execute() {
                 beanManager.getInjectableReference(
-                        beanManager.createInjectionPoint(beanManager.createAnnotatedType(Foo.class).getFields().iterator().next()),
+                        beanManager
+                                .createInjectionPoint(beanManager.createAnnotatedType(Foo.class).getFields().iterator().next()),
                         creationalContext);
             }
         }.run();

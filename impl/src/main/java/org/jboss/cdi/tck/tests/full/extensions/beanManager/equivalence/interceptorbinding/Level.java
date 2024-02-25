@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.beanManager.equivalence.intercep
 
 public enum Level {
 
-    A, B;
+    A,
+    B;
 
 }

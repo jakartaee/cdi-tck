@@ -31,11 +31,11 @@ import org.testng.annotations.Test;
 
 /**
  * Validates that injection points on observer methods are validated.
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * </p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  * @author Martin Kouba
  */
@@ -49,7 +49,8 @@ public class ObserverMethodParameterInjectionValidationTest extends AbstractTest
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"), @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"),
+            @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ab") })
     public void test() {
     }
 }

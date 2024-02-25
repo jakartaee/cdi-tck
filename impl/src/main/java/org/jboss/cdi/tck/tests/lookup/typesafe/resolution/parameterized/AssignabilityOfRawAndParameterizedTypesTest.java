@@ -55,7 +55,8 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "kb"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "f"),
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "kb"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "f"),
             @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "g"), @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "a") })
     public void testAssignabilityToRawType() {
         // Dao, DaoProducer.getDao(), DaoProducer.getRawDao and ObjectDao
@@ -91,8 +92,9 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "da"),
             @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "dc") })
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards() {
-        Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(new TypeLiteral<Result<? extends Throwable, ? super Exception>>() {
-        });
+        Set<Bean<Result<? extends Throwable, ? super Exception>>> beans = getBeans(
+                new TypeLiteral<Result<? extends Throwable, ? super Exception>>() {
+                });
         assert beans.size() == 1;
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
     }
@@ -101,22 +103,19 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "db"),
             @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "dc") })
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcards2() {
-        Set<Bean<Result<? extends RuntimeException, ? super RuntimeException>>> beans = getBeans(new TypeLiteral<Result<? extends RuntimeException, ? super RuntimeException>>() {
-        });
+        Set<Bean<Result<? extends RuntimeException, ? super RuntimeException>>> beans = getBeans(
+                new TypeLiteral<Result<? extends RuntimeException, ? super RuntimeException>>() {
+                });
         assert beans.size() == 1;
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
     }
 
     @Test
     @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "dc")
-    public <T1 extends SubBar & SubBaz & Foo,
-            T2 extends BarBazImpl & Foo,
-            T3 extends SubBar & SubBaz & SuperFoo,
-            T4 extends SubBar & SubBaz,
-            T5 extends BarBazSuperFooImpl,
-            T6 extends BarBazSuperFooImpl & SuperBarFooCloneable> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcardWithLowerBound() {
-        Set<Bean<Result<? extends Exception, ? super Throwable>>> beans = getBeans(new TypeLiteral<Result<? extends Exception, ? super Throwable>>() {
-        });
+    public <T1 extends SubBar & SubBaz & Foo, T2 extends BarBazImpl & Foo, T3 extends SubBar & SubBaz & SuperFoo, T4 extends SubBar & SubBaz, T5 extends BarBazSuperFooImpl, T6 extends BarBazSuperFooImpl & SuperBarFooCloneable> void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithWildcardWithLowerBound() {
+        Set<Bean<Result<? extends Exception, ? super Throwable>>> beans = getBeans(
+                new TypeLiteral<Result<? extends Exception, ? super Throwable>>() {
+                });
         assertEquals(beans.size(), 0);
 
         Set<Bean<Box<? super T1>>> beans1 = getBeans(new TypeLiteral<Box<? super T1>>() {
@@ -153,13 +152,15 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
     @Test
     @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "e")
     public void testAssignabilityOfParameterizedTypeWithTypeVariablesToParameterizedTypeWithActualTypes() {
-        Set<Bean<Result<RuntimeException, IllegalStateException>>> beans = getBeans(new TypeLiteral<Result<RuntimeException, IllegalStateException>>() {
-        });
+        Set<Bean<Result<RuntimeException, IllegalStateException>>> beans = getBeans(
+                new TypeLiteral<Result<RuntimeException, IllegalStateException>>() {
+                });
         assert beans.size() == 1;
         assert rawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
 
-        Set<Bean<Result<RuntimeException, Throwable>>> noBeans = getBeans(new TypeLiteral<Result<RuntimeException, Throwable>>() {
-        });
+        Set<Bean<Result<RuntimeException, Throwable>>> noBeans = getBeans(
+                new TypeLiteral<Result<RuntimeException, Throwable>>() {
+                });
         assertEquals(noBeans.size(), 0);
     }
 
@@ -202,12 +203,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "f")
-    public <T1 extends SubBar & SubBaz & Foo,
-            T2 extends BarBazImpl & Foo,
-            T3 extends SubBar & SubBaz & SuperFoo,
-            T4 extends SubBar & SubBaz,
-            T5 extends BarBazSuperFooImpl,
-            T6 extends BarBazSuperFooImpl & SuperBarFooCloneable> void testAssignabilityOfParameterizedTypeWithTypeVariableWithMultipleBoundsToParameterizedTypeWithTypeVariable() {
+    public <T1 extends SubBar & SubBaz & Foo, T2 extends BarBazImpl & Foo, T3 extends SubBar & SubBaz & SuperFoo, T4 extends SubBar & SubBaz, T5 extends BarBazSuperFooImpl, T6 extends BarBazSuperFooImpl & SuperBarFooCloneable> void testAssignabilityOfParameterizedTypeWithTypeVariableWithMultipleBoundsToParameterizedTypeWithTypeVariable() {
         Set<Bean<Box<T1>>> beans1 = getBeans(new TypeLiteral<Box<T1>>() {
         });
         assertEquals(beans1.size(), 1);

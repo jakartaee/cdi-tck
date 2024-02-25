@@ -23,7 +23,7 @@ public class ReqScopedCounter {
     private AtomicInteger counter = new AtomicInteger(0);
 
     public int increment() {
-       return counter.incrementAndGet();
+        return counter.incrementAndGet();
     }
 
 }

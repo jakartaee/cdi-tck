@@ -65,7 +65,8 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
                 .create(JavaArchive.class, ALPHA_JAR)
                 .addClasses(Alpha.class, AlphaLocal.class)
                 .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).exportAsString()),
+                        new StringAsset(Descriptors.create(BeansDescriptor.class)
+                                .beanDiscoveryMode(BeanDiscoveryMode._ALL.toString()).exportAsString()),
                         "beans.xml");
         // Empty beans.xml
         JavaArchive bravo = ShrinkWrap.create(JavaArchive.class, BRAVO_JAR).addClasses(Bravo.class, BravoLocal.class)
@@ -74,7 +75,8 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
         JavaArchive charlie = ShrinkWrap
                 .create(JavaArchive.class, CHARLIE_JAR)
                 .addClasses(Charlie.class, CharlieLocal.class)
-                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()), "beans.xml");
+                .addAsManifestResource(new StringAsset(Descriptors.create(BeansDescriptor.class).exportAsString()),
+                        "beans.xml");
         // Session bean and no beans.xml
         JavaArchive delta = ShrinkWrap.create(JavaArchive.class, DELTA_JAR).addClasses(Delta.class, DeltaLocal.class);
         // Session bean and 1.1 version beans.xml with bean-discovery-mode of annotated
@@ -82,14 +84,16 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
                 .create(JavaArchive.class, ECHO_JAR)
                 .addClasses(Echo.class, EchoLocal.class)
                 .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._ANNOTATED.toString()).exportAsString()),
+                        new StringAsset(Descriptors.create(BeansDescriptor.class)
+                                .beanDiscoveryMode(BeanDiscoveryMode._ANNOTATED.toString()).exportAsString()),
                         "beans.xml");
         // Session bean and 1.1 version beans.xml with bean-discovery-mode of none
         JavaArchive foxtrot = ShrinkWrap
                 .create(JavaArchive.class, FOXTROT_JAR)
                 .addClasses(Foxtrot.class, FoxtrotLocal.class)
                 .addAsManifestResource(
-                        new StringAsset(Descriptors.create(BeansDescriptor.class).beanDiscoveryMode(BeanDiscoveryMode._NONE.toString()).exportAsString()),
+                        new StringAsset(Descriptors.create(BeansDescriptor.class)
+                                .beanDiscoveryMode(BeanDiscoveryMode._NONE.toString()).exportAsString()),
                         "beans.xml");
 
         // Archive which contains an extension and no beans.xml file - not a bean archive
@@ -117,40 +121,46 @@ public class EnterpriseBeanDiscoveryTest extends AbstractTest {
     VerifyingExtension extension;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "ba"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc") })
     public void testExplicitBeanArchiveModeAll() {
         assertDiscoveredAndAvailable(AlphaLocal.class, Alpha.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "bb"), @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "bc"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "bb"),
+            @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "bc"),
             @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc") })
     public void testExplicitBeanArchiveEmptyDescriptor() {
         assertDiscoveredAndAvailable(BravoLocal.class, Bravo.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "bc"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "bc"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc") })
     public void testExplicitBeanArchiveLegacyDescriptor() {
         assertDiscoveredAndAvailable(CharlieLocal.class, Charlie.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DEFAULT_BEAN_DISCOVERY_EE, id = "a"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc"),
+    @SpecAssertions({ @SpecAssertion(section = DEFAULT_BEAN_DISCOVERY_EE, id = "a"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba") })
     public void testImplicitBeanArchiveNoDescriptor() {
         assertDiscoveredAndAvailable(DeltaLocal.class, Delta.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DEFAULT_BEAN_DISCOVERY_EE, id = "a"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc"),
+    @SpecAssertions({ @SpecAssertion(section = DEFAULT_BEAN_DISCOVERY_EE, id = "a"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba") })
     public void testImplicitBeanArchiveModeAnnotated() {
         assertDiscoveredAndAvailable(EchoLocal.class, Echo.class);
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "oa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "oa"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS_EE, id = "tc") })
     public void testNoBeanArchiveModeNone() {
         assertNotDiscoveredAndNotAvailable(FoxtrotLocal.class, Foxtrot.class);
     }

@@ -25,7 +25,7 @@ public class SpecialPersistor extends Persistor {
 
     @PersistenceContext
     EntityManager persistenceContextField;
-    
+
     EntityManager persistenceContext;
 
     @PersistenceUnit

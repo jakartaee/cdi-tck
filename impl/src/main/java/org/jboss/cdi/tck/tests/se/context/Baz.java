@@ -22,7 +22,7 @@ public class Baz {
     @Inject
     ApplicationScopedCounter counter;
 
-    public void ping(){
+    public void ping() {
         counter.increment();
     }
 }

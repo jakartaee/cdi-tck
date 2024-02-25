@@ -15,7 +15,7 @@ package org.jboss.cdi.tck.tests.se.discovery.trimmed;
 
 public class Bar {
 
-    public String ping(){
+    public String ping() {
         return Bar.class.getSimpleName();
     }
 }

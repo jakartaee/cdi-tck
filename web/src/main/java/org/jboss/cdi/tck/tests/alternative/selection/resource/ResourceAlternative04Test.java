@@ -65,7 +65,8 @@ public class ResourceAlternative04Test extends AbstractTest {
                                 .envEntryType("java.lang.String").envEntryValue("hello1").up().createEnvEntry()
                                 .envEntryName("test2").envEntryType("java.lang.String").envEntryValue("hello2").up()
                                 .createEnvEntry().envEntryName("test3").envEntryType("java.lang.String")
-                                .envEntryValue("hello3").up()).build();
+                                .envEntryValue("hello3").up())
+                .build();
     }
 
     @Inject

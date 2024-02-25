@@ -170,15 +170,15 @@ public abstract class AbstractTest extends Arquillian {
     }
 
     protected <T> T getContextualReference(Class<T> beanType, Annotation... qualifiers) {
-        return BeanLookupUtils.<T>getContextualReference(getCurrentManager(), beanType, qualifiers);
+        return BeanLookupUtils.<T> getContextualReference(getCurrentManager(), beanType, qualifiers);
     }
 
     protected <T> T getContextualReference(TypeLiteral<T> beanType, Annotation... qualifiers) {
-        return BeanLookupUtils.<T>getContextualReference(getCurrentManager(), beanType, qualifiers);
+        return BeanLookupUtils.<T> getContextualReference(getCurrentManager(), beanType, qualifiers);
     }
 
     protected <T> T getContextualReference(String name, Class<T> beanType) {
-        return BeanLookupUtils.<T>getContextualReference(getCurrentManager(), name, beanType);
+        return BeanLookupUtils.<T> getContextualReference(getCurrentManager(), name, beanType);
     }
 
     protected <T> DependentInstance<T> newDependentInstance(Class<T> beanType, Annotation... qualifiers) {

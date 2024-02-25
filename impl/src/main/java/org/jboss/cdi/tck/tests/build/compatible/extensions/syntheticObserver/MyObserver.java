@@ -13,12 +13,12 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticObserver;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.enterprise.inject.build.compatible.spi.Parameters;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticObserver;
 import jakarta.enterprise.inject.spi.EventContext;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MyObserver implements SyntheticObserver<MyEvent> {
     static final List<String> observed = new ArrayList<>();

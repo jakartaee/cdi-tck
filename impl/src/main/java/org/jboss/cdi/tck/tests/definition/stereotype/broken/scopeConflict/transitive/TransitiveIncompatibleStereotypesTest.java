@@ -13,7 +13,10 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.broken.scopeConflict.transitive;
 
+import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_SCOPE;
+
 import jakarta.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
@@ -23,8 +26,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_SCOPE;
 
 @SpecVersion(spec = "cdi", version = "2.0")
 public class TransitiveIncompatibleStereotypesTest extends AbstractTest {

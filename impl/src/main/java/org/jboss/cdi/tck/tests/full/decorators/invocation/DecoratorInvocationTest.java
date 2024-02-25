@@ -42,7 +42,7 @@ public class DecoratorInvocationTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorInvocationTest.class)
                 .withBeansXml(new BeansXml()
-                         .decorators(BarDecorator.class, FooDecorator1.class, FooDecorator2.class, TimestampLogger.class))
+                        .decorators(BarDecorator.class, FooDecorator1.class, FooDecorator2.class, TimestampLogger.class))
                 .build();
     }
 

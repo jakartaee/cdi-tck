@@ -15,12 +15,11 @@ package org.jboss.cdi.tck.tests.full.extensions.lifecycle.atd.lib;
 
 import jakarta.enterprise.inject.Instance;
 
-
 public class Baz {
 
     Instance<Bar> barInstance;
 
-    public  Instance<Bar> getBarInstance() {
+    public Instance<Bar> getBarInstance() {
         return barInstance;
     }
 

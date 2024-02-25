@@ -18,7 +18,7 @@ import jakarta.ejb.Stateful;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 
-@Stateful(passivationCapable=false)
+@Stateful(passivationCapable = false)
 @SessionScoped
 @Digital
 public class Telephone {

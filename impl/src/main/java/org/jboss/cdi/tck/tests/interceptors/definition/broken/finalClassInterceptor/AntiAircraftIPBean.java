@@ -18,7 +18,7 @@ import jakarta.inject.Inject;
 
 @Dependent
 public class AntiAircraftIPBean {
-    
+
     @Inject
     AntiAircraftMissileFinalClass antiAircraftMissileFinalClass;
 }

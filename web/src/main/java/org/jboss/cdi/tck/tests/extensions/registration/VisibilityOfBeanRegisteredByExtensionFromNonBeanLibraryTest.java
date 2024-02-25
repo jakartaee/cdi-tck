@@ -55,7 +55,8 @@ public class VisibilityOfBeanRegisteredByExtensionFromNonBeanLibraryTest extends
                 .withTestClass(VisibilityOfBeanRegisteredByExtensionFromNonBeanLibraryTest.class)
                 .withLibrary(BeanClassToRegister.class)
                 .withLibrary(AnotherBeanClassToRegister.class, ManualBeanRegistrationExtension.class,
-                        AnotherManualBeanRegistrationExtension.class).build();
+                        AnotherManualBeanRegistrationExtension.class)
+                .build();
     }
 
     @Test(groups = INTEGRATION)

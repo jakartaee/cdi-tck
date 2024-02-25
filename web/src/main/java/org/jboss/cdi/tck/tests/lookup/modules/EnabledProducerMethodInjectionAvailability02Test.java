@@ -29,7 +29,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Matej Briskar
  */
 
@@ -39,7 +39,8 @@ public class EnabledProducerMethodInjectionAvailability02Test extends AbstractTe
     @Deployment
     public static WebArchive createTestArchive() {
         WebArchive webArchive = new WebArchiveBuilder().withTestClass(EnabledProducerMethodInjectionAvailability02Test.class)
-                .withClasses(FooMethodProducer.class, ProducedFoo.class).withBeanLibrary(Foo.class, Bar.class).withBeanLibrary(WebBar.class).build();
+                .withClasses(FooMethodProducer.class, ProducedFoo.class).withBeanLibrary(Foo.class, Bar.class)
+                .withBeanLibrary(WebBar.class).build();
         return webArchive;
     }
 

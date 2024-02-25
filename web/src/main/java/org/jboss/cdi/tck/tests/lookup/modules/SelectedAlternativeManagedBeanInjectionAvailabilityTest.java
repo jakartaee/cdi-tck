@@ -18,6 +18,7 @@ import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.EnterpriseArchiveBuilder;
@@ -31,12 +32,12 @@ import org.testng.annotations.Test;
 
 /**
  * Test that bean in web module can inject selected alternative managed bean from EJB module.
- * 
+ *
  * classloading requirements)!
- * 
+ *
  * Also note that we need to enable alternative in web module to have it working according to spec (section 5.1.4 Inter-module
  * injection).
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")

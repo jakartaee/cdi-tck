@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.definition.stereotype.priority;
 import static org.testng.Assert.assertEquals;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;

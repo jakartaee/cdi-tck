@@ -27,10 +27,10 @@ public class SimpleSessionBean implements Serializable {
     private String id = UUID.randomUUID().toString();
 
     public String getId() {
-		return id;
-	}
+        return id;
+    }
 
-	@PreDestroy
+    @PreDestroy
     public void destroy() {
         beanDestroyed = true;
     }

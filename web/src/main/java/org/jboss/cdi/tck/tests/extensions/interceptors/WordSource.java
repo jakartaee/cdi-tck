@@ -17,16 +17,16 @@ import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class WordSource {
-    
+
     public static final String word = "awesome";
     public static final String suffix = "ness";
     public static final String wordWithSuffix = word + suffix;
-    
+
     @Suffixed(suffix)
     public String getWordWithSuffix() {
         return word;
     }
-    
+
     public String getWord() {
         return word;
     }

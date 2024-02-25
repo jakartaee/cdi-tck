@@ -19,6 +19,7 @@ import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
 

@@ -20,9 +20,8 @@ import static org.jboss.cdi.tck.cdi.Sections.REQUEST_CONTEXT_EE;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertTrue;
 
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 import java.net.URL;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
@@ -32,6 +31,9 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  *
@@ -49,7 +51,7 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(RequestContextAsyncListenerTest.class).build();
     }
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ad")
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "bd")
     public void testRequestContextActiveOnComplete() throws Exception {
@@ -68,7 +70,7 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
                 extractSimpleRequestBeanIdString(results2.getContent()));
     }
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ad")
     public void testRequestContextActiveOnTimeout() throws Exception {
         WebClient webClient = new WebClient();
@@ -79,7 +81,7 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
         assertTrue(results.getContent().contains("onTimeout: true"));
     }
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ad")
     public void testRequestContextActiveOnError() throws Exception {
         WebClient webClient = new WebClient();
@@ -89,7 +91,7 @@ public class RequestContextAsyncListenerTest extends AbstractTest {
         assertTrue(results.getContent().contains("onError: true"));
     }
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ad")
     public void testRequestContextActiveOnStartAsync() throws Exception {
         WebClient webClient = new WebClient();

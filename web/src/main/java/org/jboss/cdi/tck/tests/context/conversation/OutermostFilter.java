@@ -44,17 +44,16 @@ public class OutermostFilter implements Filter {
                 writeNonexistenConversationException(response);
             }
         } else {
-          try {
-            chain.doFilter(request, response);
-          } catch (NonexistentConversationException e) {
-              writeNonexistenConversationException(response);
-          }
+            try {
+                chain.doFilter(request, response);
+            } catch (NonexistentConversationException e) {
+                writeNonexistenConversationException(response);
+            }
         }
     }
 
     public void init(FilterConfig filterConfig) throws ServletException {
     }
-
 
     private void writeNonexistenConversationException(ServletResponse response) throws IOException {
         response.setContentType("text/plain");

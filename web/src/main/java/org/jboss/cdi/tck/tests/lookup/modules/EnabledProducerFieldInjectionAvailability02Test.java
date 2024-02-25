@@ -29,7 +29,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Matej Briskar
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -38,7 +38,8 @@ public class EnabledProducerFieldInjectionAvailability02Test extends AbstractTes
     @Deployment
     public static WebArchive createTestArchive() {
         WebArchive webArchive = new WebArchiveBuilder().withTestClass(EnabledProducerFieldInjectionAvailability02Test.class)
-                .withClasses(FooFieldProducer.class, ProducedFoo.class).withBeanLibrary(Foo.class, Bar.class).withBeanLibrary(WebBar.class).build();
+                .withClasses(FooFieldProducer.class, ProducedFoo.class).withBeanLibrary(Foo.class, Bar.class)
+                .withBeanLibrary(WebBar.class).build();
         return webArchive;
     }
 

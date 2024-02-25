@@ -18,11 +18,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class Qux {
 
-    public boolean ping(){
+    public boolean ping() {
         return true;
     }
 
-    public final void pong2(){
+    public final void pong2() {
     }
 
 }

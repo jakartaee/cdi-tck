@@ -13,10 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
+import java.util.Set;
+
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.InjectionTarget;
-import java.util.Set;
 
 public class CustomInjectionTarget<T> implements InjectionTarget<T> {
 

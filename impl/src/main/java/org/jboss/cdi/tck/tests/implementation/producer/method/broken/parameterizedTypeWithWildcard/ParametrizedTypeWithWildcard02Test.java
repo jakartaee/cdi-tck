@@ -39,9 +39,9 @@ public class ParametrizedTypeWithWildcard02Test extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "ha"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "lb") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "ha"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "lb") })
     public void testParameterizedReturnTypeWithDoubleWildcard() throws Exception {
     }
 
 }
-

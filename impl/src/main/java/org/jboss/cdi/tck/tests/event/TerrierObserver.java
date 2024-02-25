@@ -20,7 +20,7 @@ import jakarta.enterprise.inject.spi.BeanManager;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class TerrierObserver {

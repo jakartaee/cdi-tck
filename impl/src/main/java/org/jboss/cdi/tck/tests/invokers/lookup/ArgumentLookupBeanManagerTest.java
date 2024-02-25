@@ -15,6 +15,12 @@
  */
 package org.jboss.cdi.tck.tests.invokers.lookup;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -30,6 +36,7 @@ import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.invoke.Invoker;
 import jakarta.enterprise.util.TypeLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -41,12 +48,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class ArgumentLookupBeanManagerTest extends AbstractTest {
@@ -78,8 +79,8 @@ public class ArgumentLookupBeanManagerTest extends AbstractTest {
     @SpecAssertion(section = Sections.CONFIGURING_LOOKUPS, id = "i")
     public void test(MyService service, InvokerHolder invokers) throws Exception {
         Invoker<MyService, String> invoker = invokers.get("hello");
-        assertEquals("foobar0", invoker.invoke(service, new Object[]{null}));
-        assertEquals("foobar1", invoker.invoke(service, new Object[]{null}));
+        assertEquals("foobar0", invoker.invoke(service, new Object[] { null }));
+        assertEquals("foobar1", invoker.invoke(service, new Object[] { null }));
 
         assertEquals(MyService.observed, List.of("foo", "bar", "foo", "bar"));
 
@@ -97,7 +98,8 @@ public class ArgumentLookupBeanManagerTest extends AbstractTest {
             int id = dependency.getId();
             instance.destroy(dependency);
 
-            beanManager.getEvent().select(new TypeLiteral<List<String>>() {}).fire(List.of("foo", "bar"));
+            beanManager.getEvent().select(new TypeLiteral<List<String>>() {
+            }).fire(List.of("foo", "bar"));
 
             return "foobar" + id;
         }

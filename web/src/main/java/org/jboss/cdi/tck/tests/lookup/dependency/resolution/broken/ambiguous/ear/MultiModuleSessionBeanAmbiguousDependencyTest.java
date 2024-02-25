@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 /**
  * Test that ambiguous dependency is detected when multiple beans eligible for injection to the injection point are deployed in
  * different modules. See WELD-1586 for more info.
- * 
+ *
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "cdi", version = "2.0")

@@ -22,7 +22,7 @@ import jakarta.servlet.annotation.WebListener;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @WebListener
 public class BazRequestListener implements ServletRequestListener {

@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.context.activation;
 
 import java.io.IOException;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.control.RequestContextController;
 import jakarta.enterprise.inject.spi.BeanManager;

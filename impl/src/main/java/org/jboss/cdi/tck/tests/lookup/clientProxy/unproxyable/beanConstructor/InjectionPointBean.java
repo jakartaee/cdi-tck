@@ -19,6 +19,6 @@ import jakarta.inject.Inject;
 @Dependent
 public class InjectionPointBean {
 
-	@Inject
+    @Inject
     Unproxyable_Broken foo;
 }

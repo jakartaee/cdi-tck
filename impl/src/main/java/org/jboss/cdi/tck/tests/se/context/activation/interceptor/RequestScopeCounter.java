@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.se.context.activation.interceptor;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 
@@ -23,12 +24,11 @@ public class RequestScopeCounter {
     @Inject
     SecondCounter counter;
 
-    private AtomicInteger i= new AtomicInteger(0);
+    private AtomicInteger i = new AtomicInteger(0);
 
-    public int increment(){
+    public int increment() {
         i.addAndGet(counter.add10());
         return i.incrementAndGet();
     }
-
 
 }

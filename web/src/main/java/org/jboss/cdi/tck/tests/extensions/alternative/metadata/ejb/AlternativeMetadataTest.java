@@ -13,7 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata.ejb;
 
+import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES_EE;
+import static org.testng.Assert.assertEquals;
+
 import jakarta.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -24,10 +28,6 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES_EE;
-import static org.testng.Assert.assertEquals;
-
 
 /**
  * This test class contains tests for adding meta data using extensions.
@@ -54,8 +54,7 @@ public class AlternativeMetadataTest extends AbstractTest {
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES_EE, id = "kb")
     public void testGetTypeClosureUsedToDetermineTypeOfSessionBean() {
         Bean<Pasta> pasta = getBeans(Pasta.class).iterator().next();
-        assertEquals(pasta.getTypes().size(), 2, ""+pasta.getTypes());
+        assertEquals(pasta.getTypes().size(), 2, "" + pasta.getTypes());
     }
-
 
 }

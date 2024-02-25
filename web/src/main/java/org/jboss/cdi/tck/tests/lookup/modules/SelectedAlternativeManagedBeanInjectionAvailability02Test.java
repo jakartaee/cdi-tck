@@ -17,6 +17,7 @@ package org.jboss.cdi.tck.tests.lookup.modules;
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -32,7 +33,8 @@ public class SelectedAlternativeManagedBeanInjectionAvailability02Test extends A
 
     @Deployment
     public static WebArchive createTestArchive() {
-        WebArchive webArchive = new WebArchiveBuilder().withTestClass(SelectedAlternativeManagedBeanInjectionAvailability02Test.class)
+        WebArchive webArchive = new WebArchiveBuilder()
+                .withTestClass(SelectedAlternativeManagedBeanInjectionAvailability02Test.class)
                 .withClasses(AlternativeFoo.class).withBeanLibrary(Foo.class, Bar.class)
                 .withBeanLibrary(new BeansXml().alternatives(AlternativeFoo.class), WebBar.class)
                 .build();

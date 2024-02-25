@@ -23,7 +23,7 @@ import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Startup
 @Singleton

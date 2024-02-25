@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.full.decorators.definition.broken.nodecoratedtypes;
 
 import java.io.Serializable;
+
 import jakarta.annotation.Priority;
 import jakarta.decorator.Decorator;
 import jakarta.decorator.Delegate;

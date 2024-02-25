@@ -15,7 +15,6 @@ package org.jboss.cdi.tck.tests.event.observer.async.handlingExceptions;
 
 public class RadioMessage {
 
-
     private String message;
 
     public RadioMessage(String message) {

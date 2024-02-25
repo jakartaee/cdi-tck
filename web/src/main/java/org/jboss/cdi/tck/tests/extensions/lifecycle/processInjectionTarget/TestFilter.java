@@ -14,7 +14,6 @@
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
@@ -45,7 +44,7 @@ public class TestFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
             ServletException {
 
-        chain.doFilter(request,response);
+        chain.doFilter(request, response);
     }
 
     public void init(FilterConfig filterConfig) throws ServletException {

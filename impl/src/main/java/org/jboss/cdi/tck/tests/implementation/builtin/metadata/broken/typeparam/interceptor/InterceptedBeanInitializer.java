@@ -26,7 +26,7 @@ import org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam.
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Binding
 @Interceptor

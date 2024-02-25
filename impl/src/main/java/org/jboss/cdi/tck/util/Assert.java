@@ -14,11 +14,6 @@
 
 package org.jboss.cdi.tck.util;
 
-import jakarta.enterprise.inject.spi.Annotated;
-import jakarta.enterprise.inject.spi.AnnotatedMember;
-import jakarta.enterprise.inject.spi.AnnotatedParameter;
-import jakarta.enterprise.inject.spi.AnnotatedType;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
@@ -27,6 +22,11 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+
+import jakarta.enterprise.inject.spi.Annotated;
+import jakarta.enterprise.inject.spi.AnnotatedMember;
+import jakarta.enterprise.inject.spi.AnnotatedParameter;
+import jakarta.enterprise.inject.spi.AnnotatedType;
 
 /**
  * @author Martin Kouba
@@ -46,13 +46,13 @@ public class Assert {
     public static void assertAnnotationSetMatches(Set<? extends Annotation> annotations,
             Class<? extends Annotation>... requiredAnnotationTypes) {
 
-        if(annotations == null) {
+        if (annotations == null) {
             throw new IllegalArgumentException();
         }
 
-
         if (annotations.size() != requiredAnnotationTypes.length) {
-            fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(), Arrays.toString(requiredAnnotationTypes), requiredAnnotationTypes.length));
+            fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(),
+                    Arrays.toString(requiredAnnotationTypes), requiredAnnotationTypes.length));
         }
 
         if (annotations.isEmpty() && requiredAnnotationTypes.length == 0) {
@@ -63,7 +63,8 @@ public class Assert {
 
         for (Annotation annotation : annotations) {
             if (!requiredAnnotationTypesList.contains(annotation.annotationType())) {
-                fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(), requiredAnnotationTypesList, requiredAnnotationTypesList.size()));
+                fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(),
+                        requiredAnnotationTypesList, requiredAnnotationTypesList.size()));
             }
         }
     }
@@ -75,14 +76,15 @@ public class Assert {
      */
     public static void assertTypeSetMatches(Set<? extends Type> types, Type... requiredTypes) {
 
-        if(types == null) {
+        if (types == null) {
             throw new IllegalArgumentException();
         }
 
         List<Type> requiredTypeList = Arrays.asList(requiredTypes);
 
         if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
-            fail(String.format("Set %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList, requiredTypeList.size()));
+            fail(String.format("Set %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList,
+                    requiredTypeList.size()));
         }
     }
 
@@ -93,14 +95,15 @@ public class Assert {
      */
     public static void assertTypeListMatches(List<? extends Type> types, Type... requiredTypes) {
 
-        if(types == null) {
+        if (types == null) {
             throw new IllegalArgumentException();
         }
 
         List<Type> requiredTypeList = Arrays.asList(requiredTypes);
 
         if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
-            fail(String.format("List %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList, requiredTypeList.size()));
+            fail(String.format("List %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList,
+                    requiredTypeList.size()));
         }
     }
 

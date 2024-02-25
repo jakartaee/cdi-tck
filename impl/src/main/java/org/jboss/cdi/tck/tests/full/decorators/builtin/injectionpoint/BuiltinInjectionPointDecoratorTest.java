@@ -35,7 +35,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -48,7 +48,8 @@ public class BuiltinInjectionPointDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinInjectionPointDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(InjectionPointDecorator.class)).build();
+                        new BeansXml().decorators(InjectionPointDecorator.class))
+                .build();
     }
 
     @Inject

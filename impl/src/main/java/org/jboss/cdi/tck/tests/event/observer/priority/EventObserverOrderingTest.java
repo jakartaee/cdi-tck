@@ -20,6 +20,7 @@ import static org.testng.Assert.assertTrue;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.spi.ObserverMethod;
 import jakarta.inject.Inject;

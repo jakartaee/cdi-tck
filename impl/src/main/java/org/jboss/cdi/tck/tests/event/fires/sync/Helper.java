@@ -25,7 +25,7 @@ public class Helper {
 
     private int counter = 0;
 
-    public void addThreadID(Integer id){
+    public void addThreadID(Integer id) {
         threadIDs.add(id);
     }
 
@@ -36,8 +36,8 @@ public class Helper {
     public int getCounter() {
         return counter;
     }
-    
-    public void incrementCount(){
+
+    public void incrementCount() {
         counter++;
     }
 

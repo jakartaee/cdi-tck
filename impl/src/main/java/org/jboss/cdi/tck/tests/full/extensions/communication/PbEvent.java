@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.communication;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class PbEvent extends EventBase {
 

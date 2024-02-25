@@ -40,11 +40,11 @@ public class TwoBeansOneClassTest extends AbstractTest {
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({
-        @SpecAssertion(section = INIT_EVENTS, id = "b"),
-        @SpecAssertion(section = INIT_EVENTS, id = "bb"),
-        @SpecAssertion(section = BEAN_ARCHIVE, id = "n"),
-        @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af"),
-        @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "afa")})
+            @SpecAssertion(section = INIT_EVENTS, id = "b"),
+            @SpecAssertion(section = INIT_EVENTS, id = "bb"),
+            @SpecAssertion(section = BEAN_ARCHIVE, id = "n"),
+            @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af"),
+            @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "afa") })
     public void testTwoBeansWithOneBaseClass() {
         assertEquals(beanManager.getBeans(Beanie.class).size(), 0);
         assertEquals(beanManager.getBeans(Beanie.class, new BeanieTypeLiteral() {

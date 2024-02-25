@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 
 /**
  * Clarification for request context lifecycle during remote method invocation of EJB is required - see CDI-180.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -54,7 +54,7 @@ public class RequestScopeEventRemoteTest extends AbstractTest {
     FooRemote foo;
 
     @OperateOnDeployment("TEST")
-    @Test(groups =  JAVAEE_FULL)
+    @Test(groups = JAVAEE_FULL)
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jc")
     public void testRequestScopeActiveDuringRemoteCallToEjb() throws Exception {
 

@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 @Test(groups = SE)
 @SpecVersion(spec = "cdi", version = "2.0")
 public class InvalidContextualReferenceTest extends Arquillian {
-    
+
     @Deployment
     public static Archive<?> deployment() {
         final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class)
@@ -47,7 +47,7 @@ public class InvalidContextualReferenceTest extends Arquillian {
                         "META-INF/beans.xml");
         return ClassPath.builder().add(testArchive).build();
     }
-    
+
     @Test(expectedExceptions = IllegalStateException.class)
     @SpecAssertions(@SpecAssertion(section = CONTEXTUAL_REFERENCE_VALIDITY, id = "b"))
     public void testReferenceUsedAfterContainerShutdown() {
@@ -59,7 +59,7 @@ public class InvalidContextualReferenceTest extends Arquillian {
             validBeanReference.ping();
             beanReferenceOutsideContainer = validBeanReference;
         }
-        
+
         // now use stored reference after container shutdown
         // this should throw IllegalStateException
         beanReferenceOutsideContainer.ping();

@@ -19,8 +19,6 @@ import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_ORDERING;
 import java.io.IOException;
 import java.net.URL;
 
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
@@ -30,6 +28,9 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "2.0")

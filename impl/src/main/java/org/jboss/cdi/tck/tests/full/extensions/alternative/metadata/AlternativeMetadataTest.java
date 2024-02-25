@@ -20,11 +20,14 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.annotation.Annotation;
+import java.util.Set;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.ProducesLiteral;
@@ -35,9 +38,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.lang.annotation.Annotation;
-import java.util.Set;
 
 /**
  * This test class contains tests for adding meta data using extensions.
@@ -85,13 +85,15 @@ public class AlternativeMetadataTest extends AbstractTest {
                 TropicalFruit.class);
         assertTrue(MarketWrapper.isGetBaseTypeOfMarketConstructorParameterUsed());
         // s assertion
-        assertTrue(getContextualReference(Market.class).getConstructorFruit().getMetadata().getQualifiers().contains(Any.Literal.INSTANCE));
+        assertTrue(getContextualReference(Market.class).getConstructorFruit().getMetadata().getQualifiers()
+                .contains(Any.Literal.INSTANCE));
     }
 
     @Test
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "hd")
     public void testGetBaseTypeUsedToDetermineTypeOfProducerInjectionPoint() {
-        assertEquals(getContextualReference(Bill.class, new ExpensiveLiteral()).getFruit().getMetadata().getType(), TropicalFruit.class);
+        assertEquals(getContextualReference(Bill.class, new ExpensiveLiteral()).getFruit().getMetadata().getType(),
+                TropicalFruit.class);
         assertTrue(MarketWrapper.isGetBaseTypeOfBillProducerParameterUsed());
     }
 
@@ -117,7 +119,8 @@ public class AlternativeMetadataTest extends AbstractTest {
                 TropicalFruit.class);
         assertTrue(GroceryWrapper.isGetBaseTypeOfBillDisposerParameterUsed());
         // ad assertion
-        assertTrue(getContextualReference(Grocery.class, Any.Literal.INSTANCE).getDisposerFruit().getMetadata().getQualifiers().contains(Any.Literal.INSTANCE));
+        assertTrue(getContextualReference(Grocery.class, Any.Literal.INSTANCE).getDisposerFruit().getMetadata().getQualifiers()
+                .contains(Any.Literal.INSTANCE));
     }
 
     @Test
@@ -248,7 +251,8 @@ public class AlternativeMetadataTest extends AbstractTest {
     @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "x")
     public void testQualifierAddedToInitializerParameter() {
         // The @Cheap qualifier is added to the method parameter
-        Set<Annotation> qualifiers = getContextualReference(Grocery.class, Any.Literal.INSTANCE).getInitializerFruit().getMetadata()
+        Set<Annotation> qualifiers = getContextualReference(Grocery.class, Any.Literal.INSTANCE).getInitializerFruit()
+                .getMetadata()
                 .getQualifiers();
         assertTrue(annotationSetMatches(qualifiers, Cheap.class));
     }
@@ -291,7 +295,8 @@ public class AlternativeMetadataTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ae"), @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ag") })
+    @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ae"),
+            @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "ag") })
     public void testObserverMethod() {
         getCurrentManager().getEvent().select(Milk.class).fire(new Milk(true));
         Milk event = getContextualReference(Grocery.class, Any.Literal.INSTANCE).getObserverEvent();

@@ -15,6 +15,7 @@
 package org.jboss.cdi.tck.interceptors.tests.bindings.overriding;
 
 import jakarta.enterprise.context.Dependent;
+
 import org.jboss.cdi.tck.interceptors.tests.bindings.overriding.Aging.Speed;
 
 @Aging(Speed.FAST)

@@ -30,8 +30,8 @@ import jakarta.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
-import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder;
+import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.ejbjar31.EjbJarDescriptor;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -56,7 +56,8 @@ public class ContainerEventTest extends AbstractTest {
                 newMessageDriven("TestQueue", QueueMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
                         .addActivationConfigProperty("destinationType", "jakarta.jms.Queue")
-                        .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsQueue())).build();
+                        .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsQueue()))
+                .build();
 
         return new WebArchiveBuilder().withTestClassPackage(ContainerEventTest.class)
                 .withEjbJarXml(ejbJarDescriptor)
@@ -64,7 +65,8 @@ public class ContainerEventTest extends AbstractTest {
     }
 
     @Test(groups = { JAVAEE_FULL, JMS })
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aaba"), @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abba") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "aaba"),
+            @SpecAssertion(section = PROCESS_INJECTION_TARGET_EE, id = "abba") })
     public void testProcessInjectionTargetEventFiredForMessageDrivenBean() {
 
         AnnotatedType<QueueMessageDrivenBean> annotatedType = ProcessInjectionTargetObserver.getMdbType();

@@ -22,7 +22,7 @@ public class Bar {
     @Inject
     ApplicationScopedCounter counter;
 
-    public void ping(){
+    public void ping() {
         counter.increment();
     }
 }

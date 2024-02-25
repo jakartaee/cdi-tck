@@ -19,6 +19,7 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATED_TYPES;
 import static org.testng.Assert.assertEquals;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -31,7 +32,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class DelegateTypeImplementsParameterizedDecoratedTypeTest extends AbstractTest {
@@ -41,7 +42,8 @@ public class DelegateTypeImplementsParameterizedDecoratedTypeTest extends Abstra
         return new WebArchiveBuilder()
                 .withTestClassPackage(DelegateTypeImplementsParameterizedDecoratedTypeTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(TimestampLogger.class)).build();
+                        new BeansXml().decorators(TimestampLogger.class))
+                .build();
     }
 
     @Inject

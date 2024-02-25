@@ -26,7 +26,7 @@ public class Bell {
     }
 
     @PreDestroy
-    public void preDestroy(){
+    public void preDestroy() {
         TestData.preDestroyed.set(true);
     }
 }

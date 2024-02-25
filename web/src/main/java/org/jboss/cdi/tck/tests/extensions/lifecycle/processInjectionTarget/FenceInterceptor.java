@@ -21,7 +21,8 @@ import jakarta.interceptor.InvocationContext;
 
 public class FenceInterceptor implements Serializable {
 
-    @Inject Sheep sheep;
+    @Inject
+    Sheep sheep;
 
     private static boolean isWrappedInjectionSuccessfull = false;
 

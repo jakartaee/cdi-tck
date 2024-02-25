@@ -47,8 +47,10 @@ public class Specialization06Test extends AbstractTest {
 
     @Deployment
     public static EnterpriseArchive createTestArchive() {
-        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withTestClassDefinition(Specialization06Test.class).noDefaultWebModule()
-                .withBeanLibrary(Factory.class, Product.class, InjectedBean2.class, FactoryEvent.class).withBeanLibrary(AlternativeSpecializedFactory.class)
+        EnterpriseArchive enterpriseArchive = new EnterpriseArchiveBuilder().withTestClassDefinition(Specialization06Test.class)
+                .noDefaultWebModule()
+                .withBeanLibrary(Factory.class, Product.class, InjectedBean2.class, FactoryEvent.class)
+                .withBeanLibrary(AlternativeSpecializedFactory.class)
                 .build();
 
         enterpriseArchive.addAsModule(new WebArchiveBuilder().notTestArchive().withDefaultEjbModuleDependency()
@@ -58,7 +60,8 @@ public class Specialization06Test extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"),
+            @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac") })
     public void testEnabledAlternativeSpecializes() {
         assertTrue(bean1.getFactory().get() instanceof Factory);
         assertFalse(bean1.getProduct().isUnsatisfied());

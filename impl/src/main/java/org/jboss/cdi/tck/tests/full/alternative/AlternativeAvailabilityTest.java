@@ -27,8 +27,13 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -37,10 +42,6 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Type;
-import java.util.HashSet;
-import java.util.Set;
 
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
@@ -52,7 +53,8 @@ public class AlternativeAvailabilityTest extends AbstractTest {
                 .withTestClassPackage(AlternativeAvailabilityTest.class)
                 .withBeansXml(
                         new BeansXml().alternatives(Chicken.class, EnabledSheepProducer.class, SnakeProducer.class)
-                            .stereotype(EnabledAlternativeStereotype.class)).build();
+                                .stereotype(EnabledAlternativeStereotype.class))
+                .build();
     }
 
     @SuppressWarnings("serial")

@@ -62,8 +62,8 @@ public class AnimalShelter {
         return isRoomObserved;
     }
 
-    public void observesRoomInShelter(@Observes @Cats Room room){
-         isRoomObserved = true;
+    public void observesRoomInShelter(@Observes @Cats Room room) {
+        isRoomObserved = true;
     }
 
     public Cat getCat() {

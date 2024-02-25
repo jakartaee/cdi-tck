@@ -57,8 +57,10 @@ public class ProcessBeanTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(ProcessBeanTest.class)
                 .withClasses(Cat.class, Cow.class, Cowshed.class, Domestic.class, Chicken.class, ChickenHutch.class,
-                        ProcessBeanObserver.class, CatInterceptor.class, CatInterceptorBinding.class, Animal.class, AnimalDecorator.class)
-                .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL).interceptors(CatInterceptor.class).decorators(AnimalDecorator.class))
+                        ProcessBeanObserver.class, CatInterceptor.class, CatInterceptorBinding.class, Animal.class,
+                        AnimalDecorator.class)
+                .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL).interceptors(CatInterceptor.class)
+                        .decorators(AnimalDecorator.class))
                 .withExtension(ProcessBeanObserver.class).build();
     }
 
@@ -67,7 +69,8 @@ public class ProcessBeanTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "ba"), @SpecAssertion(section = PROCESS_BEAN, id = "bb"),
             @SpecAssertion(section = PROCESS_BEAN, id = "eda"), @SpecAssertion(section = PROCESS_BEAN, id = "efa"),
             @SpecAssertion(section = PROCESS_BEAN, id = "fa"), @SpecAssertion(section = PROCESS_BEAN, id = "l"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "h"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "h"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
     public void testProcessBeanEvent() {
 
         assertNotNull(ProcessBeanObserver.getCatBean());
@@ -119,7 +122,8 @@ public class ProcessBeanTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "eba"), @SpecAssertion(section = PROCESS_BEAN, id = "ebb"),
             @SpecAssertion(section = PROCESS_BEAN, id = "edd"), @SpecAssertion(section = PROCESS_BEAN, id = "efd"),
             @SpecAssertion(section = PROCESS_BEAN, id = "fd"), @SpecAssertion(section = PROCESS_BEAN, id = "n"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jb"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jd") })
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jb"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jd") })
     @Test
     public void testProcessProducerFieldEvent() {
 
@@ -151,13 +155,15 @@ public class ProcessBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "aa"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
     public void testProcessBeanFiredForInterceptor() {
         assertNotNull(ProcessBeanObserver.getInterceptor());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN, id = "aa"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "i") })
     public void testProcessBeanFiredForDecorator() {
         assertNotNull(ProcessBeanObserver.getDecorator());
     }

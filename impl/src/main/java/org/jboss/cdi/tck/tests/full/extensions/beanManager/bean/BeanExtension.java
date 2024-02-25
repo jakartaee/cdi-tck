@@ -45,7 +45,7 @@ public class BeanExtension implements Extension {
 
     @SuppressWarnings("unchecked")
     void registerBeans(@Observes AfterBeanDiscovery event, BeanManager manager) {
-     // create a synthetic class bean
+        // create a synthetic class bean
         {
             AnnotatedType<Office> oat = manager.createAnnotatedType(Office.class);
             BeanAttributes<Office> oa = manager.createBeanAttributes(oat);
@@ -92,7 +92,7 @@ public class BeanExtension implements Extension {
                 }
             }
             assertNotNull(method);
-            BeanAttributes<Tiger> attributes = (BeanAttributes<Tiger>)  starveOut(manager.createBeanAttributes(method));
+            BeanAttributes<Tiger> attributes = (BeanAttributes<Tiger>) starveOut(manager.createBeanAttributes(method));
             ProducerFactory<Zoo> factory = manager.getProducerFactory(method, zooBean);
             event.addBean(manager.createBean(attributes, Zoo.class, factory));
         }

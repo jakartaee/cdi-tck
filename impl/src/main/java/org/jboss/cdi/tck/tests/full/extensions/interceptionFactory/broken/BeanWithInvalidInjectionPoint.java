@@ -20,10 +20,11 @@ import jakarta.inject.Inject;
 @ApplicationScoped
 public class BeanWithInvalidInjectionPoint {
 
-    public BeanWithInvalidInjectionPoint(){}
+    public BeanWithInvalidInjectionPoint() {
+    }
 
     @Inject
-    public BeanWithInvalidInjectionPoint(InterceptionFactory<?> interceptionFactory){
+    public BeanWithInvalidInjectionPoint(InterceptionFactory<?> interceptionFactory) {
 
     }
 }

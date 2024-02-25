@@ -20,9 +20,9 @@ public class Text {
     }
 
     private String content;
-    
-    public Text(String content){
+
+    public Text(String content) {
         this.content = content;
-        
+
     }
 }

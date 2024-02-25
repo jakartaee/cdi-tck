@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -26,7 +26,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 /**
  * Decorator is a managed bean and may use the {@link PostConstruct} and {@link PreDestroy} annotations to identify methods to
  * be called back by the container at the appropriate points in the bean’s lifecycle.
- * 
+ *
  * @author Martin Kouba
  */
 @SuppressWarnings("serial")

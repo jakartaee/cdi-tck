@@ -18,5 +18,6 @@ import jakarta.enterprise.context.Dependent;
 @Dependent
 public class SomeAnnotatedBean {
 
-    public void pong(){}
+    public void pong() {
+    }
 }
