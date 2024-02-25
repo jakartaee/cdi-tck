@@ -71,7 +71,8 @@ public class FireEventTest extends AbstractTest {
         getCurrentManager().getEvent().select(MiniBar.class).fire(miniBar);
         assertTrue(billing.isActive());
         Item chocolate = miniBar.getItemByName("Chocolate");
-        getCurrentManager().getEvent().select(Item.class, new Lifted.LiftedLiteral(){}).fire(chocolate);
+        getCurrentManager().getEvent().select(Item.class, new Lifted.LiftedLiteral() {
+        }).fire(chocolate);
         assertEquals(billing.getCharge(), 5);
     }
 
@@ -90,7 +91,7 @@ public class FireEventTest extends AbstractTest {
         }).fire(new Object());
     }
 
-/**
+    /**
      * This test verifies that the {@link Event} object capable of firing {@link Item} objects can be injected with the {@link
      * Any} binding type and that the injected object can be used to fire an event. The functionality is verified by checking
      * that the corresponding observer gets invoked.
@@ -127,7 +128,8 @@ public class FireEventTest extends AbstractTest {
      **/
     // Simplify assertions
     @Test(groups = REWRITE)
-    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "b"), @SpecAssertion(section = EVENT, id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "b"),
+            @SpecAssertion(section = EVENT, id = "cb") })
     public void testInjectedEventAcceptsEventObject() throws SecurityException, NoSuchFieldException, NoSuchMethodException {
         Billing billing = getContextualReference(Billing.class);
         billing.reset();

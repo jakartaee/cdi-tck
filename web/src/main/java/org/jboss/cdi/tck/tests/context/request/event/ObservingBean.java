@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.context.request.event;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.BeforeDestroyed;
 import jakarta.enterprise.context.Destroyed;
@@ -36,8 +37,8 @@ public class ObservingBean {
         initializedRequestCount.incrementAndGet();
     }
 
-    public void observeBeforeDestroyed(@Observes @BeforeDestroyed(RequestScoped.class) ServletRequest event){
-         beforeDestroyedRequestCount.incrementAndGet();
+    public void observeBeforeDestroyed(@Observes @BeforeDestroyed(RequestScoped.class) ServletRequest event) {
+        beforeDestroyedRequestCount.incrementAndGet();
     }
 
     public void observeRequestDestroyed(@Observes @Destroyed(RequestScoped.class) ServletRequest event) {

@@ -21,11 +21,11 @@ import jakarta.enterprise.inject.spi.Bean;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.lookup.typesafe.resolution.Bird;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-import org.jboss.cdi.tck.tests.lookup.typesafe.resolution.Bird;
 
 @SpecVersion(spec = "cdi", version = "2.0")
 public class EnterpriseResolutionByTypeTest extends AbstractTest {

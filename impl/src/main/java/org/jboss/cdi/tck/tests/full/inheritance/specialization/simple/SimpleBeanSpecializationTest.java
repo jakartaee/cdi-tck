@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -28,7 +28,6 @@ import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.UnsatisfiedResolutionException;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Named;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -56,7 +55,8 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia"), @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ib") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia"),
+            @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ib") })
     public void testIndirectSpecialization() {
         // LazyFarmer specializes directly Farmer and indirectly Human
         Set<Bean<Human>> humanBeans = getBeans(Human.class);
@@ -80,7 +80,8 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "j"), @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "j"),
+            @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "aa") })
     public void testSpecializingBeanHasQualifiersOfSpecializedAndSpecializingBean() {
         Bean<LazyFarmer> lazyFarmerBean = getBeans(LazyFarmer.class, LAZY_LITERAL).iterator().next();
         Set<Annotation> lazyFarmerBeanQualifiers = lazyFarmerBean.getQualifiers();
@@ -91,7 +92,8 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "k"), @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "k"),
+            @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ab") })
     public void testSpecializingBeanHasNameOfSpecializedBean() {
         String expectedName = "farmer";
         Set<Bean<?>> beans = getCurrentManager().getBeans(expectedName);

@@ -53,7 +53,8 @@ public class EventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "i"),
+            @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "c"),
             @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "ca"),
             @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })
     public void testObserverMethodParameterInjectionPoints() {
@@ -68,7 +69,8 @@ public class EventTest extends AbstractTest {
      * adapter.
      */
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHODS, id = "c"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHODS, id = "c"),
+            @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "a") })
     public void testStaticObserverMethodInvoked() {
 
         Context requestContext = getCurrentConfiguration().getContexts().getRequestContext();
@@ -102,12 +104,14 @@ public class EventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "a"), @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "a"),
+            @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "b") })
     public void testObserverMethodNotifiedWhenQualifiersMatch() {
 
         BullTerrier.reset();
 
-        getCurrentManager().getEvent().select(MultiBindingEvent.class, new RoleLiteral("Admin"), new TameAnnotationLiteral()).fire(new MultiBindingEvent());
+        getCurrentManager().getEvent().select(MultiBindingEvent.class, new RoleLiteral("Admin"), new TameAnnotationLiteral())
+                .fire(new MultiBindingEvent());
 
         assertTrue(BullTerrier.isMultiBindingEventObserved());
         assertTrue(BullTerrier.isSingleBindingEventObserved());

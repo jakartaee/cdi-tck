@@ -21,9 +21,8 @@ public class DataProviderProducer {
 
     @Produces
     @Mock
-    public DataProvider produceDataProvider(){
-       return new DataProvider();
+    public DataProvider produceDataProvider() {
+        return new DataProvider();
     }
-    
-    
+
 }

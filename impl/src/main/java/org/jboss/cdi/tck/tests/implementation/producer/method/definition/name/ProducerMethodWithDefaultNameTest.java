@@ -22,7 +22,6 @@ import static org.testng.Assert.assertTrue;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -62,7 +61,8 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa"),
+            @SpecAssertion(section = NAMED_STEREOTYPE, id = "ab") })
     public void testProducerMethodQualifiers() {
         String name = "produceJohn";
         Bean<Bug> john = getUniqueBean(Bug.class, new Funny.Literal());

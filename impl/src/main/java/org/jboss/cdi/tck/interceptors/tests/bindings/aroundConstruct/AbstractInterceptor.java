@@ -18,7 +18,6 @@ import jakarta.interceptor.InvocationContext;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
-
 public abstract class AbstractInterceptor {
 
     @AroundConstruct

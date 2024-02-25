@@ -62,7 +62,8 @@ public class ResourceAlternative01Test extends AbstractTest {
                 .withBeanLibrary(Charlie.class)
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName("test1")
-                                .envEntryType("java.lang.String").envEntryValue("hello").up()).build();
+                                .envEntryType("java.lang.String").envEntryValue("hello").up())
+                .build();
     }
 
     @Inject

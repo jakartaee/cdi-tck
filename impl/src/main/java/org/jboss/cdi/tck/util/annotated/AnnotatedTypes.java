@@ -64,7 +64,8 @@ public class AnnotatedTypes {
     /**
      * compares two annotated elements to see if they have the same annotations
      */
-    public static boolean compareAnnotatedParameters(List<? extends AnnotatedParameter<?>> p1, List<? extends AnnotatedParameter<?>> p2) {
+    public static boolean compareAnnotatedParameters(List<? extends AnnotatedParameter<?>> p1,
+            List<? extends AnnotatedParameter<?>> p2) {
         if (p1.size() != p2.size()) {
             return false;
         }

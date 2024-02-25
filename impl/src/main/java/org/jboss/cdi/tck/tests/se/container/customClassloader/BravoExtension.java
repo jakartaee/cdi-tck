@@ -19,8 +19,8 @@ import jakarta.enterprise.inject.spi.ProcessAnnotatedType;
 
 public class BravoExtension implements Extension {
 
-    public void processAnnotatedType(@Observes ProcessAnnotatedType<Bravo> event){
-         event.configureAnnotatedType().add(ProcessedByExtension.ProcessedByExtensionLiteral.INSTANCE);
+    public void processAnnotatedType(@Observes ProcessAnnotatedType<Bravo> event) {
+        event.configureAnnotatedType().add(ProcessedByExtension.ProcessedByExtensionLiteral.INSTANCE);
     }
 
 }

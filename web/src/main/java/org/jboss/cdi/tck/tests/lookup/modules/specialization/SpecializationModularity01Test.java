@@ -32,17 +32,17 @@ import org.testng.annotations.Test;
 
 /**
  * Simple WAR with multiple libraries.
- * 
+ *
  * Library 1 defines bean {@link Handler}. Library 2 defines bean {@link UppercaseHandler} which specializes {@link Handler}.
  * Bean {@link Alpha} packaged in WEB-INF/classes has an injection point of type {@link Handler}. Bean {@link Bravo} packaged in
  * library 1 has an injection point of type {@link Handler}. Bean {@link Charlie} packaged in library 1 has an injection point
  * of type {@link Handler}.
- * 
- * 
+ *
+ *
  * Expected result: {@link UppercaseHandler} is injected into beans {@link Alpha}, {@link Bravo} and {@link Charlie}
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class SpecializationModularity01Test extends AbstractTest {
@@ -64,7 +64,8 @@ public class SpecializationModularity01Test extends AbstractTest {
     Charlie charlie;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "aa"), @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia") })
+    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "aa"),
+            @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia") })
     public void testSpecialization() {
         assertNotNull(alpha);
         assertEquals(alpha.hello(), "HELLO");

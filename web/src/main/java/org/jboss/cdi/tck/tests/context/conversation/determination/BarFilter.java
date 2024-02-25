@@ -28,7 +28,7 @@ import jakarta.servlet.annotation.WebFilter;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @WebFilter(filterName = "BarFilter", urlPatterns = "/foo")
 public class BarFilter implements Filter {

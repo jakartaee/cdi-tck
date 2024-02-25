@@ -21,7 +21,8 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-/** {@link jakarta.interceptor.InterceptorBinding} annotation is deliberately missing, will be registered as one in extension
+/**
+ * {@link jakarta.interceptor.InterceptorBinding} annotation is deliberately missing, will be registered as one in extension
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
@@ -29,5 +30,5 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Documented
 public @interface CustomBinding {
-    
+
 }

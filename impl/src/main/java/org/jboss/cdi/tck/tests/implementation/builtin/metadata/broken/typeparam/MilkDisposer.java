@@ -21,7 +21,7 @@ import jakarta.enterprise.inject.spi.Bean;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class MilkDisposer {

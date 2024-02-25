@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -17,8 +17,8 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATORS;
 import static org.testng.Assert.assertTrue;
 
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
+import java.net.URL;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
@@ -30,10 +30,11 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.net.URL;
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
@@ -48,7 +49,8 @@ public class DecoratorInstanceIsDependentObjectTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorInstanceIsDependentObjectTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(ChargeDecorator.class)).build();
+                        new BeansXml().decorators(ChargeDecorator.class))
+                .build();
     }
 
     @Test

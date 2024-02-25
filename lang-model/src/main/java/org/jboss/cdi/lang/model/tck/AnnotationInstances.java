@@ -22,33 +22,15 @@ public class AnnotationInstances {
     void defaultValues() {
     }
 
-    @AnnotationMembers(
-            booleanMember = false,
-            byteMember = -1,
-            shortMember = -2,
-            intMember = -3,
-            longMember = -4,
-            floatMember = -5.0F,
-            doubleMember = -6.0,
-            charMember = 'a',
-            stringMember = "bb",
-            classMember = AnnotationInstances.class,
-            enumMember = SimpleEnum.NO,
-            annotationMember = @SimpleAnnotation("ccc"),
+    @AnnotationMembers(booleanMember = false, byteMember = -1, shortMember = -2, intMember = -3, longMember = -4, floatMember = -5.0F, doubleMember = -6.0, charMember = 'a', stringMember = "bb", classMember = AnnotationInstances.class, enumMember = SimpleEnum.NO, annotationMember = @SimpleAnnotation("ccc"),
 
-            booleanArrayMember = { false, true },
-            byteArrayMember = { -1, -2 },
-            shortArrayMember = { -3, -4 },
-            intArrayMember = { -5, -6 },
-            longArrayMember = { -7, -8 },
-            floatArrayMember = { -9.0F, -10.0F },
-            doubleArrayMember = { -11.0, -12.0 },
-            charArrayMember = { 'a', 'b' },
-            stringArrayMember = { "cc", "dd" },
-            classArrayMember = { AnnotationInstances.class, AnnotationMembers.class },
-            enumArrayMember = { SimpleEnum.NO, SimpleEnum.YES },
-            annotationArrayMember = { @SimpleAnnotation("eee"), @SimpleAnnotation("fff") }
-    )
+            booleanArrayMember = { false, true }, byteArrayMember = { -1, -2 }, shortArrayMember = { -3,
+                    -4 }, intArrayMember = { -5, -6 }, longArrayMember = { -7, -8 }, floatArrayMember = { -9.0F,
+                            -10.0F }, doubleArrayMember = { -11.0, -12.0 }, charArrayMember = { 'a',
+                                    'b' }, stringArrayMember = { "cc", "dd" }, classArrayMember = { AnnotationInstances.class,
+                                            AnnotationMembers.class }, enumArrayMember = { SimpleEnum.NO,
+                                                    SimpleEnum.YES }, annotationArrayMember = { @SimpleAnnotation("eee"),
+                                                            @SimpleAnnotation("fff") })
     void nondefaultValues() {
     }
 
@@ -60,8 +42,10 @@ public class AnnotationInstances {
     private static void verifyDefaultValues(ClassInfo clazz) {
         MethodInfo method = LangModelUtils.singleMethod(clazz, "defaultValues");
         assert method.annotations().size() == 1;
-        assert method.annotations(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers")).size() == 1;
-        assert method.annotations(it -> !it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers")).size() == 0;
+        assert method.annotations(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers"))
+                .size() == 1;
+        assert method.annotations(it -> !it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers"))
+                .size() == 0;
         assert method.hasAnnotation(AnnotationMembers.class);
         assert method.hasAnnotation(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers"));
         assert !method.hasAnnotation(it -> !it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers"));
@@ -117,7 +101,8 @@ public class AnnotationInstances {
         assert ann.hasMember("classMember");
         assert ann.member("classMember").isClass();
         assert ann.member("classMember").asType().isClass();
-        assert ann.member("classMember").asType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers");
+        assert ann.member("classMember").asType().asClass().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.AnnotationMembers");
 
         // SimpleEnum enumMember() default SimpleEnum.YES;
         assert ann.hasMember("enumMember");
@@ -129,7 +114,8 @@ public class AnnotationInstances {
         // SimpleAnnotation annotationMember() default @SimpleAnnotation("CCC");
         assert ann.hasMember("annotationMember");
         assert ann.member("annotationMember").isNestedAnnotation();
-        assert ann.member("annotationMember").asNestedAnnotation().declaration().name().equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
+        assert ann.member("annotationMember").asNestedAnnotation().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
         assert ann.member("annotationMember").asNestedAnnotation().hasValue();
         assert ann.member("annotationMember").asNestedAnnotation().value().isString();
         assert ann.member("annotationMember").asNestedAnnotation().value().asString().equals("CCC");
@@ -221,10 +207,12 @@ public class AnnotationInstances {
         assert ann.member("classArrayMember").asArray().size() == 2;
         assert ann.member("classArrayMember").asArray().get(0).isClass();
         assert ann.member("classArrayMember").asArray().get(0).asType().isClass();
-        assert ann.member("classArrayMember").asArray().get(0).asType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
+        assert ann.member("classArrayMember").asArray().get(0).asType().asClass().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
         assert ann.member("classArrayMember").asArray().get(1).isClass();
         assert ann.member("classArrayMember").asArray().get(1).asType().isClass();
-        assert ann.member("classArrayMember").asArray().get(1).asType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.SimpleEnum");
+        assert ann.member("classArrayMember").asArray().get(1).asType().asClass().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleEnum");
 
         // SimpleEnum[] enumArrayMember() default { SimpleEnum.YES, SimpleEnum.NO };
         assert ann.hasMember("enumArrayMember");
@@ -233,7 +221,8 @@ public class AnnotationInstances {
         assert ann.member("enumArrayMember").asArray().get(0).isEnum();
         assert ann.member("enumArrayMember").asArray().get(0).asEnum(SimpleEnum.class) == SimpleEnum.YES;
         assert ann.member("enumArrayMember").asArray().get(1).isEnum();
-        assert ann.member("enumArrayMember").asArray().get(1).asEnumClass().name().equals("org.jboss.cdi.lang.model.tck.SimpleEnum");
+        assert ann.member("enumArrayMember").asArray().get(1).asEnumClass().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleEnum");
         assert ann.member("enumArrayMember").asArray().get(1).asEnumConstant().equals("NO");
 
         // SimpleAnnotation[] annotationArrayMember() default { @SimpleAnnotation("EEE"), @SimpleAnnotation("FFF") };
@@ -241,12 +230,14 @@ public class AnnotationInstances {
         assert ann.member("annotationArrayMember").isArray();
         assert ann.member("annotationArrayMember").asArray().size() == 2;
         assert ann.member("annotationArrayMember").asArray().get(0).isNestedAnnotation();
-        assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().declaration().name().equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
+        assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
         assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().hasValue();
         assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().value().isString();
         assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().value().asString().equals("EEE");
         assert ann.member("annotationArrayMember").asArray().get(1).isNestedAnnotation();
-        assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().declaration().name().equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
+        assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
         assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().hasValue();
         assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().value().isString();
         assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().value().asString().equals("FFF");
@@ -255,8 +246,10 @@ public class AnnotationInstances {
     private static void verifyNondefaultValues(ClassInfo clazz) {
         MethodInfo method = LangModelUtils.singleMethod(clazz, "nondefaultValues");
         assert method.annotations().size() == 1;
-        assert method.annotations(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers")).size() == 1;
-        assert method.annotations(it -> !it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers")).size() == 0;
+        assert method.annotations(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers"))
+                .size() == 1;
+        assert method.annotations(it -> !it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers"))
+                .size() == 0;
         assert method.hasAnnotation(AnnotationMembers.class);
         assert method.hasAnnotation(it -> it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers"));
         assert !method.hasAnnotation(it -> !it.declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers"));
@@ -312,7 +305,8 @@ public class AnnotationInstances {
         assert ann.hasMember("classMember");
         assert ann.member("classMember").isClass();
         assert ann.member("classMember").asType().isClass();
-        assert ann.member("classMember").asType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationInstances");
+        assert ann.member("classMember").asType().asClass().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.AnnotationInstances");
 
         // enumMember = SimpleEnum.NO
         assert ann.hasMember("enumMember");
@@ -324,7 +318,8 @@ public class AnnotationInstances {
         // annotationMember = @SimpleAnnotation("ccc"),
         assert ann.hasMember("annotationMember");
         assert ann.member("annotationMember").isNestedAnnotation();
-        assert ann.member("annotationMember").asNestedAnnotation().declaration().name().equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
+        assert ann.member("annotationMember").asNestedAnnotation().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
         assert ann.member("annotationMember").asNestedAnnotation().hasValue();
         assert ann.member("annotationMember").asNestedAnnotation().value().isString();
         assert ann.member("annotationMember").asNestedAnnotation().value().asString().equals("ccc");
@@ -416,10 +411,12 @@ public class AnnotationInstances {
         assert ann.member("classArrayMember").asArray().size() == 2;
         assert ann.member("classArrayMember").asArray().get(0).isClass();
         assert ann.member("classArrayMember").asArray().get(0).asType().isClass();
-        assert ann.member("classArrayMember").asArray().get(0).asType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationInstances");
+        assert ann.member("classArrayMember").asArray().get(0).asType().asClass().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.AnnotationInstances");
         assert ann.member("classArrayMember").asArray().get(1).isClass();
         assert ann.member("classArrayMember").asArray().get(1).asType().isClass();
-        assert ann.member("classArrayMember").asArray().get(1).asType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.AnnotationMembers");
+        assert ann.member("classArrayMember").asArray().get(1).asType().asClass().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.AnnotationMembers");
 
         // enumArrayMember = { SimpleEnum.NO, SimpleEnum.YES }
         assert ann.hasMember("enumArrayMember");
@@ -428,7 +425,8 @@ public class AnnotationInstances {
         assert ann.member("enumArrayMember").asArray().get(0).isEnum();
         assert ann.member("enumArrayMember").asArray().get(0).asEnum(SimpleEnum.class) == SimpleEnum.NO;
         assert ann.member("enumArrayMember").asArray().get(1).isEnum();
-        assert ann.member("enumArrayMember").asArray().get(1).asEnumClass().name().equals("org.jboss.cdi.lang.model.tck.SimpleEnum");
+        assert ann.member("enumArrayMember").asArray().get(1).asEnumClass().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleEnum");
         assert ann.member("enumArrayMember").asArray().get(1).asEnumConstant().equals("YES");
 
         /// annotationArrayMember = { @SimpleAnnotation("eee"), @SimpleAnnotation("fff") }
@@ -436,12 +434,14 @@ public class AnnotationInstances {
         assert ann.member("annotationArrayMember").isArray();
         assert ann.member("annotationArrayMember").asArray().size() == 2;
         assert ann.member("annotationArrayMember").asArray().get(0).isNestedAnnotation();
-        assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().declaration().name().equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
+        assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
         assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().hasValue();
         assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().value().isString();
         assert ann.member("annotationArrayMember").asArray().get(0).asNestedAnnotation().value().asString().equals("eee");
         assert ann.member("annotationArrayMember").asArray().get(1).isNestedAnnotation();
-        assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().declaration().name().equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
+        assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().declaration().name()
+                .equals("org.jboss.cdi.lang.model.tck.SimpleAnnotation");
         assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().hasValue();
         assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().value().isString();
         assert ann.member("annotationArrayMember").asArray().get(1).asNestedAnnotation().value().asString().equals("fff");

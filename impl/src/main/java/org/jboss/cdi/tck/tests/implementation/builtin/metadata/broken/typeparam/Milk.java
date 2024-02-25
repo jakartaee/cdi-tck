@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.implementation.builtin.metadata.broken.typeparam
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public interface Milk {
 

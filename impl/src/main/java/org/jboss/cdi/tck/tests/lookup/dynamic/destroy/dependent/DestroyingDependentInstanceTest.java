@@ -19,28 +19,28 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.enterprise.inject.Instance;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Test for CDI-139. It verifies that Instance.destroy() can be used to destroy a dependent bean instance and bean instances
  * depending on the bean instance are destroyed as well.
- * 
+ *
  * <p>
  * This test was originally part of the Weld test suite.
  * </p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */

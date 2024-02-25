@@ -13,9 +13,9 @@
  */
 package org.jboss.cdi.tck.tests.lookup.modules.interceptors;
 
-import jakarta.enterprise.context.Dependent;
-
 import java.io.Serializable;
+
+import jakarta.enterprise.context.Dependent;
 
 @SuppressWarnings("serial")
 @Dependent

@@ -13,17 +13,18 @@
  */
 package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persistence;
 
+import javax.sql.DataSource;
+
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Produces;
-import javax.sql.DataSource;
 
 @Dependent
 public class DataSourceProducer {
 
     @Produces
     @Another
-    @Resource(name="jdbc/TestDB")
+    @Resource(name = "jdbc/TestDB")
     DataSource dataSource;
 
 }

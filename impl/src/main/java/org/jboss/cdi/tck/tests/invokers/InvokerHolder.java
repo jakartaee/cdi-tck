@@ -15,11 +15,11 @@
  */
 package org.jboss.cdi.tck.tests.invokers;
 
-import jakarta.enterprise.invoke.Invoker;
+import static org.testng.Assert.assertNotNull;
 
 import java.util.Map;
 
-import static org.testng.Assert.assertNotNull;
+import jakarta.enterprise.invoke.Invoker;
 
 public class InvokerHolder {
     private final Map<String, Invoker<?, ?>> invokers;

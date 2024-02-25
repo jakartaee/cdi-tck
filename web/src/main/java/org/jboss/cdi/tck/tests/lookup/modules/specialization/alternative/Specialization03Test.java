@@ -25,6 +25,7 @@ import static org.testng.Assert.assertTrue;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Alternative;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -36,11 +37,12 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Test for specializing {@link Alternative}. Verifies that a bean is only specialized in the BDA where the specializing alternative is enabled.
- * 
+ * Test for specializing {@link Alternative}. Verifies that a bean is only specialized in the BDA where the specializing
+ * alternative is enabled.
+ *
  * @author Jozef Hartinger
  * @author Matej Briskar
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class Specialization03Test extends AbstractTest {
@@ -58,14 +60,18 @@ public class Specialization03Test extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(Specialization03Test.class)
-                .withBeanLibrary(Factory.class, AlternativeSpecializedFactory.class, Product.class, InjectedBean2.class, FactoryEvent.class)
+                .withBeanLibrary(Factory.class, AlternativeSpecializedFactory.class, Product.class, InjectedBean2.class,
+                        FactoryEvent.class)
                 .withBeanLibrary(new BeansXml().alternatives(AlternativeSpecializedFactory.class),
-                        InjectedBean1.class).build();
+                        InjectedBean1.class)
+                .build();
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac"),
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "i"), @SpecAssertion(section = SPECIALIZATION, id = "ca"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"),
+            @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac"),
+            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "i"),
+            @SpecAssertion(section = SPECIALIZATION, id = "ca"),
             @SpecAssertion(section = SPECIALIZATION, id = "cb") })
     public void testEnabledAlternativeSpecializes() {
         assertTrue(bean1.getFactory().get() instanceof AlternativeSpecializedFactory);

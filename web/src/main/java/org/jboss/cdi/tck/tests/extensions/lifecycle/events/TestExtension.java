@@ -32,7 +32,6 @@ import jakarta.enterprise.inject.spi.ProcessObserverMethod;
 import jakarta.enterprise.inject.spi.ProcessProducer;
 import jakarta.enterprise.inject.spi.ProcessProducerField;
 import jakarta.enterprise.inject.spi.ProcessProducerMethod;
-import jakarta.enterprise.inject.spi.ProcessSessionBean;
 import jakarta.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
 public class TestExtension implements Extension {
@@ -50,12 +49,13 @@ public class TestExtension implements Extension {
     private ProcessInjectionPoint<SimpleBean, ?> pip;
     private ProcessProducer<SimpleBean, Integer> pp;
     private ProcessManagedBean<SimpleBean> pmb;
-    private ProcessProducerField<Integer,SimpleBean> ppf;
-    private ProcessProducerMethod<Integer,SimpleBean> ppm;
+    private ProcessProducerField<Integer, SimpleBean> ppf;
+    private ProcessProducerMethod<Integer, SimpleBean> ppm;
 
     void observesBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager bm) {
         this.bbd = event;
-        bbd.addAnnotatedType(bm.createAnnotatedType(SimpleBean.class), TestExtension.class.getName() + ":" + SimpleBean.class.getName());
+        bbd.addAnnotatedType(bm.createAnnotatedType(SimpleBean.class),
+                TestExtension.class.getName() + ":" + SimpleBean.class.getName());
     }
 
     void observesProcessAnnotatedType(@Observes ProcessAnnotatedType<SimpleBean> event) {
@@ -110,11 +110,11 @@ public class TestExtension implements Extension {
         this.pmb = event;
     }
 
-    void observesProcessProducerField(@Observes ProcessProducerField<Integer,SimpleBean> event) {
+    void observesProcessProducerField(@Observes ProcessProducerField<Integer, SimpleBean> event) {
         this.ppf = event;
     }
 
-    void observesProcessSessionBean(@Observes ProcessProducerMethod<Integer,SimpleBean> event) {
+    void observesProcessSessionBean(@Observes ProcessProducerMethod<Integer, SimpleBean> event) {
         this.ppm = event;
     }
 
@@ -182,11 +182,11 @@ public class TestExtension implements Extension {
         return pmb;
     }
 
-    public ProcessProducerField<Integer,SimpleBean> getProcessProducerField() {
+    public ProcessProducerField<Integer, SimpleBean> getProcessProducerField() {
         return ppf;
     }
 
-    public ProcessProducerMethod<Integer,SimpleBean> getProcessProducerMethod() {
+    public ProcessProducerMethod<Integer, SimpleBean> getProcessProducerMethod() {
         return ppm;
     }
 

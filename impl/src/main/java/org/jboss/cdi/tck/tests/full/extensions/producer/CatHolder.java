@@ -27,6 +27,7 @@ import jakarta.interceptor.InterceptorBinding;
  *
  */
 @InterceptorBinding
-@Target({TYPE, METHOD})
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
-public @interface CatHolder {}
+public @interface CatHolder {
+}

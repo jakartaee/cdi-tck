@@ -28,7 +28,7 @@ public class Foo {
         called = true;
         return 0;
     }
-    
+
     @AroundInvoke
     private Object intercept(InvocationContext ctx) throws Exception {
         called = true;

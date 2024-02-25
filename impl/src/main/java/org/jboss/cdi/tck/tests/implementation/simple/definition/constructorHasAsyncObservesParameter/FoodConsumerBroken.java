@@ -21,7 +21,7 @@ import jakarta.inject.Inject;
 public class FoodConsumerBroken {
 
     @Inject
-    public FoodConsumerBroken(@ObservesAsync Food food){
+    public FoodConsumerBroken(@ObservesAsync Food food) {
 
     }
 }

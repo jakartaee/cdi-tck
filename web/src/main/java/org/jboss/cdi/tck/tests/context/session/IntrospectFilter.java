@@ -32,23 +32,23 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 @WebFilter(filterName = "IntrospectFilter", urlPatterns = "/introspect")
 public class IntrospectFilter implements Filter {
 
-	private static final SimpleLogger logger = new SimpleLogger(
-			IntrospectFilter.class);
+    private static final SimpleLogger logger = new SimpleLogger(
+            IntrospectFilter.class);
 
-	public void destroy() {
-	}
+    public void destroy() {
+    }
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		logger.log("Do filter...");
-		chain.doFilter(request, response);
-		String mode = request.getParameter("mode");
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException {
+        logger.log("Do filter...");
+        chain.doFilter(request, response);
+        String mode = request.getParameter("mode");
         if (IntrospectServlet.MODE_INVALIDATE.equals(mode)) {
             ActionSequence.addAction(IntrospectFilter.class.getName());
         }
-	}
+    }
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-	}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
 }

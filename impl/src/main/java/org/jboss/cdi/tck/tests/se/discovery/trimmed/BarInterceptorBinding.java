@@ -21,12 +21,13 @@ import java.lang.annotation.Target;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.interceptor.InterceptorBinding;
 
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @InterceptorBinding
 public @interface BarInterceptorBinding {
 
-    public static class BarInterceptorBindingLiteral extends AnnotationLiteral<BarInterceptorBinding> implements BarInterceptorBinding {
+    public static class BarInterceptorBindingLiteral extends AnnotationLiteral<BarInterceptorBinding>
+            implements BarInterceptorBinding {
 
         public static BarInterceptorBindingLiteral INSTANCE = new BarInterceptorBindingLiteral();
 

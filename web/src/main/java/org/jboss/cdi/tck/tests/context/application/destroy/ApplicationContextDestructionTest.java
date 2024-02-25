@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Test that the application context is destroyed when the application is shut down.
- * 
+ *
  * @author Martin Kouba
  */
 @RunAsClient
@@ -69,7 +69,7 @@ public class ApplicationContextDestructionTest extends AbstractTest {
 
     /**
      * This is not a real test method.
-     * 
+     *
      * @see #testApplicationContextDestroyed(URL, URL)
      */
     @Test
@@ -82,7 +82,7 @@ public class ApplicationContextDestructionTest extends AbstractTest {
 
     /**
      * Note that this test method depends on (must be run after) {@link #deployArchives()}.
-     * 
+     *
      * @param fooContext
      * @param barContext
      * @throws Exception

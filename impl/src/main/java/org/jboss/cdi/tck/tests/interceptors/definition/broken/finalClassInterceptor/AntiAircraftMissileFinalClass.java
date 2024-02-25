@@ -19,5 +19,5 @@ import jakarta.enterprise.context.RequestScoped;
 
 @FooBinding
 @RequestScoped
-public final class AntiAircraftMissileFinalClass implements Serializable{
+public final class AntiAircraftMissileFinalClass implements Serializable {
 }

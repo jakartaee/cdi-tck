@@ -18,13 +18,12 @@ import jakarta.inject.Inject;
 
 @Dependent
 public class WhaleCovey {
-    
+
     @Inject
     Whale whale;
-    
-    
-    public void ping(){
+
+    public void ping() {
         whale.swim();
     }
-    
+
 }

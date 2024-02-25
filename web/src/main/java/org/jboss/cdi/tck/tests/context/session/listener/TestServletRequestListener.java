@@ -45,21 +45,21 @@ public class TestServletRequestListener implements ServletRequestListener {
 
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
-    	logger.log("Request initialized...");
-    	checkSessionContextActive();
+        logger.log("Request initialized...");
+        checkSessionContextActive();
     }
 
     private void checkSessionContextActive() throws IllegalStateException {
-		try {
-			if (!beanManager.getContext(SessionScoped.class).isActive()
-					|| simpleBean == null) {
-				IntrospectServlet.isSessionScopeActive = false;
-			}
-			// Check bean invocation
-			simpleBean.getId();
-		} catch (Exception e) {
-			IntrospectServlet.isSessionScopeActive = false;
-		}
-	}
+        try {
+            if (!beanManager.getContext(SessionScoped.class).isActive()
+                    || simpleBean == null) {
+                IntrospectServlet.isSessionScopeActive = false;
+            }
+            // Check bean invocation
+            simpleBean.getId();
+        } catch (Exception e) {
+            IntrospectServlet.isSessionScopeActive = false;
+        }
+    }
 
 }

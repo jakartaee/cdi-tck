@@ -17,11 +17,15 @@ import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
 import static org.testng.Assert.assertEquals;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.enterprise.inject.spi.InterceptionType;
 import jakarta.enterprise.inject.spi.Interceptor;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -31,9 +35,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Type;
-import java.util.Collections;
 
 /**
  * @author Tomas Remes
@@ -48,7 +49,8 @@ public class BuiltinMetadataSessionBeanTest extends AbstractTest {
                 .withTestClassPackage(BuiltinMetadataSessionBeanTest.class)
                 .withClasses(YoghurtInterceptor.class, Frozen.class)
                 .withBeansXml(
-                        new BeansXml().interceptors(YoghurtInterceptor.class).decorators(BakeryProductDecorator.class)).build();
+                        new BeansXml().interceptors(YoghurtInterceptor.class).decorators(BakeryProductDecorator.class))
+                .build();
     }
 
     @Inject
@@ -76,7 +78,8 @@ public class BuiltinMetadataSessionBeanTest extends AbstractTest {
             @SpecAssertion(section = BEAN_METADATA, id = "f") })
     public void testDecoratorMetadata() {
         Bean<?> sessionBean = getUniqueBean(BakeryProduct.class);
-        Decorator<?> decoratorInstance = getCurrentManager().resolveDecorators(Collections.<Type>singleton(BakeryProduct.class))
+        Decorator<?> decoratorInstance = getCurrentManager()
+                .resolveDecorators(Collections.<Type> singleton(BakeryProduct.class))
                 .iterator().next();
         BakeryProductDecorator bakeryDecorator = bakery.getDecoratorInstance();
         assertEquals(decoratorInstance, bakeryDecorator.getBean());

@@ -13,10 +13,10 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.changeBeanQualifier;
 
-import jakarta.inject.Qualifier;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import jakarta.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)

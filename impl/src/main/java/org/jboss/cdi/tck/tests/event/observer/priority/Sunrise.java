@@ -13,7 +13,6 @@
  */
 package org.jboss.cdi.tck.tests.event.observer.priority;
 
-
 public class Sunrise {
 
 }

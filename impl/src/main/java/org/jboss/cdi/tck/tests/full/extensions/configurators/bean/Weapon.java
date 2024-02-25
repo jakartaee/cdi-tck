@@ -13,10 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.configurators.bean;
 
-/** Dummy class used for injection into beans
+/**
+ * Dummy class used for injection into beans
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 public class Weapon {
-    
+
 }

@@ -13,7 +13,6 @@
  */
 package org.jboss.cdi.tck.tests.context.application.event;
 
-
 public class ObserverNames {
 
     public static final String OBSERVER2_NAME = "org.jboss.cdi.tck.tests.context.application.event.Observer2";

@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Decorator
 public abstract class HttpSessionDecorator1 implements HttpSession, Serializable {
@@ -45,7 +45,5 @@ public abstract class HttpSessionDecorator1 implements HttpSession, Serializable
         delegate.invalidate();
         httpSessionObserver.setDecorated(true);
     }
-
-    
 
 }

@@ -16,11 +16,12 @@ package org.jboss.cdi.tck.tests.event.observer.context;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
+import javax.naming.InitialContext;
+
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.TransactionPhase;
-import javax.naming.InitialContext;
 import jakarta.transaction.TransactionSynchronizationRegistry;
 
 import org.jboss.cdi.tck.util.ActionSequence;
@@ -35,7 +36,7 @@ public class FooObserver {
     private Printer printer;
 
     private static TransactionSynchronizationRegistry tsr;
-    
+
     public void observeInProgress(@Observes(during = TransactionPhase.IN_PROGRESS) Foo foo) throws Exception {
         // this observer method is called first and we do not have to look up TransactionSynchronizationRegistry each time
         if (tsr == null) {

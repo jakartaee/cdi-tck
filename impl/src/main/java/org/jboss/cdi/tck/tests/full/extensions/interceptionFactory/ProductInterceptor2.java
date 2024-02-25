@@ -28,6 +28,6 @@ public class ProductInterceptor2 {
     @AroundInvoke
     public Object aroundInvoke(InvocationContext invocationContext) throws Exception {
         ActionSequence.addAction(this.getClass().getSimpleName());
-        return (1 + (Integer)invocationContext.proceed());
+        return (1 + (Integer) invocationContext.proceed());
     }
 }

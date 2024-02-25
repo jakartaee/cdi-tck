@@ -13,13 +13,13 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
-import jakarta.enterprise.lang.model.declarations.ClassInfo;
-import jakarta.enterprise.lang.model.declarations.FieldInfo;
-import jakarta.enterprise.lang.model.declarations.MethodInfo;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import jakarta.enterprise.lang.model.declarations.ClassInfo;
+import jakarta.enterprise.lang.model.declarations.FieldInfo;
+import jakarta.enterprise.lang.model.declarations.MethodInfo;
 
 class LangModelUtils {
     static ClassInfo classOfField(ClassInfo clazz, String fieldName) {
@@ -33,7 +33,8 @@ class LangModelUtils {
                 if (result == null) {
                     result = field;
                 } else {
-                    throw new IllegalStateException("More than 1 declaration of field '" + name + "' on '" + clazz.simpleName() + "'");
+                    throw new IllegalStateException(
+                            "More than 1 declaration of field '" + name + "' on '" + clazz.simpleName() + "'");
                 }
             }
         }
@@ -54,7 +55,8 @@ class LangModelUtils {
                 if (result == null) {
                     result = field;
                 } else {
-                    throw new IllegalStateException("More than 1 declaration of field '" + name + "' on '" + clazz.simpleName() + "'");
+                    throw new IllegalStateException(
+                            "More than 1 declaration of field '" + name + "' on '" + clazz.simpleName() + "'");
                 }
             }
         }
@@ -81,7 +83,8 @@ class LangModelUtils {
                 if (result == null) {
                     result = method;
                 } else {
-                    throw new IllegalStateException("More than 1 declaration of method '" + name + "' on '" + clazz.simpleName() + "'");
+                    throw new IllegalStateException(
+                            "More than 1 declaration of method '" + name + "' on '" + clazz.simpleName() + "'");
                 }
             }
         }
@@ -102,7 +105,8 @@ class LangModelUtils {
                 if (result == null) {
                     result = method;
                 } else {
-                    throw new IllegalStateException("More than 1 declaration of method '" + name + "' on '" + clazz.simpleName() + "'");
+                    throw new IllegalStateException(
+                            "More than 1 declaration of method '" + name + "' on '" + clazz.simpleName() + "'");
                 }
             }
         }

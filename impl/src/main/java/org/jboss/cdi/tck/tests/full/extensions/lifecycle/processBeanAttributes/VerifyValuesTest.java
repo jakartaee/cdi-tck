@@ -22,6 +22,8 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+import java.lang.annotation.Annotation;
+
 import jakarta.decorator.Decorator;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
@@ -34,6 +36,7 @@ import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.enterprise.inject.spi.BeanAttributes;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -45,12 +48,10 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.lang.annotation.Annotation;
-
 /**
- * 
+ *
  * This test was originally part of Weld test suite.
- * 
+ *
  *
  * @author Jozef Hartinger
  * @author Martin Kouba
@@ -67,8 +68,9 @@ public class VerifyValuesTest extends AbstractTest {
         WebArchive archive = new WebArchiveBuilder()
                 .withTestClassPackage(VerifyValuesTest.class)
                 .withBeansXml(
-                        new BeansXml(BeanDiscoveryMode.ALL).alternatives(Alpha.class, BravoProducer.class, CharlieProducer.class)
-                            .interceptors(BravoInterceptor.class).decorators(BravoDecorator.class))
+                        new BeansXml(BeanDiscoveryMode.ALL)
+                                .alternatives(Alpha.class, BravoProducer.class, CharlieProducer.class)
+                                .interceptors(BravoInterceptor.class).decorators(BravoDecorator.class))
                 .withExtension(VerifyingExtension.class).build();
         return archive;
     }
@@ -98,7 +100,8 @@ public class VerifyValuesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jc") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jc") })
     public void testProducerMethodBeanAttributes() {
         BeanAttributes<Bravo> attributes = extension.getProducedBravoAttributes();
         assertNotNull(attributes);
@@ -124,7 +127,8 @@ public class VerifyValuesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jc") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "aa"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jc") })
     public void testProducerFieldBeanAttributes() {
         BeanAttributes<Charlie> attributes = extension.getProducedCharlieAttributes();
         assertNotNull(attributes);
@@ -138,7 +142,8 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ab"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ab"),
+            @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
     public void testInterceptorBeanAttributes() {
         BeanAttributes<BravoInterceptor> attributes = extension.getBravoInterceptorAttributes();
         assertNotNull(attributes);
@@ -150,7 +155,8 @@ public class VerifyValuesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ac"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ac"),
+            @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bb") })
     public void testDecoratorBeanAttributes() {
         BeanAttributes<BravoDecorator> attributes = extension.getBravoDecoratorAttributes();
         assertNotNull(attributes);

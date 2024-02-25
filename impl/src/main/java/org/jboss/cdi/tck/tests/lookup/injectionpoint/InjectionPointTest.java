@@ -17,12 +17,19 @@ import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Set;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.AnnotatedParameter;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -31,12 +38,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Set;
 
 /**
  * Injection point metadata tests
@@ -55,7 +56,8 @@ public class InjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "da"), @SpecAssertion(section = INJECTION_POINT, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "da"),
+            @SpecAssertion(section = INJECTION_POINT, id = "aa") })
     public void testGetBean() {
 
         // Get an instance of the bean which has another bean injected into it

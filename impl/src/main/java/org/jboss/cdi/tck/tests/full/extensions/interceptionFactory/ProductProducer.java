@@ -24,7 +24,8 @@ public class ProductProducer {
     @Produces
     @RequestScoped
     public Product createInterceptedProduct(InterceptionFactory<Product> interceptionFactory) {
-        interceptionFactory.configure().add(ProductInterceptorBinding3.BindingLiteral.INSTANCE).filterMethods(m -> m.getJavaMember().getName().equals("ping"))
+        interceptionFactory.configure().add(ProductInterceptorBinding3.BindingLiteral.INSTANCE)
+                .filterMethods(m -> m.getJavaMember().getName().equals("ping"))
                 .findFirst().get()
                 .add(ProductInterceptorBinding1.BindingLiteral.INSTANCE)
                 .add(ProductInterceptorBinding2.BindingLiteral.INSTANCE);

@@ -41,10 +41,10 @@ import org.testng.annotations.Test;
 /**
  * Test that verifies that the container uses the runtime type of the event object as the event type. If the event type contains
  * an unresolved type variable the selected type is used to resolve it.
- * 
- * 
+ *
+ *
  * This test was originally part of the Weld test suite.
- * 
+ *
  *
  * @author Jozef Hartinger
  * @author Martin Kouba

@@ -17,8 +17,11 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
+import java.util.List;
+
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -29,8 +32,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 @SpecVersion(spec = "cdi", version = "2.0")
 public class EnterpriseLifecycleInterceptorDefinitionTest extends AbstractTest {
@@ -46,7 +47,7 @@ public class EnterpriseLifecycleInterceptorDefinitionTest extends AbstractTest {
 
     @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g"),
-        @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "h") })
+            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "h") })
     public void testLifecycleInterception() {
 
         ActionSequence.reset();

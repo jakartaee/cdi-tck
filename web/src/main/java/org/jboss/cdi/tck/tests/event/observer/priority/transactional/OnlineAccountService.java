@@ -23,8 +23,6 @@ import jakarta.inject.Named;
 import jakarta.transaction.Status;
 import jakarta.transaction.UserTransaction;
 
-import org.jboss.cdi.tck.tests.event.observer.transactional.Failure;
-import org.jboss.cdi.tck.tests.event.observer.transactional.Withdrawal;
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Named
@@ -42,7 +40,7 @@ public class OnlineAccountService {
     Event<TxFailure> eventFailure;
 
     /**
-     * 
+     *
      * @param amount
      * @throws Exception
      */
@@ -54,7 +52,7 @@ public class OnlineAccountService {
     }
 
     /**
-     * 
+     *
      * @param amount
      * @throws Exception
      */
@@ -67,7 +65,7 @@ public class OnlineAccountService {
     }
 
     /**
-     * 
+     *
      * @param amount
      * @throws Exception
      */
@@ -77,7 +75,7 @@ public class OnlineAccountService {
     }
 
     /**
-     * 
+     *
      * @param amount
      * @throws Exception
      */

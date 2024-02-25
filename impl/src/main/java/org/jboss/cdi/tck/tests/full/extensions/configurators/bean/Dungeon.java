@@ -16,46 +16,47 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.bean;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-/** Simple class checking that all 'manually' created beans can be injected
+/**
+ * Simple class checking that all 'manually' created beans can be injected
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @ApplicationScoped
 public class Dungeon {
-    
+
     @Inject
     @Undead
     private Skeleton skeleton;
-    
+
     @Inject
     @Undead
     @Dangerous
     private Zombie zombie;
-    
+
     @Inject
     @Undead
     private Ghost ghost;
-    
+
     @Inject
     @Undead
     private Vampire vampire;
-    
+
     public boolean hasAllMonters() {
         return skeleton != null && zombie != null && ghost != null && vampire != null;
     }
-    
+
     public Skeleton getSkeleton() {
         return skeleton;
     }
-    
+
     public Zombie getZombie() {
         return zombie;
     }
-    
+
     public Ghost getGhost() {
         return ghost;
     }
-    
+
     public Vampire getVampire() {
         return vampire;
     }

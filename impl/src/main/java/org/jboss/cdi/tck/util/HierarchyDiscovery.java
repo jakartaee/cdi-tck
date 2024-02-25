@@ -19,7 +19,6 @@ import java.lang.reflect.TypeVariable;
 import java.util.HashSet;
 import java.util.Set;
 
-
 public class HierarchyDiscovery {
     private final Type type;
 

@@ -22,10 +22,12 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.List;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -41,8 +43,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 /**
  * @author Martin Kouba
@@ -66,7 +66,8 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     AfterTypeDiscoveryObserver extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "a"), @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "a"),
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "c"),
             @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hb") })
     public void testInitialInterceptors() {
         assertTrue(extension.getInterceptors().contains(BravoInterceptor.class));
@@ -76,7 +77,8 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "b"), @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ha") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "b"),
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "ha") })
     public void testInitialAlternatives() {
         // frameworks might add their own alternatives, we cannot assert positions in list but rather just ordering
         assertTrue(extension.getAlternatives().size() >= 3);
@@ -103,7 +105,8 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "d"), @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hc") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "d"),
+            @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "hc") })
     public void testInitialDecorators() {
         // frameworks might add their own decorators, we cannot assert positions in list but rather just ordering
         assertTrue(extension.getDecorators().size() >= 4);
@@ -172,7 +175,8 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "e"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_TYPE_DISCOVERY, id = "e"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "d") })
     public void testAddAnnotatedType() {
         assertTrue(extension.isBossObserved());
         getUniqueBean(Boss.class);
@@ -190,18 +194,21 @@ public class AfterTypeDiscoveryTest extends AbstractTest {
     public void testAddAnnotatedTypeWithConfigurator() {
         Bean<Baz> bazBean = getUniqueBean(Baz.class, Pro.ProLiteral.INSTANCE);
         assertEquals(bazBean.getScope(), RequestScoped.class);
-        Baz baz = (Baz) getCurrentManager().getReference(bazBean, Baz.class, getCurrentManager().createCreationalContext(bazBean));
+        Baz baz = (Baz) getCurrentManager().getReference(bazBean, Baz.class,
+                getCurrentManager().createCreationalContext(bazBean));
         assertFalse(baz.getBarInstance().isUnsatisfied());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "ab"), @SpecAssertion(section = PROCESS_PRODUCER, id = "bb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "ab"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "bb") })
     public void testProcessProducerEventFiredForProducerField() {
         assertTrue(extension.isProcessProcuderFieldObserved());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "aa"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "aa"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "ba") })
     public void testProcessProducerEventFiredForProducerMethod() {
         assertTrue(extension.isProcessProcuderMethodObserved());
     }

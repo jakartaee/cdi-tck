@@ -63,17 +63,17 @@ public class URLPackageScanner {
      * Factory method to create an instance of URLPackageScanner.
      *
      * @param addRecursively
-     *            flag to add child packages
+     *        flag to add child packages
      * @param classLoader
-     *            class loader that will have classes added
+     *        class loader that will have classes added
      * @param callback
-     *          found class callback
+     *        found class callback
      * @param packageName
-     *            Package that will be scanned
+     *        Package that will be scanned
      * @return new instance of URLPackageScanner
      */
     public static URLPackageScanner newInstance(boolean addRecursively, final ClassLoader classLoader,
-        final Callback callback, final String packageName) {
+            final Callback callback, final String packageName) {
 
         validateNotNull(packageName, "Package name must be specified");
         validateNotNull(classLoader, "ClassLoader must be specified");
@@ -86,11 +86,11 @@ public class URLPackageScanner {
      * Factory method to create an instance of URLPackageScanner in the default package
      *
      * @param addRecursively
-     *            flag to add child packages
+     *        flag to add child packages
      * @param classLoader
-     *            class loader that will have classes added
+     *        class loader that will have classes added
      * @param callback
-     *          found class callback
+     *        found class callback
      * @return new instance of URLPackageScanner
      */
     public static URLPackageScanner newInstance(boolean addRecursively, ClassLoader classLoader, Callback callback) {
@@ -140,7 +140,7 @@ public class URLPackageScanner {
                 ZipEntry entry = entries.nextElement();
                 String name = entry.getName();
                 if (name.startsWith(packageNamePath) && name.endsWith(".class")
-                    && (addRecursively || !name.substring(packageNamePath.length() + 1).contains("/"))) {
+                        && (addRecursively || !name.substring(packageNamePath.length() + 1).contains("/"))) {
                     String className = name.replace("/", ".").substring(0, name.length() - ".class".length());
                     foundClass(className);
                 }
@@ -193,7 +193,7 @@ public class URLPackageScanner {
          * Called for each found class.
          *
          * @param className
-         *            The name of the found class
+         *        The name of the found class
          */
         void classFound(String className);
     }

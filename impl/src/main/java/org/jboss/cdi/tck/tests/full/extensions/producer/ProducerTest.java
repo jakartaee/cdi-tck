@@ -25,7 +25,6 @@ import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.InjectionTarget;
 import jakarta.enterprise.inject.spi.Producer;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -60,10 +59,10 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ 
-        @SpecAssertion(section = INJECTIONTARGET, id = "ba"),
-        @SpecAssertion(section = INJECTIONTARGET, id = "bb"),
-        @SpecAssertion(section = INJECTIONTARGET, id = "bc")
+    @SpecAssertions({
+            @SpecAssertion(section = INJECTIONTARGET, id = "ba"),
+            @SpecAssertion(section = INJECTIONTARGET, id = "bb"),
+            @SpecAssertion(section = INJECTIONTARGET, id = "bc")
     })
     public void testProduceAndInjectCallsInitializerAndConstructor() {
         Cat.reset();
@@ -74,11 +73,11 @@ public class ProducerTest extends AbstractTest {
         injectionTarget.inject(instance, ctx);
         assert Cat.isInitializerCalled();
     }
-    
+
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = INJECTIONTARGET, id = "bd"),
-        @SpecAssertion(section = INJECTIONTARGET, id = "be")
+            @SpecAssertion(section = INJECTIONTARGET, id = "bd"),
+            @SpecAssertion(section = INJECTIONTARGET, id = "be")
     })
     public void testInterceptorAndDecoratorStackBuilt() {
         InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
@@ -114,7 +113,8 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "db"), @SpecAssertion(section = INJECTIONTARGET, id = "dc") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "db"),
+            @SpecAssertion(section = INJECTIONTARGET, id = "dc") })
     public void testGetInjectionPointsForConstructorAndInitializer() {
         InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
         assert injectionTarget.getInjectionPoints().size() == 3;
@@ -133,7 +133,8 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eaa"), @SpecAssertion(section = PROCESS_PRODUCER, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eaa"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "aa"),
             @SpecAssertion(section = PROCESS_PRODUCER, id = "ba"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ca"),
             @SpecAssertion(section = PROCESS_PRODUCER, id = "da"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jb") })
     public void testProduceCallsProducerMethod() {
@@ -146,7 +147,8 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "e"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ga") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "e"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "ga") })
     public void testSetProducerOverridesProducer() {
         ProducerProcessor.reset();
         assert getContextualReference(Cow.class, new Noisy.Literal()) instanceof Cow;
@@ -154,7 +156,8 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eba"), @SpecAssertion(section = PROCESS_PRODUCER, id = "ab"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "eba"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "ab"),
             @SpecAssertion(section = PROCESS_PRODUCER, id = "bb"), @SpecAssertion(section = PROCESS_PRODUCER, id = "cb"),
             @SpecAssertion(section = PROCESS_PRODUCER, id = "db"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "jb") })
     public void testProduceAccessesProducerField() {
@@ -189,8 +192,10 @@ public class ProducerTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "i"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "c"),
-            @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaa"), @SpecAssertion(section = INJECTIONTARGET_EE, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "i"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "c"),
+            @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "aaa"),
+            @SpecAssertion(section = INJECTIONTARGET_EE, id = "a") })
     public void testInjectionTargetInject() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
         Bean<Dog> dogBean = (Bean<Dog>) getCurrentManager().getBeans(Dog.class).iterator().next();
@@ -202,7 +207,8 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "j"), @SpecAssertion(section = INJECTIONTARGET_EE, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "j"),
+            @SpecAssertion(section = INJECTIONTARGET_EE, id = "b") })
     public void testInjectionTargetPostConstruct() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
         Dog dog = getContextualReference(Dog.class, new Noisy.Literal());
@@ -212,7 +218,8 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "k"),  @SpecAssertion(section = INJECTIONTARGET_EE, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "k"),
+            @SpecAssertion(section = INJECTIONTARGET_EE, id = "c") })
     public void testInjectionTargetPreDestroy() {
         InjectionTarget<Dog> injectionTarget = ProducerProcessor.getDogInjectionTarget();
         Dog dog = getContextualReference(Dog.class, new Noisy.Literal());
@@ -222,7 +229,8 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "bb"), @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "ea") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "bb"),
+            @SpecAssertion(section = PROCESS_INJECTION_TARGET, id = "ea") })
     public void testSettingInjectionTargetReplacesIt() {
         CheckableInjectionTarget.setInjectCalled(false);
         getContextualReference(BirdCage.class);

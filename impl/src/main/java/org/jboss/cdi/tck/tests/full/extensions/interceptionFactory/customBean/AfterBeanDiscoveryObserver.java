@@ -26,7 +26,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
         abd.addBean()
                 .addType(Account.class)
                 .addQualifier(Custom.CustomLiteral.INSTANCE)
-                .<Account>createWith((cc) -> {
+                .<Account> createWith((cc) -> {
                     InterceptionFactory<Account> factory = beanManager.createInterceptionFactory(cc, Account.class);
                     factory.configure().add(FeeBinding.FeeLiteral.INSTANCE);
                     return factory.createInterceptedInstance(new Account());

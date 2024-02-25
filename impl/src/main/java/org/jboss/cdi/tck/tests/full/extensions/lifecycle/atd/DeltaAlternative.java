@@ -13,5 +13,5 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.lifecycle.atd;
 
-public class DeltaAlternative  implements Alternatives {
+public class DeltaAlternative implements Alternatives {
 }

@@ -19,7 +19,7 @@ public class Baz {
 
     Instance<Bar> barInstance;
 
-    public  Instance<Bar> getBarInstance() {
+    public Instance<Bar> getBarInstance() {
         return barInstance;
     }
 

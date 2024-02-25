@@ -38,15 +38,16 @@ public class ProducerFieldArrayTypeVariableTest extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(ProducerFieldArrayTypeVariableTest.class).withClasses(TypeVariableBrokenProducer.class).build();
+        return new WebArchiveBuilder().withTestClass(ProducerFieldArrayTypeVariableTest.class)
+                .withClasses(TypeVariableBrokenProducer.class).build();
     }
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = PRODUCER_FIELD, id = "hb"),
-        @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "lc")
+            @SpecAssertion(section = PRODUCER_FIELD, id = "hb"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "lc")
     })
-    
+
     public void testBeanTypes() {
     }
 

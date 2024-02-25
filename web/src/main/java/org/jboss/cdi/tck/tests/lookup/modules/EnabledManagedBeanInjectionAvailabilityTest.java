@@ -33,10 +33,10 @@ import org.testng.annotations.Test;
 
 /**
  * Test that bean in web module can inject enabled managed bean from EJB module.
- * 
+ *
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -59,7 +59,8 @@ public class EnabledManagedBeanInjectionAvailabilityTest extends AbstractTest {
     Bar bar;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = INTER_MODULE_INJECTION, id = "c"), @SpecAssertion(section = SELECTION, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = INTER_MODULE_INJECTION, id = "c"),
+            @SpecAssertion(section = SELECTION, id = "aa") })
     public void testInjection() throws Exception {
         Assert.assertEquals(bar.ping(), 0);
         assert bar.getFoo() instanceof ManagedFoo;

@@ -15,11 +15,13 @@
 package org.jboss.cdi.tck.tests.context.request.async;
 
 import java.io.IOException;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 import jakarta.servlet.AsyncEvent;
 import jakarta.servlet.AsyncListener;
+
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**

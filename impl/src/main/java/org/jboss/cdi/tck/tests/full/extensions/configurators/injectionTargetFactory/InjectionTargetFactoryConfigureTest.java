@@ -51,9 +51,9 @@ public class InjectionTargetFactoryConfigureTest extends AbstractTest {
     IoCForFramework ioc;
 
     @Test
-    @SpecAssertions({ 
-        @SpecAssertion(section = BM_OBTAIN_INJECTIONTARGET, id = "b"),
-        @SpecAssertion(section = BM_OBTAIN_INJECTIONTARGET, id = "c") })
+    @SpecAssertions({
+            @SpecAssertion(section = BM_OBTAIN_INJECTIONTARGET, id = "b"),
+            @SpecAssertion(section = BM_OBTAIN_INJECTIONTARGET, id = "c") })
     public void testInjectionTargetFactoryConfigure() {
         // now if everything went as expected, NotOurClass will have SomeService injected
         Assert.assertNotNull(noc.getService());

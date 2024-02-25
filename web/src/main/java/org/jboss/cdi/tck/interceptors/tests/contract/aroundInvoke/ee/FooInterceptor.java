@@ -15,15 +15,16 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.ee;
 
 import static org.testng.Assert.assertEquals;
 
+import javax.naming.InitialContext;
+
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.InvocationContext;
-import javax.naming.InitialContext;
 import jakarta.transaction.TransactionSynchronizationRegistry;
 
 public class FooInterceptor {
 
     static boolean called = false;
-    
+
     @AroundInvoke
     public Object intercept(InvocationContext ic) throws Exception {
         Object obj = ic.proceed();

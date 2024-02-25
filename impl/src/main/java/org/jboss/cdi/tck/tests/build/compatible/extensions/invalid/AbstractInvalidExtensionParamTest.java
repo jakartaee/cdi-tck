@@ -31,5 +31,4 @@ public abstract class AbstractInvalidExtensionParamTest extends AbstractTest {
                 .withBeansXml(new BeansXml());
     }
 
-
 }

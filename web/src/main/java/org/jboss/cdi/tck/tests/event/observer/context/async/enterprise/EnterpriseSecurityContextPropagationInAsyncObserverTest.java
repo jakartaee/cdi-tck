@@ -46,7 +46,8 @@ public class EnterpriseSecurityContextPropagationInAsyncObserverTest extends Abs
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(EnterpriseSecurityContextPropagationInAsyncObserverTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(EnterpriseSecurityContextPropagationInAsyncObserverTest.class)
+                .build();
     }
 
     @Test

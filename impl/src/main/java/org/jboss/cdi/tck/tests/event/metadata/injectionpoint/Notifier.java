@@ -66,4 +66,3 @@ public class Notifier {
         initializerInjectionInfoEvent.fire(new Info());
     }
 }
-

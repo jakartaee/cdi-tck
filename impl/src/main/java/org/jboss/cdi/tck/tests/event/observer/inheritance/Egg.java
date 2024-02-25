@@ -14,10 +14,9 @@
 
 package org.jboss.cdi.tck.tests.event.observer.inheritance;
 
-
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class Egg {
 

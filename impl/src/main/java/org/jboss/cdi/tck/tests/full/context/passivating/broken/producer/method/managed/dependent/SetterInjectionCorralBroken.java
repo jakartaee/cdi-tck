@@ -22,10 +22,10 @@ public class SetterInjectionCorralBroken extends Ranch {
     private Cow cow;
 
     @Inject
-    public void setCow(@British Cow cow){
-       this.cow = cow;
+    public void setCow(@British Cow cow) {
+        this.cow = cow;
     }
-    
-    public void ping(){
+
+    public void ping() {
     }
 }

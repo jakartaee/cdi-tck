@@ -15,6 +15,10 @@
  */
 package org.jboss.cdi.tck.tests.invokers.lookup;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Set;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -25,7 +29,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.Invoker;
-import jakarta.enterprise.invoke.InvokerBuilder;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -37,10 +41,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class ArgumentLookupTest extends AbstractTest {
@@ -71,9 +71,9 @@ public class ArgumentLookupTest extends AbstractTest {
     @SpecAssertion(section = Sections.CONFIGURING_LOOKUPS, id = "da")
     public void test(MyService service, InvokerHolder invokers) throws Exception {
         Invoker<MyService, String> invoker = invokers.get("hello");
-        assertEquals("foobar0", invoker.invoke(service, new Object[]{null}));
-        assertEquals("foobar0", invoker.invoke(service, new Object[]{null}));
-        assertEquals("foobar0", invoker.invoke(service, new Object[]{null}));
+        assertEquals("foobar0", invoker.invoke(service, new Object[] { null }));
+        assertEquals("foobar0", invoker.invoke(service, new Object[] { null }));
+        assertEquals("foobar0", invoker.invoke(service, new Object[] { null }));
         assertEquals(1, MyDependency.CREATED);
         assertEquals(0, MyDependency.DESTROYED);
     }

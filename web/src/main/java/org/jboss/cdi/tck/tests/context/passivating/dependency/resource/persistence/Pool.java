@@ -16,10 +16,11 @@ package org.jboss.cdi.tck.tests.context.passivating.dependency.resource.persiste
 import java.io.Serializable;
 import java.util.UUID;
 
+import javax.sql.DataSource;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
-import javax.sql.DataSource;
 
 @SessionScoped
 public class Pool implements Serializable {

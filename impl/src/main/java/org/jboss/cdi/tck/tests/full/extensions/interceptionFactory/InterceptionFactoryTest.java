@@ -63,12 +63,14 @@ public class InterceptionFactoryTest extends AbstractTest {
     Product product;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"),
+            @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"),
             @SpecAssertion(section = INTERCEPTION_FACTORY, id = "ca") })
     public void producedInstanceIsIntercepted() {
         ActionSequence.reset();
         Assert.assertEquals(product.ping(), 4);
-        ActionSequence.assertSequenceDataEquals(ProductInterceptor1.class, ProductInterceptor2.class, ProductInterceptor3.class);
+        ActionSequence.assertSequenceDataEquals(ProductInterceptor1.class, ProductInterceptor2.class,
+                ProductInterceptor3.class);
     }
 
     @Test
@@ -76,11 +78,13 @@ public class InterceptionFactoryTest extends AbstractTest {
     public void interceptionFactoryBeanIsAvailable() {
         Bean<?> interceptionFactoryBean = getCurrentManager().resolve(getCurrentManager().getBeans(InterceptionFactory.class));
         Assert.assertEquals(Dependent.class, interceptionFactoryBean.getScope());
-        Assert.assertEquals(Stream.of(Default.Literal.INSTANCE, Any.Literal.INSTANCE).collect(Collectors.toSet()), interceptionFactoryBean.getQualifiers());
+        Assert.assertEquals(Stream.of(Default.Literal.INSTANCE, Any.Literal.INSTANCE).collect(Collectors.toSet()),
+                interceptionFactoryBean.getQualifiers());
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"),
+            @SpecAssertion(section = INTERCEPTION_FACTORY, id = "a"),
             @SpecAssertion(section = INTERCEPTION_FACTORY, id = "b"),
             @SpecAssertion(section = INTERCEPTION_FACTORY, id = "ca") })
     public void producedWithFinalMethodIsIntercepted() {

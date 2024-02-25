@@ -20,6 +20,7 @@ import static org.testng.Assert.assertTrue;
 
 import jakarta.inject.Inject;
 import jakarta.interceptor.Interceptor;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -35,11 +36,11 @@ import org.testng.annotations.Test;
 /**
  * Registers an extension-provided implementation of the {@link Interceptor} interface and verifies that the implementation is
  * invoked upon invocation of an intercepted method.
- * 
+ *
  * <p>
  * This test was originally part of Weld test suite - WELD-997.
  * </p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  */
@@ -63,7 +64,8 @@ public class CustomInterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd"), @SpecAssertion(section = INTERCEPTOR, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "dd"),
+            @SpecAssertion(section = INTERCEPTOR, id = "d") })
     public void testCustomInterceptorInvocation() {
         CustomInterceptor.reset();
         FooInterceptor.reset();

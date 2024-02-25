@@ -22,7 +22,7 @@ import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class SimpleBean {

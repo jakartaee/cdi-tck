@@ -17,6 +17,7 @@ import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.event.Observes;
@@ -63,7 +64,7 @@ public class LifecycleObserver implements Extension {
     }
 
     private void configureSkeleton(BeanManager bm, BeanConfigurator<Skeleton> skeleton) {
-        // set bean class, qualifier, stereotype, scope       
+        // set bean class, qualifier, stereotype, scope
         // no read() method used here, all set manually
         skeleton.beanClass(Skeleton.class);
         skeleton.addQualifier(Undead.UndeadLiteral.INSTANCE);
@@ -159,14 +160,14 @@ public class LifecycleObserver implements Extension {
         });
     }
 
-    private void configureBogey(BeanManager bm, BeanConfigurator<Bogey> bogey){
+    private void configureBogey(BeanManager bm, BeanConfigurator<Bogey> bogey) {
         bogey.beanClass(Bogey.class);
         bogey.addType(Bogey.class);
         bogey.addQualifier(Undead.UndeadLiteral.INSTANCE);
         bogey.produceWith(obj -> new Bogey());
     }
 
-    private void configureWerewolf(BeanManager bm, BeanConfigurator<Werewolf> werewolf){
+    private void configureWerewolf(BeanManager bm, BeanConfigurator<Werewolf> werewolf) {
         werewolf.beanClass(Werewolf.class);
         werewolf.addTransitiveTypeClosure(Werewolf.class);
         Set<Class<? extends Annotation>> stereotypes = new HashSet<>();

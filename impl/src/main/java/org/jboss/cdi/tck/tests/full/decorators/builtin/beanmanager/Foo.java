@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.full.decorators.builtin.beanmanager;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class Foo {
 

@@ -41,11 +41,12 @@ public class SyntheticBeanExtension implements BuildCompatibleExtension {
                 .withParam("data", AnnotationBuilder.of(MyComplexValue.class)
                         .member("number", 13)
                         .member("enumeration", MyEnum.class, "NO")
-                        .member("type", types.ofClass("org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBean.MyEnum")
-                                .declaration())
+                        .member("type",
+                                types.ofClass("org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBean.MyEnum")
+                                        .declaration())
                         .member("nested", AnnotationBuilder.of(
-                                        types.ofClass("org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBean.MySimpleValue")
-                                                .declaration())
+                                types.ofClass("org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBean.MySimpleValue")
+                                        .declaration())
                                 .value("no").build())
                         .build())
                 .createWith(MyPojoCreator.class)

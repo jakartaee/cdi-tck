@@ -13,9 +13,14 @@
  */
 package org.jboss.cdi.tck.tests.full.context.dependent;
 
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT_EE;
+import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION_EE;
+
 import java.util.Set;
 
 import jakarta.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.TestGroups;
@@ -24,10 +29,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT;
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_CONTEXT_EE;
-import static org.jboss.cdi.tck.cdi.Sections.DEPENDENT_DESTRUCTION_EE;
 
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = TestGroups.CDI_FULL)

@@ -17,6 +17,7 @@ import jakarta.annotation.Priority;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.interceptor.Interceptor;
+
 import org.jboss.cdi.tck.util.ActionSequence;
 
 public class MoonObservers {

@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -19,11 +19,13 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
-import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.TypeLiteral;
 import java.lang.reflect.TypeVariable;
 import java.util.Set;
+
 import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.util.TypeLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -50,7 +52,8 @@ public class BeanByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "aa"), @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "aa"),
+            @SpecAssertion(section = BM_OBTAIN_BEAN_BY_TYPE, id = "b") })
     public void testGetBeans() {
         Set<Bean<?>> beans = getCurrentBeanContainer().getBeans(SimpleBean.class);
         assertEquals(beans.size(), 1);

@@ -13,7 +13,13 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke.ee;
 
+import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
+import static org.jboss.cdi.tck.TestGroups.SECURITY;
+import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BUSINESS_METHOD_INTERCEPTOR_METHODS;
+import static org.testng.Assert.assertTrue;
+
 import jakarta.transaction.UserTransaction;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -23,12 +29,6 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import static org.jboss.cdi.tck.TestGroups.JAVAEE_FULL;
-import static org.jboss.cdi.tck.TestGroups.SECURITY;
-import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BUSINESS_METHOD_INTERCEPTOR_METHODS;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 @SpecVersion(spec = "interceptors", version = "1.2")
 public class AroundInvokeAccessInterceptorTest extends AbstractTest {
@@ -41,8 +41,7 @@ public class AroundInvokeAccessInterceptorTest extends AbstractTest {
                 .build();
     }
 
-
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { JAVAEE_FULL, SECURITY })
     @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "e")
     @SpecAssertion(section = BUSINESS_METHOD_INTERCEPTOR_METHODS, id = "fb")
     public void testSecurityContext(Student student) throws Exception {

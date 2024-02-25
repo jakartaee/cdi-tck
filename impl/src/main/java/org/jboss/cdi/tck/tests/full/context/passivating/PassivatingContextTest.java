@@ -41,7 +41,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Nicklas Karlsson
  * @author David Allen
  * @author Martin Kouba

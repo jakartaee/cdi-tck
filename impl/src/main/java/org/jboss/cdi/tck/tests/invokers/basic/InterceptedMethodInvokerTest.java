@@ -15,6 +15,15 @@
  */
 package org.jboss.cdi.tck.tests.invokers.basic;
 
+import static org.testng.Assert.assertEquals;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
@@ -28,6 +37,7 @@ import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InterceptorBinding;
 import jakarta.interceptor.InvocationContext;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -39,15 +49,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.util.List;
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class InterceptedMethodInvokerTest extends AbstractTest {
@@ -77,12 +78,12 @@ public class InterceptedMethodInvokerTest extends AbstractTest {
     @SpecAssertion(section = Sections.USING_INVOKER, id = "d")
     public void test(MyService service, InvokerHolder invokers) throws Exception {
         Invoker<MyService, String> hello = invokers.get("hello");
-        assertEquals(hello.invoke(service, new Object[]{0, List.of("a")}), "intercepted: foobar0[a]");
+        assertEquals(hello.invoke(service, new Object[] { 0, List.of("a") }), "intercepted: foobar0[a]");
         // not a contextual reference, not intercepted
-        assertEquals(hello.invoke(new MyService(), new Object[]{1, List.of("b")}), "foobar1[b]");
+        assertEquals(hello.invoke(new MyService(), new Object[] { 1, List.of("b") }), "foobar1[b]");
     }
 
-    @Target({ElementType.TYPE, ElementType.METHOD})
+    @Target({ ElementType.TYPE, ElementType.METHOD })
     @Retention(RetentionPolicy.RUNTIME)
     @InterceptorBinding
     public @interface MyInterceptorBinding {

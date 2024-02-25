@@ -37,7 +37,8 @@ public class EventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "cc"), @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa") })
+    @SpecAssertions({ @SpecAssertion(section = SPECIALIZATION, id = "cc"),
+            @SpecAssertion(section = OBSERVERS_METHOD_INVOCATION, id = "baa") })
     public void testObserverCalledOnSpecializedBeanOnly() {
         Shop.observers.clear();
         getCurrentManager().getEvent().select(Delivery.class).fire(new Delivery());

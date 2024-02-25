@@ -29,21 +29,21 @@ import jakarta.inject.Inject;
 public class Inspector implements Serializable {
 
     private static final long serialVersionUID = 7238311288238399562L;
-    
+
     private String id;
-    
+
     @PostConstruct
     private void init() {
         id = UUID.randomUUID().toString();
     }
-    
+
     @Inject
     InjectionPoint injectionPoint;
-    
+
     public InjectionPoint getInjectionPoint() {
         return injectionPoint;
     }
-    
+
     public String getId() {
         return id;
     }

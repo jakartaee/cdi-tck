@@ -17,6 +17,7 @@ import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class Bar {
-    
-    public void ping(){}
+
+    public void ping() {
+    }
 }

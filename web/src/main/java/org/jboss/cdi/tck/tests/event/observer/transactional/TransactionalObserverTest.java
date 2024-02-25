@@ -55,9 +55,12 @@ public class TransactionalObserverTest extends AbstractTest {
     AccountService accountService;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "b"),
-            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "c"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "d"),
-            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "e"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "gaa"),
+    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "b"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "c"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "d"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "e"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "gaa"),
             @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "b") })
     public void testSucessfullTransaction() throws Exception {
 
@@ -81,9 +84,12 @@ public class TransactionalObserverTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "b"),
-            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "c"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "d"),
-            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "e"), @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "gaa"),
+    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "b"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "c"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "d"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "e"),
+            @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "gaa"),
             @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "b") })
     public void testFailedTransaction() throws Exception {
 
@@ -109,7 +115,8 @@ public class TransactionalObserverTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"), @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = TRANSACTIONAL_OBSERVER_METHODS, id = "a"),
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "b") })
     public void testNoTransaction() throws Exception {
 
         logger.log("testNoTransaction");

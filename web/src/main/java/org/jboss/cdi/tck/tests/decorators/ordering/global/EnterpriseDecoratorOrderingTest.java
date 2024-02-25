@@ -32,7 +32,6 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -45,7 +44,7 @@ import org.testng.annotations.Test;
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "cdi", version = "2.0")
-    public class EnterpriseDecoratorOrderingTest extends AbstractTest {
+public class EnterpriseDecoratorOrderingTest extends AbstractTest {
 
     /**
      * Modules:
@@ -82,7 +81,8 @@ import org.testng.annotations.Test;
         //D
         JavaArchive ejbArchive = ShrinkWrap
                 .create(JavaArchive.class, ejbJar)
-                .addClasses(DummyDao.class, GloballyEnabledDecorator2.class, GloballyEnabledDecorator5.class, LegacyDecorator3.class)
+                .addClasses(DummyDao.class, GloballyEnabledDecorator2.class, GloballyEnabledDecorator5.class,
+                        LegacyDecorator3.class)
                 .addAsManifestResource(new BeansXml().decorators(LegacyDecorator3.class), "beans.xml")
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
@@ -114,8 +114,8 @@ import org.testng.annotations.Test;
 
     @Test(groups = JAVAEE_FULL)
     @SpecAssertions({ @SpecAssertion(section = DECORATORS_EE, id = "b"),
-        @SpecAssertion(section = DECORATORS_EE, id = "c"),
-        @SpecAssertion(section = DECORATORS_EE, id = "d")})
+            @SpecAssertion(section = DECORATORS_EE, id = "c"),
+            @SpecAssertion(section = DECORATORS_EE, id = "d") })
     public void testDecoratorsInWebInfClasses() {
 
         List<String> expected = new ArrayList<String>();

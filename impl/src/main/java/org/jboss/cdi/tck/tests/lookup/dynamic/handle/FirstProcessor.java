@@ -15,6 +15,7 @@ package org.jboss.cdi.tck.tests.lookup.dynamic.handle;
 
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.Dependent;
+
 import org.jboss.cdi.tck.util.ActionSequence;
 
 @Dependent

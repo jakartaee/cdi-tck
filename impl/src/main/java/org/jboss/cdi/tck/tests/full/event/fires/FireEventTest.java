@@ -31,7 +31,8 @@ public class FireEventTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(FireEventTest.class).withClass(ContainerLifecycleEvents.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(FireEventTest.class).withClass(ContainerLifecycleEvents.class)
+                .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

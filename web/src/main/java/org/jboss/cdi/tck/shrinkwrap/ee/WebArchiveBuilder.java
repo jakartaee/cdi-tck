@@ -93,7 +93,8 @@ public class WebArchiveBuilder extends ArchiveBuilder<WebArchiveBuilder, WebArch
 
         // Deployment descriptors
         if (includeBeansXml) {
-            webArchive.addAsWebInfResource(getBeansDescriptorAsset(), buildBeansDescriptorTargetPath(getBeansDescriptorTarget()));
+            webArchive.addAsWebInfResource(getBeansDescriptorAsset(),
+                    buildBeansDescriptorTargetPath(getBeansDescriptorTarget()));
         }
 
         if (webXmlDescriptor != null) {

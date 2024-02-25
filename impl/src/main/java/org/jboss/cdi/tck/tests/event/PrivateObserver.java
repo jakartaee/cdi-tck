@@ -18,16 +18,15 @@ import jakarta.enterprise.event.Observes;
 
 @RequestScoped
 public class PrivateObserver {
-    
+
     public static boolean isObserved = false;
-    
-    private void observesDelivery(@Observes Delivery delivery){
-        isObserved = true;        
+
+    private void observesDelivery(@Observes Delivery delivery) {
+        isObserved = true;
     }
-    
-    public static void  reset(){
+
+    public static void reset() {
         isObserved = false;
     }
-    
-    
+
 }

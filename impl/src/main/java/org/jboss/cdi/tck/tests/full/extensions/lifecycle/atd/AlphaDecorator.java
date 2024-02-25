@@ -31,6 +31,4 @@ public class AlphaDecorator implements Logger {
         return logger.log(msg + "alpha");
     }
 
-
-
 }

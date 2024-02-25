@@ -31,11 +31,11 @@ import org.testng.annotations.Test;
 /**
  * Tests whether an extension that observes annotated types, when put in a library with a lower order name (bravo.jar), is
  * notified of annotated types in a library with a higher order name (alpha.jar).
- * 
+ *
  * <p>
  * This test was originally part of Seam Compatibility project.
  * <p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/dan.j.allen">Dan Allen</a>
  * @author Martin Kouba
  * @see <a href="http://java.net/jira/browse/GLASSFISH-15735">GLASSFISH-15735</a> (unresolved)

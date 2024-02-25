@@ -21,7 +21,7 @@ public class Payload {
 
     private int i = 0;
 
-    public void add(int num){
+    public void add(int num) {
         i = i + num;
     }
 }

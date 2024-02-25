@@ -16,7 +16,6 @@ package org.jboss.cdi.tck.tests.lookup.dynamic;
 import static org.jboss.cdi.tck.cdi.Sections.ANNOTATIONLITERAL_TYPELITERAL;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INSTANCE;
 import static org.jboss.cdi.tck.cdi.Sections.DYNAMIC_LOOKUP;
-import static org.jboss.cdi.tck.cdi.Sections.NEW;
 import static org.jboss.cdi.tck.cdi.Sections.PROGRAMMATIC_LOOKUP;
 import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
 import static org.testng.Assert.assertEquals;
@@ -24,9 +23,7 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.stream.Stream;
 
 import jakarta.enterprise.inject.AmbiguousResolutionException;
@@ -34,7 +31,6 @@ import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.UnsatisfiedResolutionException;
 import jakarta.enterprise.inject.spi.CDI;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -96,14 +92,16 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ba"), @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ca"),
+    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ba"),
+            @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ca"),
             @SpecAssertion(section = DYNAMIC_LOOKUP, id = "aa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ab"),
             @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fc") })
     public void testGetMethod() {
         // initial setup of contextual instance
         getContextualReference(AdvancedPaymentProcessor.class, Any.Literal.INSTANCE).setValue(10);
 
-        Instance<AsynchronousPaymentProcessor> instance = getContextualReference(ObtainsInstanceBean.class).getPaymentProcessor();
+        Instance<AsynchronousPaymentProcessor> instance = getContextualReference(ObtainsInstanceBean.class)
+                .getPaymentProcessor();
         assertTrue(instance.get() instanceof AdvancedPaymentProcessor);
         assertEquals(instance.get().getValue(), 10);
     }
@@ -165,8 +163,9 @@ public class DynamicLookupTest extends AbstractTest {
         assertNotNull(remote);
         assertEquals(remote.getValue(), 2);
 
-        Iterator<RemotePaymentProcessor> iterator2 = instance.select(RemotePaymentProcessor.class, new PayByBinding(PayBy.PaymentMethod.CREDIT_CARD) {
-        }).iterator();
+        Iterator<RemotePaymentProcessor> iterator2 = instance
+                .select(RemotePaymentProcessor.class, new PayByBinding(PayBy.PaymentMethod.CREDIT_CARD) {
+                }).iterator();
 
         assertEquals(iterator2.next().getValue(), 2);
         assertFalse(iterator2.hasNext());
@@ -195,7 +194,8 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "da"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "la"),
+    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "da"),
+            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "la"),
             @SpecAssertion(section = DYNAMIC_LOOKUP, id = "m") })
     public void testIsAmbiguous() {
         ObtainsInstanceBean injectionPoint = getContextualReference(ObtainsInstanceBean.class);
@@ -215,7 +215,8 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INSTANCE, id = "a"), @SpecAssertion(section = BM_OBTAIN_INSTANCE, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INSTANCE, id = "a"),
+            @SpecAssertion(section = BM_OBTAIN_INSTANCE, id = "b") })
     public void beanManageCreateInstance() {
         Instance<Object> instance = getCurrentManager().createInstance();
         Instance<AsynchronousPaymentProcessor> asyncProcessors = instance.select(AsynchronousPaymentProcessor.class);

@@ -21,7 +21,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -102,10 +101,10 @@ public class SessionBeanTypesTest extends AbstractTest {
         assertEquals(loginBean.getTypes().size(), 3);
         assertTypeSetMatches(loginBean.getTypes(), Object.class, LoginActionBean.class, MockLoginActionBean.class);
     }
-    
+
     @Test(groups = INTEGRATION)
     @SpecAssertion(section = SESSION_BEAN_TYPES, id = "ba")
-    public void testSessionBeanWithNoInterfaceView(){
+    public void testSessionBeanWithNoInterfaceView() {
         Bean<Cobra> cobraBean = getUniqueBean(Cobra.class);
         assertNotNull(cobraBean);
         assertEquals(cobraBean.getTypes().size(), 3);

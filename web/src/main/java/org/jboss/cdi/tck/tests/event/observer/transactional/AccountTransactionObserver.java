@@ -23,7 +23,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @Dependent
@@ -35,16 +35,17 @@ public class AccountTransactionObserver {
     private UserTransaction userTransaction;
 
     /**
-     * 
+     *
      * @param withdrawal
      * @throws Exception
      */
-    public void withdrawAfterSuccess(@Observes(during = TransactionPhase.AFTER_SUCCESS) Withdrawal withdrawal) throws Exception {
+    public void withdrawAfterSuccess(@Observes(during = TransactionPhase.AFTER_SUCCESS) Withdrawal withdrawal)
+            throws Exception {
         logEventFired(TransactionPhase.AFTER_SUCCESS);
     }
 
     /**
-     * 
+     *
      * @param withdrawal
      * @throws Exception
      */
@@ -54,7 +55,7 @@ public class AccountTransactionObserver {
     }
 
     /**
-     * 
+     *
      * @param withdrawal
      * @throws Exception
      */
@@ -65,7 +66,7 @@ public class AccountTransactionObserver {
 
     /**
      * Always fire immediately.
-     * 
+     *
      * @param withdrawal
      * @throws Exception
      */
@@ -74,16 +75,17 @@ public class AccountTransactionObserver {
     }
 
     /**
-     * 
+     *
      * @param withdrawal
      * @throws Exception
      */
-    public void withdrawAfterFailure(@Observes(during = TransactionPhase.AFTER_FAILURE) Withdrawal withdrawal) throws Exception {
+    public void withdrawAfterFailure(@Observes(during = TransactionPhase.AFTER_FAILURE) Withdrawal withdrawal)
+            throws Exception {
         logEventFired(TransactionPhase.AFTER_FAILURE);
     }
 
     /**
-     * 
+     *
      * @param failure
      * @throws Exception
      */

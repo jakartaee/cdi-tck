@@ -13,6 +13,9 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.priority;
 
+import java.util.LinkedHashSet;
+import java.util.List;
+
 import jakarta.annotation.Priority;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
@@ -22,9 +25,6 @@ import jakarta.enterprise.inject.build.compatible.spi.Enhancement;
 import jakarta.enterprise.inject.build.compatible.spi.Messages;
 import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Validation;
-
-import java.util.LinkedHashSet;
-import java.util.List;
 
 public class PriorityExtension implements BuildCompatibleExtension {
     private final LinkedHashSet<String> invocations = new LinkedHashSet<>();

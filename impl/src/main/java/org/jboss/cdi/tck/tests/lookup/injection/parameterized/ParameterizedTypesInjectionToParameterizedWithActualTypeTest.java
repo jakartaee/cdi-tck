@@ -40,14 +40,16 @@ public class ParameterizedTypesInjectionToParameterizedWithActualTypeTest extend
         return new WebArchiveBuilder()
                 .withTestClass(ParameterizedTypesInjectionToParameterizedWithActualTypeTest.class)
                 .withClasses(Dao.class, IntegerDao.class, IntegerStringDao.class, IntegerListOfStringsDao.class,
-                        ConsumerActualType.class, IntegerPowered.class).build();
+                        ConsumerActualType.class, IntegerPowered.class)
+                .build();
     }
 
     @Inject
     ConsumerActualType consumer;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "ba"), @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "bb"),
+    @SpecAssertions({ @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "ba"),
+            @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "bb"),
             @SpecAssertion(section = ASSIGNABLE_PARAMETERS, id = "e") })
     public void testInjection() {
         assertNotNull(consumer.getDao());

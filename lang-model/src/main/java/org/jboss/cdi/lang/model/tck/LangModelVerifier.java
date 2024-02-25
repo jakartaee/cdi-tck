@@ -13,11 +13,11 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
-import jakarta.enterprise.lang.model.declarations.ClassInfo;
-import jakarta.enterprise.lang.model.declarations.PackageInfo;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import jakarta.enterprise.lang.model.declarations.ClassInfo;
+import jakarta.enterprise.lang.model.declarations.PackageInfo;
 
 @Retention(RetentionPolicy.SOURCE)
 @interface SourceAnnotation {

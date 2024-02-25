@@ -17,6 +17,7 @@ import jakarta.ejb.Stateful;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
+
 import org.jboss.cdi.tck.tests.implementation.disposal.method.definition.inheritance.Yummy;
 
 @Stateful

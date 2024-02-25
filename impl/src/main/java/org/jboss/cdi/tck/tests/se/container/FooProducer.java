@@ -21,7 +21,7 @@ public class FooProducer {
     @AlternativeStereotype
     @Produces
     @Named
-    public Foo createFoo(){
+    public Foo createFoo() {
         return new Foo();
     }
 

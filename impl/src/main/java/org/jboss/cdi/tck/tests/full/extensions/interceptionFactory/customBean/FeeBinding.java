@@ -17,6 +17,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.interceptor.InterceptorBinding;
 
@@ -26,6 +27,6 @@ import jakarta.interceptor.InterceptorBinding;
 public @interface FeeBinding {
 
     public static class FeeLiteral extends AnnotationLiteral<FeeBinding> implements FeeBinding {
-         public static FeeLiteral INSTANCE = new FeeLiteral();
+        public static FeeLiteral INSTANCE = new FeeLiteral();
     }
 }

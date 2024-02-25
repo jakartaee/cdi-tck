@@ -27,12 +27,12 @@ import jakarta.inject.Qualifier;
  */
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
+@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
 public @interface Dangerous {
-    
+
     public static class DangerousLiteral extends AnnotationLiteral<Dangerous> implements Dangerous {
-        
+
         public static DangerousLiteral INSTANCE = new DangerousLiteral();
     }
-    
+
 }

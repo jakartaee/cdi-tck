@@ -65,7 +65,8 @@ public class ProgressLoggingTestListener implements IInvokedMethodListener {
 
         logger.log(Level.INFO, "Invoke {0}.{1}: {2}/{3} Failed tests: {4} ({5})",
                 new Object[] { method.getTestMethod().getTestClass().getRealClass().getSimpleName(),
-                        method.getTestMethod().getMethodName(), testMethodInvocations.incrementAndGet(), totalCountOfMethods, context.getFailedTests().size(),
+                        method.getTestMethod().getMethodName(), testMethodInvocations.incrementAndGet(), totalCountOfMethods,
+                        context.getFailedTests().size(),
                         processedTestClasses.get() });
     }
 

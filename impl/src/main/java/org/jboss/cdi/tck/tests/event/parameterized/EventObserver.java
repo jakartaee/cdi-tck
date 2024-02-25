@@ -53,8 +53,8 @@ public class EventObserver {
         this.characterListObserved = true;
     }
 
-    public void observeIntegerFoo(@Observes Foo<? extends Number> event){
-         this.integerFooObserved = true;
+    public void observeIntegerFoo(@Observes Foo<? extends Number> event) {
+        this.integerFooObserved = true;
     }
 
     public boolean isStringListFooableObserved() {

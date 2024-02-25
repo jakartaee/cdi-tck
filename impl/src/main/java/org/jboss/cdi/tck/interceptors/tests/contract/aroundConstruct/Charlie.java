@@ -14,7 +14,6 @@
 package org.jboss.cdi.tck.interceptors.tests.contract.aroundConstruct;
 
 import jakarta.enterprise.context.Dependent;
-import jakarta.interceptor.Interceptors;
 
 @CharlieBinding
 @Dependent

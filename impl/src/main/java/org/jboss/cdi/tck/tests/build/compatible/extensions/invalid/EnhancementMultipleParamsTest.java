@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.build.compatible.extensions.invalid;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -34,6 +35,7 @@ public class EnhancementMultipleParamsTest extends AbstractInvalidExtensionParam
     }
 
     @Test
-    @SpecAssertion(section = Sections.ENHANCEMENT_PHASE, id= "ab", note = "Fail due to more than one parameter ext method")
+    @SpecAssertion(section = Sections.ENHANCEMENT_PHASE, id = "ab", note = "Fail due to more than one parameter ext method")
     public void shouldFail() {
-    }}
+    }
+}

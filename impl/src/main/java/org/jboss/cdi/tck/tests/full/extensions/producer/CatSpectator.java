@@ -13,8 +13,8 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.producer;
 
-import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Retention;
@@ -27,6 +27,7 @@ import jakarta.interceptor.InterceptorBinding;
  *
  */
 @InterceptorBinding
-@Target({TYPE, METHOD})
+@Target({ TYPE, METHOD })
 @Retention(RUNTIME)
-public @interface CatSpectator {}
+public @interface CatSpectator {
+}

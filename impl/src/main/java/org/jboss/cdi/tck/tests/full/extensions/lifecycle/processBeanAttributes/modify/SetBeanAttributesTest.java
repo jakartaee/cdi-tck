@@ -60,7 +60,8 @@ public class SetBeanAttributesTest extends AbstractTest {
     ModifyingExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bc"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "bc"),
+            @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ca") })
     public void testBeanModified() {
 
         assertEquals(getCurrentManager().getBeans(Cat.class, Default.Literal.INSTANCE).size(), 0);
@@ -75,7 +76,8 @@ public class SetBeanAttributesTest extends AbstractTest {
 
         assertTypeSetMatches(bean.getTypes(), Object.class, Cat.class);
         assertTypeSetMatches(bean.getStereotypes(), PersianStereotype.class);
-        assertTrue(annotationSetMatches(bean.getQualifiers(), new Wild.Literal(true), new Cute.Literal(), Any.Literal.INSTANCE));
+        assertTrue(
+                annotationSetMatches(bean.getQualifiers(), new Wild.Literal(true), new Cute.Literal(), Any.Literal.INSTANCE));
 
         // other attributes
         assertEquals(ApplicationScoped.class, bean.getScope());

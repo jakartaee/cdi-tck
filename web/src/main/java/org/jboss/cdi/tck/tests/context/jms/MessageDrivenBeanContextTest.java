@@ -29,8 +29,8 @@ import jakarta.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
-import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder;
+import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.context.jms.LogStore.LogMessage;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
@@ -61,7 +61,8 @@ public class MessageDrivenBeanContextTest extends AbstractTest {
                 newMessageDriven("TestTopic", TopicMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
                         .addActivationConfigProperty("destinationType", "jakarta.jms.Topic")
-                        .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsTopic())).build();
+                        .addActivationConfigProperty("destinationLookup", ConfigurationFactory.get().getTestJmsTopic()))
+                .build();
 
         return new WebArchiveBuilder().withTestClassPackage(MessageDrivenBeanContextTest.class).withEjbJarXml(ejbJarDescriptor)
                 .build();

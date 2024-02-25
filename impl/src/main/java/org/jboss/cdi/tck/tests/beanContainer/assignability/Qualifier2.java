@@ -25,7 +25,7 @@ import jakarta.inject.Qualifier;
 @Retention(RUNTIME)
 @Target({ TYPE, METHOD, FIELD, PARAMETER })
 public @interface Qualifier2 {
-    
+
     static class Literal extends AnnotationLiteral<Qualifier2> implements Qualifier2 {
         static final Qualifier2 INSTANCE = new Literal();
     }

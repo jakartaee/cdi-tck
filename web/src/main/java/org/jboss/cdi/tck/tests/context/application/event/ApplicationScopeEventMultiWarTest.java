@@ -21,8 +21,6 @@ import java.net.URL;
 
 import jakarta.servlet.ServletContext;
 
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -38,6 +36,9 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * <p>
@@ -72,16 +73,19 @@ public class ApplicationScopeEventMultiWarTest extends AbstractTest {
                 .withClasses(Collector.class, ObserverNames.class, Helper.class).noDefaultWebModule().build();
         StringAsset applicationXml = new StringAsset(Descriptors.create(ApplicationDescriptor.class)
                 .version(EnterpriseArchiveBuilder.DEFAULT_APP_VERSION).applicationName("Test").createModule()
-                .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb().webUri(TEST1_ARCHIVE_NAME+".war")
-                .contextRoot("/"+TEST1_ARCHIVE_NAME).up().up().createModule().getOrCreateWeb().webUri(TEST2_ARCHIVE_NAME+".war").contextRoot("/"+TEST2_ARCHIVE_NAME).up()
+                .ejb(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME).up().createModule().getOrCreateWeb()
+                .webUri(TEST1_ARCHIVE_NAME + ".war")
+                .contextRoot("/" + TEST1_ARCHIVE_NAME).up().up().createModule().getOrCreateWeb()
+                .webUri(TEST2_ARCHIVE_NAME + ".war").contextRoot("/" + TEST2_ARCHIVE_NAME).up()
                 .up().exportAsString());
         enterpriseArchive.setApplicationXML(applicationXml);
 
-        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName(TEST1_ARCHIVE_NAME+".war")
+        WebArchive fooArchive = new WebArchiveBuilder().notTestArchive().withName(TEST1_ARCHIVE_NAME + ".war")
                 .withClasses(Observer2.class, PingServlet.class).withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(Testable.archiveToTest(fooArchive));
 
-        WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName(TEST2_ARCHIVE_NAME+".war").withClasses(Observer3.class, PingServlet.class)
+        WebArchive barArchive = new WebArchiveBuilder().notTestArchive().withName(TEST2_ARCHIVE_NAME + ".war")
+                .withClasses(Observer3.class, PingServlet.class)
                 .withDefaultEjbModuleDependency().build();
         enterpriseArchive.addAsModule(barArchive);
 

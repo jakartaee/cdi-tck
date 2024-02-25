@@ -41,7 +41,8 @@ public class ResolutionByNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "ca"), @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "ca"),
+            @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "aa"),
             @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "b") })
     public void testAmbiguousELNamesResolved() throws Exception {
         // Cod and Plaice are named "whitefish" - Cod is a not-enabled alternative

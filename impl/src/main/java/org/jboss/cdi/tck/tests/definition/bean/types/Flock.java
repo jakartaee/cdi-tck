@@ -16,11 +16,6 @@ package org.jboss.cdi.tck.tests.definition.bean.types;
 
 import jakarta.enterprise.context.Dependent;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-
 @Dependent
 public class Flock implements Gathering<Vulture<Integer>> {
 

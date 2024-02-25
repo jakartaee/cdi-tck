@@ -19,7 +19,7 @@ import jakarta.enterprise.inject.spi.CDI;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public final class AlphaLocator {
 

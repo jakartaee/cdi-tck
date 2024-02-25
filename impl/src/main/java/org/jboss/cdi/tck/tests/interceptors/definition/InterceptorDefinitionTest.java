@@ -24,19 +24,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-import jakarta.enterprise.inject.spi.InterceptionType;
-import jakarta.enterprise.inject.spi.Interceptor;
-import jakarta.enterprise.util.AnnotationLiteral;
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.HierarchyDiscovery;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
-import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.annotations.Test;
-
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
@@ -47,6 +34,20 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import jakarta.enterprise.inject.spi.InterceptionType;
+import jakarta.enterprise.inject.spi.Interceptor;
+import jakarta.enterprise.util.AnnotationLiteral;
+
+import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.cdi.tck.AbstractTest;
+import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.util.HierarchyDiscovery;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.test.audit.annotations.SpecAssertion;
+import org.jboss.test.audit.annotations.SpecAssertions;
+import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.annotations.Test;
 
 /**
  * Tests related to the definition of interceptors, but not necessarily their execution.
@@ -114,10 +115,10 @@ public class InterceptorDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertion(section = INTERCEPTOR, id = "f")
     public void testInstanceOfInterceptorForEveryEnabledInterceptor() {
-        List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>>asList(TRANSACTIONAL_LITERAL,
+        List<AnnotationLiteral<?>> annotationLiterals = Arrays.<AnnotationLiteral<?>> asList(TRANSACTIONAL_LITERAL,
                 SECURE_LITERAL, MISSILE_LITERAL, LOGGED_LITERAL);
 
-        List<Class<?>> interceptorClasses = new ArrayList<Class<?>>(Arrays.<Class<?>>asList(AtomicInterceptor.class,
+        List<Class<?>> interceptorClasses = new ArrayList<Class<?>>(Arrays.<Class<?>> asList(AtomicInterceptor.class,
                 MissileInterceptor.class, SecureInterceptor.class, TransactionalInterceptor.class, NetworkLogger.class,
                 FileLogger.class, NotEnabledAtomicInterceptor.class));
 
@@ -157,7 +158,8 @@ public class InterceptorDefinitionTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = BM_INTERCEPTOR_RESOLUTION, id = "b") })
     public void testSameBindingTypesToResolveInterceptorsFails() {
         getCurrentManager()
-                .resolveInterceptors(InterceptionType.AROUND_INVOKE, new Transactional.TransactionalLiteral("a"), new Transactional.TransactionalLiteral("b"));
+                .resolveInterceptors(InterceptionType.AROUND_INVOKE, new Transactional.TransactionalLiteral("a"),
+                        new Transactional.TransactionalLiteral("b"));
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })

@@ -27,9 +27,11 @@ import jakarta.interceptor.Interceptor;
 @Priority(Interceptor.Priority.APPLICATION + 100)
 public abstract class CanSpeakDecorator implements Speakable {
 
-    @Inject @Delegate Cat cat;
-    
+    @Inject
+    @Delegate
+    Cat cat;
+
     public String saySomething() {
-        return cat.saySomething()+ " meow";
+        return cat.saySomething() + " meow";
     }
 }

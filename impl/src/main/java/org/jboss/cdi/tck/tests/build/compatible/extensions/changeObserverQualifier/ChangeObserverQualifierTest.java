@@ -13,8 +13,13 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.changeObserverQualifier;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Set;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -23,11 +28,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 @SpecVersion(spec = "cdi", version = "4.0")
 public class ChangeObserverQualifierTest extends AbstractTest {

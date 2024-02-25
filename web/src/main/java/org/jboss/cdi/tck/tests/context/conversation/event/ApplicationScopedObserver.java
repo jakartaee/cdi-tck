@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.event;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.BeforeDestroyed;
 import jakarta.enterprise.context.ConversationScoped;

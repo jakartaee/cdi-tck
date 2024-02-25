@@ -20,5 +20,5 @@ package org.jboss.cdi.tck.tests.extensions.registration;
  */
 @BeanieType("basic")
 public class Beanie {
-    
+
 }

@@ -15,6 +15,7 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
 import jakarta.enterprise.context.Dependent;
+
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**

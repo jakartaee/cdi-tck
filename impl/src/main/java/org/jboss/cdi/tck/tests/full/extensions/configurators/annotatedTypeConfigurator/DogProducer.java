@@ -23,7 +23,7 @@ public class DogProducer {
 
     // This annotation is removed in PAT
     @Produces
-    public Dog createDog(){
+    public Dog createDog() {
         return new Dog("charlie");
     };
 }

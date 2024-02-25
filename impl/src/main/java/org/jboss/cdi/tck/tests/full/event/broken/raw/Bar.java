@@ -19,7 +19,7 @@ import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class Bar {
 

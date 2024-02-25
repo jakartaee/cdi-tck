@@ -35,7 +35,7 @@ public class ApplicationScopedObserver {
         initializedEventPayload = obj;
     }
 
-    public void observesApplicationScopedBeforeDestroyed(@Observes @BeforeDestroyed(ApplicationScoped.class) Object obj){
+    public void observesApplicationScopedBeforeDestroyed(@Observes @BeforeDestroyed(ApplicationScoped.class) Object obj) {
         isBeforeDestroyed = true;
         beforeDestroyedEventPayload = obj;
     }
@@ -44,8 +44,8 @@ public class ApplicationScopedObserver {
         isDestroyed = true;
         destroyedEventPayload = obj;
     }
-    
-    public static void reset(){
+
+    public static void reset() {
         isInitialized = false;
         isBeforeDestroyed = false;
         isDestroyed = false;

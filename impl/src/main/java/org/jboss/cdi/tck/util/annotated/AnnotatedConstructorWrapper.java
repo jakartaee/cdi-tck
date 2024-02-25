@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -18,6 +18,7 @@ import java.lang.reflect.Constructor;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
 import jakarta.enterprise.inject.spi.AnnotatedConstructor;
 import jakarta.enterprise.inject.spi.AnnotatedParameter;
 
@@ -26,11 +27,12 @@ public class AnnotatedConstructorWrapper<X> extends AnnotatedCallableWraper<X> i
     private AnnotatedConstructor<X> delegate;
     private List<AnnotatedParameter<X>> parameters;
 
-    public AnnotatedConstructorWrapper(AnnotatedConstructor<X> delegate, AnnotatedTypeWrapper<X> declaringType, boolean keepOriginalAnnotations,
+    public AnnotatedConstructorWrapper(AnnotatedConstructor<X> delegate, AnnotatedTypeWrapper<X> declaringType,
+            boolean keepOriginalAnnotations,
             Annotation... annotations) {
         super(delegate, declaringType, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
-        this.parameters =delegate.getParameters();
+        this.parameters = delegate.getParameters();
     }
 
     public Constructor<X> getJavaMember() {

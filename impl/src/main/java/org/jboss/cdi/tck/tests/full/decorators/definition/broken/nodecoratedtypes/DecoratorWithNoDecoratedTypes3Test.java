@@ -33,7 +33,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of the Weld test suite.
  * </p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -46,7 +46,8 @@ public class DecoratorWithNoDecoratedTypes3Test extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(DecoratorWithNoDecoratedTypes1Test.class)
                 .withClasses(Glue.class, GlueDecorator.class, GlueDecoratorExtension.class, ForwardingBeanAttributes.class,
-                        ForwardingInjectionPoint.class).withExtension(GlueDecoratorExtension.class).build();
+                        ForwardingInjectionPoint.class)
+                .withExtension(GlueDecoratorExtension.class).build();
     }
 
     @Test(groups = CDI_FULL)

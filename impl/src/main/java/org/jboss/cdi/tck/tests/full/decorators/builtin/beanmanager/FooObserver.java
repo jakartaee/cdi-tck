@@ -19,7 +19,7 @@ import jakarta.enterprise.event.Observes;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @RequestScoped
 public class FooObserver {

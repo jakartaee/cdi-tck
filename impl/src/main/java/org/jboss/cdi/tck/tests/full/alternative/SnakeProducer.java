@@ -24,11 +24,10 @@ public class SnakeProducer {
     @Wild
     Snake snake = new Snake();
 
-
     @Produces
     @Alternative
     @Wild
-    public Snake produceWildSnake(){
+    public Snake produceWildSnake() {
         return snake;
     }
 

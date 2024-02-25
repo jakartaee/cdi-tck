@@ -23,6 +23,7 @@ import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.inject.spi.CDI;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -51,7 +52,8 @@ public class CDIProviderRuntimeTest extends AbstractTest {
                 // BDA01
                 .withBeanLibrary(
                         new BeansXml().alternatives(Bravo.class),
-                        Bravo.class, BravoLocator.class, BravoMarker.class).build();
+                        Bravo.class, BravoLocator.class, BravoMarker.class)
+                .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

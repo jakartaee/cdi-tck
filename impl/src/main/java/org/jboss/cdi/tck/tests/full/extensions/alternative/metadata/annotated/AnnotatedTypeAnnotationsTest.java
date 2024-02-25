@@ -40,7 +40,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
@@ -77,7 +77,8 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
 
         AnnotatedType<Rimmer> rimmer = extension.getRimmer();
         assertNotNull(rimmer);
-        assertAnnotationSetMatches(rimmer.getAnnotations(), Mortal.class, Dependent.class, InheritedQualifier.class, Fate.class);
+        assertAnnotationSetMatches(rimmer.getAnnotations(), Mortal.class, Dependent.class, InheritedQualifier.class,
+                Fate.class);
     }
 
     @SuppressWarnings("unchecked")

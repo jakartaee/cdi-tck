@@ -19,7 +19,7 @@ import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import static org.testng.Assert.assertEquals;
 
 import jakarta.enterprise.inject.UnsatisfiedResolutionException;
-import jakarta.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -38,9 +38,9 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(ProducerMethodDefinitionTest.class).build();
     }
 
-
     @Test(expectedExceptions = UnsatisfiedResolutionException.class)
-    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "da"), @SpecAssertion(section = SPECIALIZATION, id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "da"),
+            @SpecAssertion(section = SPECIALIZATION, id = "cb") })
     public void testNonStaticProducerMethodNotInheritedBySpecializingSubclass() {
         assertEquals(getBeans(Egg.class, new Yummy.Literal()).size(), 0);
         getContextualReference(Egg.class, new Yummy.Literal());

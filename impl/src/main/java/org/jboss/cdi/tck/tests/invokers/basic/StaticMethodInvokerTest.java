@@ -15,6 +15,13 @@
  */
 package org.jboss.cdi.tck.tests.invokers.basic;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.expectThrows;
+
+import java.util.List;
+import java.util.Set;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
@@ -23,6 +30,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.Invoker;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -34,13 +42,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.List;
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.expectThrows;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class StaticMethodInvokerTest extends AbstractTest {
@@ -73,28 +74,28 @@ public class StaticMethodInvokerTest extends AbstractTest {
     @SpecAssertion(section = Sections.BEHAVIOR_OF_INVOKE, id = "a")
     public void test(MyService service, InvokerHolder invokers) throws Exception {
         Invoker<MyService, String> hello = invokers.get("hello");
-        assertEquals(hello.invoke(service, new Object[]{0, List.of()}), "foobar0[]");
-        assertEquals(hello.invoke(new MyService(), new Object[]{1, List.of()}), "foobar1[]");
-        assertEquals(hello.invoke(null, new Object[]{2, List.of()}), "foobar2[]");
+        assertEquals(hello.invoke(service, new Object[] { 0, List.of() }), "foobar0[]");
+        assertEquals(hello.invoke(new MyService(), new Object[] { 1, List.of() }), "foobar1[]");
+        assertEquals(hello.invoke(null, new Object[] { 2, List.of() }), "foobar2[]");
 
         Invoker<Object, Object> helloDetyped = (Invoker) hello;
-        assertEquals("foobar3[]", helloDetyped.invoke(service, new Object[]{3, List.of()}));
-        assertEquals("foobar4[]", helloDetyped.invoke(new MyService(), new Object[]{4, List.of()}));
-        assertEquals("foobar5[]", helloDetyped.invoke(null, new Object[]{5, List.of()}));
+        assertEquals("foobar3[]", helloDetyped.invoke(service, new Object[] { 3, List.of() }));
+        assertEquals("foobar4[]", helloDetyped.invoke(new MyService(), new Object[] { 4, List.of() }));
+        assertEquals("foobar5[]", helloDetyped.invoke(null, new Object[] { 5, List.of() }));
 
         Invoker<MyService, Void> doSomething = invokers.get("doSomething");
         assertEquals(0, MyService.counter);
         assertNull(doSomething.invoke(service, null));
         assertEquals(1, MyService.counter);
-        assertNull(doSomething.invoke(new MyService(), new Object[]{}));
+        assertNull(doSomething.invoke(new MyService(), new Object[] {}));
         assertEquals(2, MyService.counter);
-        assertNull(doSomething.invoke(null, new Object[]{}));
+        assertNull(doSomething.invoke(null, new Object[] {}));
         assertEquals(3, MyService.counter);
 
         Invoker<MyService, Void> fail = invokers.get("fail");
-        assertNull(fail.invoke(null, new Object[]{false}));
+        assertNull(fail.invoke(null, new Object[] { false }));
         IllegalArgumentException ex = expectThrows(IllegalArgumentException.class, () -> {
-            fail.invoke(null, new Object[]{true});
+            fail.invoke(null, new Object[] { true });
         });
         assertEquals("expected", ex.getMessage());
     }

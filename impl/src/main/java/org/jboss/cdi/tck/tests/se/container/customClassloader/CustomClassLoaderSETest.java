@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
+
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
 import jakarta.enterprise.inject.spi.Extension;
@@ -47,7 +48,8 @@ public class CustomClassLoaderSETest extends Arquillian {
     public static Archive<?> deployment() throws IOException {
         final JavaArchive bda1 = ShrinkWrap.create(JavaArchive.class)
                 .addPackage(CustomClassLoaderSETest.class.getPackage())
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml").addAsServiceProvider(Extension.class, AlphaExtension.class, BravoExtension.class)
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsServiceProvider(Extension.class, AlphaExtension.class, BravoExtension.class)
                 .addAsServiceProvider(MyExtension.class, AlphaExtension.class);
         return ClassPath.builder().add(bda1).build();
     }
@@ -72,7 +74,8 @@ public class CustomClassLoaderSETest extends Arquillian {
                 .setClassLoader(classLoader)
                 .initialize()) {
             container.select(Alpha.class, ProcessedByExtension.ProcessedByExtensionLiteral.INSTANCE).get().ping();
-            Assert.assertTrue(container.select(Bravo.class, ProcessedByExtension.ProcessedByExtensionLiteral.INSTANCE).isUnsatisfied());
+            Assert.assertTrue(
+                    container.select(Bravo.class, ProcessedByExtension.ProcessedByExtensionLiteral.INSTANCE).isUnsatisfied());
         }
 
     }

@@ -25,5 +25,5 @@ import org.jboss.cdi.tck.tests.full.extensions.lifecycle.atd.Alternatives;
 @Alternative
 @Priority(2600)
 public class BetaAlternative implements Alternatives {
-    
+
 }

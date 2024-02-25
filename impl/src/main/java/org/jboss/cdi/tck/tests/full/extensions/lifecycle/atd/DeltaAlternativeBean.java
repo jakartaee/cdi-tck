@@ -13,18 +13,17 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.lifecycle.atd;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.context.spi.CreationalContext;
-import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.inject.spi.InjectionPoint;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.spi.Bean;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.Prioritized;
 
 public class DeltaAlternativeBean implements Bean<DeltaAlternative>, Prioritized {

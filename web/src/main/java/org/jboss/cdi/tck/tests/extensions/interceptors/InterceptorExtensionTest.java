@@ -23,6 +23,7 @@ import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -35,11 +36,11 @@ import org.testng.annotations.Test;
 
 /**
  * Tests that interceptors registered via the SPI work correctly.
- * 
+ *
  * <p>
  * This test was originally part of Weld test suite.
  * <p>
- * 
+ *
  * @author Stuart Douglas stuart@baileyroberts.com.au
  * @author Martin Kouba
  */
@@ -53,10 +54,12 @@ public class InterceptorExtensionTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(InterceptorExtensionTest.class)
                 .withClasses(Marathon.class, NumberSource.class, WordSource.class)
-                .withLibrary(SuffixingInterceptor.class, IncrementingInterceptor.class, LifecycleInterceptor.class, Suffixed.class, FullMarathon.class, Incremented.class,
+                .withLibrary(SuffixingInterceptor.class, IncrementingInterceptor.class, LifecycleInterceptor.class,
+                        Suffixed.class, FullMarathon.class, Incremented.class,
                         InterceptorExtension.class)
                 .withBeansXml(
-                        new BeansXml().interceptors(SuffixingInterceptor.class, IncrementingInterceptor.class, LifecycleInterceptor.class))
+                        new BeansXml().interceptors(SuffixingInterceptor.class, IncrementingInterceptor.class,
+                                LifecycleInterceptor.class))
                 .build();
     }
 
@@ -65,7 +68,7 @@ public class InterceptorExtensionTest extends AbstractTest {
 
     @Inject
     private NumberSource numberSource;
-    
+
     @Inject
     private WordSource wordSource;
 
@@ -92,7 +95,7 @@ public class InterceptorExtensionTest extends AbstractTest {
         bean.destroy(marathon, creationalContext);
         assertTrue(LifecycleInterceptor.isPreDestroyCalled());
     }
-    
+
     @Test
     @SpecAssertions({ @SpecAssertion(section = INIT_EVENTS, id = "b"), @SpecAssertion(section = INIT_EVENTS, id = "bb"),
             @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "aea") })
@@ -101,5 +104,5 @@ public class InterceptorExtensionTest extends AbstractTest {
         assertEquals(wordSource.getWordWithSuffix(), WordSource.wordWithSuffix);
         assertTrue(SuffixingInterceptor.isDoAroundCalled());
     }
-    
+
 }

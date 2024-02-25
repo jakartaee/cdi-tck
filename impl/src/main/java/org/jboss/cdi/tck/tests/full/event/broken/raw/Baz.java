@@ -16,11 +16,12 @@ package org.jboss.cdi.tck.tests.full.event.broken.raw;
 
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
+
 import org.jboss.cdi.tck.tests.event.broken.raw.Foo;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class Baz {
 

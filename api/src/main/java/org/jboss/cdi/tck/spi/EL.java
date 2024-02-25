@@ -47,7 +47,8 @@ public interface EL {
      * @param expectedParamTypes
      * @return
      */
-    public <T> T evaluateMethodExpression(BeanManager beanManager, String expression, Class<T> expectedType, Class<?>[] expectedParamTypes,
+    public <T> T evaluateMethodExpression(BeanManager beanManager, String expression, Class<T> expectedType,
+            Class<?>[] expectedParamTypes,
             Object[] expectedParams);
 
     /**

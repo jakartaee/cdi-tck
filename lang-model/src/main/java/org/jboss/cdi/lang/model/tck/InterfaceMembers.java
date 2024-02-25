@@ -13,12 +13,12 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
-import jakarta.enterprise.lang.model.declarations.ClassInfo;
+import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertField;
+import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertMethod;
 
 import java.lang.reflect.Modifier;
 
-import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertField;
-import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertMethod;
+import jakarta.enterprise.lang.model.declarations.ClassInfo;
 
 public interface InterfaceMembers {
     public static final String publicStaticFinalField = "";
@@ -31,17 +31,27 @@ public interface InterfaceMembers {
     final String finalField = "";
     String field = "";
 
-    public static void publicStaticMethod() {}
-    static void staticMethod() {}
-    private static void privateStaticMethod() {}
+    public static void publicStaticMethod() {
+    }
+
+    static void staticMethod() {
+    }
+
+    private static void privateStaticMethod() {
+    }
 
     public void publicAbstractMethod();
+
     void abstractMethod();
 
-    public default void publicDefaultMethod() {}
-    default void defaultMethod() {}
+    public default void publicDefaultMethod() {
+    }
 
-    private void privateMethod() {}
+    default void defaultMethod() {
+    }
+
+    private void privateMethod() {
+    }
 
     class Verifier {
         public static void verify(ClassInfo clazz) {

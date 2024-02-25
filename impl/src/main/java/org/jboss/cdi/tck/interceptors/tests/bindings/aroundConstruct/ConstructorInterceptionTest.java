@@ -20,12 +20,12 @@ import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INVOCATIONCONT
 import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 
 import jakarta.enterprise.inject.Instance;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
@@ -66,7 +66,8 @@ public class ConstructorInterceptionTest extends AbstractTest {
     public void testMultipleConstructorLevelBinding(Instance<BeanWithMultipleConstructorLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
-        assertSequenceDataEquals(AlphaInterceptor2.class, BravoInterceptor.class, BeanWithMultipleConstructorLevelBinding.class);
+        assertSequenceDataEquals(AlphaInterceptor2.class, BravoInterceptor.class,
+                BeanWithMultipleConstructorLevelBinding.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -84,7 +85,8 @@ public class ConstructorInterceptionTest extends AbstractTest {
     public void testTypeLevelAndConstructorLevelBinding(Instance<BeanWithConstructorLevelAndTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
-        assertSequenceDataEquals(AlphaInterceptor1.class, BravoInterceptor.class, BeanWithConstructorLevelAndTypeLevelBinding.class);
+        assertSequenceDataEquals(AlphaInterceptor1.class, BravoInterceptor.class,
+                BeanWithConstructorLevelAndTypeLevelBinding.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

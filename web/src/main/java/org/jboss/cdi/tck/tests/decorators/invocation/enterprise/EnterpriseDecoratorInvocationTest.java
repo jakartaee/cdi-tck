@@ -21,8 +21,13 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
 import static org.testng.Assert.assertEquals;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
+
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -33,10 +38,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
 
 /**
  *

@@ -15,23 +15,24 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.bean;
 
 import jakarta.enterprise.inject.Vetoed;
 
-/** {@link Vetoed} makes sure this bean does not get picked up by CDI
+/**
+ * {@link Vetoed} makes sure this bean does not get picked up by CDI
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Vetoed
 public class Zombie {
-    
+
     private boolean decaying;
-    
+
     private Weapon weapon;
     private DesireToHurtHumans evilDesire;
-    
+
     public Zombie(boolean decaying) {
         this.decaying = decaying;
     }
-    
+
     public Zombie() {
-        
+
     }
 }

@@ -26,7 +26,6 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -51,7 +50,8 @@ public class ClientConversationContextTest extends AbstractConversationTest {
                 .withTestClassDefinition(ClientConversationContextTest.class)
                 .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
                         CloudController.class, OutermostFilter.class, Cumulus.class, BuiltInConversation.class,
-                        ConversationContextObserver.class).withWebResource("home.xhtml").withWebResource("cloud.xhtml")
+                        ConversationContextObserver.class)
+                .withWebResource("home.xhtml").withWebResource("cloud.xhtml")
                 .withWebResource("clouds.xhtml").withWebResource("cumulus.xhtml").withWebResource("builtin.xhtml")
                 .withWebResource("error.xhtml").withWebResource("storm.xhtml").withWebResource("rain.xhtml")
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
@@ -396,15 +396,14 @@ public class ClientConversationContextTest extends AbstractConversationTest {
         assertEquals(getFirstMatchingElement(page3, HtmlSpan.class, "cloudName").getTextContent(), Cloud.NAME);
     }
 
-
     private void verifyNonexistentConversationExceptionThrown(Page page) {
-        if(page instanceof TextPage) {
+        if (page instanceof TextPage) {
             TextPage textPage = (TextPage) page;
             assertTrue(textPage.getContent().contains("NonexistentConversationException thrown properly"));
             assertTrue(textPage.getContent().contains("Conversation.isTransient: true"));
             assertTrue(textPage.getContent().contains("Cloud: " + Cloud.NAME));
         } else {
-            fail("Unexpected response type: "+page.getClass().getName());
+            fail("Unexpected response type: " + page.getClass().getName());
         }
     }
 }

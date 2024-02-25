@@ -24,7 +24,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class ExtensionAlpha implements Extension {
 

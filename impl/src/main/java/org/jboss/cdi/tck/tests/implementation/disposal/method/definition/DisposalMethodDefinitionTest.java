@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -30,7 +30,6 @@ import java.lang.annotation.Annotation;
 
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -57,10 +56,13 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "c"), @SpecAssertion(section = DISPOSER_METHOD, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "c"),
+            @SpecAssertion(section = DISPOSER_METHOD, id = "b"),
             @SpecAssertion(section = DISPOSER_METHOD, id = "c"), @SpecAssertion(section = DISPOSER_METHOD, id = "e"),
-            @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba"), @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "a"),
-            @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "ba"), @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "aa"),
+            @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba"),
+            @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "a"),
+            @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "ba"),
+            @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "aa"),
             @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "b") })
     public void testBindingTypesAppliedToDisposalMethodParameters() throws Exception {
 
@@ -77,7 +79,8 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD, id = "aa"), @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD, id = "aa"),
+            @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "ba") })
     public void testDisposalMethodOnNonBean() throws Exception {
 
         DependentInstance<WebSpider> webSpider = newDependentInstance(WebSpider.class, DEADLIEST_LITERAL);
@@ -95,7 +98,8 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
      * @throws Exception
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "h"), @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "h"),
+            @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a"),
             @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "e") })
     public void testDisposalMethodParametersGetInjected() throws Exception {
 
@@ -127,7 +131,8 @@ public class DisposalMethodDefinitionTest extends AbstractTest {
      * Tests that a disposal method can be bound to a product of a producer field. CDI-145
      */
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "ab"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "o") })
+    @SpecAssertions({ @SpecAssertion(section = DISPOSER_METHOD_RESOLUTION, id = "ab"),
+            @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "o") })
     public void testDisposalMethodCalledForProducerField() throws Exception {
 
         createAndDestroyBean(Calisoga.class, new Scary.Literal());

@@ -38,7 +38,8 @@ public class ApplicationScopedObserver {
         return builder;
     }
 
-    public void first(@Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION - 100) Object obj) {
+    public void first(
+            @Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION - 100) Object obj) {
         getBuilder().append(A);
     }
 
@@ -46,11 +47,13 @@ public class ApplicationScopedObserver {
         getBuilder().append(B);
     }
 
-    public void third(@Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION + 600) Object obj) {
+    public void third(
+            @Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION + 600) Object obj) {
         getBuilder().append(C);
     }
 
-    public void forth(@Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION + 700) Object obj) {
+    public void forth(
+            @Observes @Initialized(ApplicationScoped.class) @Priority(Interceptor.Priority.APPLICATION + 700) Object obj) {
         getBuilder().append(D);
     }
 }

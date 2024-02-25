@@ -13,6 +13,8 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.registration;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
 import jakarta.enterprise.inject.build.compatible.spi.Messages;
@@ -20,8 +22,6 @@ import jakarta.enterprise.inject.build.compatible.spi.ObserverInfo;
 import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Types;
 import jakarta.enterprise.inject.build.compatible.spi.Validation;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class RegistrationExtension implements BuildCompatibleExtension {
     private final AtomicInteger beanCounter = new AtomicInteger();

@@ -18,9 +18,7 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Instance;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Inject;
-
 
 /**
  * @author Martin Kouba

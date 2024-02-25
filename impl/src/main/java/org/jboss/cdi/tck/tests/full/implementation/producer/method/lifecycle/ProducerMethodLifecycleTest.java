@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -42,7 +43,8 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "c"), @SpecAssertion(section = SPECIALIZATION, id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "c"),
+            @SpecAssertion(section = SPECIALIZATION, id = "cb") })
     public void testProducerMethodFromSpecializedBeanUsed() {
         SpiderProducer.reset();
         PreferredSpiderProducer.reset();

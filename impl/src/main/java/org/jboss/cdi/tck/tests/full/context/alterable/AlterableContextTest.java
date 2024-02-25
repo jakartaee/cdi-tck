@@ -21,6 +21,7 @@ import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.context.spi.AlterableContext;
 import jakarta.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -33,11 +34,11 @@ import org.testng.annotations.Test;
 
 /**
  * Tests for https://issues.jboss.org/browse/CDI-139
- * 
+ *
  * <p>
  * This test was originally part of the Weld test suite.
  * </p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */

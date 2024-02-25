@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -26,7 +26,6 @@ import java.util.Set;
 
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Named;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -54,8 +53,10 @@ public class ProducerMethodSpecializationTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia"), @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "k"),
-            @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "j"), @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "ia"),
+            @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "k"),
+            @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "j"),
+            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "c"),
             @SpecAssertion(section = SPECIALIZE_PRODUCER_METHOD, id = "aa") })
     public void testSpecializingProducerMethod() {
 

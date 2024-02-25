@@ -13,11 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.beanContainer;
 
+import java.lang.annotation.Annotation;
+
 import jakarta.enterprise.context.spi.AlterableContext;
 import jakarta.enterprise.context.spi.Contextual;
 import jakarta.enterprise.context.spi.CreationalContext;
-
-import java.lang.annotation.Annotation;
 
 // dummy context, never active
 public class CustomContextImpl2 implements AlterableContext {

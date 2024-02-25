@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
@@ -45,7 +45,8 @@ public class RawInstanceCustomBeanTest extends AbstractTest {
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
                 .withTestClass(RawInstanceCustomBeanTest.class)
                 .withClasses(Bar.class, AfterBeanDiscoveryObserver.class, CustomBarBean.class,
-                        CustomInstanceInjectionPoint.class).withExtension(AfterBeanDiscoveryObserver.class).build();
+                        CustomInstanceInjectionPoint.class)
+                .withExtension(AfterBeanDiscoveryObserver.class).build();
     }
 
     @Test

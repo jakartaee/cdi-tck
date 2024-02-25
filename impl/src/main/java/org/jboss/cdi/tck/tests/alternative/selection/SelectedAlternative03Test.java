@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.alternative.selection;
 import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -37,7 +38,8 @@ public class SelectedAlternative03Test extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(SelectedAlternative03Test.class)
                 .withClasses(Delta.class, StandardDeltaProducer.class, AlternativeDeltaProducer1.class,
-                        AlternativeDeltaProducer2.class).build();
+                        AlternativeDeltaProducer2.class)
+                .build();
     }
 
     @Inject

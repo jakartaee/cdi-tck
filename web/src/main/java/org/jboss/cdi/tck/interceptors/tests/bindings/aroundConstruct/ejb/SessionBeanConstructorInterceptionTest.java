@@ -19,6 +19,7 @@ import static org.jboss.cdi.tck.interceptors.InterceptorsSections.INT_BINDING_TY
 import static org.jboss.cdi.tck.util.ActionSequence.assertSequenceDataEquals;
 
 import jakarta.enterprise.inject.Instance;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -44,7 +45,8 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(SessionBeanConstructorInterceptionTest.class)
-                .withBeansXml(new BeansXml().interceptors(AlphaInterceptor1.class, AlphaInterceptor2.class, BravoInterceptor.class))
+                .withBeansXml(
+                        new BeansXml().interceptors(AlphaInterceptor1.class, AlphaInterceptor2.class, BravoInterceptor.class))
                 .build();
     }
 
@@ -71,7 +73,8 @@ public class SessionBeanConstructorInterceptionTest extends AbstractTest {
     public void testTypeLevelAndConstructorLevelBinding(Instance<BeanWithConstructorLevelAndTypeLevelBinding> instance) {
         ActionSequence.reset();
         instance.get();
-        assertSequenceDataEquals(AlphaInterceptor1.class, BravoInterceptor.class, BeanWithConstructorLevelAndTypeLevelBinding.class);
+        assertSequenceDataEquals(AlphaInterceptor1.class, BravoInterceptor.class,
+                BeanWithConstructorLevelAndTypeLevelBinding.class);
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)

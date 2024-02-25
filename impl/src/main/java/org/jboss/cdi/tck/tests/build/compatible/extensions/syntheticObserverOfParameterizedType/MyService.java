@@ -13,11 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticObserverOfParameterizedType;
 
+import java.util.List;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
-
-import java.util.List;
 
 @ApplicationScoped
 public class MyService {

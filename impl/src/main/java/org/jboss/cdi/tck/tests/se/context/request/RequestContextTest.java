@@ -56,26 +56,26 @@ public class RequestContextTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertion(section = Sections.REQUEST_CONTEXT, id="db")
-    @SpecAssertion(section = Sections.REQUEST_CONTEXT, id="eb")
+    @SpecAssertion(section = Sections.REQUEST_CONTEXT, id = "db")
+    @SpecAssertion(section = Sections.REQUEST_CONTEXT, id = "eb")
     public void requestContextIsActiveDuringPostConstructCallback() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer container = seContainerInitializer
                 .initialize()) {
             TestBean testBean = container.select(TestBean.class).get();
             assertTrue(testBean.isReqContextActiveDuringPostConstruct());
-            try{
+            try {
                 testBean.fail();
                 fail();
-            }catch (ContextNotActiveException e){
+            } catch (ContextNotActiveException e) {
 
             }
         }
     }
 
     @Test
-    @SpecAssertion(section = Sections.REQUEST_CONTEXT, id="da")
-    @SpecAssertion(section = Sections.REQUEST_CONTEXT, id="ea")
+    @SpecAssertion(section = Sections.REQUEST_CONTEXT, id = "da")
+    @SpecAssertion(section = Sections.REQUEST_CONTEXT, id = "ea")
     public void requestContextIsActiveDuringAsyncObserverNotification() throws InterruptedException {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer container = seContainerInitializer

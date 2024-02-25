@@ -19,7 +19,7 @@ public class FinalProduct {
         return 1;
     }
 
-    public final void  finalMethod(){
+    public final void finalMethod() {
 
     }
 }

@@ -13,8 +13,8 @@
  */
 package org.jboss.cdi.tck.tests.alternative.selection.stereotype.priority;
 
-import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_ALTERNATIVE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE;
 import static org.testng.Assert.assertEquals;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -36,13 +36,13 @@ public class StereotypeWithAlternativeSelectedByPriorityTest extends AbstractTes
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(StereotypeWithAlternativeSelectedByPriorityTest.class)
-            .build();
+                .build();
     }
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ba"),
-        @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ba") })
+            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ba"),
+            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ba") })
     public void testStereotypeAlternativeIsEnabled() {
         assertEquals(getContextualReference(SomeInterface.class).ping(), AlternativeImpl.class.getSimpleName());
     }

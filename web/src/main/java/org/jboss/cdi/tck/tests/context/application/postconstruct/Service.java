@@ -18,7 +18,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @ApplicationScoped
 public class Service {

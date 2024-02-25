@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.build.compatible.extensions.invalid;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -34,7 +35,7 @@ public class RegistrationOnlyMessagesTest extends AbstractInvalidExtensionParamT
     }
 
     @Test
-    @SpecAssertion(section = Sections.REGISTRATION_PHASE, id= "aa", note = "Fail due to no required parameter ext method")
+    @SpecAssertion(section = Sections.REGISTRATION_PHASE, id = "aa", note = "Fail due to no required parameter ext method")
     public void shouldFail() {
     }
 }

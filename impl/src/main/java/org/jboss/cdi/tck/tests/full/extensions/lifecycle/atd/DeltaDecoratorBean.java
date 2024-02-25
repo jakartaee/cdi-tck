@@ -13,9 +13,6 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.lifecycle.atd;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.context.spi.CreationalContext;
-import jakarta.enterprise.inject.spi.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Type;
@@ -23,7 +20,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.spi.*;
 
 public class DeltaDecoratorBean implements Decorator<DeltaDecorator>, Prioritized {
 
@@ -44,7 +44,7 @@ public class DeltaDecoratorBean implements Decorator<DeltaDecorator>, Prioritize
     }
 
     public Set<Type> getDecoratedTypes() {
-        return Collections.<Type>singleton(Logger.class);
+        return Collections.<Type> singleton(Logger.class);
     }
 
     public Class<?> getBeanClass() {
@@ -96,7 +96,8 @@ public class DeltaDecoratorBean implements Decorator<DeltaDecorator>, Prioritize
 
     public DeltaDecorator create(CreationalContext<DeltaDecorator> creationalContext) {
         DeltaDecorator decorator = new DeltaDecorator();
-        decorator.logger = (Logger) beanManager.getInjectableReference(getInjectionPoints().iterator().next(), creationalContext);
+        decorator.logger = (Logger) beanManager.getInjectableReference(getInjectionPoints().iterator().next(),
+                creationalContext);
         return decorator;
     }
 
@@ -111,7 +112,7 @@ public class DeltaDecoratorBean implements Decorator<DeltaDecorator>, Prioritize
         }
 
         public Set<Annotation> getQualifiers() {
-            return Collections.<Annotation>singleton(Default.Literal.INSTANCE);
+            return Collections.<Annotation> singleton(Default.Literal.INSTANCE);
         }
 
         public Bean<?> getBean() {

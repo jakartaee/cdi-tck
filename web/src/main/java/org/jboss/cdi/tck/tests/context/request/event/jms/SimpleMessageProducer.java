@@ -38,7 +38,8 @@ public class SimpleMessageProducer {
 
     @PostConstruct
     public void init() {
-        this.connectionFactory = (ConnectionFactory) JndiLookupUtils.lookup(ConfigurationFactory.get().getTestJmsConnectionFactory());
+        this.connectionFactory = (ConnectionFactory) JndiLookupUtils
+                .lookup(ConfigurationFactory.get().getTestJmsConnectionFactory());
         this.topic = (Topic) JndiLookupUtils.lookup(ConfigurationFactory.get().getTestJmsTopic());
     }
 

@@ -31,6 +31,4 @@ public class BravoDecorator implements Logger {
         return logger.log(msg + "bravo");
     }
 
-
-
 }

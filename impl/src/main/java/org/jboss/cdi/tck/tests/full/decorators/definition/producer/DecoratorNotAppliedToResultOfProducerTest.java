@@ -30,7 +30,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
@@ -41,7 +41,8 @@ public class DecoratorNotAppliedToResultOfProducerTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorNotAppliedToResultOfProducerTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(ChargeDecorator.class)).build();
+                        new BeansXml().decorators(ChargeDecorator.class))
+                .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -64,7 +65,8 @@ public class DecoratorNotAppliedToResultOfProducerTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = DECORATORS, id = "b")
-    public void testDecoratorNotAppliedToResultOfProducerField(DurableAccount account, @Synthetic DurableAccount producedAccount) {
+    public void testDecoratorNotAppliedToResultOfProducerField(DurableAccount account,
+            @Synthetic DurableAccount producedAccount) {
         assertNotNull(account);
         assertNotNull(producedAccount);
 

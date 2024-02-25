@@ -21,7 +21,7 @@ public class Countryside {
     private final Cat wildCat;
 
     @Inject
-    public Countryside(Dog dog, Cat cat){
+    public Countryside(Dog dog, Cat cat) {
         this.wildCat = cat;
         this.wildDog = dog;
     }

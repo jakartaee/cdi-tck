@@ -13,6 +13,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processBeanAttributes.builtin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.enterprise.context.Conversation;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.event.Observes;
@@ -22,9 +25,6 @@ import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.inject.spi.ProcessBeanAttributes;
 import jakarta.servlet.http.HttpServletRequest;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProcessBeanAttributesObserver implements Extension {
 

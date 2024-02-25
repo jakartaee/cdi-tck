@@ -19,6 +19,9 @@ import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -29,9 +32,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Test interceptor enablement and ordering.
@@ -48,7 +48,8 @@ public class GlobalInterceptorOrderingTest extends AbstractTest {
                 // WEB-INF/classes
                 .withClasses(Dao.class, LegacyInterceptor1.class, LegacyInterceptor2.class, LegacyInterceptor3.class,
                         WebApplicationGlobalInterceptor1.class)
-                .withBeansXml(new BeansXml().interceptors(LegacyInterceptor1.class, LegacyInterceptor2.class, LegacyInterceptor3.class))
+                .withBeansXml(new BeansXml().interceptors(LegacyInterceptor1.class, LegacyInterceptor2.class,
+                        LegacyInterceptor3.class))
                 .withBeanLibrary(Transactional.class, AbstractInterceptor.class, Service.class,
                         GloballyEnabledInterceptor1.class, GloballyEnabledInterceptor3.class,
                         GloballyEnabledInterceptor4.class, GloballyEnabledInterceptor5.class)

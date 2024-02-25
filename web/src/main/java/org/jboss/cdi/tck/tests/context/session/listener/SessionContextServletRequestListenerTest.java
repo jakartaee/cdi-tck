@@ -34,28 +34,28 @@ import com.gargoylesoftware.htmlunit.WebClient;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class SessionContextServletRequestListenerTest extends AbstractTest {
 
-	@ArquillianResource
-	private URL contextPath;
+    @ArquillianResource
+    private URL contextPath;
 
-	@Deployment(testable = false)
-	public static WebArchive createTestArchive() {
-		return new WebArchiveBuilder()
-				.withTestClassDefinition(SessionContextServletRequestListenerTest.class)
-				.withClasses(SimpleSessionBean.class, IntrospectServlet.class, TestServletRequestListener.class)
-				.build();
-	}
+    @Deployment(testable = false)
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder()
+                .withTestClassDefinition(SessionContextServletRequestListenerTest.class)
+                .withClasses(SimpleSessionBean.class, IntrospectServlet.class, TestServletRequestListener.class)
+                .build();
+    }
 
-	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae")
-	public void testSessionScopeActiveDuringServletRequestListenerCall() throws Exception {
-		WebClient webClient = new WebClient();
-		// Create session
-		webClient.getPage(contextPath + "introspect");
-		// Invalidate session
-		webClient.getPage(contextPath + "introspect?mode=invalidate");
-		// Verify result
-		TextPage page = webClient.getPage(contextPath + "introspect?mode=verify");
-		assertTrue(Boolean.valueOf(page.getContent()));
-	}
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae")
+    public void testSessionScopeActiveDuringServletRequestListenerCall() throws Exception {
+        WebClient webClient = new WebClient();
+        // Create session
+        webClient.getPage(contextPath + "introspect");
+        // Invalidate session
+        webClient.getPage(contextPath + "introspect?mode=invalidate");
+        // Verify result
+        TextPage page = webClient.getPage(contextPath + "introspect?mode=verify");
+        assertTrue(Boolean.valueOf(page.getContent()));
+    }
 
 }

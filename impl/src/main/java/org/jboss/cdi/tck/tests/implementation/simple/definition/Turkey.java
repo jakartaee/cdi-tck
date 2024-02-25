@@ -35,7 +35,7 @@ public class Turkey {
     }
 
     @Inject
-    public Turkey(@Tame String foo,@Tame Integer bar) {
+    public Turkey(@Tame String foo, @Tame Integer bar) {
         if (foo.equals(Turkey.foo) && bar.equals(Turkey.bar)) {
             constructedCorrectly = true;
         }

@@ -28,15 +28,13 @@ public class SimpleBean {
     @Produces
     public Integer numberOfNumbers = new Integer(13);
 
-
     @Produces
-    public Integer create(){
+    public Integer create() {
         return new Integer(0);
     }
 
-
     // we need some observer for this bean just for test purposes
-    public void dummyObserver(@Observes SimpleBean bean){
+    public void dummyObserver(@Observes SimpleBean bean) {
     }
 
 }

@@ -30,12 +30,10 @@ import org.jboss.cdi.tck.selenium.WebPage;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.annotations.Test;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Test;
 
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -61,7 +59,8 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
         return new WebArchiveBuilder()
                 .withTestClassDefinition(LongRunningConversationPropagatedByFacesContextTest.class)
                 .withClasses(Storm.class, ConversationTestPhaseListener.class, ConversationStatusServlet.class, Cloud.class,
-                        OutermostFilter.class).withWebResource("storm.xhtml").withWebResource("storm-ajax.xhtml")
+                        OutermostFilter.class)
+                .withWebResource("storm.xhtml").withWebResource("storm-ajax.xhtml")
                 .withWebResource("thunder.xhtml").withWebResource("lightening.xhtml")
                 .withWebResource("faces-config.xml", "/WEB-INF/faces-config.xml").withWebXml("web.xml").build();
     }
@@ -181,7 +180,7 @@ public class LongRunningConversationPropagatedByFacesContextTest extends Abstrac
             HtmlPage thunder = webClient.getPage(getPath("thunder.jsf", cid));
             stormStrength = getFirstMatchingElement(thunder, HtmlTextInput.class, "stormStrength");
             assertEquals(stormStrength.getValueAttribute(), AJAX_STORM_STRENGTH);
-	    }
+        }
     }
 
 }

@@ -3,6 +3,7 @@ target
 .settings
 .classpath
 .idea
+.cache
 *.iml
 
 test-output

@@ -21,7 +21,7 @@ import org.jboss.cdi.tck.util.ActionSequence;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class Baz extends Bar {

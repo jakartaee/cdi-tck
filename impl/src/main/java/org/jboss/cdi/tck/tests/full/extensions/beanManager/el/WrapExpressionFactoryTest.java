@@ -47,7 +47,7 @@ import org.testng.annotations.Test;
  * <li>The resulting instance is reused for every appearance of the EL name</li>
  * <li>The resulting instance is destroyed when the evaluation completes</li>
  * </ul>
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -61,7 +61,8 @@ public class WrapExpressionFactoryTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_WRAP_EXPRESSIONFACTORY, id = "a"), @SpecAssertion(section = BM_WRAP_EXPRESSIONFACTORY, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = BM_WRAP_EXPRESSIONFACTORY, id = "a"),
+            @SpecAssertion(section = BM_WRAP_EXPRESSIONFACTORY, id = "b") })
     public void testWrapping() {
 
         ActionSequence.reset();

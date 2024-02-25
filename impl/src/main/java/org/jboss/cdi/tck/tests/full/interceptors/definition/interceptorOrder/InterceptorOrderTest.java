@@ -13,6 +13,13 @@
  */
 package org.jboss.cdi.tck.tests.full.interceptors.definition.interceptorOrder;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
+import java.util.List;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -24,13 +31,6 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
 public class InterceptorOrderTest extends AbstractTest {
@@ -39,12 +39,14 @@ public class InterceptorOrderTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InterceptorOrderTest.class)
-                .withBeansXml(new BeansXml().interceptors(SecondInterceptor.class, FirstInterceptor.class, TransactionalInterceptor.class))
+                .withBeansXml(new BeansXml().interceptors(SecondInterceptor.class, FirstInterceptor.class,
+                        TransactionalInterceptor.class))
                 .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "b"), @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "b"),
+            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "c") })
     public void testInterceptorsCalledInOrderDefinedByBeansXml(Foo foo) {
 
         assertNotNull(foo);

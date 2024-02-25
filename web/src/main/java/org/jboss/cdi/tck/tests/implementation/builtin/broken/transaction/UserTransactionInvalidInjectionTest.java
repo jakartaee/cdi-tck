@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 /**
  * Test Java EE component class that has an injection point of type UserTransaction and qualifier Default, and may not validly
  * make use of the JTA UserTransaction according to the specification.
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)

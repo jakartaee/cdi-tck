@@ -41,7 +41,7 @@ public class SessionBeanInterceptorOrderTest extends AbstractTest {
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "g"),
-        @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "h") })
+            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "h") })
     public void testInterceptorsDeclaredUsingInterceptorsCalledBeforeInterceptorBinding(MissileLocal missile) {
 
         assertNotNull(missile);

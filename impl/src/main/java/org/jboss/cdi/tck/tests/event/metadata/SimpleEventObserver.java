@@ -31,7 +31,6 @@ public class SimpleEventObserver {
         return syncMetadata;
     }
 
-
     public void reset() {
         this.syncMetadata = null;
         this.asyncMetadata = null;

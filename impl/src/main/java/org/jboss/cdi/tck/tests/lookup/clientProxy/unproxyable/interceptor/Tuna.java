@@ -19,21 +19,21 @@ import jakarta.enterprise.context.Dependent;
 @Dependent
 public class Tuna {
 
-	public String name;
+    public String name;
 
-	private Tuna(){
-	}
+    private Tuna() {
+    }
 
-	public Tuna(String name){
-		this.name = name;
-	}
-	
-	public String getName() {
-		return name;
-	}
+    public Tuna(String name) {
+        this.name = name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}	
-	
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

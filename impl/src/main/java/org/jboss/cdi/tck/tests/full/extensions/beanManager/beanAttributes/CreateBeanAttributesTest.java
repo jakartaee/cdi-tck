@@ -90,7 +90,6 @@ public class CreateBeanAttributesTest extends AbstractTest {
         assertFalse(attributes.isAlternative());
     }
 
-
     @SuppressWarnings("unchecked")
     private void verifyLakeFish(BeanAttributes<?> attributes) {
         assertTrue(typeSetMatches(attributes.getTypes(), Fish.class, Object.class));

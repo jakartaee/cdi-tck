@@ -25,7 +25,7 @@ public class RawTypeObserver {
 
     @SuppressWarnings("rawtypes") // raw type used intentionally
     public void observe(@Observes Box box) {
-         OBSERVED = true;
+        OBSERVED = true;
     }
 
     protected static class BoxWithObjectTypeParameters extends Box<Object, Object, Object> {

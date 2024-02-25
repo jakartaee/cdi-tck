@@ -13,10 +13,10 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.customNormalScope;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import jakarta.enterprise.context.ContextNotActiveException;
 import jakarta.enterprise.inject.spi.BeanContainer;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Allows manual activation and deactivation of the {@linkplain CommandScoped command} context.

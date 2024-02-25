@@ -15,7 +15,7 @@ package org.jboss.cdi.lang.model.tck;
 
 import jakarta.enterprise.lang.model.declarations.ClassInfo;
 
-public class JavaLangObjectMethods /*extends Object*/ {
+public class JavaLangObjectMethods /* extends Object */ {
     public static class Verifier {
         public static void verify(ClassInfo clazz) {
             assert clazz.methods().isEmpty();

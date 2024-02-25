@@ -74,9 +74,9 @@ public abstract class ForwardingInjectionPoint implements InjectionPoint {
 
     @Override
     public String toString() {
-        return "ForwardingInjectionPoint with type=" + getType() 
-            + " with qualifiers=" + getQualifiers()
-            + " with delegate=" + isDelegate() 
-            + " with transient=" + isTransient() + ".";
+        return "ForwardingInjectionPoint with type=" + getType()
+                + " with qualifiers=" + getQualifiers()
+                + " with delegate=" + isDelegate()
+                + " with transient=" + isTransient() + ".";
     }
 }

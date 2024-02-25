@@ -18,7 +18,11 @@ import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_PRIORITY;
 import static org.testng.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -28,9 +32,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -53,7 +54,8 @@ public class GlobalDecoratorOrderingTest extends AbstractTest {
                 .withBeansXml(new BeansXml().decorators(LegacyDecorator1.class, LegacyDecorator2.class, LegacyDecorator3.class))
                 .withBeanLibrary(AbstractDecorator.class, Decorated.class, GloballyEnabledDecorator1.class,
                         GloballyEnabledDecorator2.class, GloballyEnabledDecorator3.class, GloballyEnabledDecorator4.class,
-                        GloballyEnabledDecorator5.class).build();
+                        GloballyEnabledDecorator5.class)
+                .build();
     }
 
     @Inject
@@ -63,7 +65,7 @@ public class GlobalDecoratorOrderingTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS_PRIORITY, id = "a"),
             @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"),
             @SpecAssertion(section = ENABLED_DECORATORS_PRIORITY, id = "b"),
-            @SpecAssertion(section = ENABLED_DECORATORS, id = "c")})
+            @SpecAssertion(section = ENABLED_DECORATORS, id = "c") })
     public void testDecoratorsInWebInfClasses() {
 
         List<String> expected = new ArrayList<String>();

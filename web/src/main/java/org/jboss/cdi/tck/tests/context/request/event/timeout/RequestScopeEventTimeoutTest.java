@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Test(groups = JAVAEE_FULL)
 @SpecVersion(spec = "cdi", version = "2.0")

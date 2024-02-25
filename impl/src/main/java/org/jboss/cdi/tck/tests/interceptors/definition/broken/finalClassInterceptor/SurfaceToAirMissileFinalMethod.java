@@ -19,9 +19,9 @@ import jakarta.enterprise.context.RequestScoped;
 
 @FooBinding
 @RequestScoped
-public class SurfaceToAirMissileFinalMethod implements Serializable{
-    
-    public final void fire(){
-        
+public class SurfaceToAirMissileFinalMethod implements Serializable {
+
+    public final void fire() {
+
     }
 }

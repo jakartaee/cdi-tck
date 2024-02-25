@@ -31,7 +31,8 @@ public class RequestContextLifecycleObserver {
     private List<String> initializedEvents = new CopyOnWriteArrayList<>();
     private List<String> destroyedEvents = new CopyOnWriteArrayList<>();
 
-    public void firstInit(@Observes @Initialized(RequestScoped.class) @Priority(Interceptor.Priority.APPLICATION - 100) ServletRequest servletRequest) {
+    public void firstInit(@Observes @Initialized(RequestScoped.class) @Priority(Interceptor.Priority.APPLICATION
+            - 100) ServletRequest servletRequest) {
         initializedEvents.add("A");
     }
 
@@ -40,11 +41,13 @@ public class RequestContextLifecycleObserver {
         ;
     }
 
-    public void thirdInit(@Observes @Initialized(RequestScoped.class) @Priority(Interceptor.Priority.APPLICATION + 501) ServletRequest servletRequest) {
+    public void thirdInit(@Observes @Initialized(RequestScoped.class) @Priority(Interceptor.Priority.APPLICATION
+            + 501) ServletRequest servletRequest) {
         initializedEvents.add("C");
     }
 
-    public void firstDestroy(@Observes @Destroyed(RequestScoped.class) @Priority(Interceptor.Priority.APPLICATION) ServletRequest servletRequest) {
+    public void firstDestroy(
+            @Observes @Destroyed(RequestScoped.class) @Priority(Interceptor.Priority.APPLICATION) ServletRequest servletRequest) {
         destroyedEvents.add("A");
     }
 
@@ -52,7 +55,8 @@ public class RequestContextLifecycleObserver {
         destroyedEvents.add("B");
     }
 
-    public void thirdDestroy(@Observes @Destroyed(RequestScoped.class) @Priority(Interceptor.Priority.APPLICATION + 501) ServletRequest servletRequest) {
+    public void thirdDestroy(@Observes @Destroyed(RequestScoped.class) @Priority(Interceptor.Priority.APPLICATION
+            + 501) ServletRequest servletRequest) {
         destroyedEvents.add("C");
     }
 

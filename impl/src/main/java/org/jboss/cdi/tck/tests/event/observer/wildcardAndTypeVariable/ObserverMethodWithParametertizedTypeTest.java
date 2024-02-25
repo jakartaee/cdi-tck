@@ -20,6 +20,7 @@ import static org.testng.Assert.assertTrue;
 import java.util.List;
 
 import jakarta.enterprise.util.TypeLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;

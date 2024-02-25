@@ -16,7 +16,6 @@ package org.jboss.cdi.tck.interceptors.tests.contract.aroundInvoke;
 import static org.jboss.cdi.tck.interceptors.InterceptorsSections.BUSINESS_METHOD_INTERCEPTOR_METHODS;
 import static org.testng.Assert.assertEquals;
 
-
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;

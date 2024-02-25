@@ -35,9 +35,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Test the request context is active during @PostConstruct callback of a simple bean.
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class SimpleBeanPostConstructCallbackTest extends AbstractTest {
@@ -52,7 +52,8 @@ public class SimpleBeanPostConstructCallbackTest extends AbstractTest {
     private URL contextPath;
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "db"), @SpecAssertion(section = REQUEST_CONTEXT, id = "eb") })
+    @SpecAssertions({ @SpecAssertion(section = REQUEST_CONTEXT, id = "db"),
+            @SpecAssertion(section = REQUEST_CONTEXT, id = "eb") })
     public void testSimplePostConstructCallback() throws Exception {
 
         WebClient client = new WebClient();

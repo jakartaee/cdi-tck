@@ -28,10 +28,16 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.io.Serializable;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.List;
+
 import jakarta.decorator.Delegate;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.Decorator;
-import jakarta.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -41,12 +47,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * @author pmuir
@@ -63,11 +63,13 @@ public class DecoratorDefinitionTest extends AbstractTest {
                 .withTestClassPackage(DecoratorDefinitionTest.class)
                 .withBeansXml(new BeansXml().decorators(BazDecorator1.class, BazDecorator2.class,
                         FooDecorator.class, TimestampLogger.class,
-                        ChargeDecorator.class)).build();
+                        ChargeDecorator.class))
+                .build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN, id = "d"), @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_BEAN, id = "d"),
+            @SpecAssertion(section = DECORATOR_ANNOTATION, id = "a"),
             @SpecAssertion(section = DECORATED_TYPES, id = "c"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
             @SpecAssertion(section = DECORATOR, id = "a"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "g") })
     public void testDecoratorIsManagedBean() {
@@ -108,7 +110,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
         assertEquals(decorators.size(), 1);
         Decorator<?> decorator = decorators.get(0);
         assertEquals(decorator.getInjectionPoints().size(), 1);
-        assertEquals(decorator.getInjectionPoints().iterator().next().getType(),Logger.class);
+        assertEquals(decorator.getInjectionPoints().iterator().next().getType(), Logger.class);
         assertTrue(decorator.getInjectionPoints().iterator().next().getAnnotated().isAnnotationPresent(Delegate.class));
         assertEquals(decorator.getDelegateType(), Logger.class);
         assertEquals(decorator.getDelegateQualifiers().size(), 1);
@@ -123,7 +125,8 @@ public class DecoratorDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "b"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "b"),
+            @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
             @SpecAssertion(section = BM_DECORATOR_RESOLUTION, id = "a") })
     public void testDecoratorOrdering() {
         List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Bazt.TYPES);
