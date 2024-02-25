@@ -62,7 +62,6 @@ public class InterceptorsExtension implements Extension {
 
         pat.setAnnotatedType(modifiedSimpleAnnotatedType);
 
-
     }
 
 }

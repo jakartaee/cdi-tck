@@ -27,7 +27,6 @@ import jakarta.enterprise.event.Reception;
 import jakarta.enterprise.event.TransactionPhase;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.ObserverMethod;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -39,7 +38,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ObserverMethodTest extends AbstractTest {
@@ -132,7 +131,8 @@ public class ObserverMethodTest extends AbstractTest {
     @SpecAssertion(section = OBSERVER_METHOD, id = "f")
     public void testNotifyOnObserverMethod() {
         Integer event = Integer.valueOf(1);
-        Set<ObserverMethod<? super Integer>> observerMethods = getCurrentManager().resolveObserverMethods(event, new Number.Literal());
+        Set<ObserverMethod<? super Integer>> observerMethods = getCurrentManager().resolveObserverMethods(event,
+                new Number.Literal());
         assertEquals(observerMethods.size(), 1);
         observerMethods.iterator().next().notify(event);
         assertTrue(IntegerObserver.wasNotified);

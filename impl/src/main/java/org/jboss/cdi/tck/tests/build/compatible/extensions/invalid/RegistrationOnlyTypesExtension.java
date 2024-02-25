@@ -19,7 +19,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Types;
 
 public class RegistrationOnlyTypesExtension implements BuildCompatibleExtension {
 
-    @Registration(types = {SomeBean.class})
+    @Registration(types = { SomeBean.class })
     public void register(Types t) {
         // no-op, deployment should fail
     }

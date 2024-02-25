@@ -15,6 +15,12 @@
  */
 package org.jboss.cdi.tck.tests.invokers.basic;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertThrows;
+
+import java.util.Arrays;
+import java.util.Set;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
@@ -23,6 +29,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.Invoker;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -34,12 +41,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Arrays;
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class VarargsMethodInvokerTest extends AbstractTest {
@@ -69,17 +70,17 @@ public class VarargsMethodInvokerTest extends AbstractTest {
     @SpecAssertion(section = Sections.BEHAVIOR_OF_INVOKE, id = "f")
     public void test(MyService service, InvokerHolder invokers) throws Exception {
         Invoker<MyService, String> hello = invokers.get("hello");
-        assertEquals(hello.invoke(service, new Object[]{0, new String[]{}}), "foobar0[]");
-        assertEquals(hello.invoke(new MyService(), new Object[]{1, new String[]{"a"}}), "foobar1[a]");
+        assertEquals(hello.invoke(service, new Object[] { 0, new String[] {} }), "foobar0[]");
+        assertEquals(hello.invoke(new MyService(), new Object[] { 1, new String[] { "a" } }), "foobar1[a]");
         assertThrows(RuntimeException.class, () -> {
-            hello.invoke(null, new Object[]{1, "a"});
+            hello.invoke(null, new Object[] { 1, "a" });
         });
 
         Invoker<MyService, String> helloStatic = invokers.get("helloStatic");
-        assertEquals(helloStatic.invoke(null, new Object[]{0, new String[]{"b"}}), "quux0[b]");
-        assertEquals(helloStatic.invoke(null, new Object[]{1, new String[]{"c"}}), "quux1[c]");
+        assertEquals(helloStatic.invoke(null, new Object[] { 0, new String[] { "b" } }), "quux0[b]");
+        assertEquals(helloStatic.invoke(null, new Object[] { 1, new String[] { "c" } }), "quux1[c]");
         assertThrows(RuntimeException.class, () -> {
-            helloStatic.invoke(null, new Object[]{1, "a"});
+            helloStatic.invoke(null, new Object[] { 1, "a" });
         });
     }
 

@@ -18,6 +18,7 @@ import static org.jboss.cdi.tck.cdi.Sections.CONTEXT;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.TestGroups;
@@ -29,7 +30,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Nicklas Karlsson
  * @author Pete Muir
  * @author David Allen

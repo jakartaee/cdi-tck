@@ -37,7 +37,7 @@ import org.testng.annotations.Test;
 @Test(groups = CDI_FULL)
 @SpecVersion(spec = "cdi", version = "2.0")
 public class CustomObserverMethodWithoutNotifyMethodTest extends AbstractTest {
-    
+
     @Deployment
     @ShouldThrowException(DefinitionException.class)
     public static WebArchive createSecondTestArchive() {
@@ -46,7 +46,7 @@ public class CustomObserverMethodWithoutNotifyMethodTest extends AbstractTest {
                 .withClasses(ExtensionAddingCustomObserverMethod.class, Foo.class)
                 .withExtension(ExtensionAddingCustomObserverMethod.class).build();
     }
-    
+
     @Test
     @SpecAssertions({ @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "ec") })
     public void observerCustomMethodNotOverridingNotifyMethodTreatedAsDefinitionError() {

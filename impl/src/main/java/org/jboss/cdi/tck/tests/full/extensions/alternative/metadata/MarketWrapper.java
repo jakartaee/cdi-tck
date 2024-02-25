@@ -13,17 +13,18 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.alternative.metadata;
 
-import org.jboss.cdi.tck.util.annotated.*;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.spi.AnnotatedConstructor;
 import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.AnnotatedMethod;
 import jakarta.enterprise.inject.spi.AnnotatedType;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import java.util.HashSet;
-import java.util.Set;
+
+import org.jboss.cdi.tck.util.annotated.*;
 
 public class MarketWrapper extends AnnotatedTypeWrapper<Market> {
 
@@ -93,31 +94,35 @@ public class MarketWrapper extends AnnotatedTypeWrapper<Market> {
         return methods;
     }
 
-    public AnnotatedMethodWrapper<? super Market> wrapMethodParameter(AnnotatedMethod<? super Market> delegate, boolean keepOriginalAnnotations) {
+    public AnnotatedMethodWrapper<? super Market> wrapMethodParameter(AnnotatedMethod<? super Market> delegate,
+            boolean keepOriginalAnnotations) {
 
         AnnotatedMethodWrapper<Market> methodWrapper = new AnnotatedMethodWrapper(delegate, this, keepOriginalAnnotations);
-        methodWrapper.replaceParameters(new AnnotatedParameterWrapper<Market>(methodWrapper.getParameter(0),methodWrapper, true) {
-            @Override
-            public Type getBaseType() {
-                getBaseTypeOfBillProducerParameterUsed = true;
-                return TropicalFruit.class;
-            }
-        });
+        methodWrapper
+                .replaceParameters(new AnnotatedParameterWrapper<Market>(methodWrapper.getParameter(0), methodWrapper, true) {
+                    @Override
+                    public Type getBaseType() {
+                        getBaseTypeOfBillProducerParameterUsed = true;
+                        return TropicalFruit.class;
+                    }
+                });
 
         return methodWrapper;
     }
 
-    private AnnotatedConstructor<Market> wrapConstructor
-            (AnnotatedConstructor<Market> delegate, final boolean keepOriginalAnnotations, final Annotation... annotations) {
-        AnnotatedConstructorWrapper<Market> constructor = new AnnotatedConstructorWrapper(delegate, this, keepOriginalAnnotations, annotations);
-        constructor.replaceParameters(new AnnotatedParameterWrapper(constructor.getParameter(0),constructor,  keepOriginalAnnotations, annotations) {
-            @Override
-            public Type getBaseType() {
-                getBaseTypeOfMarketConstructorParameterUsed = true;
-                return TropicalFruit.class;
-            }
+    private AnnotatedConstructor<Market> wrapConstructor(AnnotatedConstructor<Market> delegate,
+            final boolean keepOriginalAnnotations, final Annotation... annotations) {
+        AnnotatedConstructorWrapper<Market> constructor = new AnnotatedConstructorWrapper(delegate, this,
+                keepOriginalAnnotations, annotations);
+        constructor.replaceParameters(
+                new AnnotatedParameterWrapper(constructor.getParameter(0), constructor, keepOriginalAnnotations, annotations) {
+                    @Override
+                    public Type getBaseType() {
+                        getBaseTypeOfMarketConstructorParameterUsed = true;
+                        return TropicalFruit.class;
+                    }
 
-        });
+                });
         return constructor;
     }
 

@@ -18,5 +18,5 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.beanAttributes;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 public interface Weapon extends Tool {
-    
+
 }

@@ -43,7 +43,8 @@ public class ResourceDefinitionWithDifferentTypeTest extends AbstractTest {
                 .withTestClassPackage(ResourceDefinitionWithDifferentTypeTest.class)
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createEnvEntry().envEntryName("greeting")
-                                .envEntryType("java.lang.String").envEntryValue("Hello!").up()).build();
+                                .envEntryType("java.lang.String").envEntryValue("Hello!").up())
+                .build();
     }
 
     @Test(groups = INTEGRATION)

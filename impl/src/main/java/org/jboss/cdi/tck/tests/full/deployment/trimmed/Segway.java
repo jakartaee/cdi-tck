@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.full.deployment.trimmed;
 @Popular
 public class Segway {
 
-    void start(){
+    void start() {
 
     }
 }

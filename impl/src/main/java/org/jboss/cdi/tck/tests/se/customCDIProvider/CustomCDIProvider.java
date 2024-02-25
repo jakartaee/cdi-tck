@@ -13,15 +13,15 @@
  */
 package org.jboss.cdi.tck.tests.se.customCDIProvider;
 
+import java.lang.annotation.Annotation;
+import java.util.Iterator;
+
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.inject.spi.CDI;
 import jakarta.enterprise.inject.spi.CDIProvider;
 import jakarta.enterprise.util.TypeLiteral;
-
-import java.lang.annotation.Annotation;
-import java.util.Iterator;
 
 /**
  * @author Martin Kouba

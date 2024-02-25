@@ -21,7 +21,7 @@ public class GarplyProducer {
 
     @Produces
     @Custom
-    public Garply createGarply(){
+    public Garply createGarply() {
         return new Garply(1);
     }
 }

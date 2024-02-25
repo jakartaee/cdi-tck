@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.Instance;
@@ -81,11 +82,12 @@ public class AfterTypeDiscoveryObserver implements Extension {
 
         // add Baz annotatedType via AnnotatedTypeConfigurator
         event.addAnnotatedType(Baz.class, AfterTypeDiscoveryObserver.class.getName() + ":" + Baz.class.getName())
-            .add(Pro.ProLiteral.INSTANCE)
-            .add(RequestScoped.Literal.INSTANCE)
-            .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst().get()
-            .add(InjectLiteral.INSTANCE)
-            .add(Pro.ProLiteral.INSTANCE);
+                .add(Pro.ProLiteral.INSTANCE)
+                .add(RequestScoped.Literal.INSTANCE)
+                .filterFields(annotatedField -> annotatedField.getJavaMember().getType().equals(Instance.class)).findFirst()
+                .get()
+                .add(InjectLiteral.INSTANCE)
+                .add(Pro.ProLiteral.INSTANCE);
 
         // Remove alternative, decorator and interceptor based on Class<?>
         event.getAlternatives().remove(EchoAlternative.class);

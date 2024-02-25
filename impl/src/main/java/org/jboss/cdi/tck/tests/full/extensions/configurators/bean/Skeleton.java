@@ -16,24 +16,24 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.bean;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 
-/** {@link Vetoed} ensures this bean will not get picked up by CDI automatically
+/**
+ * {@link Vetoed} ensures this bean will not get picked up by CDI automatically
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Vetoed
 public class Skeleton {
-    
+
     private int healthPoints;
-    
+
     @Inject
     private DesireToHurtHumans evilDesire;
-        
 
-    public Skeleton (int healthPoints) {
+    public Skeleton(int healthPoints) {
         this.healthPoints = healthPoints;
     }
-    
+
     public Skeleton() {
-        
+
     }
 }

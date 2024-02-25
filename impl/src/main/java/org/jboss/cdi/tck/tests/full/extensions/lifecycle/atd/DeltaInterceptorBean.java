@@ -13,22 +13,23 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.lifecycle.atd;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.context.spi.CreationalContext;
-import jakarta.enterprise.inject.spi.InjectionPoint;
-import jakarta.enterprise.inject.spi.InterceptionType;
-import jakarta.enterprise.inject.spi.Interceptor;
-import jakarta.interceptor.InvocationContext;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.enterprise.inject.spi.InjectionPoint;
+import jakarta.enterprise.inject.spi.InterceptionType;
+import jakarta.enterprise.inject.spi.Interceptor;
+import jakarta.interceptor.InvocationContext;
+
 public class DeltaInterceptorBean implements Interceptor<DeltaInterceptor> {
 
     public Set<Annotation> getInterceptorBindings() {
-        return Collections.<Annotation>singleton(Monitored.MonitoredBindingLiteral.INSTANCE);
+        return Collections.<Annotation> singleton(Monitored.MonitoredBindingLiteral.INSTANCE);
     }
 
     public boolean intercepts(InterceptionType type) {

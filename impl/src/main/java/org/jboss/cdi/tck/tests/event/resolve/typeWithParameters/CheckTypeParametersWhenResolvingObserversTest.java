@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -21,17 +21,19 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.ObserverMethod;
 import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -54,7 +56,8 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     Event<Box<Integer, String, Random>> event;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "b"), @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "b"),
+            @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "a") })
     public void testResolvingChecksTypeParameters() {
         verifyObserver(new StringList(), 1, StringListObserver.class);
         verifyObserver(new IntegerList(), 1, IntegerListObserver.class);
@@ -72,7 +75,8 @@ public class CheckTypeParametersWhenResolvingObserversTest extends AbstractTest 
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "c"), @SpecAssertion(section = OBSERVER_METHODS, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVERS_ASSIGNABILITY, id = "c"),
+            @SpecAssertion(section = OBSERVER_METHODS, id = "ab") })
     public void testObservedEventTypeParameterIsActualType() {
         ActionSequence.reset();
         Foo<String> fooString = new Foo.FooString();

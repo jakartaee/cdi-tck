@@ -29,9 +29,9 @@ import jakarta.inject.Qualifier;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.METHOD, ElementType.TYPE })
 public @interface Reforged {
-    
+
     public static class ReforgedLiteral extends AnnotationLiteral<Reforged> implements Reforged {
-        
+
         public static ReforgedLiteral INSTANCE = new ReforgedLiteral();
     }
 }

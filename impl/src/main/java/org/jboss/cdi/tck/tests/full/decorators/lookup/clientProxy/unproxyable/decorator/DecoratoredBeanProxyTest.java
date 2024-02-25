@@ -32,19 +32,18 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class DecoratoredBeanProxyTest extends AbstractTest {
 
+    @Deployment
+    @ShouldThrowException(DeploymentException.class)
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder()
+                .withTestClassPackage(DecoratoredBeanProxyTest.class)
+                .withBeansXml(new BeansXml().decorators(MarineDecorator.class))
+                .build();
+    }
 
-	@Deployment
-	@ShouldThrowException(DeploymentException.class)
-	public static WebArchive createTestArchive() {
-		return new WebArchiveBuilder()
-				.withTestClassPackage(DecoratoredBeanProxyTest.class)
-				.withBeansXml(new BeansXml().decorators(MarineDecorator.class))
-				.build();
-	}
+    @Test(groups = CDI_FULL)
+    @SpecAssertions({ @SpecAssertion(section = UNPROXYABLE, id = "ea") })
+    public void testClientProxyBeanWithAssociatedDecorator() {
 
-	@Test(groups = CDI_FULL)
-	@SpecAssertions({ @SpecAssertion(section = UNPROXYABLE, id = "ea") })
-	public void testClientProxyBeanWithAssociatedDecorator() {
-		
-	}
+    }
 }

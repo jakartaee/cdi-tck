@@ -30,7 +30,8 @@ public class ParametrizedReturnTypeWithTypeVariable02Test extends AbstractTest {
     @ShouldThrowException(DefinitionException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClass(ParametrizedReturnTypeWithTypeVariable02Test.class).withClasses(DoubleListProducer.class).build();
+        return new WebArchiveBuilder().withTestClass(ParametrizedReturnTypeWithTypeVariable02Test.class)
+                .withClasses(DoubleListProducer.class).build();
     }
 
     @Test

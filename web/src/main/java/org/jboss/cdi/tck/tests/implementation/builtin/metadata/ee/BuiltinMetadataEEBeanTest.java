@@ -19,7 +19,6 @@ import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA_EE;
 import java.io.IOException;
 import java.net.URL;
 
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.test.api.ArquillianResource;
@@ -30,6 +29,8 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * @author Tomas Remes
@@ -57,6 +58,5 @@ public class BuiltinMetadataEEBeanTest extends AbstractTest {
         Assert.assertTrue(servletResponse.contains(String.valueOf(1)));
 
     }
-
 
 }

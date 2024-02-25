@@ -25,7 +25,7 @@ public class EagleProducer<T> {
 
     @Produces
     @ProducedWithMethod
-    public Eagle<T> createEagle(){
+    public Eagle<T> createEagle() {
         return new Eagle<>();
     }
 }

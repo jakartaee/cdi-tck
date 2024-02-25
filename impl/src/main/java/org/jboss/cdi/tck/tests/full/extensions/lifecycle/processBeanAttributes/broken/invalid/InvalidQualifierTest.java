@@ -46,7 +46,8 @@ public class InvalidQualifierTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(InvalidQualifierTest.class)
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
-                .withClasses(Telephone.class, PlainOldAnnotation.class, InvalidQualifierExtension.class).withExtension(InvalidQualifierExtension.class).build();
+                .withClasses(Telephone.class, PlainOldAnnotation.class, InvalidQualifierExtension.class)
+                .withExtension(InvalidQualifierExtension.class).build();
     }
 
     @Test

@@ -22,83 +22,87 @@ import jakarta.interceptor.Interceptor;
 import jakarta.transaction.UserTransaction;
 
 /**
- * 
+ *
  * @author Mark Paluch
  */
 @Dependent
-public class PhisherAccountTransactionObserver extends AbstractObserver{
-
+public class PhisherAccountTransactionObserver extends AbstractObserver {
 
     @Resource
     private UserTransaction userTransaction;
 
     /**
-     * 
+     *
      * @param txWithdrawal
      * @throws Exception
      */
     public void withdrawAfterSuccess(
-            @Observes(during = TransactionPhase.AFTER_SUCCESS) @Priority(Interceptor.Priority.APPLICATION + 111) TxWithdrawal txWithdrawal)
+            @Observes(during = TransactionPhase.AFTER_SUCCESS) @Priority(Interceptor.Priority.APPLICATION
+                    + 111) TxWithdrawal txWithdrawal)
             throws Exception {
         logEventFired(TransactionPhase.AFTER_SUCCESS);
     }
 
     /**
-     * 
+     *
      * @param txWithdrawal
      * @throws Exception
      */
     public void withdrawAfterCompletion(
-            @Observes(during = TransactionPhase.AFTER_COMPLETION) @Priority(Interceptor.Priority.APPLICATION + 111) TxWithdrawal txWithdrawal)
+            @Observes(during = TransactionPhase.AFTER_COMPLETION) @Priority(Interceptor.Priority.APPLICATION
+                    + 111) TxWithdrawal txWithdrawal)
             throws Exception {
         logEventFired(TransactionPhase.AFTER_COMPLETION);
     }
 
     /**
-     * 
+     *
      * @param txWithdrawal
      * @throws Exception
      */
     public void withdrawBeforeCompletion(
-            @Observes(during = TransactionPhase.BEFORE_COMPLETION) @Priority(Interceptor.Priority.APPLICATION + 700) TxWithdrawal txWithdrawal)
+            @Observes(during = TransactionPhase.BEFORE_COMPLETION) @Priority(Interceptor.Priority.APPLICATION
+                    + 700) TxWithdrawal txWithdrawal)
             throws Exception {
         logEventFired(TransactionPhase.BEFORE_COMPLETION);
     }
 
     /**
      * Always fire immediately.
-     * 
+     *
      * @param txWithdrawal
      * @throws Exception
      */
     public void withdrawNoTx(
-            @Observes(during = TransactionPhase.IN_PROGRESS) @Priority(Interceptor.Priority.APPLICATION + 700) TxWithdrawal txWithdrawal)
+            @Observes(during = TransactionPhase.IN_PROGRESS) @Priority(Interceptor.Priority.APPLICATION
+                    + 700) TxWithdrawal txWithdrawal)
             throws Exception {
         logEventFired(TransactionPhase.IN_PROGRESS);
     }
 
     /**
-     * 
+     *
      * @param txWithdrawal
      * @throws Exception
      */
     public void withdrawAfterFailure(
-            @Observes(during = TransactionPhase.AFTER_FAILURE) @Priority(Interceptor.Priority.APPLICATION + 999) TxWithdrawal txWithdrawal)
+            @Observes(during = TransactionPhase.AFTER_FAILURE) @Priority(Interceptor.Priority.APPLICATION
+                    + 999) TxWithdrawal txWithdrawal)
             throws Exception {
         logEventFired(TransactionPhase.AFTER_FAILURE);
     }
 
     /**
-     * 
+     *
      * @param txFailure
      * @throws Exception
      */
     public void failBeforeCompletion(
-            @Observes(during = TransactionPhase.IN_PROGRESS) @Priority(Interceptor.Priority.APPLICATION + 999) TxFailure txFailure)
+            @Observes(during = TransactionPhase.IN_PROGRESS) @Priority(Interceptor.Priority.APPLICATION
+                    + 999) TxFailure txFailure)
             throws Exception {
         logEventFired(TransactionPhase.IN_PROGRESS);
         userTransaction.setRollbackOnly();
     }
-
 
 }

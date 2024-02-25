@@ -17,6 +17,7 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
@@ -31,7 +32,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of the Weld test suite.
  * </p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */

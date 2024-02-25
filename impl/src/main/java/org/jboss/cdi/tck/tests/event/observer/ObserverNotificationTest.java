@@ -41,7 +41,8 @@ public class ObserverNotificationTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c"),
-            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "d"), @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "aa") })
+            @SpecAssertion(section = OBSERVER_RESOLUTION, id = "d"),
+            @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "aa") })
     public void testObserversNotified() {
 
         AnEventType anEvent = new AnEventType();
@@ -83,7 +84,8 @@ public class ObserverNotificationTest extends AbstractTest {
         try {
             setContextInactive(requestContext);
             // Observer method not called - there is no context active for its scope
-            getCurrentManager().getEvent().select(AnEventType.class, new RoleLiteral("Admin", "hurray")).fire(new AnEventType());
+            getCurrentManager().getEvent().select(AnEventType.class, new RoleLiteral("Admin", "hurray"))
+                    .fire(new AnEventType());
             assertFalse(AnotherObserver.wasNotified);
         } finally {
             setContextActive(requestContext);

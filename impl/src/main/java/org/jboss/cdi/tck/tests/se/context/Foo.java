@@ -18,11 +18,11 @@ import jakarta.inject.Inject;
 
 @Dependent
 public class Foo {
-    
+
     @Inject
     ApplicationScopedCounter counter;
-    
-    public void ping(){
+
+    public void ping() {
         counter.increment();
     }
 

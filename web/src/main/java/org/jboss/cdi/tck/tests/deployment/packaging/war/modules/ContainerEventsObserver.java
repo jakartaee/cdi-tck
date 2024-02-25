@@ -81,7 +81,8 @@ public class ContainerEventsObserver implements Extension {
         isProcessManagedBeanOk = (beanManager != null);
     }
 
-    public void observeProcessObserverMethod(@Observes ProcessObserverMethod<LegacyService, Foo> event, BeanManager beanManager) {
+    public void observeProcessObserverMethod(@Observes ProcessObserverMethod<LegacyService, Foo> event,
+            BeanManager beanManager) {
         isProcessObserverMethodOk = (beanManager != null);
     }
 

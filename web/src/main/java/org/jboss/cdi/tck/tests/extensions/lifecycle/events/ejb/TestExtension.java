@@ -13,6 +13,8 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.events.ejb;
 
+import static org.testng.Assert.fail;
+
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
 import jakarta.enterprise.inject.spi.AfterDeploymentValidation;
@@ -32,8 +34,6 @@ import jakarta.enterprise.inject.spi.ProcessProducerField;
 import jakarta.enterprise.inject.spi.ProcessProducerMethod;
 import jakarta.enterprise.inject.spi.ProcessSessionBean;
 import jakarta.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
-
-import static org.testng.Assert.fail;
 
 public class TestExtension implements Extension {
 
@@ -56,7 +56,8 @@ public class TestExtension implements Extension {
 
     void observesBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager bm) {
         this.bbd = event;
-        bbd.addAnnotatedType(bm.createAnnotatedType(SimpleBean.class), TestExtension.class.getName() + ":" + SimpleBean.class.getName());
+        bbd.addAnnotatedType(bm.createAnnotatedType(SimpleBean.class),
+                TestExtension.class.getName() + ":" + SimpleBean.class.getName());
     }
 
     void observesProcessAnnotatedType(@Observes ProcessAnnotatedType<SimpleBean> event) {

@@ -28,9 +28,9 @@ import jakarta.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.BeansXmlVersion;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -50,9 +50,9 @@ public class EnterpriseDefaultBeanDiscoveryModeTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(EnterpriseDefaultBeanDiscoveryModeTest.class)
                 .withBeansXml(new BeansXml()
-                    .setBeansXmlVersion(BeansXmlVersion.v11)
-                    .setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED)
-                    )
+                        .setBeansXmlVersion(BeansXmlVersion.v11)
+                        .setBeanDiscoveryMode(BeanDiscoveryMode.ANNOTATED)
+                )
                 .withExtension(TestExtension.class).build();
     }
 

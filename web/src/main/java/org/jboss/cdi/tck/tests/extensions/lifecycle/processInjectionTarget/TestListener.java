@@ -32,7 +32,7 @@ public class TestListener implements ServletContextListener {
     }
 
     public void contextInitialized(ServletContextEvent sce) {
-        sce.getServletContext().setAttribute("initialized",sheep);
+        sce.getServletContext().setAttribute("initialized", sheep);
     }
 
     public static boolean isIsWrappedInjectionSuccessfull() {

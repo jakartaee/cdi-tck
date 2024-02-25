@@ -30,10 +30,10 @@ import org.testng.annotations.Test;
 /**
  * An extension is not allowed to fire an event with runtime type assignable to the type of a container lifecycle event. Tested
  * extension fires such events during BeforeBeanDiscovery notification.
- * 
+ *
  * @author Martin Kouba
  * @author Jozef Hartinger
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)

@@ -48,7 +48,7 @@ public class ConversationDeterminationTest extends AbstractTest {
     @ArquillianResource
     private URL contextPath;
 
-    @Test(groups = {INTEGRATION, ASYNC_SERVLET})
+    @Test(groups = { INTEGRATION, ASYNC_SERVLET })
     @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "da")
     @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "db")
     @SpecAssertion(section = CONVERSATION_CONTEXT_EE, id = "dc")
@@ -65,31 +65,31 @@ public class ConversationDeterminationTest extends AbstractTest {
         assertTrue(cidPage.getContent().contains("transient: false"));
 
         // Test built-in conversation bean is available
-        TextPage resultPage = webClient.getPage(getContextPath(contextPath,"foo","test",cid));
+        TextPage resultPage = webClient.getPage(getContextPath(contextPath, "foo", "test", cid));
         assertTrue(resultPage.getContent().contains("testServlet=true"));
         assertTrue(resultPage.getContent().contains("testFilter=true"));
         assertTrue(resultPage.getContent().contains("testListener=true"));
 
         // Async listener
-        webClient.getPage(getContextPath(contextPath,"foo-async","complete",cid));
+        webClient.getPage(getContextPath(contextPath, "foo-async", "complete", cid));
         TextPage results = webClient.getPage(contextPath + "Status");
         assertTrue(results.getContent().contains("onComplete: true"));
 
-        webClient.getPage(getContextPath(contextPath,"foo-async","timeout",cid));
+        webClient.getPage(getContextPath(contextPath, "foo-async", "timeout", cid));
         results = webClient.getPage(contextPath + "Status");
         assertTrue(results.getContent().contains("onTimeout: true"));
 
-        webClient.getPage(getContextPath(contextPath,"foo-async","error",cid));
+        webClient.getPage(getContextPath(contextPath, "foo-async", "error", cid));
         results = webClient.getPage(contextPath + "Status");
         assertTrue(results.getContent().contains("onError: true"));
 
-        webClient.getPage(getContextPath(contextPath,"foo-async","loop",cid));
+        webClient.getPage(getContextPath(contextPath, "foo-async", "loop", cid));
         results = webClient.getPage(contextPath + "Status");
         assertTrue(results.getContent().contains("onStartAsync: true"));
     }
 
-    private String getContextPath(URL contextPath, String servlet, String param, String cid){
-        return contextPath + servlet + "?action="+ param + "&cid=" + cid.trim();
+    private String getContextPath(URL contextPath, String servlet, String param, String cid) {
+        return contextPath + servlet + "?action=" + param + "&cid=" + cid.trim();
     }
 
 }

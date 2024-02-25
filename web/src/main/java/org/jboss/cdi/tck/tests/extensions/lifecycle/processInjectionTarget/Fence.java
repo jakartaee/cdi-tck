@@ -26,7 +26,7 @@ public class Fence {
 
     private static boolean isWrappedInjectionSuccessfull = false;
 
-    public void ping(){
+    public void ping() {
     }
 
     public static boolean isIsWrappedInjectionSuccessfull() {

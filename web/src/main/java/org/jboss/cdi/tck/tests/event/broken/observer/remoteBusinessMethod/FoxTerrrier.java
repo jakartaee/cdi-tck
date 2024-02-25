@@ -17,10 +17,10 @@ import jakarta.ejb.Stateless;
 import jakarta.enterprise.event.ObservesAsync;
 
 @Stateless
-public class FoxTerrrier implements Terrier{
+public class FoxTerrrier implements Terrier {
 
     @Override
-    public void observeSomeEvent(@ObservesAsync  String someEvent) {
+    public void observeSomeEvent(@ObservesAsync String someEvent) {
 
     }
 }

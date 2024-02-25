@@ -13,13 +13,13 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
-import jakarta.enterprise.lang.model.declarations.ClassInfo;
-import jakarta.enterprise.lang.model.declarations.MethodInfo;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import jakarta.enterprise.lang.model.declarations.ClassInfo;
+import jakarta.enterprise.lang.model.declarations.MethodInfo;
 
 @Target(ElementType.TYPE_USE)
 @Retention(RetentionPolicy.RUNTIME)

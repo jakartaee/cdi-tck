@@ -40,7 +40,7 @@ public class AccountService {
     Event<Failure> eventFailure;
 
     /**
-     * 
+     *
      * @param amount
      * @throws Exception
      */
@@ -52,7 +52,7 @@ public class AccountService {
     }
 
     /**
-     * 
+     *
      * @param amount
      * @throws Exception
      */
@@ -65,7 +65,7 @@ public class AccountService {
     }
 
     /**
-     * 
+     *
      * @param amount
      * @throws Exception
      */
@@ -75,7 +75,7 @@ public class AccountService {
     }
 
     /**
-     * 
+     *
      * @param amount
      * @throws Exception
      */

@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 /**
  * An instance of a bean with scope <code>@Dependent</code> obtained by direct invocation of an <code>Instance</code> is a
  * dependent object of the instance of <code>Instance</code>.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")

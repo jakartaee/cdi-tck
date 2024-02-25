@@ -13,10 +13,10 @@
  */
 package org.jboss.cdi.tck.tests.full.lookup.dynamic.destroy.normal;
 
+import java.lang.annotation.Annotation;
+
 import jakarta.enterprise.context.spi.AlterableContext;
 import jakarta.enterprise.context.spi.Contextual;
-
-import java.lang.annotation.Annotation;
 
 public class CustomAlterableContext extends AbstractContext implements AlterableContext {
 
@@ -24,7 +24,7 @@ public class CustomAlterableContext extends AbstractContext implements Alterable
 
     @SuppressWarnings("unchecked")
     public void destroy(Contextual<?> contextual) {
-    	destroyCalled = true;
+        destroyCalled = true;
         Instance instance = storage.remove(contextual);
         if (instance != null) {
             @SuppressWarnings("rawtypes")
@@ -41,8 +41,8 @@ public class CustomAlterableContext extends AbstractContext implements Alterable
         return destroyCalled;
     }
 
-	@Override
-	public Class<? extends Annotation> getScope() {
-		return AlterableScoped.class;
-	}
+    @Override
+    public Class<? extends Annotation> getScope() {
+        return AlterableScoped.class;
+    }
 }

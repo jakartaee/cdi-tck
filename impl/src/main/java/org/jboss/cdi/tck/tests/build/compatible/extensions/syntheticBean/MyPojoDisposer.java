@@ -13,12 +13,12 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBean;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.build.compatible.spi.Parameters;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanDisposer;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class MyPojoDisposer implements SyntheticBeanDisposer<MyPojo> {
     static final Set<String> disposed = new HashSet<>();

@@ -13,13 +13,13 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
+import java.lang.reflect.Modifier;
+
 import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import jakarta.enterprise.lang.model.declarations.FieldInfo;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
 import jakarta.enterprise.lang.model.types.PrimitiveType;
 import jakarta.enterprise.lang.model.types.Type;
-
-import java.lang.reflect.Modifier;
 
 abstract class PlainAbstractClass {
     PlainAbstractClass(boolean disambiguate) {
@@ -56,37 +56,68 @@ public final class PlainClassMembers extends PlainAbstractClass {
 
     // methods
 
-    public static final void publicStaticFinalMethod() {}
-    public static void publicStaticMethod() {}
-    public final void publicFinalMethod() {}
-    public void publicMethod() {}
+    public static final void publicStaticFinalMethod() {
+    }
 
-    protected static final void protectedStaticFinalMethod() {}
-    protected static void protectedStaticMethod() {}
-    protected final void protectedFinalMethod() {}
-    protected void protectedMethod() {}
+    public static void publicStaticMethod() {
+    }
 
-    static final void packagePrivateStaticFinalMethod() {}
-    static void packagePrivateStaticMethod() {}
-    final void packagePrivateFinalMethod() {}
-    void packagePrivateMethod() {}
+    public final void publicFinalMethod() {
+    }
 
-    private static final void privateStaticFinalMethod() {}
-    private static void privateStaticMethod() {}
-    private final void privateFinalMethod() {}
-    private void privateMethod() {}
+    public void publicMethod() {
+    }
+
+    protected static final void protectedStaticFinalMethod() {
+    }
+
+    protected static void protectedStaticMethod() {
+    }
+
+    protected final void protectedFinalMethod() {
+    }
+
+    protected void protectedMethod() {
+    }
+
+    static final void packagePrivateStaticFinalMethod() {
+    }
+
+    static void packagePrivateStaticMethod() {
+    }
+
+    final void packagePrivateFinalMethod() {
+    }
+
+    void packagePrivateMethod() {
+    }
+
+    private static final void privateStaticFinalMethod() {
+    }
+
+    private static void privateStaticMethod() {
+    }
+
+    private final void privateFinalMethod() {
+    }
+
+    private void privateMethod() {
+    }
 
     // constructors
 
     public PlainClassMembers(boolean disambiguate) {
         super(false);
     }
+
     protected PlainClassMembers(int disambiguate) {
         super(false);
     }
+
     PlainClassMembers(double disambiguate) {
         super(false);
     }
+
     private PlainClassMembers(char disambiguate) {
         super(false);
     }
@@ -152,7 +183,8 @@ public final class PlainClassMembers extends PlainAbstractClass {
             assertField(clazz, "privateField", Modifier.PRIVATE, false, false, true);
         }
 
-        static void assertField(ClassInfo clazz, String name, int accesibility, boolean isStatic, boolean isFinal, boolean testStringType) {
+        static void assertField(ClassInfo clazz, String name, int accesibility, boolean isStatic, boolean isFinal,
+                boolean testStringType) {
             FieldInfo field = LangModelUtils.singleField(clazz, name);
 
             assert field.declaringClass().equals(clazz);
@@ -199,7 +231,8 @@ public final class PlainClassMembers extends PlainAbstractClass {
             assertMethod(clazz, "privateMethod", Modifier.PRIVATE, false, false, false);
         }
 
-        static void assertMethod(ClassInfo clazz, String name, int accesibility, boolean isStatic, boolean isFinal, boolean isAbstract) {
+        static void assertMethod(ClassInfo clazz, String name, int accesibility, boolean isStatic, boolean isFinal,
+                boolean isAbstract) {
             MethodInfo method = LangModelUtils.singleMethod(clazz, name);
 
             assert method.declaringClass().equals(clazz);

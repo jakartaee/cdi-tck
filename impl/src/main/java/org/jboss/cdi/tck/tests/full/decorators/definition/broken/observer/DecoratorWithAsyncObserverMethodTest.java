@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -38,7 +38,8 @@ public class DecoratorWithAsyncObserverMethodTest extends AbstractTest {
                 .withClasses(ApplicationLogger.class, FooPayload.class, Logger.class, MockLogger.class)
                 .withTestClass(DecoratorWithAsyncObserverMethodTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(ApplicationLogger.class)).build();
+                        new BeansXml().decorators(ApplicationLogger.class))
+                .build();
     }
 
     @Test(groups = CDI_FULL)

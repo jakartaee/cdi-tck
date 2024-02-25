@@ -18,8 +18,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.full.extensions.lifecycle.ExtensionLifecycleTest;
-import org.jboss.cdi.tck.tests.full.extensions.lifecycle.SimpleExtension;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.impl.BeansXml;

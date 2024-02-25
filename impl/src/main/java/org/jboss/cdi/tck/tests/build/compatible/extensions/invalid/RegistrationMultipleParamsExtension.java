@@ -20,7 +20,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 
 public class RegistrationMultipleParamsExtension implements BuildCompatibleExtension {
 
-    @Registration(types = {SomeBean.class})
+    @Registration(types = { SomeBean.class })
     public void register(BeanInfo bi, InterceptorInfo ii) {
         // no-op, deployment should fail
     }

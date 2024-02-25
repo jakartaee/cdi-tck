@@ -19,7 +19,7 @@ import jakarta.enterprise.inject.Produces;
 import jakarta.inject.Named;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @Dependent

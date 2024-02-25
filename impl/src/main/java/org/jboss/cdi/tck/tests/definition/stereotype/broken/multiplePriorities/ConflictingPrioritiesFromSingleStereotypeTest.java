@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.definition.stereotype.broken.multiplePriorities;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;

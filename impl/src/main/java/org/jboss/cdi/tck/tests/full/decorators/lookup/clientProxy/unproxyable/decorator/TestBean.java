@@ -18,8 +18,8 @@ import jakarta.inject.Inject;
 
 @Dependent
 public class TestBean {
-	
-	@Inject
-	Tuna tuna;
+
+    @Inject
+    Tuna tuna;
 
 }

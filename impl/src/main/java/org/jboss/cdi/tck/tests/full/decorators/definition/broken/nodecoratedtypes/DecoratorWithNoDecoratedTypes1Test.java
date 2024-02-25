@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of the Weld test suite.
  * </p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */

@@ -13,11 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.changeObserverQualifier;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 
 @ApplicationScoped
 public class MyConsumer {

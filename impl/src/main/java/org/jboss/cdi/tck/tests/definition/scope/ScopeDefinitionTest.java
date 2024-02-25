@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -93,7 +93,8 @@ public class ScopeDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEFAULT_SCOPE, id = "e"), @SpecAssertion(section = DECLARING_STEREOTYPES, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = DEFAULT_SCOPE, id = "e"),
+            @SpecAssertion(section = DECLARING_STEREOTYPES, id = "a") })
     public void testScopeSpecifiedAndStereotyped() {
         assert getBeans(Minnow.class).size() == 1;
         Bean<Minnow> bean = getBeans(Minnow.class).iterator().next();
@@ -117,7 +118,8 @@ public class ScopeDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_STEREOTYPES, id = "db"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_STEREOTYPES, id = "db"),
+            @SpecAssertion(section = TYPE_LEVEL_INHERITANCE, id = "ab") })
     public void testWebBeanScopeTypeOverridesStereotype() {
         assert getBeans(RedSnapper.class).size() == 1;
         Bean<RedSnapper> bean = getBeans(RedSnapper.class).iterator().next();

@@ -15,7 +15,8 @@ package org.jboss.cdi.tck.tests.se.container.contextualReference;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
-/** Normal scoped bean
+/**
+ * Normal scoped bean
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */

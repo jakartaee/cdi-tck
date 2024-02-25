@@ -61,7 +61,7 @@ public class MultipleExceptionsInObserversNotificationTest extends AbstractTest 
         assertTrue(NewYorkRadioStation.observed.get());
         assertTrue(ParisRadioStation.observed.get());
         assertTrue(PragueRadioStation.observed.get());
-        
+
         assertTrue(throwable instanceof CompletionException);
 
         List<Throwable> suppressedExceptions = Arrays.asList(throwable.getSuppressed());

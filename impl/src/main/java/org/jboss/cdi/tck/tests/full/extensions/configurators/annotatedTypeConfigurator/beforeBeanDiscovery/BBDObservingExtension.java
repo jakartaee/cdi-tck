@@ -22,11 +22,11 @@ import jakarta.enterprise.inject.spi.Extension;
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 public class BBDObservingExtension implements Extension {
-    
+
     public void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event) {
         // turn annotation into qualifier
         event.configureQualifier(CustomQualifier.class);
-        
+
         // turn annotation into binding
         event.configureInterceptorBinding(CustomBinding.class);
     }

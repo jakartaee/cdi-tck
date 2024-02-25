@@ -17,6 +17,7 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
 
 import jakarta.enterprise.inject.spi.DeploymentException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
@@ -40,7 +41,8 @@ public class EnabledDecoratorNotADecoratorTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(EnabledDecoratorNotADecoratorTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(TimestampLogger.class)).build();
+                        new BeansXml().decorators(TimestampLogger.class))
+                .build();
     }
 
     @Test(groups = CDI_FULL)

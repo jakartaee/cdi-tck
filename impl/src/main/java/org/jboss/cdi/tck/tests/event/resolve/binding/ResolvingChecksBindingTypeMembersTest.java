@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -58,11 +58,15 @@ public class ResolvingChecksBindingTypeMembersTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "a"), @SpecAssertion(section = EVENT_QUALIFIER_TYPES_WITH_MEMBERS, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_METHOD_EVENT_PARAMETER, id = "a"),
+            @SpecAssertion(section = EVENT_QUALIFIER_TYPES_WITH_MEMBERS, id = "a") })
     public void testResolvingChecksBindingTypeMembers() {
-        assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("first-observer")).size() == 1;
-        assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("second-observer")).size() == 1;
-        assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("third-observer")).size() == 0;
+        assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("first-observer"))
+                .size() == 1;
+        assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("second-observer"))
+                .size() == 1;
+        assert getCurrentManager().resolveObserverMethods(new AnEventType(), new BindingTypeCBinding("third-observer"))
+                .size() == 0;
 
     }
 }

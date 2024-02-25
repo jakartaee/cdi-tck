@@ -64,7 +64,8 @@ public class ProcessBeanAttributesNotFiredForSyntheticBeanTest extends AbstractT
     BicycleExtension bicycleExtension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a"), @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ae"),
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_BEANATTRIBUTES, id = "a"),
+            @SpecAssertion(section = PROCESS_BEAN_ATTRIBUTES, id = "ae"),
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "bc") })
     public void testProcessBeanAttributesNotFired() {
 

@@ -27,9 +27,12 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.util.Set;
+
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -39,8 +42,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Set;
 
 /**
  * This test is aimed to verify packaging-related issues in a little bit more complex deployment scenario. The assertions are
@@ -74,7 +75,8 @@ public class WebArchiveModulesTest extends AbstractTest {
                 .withBeanLibrary(new BeansXml().interceptors(SecurityInterceptor.class), Bar.class, AlternativeBar.class,
                         BarInspector.class)
                 // C
-                .withBeanLibrary(new BeansXml().decorators(LoggingDecorator.class), Baz.class, LoggingDecorator.class, Bazinga.class)
+                .withBeanLibrary(new BeansXml().decorators(LoggingDecorator.class), Baz.class, LoggingDecorator.class,
+                        Bazinga.class)
                 // D
                 .withBeanLibrary(Qux.class, ContainerEventsObserver.class, LegacyServiceProducer.class)
                 // E
@@ -92,7 +94,8 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jg"), @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jh"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jg"),
+            @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jh"),
             @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testInjectionChainVisibilityAndInterceptorEnablement() {
         // Test injection chain, visibility, SecurityInterceptor is enabled in B only
@@ -104,7 +107,8 @@ public class WebArchiveModulesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"), @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa"),
+            @SpecAssertion(section = ENABLED_DECORATORS_BEAN_ARCHIVE, id = "a"),
             @SpecAssertion(section = OBSERVER_RESOLUTION, id = "c") })
     public void testDecoratorAndCrossModuleEventObserver() throws Exception {
         // Test LoggingDecorator is enabled in C only; bean from D observes event from A

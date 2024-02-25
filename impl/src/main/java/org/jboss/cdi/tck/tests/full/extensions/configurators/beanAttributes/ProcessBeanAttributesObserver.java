@@ -17,6 +17,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.AnnotatedType;
@@ -40,7 +41,7 @@ public class ProcessBeanAttributesObserver implements Extension {
         // add qualifier @TwoHanded
         // add Type Weapon.class
         // set name
-        // set stereotype 
+        // set stereotype
         configurator.addQualifier(TwoHanded.TwoHandedLiteral.INSTANCE);
         configurator.addType(Weapon.class);
         configurator.name(BeanAttributesConfiguratorTest.SWORD_NAME);

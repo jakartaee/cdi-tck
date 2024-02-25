@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.build.compatible.extensions.validation;
 
 import jakarta.enterprise.inject.spi.DeploymentException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;

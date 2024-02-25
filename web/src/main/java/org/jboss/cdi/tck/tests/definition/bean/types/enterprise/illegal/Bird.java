@@ -14,6 +14,6 @@
 
 package org.jboss.cdi.tck.tests.definition.bean.types.enterprise.illegal;
 
-public interface Bird<T> extends AnimalHolder<Animal<? extends T>>{
+public interface Bird<T> extends AnimalHolder<Animal<? extends T>> {
 
 }

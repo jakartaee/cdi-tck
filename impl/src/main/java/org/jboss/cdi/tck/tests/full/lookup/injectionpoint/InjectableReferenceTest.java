@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,6 +23,7 @@ import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InjectionPoint;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -36,9 +37,9 @@ import org.testng.annotations.Test;
 /**
  * InjectableReference tests for the bean manager. These tests are only here due to the fact that InjectionPoints are always
  * needed too.
- * 
+ *
  * @author David Allen
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
@@ -53,8 +54,10 @@ public class InjectableReferenceTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INJECTABLE_REFERENCE, id = "a"), @SpecAssertion(section = BM_OBTAIN_INJECTABLE_REFERENCE, id = "ab"),
-            @SpecAssertion(section = BM_OBTAIN_CREATIONALCONTEXT, id = "a"), @SpecAssertion(section = INJECTABLE_REFERENCE, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INJECTABLE_REFERENCE, id = "a"),
+            @SpecAssertion(section = BM_OBTAIN_INJECTABLE_REFERENCE, id = "ab"),
+            @SpecAssertion(section = BM_OBTAIN_CREATIONALCONTEXT, id = "a"),
+            @SpecAssertion(section = INJECTABLE_REFERENCE, id = "a") })
     public void testGetInjectableReferenceOnBeanManager() {
 
         BeanWithInjectionPointMetadata.reset();

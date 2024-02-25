@@ -23,8 +23,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 @CustomBinding
 @CustomQualifier
 public class Foo {
-    
-    public void shouldTriggerInterceptor () {
+
+    public void shouldTriggerInterceptor() {
         // no-op, calling it should trigger interceptor
     }
 }

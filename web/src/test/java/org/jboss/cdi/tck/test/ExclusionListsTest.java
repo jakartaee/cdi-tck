@@ -13,20 +13,20 @@
  */
 package org.jboss.cdi.tck.test;
 
-import org.testng.annotations.Test;
-import org.xmlunit.builder.DiffBuilder;
-import org.xmlunit.diff.ComparisonResult;
-import org.xmlunit.diff.ComparisonType;
-import org.xmlunit.diff.Diff;
-import org.xmlunit.diff.DifferenceEvaluators;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
+import org.testng.annotations.Test;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.ComparisonResult;
+import org.xmlunit.diff.ComparisonType;
+import org.xmlunit.diff.Diff;
+import org.xmlunit.diff.DifferenceEvaluators;
 
 public class ExclusionListsTest {
     @Test
@@ -49,7 +49,8 @@ public class ExclusionListsTest {
                                 return outcome;
                             }
                             if (comparison.getType() == ComparisonType.CHILD_NODELIST_LENGTH
-                                    && (Integer) comparison.getControlDetails().getValue() < (Integer) comparison.getTestDetails().getValue()) {
+                                    && (Integer) comparison.getControlDetails().getValue() < (Integer) comparison
+                                            .getTestDetails().getValue()) {
                                 return ComparisonResult.SIMILAR;
                             }
                             if (comparison.getType() == ComparisonType.CHILD_LOOKUP

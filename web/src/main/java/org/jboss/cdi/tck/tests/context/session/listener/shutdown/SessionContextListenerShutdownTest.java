@@ -93,7 +93,8 @@ public class SessionContextListenerShutdownTest extends AbstractTest {
      */
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ac")
-    public void testApplicationContextDestroyed(@ArquillianResource @OperateOnDeployment(ALPHA_DEPLOYMENT_NAME) URL alphaContext,
+    public void testApplicationContextDestroyed(
+            @ArquillianResource @OperateOnDeployment(ALPHA_DEPLOYMENT_NAME) URL alphaContext,
             @ArquillianResource @OperateOnDeployment(BRAVO_ARCHIVE_NAME) URL bravoContext) throws Exception {
 
         // Init SessionScopedTestFlagClient - set bravo archive deployment url

@@ -19,7 +19,7 @@ import jakarta.el.ValueExpression;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SuppressWarnings("serial")
 public class DummyValueExpression extends ValueExpression {

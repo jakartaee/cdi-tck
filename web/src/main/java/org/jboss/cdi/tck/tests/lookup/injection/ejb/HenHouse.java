@@ -17,6 +17,7 @@ import jakarta.annotation.Resource;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
+
 import org.jboss.cdi.tck.tests.lookup.injection.Fox;
 import org.jboss.cdi.tck.tests.lookup.injection.Hen;
 

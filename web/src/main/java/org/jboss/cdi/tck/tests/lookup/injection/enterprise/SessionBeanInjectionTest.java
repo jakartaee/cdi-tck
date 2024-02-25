@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -37,22 +37,26 @@ public class SessionBeanInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "a"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "aa"),
-            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ab"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ba"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "a"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "aa"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ab"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ba"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "be") })
     public void testInjectionOnContextualSessionBean() {
         assert getContextualReference(FarmLocal.class).isInjectionPerformedCorrectly();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "c"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ak"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "c"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ak"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "al") })
     public void testInjectionOnNonContextualSessionBean() {
         assert getContextualReference(InjectedSessionBeanLocal.class).getFarm().isInjectionPerformedCorrectly();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "ed"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ao"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_EE, id = "ed"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ao"),
             @SpecAssertion(section = FIELDS_INITIALIZER_METHODS_EE, id = "ap") })
     public void testInjectionOnEJBInterceptor() {
         // Test interceptor that intercepts contextual Session Bean

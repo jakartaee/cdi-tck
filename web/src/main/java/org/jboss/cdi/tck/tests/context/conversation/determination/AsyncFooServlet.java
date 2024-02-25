@@ -25,7 +25,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 @WebServlet(value = { "/foo-async" }, asyncSupported = true)
 @SuppressWarnings("serial")
 public class AsyncFooServlet extends HttpServlet {
@@ -63,7 +62,7 @@ public class AsyncFooServlet extends HttpServlet {
         } else if (COMPLETE.equals(param)) {
             executorService.execute(new AsyncRequestProcessor(actx, 50l, false, null));
         } else if (ERROR.equals(param)) {
-            executorService.execute(new AsyncRequestProcessor(actx, 50l, true, "/FailingServlet?cid="+cid));
+            executorService.execute(new AsyncRequestProcessor(actx, 50l, true, "/FailingServlet?cid=" + cid));
         } else if (LOOP.equals(param)) {
             if (inLoop) {
                 executorService.execute(new AsyncRequestProcessor(actx, 50l, false, null));

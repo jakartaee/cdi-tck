@@ -13,10 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
+import java.io.IOException;
+
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 import jakarta.servlet.jsp.tagext.SimpleTagSupport;
-import java.io.IOException;
 
 @Vetoed
 public class TestTagHandler extends SimpleTagSupport {
@@ -32,7 +33,7 @@ public class TestTagHandler extends SimpleTagSupport {
 
     @Override
     public void doTag() throws IOException {
-       getJspContext().getOut().write(String.valueOf(isWrappedInjectionSuccessfull));
+        getJspContext().getOut().write(String.valueOf(isWrappedInjectionSuccessfull));
     }
 
     public static boolean isIsWrappedInjectionSuccessfull() {

@@ -29,7 +29,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = CDI_FULL)
@@ -43,7 +43,8 @@ public class InterceptorProcessBeanAttributesTest extends AbstractTest {
                 .withClasses(VerifyingExtension.class, AlphaInterceptor.class, AlphaInterceptorBinding.class)
                 .withExtension(VerifyingExtension.class)
                 .withBeanLibrary(BravoInterceptor.class, BravoInterceptorBinding.class)
-                .withBeanLibrary(new BeansXml(BeanDiscoveryMode.ALL).interceptors(AlphaInterceptor.class, BravoInterceptor.class))
+                .withBeanLibrary(
+                        new BeansXml(BeanDiscoveryMode.ALL).interceptors(AlphaInterceptor.class, BravoInterceptor.class))
                 .withBeansXml(new BeansXml().interceptors(AlphaInterceptor.class, BravoInterceptor.class))
                 .build();
     }

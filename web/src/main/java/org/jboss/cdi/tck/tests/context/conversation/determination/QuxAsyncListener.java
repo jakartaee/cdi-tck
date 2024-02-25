@@ -15,6 +15,7 @@
 package org.jboss.cdi.tck.tests.context.conversation.determination;
 
 import java.io.IOException;
+
 import jakarta.enterprise.context.Conversation;
 import jakarta.inject.Inject;
 import jakarta.servlet.AsyncEvent;
@@ -22,7 +23,7 @@ import jakarta.servlet.AsyncListener;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class QuxAsyncListener implements AsyncListener {
 
@@ -58,7 +59,7 @@ public class QuxAsyncListener implements AsyncListener {
         statusBean.setOnStartAsync(checkSameConversationActive());
     }
 
-    public boolean checkSameConversationActive(){
+    public boolean checkSameConversationActive() {
         return FooServlet.CID.equals(conversation.getId());
     }
 

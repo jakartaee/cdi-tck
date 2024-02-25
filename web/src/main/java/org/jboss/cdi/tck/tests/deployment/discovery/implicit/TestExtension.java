@@ -23,22 +23,22 @@ import jakarta.enterprise.inject.spi.ProcessProducerField;
 import jakarta.enterprise.inject.spi.ProcessProducerMethod;
 
 public class TestExtension implements Extension {
-    
+
     public static AtomicInteger processProducerMethodCounter = new AtomicInteger();
     public static AtomicInteger processProducerFieldCounter = new AtomicInteger();
     public static AtomicInteger processObserverCounter = new AtomicInteger();
     public static AnnotatedParameter<ProducedBean> disposerParam;
-    
-    public void processProducerMethod(@Observes ProcessProducerMethod<ProducedBean, NotDiscoveredBean> event){
+
+    public void processProducerMethod(@Observes ProcessProducerMethod<ProducedBean, NotDiscoveredBean> event) {
         processProducerMethodCounter.incrementAndGet();
         disposerParam = event.getAnnotatedDisposedParameter();
     }
 
-    public void processProducerField(@Observes ProcessProducerField<ProducedBean, NotDiscoveredBean> event){
+    public void processProducerField(@Observes ProcessProducerField<ProducedBean, NotDiscoveredBean> event) {
         processProducerFieldCounter.incrementAndGet();
     }
 
-    public void processObserverMethod(@Observes ProcessObserverMethod<ProducedBean, NotDiscoveredBean> event){
+    public void processObserverMethod(@Observes ProcessObserverMethod<ProducedBean, NotDiscoveredBean> event) {
         processObserverCounter.incrementAndGet();
-    }      
+    }
 }

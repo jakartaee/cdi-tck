@@ -63,7 +63,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "f"), @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "g"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "f"),
+            @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "g"),
             @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "d") })
     public void testInjectionOfParametersIntoBeanConstructor() {
         assert getBeans(FishPond.class).size() == 1;
@@ -81,7 +82,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CREATIONAL_CONTEXT, id = "d"), @SpecAssertion(section = CREATIONAL_CONTEXT, id = "g") })
+    @SpecAssertions({ @SpecAssertion(section = CREATIONAL_CONTEXT, id = "d"),
+            @SpecAssertion(section = CREATIONAL_CONTEXT, id = "g") })
     public void testCreateReturnsSameBeanPushed() {
         final Contextual<ShoeFactory> bean = getBeans(ShoeFactory.class).iterator().next();
         final CreationalContexts.Inspectable<ShoeFactory> creationalContext = createInspectableCreationalContext(bean);
@@ -117,9 +119,11 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa"), @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa"),
+            @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"),
             @SpecAssertion(section = INJECTED_FIELD_QUALIFIERS, id = "a"), @SpecAssertion(section = INJECTED_FIELDS, id = "a"),
-            @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"), @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jg") })
+            @SpecAssertion(section = DECLARING_INJECTED_FIELD, id = "aa"),
+            @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jg") })
     public void testCreateInjectsFieldsDeclaredInJava() {
         assert getBeans(TunaFarm.class).size() == 1;
         TunaFarm tunaFarm = getContextualReference(TunaFarm.class);
@@ -141,7 +145,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa"), @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba") })
+    @SpecAssertions({ @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "aa"),
+            @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba") })
     public void testPostConstructPreDestroy() {
         assert getBeans(Farm.class).size() == 1;
         Bean<Farm> farmBean = getBeans(Farm.class).iterator().next();
@@ -156,7 +161,8 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "aa"), @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba"),
+    @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "aa"),
+            @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba"),
             @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "c") })
     public void testContextualDestroyDisposesWhenNecessary() {
         final Bean<Goose> gooseBean = getBeans(Goose.class).iterator().next();

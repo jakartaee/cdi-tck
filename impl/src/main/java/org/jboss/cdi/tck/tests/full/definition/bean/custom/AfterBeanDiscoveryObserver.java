@@ -30,11 +30,11 @@ public class AfterBeanDiscoveryObserver implements Extension {
 
         // register custom alternative via configurator but don't select it
         event.addBean()
-            .beanClass(SomeBean.class)
-            .types(SomeBean.class, AlternativeSomeBean.class, Object.class)
-            .scope(ApplicationScoped.class)
-            .alternative(true)
-            .produceWith(obj -> new AlternativeSomeBean());
+                .beanClass(SomeBean.class)
+                .types(SomeBean.class, AlternativeSomeBean.class, Object.class)
+                .scope(ApplicationScoped.class)
+                .alternative(true)
+                .produceWith(obj -> new AlternativeSomeBean());
     }
 
     private AnnotatedField<?> getAnnotatedField(BeanManager beanManager, Type memberType) {

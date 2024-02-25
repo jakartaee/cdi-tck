@@ -48,7 +48,7 @@ public class SessionBeanPassivationDependencyTest extends AbstractTest {
     @Inject
     Chef chef;
 
-    @Test(groups=INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "ab")
     public void testSingleton() throws IOException, ClassNotFoundException {
         assertNotNull(worker);
@@ -66,7 +66,7 @@ public class SessionBeanPassivationDependencyTest extends AbstractTest {
         assertEquals(workerCopy.getHammer().getId(), hammerId);
     }
 
-    @Test(groups=INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "aa")
     public void testStateless() throws IOException, ClassNotFoundException {
         assertNotNull(chef);

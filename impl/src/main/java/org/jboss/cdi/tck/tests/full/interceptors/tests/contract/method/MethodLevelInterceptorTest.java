@@ -43,8 +43,8 @@ public class MethodLevelInterceptorTest extends AbstractTest {
     public void testInterceptorCanBeAppliedToMoreThanOneMethod() {
         Fish fish = getContextualReference(Fish.class);
         assertEquals(fish.foo(), "Intercepted bar");
-        assertEquals(fish.ping(),"Intercepted pong");
-        assertEquals(fish.getName(),"Salmon");
+        assertEquals(fish.ping(), "Intercepted pong");
+        assertEquals(fish.getName(), "Salmon");
         assertEquals(FishInterceptor.getInstanceCount(), 1);
     }
 

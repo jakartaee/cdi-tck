@@ -13,6 +13,9 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionTarget;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletException;
@@ -20,8 +23,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 @Vetoed
 @WebServlet("/test")
@@ -67,7 +68,7 @@ public class TestServlet extends HttpServlet {
             writer.append(String.valueOf(TagLibraryListener.isIsWrappedInjectionSuccessfull()));
         }
 
-        writer.append("\n"+req.getServletContext().getAttribute("initialized").toString() + "\n");
+        writer.append("\n" + req.getServletContext().getAttribute("initialized").toString() + "\n");
     }
 
     public static void setIsWrappedInjectionSuccessfull(boolean isWrappedInjectionSuccessfull) {

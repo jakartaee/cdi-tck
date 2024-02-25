@@ -17,4 +17,3 @@
 package org.jboss.cdi.tck.tests.full.vetoed.aquarium;
 
 import jakarta.enterprise.inject.Vetoed;
-

@@ -18,8 +18,8 @@ import jakarta.inject.Inject;
 
 @Dependent
 public class PikeFarm {
-    
+
     @Inject
     PikeBroken pikeBroken;
-    
+
 }

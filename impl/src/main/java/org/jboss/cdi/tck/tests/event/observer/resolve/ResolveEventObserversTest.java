@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -93,11 +93,14 @@ public class ResolveEventObserversTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "c"), @SpecAssertion(section = EVENT_QUALIFIER_TYPES_WITH_MEMBERS, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = OBSERVES, id = "c"),
+            @SpecAssertion(section = EVENT_QUALIFIER_TYPES_WITH_MEMBERS, id = "a"),
             @SpecAssertion(section = MULTIPLE_EVENT_QUALIFIERS, id = "a") })
     public void testObserverMethodMayHaveMultipleBindingTypes() {
         // If we can resolve the observer with the two binding types, then it worked
-        assertEquals(getCurrentManager().resolveObserverMethods(new MultiBindingEvent(), new RoleBinding("Admin"), new TameAnnotationLiteral()).size(), 2);
+        assertEquals(getCurrentManager()
+                .resolveObserverMethods(new MultiBindingEvent(), new RoleBinding("Admin"), new TameAnnotationLiteral()).size(),
+                2);
     }
 
     @Test
@@ -110,9 +113,11 @@ public class ResolveEventObserversTest extends AbstractTest {
     @Test
     @SpecAssertions({
             // these two assertions combine to create a logical, testable assertion
-            @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "a"), @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "b") })
+            @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "a"),
+            @SpecAssertion(section = BM_OBSERVER_METHOD_RESOLUTION, id = "b") })
     public void testBeanManagerResolveObserversSignature() throws Exception {
-        assertNotNull(getCurrentManager().getClass().getDeclaredMethod(BEAN_MANAGER_RESOLVE_OBSERVERS_METHOD_NAME, Object.class, Annotation[].class));
+        assertNotNull(getCurrentManager().getClass().getDeclaredMethod(BEAN_MANAGER_RESOLVE_OBSERVERS_METHOD_NAME, Object.class,
+                Annotation[].class));
     }
 
     @Test(expectedExceptions = { IllegalArgumentException.class })
@@ -145,7 +150,8 @@ public class ResolveEventObserversTest extends AbstractTest {
     @Test
     @SpecAssertion(section = OBSERVES, id = "ab")
     public void testSyncObserver() {
-        Set<ObserverMethod<? super DiskSpaceEvent>> diskSpaceObservers = getCurrentManager().resolveObserverMethods(new DiskSpaceEvent());
+        Set<ObserverMethod<? super DiskSpaceEvent>> diskSpaceObservers = getCurrentManager()
+                .resolveObserverMethods(new DiskSpaceEvent());
         assertTrue(diskSpaceObservers.stream().allMatch(method -> !method.isAsync()));
     }
 

@@ -35,7 +35,7 @@ public class ServletInterceptor {
 
     @AroundInvoke
     public Object aroundInvoke(InvocationContext invocationContext) throws Exception {
-        if(interceptedBean == null){
+        if (interceptedBean == null) {
             counter.increment();
         }
         return invocationContext.proceed();

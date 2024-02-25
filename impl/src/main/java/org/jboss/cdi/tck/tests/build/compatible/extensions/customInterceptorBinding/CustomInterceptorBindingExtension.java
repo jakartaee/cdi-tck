@@ -20,7 +20,6 @@ import jakarta.enterprise.inject.build.compatible.spi.ClassConfig;
 import jakarta.enterprise.inject.build.compatible.spi.Discovery;
 import jakarta.enterprise.inject.build.compatible.spi.Enhancement;
 import jakarta.enterprise.inject.build.compatible.spi.MetaAnnotations;
-import jakarta.enterprise.inject.build.compatible.spi.ScannedClasses;
 import jakarta.enterprise.util.Nonbinding;
 
 public class CustomInterceptorBindingExtension implements BuildCompatibleExtension {

@@ -60,7 +60,8 @@ public class EjbJarDescriptorBuilderTest {
                 newMessageDriven("TestTopic", TopicMessageDrivenBean.class.getName())
                         .addActivationConfigProperty("acknowledgeMode", "Auto-acknowledge")
                         .addActivationConfigProperty("destinationType", "jakarta.jms.Topic")
-                        .addActivationConfigProperty("destinationLookup", "test_topic")).build();
+                        .addActivationConfigProperty("destinationLookup", "test_topic"))
+                .build();
 
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         schemaFactory.setResourceResolver(new LSResourceResolver() {

@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpSessionListener;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @WebListener
 public class SessionListener implements HttpSessionListener {

@@ -13,20 +13,21 @@
  */
 package org.jboss.cdi.tck.tests.extensions.lifecycle.processInjectionPoint.ee;
 
+import static org.testng.Assert.assertNull;
+
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.enterprise.inject.spi.ProcessInjectionPoint;
 import jakarta.enterprise.inject.spi.ProcessManagedBean;
+
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Alpha;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Bravo;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.BravoObserver;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Charlie;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Delta;
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.InjectingBean;
-
-import static org.testng.Assert.assertNull;
 
 public class VerifyingExtension implements Extension {
 
@@ -154,6 +155,5 @@ public class VerifyingExtension implements Extension {
     public InjectionPoint getDisposerDeltaIp() {
         return disposerDeltaIp;
     }
-
 
 }

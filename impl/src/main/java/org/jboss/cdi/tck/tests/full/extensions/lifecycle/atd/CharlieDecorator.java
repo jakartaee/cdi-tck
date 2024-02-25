@@ -29,6 +29,4 @@ public class CharlieDecorator implements Logger {
         return logger.log(msg + "charlie");
     }
 
-
-
 }

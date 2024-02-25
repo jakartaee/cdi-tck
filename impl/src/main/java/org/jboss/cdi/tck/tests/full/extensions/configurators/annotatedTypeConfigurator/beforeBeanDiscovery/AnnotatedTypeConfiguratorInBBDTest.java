@@ -46,11 +46,11 @@ public class AnnotatedTypeConfiguratorInBBDTest extends AbstractTest {
                 .withExtensions(BBDObservingExtension.class)
                 .build();
     }
-    
+
     @Inject
     @Any
     Instance<Object> instance;
-    
+
     @Test
     @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "c")
     public void testQualifierAddition() {
@@ -58,7 +58,7 @@ public class AnnotatedTypeConfiguratorInBBDTest extends AbstractTest {
         Assert.assertFalse(fooInstance.isUnsatisfied());
         Assert.assertNotNull(fooInstance.get());
     }
-    
+
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "d")
     public void testInterceptorBindingAddition(@Any Foo foo) {

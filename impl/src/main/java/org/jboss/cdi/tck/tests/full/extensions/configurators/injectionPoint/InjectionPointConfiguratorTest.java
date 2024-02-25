@@ -22,6 +22,7 @@ import static org.testng.Assert.assertNotNull;
 import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
+
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.enterprise.inject.spi.InjectionPoint;
@@ -68,7 +69,8 @@ public class InjectionPointConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = INJECTION_POINT_CONFIGURATOR, id = "be")
     })
     public void replaceQualifiersAndDelegate() {
-        List<Decorator<?>> vehicleDecorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Car.class), Driving.DrivingLiteral.INSTANCE);
+        List<Decorator<?>> vehicleDecorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(Car.class),
+                Driving.DrivingLiteral.INSTANCE);
         assertEquals(vehicleDecorators.size(), 1);
         Decorator<Car> vehicleDecorator = (Decorator<Car>) vehicleDecorators.get(0);
         assertEquals(vehicleDecorator.getInjectionPoints().size(), 1);

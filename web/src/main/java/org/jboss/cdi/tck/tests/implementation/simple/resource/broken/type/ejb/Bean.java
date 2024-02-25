@@ -15,7 +15,7 @@ package org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ejb;
 
 import jakarta.ejb.Stateful;
 
-@Stateful(name="Bean")
+@Stateful(name = "Bean")
 public class Bean implements BeanRemote {
 
 }

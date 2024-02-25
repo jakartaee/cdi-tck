@@ -19,7 +19,10 @@ import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEAN_BY_NAME;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.util.Set;
+
 import jakarta.enterprise.inject.spi.Bean;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -28,8 +31,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Set;
 
 /**
  * This test is same as {@link org.jboss.cdi.tck.tests.lookup.byname.ResolutionByNameTest} except that it includes
@@ -46,7 +47,8 @@ public class ResolutionByNameTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "ca"), @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "ca"),
+            @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "aa"),
             @SpecAssertion(section = BM_OBTAIN_BEAN_BY_NAME, id = "b") })
     public void testAmbiguousELNamesResolved() throws Exception {
         // Cod, Plaice and AlaskaPlaice are named "whitefish" - Cod is a not-enabled alternative, AlaskaPlaice specializes

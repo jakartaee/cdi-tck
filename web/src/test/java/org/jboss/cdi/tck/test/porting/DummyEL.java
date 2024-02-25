@@ -15,6 +15,7 @@ package org.jboss.cdi.tck.test.porting;
 
 import jakarta.el.ELContext;
 import jakarta.enterprise.inject.spi.BeanManager;
+
 import org.jboss.cdi.tck.spi.EL;
 
 public class DummyEL implements EL {
@@ -25,7 +26,8 @@ public class DummyEL implements EL {
     }
 
     @Override
-    public <T> T evaluateMethodExpression(BeanManager beanManager, String expression, Class<T> expectedType, Class<?>[] expectedParamTypes,
+    public <T> T evaluateMethodExpression(BeanManager beanManager, String expression, Class<T> expectedType,
+            Class<?>[] expectedParamTypes,
             Object[] expectedParams) {
         throw new UnsupportedOperationException();
     }

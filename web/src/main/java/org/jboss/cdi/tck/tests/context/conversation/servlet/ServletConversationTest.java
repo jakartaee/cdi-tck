@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -25,7 +25,6 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.cdi.tck.AbstractTest;
@@ -34,9 +33,9 @@ import org.jboss.cdi.tck.util.ActionSequence;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.TextPage;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -46,7 +45,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 /**
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -177,20 +176,20 @@ public class ServletConversationTest extends AbstractTest {
         {
             client.getPage(getPath("/invalidateSession", cid));
         }
-        
+
         TextPage sequence = client.getPage(getPath("/getSequence", null));
         String result = sequence.getContent().trim();
-        
+
         // Construct expected result locally
         ActionSequence.reset();
         ActionSequence.addAction(CONVERSATION_CREATED);
         ActionSequence.addAction(BEFORE_INVALIDATE);
         ActionSequence.addAction(AFTER_INVALIDATE);
         ActionSequence.addAction(CONVERSATION_DESTROYED);
-            
+
         // Verify that the action sequence fetched from server is equal to the expected sequence
         assertEquals(result, ActionSequence.getSequence().dataToCsv());
-        
+
         // Additional verification that the conversation cannot be associated
         try {
             Page page = client.getPage(getPath("/display", cid));
@@ -209,13 +208,13 @@ public class ServletConversationTest extends AbstractTest {
         String firstCid = beginConversation(client, true);
         String secondCid = beginConversation(client, false);
         assertFalse(firstCid.equals(secondCid));
-        
+
         // Invalidate the session with one cid
         client.getPage(getPath("/invalidateSession", secondCid));
-        
+
         TextPage sequence = client.getPage(getPath("/getSequence", null));
         String result = sequence.getContent().trim();
-        
+
         // Construct expected result locally
         // Two conv. should be created and both destroyed after invalidation
         ActionSequence.reset();
@@ -225,11 +224,11 @@ public class ServletConversationTest extends AbstractTest {
         ActionSequence.addAction(AFTER_INVALIDATE);
         ActionSequence.addAction(CONVERSATION_DESTROYED);
         ActionSequence.addAction(CONVERSATION_DESTROYED);
-            
+
         // Verify that the action sequence fetched from server is equal to the expected sequence
         assertEquals(result, ActionSequence.getSequence().dataToCsv());
     }
-    
+
     protected String getCid(String content) {
         return content.substring(content.indexOf("cid: [") + 6, content.indexOf("]"));
     }
@@ -271,7 +270,7 @@ public class ServletConversationTest extends AbstractTest {
         return result;
 
     }
-    
+
     protected String beginConversation(WebClient client, boolean resetSequence) throws IOException {
         if (resetSequence) {
             client.getPage(getPath("/resetSequence", null));
@@ -282,5 +281,5 @@ public class ServletConversationTest extends AbstractTest {
         assertTrue(content.contains("transient: false"));
         return getCid(content);
     }
-    
+
 }

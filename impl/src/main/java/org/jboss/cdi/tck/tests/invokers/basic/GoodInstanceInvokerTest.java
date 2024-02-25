@@ -15,6 +15,8 @@
  */
 package org.jboss.cdi.tck.tests.invokers.basic;
 
+import static org.testng.Assert.assertEquals;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
@@ -23,6 +25,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.Invoker;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -34,8 +37,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertEquals;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class GoodInstanceInvokerTest extends AbstractTest {
@@ -73,12 +74,12 @@ public class GoodInstanceInvokerTest extends AbstractTest {
     @SpecAssertion(section = Sections.BEHAVIOR_OF_INVOKE, id = "dc")
     public void test(InvokerHolder invokers) throws Exception {
         Invoker<MyService, String> hello = invokers.get("hello");
-        assertEquals(hello.invoke(getContextualReference(MyService.class), new Object[]{"1"}), "foobar_1");
-        assertEquals(hello.invoke(new MyService(), new Object[]{"2"}), "foobar_2");
+        assertEquals(hello.invoke(getContextualReference(MyService.class), new Object[] { "1" }), "foobar_1");
+        assertEquals(hello.invoke(new MyService(), new Object[] { "2" }), "foobar_2");
 
         Invoker<MyServiceInterface, String> helloInterface = invokers.get("helloInterface");
-        assertEquals(helloInterface.invoke(getContextualReference(MyServiceInterface.class), new Object[]{"3"}), "quux_3");
-        assertEquals(helloInterface.invoke(new MyService(), new Object[]{"4"}), "quux_4");
+        assertEquals(helloInterface.invoke(getContextualReference(MyServiceInterface.class), new Object[] { "3" }), "quux_3");
+        assertEquals(helloInterface.invoke(new MyService(), new Object[] { "4" }), "quux_4");
     }
 
     public interface MyServiceInterface {

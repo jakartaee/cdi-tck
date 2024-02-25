@@ -18,7 +18,7 @@ import jakarta.enterprise.context.RequestScoped;
 @RequestScoped
 public class House {
 
-    public void build(){
+    public void build() {
 
     }
 }

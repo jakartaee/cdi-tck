@@ -19,7 +19,7 @@ import jakarta.enterprise.context.Dependent;
 @Dependent
 public class Foo {
 
-    public int ping(){
+    public int ping() {
         return 0;
     }
 }

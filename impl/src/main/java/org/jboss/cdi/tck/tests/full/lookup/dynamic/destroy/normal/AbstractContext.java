@@ -13,16 +13,16 @@
  */
 package org.jboss.cdi.tck.tests.full.lookup.dynamic.destroy.normal;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.context.spi.Contextual;
 import jakarta.enterprise.context.spi.CreationalContext;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 public abstract class AbstractContext implements Context {
 
-	protected static class Instance {
+    protected static class Instance {
         private final Object instance;
         private final CreationalContext<?> ctx;
 
@@ -31,18 +31,18 @@ public abstract class AbstractContext implements Context {
             this.ctx = ctx;
         }
 
-		public Object getInstance() {
-			return instance;
-		}
+        public Object getInstance() {
+            return instance;
+        }
 
-		public CreationalContext<?> getCtx() {
-			return ctx;
-		}
-	}
+        public CreationalContext<?> getCtx() {
+            return ctx;
+        }
+    }
 
-	protected final Map<Contextual<?>, Instance> storage = new ConcurrentHashMap<Contextual<?>, Instance>();
+    protected final Map<Contextual<?>, Instance> storage = new ConcurrentHashMap<Contextual<?>, Instance>();
 
-	@Override
+    @Override
     public <T> T get(Contextual<T> contextual, CreationalContext<T> creationalContext) {
         T instance = get(contextual);
         if (instance == null) {

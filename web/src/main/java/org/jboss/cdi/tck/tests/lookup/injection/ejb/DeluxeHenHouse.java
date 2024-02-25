@@ -18,6 +18,7 @@ import jakarta.annotation.Resource;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
+
 import org.jboss.cdi.tck.tests.lookup.injection.Wolf;
 
 @Dependent
@@ -39,7 +40,8 @@ public class DeluxeHenHouse extends HenHouse {
 
     @Inject
     public void initialize() {
-        initializerCalledAfterInjectionPointsInit = (fox != null && wolf != null && "Hello".equals(greeting) && "Hello".equals(superGreeting)
+        initializerCalledAfterInjectionPointsInit = (fox != null && wolf != null && "Hello".equals(greeting)
+                && "Hello".equals(superGreeting)
                 && game.equals("poker") && superGame.equals("poker") && sessionBean.ping() && superSessionBean.ping());
     }
 
@@ -47,7 +49,7 @@ public class DeluxeHenHouse extends HenHouse {
     public void postConstruct() {
         postConstructCalledAfterInitializers = (initializerCalledAfterInjectionPointsInit && hen != null);
     }
-    
+
     @Resource(name = "game")
     private void setGame(String game) {
         this.game = game;

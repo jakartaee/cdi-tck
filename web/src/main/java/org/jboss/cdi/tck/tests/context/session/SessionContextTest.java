@@ -39,123 +39,123 @@ import com.gargoylesoftware.htmlunit.WebClient;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class SessionContextTest extends AbstractTest {
 
-	private static final long DEFAULT_SLEEP_INTERVAL = 3000;
+    private static final long DEFAULT_SLEEP_INTERVAL = 3000;
 
-	@ArquillianResource
-	private URL contextPath;
+    @ArquillianResource
+    private URL contextPath;
 
-	@Deployment(testable = false)
-	public static WebArchive createTestArchive() {
-		return new WebArchiveBuilder()
-				.withTestClassPackage(SessionContextTest.class)
-				.withWebResource("SimplePage.html", "SimplePage.html").build();
-	}
+    @Deployment(testable = false)
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder()
+                .withTestClassPackage(SessionContextTest.class)
+                .withWebResource("SimplePage.html", "SimplePage.html").build();
+    }
 
-	@Test(groups = INTEGRATION)
-	@SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "aa"),
-			@SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae") })
-	public void testSessionScopeActiveDuringServiceMethod() throws Exception {
-		WebClient webClient = new WebClient();
-		webClient.getPage(contextPath + "test");
-	}
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "aa"),
+            @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae") })
+    public void testSessionScopeActiveDuringServiceMethod() throws Exception {
+        WebClient webClient = new WebClient();
+        webClient.getPage(contextPath + "test");
+    }
 
-	@Test(groups = INTEGRATION)
-	@SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ab"),
-			@SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae") })
-	public void testSessionScopeActiveDuringDoFilterMethod() throws Exception {
-		WebClient webClient = new WebClient();
-		webClient.getPage(contextPath + "SimplePage.html");
-	}
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ab"),
+            @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ae") })
+    public void testSessionScopeActiveDuringDoFilterMethod() throws Exception {
+        WebClient webClient = new WebClient();
+        webClient.getPage(contextPath + "SimplePage.html");
+    }
 
-	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT_EE, id = "b")
-	public void testSessionContextSharedBetweenServletRequestsInSameHttpSession()
-			throws Exception {
-		WebClient webClient = new WebClient();
-		TextPage firstRequestResult = webClient.getPage(contextPath
-				+ "introspect");
-		assertNotNull(firstRequestResult.getContent());
-		String sessionBeanId = firstRequestResult.getContent();
-		assertNotNull(sessionBeanId);
-		// Make a second request and make sure the same context is used
-		TextPage secondRequestResult = webClient.getPage(contextPath
-				+ "introspect");
-		assertNotNull(secondRequestResult.getContent());
-		assertEquals(secondRequestResult.getContent(), sessionBeanId);
-	}
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = SESSION_CONTEXT_EE, id = "b")
+    public void testSessionContextSharedBetweenServletRequestsInSameHttpSession()
+            throws Exception {
+        WebClient webClient = new WebClient();
+        TextPage firstRequestResult = webClient.getPage(contextPath
+                + "introspect");
+        assertNotNull(firstRequestResult.getContent());
+        String sessionBeanId = firstRequestResult.getContent();
+        assertNotNull(sessionBeanId);
+        // Make a second request and make sure the same context is used
+        TextPage secondRequestResult = webClient.getPage(contextPath
+                + "introspect");
+        assertNotNull(secondRequestResult.getContent());
+        assertEquals(secondRequestResult.getContent(), sessionBeanId);
+    }
 
-	/**
-	 * Test that the session context is destroyed at the very end of any request
-	 * in which invalidate() was called, after all filters and
-	 * ServletRequestListeners have been called.
-	 *
-	 * @throws Exception
-	 */
-	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT_EE, id = "ca")
-	public void testSessionContextDestroyedWhenHttpSessionInvalidated()
-			throws Exception {
-		WebClient webClient = new WebClient();
+    /**
+     * Test that the session context is destroyed at the very end of any request
+     * in which invalidate() was called, after all filters and
+     * ServletRequestListeners have been called.
+     *
+     * @throws Exception
+     */
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ca")
+    public void testSessionContextDestroyedWhenHttpSessionInvalidated()
+            throws Exception {
+        WebClient webClient = new WebClient();
 
-		TextPage firstRequestResult = webClient.getPage(contextPath
-				+ "introspect");
-		assertNotNull(firstRequestResult.getContent());
-		String sessionBeanId = firstRequestResult.getContent();
-		// Invalidate the session
-		webClient.getPage(contextPath + "introspect?mode=invalidate");
-		// Make a second request and make sure the same context is not there
-		TextPage secondRequestResult = webClient.getPage(contextPath
-				+ "introspect");
-		assertNotNull(secondRequestResult.getContent());
-		assertNotEquals(secondRequestResult.getContent(), sessionBeanId);
+        TextPage firstRequestResult = webClient.getPage(contextPath
+                + "introspect");
+        assertNotNull(firstRequestResult.getContent());
+        String sessionBeanId = firstRequestResult.getContent();
+        // Invalidate the session
+        webClient.getPage(contextPath + "introspect?mode=invalidate");
+        // Make a second request and make sure the same context is not there
+        TextPage secondRequestResult = webClient.getPage(contextPath
+                + "introspect");
+        assertNotNull(secondRequestResult.getContent());
+        assertNotEquals(secondRequestResult.getContent(), sessionBeanId);
 
-		// Verify context is destroyed after all filters and
-		// ServletRequestListeners
-		TextPage verifyResult = webClient.getPage(contextPath
-				+ "introspect?mode=verify");
-		ActionSequence correctSequence = new ActionSequence()
-				.add(IntrospectServlet.class.getName())
-				.add(IntrospectHttpSessionListener.class.getName())
-				.add(IntrospectFilter.class.getName())
-				.add(IntrospectServletRequestListener.class.getName())
-				.add(SimpleSessionBean.class.getName());
-		assertEquals(verifyResult.getContent(), correctSequence.toString());
-	}
+        // Verify context is destroyed after all filters and
+        // ServletRequestListeners
+        TextPage verifyResult = webClient.getPage(contextPath
+                + "introspect?mode=verify");
+        ActionSequence correctSequence = new ActionSequence()
+                .add(IntrospectServlet.class.getName())
+                .add(IntrospectHttpSessionListener.class.getName())
+                .add(IntrospectFilter.class.getName())
+                .add(IntrospectServletRequestListener.class.getName())
+                .add(SimpleSessionBean.class.getName());
+        assertEquals(verifyResult.getContent(), correctSequence.toString());
+    }
 
-	/**
-	 * The session context is destroyed when the HTTPSession times out, after
-	 * all HttpSessionListeners have been called.
-	 *
-	 * @throws Exception
-	 */
-	@Test(groups = INTEGRATION)
-	@SpecAssertion(section = SESSION_CONTEXT_EE, id = "cb")
-	public void testSessionContextDestroyedWhenHttpSessionTimesOut()
-			throws Exception {
-		WebClient webClient = new WebClient();
-		TextPage firstRequestResult = webClient.getPage(contextPath
-				+ "introspect");
-		assertNotNull(firstRequestResult.getContent());
-		String sessionBeanId = firstRequestResult.getContent();
-		assertNotNull(sessionBeanId);
+    /**
+     * The session context is destroyed when the HTTPSession times out, after
+     * all HttpSessionListeners have been called.
+     *
+     * @throws Exception
+     */
+    @Test(groups = INTEGRATION)
+    @SpecAssertion(section = SESSION_CONTEXT_EE, id = "cb")
+    public void testSessionContextDestroyedWhenHttpSessionTimesOut()
+            throws Exception {
+        WebClient webClient = new WebClient();
+        TextPage firstRequestResult = webClient.getPage(contextPath
+                + "introspect");
+        assertNotNull(firstRequestResult.getContent());
+        String sessionBeanId = firstRequestResult.getContent();
+        assertNotNull(sessionBeanId);
 
-		webClient.getPage(contextPath + "introspect?mode=timeout");
-		Timer.startNew(DEFAULT_SLEEP_INTERVAL);
+        webClient.getPage(contextPath + "introspect?mode=timeout");
+        Timer.startNew(DEFAULT_SLEEP_INTERVAL);
 
-		// Make a second request and make sure the same context is not there
-		TextPage secondRequestResult = webClient.getPage(contextPath
-				+ "introspect");
-		assertNotNull(secondRequestResult.getContent());
-		assertNotEquals(secondRequestResult.getContent(), sessionBeanId);
+        // Make a second request and make sure the same context is not there
+        TextPage secondRequestResult = webClient.getPage(contextPath
+                + "introspect");
+        assertNotNull(secondRequestResult.getContent());
+        assertNotEquals(secondRequestResult.getContent(), sessionBeanId);
 
-		// Verify context is destroyed after all filters and
-		// ServletRequestListeners
-		TextPage verifyResult = webClient.getPage(contextPath
-				+ "introspect?mode=verify");
-		ActionSequence correctSequence = new ActionSequence()
-				.add(IntrospectHttpSessionListener.class.getName())
-				.add(SimpleSessionBean.class.getName());
-		assertEquals(verifyResult.getContent(), correctSequence.toString());
-	}
+        // Verify context is destroyed after all filters and
+        // ServletRequestListeners
+        TextPage verifyResult = webClient.getPage(contextPath
+                + "introspect?mode=verify");
+        ActionSequence correctSequence = new ActionSequence()
+                .add(IntrospectHttpSessionListener.class.getName())
+                .add(SimpleSessionBean.class.getName());
+        assertEquals(verifyResult.getContent(), correctSequence.toString());
+    }
 
 }

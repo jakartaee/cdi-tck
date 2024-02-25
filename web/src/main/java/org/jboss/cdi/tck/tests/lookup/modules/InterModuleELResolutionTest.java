@@ -30,10 +30,10 @@ import org.testng.annotations.Test;
 
 /**
  * Test that bean in web module can resolve enabled bean via EL from EJB module.
- * 
+ *
  * Note that we DO NOT include test class in EJB module since we wouldn't be able to inject bean from web module (Java EE
  * classloading requirements)!
- * 
+ *
  * @author Martin Kouba
  */
 @Test

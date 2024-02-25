@@ -29,12 +29,10 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
-
 /**
  * Test that bean in web module bean archive can inject enabled managed bean from another bean archive.
- * 
- * 
+ *
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -42,7 +40,8 @@ public class EnabledManagedBeanInjectionAvailability02Test extends AbstractTest 
 
     @Deployment
     public static WebArchive createTestArchive() {
-        WebArchive webArchive = new WebArchiveBuilder().withTestClass(EnabledManagedBeanInjectionAvailability02Test.class).withClasses(ManagedFoo.class)
+        WebArchive webArchive = new WebArchiveBuilder().withTestClass(EnabledManagedBeanInjectionAvailability02Test.class)
+                .withClasses(ManagedFoo.class)
                 .withBeanLibrary(Foo.class, Bar.class).withBeanLibrary(WebBar.class)
                 .build();
 
@@ -53,7 +52,8 @@ public class EnabledManagedBeanInjectionAvailability02Test extends AbstractTest 
     Bar bar;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INTER_MODULE_INJECTION, id = "c"), @SpecAssertion(section = SELECTION, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = INTER_MODULE_INJECTION, id = "c"),
+            @SpecAssertion(section = SELECTION, id = "aa") })
     public void testInjection() throws Exception {
         Assert.assertEquals(bar.ping(), 0);
         assert bar.getFoo() instanceof ManagedFoo;

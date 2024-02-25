@@ -13,13 +13,6 @@
  */
 package org.jboss.cdi.tck.impl;
 
-import org.jboss.cdi.tck.api.Configuration;
-import org.jboss.cdi.tck.spi.Beans;
-import org.jboss.cdi.tck.spi.Contexts;
-import org.jboss.cdi.tck.spi.Contextuals;
-import org.jboss.cdi.tck.spi.CreationalContexts;
-import org.jboss.cdi.tck.spi.EL;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -27,6 +20,13 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
+
+import org.jboss.cdi.tck.api.Configuration;
+import org.jboss.cdi.tck.spi.Beans;
+import org.jboss.cdi.tck.spi.Contexts;
+import org.jboss.cdi.tck.spi.Contextuals;
+import org.jboss.cdi.tck.spi.CreationalContexts;
+import org.jboss.cdi.tck.spi.EL;
 
 /**
  * CDI TCK configuration builder.
@@ -64,20 +64,23 @@ public class PropertiesBasedConfigurationBuilder {
 
         configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, !deploymentPhase));
         configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, !deploymentPhase));
-        configuration.setContexts((Contexts<?>)getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
+        configuration.setContexts((Contexts<?>) getInstanceValue(Contexts.PROPERTY_NAME, Contexts.class, !deploymentPhase));
         configuration.setContextuals(getInstanceValue(Contextuals.PROPERTY_NAME, Contextuals.class, !deploymentPhase));
-        configuration.setCreationalContexts(getInstanceValue(CreationalContexts.PROPERTY_NAME, CreationalContexts.class, !deploymentPhase));
+        configuration.setCreationalContexts(
+                getInstanceValue(CreationalContexts.PROPERTY_NAME, CreationalContexts.class, !deploymentPhase));
 
         configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, deploymentPhase));
 
         if (!configuration.getCdiLiteMode()) {
             configuration.setTestDataSource(getStringValue(Configuration.TEST_DATASOURCE_PROPERTY_NAME, null, deploymentPhase));
-            configuration.setTestJmsConnectionFactory(getStringValue(Configuration.TEST_JMS_CONNECTION_FACTORY, null, deploymentPhase));
+            configuration.setTestJmsConnectionFactory(
+                    getStringValue(Configuration.TEST_JMS_CONNECTION_FACTORY, null, deploymentPhase));
             configuration.setTestJmsQueue(getStringValue(Configuration.TEST_JMS_QUEUE, null, deploymentPhase));
             configuration.setTestJmsTopic(getStringValue(Configuration.TEST_JMS_TOPIC, null, deploymentPhase));
         }
 
-        configuration.setTestTimeoutFactor(getIntegerValue(Configuration.TEST_TIMEOUT_FACTOR, Configuration.TEST_TIMEOUT_FACTOR_DEFAULT_VALUE, false));
+        configuration.setTestTimeoutFactor(
+                getIntegerValue(Configuration.TEST_TIMEOUT_FACTOR, Configuration.TEST_TIMEOUT_FACTOR_DEFAULT_VALUE, false));
 
         return this;
     }
@@ -267,38 +270,41 @@ public class PropertiesBasedConfigurationBuilder {
                     classes.add((Class<T>) Class.forName(className));
                 }
 
-            } catch (ClassNotFoundException|LinkageError e) {
-                throw new IllegalArgumentException("Implementation class with name " + className + " not found using classloader "
+            } catch (ClassNotFoundException | LinkageError e) {
+                throw new IllegalArgumentException("Implementation class with name " + className
+                        + " not found using classloader "
                         + (currentThreadClassLoader != null ? currentThreadClassLoader : this.getClass().getClassLoader()), e);
             }
         }
 
         if (classes.size() == 0) {
             if (required) {
-                throw new IllegalArgumentException("Cannot find any implementations of " + expectedType.getSimpleName() + ", check that " + propertyName
-                        + " is specified");
+                throw new IllegalArgumentException(
+                        "Cannot find any implementations of " + expectedType.getSimpleName() + ", check that " + propertyName
+                                + " is specified");
             } else {
                 return null;
             }
         } else if (classes.size() > 1) {
-            throw new IllegalArgumentException("More than one implementation of " + expectedType.getSimpleName() + " specified by " + propertyName
-                    + ", not sure which one to use!");
+            throw new IllegalArgumentException(
+                    "More than one implementation of " + expectedType.getSimpleName() + " specified by " + propertyName
+                            + ", not sure which one to use!");
         } else {
             return classes.iterator().next();
         }
     }
-
 
     private String getValue(String propertyName, boolean required) {
         Set<String> values = getPropertyValues(propertyName);
         if (values.size() == 0) {
             if (required) {
                 throw new IllegalArgumentException("Cannot find required property " + propertyName
-                    + ", check that it is specified. See cdiLiteMode flag if testing CDI Lite.");
+                        + ", check that it is specified. See cdiLiteMode flag if testing CDI Lite.");
             }
             return null;
         } else if (values.size() > 1) {
-            throw new IllegalArgumentException("More than one value given for " + propertyName + ", not sure which one to use!");
+            throw new IllegalArgumentException(
+                    "More than one value given for " + propertyName + ", not sure which one to use!");
         } else {
             return values.iterator().next();
         }

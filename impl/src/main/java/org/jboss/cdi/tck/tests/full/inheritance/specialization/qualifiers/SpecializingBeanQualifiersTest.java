@@ -49,7 +49,8 @@ public class SpecializingBeanQualifiersTest extends AbstractTest {
     @Test
     @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "j")
     public void testQuailifiersOfSpecializingdNestedClass() {
-        testQualifiersOfSpecializedBean(StaticNestedClassesParent.StaticSpecializationBean.class, StaticNestedClassesParent.StaticMockSpecializationBean.class);
+        testQualifiersOfSpecializedBean(StaticNestedClassesParent.StaticSpecializationBean.class,
+                StaticNestedClassesParent.StaticMockSpecializationBean.class);
     }
 
     @Test

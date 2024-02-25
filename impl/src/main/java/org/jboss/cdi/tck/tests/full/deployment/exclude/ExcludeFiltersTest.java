@@ -56,15 +56,19 @@ public class ExcludeFiltersTest extends AbstractTest {
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL).excludeFilters(
                         BeansXml.Exclude.match(Chonmage.class.getPackage().getName() + ".*"),
                         BeansXml.Exclude.match(Mustache.class.getPackage().getName() + ".**"),
-                        BeansXml.Exclude.match(Meat.class.getPackage().getName() + ".*").ifClassAvailable("com.some.unreal.class.Name"),
-                        BeansXml.Exclude.match(Meat.class.getPackage().getName() + ".*").ifClassNotAvailable(ExcludeFiltersTest.class.getName()),
+                        BeansXml.Exclude.match(Meat.class.getPackage().getName() + ".*")
+                                .ifClassAvailable("com.some.unreal.class.Name"),
+                        BeansXml.Exclude.match(Meat.class.getPackage().getName() + ".*")
+                                .ifClassNotAvailable(ExcludeFiltersTest.class.getName()),
                         BeansXml.Exclude.match(Alpha.class.getName()).ifClassAvailable(Stubble.class.getName()),
                         BeansXml.Exclude.match(Stubble.class.getName()),
                         BeansXml.Exclude.match(Foxtrot.class.getName()).ifClassAvailable("com.some.unreal.class.Name"),
                         BeansXml.Exclude.match(Bravo.class.getName()).ifClassNotAvailable("com.some.unreal.class.Name"),
                         BeansXml.Exclude.match(Echo.class.getName()).ifClassNotAvailable(ExcludeFiltersTest.class.getName()),
-                        BeansXml.Exclude.match(Charlie.class.getName()).ifSystemProperty(TestSystemProperty.EXCLUDE_DUMMY.getKey()),
-                        BeansXml.Exclude.match(Delta.class.getName()).ifSystemProperty(TestSystemProperty.EXCLUDE_DUMMY.getKey(), TestSystemProperty.EXCLUDE_DUMMY.getValue())
+                        BeansXml.Exclude.match(Charlie.class.getName())
+                                .ifSystemProperty(TestSystemProperty.EXCLUDE_DUMMY.getKey()),
+                        BeansXml.Exclude.match(Delta.class.getName()).ifSystemProperty(
+                                TestSystemProperty.EXCLUDE_DUMMY.getKey(), TestSystemProperty.EXCLUDE_DUMMY.getValue())
                 ))
                 .withExtension(VerifyingExtension.class).build();
     }
@@ -73,7 +77,8 @@ public class ExcludeFiltersTest extends AbstractTest {
     VerifyingExtension extension;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "a"), @SpecAssertion(section = EXCLUDE_FILTERS, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "a"),
+            @SpecAssertion(section = EXCLUDE_FILTERS, id = "f") })
     public void testTypeFcqnMatchesExcludeFilterName() {
         assertTypeIsExcluded(Stubble.class);
         assertTypeIsNotExcluded(Golf.class);
@@ -89,7 +94,8 @@ public class ExcludeFiltersTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "b"), @SpecAssertion(section = EXCLUDE_FILTERS, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "b"),
+            @SpecAssertion(section = EXCLUDE_FILTERS, id = "c") })
     public void testExcludeClassActivators() {
         assertTypeIsExcluded(Alpha.class);
         assertTypeIsNotExcluded(Foxtrot.class);
@@ -99,7 +105,8 @@ public class ExcludeFiltersTest extends AbstractTest {
     }
 
     @Test(groups = { INTEGRATION, SYSTEM_PROPERTIES, CDI_FULL })
-    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "d"), @SpecAssertion(section = EXCLUDE_FILTERS, id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = EXCLUDE_FILTERS, id = "d"),
+            @SpecAssertion(section = EXCLUDE_FILTERS, id = "e") })
     public void testExcludeSystemPropertyActivator() {
         assertTypeIsExcluded(Charlie.class);
         assertTypeIsExcluded(Delta.class);

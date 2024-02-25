@@ -35,7 +35,8 @@ public class ScopeDefinedInOtherBDATest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         JavaArchive lib = ShrinkWrap.create(JavaArchive.class).addClass(ThirdPartyScope.class);
-        return new WebArchiveBuilder().withTestClass(ScopeDefinedInOtherBDATest.class).withClasses(ThirdPartyScopeBean.class).withLibraries(lib).build();
+        return new WebArchiveBuilder().withTestClass(ScopeDefinedInOtherBDATest.class).withClasses(ThirdPartyScopeBean.class)
+                .withLibraries(lib).build();
 
     }
 

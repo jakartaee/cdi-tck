@@ -16,7 +16,6 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.producer;
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_PRODUCER;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_CONFIGURATOR;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
@@ -56,9 +55,9 @@ public class ProducerConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertions({
-        @SpecAssertion(section = PROCESS_PRODUCER, id = "f"),
-        @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "a"),
-        @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "b") })
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "f"),
+            @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = PRODUCER_CONFIGURATOR, id = "b") })
     public void configuratorOptionsTest() {
         // verify producer/disposer were changed
         assertTrue(barInstance.isResolvable());

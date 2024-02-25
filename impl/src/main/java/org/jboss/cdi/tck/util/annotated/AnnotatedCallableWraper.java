@@ -13,19 +13,21 @@
  */
 package org.jboss.cdi.tck.util.annotated;
 
-import jakarta.enterprise.inject.spi.AnnotatedCallable;
-import jakarta.enterprise.inject.spi.AnnotatedParameter;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import jakarta.enterprise.inject.spi.AnnotatedCallable;
+import jakarta.enterprise.inject.spi.AnnotatedParameter;
 
 public class AnnotatedCallableWraper<X> extends AnnotatedMemberWrapper<X> implements AnnotatedCallable<X> {
 
     private AnnotatedCallable<X> delegate;
     private List<AnnotatedParameter<X>> wrappedParameters;
 
-    public AnnotatedCallableWraper(AnnotatedCallable<X> delegate, AnnotatedTypeWrapper<X> declaringType, boolean keepOriginalAnnotations,
+    public AnnotatedCallableWraper(AnnotatedCallable<X> delegate, AnnotatedTypeWrapper<X> declaringType,
+            boolean keepOriginalAnnotations,
             Annotation... annotations) {
         super(delegate, declaringType, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
@@ -33,8 +35,9 @@ public class AnnotatedCallableWraper<X> extends AnnotatedMemberWrapper<X> implem
 
         for (AnnotatedParameter<X> annotatedParameter : delegate.getParameters()) {
             wrappedParameters
-                    .add(new AnnotatedParameterWrapper<X>(annotatedParameter, this, true, annotatedParameter.getAnnotations().toArray(
-                            new Annotation[] { })));
+                    .add(new AnnotatedParameterWrapper<X>(annotatedParameter, this, true,
+                            annotatedParameter.getAnnotations().toArray(
+                                    new Annotation[] {})));
         }
     }
 

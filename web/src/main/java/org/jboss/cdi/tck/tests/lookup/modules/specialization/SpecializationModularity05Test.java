@@ -37,17 +37,17 @@ import org.testng.annotations.Test;
  * <li>1 WAR</li>
  * <li>2 shared libraries (can see each other)</li>
  * </ul>
- * 
+ *
  * Shared library 1 defines {@link Handler}. WEB-INF/classes defines {@link UppercaseHandler} which specializes {@link Handler}.
  * Bean {@link Alpha} packaged in WEB-INF/classes has an injection point of type {@link Handler}. Bean {@link Bravo} packaged in
  * the shared library 1 has an injection point of type {@link Handler}. Bean {@link Charlie} packaged in the shared library 2
  * has an injection point of type {@link Handler}.
- * 
+ *
  * Expected result: UnsatisfiedDependencyException - {@link Bravo} and {@link Charlie} cannot see {@link UppercaseHandler},
  * {@link Handler} is not enabled
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class SpecializationModularity05Test extends AbstractTest {
@@ -67,7 +67,8 @@ public class SpecializationModularity05Test extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "aa"), @SpecAssertion(section = INTER_MODULE_INJECTION, id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = SELECTION, id = "aa"),
+            @SpecAssertion(section = INTER_MODULE_INJECTION, id = "l") })
     public void testSpecialization() {
     }
 

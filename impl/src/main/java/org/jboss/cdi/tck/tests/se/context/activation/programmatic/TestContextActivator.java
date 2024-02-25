@@ -26,7 +26,6 @@ public class TestContextActivator {
     @Inject
     RequestScopeCounter requestScopeCounter;
 
-
     public boolean activate() {
         return requestContextController.activate();
     }

@@ -44,7 +44,7 @@ public class MonsterController {
         zombieProducerCalled = true;
         return new Zombie(t.select(Boolean.class).get());
     };
-    
+
     public static BiConsumer<Zombie, CreationalContext<Zombie>> zombieConsumer = new BiConsumer<Zombie, CreationalContext<Zombie>>() {
 
         @Override

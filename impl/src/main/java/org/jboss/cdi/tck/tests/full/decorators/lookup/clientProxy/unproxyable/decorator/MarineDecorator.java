@@ -21,12 +21,12 @@ import jakarta.inject.Inject;
 @Decorator
 public abstract class MarineDecorator implements Fish {
 
-	@Inject
-	@Delegate
-	@Any
-	private Fish fish;
+    @Inject
+    @Delegate
+    @Any
+    private Fish fish;
 
-	public MarineDecorator() {
-	}
+    public MarineDecorator() {
+    }
 
 }

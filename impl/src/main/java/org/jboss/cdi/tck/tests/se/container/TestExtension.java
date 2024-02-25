@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.se.container;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
 import jakarta.enterprise.inject.spi.AfterDeploymentValidation;
@@ -36,7 +37,6 @@ public class TestExtension implements Extension {
     private AtomicBoolean pitNotified = new AtomicBoolean();
     private AtomicBoolean pbNotified = new AtomicBoolean();
     private AtomicBoolean pbaNotified = new AtomicBoolean();
-
 
     void observeBeforeBeanDiscovery(@Observes BeforeBeanDiscovery event, BeanManager beanManager) {
         bbdNotified.set(true);

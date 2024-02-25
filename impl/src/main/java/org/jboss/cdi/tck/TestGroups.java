@@ -87,13 +87,13 @@ public final class TestGroups {
 
     /**
      * Requires following mapping of roles to principals:
-     *  --------------------------------
-     *  | Principal | Group            |
-     *  --------------------------------
-     *  | student   | student          |
-     *  | alarm     | student, alarm   |
-     *  | printer   | printer |
-     *  --------------------------------
+     * --------------------------------
+     * | Principal | Group |
+     * --------------------------------
+     * | student | student |
+     * | alarm | student, alarm |
+     * | printer | printer |
+     * --------------------------------
      */
     public static final String SECURITY = "security";
 

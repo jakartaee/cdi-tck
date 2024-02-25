@@ -20,6 +20,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.inject.Instance;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.Testable;
 import org.jboss.cdi.tck.AbstractTest;
@@ -63,8 +64,8 @@ public class InterceptorModularityTest extends AbstractTest {
         JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class, TEST1_JAR)
                 .addClasses(BarInterceptor.class, Dog.class, DummySessionBean.class)
                 .setManifest(new StringAsset(Descriptors.create(ManifestDescriptor.class)
-                                .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME)
-                                .exportAsString()))
+                        .addToClassPath(EnterpriseArchiveBuilder.DEFAULT_EJB_MODULE_NAME)
+                        .exportAsString()))
                 .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
         enterpriseArchive.addAsModule(fooArchive);
 

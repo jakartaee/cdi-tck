@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 /**
  * A very simple JDK logger wrapper. It should be used in complex tests only as logging in integration tests is not a good idea.
- * 
+ *
  * @author Martin Kouba
  */
 public final class SimpleLogger implements Serializable {
@@ -39,7 +39,7 @@ public final class SimpleLogger implements Serializable {
     /**
      * Log message with specified parameters. {@link Level#FINE} is always used since the message is considered to be tracing
      * information.
-     * 
+     *
      * @param message - log message
      * @param parameters - message parameters
      */
@@ -48,8 +48,9 @@ public final class SimpleLogger implements Serializable {
     }
 
     /**
-     * Log message with specified throwed exception. {@link Level#FINE} is always used since the message is considered to be tracing information.
-     * 
+     * Log message with specified throwed exception. {@link Level#FINE} is always used since the message is considered to be
+     * tracing information.
+     *
      * @param thrown - exception to log
      */
     public void log(Throwable thrown) {

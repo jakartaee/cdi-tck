@@ -18,7 +18,7 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 
 /**
- * 
+ *
  * @author Martin Kouba
  */
 @Dependent

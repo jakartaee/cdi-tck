@@ -14,7 +14,6 @@
 
 package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
 
-
 /**
  * @author Martin Kouba
  */

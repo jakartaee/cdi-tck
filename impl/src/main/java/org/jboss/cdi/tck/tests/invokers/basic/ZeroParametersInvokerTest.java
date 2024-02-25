@@ -15,6 +15,10 @@
  */
 package org.jboss.cdi.tck.tests.invokers.basic;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Set;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
@@ -23,6 +27,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.Invoker;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -34,10 +39,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class ZeroParametersInvokerTest extends AbstractTest {
@@ -68,11 +69,11 @@ public class ZeroParametersInvokerTest extends AbstractTest {
     public void test(MyService service, InvokerHolder invokers) throws Exception {
         Invoker<MyService, String> hello = invokers.get("hello");
         assertEquals(hello.invoke(service, null), "foobar");
-        assertEquals(hello.invoke(new MyService(), new Object[]{}), "foobar");
+        assertEquals(hello.invoke(new MyService(), new Object[] {}), "foobar");
 
         Invoker<MyService, String> helloStatic = invokers.get("helloStatic");
         assertEquals(helloStatic.invoke(null, null), "quux");
-        assertEquals(helloStatic.invoke(null, new Object[]{}), "quux");
+        assertEquals(helloStatic.invoke(null, new Object[] {}), "quux");
     }
 
     @ApplicationScoped

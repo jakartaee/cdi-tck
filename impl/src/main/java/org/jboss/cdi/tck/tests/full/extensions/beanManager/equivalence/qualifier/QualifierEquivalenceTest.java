@@ -101,7 +101,7 @@ public class QualifierEquivalenceTest extends AbstractTest {
 
     private Annotation getContainerProvidedQualifier(Bean<?> bean, Class<? extends Annotation> qualifierClass) {
         for (Annotation annotation : bean.getQualifiers()) {
-            if(annotation.annotationType().equals(qualifierClass)) {
+            if (annotation.annotationType().equals(qualifierClass)) {
                 return annotation;
             }
         }

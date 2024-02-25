@@ -20,7 +20,7 @@ import jakarta.el.MethodInfo;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SuppressWarnings("serial")
 public class DummyMethodExpression extends MethodExpression {

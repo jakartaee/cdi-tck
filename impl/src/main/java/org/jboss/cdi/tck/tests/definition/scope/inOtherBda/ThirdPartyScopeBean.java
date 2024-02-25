@@ -15,6 +15,7 @@ package org.jboss.cdi.tck.tests.definition.scope.inOtherBda;
 
 @ThirdPartyScope
 public class ThirdPartyScopeBean {
-    
-    public void ping(){}
+
+    public void ping() {
+    }
 }

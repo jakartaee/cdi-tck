@@ -26,18 +26,18 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 @WebListener
 public class IntrospectHttpSessionListener implements HttpSessionListener {
 
-	private static final SimpleLogger logger = new SimpleLogger(
-			IntrospectHttpSessionListener.class);
+    private static final SimpleLogger logger = new SimpleLogger(
+            IntrospectHttpSessionListener.class);
 
-	@Override
-	public void sessionCreated(HttpSessionEvent se) {
-		logger.log("Session created...");
-	}
+    @Override
+    public void sessionCreated(HttpSessionEvent se) {
+        logger.log("Session created...");
+    }
 
-	@Override
-	public void sessionDestroyed(HttpSessionEvent se) {
-		logger.log("Session destroyed...");
-		ActionSequence.addAction(IntrospectHttpSessionListener.class.getName());
-	}
+    @Override
+    public void sessionDestroyed(HttpSessionEvent se) {
+        logger.log("Session destroyed...");
+        ActionSequence.addAction(IntrospectHttpSessionListener.class.getName());
+    }
 
 }

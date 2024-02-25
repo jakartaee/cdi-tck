@@ -15,12 +15,11 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.beanAttributes;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
-
 /**
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @ApplicationScoped
 public class Sword {
-    
+
 }

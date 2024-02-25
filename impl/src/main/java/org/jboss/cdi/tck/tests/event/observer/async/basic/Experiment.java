@@ -27,5 +27,5 @@ public class Experiment {
     }
 
     private List<Class<?>> universities = new CopyOnWriteArrayList<>();
-    
+
 }

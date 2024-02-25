@@ -27,6 +27,6 @@ import jakarta.inject.Qualifier;
 public @interface Cats {
 
     public static class CatsLiteral extends AnnotationLiteral<Cats> implements Cats {
-            public static CatsLiteral INSTANCE = new CatsLiteral();
+        public static CatsLiteral INSTANCE = new CatsLiteral();
     }
 }

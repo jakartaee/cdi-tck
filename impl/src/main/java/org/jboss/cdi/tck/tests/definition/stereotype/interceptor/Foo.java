@@ -18,7 +18,7 @@ import java.util.List;
 
 import jakarta.enterprise.context.Dependent;
 
-@Alpha(value=true)
+@Alpha(value = true)
 @AlphaOmegaStereotype
 @Dependent
 public class Foo {

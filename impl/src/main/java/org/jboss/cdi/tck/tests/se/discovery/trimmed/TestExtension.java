@@ -27,7 +27,6 @@ public class TestExtension implements Extension {
     private AtomicBoolean barPATFired = new AtomicBoolean(false);
     private AtomicBoolean barPBFired = new AtomicBoolean(false);
 
-
     void observesBarProducerPBA(@Observes ProcessBeanAttributes<BarProducer> event) {
         barProducerPBAFired.set(true);
     }

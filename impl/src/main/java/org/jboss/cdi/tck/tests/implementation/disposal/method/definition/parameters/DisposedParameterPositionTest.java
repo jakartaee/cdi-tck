@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 
 /**
  * There is no requirement for disposed parameter position in the spec.
- * 
+ *
  * @author Martin Kouba
  * @see <a href="https://issues.jboss.org/browse/CDITCK-271">CDITCK-271</a>
  */
@@ -50,7 +50,8 @@ public class DisposedParameterPositionTest extends AbstractTest {
     Thinker thinker;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "h"), @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "i"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_DISPOSER_METHOD, id = "h"),
+            @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "i"),
             @SpecAssertion(section = DISPOSER_METHOD_DISPOSED_PARAMETER, id = "a") })
     public void testDisposedParameterPosition() {
 

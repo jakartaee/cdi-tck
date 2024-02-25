@@ -44,7 +44,7 @@ public class ClassActivator implements Activator {
 
     @Override
     public String getElementName() {
-        return isAvailable ? "if-class-available":"if-class-not-available";
+        return isAvailable ? "if-class-available" : "if-class-not-available";
     }
 
     @Override

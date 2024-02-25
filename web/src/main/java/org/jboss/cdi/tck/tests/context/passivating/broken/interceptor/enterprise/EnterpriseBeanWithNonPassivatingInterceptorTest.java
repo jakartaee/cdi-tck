@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -23,8 +23,6 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -41,7 +39,7 @@ public class EnterpriseBeanWithNonPassivatingInterceptorTest extends AbstractTes
                 .withBeansXml(new BeansXml().interceptors(DigitalInterceptor.class)).build();
     }
 
-    @Test(groups =  INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "b")
     @SpecAssertion(section = PASSIVATION_VALIDATION_EE, id = "hd")
     public void testEnterpriseBeanWithNonPassivatingDecoratorFails() {

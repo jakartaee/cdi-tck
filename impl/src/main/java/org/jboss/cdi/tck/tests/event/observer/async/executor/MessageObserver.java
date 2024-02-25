@@ -20,10 +20,10 @@ import jakarta.enterprise.event.ObservesAsync;
 
 @Dependent
 public class MessageObserver {
-    
+
     public static final AtomicBoolean observed = new AtomicBoolean(false);
-    
-    public void observes(@ObservesAsync Message message){
-       observed.set(true);
+
+    public void observes(@ObservesAsync Message message) {
+        observed.set(true);
     }
 }

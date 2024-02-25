@@ -22,10 +22,12 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import java.util.concurrent.TimeUnit;
+
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.InterceptionType;
-import jakarta.enterprise.util.AnnotationLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -36,8 +38,6 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Interceptor resolution test.
@@ -73,7 +73,8 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
                         new TransactionalBinding.Literal(),
                         new PingBinding.Literal(),
                         new PongBinding.Literal(),
-                        new BallBindingLiteral(true, true)).size(), 1);
+                        new BallBindingLiteral(true, true)).size(),
+                1);
 
         // Test the set of interceptor bindings
         assertNotNull(messageService);
@@ -115,12 +116,14 @@ public class EnterpriseInterceptorBindingResolutionTest extends AbstractTest {
                         new MessageBinding.Literal(),
                         new LoggedBinding.Literal(),
                         new TransactionalBinding.Literal(),
-                        new BasketBindingLiteral(true, true)).size(), 1);
+                        new BasketBindingLiteral(true, true)).size(),
+                1);
         assertEquals(
                 getCurrentManager().resolveInterceptors(InterceptionType.PRE_DESTROY, new MessageBinding.Literal(),
-                new LoggedBinding.Literal(),
-                new TransactionalBinding.Literal(),
-                new BasketBindingLiteral(true, true)).size(), 1);
+                        new LoggedBinding.Literal(),
+                        new TransactionalBinding.Literal(),
+                        new BasketBindingLiteral(true, true)).size(),
+                1);
 
         // Test the set of interceptor bindings
         ComplicatedLifecycleInterceptor.reset();

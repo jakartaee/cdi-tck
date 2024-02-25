@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-    
+
 package org.jboss.cdi.tck.tests.event.broken.raw;
 
 import jakarta.enterprise.context.Dependent;

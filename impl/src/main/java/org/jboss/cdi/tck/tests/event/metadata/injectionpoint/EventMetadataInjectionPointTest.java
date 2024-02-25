@@ -69,7 +69,8 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
     InfoObserver infoObserver;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "aa"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "aa"),
+            @SpecAssertion(section = EVENT_METADATA, id = "b") })
     public void testGetBean() {
 
         Bean<?> lastBean = null;
@@ -91,7 +92,8 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "dca"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "dca"),
+            @SpecAssertion(section = EVENT_METADATA, id = "b") })
     public void testIsTransient() {
 
         notifier.fireInfoEvent();
@@ -103,7 +105,8 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "ba"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "ba"),
+            @SpecAssertion(section = EVENT_METADATA, id = "b") })
     public void testGetType() {
 
         Type lastType = null;
@@ -128,7 +131,8 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "bc"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "bc"),
+            @SpecAssertion(section = EVENT_METADATA, id = "b") })
     public void testGetQualifiers() {
 
         Set<Annotation> lastQualifiers = null;
@@ -181,7 +185,8 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
 
     @SuppressWarnings("rawtypes")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "daa"), @SpecAssertion(section = EVENT_METADATA, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "daa"),
+            @SpecAssertion(section = EVENT_METADATA, id = "b") })
     public void testGetAnnotatedType() {
 
         Annotated lastAnnotated = null;

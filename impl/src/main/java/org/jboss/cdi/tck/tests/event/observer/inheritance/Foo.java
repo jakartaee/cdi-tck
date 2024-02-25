@@ -18,7 +18,7 @@ import jakarta.enterprise.context.Dependent;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class Foo extends AbstractEggObserver {

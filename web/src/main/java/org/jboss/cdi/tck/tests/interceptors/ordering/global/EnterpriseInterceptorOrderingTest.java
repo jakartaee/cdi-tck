@@ -32,7 +32,6 @@ import org.jboss.shrinkwrap.api.spec.EnterpriseArchive;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.spec.se.manifest.ManifestDescriptor;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -82,7 +81,8 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
         //D
         JavaArchive ejbArchive = ShrinkWrap
                 .create(JavaArchive.class, ejbJar)
-                .addClasses(DummyDao.class, GloballyEnabledInterceptor2.class, GloballyEnabledInterceptor5.class, LegacyInterceptor3.class)
+                .addClasses(DummyDao.class, GloballyEnabledInterceptor2.class, GloballyEnabledInterceptor5.class,
+                        LegacyInterceptor3.class)
                 .addAsManifestResource(new BeansXml().interceptors(LegacyInterceptor3.class), "beans.xml")
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
@@ -94,7 +94,8 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
         WebArchive webArchive = new WebArchiveBuilder()
                 .notTestArchive()
                 //F
-                .withClasses(EnterpriseInterceptorOrderingTest.class, GloballyEnabledInterceptor1.class, LegacyInterceptor1.class)
+                .withClasses(EnterpriseInterceptorOrderingTest.class, GloballyEnabledInterceptor1.class,
+                        LegacyInterceptor1.class)
                 .withBeansXml(new BeansXml().interceptors(LegacyInterceptor1.class))
                 //G
                 .withBeanLibrary(GloballyEnabledInterceptor4.class)
@@ -111,7 +112,7 @@ public class EnterpriseInterceptorOrderingTest extends AbstractTest {
 
     @Test(groups = JAVAEE_FULL, dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "f"),
-        @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "i") })
+            @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "i") })
     public void testDecoratorsInWebInfClasses(Dao dao) {
 
         assertNotNull(dao);

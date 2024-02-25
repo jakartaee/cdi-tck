@@ -30,9 +30,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
+
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.enterprise.util.TypeLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -72,8 +73,10 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTED_FIELD_QUALIFIERS, id = "b"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lc"),
-            @SpecAssertion(section = DECLARING_BEAN_QUALIFIERS, id = "d"), @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "la"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTED_FIELD_QUALIFIERS, id = "b"),
+            @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "lc"),
+            @SpecAssertion(section = DECLARING_BEAN_QUALIFIERS, id = "d"),
+            @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "la"),
             @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "a"), @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "d") })
     public void testAllQualifiersSpecifiedForResolutionMustAppearOnBean() {
 
@@ -102,14 +105,17 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "j"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "j"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "i") })
     public void testResolveByTypeWithArray() throws Exception {
         assertEquals(getBeans(Spider[].class).size(), 1);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "i"), @SpecAssertion(section = PRIMITIVE_TYPES_AND_NULL_VALUES, id = "aa"),
-            @SpecAssertion(section = PRIMITIVE_TYPES_AND_NULL_VALUES, id = "ab"), @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "i"),
+            @SpecAssertion(section = PRIMITIVE_TYPES_AND_NULL_VALUES, id = "aa"),
+            @SpecAssertion(section = PRIMITIVE_TYPES_AND_NULL_VALUES, id = "ab"),
+            @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "b"),
             @SpecAssertion(section = MULTIPLE_QUALIFIERS, id = "c"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "j") })
     public void testResolveByTypeWithPrimitives() {
 
@@ -124,7 +130,8 @@ public class ResolutionByTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "ld"), @SpecAssertion(section = QUALIFIER_ANNOTATION_MEMBERS, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "ld"),
+            @SpecAssertion(section = QUALIFIER_ANNOTATION_MEMBERS, id = "b") })
     public void testResolveByTypeWithNonBindingMembers() throws Exception {
 
         Set<Bean<Animal>> beans = getBeans(Animal.class, new ExpensiveLiteral() {

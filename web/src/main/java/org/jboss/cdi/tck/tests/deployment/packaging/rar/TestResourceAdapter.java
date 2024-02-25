@@ -15,17 +15,18 @@ package org.jboss.cdi.tck.tests.deployment.packaging.rar;
 
 import java.util.logging.Logger;
 
+import javax.transaction.xa.XAResource;
+
 import jakarta.resource.ResourceException;
 import jakarta.resource.spi.ActivationSpec;
 import jakarta.resource.spi.BootstrapContext;
 import jakarta.resource.spi.ResourceAdapter;
 import jakarta.resource.spi.ResourceAdapterInternalException;
 import jakarta.resource.spi.endpoint.MessageEndpointFactory;
-import javax.transaction.xa.XAResource;
 
 /**
  * TestResourceAdapter
- * 
+ *
  * @version $Revision: $
  */
 public class TestResourceAdapter implements ResourceAdapter, java.io.Serializable {
@@ -45,7 +46,7 @@ public class TestResourceAdapter implements ResourceAdapter, java.io.Serializabl
 
     /**
      * This is called during the activation of a message endpoint.
-     * 
+     *
      * @param endpointFactory A message endpoint factory instance.
      * @param spec An activation spec JavaBean instance.
      * @throws ResourceException generic exception
@@ -56,7 +57,7 @@ public class TestResourceAdapter implements ResourceAdapter, java.io.Serializabl
 
     /**
      * This is called when a message endpoint is deactivated.
-     * 
+     *
      * @param endpointFactory A message endpoint factory instance.
      * @param spec An activation spec JavaBean instance.
      */
@@ -66,7 +67,7 @@ public class TestResourceAdapter implements ResourceAdapter, java.io.Serializabl
 
     /**
      * This is called when a resource adapter instance is bootstrapped.
-     * 
+     *
      * @param ctx A bootstrap context containing references
      * @throws ResourceAdapterInternalException indicates bootstrap failure.
      */
@@ -83,7 +84,7 @@ public class TestResourceAdapter implements ResourceAdapter, java.io.Serializabl
 
     /**
      * This method is called by the application server during crash recovery.
-     * 
+     *
      * @param specs An array of ActivationSpec JavaBeans
      * @throws ResourceException generic exception
      * @return An array of XAResource objects
@@ -95,7 +96,7 @@ public class TestResourceAdapter implements ResourceAdapter, java.io.Serializabl
 
     /**
      * Returns a hash code value for the object.
-     * 
+     *
      * @return A hash code value for this object.
      */
     @Override
@@ -106,7 +107,7 @@ public class TestResourceAdapter implements ResourceAdapter, java.io.Serializabl
 
     /**
      * Indicates whether some other object is equal to this one.
-     * 
+     *
      * @param other The reference object with which to compare.
      * @return true if this object is the same as the obj argument, false otherwise.
      */

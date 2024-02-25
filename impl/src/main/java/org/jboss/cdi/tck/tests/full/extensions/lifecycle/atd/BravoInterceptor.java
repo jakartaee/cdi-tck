@@ -31,7 +31,6 @@ public class BravoInterceptor {
         return ctx.proceed();
     }
 
-
     public static void reset() {
         intercepted = false;
     }

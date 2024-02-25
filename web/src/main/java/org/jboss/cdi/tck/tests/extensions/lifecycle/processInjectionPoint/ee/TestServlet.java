@@ -17,6 +17,7 @@ import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
+
 import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.Charlie;
 
 @SuppressWarnings("serial")
@@ -25,6 +26,5 @@ import org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint.C
 public class TestServlet extends HttpServlet {
     @Inject
     Charlie charlie;
-
 
 }

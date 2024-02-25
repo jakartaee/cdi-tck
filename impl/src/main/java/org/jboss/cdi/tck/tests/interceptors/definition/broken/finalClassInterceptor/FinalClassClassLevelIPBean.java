@@ -18,9 +18,8 @@ import jakarta.inject.Inject;
 
 @Dependent
 public class FinalClassClassLevelIPBean {
-    
+
     @Inject
     FinalClassClassLevelMissile finalClassClassLevelMissile;
-    
-    
+
 }

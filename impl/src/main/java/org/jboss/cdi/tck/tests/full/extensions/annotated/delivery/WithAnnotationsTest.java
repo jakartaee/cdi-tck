@@ -46,7 +46,8 @@ public class WithAnnotationsTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(WithAnnotationsTest.class)
                 .withClasses(Baby.class, BeforeBeanDiscoveryObserver.class, Desired.class, Egg.class, Bird.class, Pirate.class,
-                        Falcon.class, BatFalcon.class, AplomadoFalcon.class, Hen.class, Hummingbird.class, BeeHummingbird.class, Chicken.class,
+                        Falcon.class, BatFalcon.class, AplomadoFalcon.class, Hen.class, Hummingbird.class, BeeHummingbird.class,
+                        Chicken.class,
                         RubberChicken.class, Phoenix.class, ProcessAnnotatedTypeObserver.class, Raven.class, Sparrow.class,
                         Jack.class, Turkey.class, OcellatedTurkey.class, Wanted.class, MetaAnnotation.class, Griffin.class)
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
@@ -57,9 +58,12 @@ public class WithAnnotationsTest extends AbstractTest {
     ProcessAnnotatedTypeObserver processAnnotatedTypeObserver;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fa"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fb"),
-            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fd"),
-            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fe"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ff") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fa"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fb"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fd"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fe"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ff") })
     public void testDelivery() {
 
         // Annotated with @Desired or @Wanted
@@ -72,7 +76,7 @@ public class WithAnnotationsTest extends AbstractTest {
 
         // Annotated with @Desired only
         assertTypeListMatches(processAnnotatedTypeObserver.getProcessedDesiredTypes(),
-        // type-level
+                // type-level
                 Bird.class, Hummingbird.class, BeeHummingbird.class,
                 // member-level
                 Turkey.class, OcellatedTurkey.class, Sparrow.class, Jack.class);
@@ -81,7 +85,8 @@ public class WithAnnotationsTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fa"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fa"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"),
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "g") })
     public void testDeliveryMetaAnnotation() {
         assertTypeListMatches(processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes(), Chicken.class, Hen.class,

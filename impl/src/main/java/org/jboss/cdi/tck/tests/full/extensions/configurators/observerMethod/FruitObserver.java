@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.full.extensions.configurators.observerMethod;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 
@@ -24,7 +25,6 @@ public class FruitObserver {
     public static AtomicBoolean peachObserverNotified = new AtomicBoolean(false);
     public static AtomicBoolean bananaObserverNotified = new AtomicBoolean(false);
     public static AtomicBoolean pearObserverNotified = new AtomicBoolean(false);
-
 
     public void observesPear(@Observes Pear pear) {
         pearObserverNotified.set(true);
@@ -48,7 +48,7 @@ public class FruitObserver {
         peachObserverNotified.set(true);
     }
 
-    public void observesKiwi(@Observes @Ripe Kiwi kiwi){
+    public void observesKiwi(@Observes @Ripe Kiwi kiwi) {
 
     }
 }

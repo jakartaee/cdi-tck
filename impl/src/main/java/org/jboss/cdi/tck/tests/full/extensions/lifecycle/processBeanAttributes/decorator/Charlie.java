@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.lifecycle.processBeanAttributes.
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class Charlie implements Alpha, Bravo {
 

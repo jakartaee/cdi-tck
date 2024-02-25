@@ -42,7 +42,8 @@ public class DecoratorListedTwiceInBeansXmlTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(DecoratorListedTwiceInBeansXmlTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(PresentDecorator.class, PresentDecorator.class)).build();
+                        new BeansXml().decorators(PresentDecorator.class, PresentDecorator.class))
+                .build();
     }
 
     @Test(groups = CDI_FULL)

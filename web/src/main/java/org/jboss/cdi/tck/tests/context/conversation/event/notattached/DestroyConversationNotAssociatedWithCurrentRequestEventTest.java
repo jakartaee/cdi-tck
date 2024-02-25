@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Test(groups = INTEGRATION)
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -45,7 +45,8 @@ public class DestroyConversationNotAssociatedWithCurrentRequestEventTest extends
 
     @Deployment(testable = false)
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DestroyConversationNotAssociatedWithCurrentRequestEventTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(DestroyConversationNotAssociatedWithCurrentRequestEventTest.class)
+                .build();
     }
 
     @Test

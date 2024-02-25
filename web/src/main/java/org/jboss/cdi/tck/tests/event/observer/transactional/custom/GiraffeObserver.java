@@ -27,16 +27,17 @@ public class GiraffeObserver {
     private static final SimpleLogger logger = new SimpleLogger(GiraffeObserver.class);
 
     /**
-     * 
+     *
      * @param giraffe
      * @throws Exception
      */
-    public void withdrawAfterCompletion(@Observes(during = TransactionPhase.AFTER_COMPLETION) Giraffe giraffe) throws Exception {
+    public void withdrawAfterCompletion(@Observes(during = TransactionPhase.AFTER_COMPLETION) Giraffe giraffe)
+            throws Exception {
         logEventFired(TransactionPhase.AFTER_COMPLETION);
     }
 
     /**
-     * 
+     *
      * @param giraffe
      * @throws Exception
      */

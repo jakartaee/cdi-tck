@@ -17,9 +17,9 @@ import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class CarpBroken {
-    
-    protected final void swim(){
+
+    protected final void swim() {
 
     }
-    
+
 }

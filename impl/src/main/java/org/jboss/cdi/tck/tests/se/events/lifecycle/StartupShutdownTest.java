@@ -14,14 +14,13 @@
 package org.jboss.cdi.tck.tests.se.events.lifecycle;
 
 import static org.jboss.cdi.tck.TestGroups.SE;
-import static org.jboss.cdi.tck.cdi.Sections.BEAN_ARCHIVE_SE;
-import static org.jboss.cdi.tck.cdi.Sections.SE_BOOTSTRAP;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Shutdown;
 import jakarta.enterprise.event.Startup;
 import jakarta.enterprise.inject.se.SeContainer;
 import jakarta.enterprise.inject.se.SeContainerInitializer;
+
 import org.jboss.arquillian.container.se.api.ClassPath;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.cdi.Sections;

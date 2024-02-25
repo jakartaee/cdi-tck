@@ -18,6 +18,7 @@ import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
 import static org.jboss.cdi.tck.cdi.Sections.SELECTION_EE;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -34,7 +35,8 @@ public class SelectedAlternativeSessionBeanInjectionAvailability02Test extends A
     @Deployment
     public static WebArchive createTestArchive() {
 
-        WebArchive webArchive = new WebArchiveBuilder().withTestClass(SelectedAlternativeSessionBeanInjectionAvailability02Test.class)
+        WebArchive webArchive = new WebArchiveBuilder()
+                .withTestClass(SelectedAlternativeSessionBeanInjectionAvailability02Test.class)
                 .withClasses(AlternativeEjbFoo.class, EjbFooLocal.class).withBeanLibrary(Foo.class, Bar.class)
                 .withBeanLibrary(new BeansXml().alternatives(AlternativeEjbFoo.class), WebBar.class)
                 .build();

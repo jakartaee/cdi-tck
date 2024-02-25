@@ -19,9 +19,8 @@ import jakarta.enterprise.event.ObservesAsync;
 @ApplicationScoped
 public class TestObserver {
 
-    public void observes(@ObservesAsync Payload payload, ReqScopedCounter counter){
+    public void observes(@ObservesAsync Payload payload, ReqScopedCounter counter) {
         payload.add(counter.increment());
     }
-
 
 }

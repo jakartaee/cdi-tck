@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.spi.CreationalContext;
@@ -75,10 +76,14 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bd"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bg"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bi"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bj"),
-            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "b"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "b"),
-            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "f"), @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bd"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bg"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bi"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bj"),
+            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "b"),
+            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "b"),
+            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "f"),
+            @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "b"),
             @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "b")
     })
     public void addMethodsOfAnnotationTypecConfigurator() {
@@ -96,7 +101,8 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
                 .filter(injectionPoint -> injectionPoint.getQualifiers().contains(new Dogs.DogsLiteral())).collect(
                         Collectors.toList());
         assertEquals(dogsInjectionPoints.size(), 2);
-        Optional<InjectionPoint> feedIpOptional = dogsInjectionPoints.stream().filter(injectionPoint -> injectionPoint.getType().equals(Feed.class))
+        Optional<InjectionPoint> feedIpOptional = dogsInjectionPoints.stream()
+                .filter(injectionPoint -> injectionPoint.getType().equals(Feed.class))
                 .findFirst();
         assertTrue(feedIpOptional.isPresent());
 
@@ -106,10 +112,14 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "be"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bh"),
-            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bj"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bl"),
-            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "c"), @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "c"),
-            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "f"), @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "be"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bh"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bj"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bl"),
+            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "c"),
+            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "c"),
+            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "f"),
+            @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "c"),
             @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "c") })
     public void removeMethodsOfAnnotationTypeConfigurator() {
         Bean<Cat> catBean = getUniqueBean(Cat.class);
@@ -128,8 +138,10 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bc"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "a"),
-            @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "a"), @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bc"),
+            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "a"),
+            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "a"),
             @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "a") })
     public void annotatedTypesAndMemebersEqual() {
         assertTrue(ProcessAnnotatedTypeObserver.annotatedTypesEqual.get());
@@ -140,9 +152,12 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bf"), @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bk"),
-            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "d"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "d"),
-            @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "d"), @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "e"),
+    @SpecAssertions({ @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bf"),
+            @SpecAssertion(section = ANNOTATED_TYPE_CONFIGURATOR, id = "bk"),
+            @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "d"),
+            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "d"),
+            @SpecAssertion(section = ANNOTATED_PARAMETER_CONFIGURATOR, id = "d"),
+            @SpecAssertion(section = ANNOTATED_METHOD_CONFIGURATOR, id = "e"),
             @SpecAssertion(section = ANNOTATED_FIELD_CONFIGURATOR, id = "d") })
     public void annotationsRemovedFromAnimalShelter() {
         Bean<AnimalShelter> animalShelterBean = getUniqueBean(AnimalShelter.class);
@@ -165,14 +180,15 @@ public class AnnotatedTypeConfiguratorTest extends AbstractTest {
         AnnotatedType<Cat> catAT = getCurrentManager().getExtension(ProcessAnnotatedTypeObserver.class).getOriginalCatAT();
         assertTrue(catAT.isAnnotationPresent(RequestScoped.class));
         AnnotatedConstructor<Cat> annotatedConstructor = catAT.getConstructors().stream()
-                .filter(ac -> ac.getParameters().size() == 1 && ac.getParameters().get(0).getBaseType().equals(Feed.class)).findFirst().get();
+                .filter(ac -> ac.getParameters().size() == 1 && ac.getParameters().get(0).getBaseType().equals(Feed.class))
+                .findFirst().get();
         assertTrue(annotatedConstructor.getParameters().iterator().next().isAnnotationPresent(Cats.class));
         assertTrue(annotatedConstructor.isAnnotationPresent(Inject.class));
     }
 
     @Test
     @SpecAssertion(section = ANNOTATED_CONSTRUCTOR_CONFIGURATOR, id = "e")
-    public void configureAndTestConstructorAnnotatedParams(){
+    public void configureAndTestConstructorAnnotatedParams() {
         Assert.assertFalse(countrysideInstance.isUnsatisfied());
         Countryside countryside = countrysideInstance.get();
         assertEquals(countryside.getWildDog().getName(), "wild dog");

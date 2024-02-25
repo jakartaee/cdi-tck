@@ -13,9 +13,9 @@
  */
 package org.jboss.cdi.tck.tests.context;
 
-import jakarta.enterprise.context.RequestScoped;
-
 import java.io.Serializable;
+
+import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class MyRequestBean implements Serializable {

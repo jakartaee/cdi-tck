@@ -13,11 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.handle;
 
+import java.math.BigDecimal;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Instance;
 import jakarta.inject.Inject;
-
-import java.math.BigDecimal;
 
 @Dependent
 public class Client {

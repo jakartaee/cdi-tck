@@ -13,12 +13,13 @@
  */
 package org.jboss.cdi.tck.tests.extensions.alternative.metadata.ejb;
 
-import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
-
-import jakarta.enterprise.inject.spi.AnnotatedType;
 import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
+
+import jakarta.enterprise.inject.spi.AnnotatedType;
+
+import org.jboss.cdi.tck.util.annotated.AnnotatedTypeWrapper;
 
 public class PastaWrapper extends AnnotatedTypeWrapper<Pasta> {
 

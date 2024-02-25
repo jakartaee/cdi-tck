@@ -40,25 +40,27 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * EAR deployment with 2 libraries and 1 war:
  * <ul>
  * <li>ear 1.lib - contains {@link Foo} TestBean alternative with priority 1000</li>
- * 
- * <li>war - contains {@link Bar} TestBean alternative with priority 2000, {@link BarProducer} Bar alternative producer method and Bar alternative producer
+ *
+ * <li>war - contains {@link Bar} TestBean alternative with priority 2000, {@link BarProducer} Bar alternative producer method
+ * and Bar alternative producer
  * field with priority 1100 with 2 different annotations .</li>
  * </ul>
- * 
+ *
  * Expected results:
  * <ul>
  * <li>{@link Foo} is available for injection in all beans</li>
  * <li>{@link Bar} is available for injection in beans in war only</li>
  * <li>when injecting {@link TestBean}, {@link Bar} is preferred if visible</li>
- * <li>{@link BarProducer} alternative producer method and alternative producer field are both selected and visible in war only.</li>
+ * <li>{@link BarProducer} alternative producer method and alternative producer field are both selected and visible in war
+ * only.</li>
  * </ul>
- * 
+ *
  * @author Matej Briskar
- * 
+ *
  */
 
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -68,13 +70,14 @@ public class EnterpriseSelectedAlternative03Test extends AbstractTest {
     public static EnterpriseArchive createTestArchive() {
 
         EnterpriseArchive enterpriseArchive = SelectedAlternativeTestUtil.createEnterpriseBuilderBase()
-        // A - default EJB jar
+                // A - default EJB jar
                 .withTestClassDefinition(EnterpriseSelectedAlternative03Test.class)
                 // C - lib visible to all
                 .withBeanLibrary(Foo.class).withBeanLibrary(Bravo.class).noDefaultWebModule().build();
 
         // E - not visible for AC
-        WebArchive bazWebArchive = new WebArchiveBuilder().notTestArchive().withClasses(Bar.class, EnterpriseSelectedAlternative03Test.class)
+        WebArchive bazWebArchive = new WebArchiveBuilder().notTestArchive()
+                .withClasses(Bar.class, EnterpriseSelectedAlternative03Test.class)
                 .withBeanLibrary(Alpha.class, Charlie.class, BarProducer.class).build();
 
         enterpriseArchive.addAsModule(bazWebArchive);

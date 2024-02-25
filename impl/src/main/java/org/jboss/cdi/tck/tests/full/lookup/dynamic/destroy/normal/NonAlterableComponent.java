@@ -13,9 +13,7 @@
  */
 package org.jboss.cdi.tck.tests.full.lookup.dynamic.destroy.normal;
 
-
 @NonAlterableScoped
 public class NonAlterableComponent extends AbstractComponent {
-
 
 }

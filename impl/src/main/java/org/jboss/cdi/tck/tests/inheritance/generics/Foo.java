@@ -17,7 +17,7 @@ package org.jboss.cdi.tck.tests.inheritance.generics;
 import jakarta.enterprise.context.RequestScoped;
 
 /**
- * 
+ *
  */
 @RequestScoped
 public class Foo extends Bar<String, Qux> {

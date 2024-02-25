@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.util.Cookie;
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ConversationFilterTest extends AbstractTest {
-    
+
     private static final String JSESSIONID = "JSESSIONID";
 
     @Deployment(testable = false)
@@ -61,7 +61,8 @@ public class ConversationFilterTest extends AbstractTest {
                         Descriptors.create(WebAppDescriptor.class).createFilter().filterName(OuterFilter.class.getSimpleName())
                                 .filterClass(OuterFilter.class.getName()).up().createFilterMapping()
                                 .filterName(OuterFilter.class.getSimpleName()).urlPattern("/*").up().createFilterMapping()
-                                .filterName("CDI Conversation Filter").urlPattern("/*").up()).build();
+                                .filterName("CDI Conversation Filter").urlPattern("/*").up())
+                .build();
     }
 
     @ArquillianResource
@@ -89,7 +90,8 @@ public class ConversationFilterTest extends AbstractTest {
     }
 
     /**
-     * "The container ensures that a long-running conversation may be associated with at most one request at a time, by blocking or rejecting concurrent requests."
+     * "The container ensures that a long-running conversation may be associated with at most one request at a time, by blocking
+     * or rejecting concurrent requests."
      *
      * In fact the spec doesn't require the container to reject the concurrent requests, but we don't expect it will block them
      * forever.

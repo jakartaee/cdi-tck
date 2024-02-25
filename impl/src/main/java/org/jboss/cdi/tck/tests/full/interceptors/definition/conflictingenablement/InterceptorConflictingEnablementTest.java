@@ -20,6 +20,8 @@ import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_INTERCEPTORS;
 import static org.testng.Assert.assertEquals;
 
+import java.util.List;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -29,8 +31,6 @@ import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
-
-import java.util.List;
 
 /**
  * This test was originally part of Weld testsuite
@@ -52,7 +52,8 @@ public class InterceptorConflictingEnablementTest extends AbstractTest {
     }
 
     @org.testng.annotations.Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = CDI_FULL)
-    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "k"), @SpecAssertion(section = ENABLED_DECORATORS, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = ENABLED_INTERCEPTORS, id = "k"),
+            @SpecAssertion(section = ENABLED_DECORATORS, id = "d") })
     public void testInterception(TestBean testBean) {
         ActionSequence.reset();
         testBean.ping();

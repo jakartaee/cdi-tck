@@ -13,10 +13,10 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBean;
 
-import jakarta.enterprise.util.AnnotationLiteral;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import jakarta.enterprise.util.AnnotationLiteral;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MySimpleValue {

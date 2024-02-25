@@ -18,7 +18,7 @@ import jakarta.ejb.Stateless;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Stateless
 public class Bar extends BusinessBase implements BarBusiness {

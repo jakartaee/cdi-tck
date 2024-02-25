@@ -13,6 +13,14 @@
  */
 package org.jboss.cdi.tck.tests.extensions.beanManager.beanAttributes.ejb;
 
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Any;
@@ -23,6 +31,7 @@ import jakarta.enterprise.inject.spi.AnnotatedMethod;
 import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.enterprise.inject.spi.BeanAttributes;
 import jakarta.inject.Named;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
@@ -39,14 +48,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertTrue;
-
 /**
  * <p>
  * This test was originally part of Weld test suite.
@@ -62,10 +63,9 @@ public class CreateBeanAttributesTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(CreateBeanAttributesTest.class)
                 .withClasses(Animal.class, Fish.class, InvalidBeanType.class, Landmark.class, Natural.class,
-                             TundraStereotype.class, WaterBody.class,Wild.class)
+                        TundraStereotype.class, WaterBody.class, Wild.class)
                 .build();
     }
-
 
     @SuppressWarnings("unchecked")
     @Test(groups = INTEGRATION)
@@ -127,7 +127,8 @@ public class CreateBeanAttributesTest extends AbstractTest {
             if (field.getJavaMember().getName().equals("fish") && field.getJavaMember().getDeclaringClass().equals(Dam.class)) {
                 damFishField = field;
             }
-            if (field.getJavaMember().getName().equals("fish") && field.getJavaMember().getDeclaringClass().equals(Lake.class)) {
+            if (field.getJavaMember().getName().equals("fish")
+                    && field.getJavaMember().getDeclaringClass().equals(Lake.class)) {
                 lakeFishField = field;
             }
             if (field.getJavaMember().getName().equals("volume")

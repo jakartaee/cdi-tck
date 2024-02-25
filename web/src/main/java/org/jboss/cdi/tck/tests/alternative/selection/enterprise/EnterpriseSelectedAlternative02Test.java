@@ -32,20 +32,20 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * EAR deployment with 1 library and 1 war:
  * <ul>
  * <li>ear lib - contains {@link Service} and a simple service implementation {@link PojoService}</li>
  * <li>war - contains {@link EnterpriseService} alternative with priority 1000, should be visible for the war only</li>
  * </ul>
- * 
+ *
  * Expected results:
  * <ul>
  * <li>{@link EnterpriseService} is available for injection in beans in war only</li>
  * </ul>
- * 
+ *
  * @author Matej Briskar
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class EnterpriseSelectedAlternative02Test extends AbstractTest {
@@ -54,14 +54,15 @@ public class EnterpriseSelectedAlternative02Test extends AbstractTest {
     public static EnterpriseArchive createTestArchive() {
 
         EnterpriseArchive enterpriseArchive = SelectedAlternativeTestUtil.createEnterpriseBuilderBase()
-        // A - default EJB jar
+                // A - default EJB jar
                 .withTestClassDefinition(EnterpriseSelectedAlternative02Test.class)
                 // C - lib visible to all
                 .withBeanLibrary(Bravo.class, Service.class, PojoService.class).noDefaultWebModule().build();
 
         // E - not visible for AC
         WebArchive bazWebArchive = SelectedAlternativeTestUtil.createBuilderBase().notTestArchive()
-                .withClasses(Charlie.class, EnterpriseService.class, EnterpriseSelectedAlternative02Test.class).withBeanLibrary(Alpha.class).build();
+                .withClasses(Charlie.class, EnterpriseService.class, EnterpriseSelectedAlternative02Test.class)
+                .withBeanLibrary(Alpha.class).build();
         enterpriseArchive.addAsModule(bazWebArchive);
 
         return enterpriseArchive;

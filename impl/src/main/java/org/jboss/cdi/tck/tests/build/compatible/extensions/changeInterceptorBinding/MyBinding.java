@@ -33,7 +33,7 @@ public @interface MyBinding {
 
     @Nonbinding
     public String value();
-    
+
     public class Literal extends AnnotationLiteral<MyBinding> implements MyBinding {
         private String value;
 

@@ -14,7 +14,6 @@
 
 package org.jboss.cdi.tck.tests.deployment.packaging.ejb;
 
-
 public class Bar {
 
 }

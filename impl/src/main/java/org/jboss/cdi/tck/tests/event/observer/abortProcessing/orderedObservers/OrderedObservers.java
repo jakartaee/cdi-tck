@@ -40,7 +40,7 @@ public class OrderedObservers {
     public void othersObserves(@Observes @Priority(Interceptor.Priority.APPLICATION + 100) Invitation invitation) {
         othersInvited = true;
     }
-    
+
     public class CancelledException extends RuntimeException {
 
     }

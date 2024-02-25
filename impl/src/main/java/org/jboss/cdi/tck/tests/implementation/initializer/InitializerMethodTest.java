@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -38,7 +38,8 @@ public class InitializerMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_INITIALIZER, id = "f"), @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_INITIALIZER, id = "f"),
+            @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "b"),
             @SpecAssertion(section = INITIALIZER_METHODS, id = "a") })
     public void testBindingTypeOnInitializerParameter() {
         PremiumChickenHutch hutch = getContextualReference(PremiumChickenHutch.class);
@@ -48,8 +49,10 @@ public class InitializerMethodTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INITIALIZER_METHODS, id = "g"), @SpecAssertion(section = DECLARING_INITIALIZER, id = "a"),
-            @SpecAssertion(section = DECLARING_INITIALIZER, id = "e"), @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ad"),
+    @SpecAssertions({ @SpecAssertion(section = INITIALIZER_METHODS, id = "g"),
+            @SpecAssertion(section = DECLARING_INITIALIZER, id = "a"),
+            @SpecAssertion(section = DECLARING_INITIALIZER, id = "e"),
+            @SpecAssertion(section = FIELDS_INITIALIZER_METHODS, id = "ad"),
             @SpecAssertion(section = INJECTION_POINT_DEFAULT_QUALIFIER, id = "a") })
     public void testMultipleInitializerMethodsAreCalled() {
         ChickenHutch chickenHutch = getContextualReference(ChickenHutch.class);

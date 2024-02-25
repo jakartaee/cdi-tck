@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -41,7 +41,7 @@ import org.testng.annotations.Test;
 
 /**
  * Tests for the extensions provided by the ProcessAnnotatedType events.
- * 
+ *
  * @author David Allen
  * @author Jozef Hartinger
  * @author Martin Kouba
@@ -58,8 +58,10 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "aa"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ab"),
-            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "c"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "j") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "aa"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ab"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "c"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "j") })
     public void testProcessAnnotatedTypeEventsSent() {
         // Randomly test some of the classes and interfaces that should have
         // been discovered and sent via the event
@@ -91,7 +93,8 @@ public class ProcessAnnotatedTypeTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "bb"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "bb"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ca") })
     public void testSetAnnotatedType() {
         assertTrue(TestAnnotatedType.isGetConstructorsUsed());
         assertTrue(TestAnnotatedType.isGetFieldsUsed());

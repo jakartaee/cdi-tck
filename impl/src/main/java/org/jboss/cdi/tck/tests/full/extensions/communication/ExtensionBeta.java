@@ -18,13 +18,12 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.inject.spi.ProcessBean;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.cdi.tck.util.ActionSequence;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public class ExtensionBeta implements Extension {
 

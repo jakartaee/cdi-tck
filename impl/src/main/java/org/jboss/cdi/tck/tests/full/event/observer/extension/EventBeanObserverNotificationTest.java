@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -38,10 +38,10 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * </p>
- * 
+ *
  * Note that we have to declare test methods on test class (not abstract superclass) because of the way we analyze assertions
  * coverage.
- * 
+ *
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  */
@@ -66,7 +66,8 @@ public class EventBeanObserverNotificationTest extends AbstractObserverNotificat
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fb"), @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "eb"),
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "fb"),
+            @SpecAssertion(section = AFTER_BEAN_DISCOVERY, id = "eb"),
             @SpecAssertion(section = OBSERVER_RESOLUTION, id = "k") })
     public void testNotifyInvoked() {
         testNotifyInvokedInternal();
