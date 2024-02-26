@@ -20,5 +20,5 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.beanAttributes;
 @Melee
 @TwoHanded
 public class Hoe {
-    
+
 }

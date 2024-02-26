@@ -51,7 +51,8 @@ public class ProcessSessionBeanTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_EE, id = "ca"), @SpecAssertion(section = PROCESS_BEAN_EE, id = "cb"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_BEAN_EE, id = "ca"),
+            @SpecAssertion(section = PROCESS_BEAN_EE, id = "cb"),
             @SpecAssertion(section = PROCESS_BEAN_EE, id = "edb"), @SpecAssertion(section = PROCESS_BEAN_EE, id = "efb"),
             @SpecAssertion(section = PROCESS_BEAN_EE, id = "fb"), @SpecAssertion(section = PROCESS_BEAN_EE, id = "hb"),
             @SpecAssertion(section = PROCESS_BEAN_EE, id = "hc"), @SpecAssertion(section = PROCESS_BEAN_EE, id = "m"),

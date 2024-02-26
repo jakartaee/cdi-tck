@@ -47,7 +47,8 @@ public class TrimmedBeanArchiveSETest extends Arquillian {
     @Deployment
     public static Archive<?> deployment() {
         final JavaArchive trimmed = ShrinkWrap.create(JavaArchive.class)
-                .addClasses(TrimmedBeanArchiveSETest.class, Bar.class, Foo.class, BarProducer.class, FooProducer.class, TestStereotype.class,
+                .addClasses(TrimmedBeanArchiveSETest.class, Bar.class, Foo.class, BarProducer.class, FooProducer.class,
+                        TestStereotype.class,
                         TestExtension.class, BarInterceptor.class, BarInterceptorBinding.class)
                 .addAsServiceProvider(Extension.class, TestExtension.class)
                 .addAsManifestResource(TrimmedBeanArchiveSETest.class.getPackage(), "beans.xml", "beans.xml");
@@ -55,7 +56,8 @@ public class TrimmedBeanArchiveSETest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = TRIMMED_BEAN_ARCHIVE, id = "a"), @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"),
+    @SpecAssertions({ @SpecAssertion(section = TRIMMED_BEAN_ARCHIVE, id = "a"),
+            @SpecAssertion(section = BINDING_INTERCEPTOR_TO_BEAN, id = "c"),
             @SpecAssertion(section = INTERCEPTION_FACTORY, id = "ca") })
     public void discoveredTypes() {
         try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {

@@ -29,7 +29,6 @@ public class CharlieInterceptor {
         return ctx.proceed();
     }
 
-
     public static void reset() {
         intercepted = false;
     }

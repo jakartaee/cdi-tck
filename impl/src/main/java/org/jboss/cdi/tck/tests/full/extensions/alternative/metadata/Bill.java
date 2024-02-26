@@ -17,7 +17,7 @@ public class Bill {
 
     private Fruit fruit;
 
-    public Bill(Fruit fruit){
+    public Bill(Fruit fruit) {
         this.fruit = fruit;
     }
 

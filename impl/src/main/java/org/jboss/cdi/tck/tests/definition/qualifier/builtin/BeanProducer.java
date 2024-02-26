@@ -20,24 +20,24 @@ import jakarta.inject.Named;
 
 @Dependent
 public class BeanProducer {
-    
+
     @Produces
     @Named
     @Any
-    public ProducedNamedAnyBean producedNamedAnyBean(){
+    public ProducedNamedAnyBean producedNamedAnyBean() {
         return new ProducedNamedAnyBean();
     }
 
     @Produces
     @Any
-    public ProducedAnyBean producedAnyBean(){
+    public ProducedAnyBean producedAnyBean() {
         return new ProducedAnyBean();
     }
 
     @Produces
     @Named
-    public ProducedNamedBean producedNamedBean(){
+    public ProducedNamedBean producedNamedBean() {
         return new ProducedNamedBean();
     }
-    
+
 }

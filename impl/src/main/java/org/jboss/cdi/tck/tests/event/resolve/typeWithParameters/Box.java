@@ -13,6 +13,6 @@
  */
 package org.jboss.cdi.tck.tests.event.resolve.typeWithParameters;
 
-public class Box <A,B,C> {
+public class Box<A, B, C> {
 
 }

@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -49,27 +49,30 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "a")})
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "a") })
     public void testProducerFieldNotAnotherBean() {
         assert getContextualReference(BrownRecluse.class) != null;
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELDS_ACCESS, id = "a"), @SpecAssertion(section = PRODUCER_FIELD, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELDS_ACCESS, id = "a"),
+            @SpecAssertion(section = PRODUCER_FIELD, id = "b") })
     public void testProducerStaticFieldBean() {
         StaticTarantulaConsumer tarantulaConsumer = getContextualReference(StaticTarantulaConsumer.class);
         assert tarantulaConsumer.getConsumedTarantula().equals(StaticTarantulaProducer.produceTarantula);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELDS_ACCESS, id = "b"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "ga") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELDS_ACCESS, id = "b"),
+            @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "ga") })
     public void testProducerFieldBeanCreate() throws Exception {
         BlackWidowConsumer spiderConsumer = getContextualReference(BlackWidowConsumer.class);
         assert spiderConsumer.getInjectedSpider().equals(BlackWidowProducer.blackWidow);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "d"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "m") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "d"),
+            @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "m") })
     public void testProducerFieldReturnsNullIsDependent() throws Exception {
         NullSpiderConsumer consumerBean = getContextualReference(NullSpiderConsumer.class);
         assert consumerBean.getInjectedSpider() == null;
@@ -87,7 +90,8 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
     }
 
     @Test(expectedExceptions = IllegalProductException.class)
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "e"), @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "n") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_FIELD, id = "e"),
+            @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "n") })
     public void testProducerFieldReturnsNullIsNotDependent() throws Exception {
         NullSpiderConsumerForBrokenProducer consumer = getContextualReference(NullSpiderConsumerForBrokenProducer.class);
         // The injected spider is proxied since it is in the request scope.

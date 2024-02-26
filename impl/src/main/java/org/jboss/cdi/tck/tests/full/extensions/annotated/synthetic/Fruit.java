@@ -14,6 +14,6 @@
 
 package org.jboss.cdi.tck.tests.full.extensions.annotated.synthetic;
 
-public interface Fruit extends Plants{
+public interface Fruit extends Plants {
 
 }

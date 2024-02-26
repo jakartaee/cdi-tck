@@ -20,5 +20,4 @@ import jakarta.inject.Named;
 @Dependent
 public class _Underscore {
 
-
 }

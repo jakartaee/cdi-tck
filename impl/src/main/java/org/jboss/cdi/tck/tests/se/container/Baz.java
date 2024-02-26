@@ -22,7 +22,7 @@ public class Baz {
     @Inject
     Qux qux;
 
-    public Qux ping(){
+    public Qux ping() {
         return qux;
     }
 }

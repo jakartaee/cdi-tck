@@ -18,7 +18,7 @@ public class ProducedFoo implements Foo {
     private int value;
 
     public ProducedFoo(Integer value) {
-        if(value == null) {
+        if (value == null) {
             this.value = 0;
         } else {
             this.value = value;

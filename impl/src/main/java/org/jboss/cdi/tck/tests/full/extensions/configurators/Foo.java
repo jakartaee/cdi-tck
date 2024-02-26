@@ -27,7 +27,7 @@ public class Foo {
         return bar;
     }
 
-    void observes(@Observes Bar bar){
+    void observes(@Observes Bar bar) {
         //no-op
     }
 

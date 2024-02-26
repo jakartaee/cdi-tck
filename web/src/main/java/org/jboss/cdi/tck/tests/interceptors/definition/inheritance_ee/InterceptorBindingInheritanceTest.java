@@ -6,12 +6,19 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package org.jboss.cdi.tck.tests.interceptors.definition.inheritance_ee;
+
+import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
+import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
+import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE_EE;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -24,17 +31,9 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import static org.jboss.cdi.tck.TestGroups.INTEGRATION;
-import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE;
-import static org.jboss.cdi.tck.cdi.Sections.MEMBER_LEVEL_INHERITANCE_EE;
-import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE;
-import static org.jboss.cdi.tck.cdi.Sections.TYPE_LEVEL_INHERITANCE_EE;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
 /**
  * Test interceptor binding inheritance.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -52,9 +51,9 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
     private String squirrel = SquirrelInterceptor.class.getName();
     private String woodpecker = WoodpeckerInterceptor.class.getName();
 
-
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "an"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ana") })
+    @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "an"),
+            @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ana") })
     public void testInterceptorBindingDirectlyInheritedFromSessionBean(ForgetMeNot forgetMeNot) throws Exception {
         forgetMeNot.pong();
         assertTrue(forgetMeNot.inspectedBy(squirrel));
@@ -62,7 +61,8 @@ public class InterceptorBindingInheritanceTest extends AbstractTest {
     }
 
     @Test(groups = INTEGRATION, dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ar"), @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ara") })
+    @SpecAssertions({ @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ar"),
+            @SpecAssertion(section = TYPE_LEVEL_INHERITANCE_EE, id = "ara") })
     public void testInterceptorBindingIndirectlyInheritedFromSessionBean(@European ForgetMeNot woodForgetMeNot)
             throws Exception {
         woodForgetMeNot.pong();

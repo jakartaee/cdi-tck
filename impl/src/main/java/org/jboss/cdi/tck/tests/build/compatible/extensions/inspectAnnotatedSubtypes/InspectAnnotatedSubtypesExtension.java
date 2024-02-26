@@ -13,6 +13,9 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.inspectAnnotatedSubtypes;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
 import jakarta.enterprise.inject.build.compatible.spi.ClassConfig;
 import jakarta.enterprise.inject.build.compatible.spi.Discovery;
@@ -20,9 +23,6 @@ import jakarta.enterprise.inject.build.compatible.spi.Enhancement;
 import jakarta.enterprise.inject.build.compatible.spi.Messages;
 import jakarta.enterprise.inject.build.compatible.spi.ScannedClasses;
 import jakarta.enterprise.inject.build.compatible.spi.Validation;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class InspectAnnotatedSubtypesExtension implements BuildCompatibleExtension {
     private final Set<String> seenAnnotatedSubtypes = new HashSet<>();

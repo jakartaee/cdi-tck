@@ -29,6 +29,6 @@ public class CatInterceptor {
 
     @AroundInvoke
     public Object increaseIt(InvocationContext ctx) throws Exception {
-        return (Integer)ctx.proceed() + 10;
+        return (Integer) ctx.proceed() + 10;
     }
 }

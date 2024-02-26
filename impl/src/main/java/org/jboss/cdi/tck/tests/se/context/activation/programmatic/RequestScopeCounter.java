@@ -14,16 +14,16 @@
 package org.jboss.cdi.tck.tests.se.context.activation.programmatic;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped
 public class RequestScopeCounter {
 
-    private AtomicInteger i= new AtomicInteger(0);
+    private AtomicInteger i = new AtomicInteger(0);
 
-    public int increment(){
+    public int increment() {
         return i.incrementAndGet();
     }
-
 
 }

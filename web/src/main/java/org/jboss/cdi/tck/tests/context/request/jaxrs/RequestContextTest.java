@@ -49,7 +49,7 @@ public class RequestContextTest extends AbstractTest {
         return new WebArchiveBuilder().withTestClassPackage(RequestContextTest.class).withClass(JaxRsActivator.class).build();
     }
 
-    @Test(groups = { INTEGRATION, JAX_RS})
+    @Test(groups = { INTEGRATION, JAX_RS })
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "b")
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "d")
     @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "jb")

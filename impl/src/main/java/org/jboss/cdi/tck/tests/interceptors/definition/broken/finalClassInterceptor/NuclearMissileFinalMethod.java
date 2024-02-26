@@ -18,8 +18,8 @@ import jakarta.enterprise.context.Dependent;
 @FooBinding
 @Dependent
 public class NuclearMissileFinalMethod {
-    
-    public final void nuclearSolution(){
-        
+
+    public final void nuclearSolution() {
+
     }
 }

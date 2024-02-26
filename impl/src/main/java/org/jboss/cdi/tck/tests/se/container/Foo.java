@@ -17,8 +17,8 @@ import jakarta.enterprise.context.Dependent;
 
 @Dependent
 public class Foo {
-    
-    public void ping(){
+
+    public void ping() {
 
     }
 }

@@ -21,14 +21,15 @@ public class ConstructorInjectionCorralBroken extends Ranch {
 
     private Cow cow;
 
-    public ConstructorInjectionCorralBroken(){}
+    public ConstructorInjectionCorralBroken() {
+    }
 
     @Inject
-    public ConstructorInjectionCorralBroken(@British Cow cow){
-       this.cow = cow;
+    public ConstructorInjectionCorralBroken(@British Cow cow) {
+        this.cow = cow;
     }
-    
-    public void ping(){
+
+    public void ping() {
     }
 
 }

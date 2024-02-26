@@ -34,36 +34,36 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name = "TestServlet", urlPatterns = "/test")
 public class TestServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Inject
-	private BeanManager beanManager;
+    @Inject
+    private BeanManager beanManager;
 
-	@Inject
-	private SimpleSessionBean simpleBean;
+    @Inject
+    private SimpleSessionBean simpleBean;
 
-	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		checkSessionContextActive();
-		super.service(req, resp);
-	}
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        checkSessionContextActive();
+        super.service(req, resp);
+    }
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		resp.setContentType("text/text");
-		resp.getWriter().println("It worked!");
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        resp.setContentType("text/text");
+        resp.getWriter().println("It worked!");
+    }
 
-	private void checkSessionContextActive() throws ServletException {
-		if (beanManager == null
-				|| !beanManager.getContext(SessionScoped.class).isActive()
-				|| simpleBean == null) {
-			throw new ServletException("Session context is not active");
-		}
-		// Check bean invocation
-		simpleBean.getId();
-	}
+    private void checkSessionContextActive() throws ServletException {
+        if (beanManager == null
+                || !beanManager.getContext(SessionScoped.class).isActive()
+                || simpleBean == null) {
+            throw new ServletException("Session context is not active");
+        }
+        // Check bean invocation
+        simpleBean.getId();
+    }
 
 }

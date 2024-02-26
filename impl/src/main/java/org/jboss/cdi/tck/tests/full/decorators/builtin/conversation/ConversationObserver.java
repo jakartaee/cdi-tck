@@ -18,7 +18,7 @@ import jakarta.enterprise.context.RequestScoped;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @RequestScoped
 public class ConversationObserver {

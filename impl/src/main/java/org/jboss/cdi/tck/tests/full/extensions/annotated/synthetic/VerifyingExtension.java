@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -22,7 +22,6 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.inject.spi.ProcessAnnotatedType;
 import jakarta.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
-
 
 public class VerifyingExtension implements Extension {
 
@@ -41,7 +40,7 @@ public class VerifyingExtension implements Extension {
     public <T extends Fruit> void verifySource(@Observes ProcessSyntheticAnnotatedType<T> event) {
         sources.put(event.getAnnotatedType().getJavaClass(), event.getSource());
     }
-    
+
     protected Set<Class<?>> getPatClasses() {
         return patClasses;
     }

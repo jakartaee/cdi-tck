@@ -16,7 +16,19 @@
 // Original code stemming 100% from me, hence relicense from EPL
 package org.jboss.cdi.tck.selenium;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import java.net.URI;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
+
 import org.apache.commons.io.output.NullOutputStream;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -41,18 +53,7 @@ import org.openqa.selenium.remote.*;
 import org.openqa.selenium.virtualauthenticator.VirtualAuthenticator;
 import org.openqa.selenium.virtualauthenticator.VirtualAuthenticatorOptions;
 
-import java.net.URI;
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 /**
  * Extended driver which we need for getting
@@ -136,7 +137,8 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
             RequestId requestId = entry.getRequestId();
             //only in case of a match we add response to request
             //so we only cover our ajax cycle and the original get
-            Optional<HttpCycleData> found = cycleData.stream().filter(item -> item.requestId.toJson().equals(requestId.toJson())).findFirst();
+            Optional<HttpCycleData> found = cycleData.stream()
+                    .filter(item -> item.requestId.toJson().equals(requestId.toJson())).findFirst();
             found.ifPresent(httpCycleData -> httpCycleData.responseReceived = entry);
         });
     }
@@ -233,7 +235,6 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
         delegate.deleteNetworkConditions();
     }
 
-
     public SessionId getSessionId() {
         return delegate.getSessionId();
     }
@@ -279,7 +280,8 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
         return delegate.findElements(locator);
     }
 
-    public List<WebElement> findElements(SearchContext context, BiFunction<String, Object, CommandPayload> findCommand, By locator) {
+    public List<WebElement> findElements(SearchContext context, BiFunction<String, Object, CommandPayload> findCommand,
+            By locator) {
         return delegate.findElements(context, findCommand, locator);
     }
 
@@ -409,7 +411,6 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
         return delegate.getDevTools();
     }
 
-
     @Override
     public int getResponseStatus() {
         try {
@@ -463,7 +464,8 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
             if (o2.responseReceived == null) {
                 return 1;
             }
-            return Long.compare(o1.responseReceived.getTimestamp().toJson().longValue(), o2.responseReceived.getTimestamp().toJson().longValue());
+            return Long.compare(o1.responseReceived.getTimestamp().toJson().longValue(),
+                    o2.responseReceived.getTimestamp().toJson().longValue());
         });
     }
 
@@ -497,7 +499,6 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
      */
     static AtomicBoolean firstLog = new AtomicBoolean(Boolean.TRUE);
 
-
     public static ExtendedWebDriver stdInit() {
         Locale.setDefault(new Locale("en", "US"));
         WebDriverManager.chromedriver().setup();
@@ -508,8 +509,8 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
         // we can turn on a visual browser by
         // adding chromedriver.headless = false to our properties
         // default is headless = true
-        if(System.getProperty("chromedriver.headless") == null  ||
-        "true".equals(System.getProperty("chromedriver.headless"))) {
+        if (System.getProperty("chromedriver.headless") == null ||
+                "true".equals(System.getProperty("chromedriver.headless"))) {
             options.addArguments("--headless");
         }
         options.addArguments("--no-sandbox");
@@ -540,10 +541,10 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
         logger.setFilter(record -> {
             //report the match warning only once, this suffices
             boolean isMatchWarning = record.getMessage().contains("Unable to find an exact match for CDP version");
-            if(isMatchWarning && !firstLog.get()) {
+            if (isMatchWarning && !firstLog.get()) {
                 return false;
             }
-            if(isMatchWarning) {
+            if (isMatchWarning) {
                 firstLog.set(false);
             }
             return true;

@@ -73,11 +73,11 @@ public abstract class ForwardingBeanAttributes<T> implements BeanAttributes<T> {
     @Override
     public String toString() {
         return "ForwardingBeanAttributes with name = " + getName()
-            + " with qualifiers = " + getQualifiers()
-            + " with scope = " + getScope()
-            + " with stereotypes = " + getStereotypes()
-            + " with types = " + getTypes()
-            + " alternative = " + isAlternative();
+                + " with qualifiers = " + getQualifiers()
+                + " with scope = " + getScope()
+                + " with stereotypes = " + getStereotypes()
+                + " with types = " + getTypes()
+                + " alternative = " + isAlternative();
     }
 
 }

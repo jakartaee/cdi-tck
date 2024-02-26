@@ -13,11 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.customPseudoScope;
 
+import java.lang.annotation.Annotation;
+
 import jakarta.enterprise.context.spi.AlterableContext;
 import jakarta.enterprise.context.spi.Contextual;
 import jakarta.enterprise.context.spi.CreationalContext;
-
-import java.lang.annotation.Annotation;
 
 public class PrototypeContext implements AlterableContext {
     public Class<? extends Annotation> getScope() {

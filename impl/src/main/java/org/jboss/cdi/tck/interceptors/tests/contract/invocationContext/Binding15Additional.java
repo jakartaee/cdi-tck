@@ -31,13 +31,13 @@ public @interface Binding15Additional {
     String value();
 
     public class Literal extends AnnotationLiteral<Binding15Additional> implements Binding15Additional {
-        
+
         private String value;
-        
+
         public Literal(String value) {
             this.value = value;
         }
-        
+
         @Override
         public String value() {
             return value;

@@ -13,10 +13,9 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
-import jakarta.enterprise.lang.model.declarations.ClassInfo;
-import jakarta.enterprise.lang.model.declarations.FieldInfo;
-import jakarta.enterprise.lang.model.declarations.MethodInfo;
-import jakarta.enterprise.lang.model.types.PrimitiveType;
+import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertConstructor;
+import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertField;
+import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertMethod;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Repeatable;
@@ -25,9 +24,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Modifier;
 
-import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertConstructor;
-import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertField;
-import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertMethod;
+import jakarta.enterprise.lang.model.declarations.ClassInfo;
+import jakarta.enterprise.lang.model.declarations.FieldInfo;
+import jakarta.enterprise.lang.model.declarations.MethodInfo;
+import jakarta.enterprise.lang.model.types.PrimitiveType;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
@@ -40,34 +40,34 @@ import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertMeth
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@Target({ ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE })
 @interface AnnEnumConstructor1 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@Target({ ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE })
 @interface AnnEnumConstructor2 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@Target({ ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE })
 @interface AnnEnumConstructor3 {
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@Target({ ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE })
 @interface AnnEnumConstructor4 {
 }
 
 @Repeatable(AnnEnumConstructorRepeatableContainer.class)
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@Target({ ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE })
 @interface AnnEnumConstructorRepeatable {
     String value();
 }
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE})
+@Target({ ElementType.CONSTRUCTOR, ElementType.PARAMETER, ElementType.TYPE_USE })
 @interface AnnEnumConstructorRepeatableContainer {
     AnnEnumConstructorRepeatable[] value();
 }
@@ -147,36 +147,70 @@ public enum EnumMembers implements EnumInterface {
 
     // methods
 
-    public static final void publicStaticFinalMethod() {}
-    public static void publicStaticMethod() {}
-    public final void publicFinalMethod() {}
-    public void publicMethod() {}
+    public static final void publicStaticFinalMethod() {
+    }
 
-    protected static final void protectedStaticFinalMethod() {}
-    protected static void protectedStaticMethod() {}
-    protected final void protectedFinalMethod() {}
-    protected void protectedMethod() {}
+    public static void publicStaticMethod() {
+    }
 
-    static final void packagePrivateStaticFinalMethod() {}
-    static void packagePrivateStaticMethod() {}
-    final void packagePrivateFinalMethod() {}
-    void packagePrivateMethod() {}
+    public final void publicFinalMethod() {
+    }
 
-    private static final void privateStaticFinalMethod() {}
-    private static void privateStaticMethod() {}
-    private final void privateFinalMethod() {}
-    private void privateMethod() {}
+    public void publicMethod() {
+    }
+
+    protected static final void protectedStaticFinalMethod() {
+    }
+
+    protected static void protectedStaticMethod() {
+    }
+
+    protected final void protectedFinalMethod() {
+    }
+
+    protected void protectedMethod() {
+    }
+
+    static final void packagePrivateStaticFinalMethod() {
+    }
+
+    static void packagePrivateStaticMethod() {
+    }
+
+    final void packagePrivateFinalMethod() {
+    }
+
+    void packagePrivateMethod() {
+    }
+
+    private static final void privateStaticFinalMethod() {
+    }
+
+    private static void privateStaticMethod() {
+    }
+
+    private final void privateFinalMethod() {
+    }
+
+    private void privateMethod() {
+    }
 
     public abstract void publicAbstractMethod();
+
     protected abstract void protectedAbstractMethod();
+
     abstract void packagePrivateAbstractMethod();
 
     // constructors
 
     @AnnEnumConstructor1
-    EnumMembers(@AnnEnumConstructor2 @AnnEnumConstructorRepeatable("foo") boolean disambiguate) {}
+    EnumMembers(@AnnEnumConstructor2 @AnnEnumConstructorRepeatable("foo") boolean disambiguate) {
+    }
+
     @AnnEnumConstructor3
-    private EnumMembers(@AnnEnumConstructor4 @AnnEnumConstructorRepeatable("bar") @AnnEnumConstructorRepeatable("baz") int disambiguate) {}
+    private EnumMembers(
+            @AnnEnumConstructor4 @AnnEnumConstructorRepeatable("bar") @AnnEnumConstructorRepeatable("baz") int disambiguate) {
+    }
 
     // inherited
 
@@ -301,7 +335,8 @@ public enum EnumMembers implements EnumInterface {
             // EnumMembers(@AnnEnumConstructor2 @AnnEnumConstructorRepeatable("foo") boolean disambiguate) {}
             MethodInfo ctor = clazz.constructors()
                     .stream()
-                    .filter(it -> it.parameters().get(0).type().asPrimitive().primitiveKind() == PrimitiveType.PrimitiveKind.BOOLEAN)
+                    .filter(it -> it.parameters().get(0).type().asPrimitive()
+                            .primitiveKind() == PrimitiveType.PrimitiveKind.BOOLEAN)
                     .findAny()
                     .get();
             assert ctor.annotations().size() == 1;
@@ -325,7 +360,8 @@ public enum EnumMembers implements EnumInterface {
             // private EnumMembers(@AnnEnumConstructor4 @AnnEnumConstructorRepeatable("bar") @AnnEnumConstructorRepeatable("baz") int disambiguate) {}
             MethodInfo ctor2 = clazz.constructors()
                     .stream()
-                    .filter(it -> it.parameters().get(0).type().asPrimitive().primitiveKind() == PrimitiveType.PrimitiveKind.INT)
+                    .filter(it -> it.parameters().get(0).type().asPrimitive()
+                            .primitiveKind() == PrimitiveType.PrimitiveKind.INT)
                     .findAny()
                     .get();
             assert ctor2.annotations().size() == 1;

@@ -21,7 +21,7 @@ public class AlternativeConsumerProducer {
 
     @Produces
     @AlternativeConsumerStereotype
-    public Consumer createAlternativeConsumer(){
-        return  new Consumer();
+    public Consumer createAlternativeConsumer() {
+        return new Consumer();
     }
 }

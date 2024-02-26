@@ -67,7 +67,8 @@ public class SingleWebModuleWithExtensionTest extends AbstractTest {
     FooWebBean fooWebBean;
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jc"), @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "je") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jc"),
+            @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "je") })
     public void testSingleWebModuleWithExtension() {
         fooWebBean.ping();
     }

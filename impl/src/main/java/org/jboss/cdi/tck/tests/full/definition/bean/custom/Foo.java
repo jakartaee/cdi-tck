@@ -15,6 +15,7 @@ package org.jboss.cdi.tck.tests.full.definition.bean.custom;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 
@@ -37,8 +38,5 @@ public class Foo implements Serializable {
     public long getId() {
         return id;
     }
-
-
-
 
 }

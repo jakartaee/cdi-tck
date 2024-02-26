@@ -28,7 +28,7 @@ public class Elephant {
     public static boolean preDestroyCalled = false;
 
     public void use(Proboscis proboscis) {
-        if(proboscis == null) {
+        if (proboscis == null) {
             throw new AssertionError();
         }
     }

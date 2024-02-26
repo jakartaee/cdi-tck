@@ -19,7 +19,7 @@ import jakarta.enterprise.inject.spi.ProcessAnnotatedType;
 
 public class AlphaExtension implements Extension, MyExtension {
 
-    public void processAnnotatedType(@Observes ProcessAnnotatedType<Alpha> event){
+    public void processAnnotatedType(@Observes ProcessAnnotatedType<Alpha> event) {
         event.configureAnnotatedType().add(ProcessedByExtension.ProcessedByExtensionLiteral.INSTANCE);
     }
 

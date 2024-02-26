@@ -37,14 +37,16 @@ public class CustomCDIProviderTest extends Arquillian {
 
     @Deployment
     public static Archive<?> deployment() {
-        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class).addClasses(CustomCDIProviderTest.class, CustomCDIProvider.class)
+        final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class)
+                .addClasses(CustomCDIProviderTest.class, CustomCDIProvider.class)
                 .addAsResource(EmptyAsset.INSTANCE,
                         "META-INF/beans.xml");
         return ClassPath.builder().add(testArchive).build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = Sections.PROVIDER, id = "da"), @SpecAssertion(section = Sections.PROVIDER, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = Sections.PROVIDER, id = "da"),
+            @SpecAssertion(section = Sections.PROVIDER, id = "c") })
     public void testCustomCDIProvider() {
         CDI.setCDIProvider(new CustomCDIProvider());
         CDI<Object> current = CDI.current();

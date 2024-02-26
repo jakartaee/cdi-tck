@@ -26,9 +26,9 @@ import jakarta.interceptor.InvocationContext;
 @Priority(2000)
 @CustomBinding
 public class FooInterceptor {
-    
+
     public static boolean interceptorInvoked = false;
-    
+
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         interceptorInvoked = true;

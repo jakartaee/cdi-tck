@@ -47,7 +47,8 @@ public class CustomBeanWithInterceptorTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INTERCEPTION_FACTORY, id = "a"), @SpecAssertion(section = INTERCEPTION_FACTORY, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INTERCEPTION_FACTORY, id = "a"),
+            @SpecAssertion(section = INTERCEPTION_FACTORY, id = "f") })
     public void customBeanIntercepted() {
         Account customAccount = getContextualReference(Account.class, Custom.CustomLiteral.INSTANCE);
         assertNotNull(customAccount);

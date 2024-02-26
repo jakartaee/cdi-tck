@@ -24,7 +24,8 @@ public class InterceptedInstanceProducer {
 
     @Produces
     @Dependent
-    public UnproxyableType attemptToCreateUnproxyableInterceptedInstance(InterceptionFactory<UnproxyableType> interceptionFactory) {
+    public UnproxyableType attemptToCreateUnproxyableInterceptedInstance(
+            InterceptionFactory<UnproxyableType> interceptionFactory) {
         try {
             return interceptionFactory.createInterceptedInstance(new UnproxyableType());
         } catch (UnproxyableResolutionException e) {

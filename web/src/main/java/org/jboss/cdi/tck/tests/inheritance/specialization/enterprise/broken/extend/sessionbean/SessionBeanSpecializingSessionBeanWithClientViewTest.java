@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
  * Bean types of LoginActionBean are LoginAction, Object (all local interfaces of the bean and their superinterfaces).
  * Bean types of MockLoginActionBean are MockLoginActionBean, LoginActionBean, Object (the bean class and all superclasses).
  * Specializing bean must have all bean types of the specialized bean.
- * 
+ *
  * @author Matus Abaffy
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -43,7 +43,7 @@ public class SessionBeanSpecializingSessionBeanWithClientViewTest extends Abstra
         return new WebArchiveBuilder().withTestClassPackage(SessionBeanSpecializingSessionBeanWithClientViewTest.class).build();
     }
 
-    @Test(groups =  INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = DIRECT_AND_INDIRECT_SPECIALIZATION, id = "l")
     public void testDeployment() {
     }

@@ -21,7 +21,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Types;
 
 public class RegistrationMultipleParamsExtension2 implements BuildCompatibleExtension {
 
-    @Registration(types = {SomeBean.class})
+    @Registration(types = { SomeBean.class })
     public void register(ObserverInfo oi, Types t, BeanInfo bi) {
         // no-op, deployment should fail
     }

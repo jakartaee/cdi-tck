@@ -23,7 +23,6 @@ import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -121,7 +120,8 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
 
     @SuppressWarnings("serial")
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = BEFORE_BEAN_DISCOVERY, id = "af"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "d") })
     public void testAddAnnotatedType() {
         getUniqueBean(Boss.class);
         assertEquals(getBeans(Bar.class).size(), 0);
@@ -136,7 +136,8 @@ public class BeforeBeanDiscoveryTest extends AbstractTest {
     public void testAddAnnotatedTypeWithConfigurator() {
         Bean<Baz> bazBean = getUniqueBean(Baz.class, Pro.ProLiteral.INSTANCE);
         assertEquals(bazBean.getScope(), RequestScoped.class);
-        Baz baz = (Baz) getCurrentManager().getReference(bazBean, Baz.class, getCurrentManager().createCreationalContext(bazBean));
+        Baz baz = (Baz) getCurrentManager().getReference(bazBean, Baz.class,
+                getCurrentManager().createCreationalContext(bazBean));
         assertFalse(baz.getBarInstance().isUnsatisfied());
     }
 

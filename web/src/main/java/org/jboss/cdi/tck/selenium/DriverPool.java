@@ -28,16 +28,16 @@ public class DriverPool {
     ConcurrentLinkedQueue<ExtendedWebDriver> allDrivers = new ConcurrentLinkedQueue<>();
     ConcurrentLinkedQueue<ExtendedWebDriver> availableDrivers = new ConcurrentLinkedQueue<>();
 
-
     /**
      * creates or activates a new driver instance
+     *
      * @return a new or recycled driver instance
      */
     public synchronized ExtendedWebDriver getOrNewInstance() {
         //synchronized to avoid get race conditions.... there is a non synchonzed part between the check and remove
         //to make this easy we simply synchronize the get to fix it
         ExtendedWebDriver webDriver = (availableDrivers.size() > 0) ? availableDrivers.remove() : null;
-        if(webDriver == null) {
+        if (webDriver == null) {
             webDriver = ChromeDevtoolsDriver.stdInit();
             allDrivers.add(webDriver);
         }
@@ -48,6 +48,7 @@ public class DriverPool {
 
     /**
      * resets a driver and keeps it in the pool for recycling
+     *
      * @param driver
      */
     public void returnInstance(ExtendedWebDriver driver) {
@@ -57,6 +58,7 @@ public class DriverPool {
 
     /**
      * closes a driver but keeps it in the pool
+     *
      * @param driver
      */
     public void returnAndCloseInstance(ExtendedWebDriver driver) {
@@ -66,6 +68,7 @@ public class DriverPool {
 
     /**
      * quits a driver and removes it from the pool
+     *
      * @param driver
      */
     public void quitInstance(ExtendedWebDriver driver) {

@@ -43,7 +43,6 @@ import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.IllegalProductException;
 import jakarta.enterprise.inject.literal.NamedLiteral;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -72,7 +71,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "b"), @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "b"),
+            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "a") })
     public void testStaticMethod() throws Exception {
         assertEquals(getBeans(String.class, TAME_LITERAL).size(), 1);
         assertEquals(getContextualReference(String.class, TAME_LITERAL), BeanWithStaticProducerMethod.getString());
@@ -122,17 +122,21 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "c"), @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD, id = "c"),
+            @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "a"),
             @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "aa"), @SpecAssertion(section = BUILTIN_QUALIFIERS, id = "ab") })
     public void testDefaultBindingType() throws Exception {
         assertEquals(getCurrentManager().getBeans(Tarantula.class).size(), 1);
         assertEquals(getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().size(), 2);
-        assertTrue(getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(Default.Literal.INSTANCE));
-        assertTrue(getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(Any.Literal.INSTANCE));
+        assertTrue(getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers()
+                .contains(Default.Literal.INSTANCE));
+        assertTrue(
+                getCurrentManager().getBeans(Tarantula.class).iterator().next().getQualifiers().contains(Any.Literal.INSTANCE));
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_TYPES, id = "c"), @SpecAssertion(section = BEAN_TYPES, id = "l") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_TYPES, id = "c"),
+            @SpecAssertion(section = BEAN_TYPES, id = "l") })
     public void testApiTypeForClassReturn() throws Exception {
         assertEquals(getBeans(Tarantula.class).size(), 1);
         Bean<Tarantula> tarantula = getBeans(Tarantula.class).iterator().next();
@@ -166,7 +170,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_TYPES, id = "bb"), @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "i") })
+    @SpecAssertions({ @SpecAssertion(section = PRODUCER_METHOD_TYPES, id = "bb"),
+            @SpecAssertion(section = LEGAL_BEAN_TYPES, id = "i") })
     public void testApiTypeForArrayTypeReturn() throws Exception {
         assertEquals(getBeans(Spider[].class).size(), 1);
         Bean<Spider[]> spiders = getBeans(Spider[].class).iterator().next();
@@ -176,7 +181,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "be"), @SpecAssertion(section = PRODUCER_METHOD, id = "k"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "be"),
+            @SpecAssertion(section = PRODUCER_METHOD, id = "k"),
             @SpecAssertion(section = DECLARING_BEAN_QUALIFIERS, id = "b") })
     public void testBindingType() throws Exception {
         assertEquals(getBeans(Tarantula.class, TAME_LITERAL).size(), 1);
@@ -186,7 +192,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "ba"), @SpecAssertion(section = PRODUCER_METHOD, id = "k") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "ba"),
+            @SpecAssertion(section = PRODUCER_METHOD, id = "k") })
     public void testScopeType() throws Exception {
         assertEquals(getBeans(DaddyLongLegs.class, TAME_LITERAL).size(), 1);
         Bean<DaddyLongLegs> daddyLongLegs = getBeans(DaddyLongLegs.class, TAME_LITERAL).iterator().next();
@@ -194,7 +201,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "bb"), @SpecAssertion(section = DECLARING_BEAN_NAME, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "bb"),
+            @SpecAssertion(section = DECLARING_BEAN_NAME, id = "b") })
     public void testNamedMethod() throws Exception {
         assertEquals(getBeans(BlackWidow.class, TAME_LITERAL).size(), 1);
         Bean<BlackWidow> blackWidowSpider = getBeans(BlackWidow.class, TAME_LITERAL).iterator().next();
@@ -202,7 +210,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "bb"), @SpecAssertion(section = DEFAULT_NAME, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "bb"),
+            @SpecAssertion(section = DEFAULT_NAME, id = "b"),
             @SpecAssertion(section = DEFAULT_NAME, id = "fb") })
     public void testDefaultNamedMethod() throws Exception {
         String name = "produceDaddyLongLegs";
@@ -215,7 +224,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
 
     // Review 2.2
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_STEREOTYPES, id = "b"), @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "ba"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_STEREOTYPES, id = "b"),
+            @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "ba"),
             @SpecAssertion(section = DEFAULT_SCOPE, id = "c"), @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "bd") })
     public void testStereotypeSpecifiesScope() throws Exception {
         assertEquals(getBeans(WolfSpider.class, TAME_LITERAL).size(), 1);
@@ -224,7 +234,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "da"), @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dg") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "da"),
+            @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dg") })
     public void testNonStaticProducerMethodNotInherited() {
         assertEquals(getBeans(Apple.class, new Yummy.Literal()).size(), 1);
         assertEquals(getContextualReference(Apple.class, new Yummy.Literal()).getTree().getClass(), AppleTree.class);
@@ -239,7 +250,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "a"),
             @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "i"),
-            @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "h"), @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "e") })
+            @SpecAssertion(section = DECLARING_PRODUCER_METHOD, id = "h"),
+            @SpecAssertion(section = PRODUCER_OR_DISPOSER_METHODS_INVOCATION, id = "e") })
     public void testBindingTypesAppliedToProducerMethodParameters() {
         Bean<Tarantula> tarantula = getBeans(Tarantula.class, DEADLIEST_LITERAL).iterator().next();
         CreationalContext<Tarantula> creationalContext = getCurrentManager().createCreationalContext(tarantula);

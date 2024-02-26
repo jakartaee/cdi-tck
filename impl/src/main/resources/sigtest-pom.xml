@@ -19,7 +19,7 @@
     <annotations.api.version>3.0.0-M1</annotations.api.version>
     <interceptors.api.version>2.2.0-M1</interceptors.api.version>
     <atinject.api.version>2.0.1</atinject.api.version>
-    <el.api.version>5.0.1</el.api.version>
+    <el.api.version>6.0.0-RC1</el.api.version>
     <cdi.api.version>4.1.0.Beta1</cdi.api.version>
   </properties>
 
@@ -80,7 +80,7 @@
       <plugin>
         <groupId>jakarta.tck</groupId>
         <artifactId>sigtest-maven-plugin</artifactId>
-        <version>2.1</version>
+        <version>2.2</version>
         <executions>
           <execution>
             <id>sigtest</id>

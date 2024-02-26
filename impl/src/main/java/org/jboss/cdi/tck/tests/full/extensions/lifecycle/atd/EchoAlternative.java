@@ -23,5 +23,5 @@ import jakarta.enterprise.inject.Alternative;
 @Alternative
 @Priority(2600)
 public class EchoAlternative implements Alternatives {
-    
+
 }

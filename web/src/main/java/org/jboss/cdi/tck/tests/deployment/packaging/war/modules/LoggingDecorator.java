@@ -22,7 +22,7 @@ import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Decorator
 public abstract class LoggingDecorator implements Business {

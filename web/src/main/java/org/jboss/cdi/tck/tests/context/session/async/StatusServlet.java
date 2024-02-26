@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.context.session.async;
 
 import java.io.IOException;
+
 import jakarta.inject.Inject;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,6 +41,7 @@ public class StatusServlet extends HttpServlet {
     public String getInfo() {
         return String
                 .format("onStartAsync: %s, onError: %s, onTimeout: %s, onComplete: %s, simpleSessionBeanId: %s",
-                        statusBean.isOnStartAsync(), statusBean.isOnError(), statusBean.isOnTimeout(), statusBean.isOnComplete(), statusBean.getSessionBeanId());
+                        statusBean.isOnStartAsync(), statusBean.isOnError(), statusBean.isOnTimeout(),
+                        statusBean.isOnComplete(), statusBean.getSessionBeanId());
     }
 }

@@ -21,7 +21,7 @@ import jakarta.enterprise.inject.Produces;
 public class ResourceProducer {
 
     @Produces
-    @EJB(lookup="java:global/ResourceDefinitionWithDifferentTypeTestEJB/Bean!org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ejb.BeanRemote")
+    @EJB(lookup = "java:global/ResourceDefinitionWithDifferentTypeTestEJB/Bean!org.jboss.cdi.tck.tests.implementation.simple.resource.broken.type.ejb.BeanRemote")
     @Lazy
     Integer remoteBean;
 }

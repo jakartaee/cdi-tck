@@ -15,11 +15,12 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.requiredtype;
 
 import jakarta.enterprise.context.Dependent;
+
 import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class Leaf<T extends Tree> {

@@ -62,7 +62,7 @@ public class AroundTimeoutInterceptorTest extends AbstractTest {
                 "Around-timeout method invocation did NOT occur within the same transaction context as the timeout method on which it is interposing");
     }
 
-    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = {JAVAEE_FULL, SECURITY})
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = { JAVAEE_FULL, SECURITY })
     @SpecAssertion(section = TIMEOUT_METHOD_INT_METHODS, id = "d")
     @SpecAssertion(section = TIMEOUT_METHOD_INT_METHODS, id = "eb")
     public void testSecurityContext(Student student) throws Exception {

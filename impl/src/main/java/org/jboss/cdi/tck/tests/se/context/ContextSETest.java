@@ -43,9 +43,12 @@ public class ContextSETest extends Arquillian {
         final JavaArchive testArchive = ShrinkWrap.create(JavaArchive.class)
                 .addClasses(ContextSETest.class, ApplicationScopedCounter.class, ApplicationScopedObserver.class)
                 .addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
-        final JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
-        final JavaArchive barArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Bar.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
-        final JavaArchive bazArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Baz.class).addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
+        final JavaArchive fooArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Foo.class)
+                .addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
+        final JavaArchive barArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Bar.class)
+                .addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
+        final JavaArchive bazArchive = ShrinkWrap.create(JavaArchive.class).addClasses(Baz.class)
+                .addAsResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
         return ClassPath.builder().add(testArchive, fooArchive, barArchive, bazArchive).build();
     }
 
@@ -63,9 +66,10 @@ public class ContextSETest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "b"),
+            @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
             @SpecAssertion(section = SE_BOOTSTRAP, id = "f"), @SpecAssertion(section = SE_BOOTSTRAP, id = "f"),
-            @SpecAssertion(section = APPLICATION_CONTEXT, id = "a")})
+            @SpecAssertion(section = APPLICATION_CONTEXT, id = "a") })
     public void testEventIsFiredWhenAplicationContextInitialized() {
         ApplicationScopedObserver.reset();
         try (SeContainer seContainer = SeContainerInitializer.newInstance().initialize()) {
@@ -75,7 +79,8 @@ public class ContextSETest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "c"), @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
+    @SpecAssertions({ @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "c"),
+            @SpecAssertion(section = APPLICATION_CONTEXT_SE, id = "d"),
             @SpecAssertion(section = APPLICATION_CONTEXT, id = "b"), @SpecAssertion(section = APPLICATION_CONTEXT, id = "c") })
     public void testEventIsFiredWhenAplicationContextDestroyed() {
         ApplicationScopedObserver.reset();

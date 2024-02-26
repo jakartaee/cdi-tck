@@ -22,7 +22,6 @@ import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -52,7 +51,8 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "cc"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lb"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "cc"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lb"),
             @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mc") })
     public void testInjectionOfPersistenceContext() {
         ServiceBean serviceBean = getContextualReference(ServiceBean.class);
@@ -62,7 +62,8 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "dd"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lc"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "dd"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lc"),
             @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "me") })
     public void testInjectionOfPersistenceUnit() {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
@@ -84,7 +85,8 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lc"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mf") })
+    @SpecAssertions({ @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "lc"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mf") })
     public void testPassivationOfPersistenceUnit() throws Exception {
         Bean<ManagedBean> managedBeanBean = getBeans(ManagedBean.class).iterator().next();
         CreationalContext<ManagedBean> managedBeanCc = getCurrentManager().createCreationalContext(managedBeanBean);
@@ -95,7 +97,8 @@ public class PersistenceContextInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "hh"), @SpecAssertion(section = RESOURCE_TYPES, id = "ab") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "hh"),
+            @SpecAssertion(section = RESOURCE_TYPES, id = "ab") })
     public void testBeanTypesAndBindingTypesOfPersistenceContext() {
         Bean<EntityManager> manager = getBeans(EntityManager.class, new Database.Literal()).iterator().next();
         assert manager.getTypes().size() == 3;

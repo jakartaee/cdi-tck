@@ -25,6 +25,6 @@ public class Interceptor4 {
     @AroundInvoke
     public Object intercept(InvocationContext ctx) throws Exception {
         ExceptionBean.failFirstTwoInvocations();
-        return ! (Boolean) ctx.proceed();
+        return !(Boolean) ctx.proceed();
     }
 }

@@ -13,12 +13,12 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.interceptorLifeCycle.environment.jndi;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jakarta.enterprise.context.Dependent;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 @MyBinding
 @Dependent

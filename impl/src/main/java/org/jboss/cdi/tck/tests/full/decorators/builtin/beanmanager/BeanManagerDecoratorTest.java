@@ -22,6 +22,7 @@ import static org.testng.Assert.assertTrue;
 import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.full.decorators.AbstractDecoratorTest;
@@ -34,7 +35,7 @@ import org.testng.annotations.Test;
 
 /**
  * The {@link BeanManager} built-in bean is never intercepted by decorators.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -46,7 +47,8 @@ public class BeanManagerDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BeanManagerDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(BeanManagerDecorator.class)).build();
+                        new BeansXml().decorators(BeanManagerDecorator.class))
+                .build();
     }
 
     @Inject

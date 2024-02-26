@@ -53,7 +53,8 @@ public class SessionScopeEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "da"), @SpecAssertion(section = SESSION_CONTEXT_EE, id = "db"),
+    @SpecAssertions({ @SpecAssertion(section = SESSION_CONTEXT_EE, id = "da"),
+            @SpecAssertion(section = SESSION_CONTEXT_EE, id = "db"),
             @SpecAssertion(section = SESSION_CONTEXT_EE, id = "dc"),
             @SpecAssertion(section = SESSION_CONTEXT_EE, id = "ca") })
     public void test() throws Exception {

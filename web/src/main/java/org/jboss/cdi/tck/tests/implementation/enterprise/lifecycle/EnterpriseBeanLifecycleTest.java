@@ -28,7 +28,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -63,8 +62,9 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
                 .build();
     }
 
-    @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bb"), @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "b"),
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bb"),
+            @SpecAssertion(section = CONTEXTUAL_REFERENCE, id = "b"),
             @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "ja") })
     public void testCreateSFSB() throws Exception {
         GrossStadt frankfurt = getContextualReference(GrossStadt.class);
@@ -90,7 +90,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         assert stadtInstance instanceof SchoeneStadt;
     }
 
-    @Test(groups =  INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY_EE, id = "ac") })
     public void testSerializeSFSB() throws Exception {
 
@@ -103,8 +103,9 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
 
     }
 
-    @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bc"), @SpecAssertion(section = STATELESS_LIFECYCLE, id = "c") })
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = STATEFUL_LIFECYCLE, id = "bc"),
+            @SpecAssertion(section = STATELESS_LIFECYCLE, id = "c") })
     public void testDestroyRemovesSFSB() throws Exception {
         GrossStadt frankfurt = getContextualReference(GrossStadt.class);
         Bean<KleinStadt> stadtBean = getBeans(KleinStadt.class).iterator().next();
@@ -121,8 +122,9 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         // frankfurt.dispose();
     }
 
-    @Test(groups =  INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = STATELESS_LIFECYCLE, id = "c"), @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "dba") })
+    @Test(groups = INTEGRATION)
+    @SpecAssertions({ @SpecAssertion(section = STATELESS_LIFECYCLE, id = "c"),
+            @SpecAssertion(section = SESSION_BEAN_EJB_REMOVE_METHOD, id = "dba") })
     public void testRemovedEjbIgnored() {
         KleinStadt stadtInstance = getContextualReference(KleinStadt.class, new Important.Literal());
         assert stadtInstance != null : "Expected instance to be created by container";
@@ -135,7 +137,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         assert !"Kassel-Wilhelmshoehe".equals(newStadtInstance.getName()) : "The destroyed SFSB was not ignored";
     }
 
-    @Test(groups =  INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertions({ @SpecAssertion(section = STATELESS_LIFECYCLE, id = "b") })
     public void testCreateSLSB() {
         Bean<NeueStadt> stadtBean = getBeans(NeueStadt.class).iterator().next();
@@ -149,7 +151,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         assert stadtInstance instanceof GeschichtslosStadt;
     }
 
-    @Test(groups =  INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = INITIALIZER_METHODS_EE, id = "f")
     public void testInitializerMethodsCalledWithCurrentParameterValues() {
         AlteStadt alteStadt = getContextualReference(AlteStadt.class);
@@ -157,7 +159,7 @@ public class EnterpriseBeanLifecycleTest extends AbstractTest {
         assert alteStadt.getAnotherPlaceOfInterest() != null;
     }
 
-    @Test(groups =  INTEGRATION)
+    @Test(groups = INTEGRATION)
     @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION_EE, id = "a")
     public void testDependentObjectsDestroyed() {
         Bean<UniStadt> uniStadtBean = getBeans(UniStadt.class).iterator().next();

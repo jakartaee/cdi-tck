@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.se.context.activation.interceptor;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import jakarta.annotation.Priority;
 import jakarta.enterprise.context.ContextNotActiveException;
 import jakarta.enterprise.context.RequestScoped;

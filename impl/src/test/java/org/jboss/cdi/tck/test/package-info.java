@@ -13,6 +13,7 @@
  */
 
 /**
- * Don't use the same package for unit tests, otherwise these might be added to ShrinkWrap test archives along with impl classes.
+ * Don't use the same package for unit tests, otherwise these might be added to ShrinkWrap test archives along with impl
+ * classes.
  */
 package org.jboss.cdi.tck.test;

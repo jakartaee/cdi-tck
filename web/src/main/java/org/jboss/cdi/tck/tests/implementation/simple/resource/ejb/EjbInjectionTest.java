@@ -21,7 +21,6 @@ import static org.jboss.cdi.tck.cdi.Sections.RESOURCE_TYPES;
 
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -46,7 +45,8 @@ public class EjbInjectionTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "ee"), @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "ld"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_RESOURCE, id = "ee"),
+            @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "ld"),
             @SpecAssertion(section = RESOURCE_LIFECYCLE, id = "mg") })
     public void testInjectionOfEjbs() {
         Bean<ManagedBean> managedBean = getBeans(ManagedBean.class).iterator().next();

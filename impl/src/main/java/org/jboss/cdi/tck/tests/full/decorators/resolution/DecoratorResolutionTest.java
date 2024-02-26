@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -73,21 +73,21 @@ public class DecoratorResolutionTest<C extends Cow, F extends FresianCow> extend
     @Test
     @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "aa") })
     public void testUnboundedTypeVariables() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Bar.class));
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(Bar.class));
         assert decoratorCollectionMatches(decorators, BarDecorator.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "ab") })
     public void testObject() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Baz.class));
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(Baz.class));
         assert decoratorCollectionMatches(decorators, BazDecorator.class);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = DELEGATE_ASSIGNABLE_PARAMETERS, id = "ac") })
     public void testUnboundedTypeVariablesAndObject() {
-        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Foo.class));
+        List<Decorator<?>> decorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(Foo.class));
         assert decoratorCollectionMatches(decorators, FooDecorator.class, FooObjectDecorator.class);
     }
 

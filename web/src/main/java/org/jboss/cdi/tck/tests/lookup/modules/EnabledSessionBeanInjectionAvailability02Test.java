@@ -36,7 +36,8 @@ public class EnabledSessionBeanInjectionAvailability02Test extends AbstractTest 
     @Deployment
     public static WebArchive createTestArchive() {
         WebArchive webArchive = new WebArchiveBuilder().withTestClass(EnabledSessionBeanInjectionAvailability02Test.class)
-                .withClasses(EjbFoo.class, EjbFooLocal.class).withBeanLibrary(Foo.class, Bar.class).withBeanLibrary(WebBar.class)
+                .withClasses(EjbFoo.class, EjbFooLocal.class).withBeanLibrary(Foo.class, Bar.class)
+                .withBeanLibrary(WebBar.class)
                 .build();
         return webArchive;
     }

@@ -35,9 +35,9 @@ import org.testng.annotations.Test;
 
 /**
  * Test that uses a more complex scenario to verify that Decorators can be used to alter event delivery logic.
- * 
+ *
  * @author Jozef Hartinger
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ComplexEventDecoratorTest extends AbstractTest {
@@ -54,7 +54,8 @@ public class ComplexEventDecoratorTest extends AbstractTest {
                 .withTestClassPackage(ComplexEventDecoratorTest.class)
                 .withExtension(OrderedEventDeliveryExtension.class)
                 .withBeansXml(
-                        new BeansXml().decorators(OrderedEventDeliveryDecorator.class)).build();
+                        new BeansXml().decorators(OrderedEventDeliveryDecorator.class))
+                .build();
     }
 
     @Test(groups = CDI_FULL)

@@ -52,5 +52,4 @@ public class InjectionVisibilityTest extends AbstractTest {
         assertTrue(AbstractBean.fooSetCalled);
     }
 
-
 }

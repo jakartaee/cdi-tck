@@ -56,7 +56,7 @@ public class AfterBeanDiscoveryObserver implements Extension {
     void observesABD(@Observes AfterBeanDiscovery abd) throws NoSuchMethodException {
 
         // read from ObserverMethod
-        abd.<Fruit>addObserverMethod().read(fruitObserverMethod).beanClass(FruitObserver.class).observedType(Banana.class)
+        abd.<Fruit> addObserverMethod().read(fruitObserverMethod).beanClass(FruitObserver.class).observedType(Banana.class)
                 .addQualifiers(Ripe.RipeLiteral.INSTANCE, Any.Literal.INSTANCE)
                 .notifyWith((b) -> {
                     newBananaObserverNotified.set(true);
@@ -106,7 +106,8 @@ public class AfterBeanDiscoveryObserver implements Extension {
             }
         });
 
-        abd.addObserverMethod().observedType(Papaya.class).reception(Reception.ALWAYS).notifyWith(eventContext -> newPapayaObserverNotified.set(true));
+        abd.addObserverMethod().observedType(Papaya.class).reception(Reception.ALWAYS)
+                .notifyWith(eventContext -> newPapayaObserverNotified.set(true));
     }
 
     public static void reset() {

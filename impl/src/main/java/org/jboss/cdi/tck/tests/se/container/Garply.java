@@ -20,11 +20,11 @@ public class Garply {
 
     private final int number;
 
-    public Garply(){
+    public Garply() {
         number = 0;
     }
 
-    public Garply(int number){
+    public Garply(int number) {
         this.number = number;
     }
 

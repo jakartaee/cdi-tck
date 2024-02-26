@@ -34,12 +34,13 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Originated from weld test suite. Test for specializing {@link Alternative}. Verifies that a bean is not specialized unless the specializing alternative is
+ * Originated from weld test suite. Test for specializing {@link Alternative}. Verifies that a bean is not specialized unless
+ * the specializing alternative is
  * enabled.
- * 
+ *
  * @author Jozef Hartinger
  * @author Matej Briskar
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class Specialization01Test extends AbstractTest {
@@ -49,7 +50,9 @@ public class Specialization01Test extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(Specialization01Test.class).withBeanLibrary(InjectedBean1.class)
-                .withBeanLibrary(Factory.class, AlternativeSpecializedFactory.class, Product.class, InjectedBean2.class, FactoryEvent.class).build();
+                .withBeanLibrary(Factory.class, AlternativeSpecializedFactory.class, Product.class, InjectedBean2.class,
+                        FactoryEvent.class)
+                .build();
     }
 
     @Inject
@@ -62,7 +65,8 @@ public class Specialization01Test extends AbstractTest {
     private Event<FactoryEvent> event;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"),
+            @SpecAssertion(section = SPECIALIZE_MANAGED_BEAN, id = "ac") })
     public void testNotEnabledAlternativeDoesNotSpecialize() {
         assertFalse(bean1.getFactory() instanceof AlternativeSpecializedFactory);
         assertFalse(bean1.getProduct().isUnsatisfied());

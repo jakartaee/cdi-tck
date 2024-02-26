@@ -18,7 +18,7 @@ import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SuppressWarnings("all")
 public class PowerfulLiteral extends AnnotationLiteral<Powerful> implements Powerful {

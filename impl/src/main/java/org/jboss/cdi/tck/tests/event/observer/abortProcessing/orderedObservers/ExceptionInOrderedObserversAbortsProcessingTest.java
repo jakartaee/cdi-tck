@@ -42,7 +42,8 @@ public class ExceptionInOrderedObserversAbortsProcessingTest extends AbstractTes
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cd"), @SpecAssertion(section = OBSERVER_ORDERING, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = OBSERVER_NOTIFICATION, id = "cd"),
+            @SpecAssertion(section = OBSERVER_ORDERING, id = "b") })
     public void testOrderedObserversAbortedCorrectly() {
 
         try {

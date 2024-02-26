@@ -48,7 +48,8 @@ public class NamedAtInjectionPointTest extends AbstractTest {
     Pike pike;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = NAMED_AT_INJECTION_POINT, id = "a"), @SpecAssertion(section = DEFAULT_NAME, id = "fa") })
+    @SpecAssertions({ @SpecAssertion(section = NAMED_AT_INJECTION_POINT, id = "a"),
+            @SpecAssertion(section = DEFAULT_NAME, id = "fa") })
     public void testFieldNameUsedAsBeanName() {
         // Managed bean
         assertNotNull(fishingNet);

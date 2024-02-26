@@ -32,16 +32,17 @@ public interface ExtendedWebDriver extends WebDriver {
 
     /**
      * gets the response status of the last response (of the last triggered request against get)
+     *
      * @return
      */
     int getResponseStatus();
 
     /**
      * gets the last response as body
+     *
      * @return
      */
     String getResponseBody();
-
 
     /**
      * @return the request post data as string
@@ -55,12 +56,14 @@ public interface ExtendedWebDriver extends WebDriver {
 
     /**
      * gets the internal webdriver delegate
+     *
      * @return
      */
     WebDriver getDelegate();
 
     /**
      * returns a reference to the Selenium JS Executor of this webdriver
+     *
      * @return
      */
     JavascriptExecutor getJSExecutor();
@@ -73,6 +76,7 @@ public interface ExtendedWebDriver extends WebDriver {
     /**
      * returns the innerText of the page in a blank reduced state (more than one blank is reduced to one
      * invisible blanks like nbsp are replaced by normal blanks)
+     *
      * @return
      */
     String getPageTextReduced();

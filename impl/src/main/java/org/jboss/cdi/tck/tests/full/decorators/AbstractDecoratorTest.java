@@ -29,7 +29,7 @@ import org.jboss.cdi.tck.AbstractTest;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public abstract class AbstractDecoratorTest extends AbstractTest {
 

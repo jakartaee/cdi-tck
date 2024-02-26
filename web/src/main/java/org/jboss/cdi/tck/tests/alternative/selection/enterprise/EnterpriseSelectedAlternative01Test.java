@@ -32,28 +32,30 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * The simplest possible scenario - test session bean alternative selected for the entire application, no priority ordering during resolution.
- * 
+ * The simplest possible scenario - test session bean alternative selected for the entire application, no priority ordering
+ * during resolution.
+ *
  * WAR deployment with 2 libraries:
  * <ul>
  * <li>WEB-INF/classes - alpha - contains {@link EnterpriseService} alternative with priority 1000</li>
  * <li>lib 1 - bravo - contains {@link PojoService}</li>
  * </ul>
- * 
+ *
  * Expected results:
  * <ul>
  * <li>{@link EnterpriseService} is available for injection in all bean archives</li>
  * </ul>
- * 
+ *
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class EnterpriseSelectedAlternative01Test extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return createBuilderBase().withTestClass(EnterpriseSelectedAlternative01Test.class).withClasses(Service.class, EnterpriseService.class, Alpha.class)
+        return createBuilderBase().withTestClass(EnterpriseSelectedAlternative01Test.class)
+                .withClasses(Service.class, EnterpriseService.class, Alpha.class)
                 .withBeanLibrary(PojoService.class, Bravo.class).build();
     }
 

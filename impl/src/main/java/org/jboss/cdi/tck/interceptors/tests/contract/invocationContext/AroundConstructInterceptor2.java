@@ -13,13 +13,13 @@
  */
 package org.jboss.cdi.tck.interceptors.tests.contract.invocationContext;
 
+import java.lang.annotation.Annotation;
+import java.util.Set;
+
 import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundConstruct;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
-
-import java.lang.annotation.Annotation;
-import java.util.Set;
 
 @Interceptor
 @AroundConstructBinding2

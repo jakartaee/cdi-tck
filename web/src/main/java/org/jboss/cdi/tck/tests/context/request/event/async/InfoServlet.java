@@ -28,7 +28,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Martin Kouba
  */
 @SuppressWarnings("serial")
-@WebServlet(value="/info")
+@WebServlet(value = "/info")
 public class InfoServlet extends HttpServlet {
 
     @Inject

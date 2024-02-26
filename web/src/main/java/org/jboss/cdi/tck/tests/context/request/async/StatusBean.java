@@ -64,7 +64,7 @@ public class StatusBean {
         this.onTimeout = onTimeout;
     }
 
-    public void reset(){
+    public void reset() {
         this.onComplete = false;
         this.onStartAsync = false;
         this.onTimeout = false;

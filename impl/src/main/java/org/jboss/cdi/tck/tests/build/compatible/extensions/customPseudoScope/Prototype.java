@@ -13,16 +13,16 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.customPseudoScope;
 
-import jakarta.enterprise.context.spi.Context;
-import jakarta.enterprise.context.spi.Contextual;
-import jakarta.enterprise.context.spi.CreationalContext;
-import jakarta.inject.Scope;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import jakarta.enterprise.context.spi.Context;
+import jakarta.enterprise.context.spi.Contextual;
+import jakarta.enterprise.context.spi.CreationalContext;
+import jakarta.inject.Scope;
 
 /**
  * Specifies that a bean belongs to the <em>prototype</em> pseudo-scope.
@@ -42,7 +42,7 @@ import java.lang.annotation.Target;
  * The {@code @Prototype} scope is always active.
  */
 @Scope
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
+@Target({ ElementType.TYPE, ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Prototype {

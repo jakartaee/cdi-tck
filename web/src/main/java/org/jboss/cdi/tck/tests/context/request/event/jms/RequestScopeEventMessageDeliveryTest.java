@@ -22,13 +22,14 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
+
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.impl.ConfigurationFactory;
-import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.descriptors.ejb.EjbJarDescriptorBuilder;
+import org.jboss.cdi.tck.shrinkwrap.ee.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.Timer;
 import org.jboss.cdi.tck.util.Timer.StopCondition;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -82,7 +83,8 @@ public class RequestScopeEventMessageDeliveryTest extends AbstractTest {
 
         new Timer().setDelay(5, TimeUnit.SECONDS).addStopCondition(new StopCondition() {
             public boolean isSatisfied() {
-                return AbstractMessageListener.isInitializedEventObserver() && AbstractMessageListener.getProcessedMessages() >= 1;
+                return AbstractMessageListener.isInitializedEventObserver()
+                        && AbstractMessageListener.getProcessedMessages() >= 1;
             }
         }).start();
 

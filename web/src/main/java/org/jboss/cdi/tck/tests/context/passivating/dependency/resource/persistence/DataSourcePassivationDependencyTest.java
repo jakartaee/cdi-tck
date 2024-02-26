@@ -51,7 +51,8 @@ public class DataSourcePassivationDependencyTest extends AbstractTest {
                 .withWebXml(
                         Descriptors.create(WebAppDescriptor.class).createResourceRef().resRefName("jdbc/TestDB")
                                 .resType(DataSource.class.getName()).lookupName(ConfigurationFactory.get().getTestDataSource())
-                                .up()).withDefaultPersistenceXml().build();
+                                .up())
+                .withDefaultPersistenceXml().build();
     }
 
     @Test(groups = { PERSISTENCE, INTEGRATION })

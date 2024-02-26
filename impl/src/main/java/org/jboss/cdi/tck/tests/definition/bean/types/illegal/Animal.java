@@ -19,7 +19,7 @@ import jakarta.enterprise.context.Dependent;
 @Dependent
 public class Animal<T> {
 
-    public final void ping(){
+    public final void ping() {
 
     }
 

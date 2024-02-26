@@ -47,13 +47,14 @@ public class TwoBeansOneClassExtension implements Extension {
         // add @BeanieType("propeller")Beanie
         new AddForwardingAnnotatedTypeAction<Beanie>() {
 
-            final AnnotatedType<Beanie> delegate = new AnnotatedTypeWrapper<Beanie>(bm.createAnnotatedType(Beanie.class), false, new BeanieTypeLiteral() {
+            final AnnotatedType<Beanie> delegate = new AnnotatedTypeWrapper<Beanie>(bm.createAnnotatedType(Beanie.class), false,
+                    new BeanieTypeLiteral() {
 
-                @Override
-                public String value() {
-                    return "propeller";
-                }
-            });
+                        @Override
+                        public String value() {
+                            return "propeller";
+                        }
+                    });
 
             @Override
             public String getBaseId() {

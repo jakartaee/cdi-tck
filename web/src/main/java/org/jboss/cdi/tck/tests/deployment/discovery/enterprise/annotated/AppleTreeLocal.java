@@ -17,10 +17,10 @@ import jakarta.ejb.Local;
 
 @Local
 public interface AppleTreeLocal {
-    
+
     Apple produceApple();
-    
+
     void eatApple(Apple apple);
-    
+
     void fallDown(Apple apple);
 }

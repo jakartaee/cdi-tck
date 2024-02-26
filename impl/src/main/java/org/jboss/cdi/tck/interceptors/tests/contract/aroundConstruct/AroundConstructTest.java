@@ -54,9 +54,9 @@ public class AroundConstructTest extends AbstractTest {
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertion(section = CONSTRUCTOR_AND_METHOD_LEVEL_INT, id = "ab")
-    @SpecAssertion(section =  INVOCATIONCONTEXT, id = "c")
-    @SpecAssertion(section =  INVOCATIONCONTEXT, id = "eb")
-    @SpecAssertion(section =  INVOCATIONCONTEXT, id = "f")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "c")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "eb")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "f")
     @SpecAssertion(section = INT_METHODS_FOR_LIFECYCLE_EVENT_CALLBACKS, id = "a")
     @SpecAssertion(section = ASSOCIATING_INT_USING_INTERCEPTORS_ANNOTATION, id = "c")
     public void testInterceptorInvocation(Instance<Alpha> instance) {
@@ -66,7 +66,7 @@ public class AroundConstructTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section =  INVOCATIONCONTEXT, id = "ga")
+    @SpecAssertion(section = INVOCATIONCONTEXT, id = "ga")
     public void testReplacingParameters(Instance<Bravo> instance) {
         ActionSequence.reset();
         Bravo bravo = instance.get();

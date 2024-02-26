@@ -30,8 +30,6 @@ import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.enterprise.inject.spi.BeforeShutdown;
 
-import com.gargoylesoftware.htmlunit.TextPage;
-import com.gargoylesoftware.htmlunit.WebClient;
 import org.jboss.arquillian.container.test.api.Deployer;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
@@ -47,6 +45,9 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
+
+import com.gargoylesoftware.htmlunit.TextPage;
+import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Test application shutdown lifecycle.
@@ -73,7 +74,9 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
     @Deployment(name = INFO, managed = false, testable = false)
     public static WebArchive createBarTestArchive() {
         return new WebArchiveBuilder().notTestArchive()
-                .withClasses(InfoServlet.class, ActionSequence.class, TransformationUtils.class, TransformationUtils.Function.class).build();
+                .withClasses(InfoServlet.class, ActionSequence.class, TransformationUtils.class,
+                        TransformationUtils.Function.class)
+                .build();
     }
 
     @ArquillianResource
@@ -99,7 +102,8 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
      */
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
     @SpecAssertions({ @SpecAssertion(section = SHUTDOWN, id = "a"), @SpecAssertion(section = SHUTDOWN, id = "b"),
-            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja"), @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga"),
+            @SpecAssertion(section = REQUEST_CONTEXT_EE, id = "ja"),
+            @SpecAssertion(section = APPLICATION_CONTEXT_EE, id = "ga"),
             @SpecAssertion(section = BEFORE_SHUTDOWN, id = "a") })
     public void testShutdown(@ArquillianResource @OperateOnDeployment(FOO) URL fooContext,
             @ArquillianResource @OperateOnDeployment(INFO) URL infoContext) throws Exception {
@@ -118,7 +122,8 @@ public class ApplicationShutdownLifecycleTest extends AbstractTest {
         assertTrue(actual.endsWith(BeforeShutdown.class.getName()));
         actual.assertDataContainsAll(RequestScoped.class.getName(), SessionScoped.class.getName(),
                 ApplicationScoped.class.getName(),
-                ConversationScoped.class.getName(), Foo.class.getName(), Bar.class.getName(), Baz.class.getName(), Qux.class.getName());
+                ConversationScoped.class.getName(), Foo.class.getName(), Bar.class.getName(), Baz.class.getName(),
+                Qux.class.getName());
 
         // Undeploy info
         deployer.undeploy(INFO);

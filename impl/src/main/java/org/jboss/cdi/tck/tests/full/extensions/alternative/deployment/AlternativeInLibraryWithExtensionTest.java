@@ -20,6 +20,7 @@ import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_BEA
 import static org.jboss.cdi.tck.cdi.Sections.INITIALIZATION;
 
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -54,11 +55,13 @@ public class AlternativeInLibraryWithExtensionTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(AlternativeInLibraryWithExtensionTest.class)
                 .withBeanLibrary(new BeansXml().alternatives(BarAlternative.class),
-                        Foo.class, Bar.class, BarAlternative.class, NoopExtension.class).build();
+                        Foo.class, Bar.class, BarAlternative.class, NoopExtension.class)
+                .build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"), @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa"),
+            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "ba"),
             @SpecAssertion(section = INITIALIZATION, id = "b") })
     public void testAlternative() {
         Assert.assertEquals("barAlternative", foo.getBar().ping());

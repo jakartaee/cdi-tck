@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.interceptors.tests.bindings.members;
 
 import jakarta.enterprise.context.Dependent;
+
 import org.jboss.cdi.tck.interceptors.tests.bindings.members.AnimalCountInterceptorBinding.Operation;
 
 @Dependent

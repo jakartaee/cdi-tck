@@ -61,10 +61,10 @@ public class BeanTypesWithIllegalTypeTest extends AbstractTest {
         getUniqueEagleAndCheckItsTypes(ProducedWithMethod.ProducedWithMethoddLiteral.INSTANCE);
     }
 
-    private void getUniqueEagleAndCheckItsTypes(Annotation... annotations){
+    private void getUniqueEagleAndCheckItsTypes(Annotation... annotations) {
         Bean<Eagle> eagleBean = getUniqueBean(Eagle.class, annotations);
         for (Type type : eagleBean.getTypes()) {
-            if(type instanceof ParameterizedType){
+            if (type instanceof ParameterizedType) {
                 assertNotEquals(((ParameterizedType) type).getRawType(), AnimalHolder.class);
             }
         }

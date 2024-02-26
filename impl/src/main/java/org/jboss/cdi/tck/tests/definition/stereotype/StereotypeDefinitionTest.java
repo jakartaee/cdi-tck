@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -28,7 +28,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.util.AnnotationLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -49,21 +48,24 @@ public class StereotypeDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = STEREOTYPE_DEFAULT_SCOPE, id = "aa"), @SpecAssertion(section = DECLARING_BEAN_SCOPE, id = "c") })
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPE_DEFAULT_SCOPE, id = "aa"),
+            @SpecAssertion(section = DECLARING_BEAN_SCOPE, id = "c") })
     public void testStereotypeWithScopeType() {
         assert getBeans(Moose.class).size() == 1;
         assert getBeans(Moose.class).iterator().next().getScope().equals(RequestScoped.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = STEREOTYPE_DEFAULT_SCOPE, id = "aa"), @SpecAssertion(section = DEFAULT_SCOPE, id = "b") })
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPE_DEFAULT_SCOPE, id = "aa"),
+            @SpecAssertion(section = DEFAULT_SCOPE, id = "b") })
     public void testStereotypeWithoutScopeType() {
         assert getBeans(Reindeer.class).size() == 1;
         assert getBeans(Reindeer.class).iterator().next().getScope().equals(Dependent.class);
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES, id = "c"), @SpecAssertion(section = DEFINING_NEW_STEREOTYPE, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES, id = "c"),
+            @SpecAssertion(section = DEFINING_NEW_STEREOTYPE, id = "b"),
             @SpecAssertion(section = SPECIFY_STEREOTYPE_INTERCEPTOR_BINDINGS, id = "a") })
     public void testOneStereotypeAllowed() {
         Bean<LongHairedDog> bean = getBeans(LongHairedDog.class).iterator().next();
@@ -71,7 +73,8 @@ public class StereotypeDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_STEREOTYPES, id = "e"), @SpecAssertion(section = STEREOTYPES, id = "d") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_STEREOTYPES, id = "e"),
+            @SpecAssertion(section = STEREOTYPES, id = "d") })
     public void testMultipleStereotypesAllowed() {
         assert getBeans(HighlandCow.class, TAME_LITERAL).size() == 1;
         Bean<HighlandCow> highlandCow = getBeans(HighlandCow.class, TAME_LITERAL).iterator().next();
@@ -81,7 +84,8 @@ public class StereotypeDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_STEREOTYPES, id = "e"), @SpecAssertion(section = DEFAULT_SCOPE, id = "e") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_STEREOTYPES, id = "e"),
+            @SpecAssertion(section = DEFAULT_SCOPE, id = "e") })
     public void testExplicitScopeOverridesMergedScopesFromMultipleStereotype() {
         assert getBeans(Springbok.class).size() == 1;
         assert getBeans(Springbok.class).iterator().next().getScope().equals(RequestScoped.class);

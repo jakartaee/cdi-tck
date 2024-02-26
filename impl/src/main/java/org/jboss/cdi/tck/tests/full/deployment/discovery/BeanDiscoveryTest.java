@@ -24,6 +24,7 @@ import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -60,12 +61,14 @@ public class BeanDiscoveryTest extends AbstractTest {
         JavaArchive alpha2 = ShrinkWrap
                 .create(JavaArchive.class)
                 .addClass(Alpha2.class)
-                .addAsManifestResource(new BeansXml(BeanDiscoveryMode.ALL).setBeansXmlVersion(BeansXmlVersion.v11), "beans.xml");
+                .addAsManifestResource(new BeansXml(BeanDiscoveryMode.ALL).setBeansXmlVersion(BeansXmlVersion.v11),
+                        "beans.xml");
         // beans.xml with version 2.0 and bean-discovery-mode of all
         JavaArchive alpha3 = ShrinkWrap
                 .create(JavaArchive.class)
                 .addClass(Alpha3.class)
-                .addAsManifestResource(new BeansXml(BeanDiscoveryMode.ALL).setBeansXmlVersion(BeansXmlVersion.v20), "beans.xml");
+                .addAsManifestResource(new BeansXml(BeanDiscoveryMode.ALL).setBeansXmlVersion(BeansXmlVersion.v20),
+                        "beans.xml");
         // Empty beans.xml, since CDI 4.0 this is discovery mode "annotated"
         JavaArchive bravo = ShrinkWrap.create(JavaArchive.class).addClass(Bravo.class)
                 .addAsManifestResource(new StringAsset(""), "beans.xml");
@@ -74,7 +77,7 @@ public class BeanDiscoveryTest extends AbstractTest {
                 .create(JavaArchive.class)
                 .addClass(Charlie.class)
                 // using null values enforces missing attribute in resulting XML file
-                .addAsManifestResource(new BeansXml().setBeansXmlVersion(null).setBeanDiscoveryMode(null),"beans.xml");
+                .addAsManifestResource(new BeansXml().setBeansXmlVersion(null).setBeanDiscoveryMode(null), "beans.xml");
         // Bean defining annotation and no beans.xml
         JavaArchive delta = ShrinkWrap.create(JavaArchive.class).addClasses(Delta.class, Golf.class, India.class, Kilo.class,
                 Mike.class, Interceptor1.class, Decorator1.class);
@@ -95,7 +98,8 @@ public class BeanDiscoveryTest extends AbstractTest {
                 LegacyBravo.class).addAsServiceProvider(Extension.class, LegacyExtension.class);
 
         return new WebArchiveBuilder().withTestClass(BeanDiscoveryTest.class)
-                .withClasses(VerifyingExtension.class, ScopesExtension.class, Binding.class, MyNormalScope.class, MyPseudoScope.class,
+                .withClasses(VerifyingExtension.class, ScopesExtension.class, Binding.class, MyNormalScope.class,
+                        MyPseudoScope.class,
                         MyNormalContext.class, MyPseudoContext.class, MyStereotype.class)
                 .withExtensions(VerifyingExtension.class, ScopesExtension.class).withLibrary(Ping.class)
                 .withLibraries(alpha, alpha2, alpha3, bravo, charlie, delta, echo, foxtrot, legacy).build();
@@ -105,19 +109,22 @@ public class BeanDiscoveryTest extends AbstractTest {
     VerifyingExtension extension;
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
     public void testExplicitBeanArchiveModeAll(Alpha alpha) {
         assertDiscoveredAndAvailable(alpha, Alpha.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
     public void testExplicitBeanArchiveModeAllVersion11(Alpha2 alpha) {
         assertDiscoveredAndAvailable(alpha, Alpha2.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ba"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "a") })
     public void testExplicitBeanArchiveModeAllVersion20(Alpha3 alpha) {
         assertDiscoveredAndAvailable(alpha, Alpha3.class);
     }
@@ -138,7 +145,8 @@ public class BeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "b"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bb") })
     public void testNormalScopeImplicitBeanArchiveNoDescriptor(Delta delta, Golf golf) {
@@ -147,7 +155,8 @@ public class BeanDiscoveryTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER, groups = INTEGRATION)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"), @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "b"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE, id = "ca"),
+            @SpecAssertion(section = TYPE_DISCOVERY_STEPS, id = "b"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "ba"),
             @SpecAssertion(section = BEAN_DEFINING_ANNOTATIONS, id = "bb") })
     public void testNormalScopeImplicitBeanArchiveModeAnnotated(Echo echo, Hotel hotel) {

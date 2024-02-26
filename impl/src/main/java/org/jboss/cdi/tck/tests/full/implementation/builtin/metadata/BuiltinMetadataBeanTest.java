@@ -17,12 +17,16 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_METADATA;
 import static org.testng.Assert.assertEquals;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.enterprise.inject.spi.InterceptionType;
 import jakarta.enterprise.inject.spi.Interceptor;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -33,9 +37,6 @@ import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-
 /**
  * <p>
  * This test was originally part of Weld test suite.
@@ -44,6 +45,7 @@ import java.util.Collections;
  * Note that we also test that all built-in beans are passivation capable dependencies - if validation of passivation capable
  * beans and dependencies fails test the deployment (and thus all test methods) will fail.
  * </p>
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -55,7 +57,8 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(BuiltinMetadataBeanTest.class)
-                .withBeansXml(new BeansXml().interceptors(YoghurtInterceptor.class).decorators(MilkProductDecorator.class)).build();
+                .withBeansXml(new BeansXml().interceptors(YoghurtInterceptor.class).decorators(MilkProductDecorator.class))
+                .build();
     }
 
     @Inject
@@ -82,7 +85,8 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
 
         Bean<Yoghurt> probioticYoghurtBean = getUniqueBean(Yoghurt.class, new Probiotic.Literal());
         CreationalContext<Yoghurt> probioticCtx = getCurrentManager().createCreationalContext(probioticYoghurtBean);
-        Yoghurt probioticYoghurt = (Yoghurt) getCurrentManager().getReference(probioticYoghurtBean, Yoghurt.class, probioticCtx);
+        Yoghurt probioticYoghurt = (Yoghurt) getCurrentManager().getReference(probioticYoghurtBean, Yoghurt.class,
+                probioticCtx);
         assertEquals(probioticYoghurtBean, factory.getProbioticYoghurtBean());
     }
 
@@ -105,7 +109,7 @@ public class BuiltinMetadataBeanTest extends AbstractTest {
             @SpecAssertion(section = BEAN_METADATA, id = "f") })
     public void testDecoratorMetadata() {
         Bean<?> bean = getUniqueBean(Yoghurt.class);
-        Decorator<?> decorator = getCurrentManager().resolveDecorators(Collections.<Type>singleton(MilkProduct.class))
+        Decorator<?> decorator = getCurrentManager().resolveDecorators(Collections.<Type> singleton(MilkProduct.class))
                 .iterator().next();
         MilkProductDecorator instance = yoghurt.getDecoratorInstance();
         assertEquals(decorator, instance.getBean());

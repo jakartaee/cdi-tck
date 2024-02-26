@@ -54,8 +54,9 @@ public class ConversationTestPhaseListener implements PhaseListener {
             response.addHeader(AbstractConversationTest.CID_HEADER_NAME,
                     conversation.getId() == null ? " null" : conversation.getId());
             response.addHeader(AbstractConversationTest.LONG_RUNNING_HEADER_NAME, String.valueOf(!conversation.isTransient()));
-            response.addHeader(Cloud.RAINED_HEADER_NAME, new Boolean(BeanLookupUtils.getContextualReference(beanManager, Cloud.class)
-                    .isRained()).toString());
+            response.addHeader(Cloud.RAINED_HEADER_NAME,
+                    new Boolean(BeanLookupUtils.getContextualReference(beanManager, Cloud.class)
+                            .isRained()).toString());
             response.addHeader(ACTIVE_BEFORE_APPLY_REQUEST_VALUES_HEADER_NAME,
                     new Boolean(activeBeforeApplyRequestValues).toString());
         }

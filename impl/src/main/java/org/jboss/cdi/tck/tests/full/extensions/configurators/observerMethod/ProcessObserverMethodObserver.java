@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.observerMethod;
 import java.lang.annotation.Annotation;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.Reception;
 import jakarta.enterprise.event.TransactionPhase;

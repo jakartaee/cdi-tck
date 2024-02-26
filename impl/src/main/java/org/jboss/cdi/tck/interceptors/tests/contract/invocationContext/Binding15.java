@@ -29,5 +29,6 @@ import jakarta.interceptor.InterceptorBinding;
 @Retention(RUNTIME)
 public @interface Binding15 {
 
-    public class Literal extends AnnotationLiteral<Binding15> implements Binding15 {}
+    public class Literal extends AnnotationLiteral<Binding15> implements Binding15 {
+    }
 }

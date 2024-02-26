@@ -18,9 +18,10 @@ import jakarta.enterprise.context.ApplicationScoped;
 /**
  * This bean has bean defining annotation hence is picked up in implicit archive.
  * It serves no other purpose and is not used in the tests.
+ *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @ApplicationScoped
 public class DummyBean {
-    
+
 }

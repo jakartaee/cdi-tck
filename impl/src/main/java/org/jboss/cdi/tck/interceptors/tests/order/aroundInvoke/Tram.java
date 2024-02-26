@@ -17,7 +17,6 @@ import static org.testng.Assert.assertEquals;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.interceptor.AroundInvoke;
-import jakarta.interceptor.Interceptors;
 import jakarta.interceptor.InvocationContext;
 
 @TramClassBinding

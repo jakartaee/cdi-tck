@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.interceptors.definition.broken.finalClassInterce
 import static org.jboss.cdi.tck.cdi.Sections.BINDING_INTERCEPTOR_TO_BEAN;
 
 import jakarta.enterprise.inject.spi.DeploymentException;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
@@ -33,7 +34,8 @@ public class DependentBeanFinalMethodInterceptorTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassDefinition(DependentBeanFinalMethodInterceptorTest.class)
-                .withClasses(FooBinding.class, MissileInterceptor.class, NuclearMissileFinalMethod.class, NuclearMissileIPBean.class)
+                .withClasses(FooBinding.class, MissileInterceptor.class, NuclearMissileFinalMethod.class,
+                        NuclearMissileIPBean.class)
                 .build();
     }
 

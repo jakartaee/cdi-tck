@@ -23,13 +23,13 @@ import jakarta.interceptor.InvocationContext;
 @Priority(Interceptor.Priority.APPLICATION)
 public class FishInterceptor {
 
-	public FishInterceptor() {
-	}
+    public FishInterceptor() {
+    }
 
-	@AroundInvoke
-	public Object aroundInvoke(InvocationContext ic) throws Exception {
+    @AroundInvoke
+    public Object aroundInvoke(InvocationContext ic) throws Exception {
 
-		return ic.proceed();
-	}
+        return ic.proceed();
+    }
 
 }

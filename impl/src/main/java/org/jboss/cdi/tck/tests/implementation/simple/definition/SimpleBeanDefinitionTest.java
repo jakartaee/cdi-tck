@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -94,7 +94,8 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "ba"), @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "a"),
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "ba"),
+            @SpecAssertion(section = DECLARING_MANAGED_BEAN, id = "a"),
             @SpecAssertion(section = BEAN_CONSTRUCTORS, id = "a"), @SpecAssertion(section = INSTANTIATION, id = "ba") })
     public void testEmptyConstructorUsed() {
         Donkey.constructedCorrectly = false;
@@ -103,7 +104,8 @@ public class SimpleBeanDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"), @SpecAssertion(section = INSTANTIATION, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DECLARING_BEAN_CONSTRUCTOR, id = "aa"),
+            @SpecAssertion(section = INSTANTIATION, id = "aa") })
     public void testInitializerAnnotatedConstructorUsedOverEmptyConstuctor() throws Exception {
         getContextualReference(Turkey.class);
         Assert.assertTrue(Turkey.constructedCorrectly);

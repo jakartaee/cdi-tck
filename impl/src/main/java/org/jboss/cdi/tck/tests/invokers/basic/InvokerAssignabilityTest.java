@@ -15,6 +15,17 @@
  */
 package org.jboss.cdi.tck.tests.invokers.basic;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertThrows;
+import static org.testng.Assert.fail;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
@@ -24,6 +35,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.Invoker;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -35,17 +47,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
-import static org.testng.Assert.fail;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class InvokerAssignabilityTest extends AbstractTest {
@@ -110,35 +111,35 @@ public class InvokerAssignabilityTest extends AbstractTest {
         assertOK(invokers, service, "helloCollection", array(List.of()));
         assertOK(invokers, service, "helloCollection", array(Set.of()));
         assertOK(invokers, service, "helloSerializable", array(1)); // Number is Serializable
-        assertOK(invokers, service, "helloSerializable", array(new Object[]{}));
-        assertOK(invokers, service, "helloSerializable", array(new String[]{}));
+        assertOK(invokers, service, "helloSerializable", array(new Object[] {}));
+        assertOK(invokers, service, "helloSerializable", array(new String[] {}));
         assertOK(invokers, service, "helloObject", array(""));
         assertOK(invokers, service, "helloObject", array(List.of()));
         assertOK(invokers, service, "helloObject", array(new Object()));
-        assertOK(invokers, service, "helloObject", array(new int[]{}));
-        assertOK(invokers, service, "helloObject", array(new String[]{}));
-        assertOK(invokers, service, "helloObject", array(new List<?>[]{}));
-        assertOK(invokers, service, "helloObject", array(new Object[]{}));
+        assertOK(invokers, service, "helloObject", array(new int[] {}));
+        assertOK(invokers, service, "helloObject", array(new String[] {}));
+        assertOK(invokers, service, "helloObject", array(new List<?>[] {}));
+        assertOK(invokers, service, "helloObject", array(new Object[] {}));
 
-        assertOK(invokers, service, "helloBooleanArray", array(new boolean[]{true}));
-        assertOK(invokers, service, "helloByteArray", array(new byte[]{(byte) 1}));
-        assertOK(invokers, service, "helloShortArray", array(new short[]{(short) 1}));
-        assertOK(invokers, service, "helloIntArray", array(new int[]{1}));
-        assertOK(invokers, service, "helloLongArray", array(new long[]{1L}));
-        assertOK(invokers, service, "helloFloatArray", array(new float[]{1.0F}));
-        assertOK(invokers, service, "helloDoubleArray", array(new double[]{1.0}));
-        assertOK(invokers, service, "helloCharArray", array(new char[]{'a'}));
-        assertOK(invokers, service, "helloStringArray", array(new String[]{}));
-        assertOK(invokers, service, "helloObjectArray", array(new String[]{}));
-        assertOK(invokers, service, "helloObjectArray", array(new Object[]{}));
+        assertOK(invokers, service, "helloBooleanArray", array(new boolean[] { true }));
+        assertOK(invokers, service, "helloByteArray", array(new byte[] { (byte) 1 }));
+        assertOK(invokers, service, "helloShortArray", array(new short[] { (short) 1 }));
+        assertOK(invokers, service, "helloIntArray", array(new int[] { 1 }));
+        assertOK(invokers, service, "helloLongArray", array(new long[] { 1L }));
+        assertOK(invokers, service, "helloFloatArray", array(new float[] { 1.0F }));
+        assertOK(invokers, service, "helloDoubleArray", array(new double[] { 1.0 }));
+        assertOK(invokers, service, "helloCharArray", array(new char[] { 'a' }));
+        assertOK(invokers, service, "helloStringArray", array(new String[] {}));
+        assertOK(invokers, service, "helloObjectArray", array(new String[] {}));
+        assertOK(invokers, service, "helloObjectArray", array(new Object[] {}));
 
-        assertOK(invokers, service, "helloCollectionArrayArray", array(new List<?>[][]{}));
-        assertOK(invokers, service, "helloCollectionArrayArray", array(new Set<?>[][]{}));
-        assertOK(invokers, service, "helloObjectArrayArray", array(new List<?>[][]{}));
-        assertOK(invokers, service, "helloObjectArrayArray", array(new Set<?>[][]{}));
-        assertOK(invokers, service, "helloObjectArrayArray", array(new String[][]{}));
-        assertOK(invokers, service, "helloObjectArrayArray", array(new Object[][]{}));
-        assertOK(invokers, service, "helloObjectArrayArray", array(new Object[][][]{}));
+        assertOK(invokers, service, "helloCollectionArrayArray", array(new List<?>[][] {}));
+        assertOK(invokers, service, "helloCollectionArrayArray", array(new Set<?>[][] {}));
+        assertOK(invokers, service, "helloObjectArrayArray", array(new List<?>[][] {}));
+        assertOK(invokers, service, "helloObjectArrayArray", array(new Set<?>[][] {}));
+        assertOK(invokers, service, "helloObjectArrayArray", array(new String[][] {}));
+        assertOK(invokers, service, "helloObjectArrayArray", array(new Object[][] {}));
+        assertOK(invokers, service, "helloObjectArrayArray", array(new Object[][][] {}));
 
         assertFail(invokers, service, "helloBoolean", array(1));
         assertFail(invokers, service, "helloByte", array(1));
@@ -186,27 +187,27 @@ public class InvokerAssignabilityTest extends AbstractTest {
         assertFail(invokers, service, "helloCollection", array(new Object()));
         assertFail(invokers, service, "helloSerializable", array(new Object()));
 
-        assertFail(invokers, service, "helloBooleanArray", array(new int[]{1}));
-        assertFail(invokers, service, "helloByteArray", array(new int[]{1}));
-        assertFail(invokers, service, "helloShortArray", array(new int[]{1}));
-        assertFail(invokers, service, "helloIntArray", array(new long[]{1L}));
-        assertFail(invokers, service, "helloLongArray", array(new int[]{1}));
-        assertFail(invokers, service, "helloFloatArray", array(new double[]{1.0}));
-        assertFail(invokers, service, "helloDoubleArray", array(new float[]{1.0F}));
-        assertFail(invokers, service, "helloCharArray", array(new int[]{1}));
+        assertFail(invokers, service, "helloBooleanArray", array(new int[] { 1 }));
+        assertFail(invokers, service, "helloByteArray", array(new int[] { 1 }));
+        assertFail(invokers, service, "helloShortArray", array(new int[] { 1 }));
+        assertFail(invokers, service, "helloIntArray", array(new long[] { 1L }));
+        assertFail(invokers, service, "helloLongArray", array(new int[] { 1 }));
+        assertFail(invokers, service, "helloFloatArray", array(new double[] { 1.0 }));
+        assertFail(invokers, service, "helloDoubleArray", array(new float[] { 1.0F }));
+        assertFail(invokers, service, "helloCharArray", array(new int[] { 1 }));
         assertFail(invokers, service, "helloStringArray", array(""));
         assertFail(invokers, service, "helloStringArray", array(new Object()));
-        assertFail(invokers, service, "helloStringArray", array(new String[][]{}));
-        assertFail(invokers, service, "helloStringArray", array(new Object[]{}));
+        assertFail(invokers, service, "helloStringArray", array(new String[][] {}));
+        assertFail(invokers, service, "helloStringArray", array(new Object[] {}));
         assertFail(invokers, service, "helloObjectArray", array(""));
         assertFail(invokers, service, "helloObjectArray", array(new Object()));
 
-        assertFail(invokers, service, "helloCollectionArrayArray", array(new List<?>[]{}));
-        assertFail(invokers, service, "helloCollectionArrayArray", array(new Set<?>[]{}));
-        assertFail(invokers, service, "helloCollectionArrayArray", array(new List<?>[][][]{}));
-        assertFail(invokers, service, "helloCollectionArrayArray", array(new Set<?>[][][]{}));
-        assertFail(invokers, service, "helloCollectionArrayArray", array(new Object[][]{}));
-        assertFail(invokers, service, "helloObjectArrayArray", array(new Object[]{}));
+        assertFail(invokers, service, "helloCollectionArrayArray", array(new List<?>[] {}));
+        assertFail(invokers, service, "helloCollectionArrayArray", array(new Set<?>[] {}));
+        assertFail(invokers, service, "helloCollectionArrayArray", array(new List<?>[][][] {}));
+        assertFail(invokers, service, "helloCollectionArrayArray", array(new Set<?>[][][] {}));
+        assertFail(invokers, service, "helloCollectionArrayArray", array(new Object[][] {}));
+        assertFail(invokers, service, "helloObjectArrayArray", array(new Object[] {}));
         assertFail(invokers, service, "helloObjectArrayArray", array(new Object()));
     }
 
@@ -253,7 +254,7 @@ public class InvokerAssignabilityTest extends AbstractTest {
 
     // produces a single-element array whose only element is `obj`
     private static Object[] array(Object obj) {
-        return new Object[]{obj};
+        return new Object[] { obj };
     }
 
     private static void assertOK(InvokerHolder invokers, MyService instance, String methodName, Object[] arguments) {

@@ -20,7 +20,7 @@ import jakarta.inject.Inject;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @RequestScoped
 public class Action {

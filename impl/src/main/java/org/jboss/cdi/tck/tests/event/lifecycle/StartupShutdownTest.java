@@ -17,6 +17,7 @@ import static org.jboss.cdi.tck.cdi.Sections.STARTUP_EVENT;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Startup;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;

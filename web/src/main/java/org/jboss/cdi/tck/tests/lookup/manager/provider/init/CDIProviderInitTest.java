@@ -21,6 +21,7 @@ import static org.testng.Assert.assertNotNull;
 
 import jakarta.enterprise.inject.spi.CDI;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;

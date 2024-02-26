@@ -18,6 +18,6 @@ import jakarta.inject.Inject;
 public class AirPlane {
 
     @Inject
-    public AirPlane(Tank tank){
+    public AirPlane(Tank tank) {
     }
 }

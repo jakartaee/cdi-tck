@@ -44,27 +44,32 @@ public class ProcessInjectionTargetObserver implements Extension {
 
     public void observeServlet(@Observes ProcessInjectionTarget<TestServlet> event, BeanManager beanManager) {
         servletEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TestServlet>(event.getInjectionTarget(), () -> TestServlet.setIsWrappedInjectionSuccessfull(true)));
+        event.setInjectionTarget(new CustomInjectionTarget<TestServlet>(event.getInjectionTarget(),
+                () -> TestServlet.setIsWrappedInjectionSuccessfull(true)));
     }
 
     public void observeFilter(@Observes ProcessInjectionTarget<TestFilter> event, BeanManager beanManager) {
         filterEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TestFilter>(event.getInjectionTarget(), () -> TestFilter.setIsWrappedInjectionSuccessfull(true)));
+        event.setInjectionTarget(new CustomInjectionTarget<TestFilter>(event.getInjectionTarget(),
+                () -> TestFilter.setIsWrappedInjectionSuccessfull(true)));
     }
 
     public void observeListener(@Observes ProcessInjectionTarget<TestListener> event, BeanManager beanManager) {
         listenerEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TestListener>(event.getInjectionTarget(), () -> TestListener.setIsWrappedInjectionSuccessfull(true)));
+        event.setInjectionTarget(new CustomInjectionTarget<TestListener>(event.getInjectionTarget(),
+                () -> TestListener.setIsWrappedInjectionSuccessfull(true)));
     }
 
     public void observeTagHandler(@Observes ProcessInjectionTarget<TestTagHandler> event, BeanManager beanManager) {
         tagHandlerEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TestTagHandler>(event.getInjectionTarget(), () -> TestTagHandler.setIsWrappedInjectionSuccessfull(true)));
+        event.setInjectionTarget(new CustomInjectionTarget<TestTagHandler>(event.getInjectionTarget(),
+                () -> TestTagHandler.setIsWrappedInjectionSuccessfull(true)));
     }
 
     public void observeTagLibraryListener(@Observes ProcessInjectionTarget<TagLibraryListener> event, BeanManager beanManager) {
         tagLibraryListenerEvent = event;
-        event.setInjectionTarget(new CustomInjectionTarget<TagLibraryListener>(event.getInjectionTarget(), () -> TagLibraryListener.setIsWrappedInjectionSuccessfull(true)));
+        event.setInjectionTarget(new CustomInjectionTarget<TagLibraryListener>(event.getInjectionTarget(),
+                () -> TagLibraryListener.setIsWrappedInjectionSuccessfull(true)));
     }
 
     public void observeServletSuperType(@Observes ProcessInjectionTarget<? super HttpServlet> event) {
@@ -89,11 +94,13 @@ public class ProcessInjectionTargetObserver implements Extension {
     }
 
     public void observeSessionBean(@Observes ProcessInjectionTarget<Fence> event, BeanManager beanManager) {
-        event.setInjectionTarget(new CustomInjectionTarget<Fence>(event.getInjectionTarget(), () -> Fence.setIsWrappedInjectionSuccessfull(true)));
+        event.setInjectionTarget(new CustomInjectionTarget<Fence>(event.getInjectionTarget(),
+                () -> Fence.setIsWrappedInjectionSuccessfull(true)));
     }
 
     public void observeEJBInterceptor(@Observes ProcessInjectionTarget<FenceInterceptor> event, BeanManager beanManager) {
-        event.setInjectionTarget(new CustomInjectionTarget<FenceInterceptor>(event.getInjectionTarget(), () -> FenceInterceptor.setIsWrappedInjectionSuccessfull(true)));
+        event.setInjectionTarget(new CustomInjectionTarget<FenceInterceptor>(event.getInjectionTarget(),
+                () -> FenceInterceptor.setIsWrappedInjectionSuccessfull(true)));
     }
 
     public void stringObserver(@Observes ProcessInjectionTarget<String> event) {

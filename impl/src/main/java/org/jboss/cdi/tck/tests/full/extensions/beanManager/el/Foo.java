@@ -23,7 +23,7 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Named
 public class Foo {

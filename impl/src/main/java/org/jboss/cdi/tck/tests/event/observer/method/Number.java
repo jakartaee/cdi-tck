@@ -34,4 +34,3 @@ public @interface Number {
     class Literal extends AnnotationLiteral<Number> implements Number {
     }
 }
-

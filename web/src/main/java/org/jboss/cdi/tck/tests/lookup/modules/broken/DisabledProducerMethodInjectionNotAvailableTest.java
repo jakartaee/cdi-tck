@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
 
 /**
  * Test that bean in web module cannot inject disabled producer method from EJB module.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")

@@ -18,7 +18,7 @@ import jakarta.enterprise.inject.Produces;
 public class FooProducer {
 
     @Produces
-    public Foo createFoo(){
+    public Foo createFoo() {
         return new Foo();
     }
 }

@@ -31,39 +31,39 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 @WebFilter(filterName = "FilterTest", displayName = "Test Filter for Sessions", urlPatterns = "/SimplePage.html")
 public class TestFilter implements Filter {
 
-	private static final SimpleLogger logger = new SimpleLogger(
-			TestFilter.class);
+    private static final SimpleLogger logger = new SimpleLogger(
+            TestFilter.class);
 
-	@Inject
-	private BeanManager beanManager;
+    @Inject
+    private BeanManager beanManager;
 
-	@Inject
-	private SimpleSessionBean simpleBean;
+    @Inject
+    private SimpleSessionBean simpleBean;
 
-	public void destroy() {
-		beanManager = null;
-	}
+    public void destroy() {
+        beanManager = null;
+    }
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
-		logger.log("Do filter...");
-		checkSessionContextActive();
-		chain.doFilter(request, response);
-		checkSessionContextActive();
+    public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException {
+        logger.log("Do filter...");
+        checkSessionContextActive();
+        chain.doFilter(request, response);
+        checkSessionContextActive();
 
-	}
+    }
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-	}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
-	private void checkSessionContextActive() throws ServletException {
-		if (beanManager == null
-				|| !beanManager.getContext(SessionScoped.class).isActive()
-				|| simpleBean == null) {
-			throw new ServletException("Session context is not active");
-		}
-		// Check bean invocation
-		simpleBean.getId();
-	}
+    private void checkSessionContextActive() throws ServletException {
+        if (beanManager == null
+                || !beanManager.getContext(SessionScoped.class).isActive()
+                || simpleBean == null) {
+            throw new ServletException("Session context is not active");
+        }
+        // Check bean invocation
+        simpleBean.getId();
+    }
 
 }

@@ -44,7 +44,8 @@ public class FireSyncEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "e"), @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "e"),
+            @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "f") })
     public void testSyncObservesCalledInSameThread() {
 
         event.fire(new Letter());

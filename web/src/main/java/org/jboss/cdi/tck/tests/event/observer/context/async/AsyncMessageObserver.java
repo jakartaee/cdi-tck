@@ -32,10 +32,10 @@ public class AsyncMessageObserver {
 
     @Inject
     Counter counter;
-    
+
     @Inject
     BeanManager bm;
-    
+
     public static AtomicBoolean requestScopeActive = new AtomicBoolean(false);
 
     public static AtomicInteger status = new AtomicInteger();
@@ -50,6 +50,5 @@ public class AsyncMessageObserver {
         requestScopeActive.set(bm.getContext(RequestScoped.class).isActive());
         counterIsZero.set(counter.getCount().get() > 0 ? false : true);
     }
-
 
 }

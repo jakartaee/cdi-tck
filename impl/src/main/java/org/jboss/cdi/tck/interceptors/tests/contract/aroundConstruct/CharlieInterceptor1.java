@@ -20,7 +20,6 @@ import jakarta.interceptor.AroundConstruct;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
 
-
 @Interceptor
 @CharlieBinding
 @Priority(100)

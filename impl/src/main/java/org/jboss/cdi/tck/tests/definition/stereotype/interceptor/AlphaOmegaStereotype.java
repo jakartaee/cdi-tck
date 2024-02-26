@@ -28,7 +28,7 @@ import jakarta.enterprise.inject.Stereotype;
  *
  * @author Martin Kouba
  */
-@Alpha(value=false)
+@Alpha(value = false)
 @Omega
 @Stereotype
 @Target({ TYPE, METHOD, FIELD })

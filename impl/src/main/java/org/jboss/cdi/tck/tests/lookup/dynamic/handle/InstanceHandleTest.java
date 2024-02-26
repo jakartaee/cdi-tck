@@ -21,10 +21,14 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
+import java.util.Iterator;
+import java.util.List;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.BeanManager;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -33,9 +37,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Iterator;
-import java.util.List;
 
 @SpecVersion(spec = "cdi", version = "4.0")
 public class InstanceHandleTest extends AbstractTest {
@@ -147,7 +148,7 @@ public class InstanceHandleTest extends AbstractTest {
 
         ActionSequence.reset();
         assertTrue(instance.isAmbiguous());
-        for (Iterator<? extends Instance.Handle<Processor>> iterator = instance.handles().iterator(); iterator.hasNext(); ) {
+        for (Iterator<? extends Instance.Handle<Processor>> iterator = instance.handles().iterator(); iterator.hasNext();) {
             try (Instance.Handle<Processor> handle = iterator.next()) {
                 handle.get().ping();
             }

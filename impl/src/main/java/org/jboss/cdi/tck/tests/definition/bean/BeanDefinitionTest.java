@@ -31,8 +31,8 @@ import java.util.Set;
 
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.inject.spi.Bean;
-
 import jakarta.enterprise.util.TypeLiteral;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -101,7 +101,8 @@ public class BeanDefinitionTest extends AbstractTest {
             @SpecAssertion(section = BEAN_TYPES, id = "l"), @SpecAssertion(section = BEAN, id = "ba") })
     public void testGenericBeanTypes() {
         assertEquals(getBeans(MyRawBean.class).size(), 1);
-        Bean<MyGenericBean<?>> bean = (Bean<MyGenericBean<?>>) getCurrentManager().getBeans(MyGenericBean.class).iterator().next();
+        Bean<MyGenericBean<?>> bean = (Bean<MyGenericBean<?>>) getCurrentManager().getBeans(MyGenericBean.class).iterator()
+                .next();
         assertEquals(bean.getTypes().size(), 5);
 
         assertTrue(containsClass(bean.getTypes(), MyGenericBean.class));
@@ -134,7 +135,8 @@ public class BeanDefinitionTest extends AbstractTest {
         // JLS isn't clear itself and Java implementations either. So we need to keep it open and support both
         // https://bugs.openjdk.org/browse/JDK-8044366
         assertTrue(bean.getTypes().contains(MySuperInterface.class)
-                   || bean.getTypes().contains(new TypeLiteral<MySuperInterface<Number>>() {}.getType()));
+                || bean.getTypes().contains(new TypeLiteral<MySuperInterface<Number>>() {
+                }.getType()));
         assertTrue(bean.getTypes().contains(Object.class));
     }
 

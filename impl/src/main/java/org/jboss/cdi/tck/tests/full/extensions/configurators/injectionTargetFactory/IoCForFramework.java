@@ -33,19 +33,22 @@ public class IoCForFramework {
     private InjectionTarget<NotOurClass> it;
     private boolean exceptionThrown = false;
 
-    public IoCForFramework(){}
+    public IoCForFramework() {
+    }
 
     @Inject
     public IoCForFramework(BeanManager bm) {
         nocc = bm.createCreationalContext(null);
         InjectionTargetFactory<NotOurClass> itf = bm.getInjectionTargetFactory(bm.createAnnotatedType(NotOurClass.class));
-        itf.configure().filterMethods(m -> m.getJavaMember().getName().equals("setService")).findFirst().get().add(InjectLiteral.INSTANCE);
+        itf.configure().filterMethods(m -> m.getJavaMember().getName().equals("setService")).findFirst().get()
+                .add(InjectLiteral.INSTANCE);
 
         it = itf.createInjectionTarget(null);
 
         // invoking configure() after create method should throw exception
         try {
-            itf.configure().filterMethods(m -> m.getJavaMember().getName().equals("setService")).findFirst().get().add(InjectLiteral.INSTANCE);
+            itf.configure().filterMethods(m -> m.getJavaMember().getName().equals("setService")).findFirst().get()
+                    .add(InjectLiteral.INSTANCE);
         } catch (IllegalStateException e) {
             //expected behaviour
             exceptionThrown = true;

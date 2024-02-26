@@ -22,11 +22,11 @@ import jakarta.ws.rs.Produces;
 public class BrokenFoodProducer {
 
     @Produces
-    public Food cookSomething(){
-       return new Food();
+    public Food cookSomething() {
+        return new Food();
     }
 
-    public void eatFood(@Disposes @ObservesAsync Food food){
+    public void eatFood(@Disposes @ObservesAsync Food food) {
 
     }
 }

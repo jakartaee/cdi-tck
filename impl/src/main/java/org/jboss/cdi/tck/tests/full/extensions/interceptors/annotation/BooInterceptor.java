@@ -24,6 +24,6 @@ public class BooInterceptor {
             return "intercepted";
         }
         return ctx.proceed();
-}
+    }
 
 }

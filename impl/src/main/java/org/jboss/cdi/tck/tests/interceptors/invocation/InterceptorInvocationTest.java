@@ -25,9 +25,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
-import org.jboss.shrinkwrap.descriptor.api.beans11.BeansDescriptor;
-import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -49,7 +46,7 @@ public class InterceptorInvocationTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "a"),
-            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "g"),  @SpecAssertion(section = BIZ_METHOD, id = "aa")})
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "g"), @SpecAssertion(section = BIZ_METHOD, id = "aa") })
     public void testManagedBeanIsIntercepted() {
 
         AlmightyInterceptor.reset();
@@ -69,7 +66,8 @@ public class InterceptorInvocationTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "ad"), @SpecAssertion(section = INITIALIZER_METHODS, id = "f") })
+    @SpecAssertions({ @SpecAssertion(section = BIZ_METHOD, id = "ad"),
+            @SpecAssertion(section = INITIALIZER_METHODS, id = "f") })
     public void testInitializerMethodsNotIntercepted() {
 
         AlmightyInterceptor.reset();

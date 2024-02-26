@@ -13,6 +13,5 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.configurators.injectionPoint;
 
-
 public class Engine {
 }

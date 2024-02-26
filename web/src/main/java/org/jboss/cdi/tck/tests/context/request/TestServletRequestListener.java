@@ -51,7 +51,7 @@ public class TestServletRequestListener implements ServletRequestListener {
 
     @Override
     public void requestInitialized(ServletRequestEvent sre) {
-    	logger.log("Request initialized...");
+        logger.log("Request initialized...");
         checkRequestContextActive();
     }
 

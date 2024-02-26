@@ -20,13 +20,13 @@ import jakarta.enterprise.inject.Produces;
 public class ProducerMethodParamInjectionCorralBroken extends Ranch {
     @Override
     public void ping() {
-        
+
     }
-    
+
     @Produces
     @British
     @SessionScoped
-    public Herd produce(@British Cow cow){
-       return new Herd();
+    public Herd produce(@British Cow cow) {
+        return new Herd();
     }
 }

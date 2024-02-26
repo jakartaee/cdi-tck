@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.full.extensions.configurators;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.Extension;
@@ -51,7 +52,7 @@ public class DummyConfiguringExtension implements Extension {
         sameBAConfiguratorReturned.set(beanAttributesConfigurator.equals(event.configureBeanAttributes()));
     }
 
-    void observesFooPOM(@Observes ProcessObserverMethod<Bar, Foo> event){
+    void observesFooPOM(@Observes ProcessObserverMethod<Bar, Foo> event) {
         ObserverMethodConfigurator<Bar> observerMethodConfigurator = event.configureObserverMethod();
         observerMethodConfigurator.priority(1000);
         sameOMConfiguratorReturned.set(observerMethodConfigurator.equals(event.configureObserverMethod()));

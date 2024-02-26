@@ -17,6 +17,7 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.AFTER_BEAN_DISCOVERY;
 
 import jakarta.interceptor.Interceptor;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -31,12 +32,12 @@ import org.testng.annotations.Test;
 
 /**
  * Registers an extension-provided implementation of the {@link Interceptor} interface.
- * 
+ *
  * <p>
  * This test was originally part of Weld test suite. Causes deployment error on Weld if an intercepted bean is passivation
  * capable - WELD-996.
  * </p>
- * 
+ *
  * @author <a href="http://community.jboss.org/people/jharting">Jozef Hartinger</a>
  * @author Martin Kouba
  */

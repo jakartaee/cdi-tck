@@ -21,7 +21,6 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.inject.Any;
-import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -32,8 +31,6 @@ import org.jboss.cdi.tck.tests.full.vetoed.aquarium.FishType;
 import org.jboss.cdi.tck.tests.full.vetoed.aquarium.Fishy;
 import org.jboss.cdi.tck.tests.full.vetoed.aquarium.Piranha;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -61,7 +58,8 @@ public class VetoedTest extends AbstractTest {
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
                 .withClasses(Animal.class, Elephant.class, Shark.class, Predator.class,
                         AnimalStereotype.class, Tiger.class, ModifyingExtension.class,
-                        VerifyingExtension.class, Shark.class).withPackage(Piranha.class.getPackage())
+                        VerifyingExtension.class, Shark.class)
+                .withPackage(Piranha.class.getPackage())
                 .withExtensions(ModifyingExtension.class, VerifyingExtension.class)
                 .withLibrary(new BeansXml(BeanDiscoveryMode.ALL), false, Gecko.class, Reptile.class)
                 .build();
@@ -72,7 +70,8 @@ public class VetoedTest extends AbstractTest {
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = WHAT_CLASSES_ARE_BEANS, id = "h"),
-            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ia"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ib") })
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ia"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ib") })
     public void testClassLevelVeto() {
         assertFalse(verifyingExtension.getClasses().contains(Elephant.class));
         assertEquals(getCurrentManager().getBeans(Elephant.class, Any.Literal.INSTANCE).size(), 0);

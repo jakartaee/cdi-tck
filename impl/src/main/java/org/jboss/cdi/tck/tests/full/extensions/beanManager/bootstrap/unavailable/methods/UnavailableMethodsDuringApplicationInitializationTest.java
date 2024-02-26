@@ -13,6 +13,9 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.beanManager.bootstrap.unavailable.methods;
 
+import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
+import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -23,13 +26,10 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
-import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
-
 /**
- * 
+ *
  * This test was originally part of the Weld test suite.
- * 
+ *
  *
  * @author Martin Kouba
  * @author Tomas Remes

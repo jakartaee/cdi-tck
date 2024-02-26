@@ -31,7 +31,6 @@ import org.jboss.cdi.tck.TestGroups;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.descriptor.api.Descriptors;
 import org.jboss.shrinkwrap.impl.BeansXml;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -50,10 +49,10 @@ public class DefaultBeanDiscoveryModeTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-            .withBeansXml(new BeansXml(BeanDiscoveryMode.ANNOTATED))
-            .withTestClass(DefaultBeanDiscoveryModeTest.class)
-            .withExtension(TestExtension.class)
-            .withPackage(DefaultBeanDiscoveryModeTest.class.getPackage()).build();
+                .withBeansXml(new BeansXml(BeanDiscoveryMode.ANNOTATED))
+                .withTestClass(DefaultBeanDiscoveryModeTest.class)
+                .withExtension(TestExtension.class)
+                .withPackage(DefaultBeanDiscoveryModeTest.class.getPackage()).build();
     }
 
     @Test

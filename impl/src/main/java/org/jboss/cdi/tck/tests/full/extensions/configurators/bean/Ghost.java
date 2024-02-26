@@ -16,26 +16,27 @@ package org.jboss.cdi.tck.tests.full.extensions.configurators.bean;
 import jakarta.enterprise.inject.Vetoed;
 import jakarta.inject.Inject;
 
-/** {@link Vetoed} makes sure this bean does not get picked up by CDI
+/**
+ * {@link Vetoed} makes sure this bean does not get picked up by CDI
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 @Vetoed
 public class Ghost {
-    
+
     private boolean invisible;
-    
+
     @Inject
     private Weapon weapon;
-    
+
     @Inject
     private DesireToHurtHumans evilDesire;
-    
+
     public Ghost(boolean invisible) {
         this.invisible = invisible;
     }
-    
+
     public Ghost() {
-        
+
     }
 }

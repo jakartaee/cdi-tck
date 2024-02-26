@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -53,7 +53,8 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "aaa"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "aaa"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kb") })
     public void testProcessObserverMethodEventsSent() {
         Assert.assertTrue(ProcessObserverMethodObserver.getEventtypes().contains(EventA.class));
     }
@@ -61,12 +62,13 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     @Test
     @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "aba")
     public void testGetAnnotatedMethod() {
-        Assert.assertEquals(ProcessObserverMethodObserver.getAnnotatedMethod().getParameters().iterator().next().getBaseType()
-                , (EventA.class));
+        Assert.assertEquals(ProcessObserverMethodObserver.getAnnotatedMethod().getParameters().iterator().next().getBaseType(),
+                (EventA.class));
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "ba"), @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kb") })
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "ba"),
+            @SpecAssertion(section = BEAN_DISCOVERY_STEPS, id = "kb") })
     public void testGetObserverMethod() {
         Assert.assertEquals(ProcessObserverMethodObserver.getObserverMethod().getObservedType(), (EventA.class));
     }
@@ -74,14 +76,16 @@ public class ProcessObserverMethodEventTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "daa") })
     public void replaceWithSetObserverMethod() {
-        Set<ObserverMethod<? super EventC>> observerMethods = getCurrentManager().resolveObserverMethods(new EventC(), Any.Literal.INSTANCE);
+        Set<ObserverMethod<? super EventC>> observerMethods = getCurrentManager().resolveObserverMethods(new EventC(),
+                Any.Literal.INSTANCE);
         Assert.assertEquals(observerMethods.size(), 1);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dad") })
     public void vetoEventD() {
-        Set<ObserverMethod<? super EventD>> observerMethods = getCurrentManager().resolveObserverMethods(new EventD(), Any.Literal.INSTANCE);
+        Set<ObserverMethod<? super EventD>> observerMethods = getCurrentManager().resolveObserverMethods(new EventD(),
+                Any.Literal.INSTANCE);
         Assert.assertEquals(observerMethods.size(), 0);
     }
 

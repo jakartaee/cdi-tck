@@ -27,21 +27,21 @@ import org.jboss.cdi.tck.util.SimpleLogger;
 @WebListener
 public class IntrospectServletRequestListener implements ServletRequestListener {
 
-	private static final SimpleLogger logger = new SimpleLogger(
-			IntrospectServletRequestListener.class);
+    private static final SimpleLogger logger = new SimpleLogger(
+            IntrospectServletRequestListener.class);
 
-	@Override
-	public void requestDestroyed(ServletRequestEvent sre) {
-		logger.log("Request destroyed...");
-		String mode = sre.getServletRequest().getParameter("mode");
-		if (IntrospectServlet.MODE_INVALIDATE.equals(mode)) {
-			ActionSequence.addAction(IntrospectServletRequestListener.class
-					.getName());
-		}
-	}
+    @Override
+    public void requestDestroyed(ServletRequestEvent sre) {
+        logger.log("Request destroyed...");
+        String mode = sre.getServletRequest().getParameter("mode");
+        if (IntrospectServlet.MODE_INVALIDATE.equals(mode)) {
+            ActionSequence.addAction(IntrospectServletRequestListener.class
+                    .getName());
+        }
+    }
 
-	@Override
-	public void requestInitialized(ServletRequestEvent sre) {
-		// No-op
-	}
+    @Override
+    public void requestInitialized(ServletRequestEvent sre) {
+        // No-op
+    }
 }

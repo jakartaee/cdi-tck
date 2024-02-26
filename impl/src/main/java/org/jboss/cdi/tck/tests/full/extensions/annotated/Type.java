@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.annotated;
 
 public enum Type {
 
-    A, B;
+    A,
+    B;
 
 }

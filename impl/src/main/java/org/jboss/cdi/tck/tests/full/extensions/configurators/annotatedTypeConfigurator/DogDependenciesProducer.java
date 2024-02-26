@@ -24,12 +24,12 @@ public class DogDependenciesProducer {
 
     public static String dogName = "Max";
 
-    public Feed produceFeed(){
-         return new Feed();
+    public Feed produceFeed() {
+        return new Feed();
     }
 
-    public void disposeFeed(Feed feed){
-         disposerCalled.set(true);
+    public void disposeFeed(Feed feed) {
+        disposerCalled.set(true);
     }
 
 }

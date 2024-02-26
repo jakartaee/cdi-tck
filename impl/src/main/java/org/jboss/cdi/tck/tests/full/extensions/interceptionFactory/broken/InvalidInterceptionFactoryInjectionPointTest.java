@@ -48,6 +48,7 @@ public class InvalidInterceptionFactoryInjectionPointTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = Sections.INTERCEPTION_FACTORY, id = "h")
-    public void noopTest(){}
+    public void noopTest() {
+    }
 
 }

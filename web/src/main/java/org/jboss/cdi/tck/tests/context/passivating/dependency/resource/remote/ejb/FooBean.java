@@ -35,6 +35,4 @@ public class FooBean implements FooRemote {
         return id;
     }
 
-
-
 }

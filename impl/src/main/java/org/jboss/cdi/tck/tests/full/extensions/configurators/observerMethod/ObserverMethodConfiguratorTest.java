@@ -71,7 +71,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
                 .withClass(ObservesLiteral.class)
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
                 .withExtensions(ProcessObserverMethodObserver.class, AfterBeanDiscoveryObserver.class,
-                        ProcessSyntheticObserverMethodObserver.class).build();
+                        ProcessSyntheticObserverMethodObserver.class)
+                .build();
     }
 
     @Test
@@ -81,7 +82,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bi") })
     public void addQualifiersAndSetPriorityAndChangeToAsync() throws InterruptedException {
         Set<ObserverMethod<? super Pear>> pearEventObservers = getCurrentManager()
-                .resolveObserverMethods(new Pear(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE);
+                .resolveObserverMethods(new Pear(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE,
+                        Delicious.DeliciousLiteral.INSTANCE);
         assertEquals(pearEventObservers.size(), 1);
         assertEquals(pearEventObservers.iterator().next().getPriority(), ObserverMethod.DEFAULT_PRIORITY + 100);
         assertEquals(pearEventObservers.iterator().next().isAsync(), true);
@@ -90,7 +92,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
                         Collectors.toSet()));
 
         BlockingQueue<Pear> queue = new LinkedBlockingQueue<>();
-        pearEvent.select(Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).fireAsync(new Pear()).thenAccept(queue::offer);
+        pearEvent.select(Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE, Delicious.DeliciousLiteral.INSTANCE)
+                .fireAsync(new Pear()).thenAccept(queue::offer);
         Pear pear = queue.poll(2, TimeUnit.SECONDS);
         assertNotNull(pear);
         assertTrue(FruitObserver.pearObserverNotified.get());
@@ -106,7 +109,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
         assertEquals(orangeEventObservers.size(), 1);
         assertEquals(orangeEventObservers.iterator().next().getReception(), Reception.IF_EXISTS);
         assertEquals(orangeEventObservers.iterator().next().getTransactionPhase(), TransactionPhase.AFTER_SUCCESS);
-        assertEquals(orangeEventObservers.iterator().next().getObservedQualifiers(), Collections.singleton(Delicious.DeliciousLiteral.INSTANCE));
+        assertEquals(orangeEventObservers.iterator().next().getObservedQualifiers(),
+                Collections.singleton(Delicious.DeliciousLiteral.INSTANCE));
     }
 
     @Test
@@ -114,9 +118,11 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bc"),
             @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "bh") })
     public void notifyAcceptingConsumerNotified() {
-        getCurrentManager().getEvent().select(Pineapple.class, Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE).fire(new Pineapple());
+        getCurrentManager().getEvent().select(Pineapple.class, Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE)
+                .fire(new Pineapple());
         assertTrue(ProcessObserverMethodObserver.consumerNotified.get());
-        assertEquals(ProcessObserverMethodObserver.pineAppleQualifiers, Arrays.asList(Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE));
+        assertEquals(ProcessObserverMethodObserver.pineAppleQualifiers,
+                Arrays.asList(Any.Literal.INSTANCE, Delicious.DeliciousLiteral.INSTANCE));
     }
 
     @Test
@@ -132,7 +138,8 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
         getCurrentManager().getEvent().select(Banana.class, Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE).fire(new Banana());
         getCurrentManager().getEvent().select(Melon.class, Any.Literal.INSTANCE).fire(new Melon());
         getCurrentManager().getEvent().select(Peach.class, Any.Literal.INSTANCE).fire(new Peach());
-        Set<ObserverMethod<? super Peach>> peachEventObservers = getCurrentManager().resolveObserverMethods(new Peach(), Any.Literal.INSTANCE);
+        Set<ObserverMethod<? super Peach>> peachEventObservers = getCurrentManager().resolveObserverMethods(new Peach(),
+                Any.Literal.INSTANCE);
         Set<ObserverMethod<? super Banana>> bananaEventObservers = getCurrentManager()
                 .resolveObserverMethods(new Banana(), Any.Literal.INSTANCE, Ripe.RipeLiteral.INSTANCE);
         // one in FruitObserver and second one added in AfterBeanDiscoveryObserver
@@ -150,8 +157,10 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
     @Test
     @SpecAssertion(section = PROCESS_OBSERVER_METHOD, id = "dab")
     public void configuratorInitializedWithOriginalObserverMethod() {
-        ObserverMethod<? super Kiwi> configuredOne = getCurrentManager().resolveObserverMethods(new Kiwi(), Ripe.RipeLiteral.INSTANCE).iterator().next();
-        ObserverMethod<Kiwi> originalOne = getCurrentManager().getExtension(ProcessObserverMethodObserver.class).getOriginalOM();
+        ObserverMethod<? super Kiwi> configuredOne = getCurrentManager()
+                .resolveObserverMethods(new Kiwi(), Ripe.RipeLiteral.INSTANCE).iterator().next();
+        ObserverMethod<Kiwi> originalOne = getCurrentManager().getExtension(ProcessObserverMethodObserver.class)
+                .getOriginalOM();
         assertEquals(configuredOne.getObservedType(), originalOne.getObservedType());
         assertEquals(configuredOne.getObservedQualifiers(), originalOne.getObservedQualifiers());
         assertEquals(configuredOne.getPriority(), originalOne.getPriority());
@@ -172,8 +181,9 @@ public class ObserverMethodConfiguratorTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = OBSERVER_METHOD_CONFIGURATOR, id = "baa")
-    public void defaultBeanClassIsExtensionClass(){
-        Set<ObserverMethod<? super Papaya>> papayaEventObservers = getCurrentManager().resolveObserverMethods(new Papaya(), Any.Literal.INSTANCE);
+    public void defaultBeanClassIsExtensionClass() {
+        Set<ObserverMethod<? super Papaya>> papayaEventObservers = getCurrentManager().resolveObserverMethods(new Papaya(),
+                Any.Literal.INSTANCE);
         ObserverMethod<? super Papaya> papayaObserver = papayaEventObservers.iterator().next();
         assertNotNull(papayaObserver, "There is no Papaya Observer available!");
         assertEquals(papayaObserver.getBeanClass(), AfterBeanDiscoveryObserver.class);

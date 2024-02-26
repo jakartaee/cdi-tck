@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 public class TypeParametersNotTheSameTest extends AbstractTest {
@@ -43,7 +43,8 @@ public class TypeParametersNotTheSameTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(TypeParametersNotTheSameTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(TimestampLogger.class)).build();
+                        new BeansXml().decorators(TimestampLogger.class))
+                .build();
     }
 
     @Test(groups = CDI_FULL)

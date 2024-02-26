@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -42,7 +42,7 @@ import org.testng.annotations.Test;
  * <p>
  * This test was originally part of Weld test suite.
  * </p>
- * 
+ *
  * @author Jozef Hartinger
  * @author Martin Kouba
  */
@@ -60,12 +60,15 @@ public class ProcessSyntheticAnnotatedTypeTest extends AbstractTest {
                 .withTestClassPackage(ProcessSyntheticAnnotatedTypeTest.class)
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
                 .withExtensions(RegisteringAnnotationExtension.class, RegisteringExtension1.class, RegisteringExtension2.class,
-                        RegisteringExtension3.class, ModifyingExtension.class, VerifyingExtension.class).build();
+                        RegisteringExtension3.class, ModifyingExtension.class, VerifyingExtension.class)
+                .build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ae"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "af"),
-            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "j"), @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ag"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ae"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "af"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "j"),
+            @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ag"),
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "ah") })
     public void testEventsFired() {
         Set<Class<?>> patClasses = verifyingExtension.getPatClasses();

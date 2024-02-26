@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SuppressWarnings("serial")
 @WebServlet("/eager")

@@ -20,8 +20,8 @@ import jakarta.enterprise.event.ObservesAsync;
 @Stateless
 @RolesAllowed("student")
 public class Printer {
-    
-    public void observes(@ObservesAsync Text text){
+
+    public void observes(@ObservesAsync Text text) {
 
     }
 

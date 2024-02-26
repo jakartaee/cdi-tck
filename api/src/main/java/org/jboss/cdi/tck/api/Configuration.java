@@ -104,7 +104,8 @@ public interface Configuration {
     public void setEl(EL el);
 
     /**
-     * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the implementation). Any jars in this
+     * The TCK allows additional libraries to be put in the deployed test artifacts (for example the porting package for the
+     * implementation). Any jars in this
      * directory will be added to the deployed artifact.
      *
      * By default no directory is used.
@@ -116,7 +117,8 @@ public interface Configuration {
     public void setLibraryDirectory(String libraryDir);
 
     /**
-     * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided. These tests belong to testng group
+     * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided.
+     * These tests belong to testng group
      * <code>persistence</code>.
      *
      * @return the JNDI name of the test datasource
@@ -163,7 +165,8 @@ public interface Configuration {
     public void setTestJmsTopic(String testJmsTopic);
 
     /**
-     * All tests using some timeout technique (e.g. wait for async processing) should use this value to adjust the final timeout so that it's possible to configure timeouts
+     * All tests using some timeout technique (e.g. wait for async processing) should use this value to adjust the final timeout
+     * so that it's possible to configure timeouts
      * according to the testing runtime performance and throughput.
      *
      * @return the test timeout factor (in percent)

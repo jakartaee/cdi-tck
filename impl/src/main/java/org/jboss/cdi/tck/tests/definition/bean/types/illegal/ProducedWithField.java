@@ -33,7 +33,7 @@ import jakarta.inject.Qualifier;
 @Qualifier
 public @interface ProducedWithField {
 
-    public static class ProducedWithFieldLiteral extends AnnotationLiteral<ProducedWithField> implements ProducedWithField{
+    public static class ProducedWithFieldLiteral extends AnnotationLiteral<ProducedWithField> implements ProducedWithField {
 
         public static ProducedWithFieldLiteral INSTANCE = new ProducedWithFieldLiteral();
 

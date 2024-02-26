@@ -15,6 +15,11 @@
  */
 package org.jboss.cdi.tck.tests.invokers.basic;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertThrows;
+
+import java.util.Set;
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
@@ -23,6 +28,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.Invoker;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
@@ -34,11 +40,6 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
-
-import java.util.Set;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 @SpecVersion(spec = "cdi", version = "4.1")
 public class PrimitiveParametersInvokerTest extends AbstractTest {
@@ -69,27 +70,27 @@ public class PrimitiveParametersInvokerTest extends AbstractTest {
     @SpecAssertion(section = Sections.BEHAVIOR_OF_INVOKE, id = "l")
     public void test(MyService service, InvokerHolder invokers) throws Exception {
         Invoker<MyService, String> hello = invokers.get("hello");
-        assertEquals(hello.invoke(service, new Object[]{true, 'a', 1}), "foobar_true_a_1");
-        assertEquals(hello.invoke(new MyService(), new Object[]{false, 'b', (short) 2}), "foobar_false_b_2");
+        assertEquals(hello.invoke(service, new Object[] { true, 'a', 1 }), "foobar_true_a_1");
+        assertEquals(hello.invoke(new MyService(), new Object[] { false, 'b', (short) 2 }), "foobar_false_b_2");
         assertThrows(RuntimeException.class, () -> {
-            hello.invoke(new MyService(), new Object[]{null, null, null});
+            hello.invoke(new MyService(), new Object[] { null, null, null });
         });
         assertThrows(RuntimeException.class, () -> {
-            hello.invoke(service, new Object[]{true, 'a', 1L});
+            hello.invoke(service, new Object[] { true, 'a', 1L });
         });
         assertThrows(RuntimeException.class, () -> {
-            hello.invoke(service, new Object[]{true, 'a', 1.0});
+            hello.invoke(service, new Object[] { true, 'a', 1.0 });
         });
 
         Invoker<MyService, String> helloStatic = invokers.get("helloStatic");
-        assertEquals(helloStatic.invoke(null, new Object[]{1L, 1.0}), "quux_1_1.0");
-        assertEquals(helloStatic.invoke(null, new Object[]{1, 1.0}), "quux_1_1.0");
-        assertEquals(helloStatic.invoke(null, new Object[]{1L, 1.0F}), "quux_1_1.0");
+        assertEquals(helloStatic.invoke(null, new Object[] { 1L, 1.0 }), "quux_1_1.0");
+        assertEquals(helloStatic.invoke(null, new Object[] { 1, 1.0 }), "quux_1_1.0");
+        assertEquals(helloStatic.invoke(null, new Object[] { 1L, 1.0F }), "quux_1_1.0");
         assertThrows(RuntimeException.class, () -> {
-            helloStatic.invoke(null, new Object[]{null, null});
+            helloStatic.invoke(null, new Object[] { null, null });
         });
         assertThrows(RuntimeException.class, () -> {
-            helloStatic.invoke(null, new Object[]{1.0, 1.0});
+            helloStatic.invoke(null, new Object[] { 1.0, 1.0 });
         });
     }
 

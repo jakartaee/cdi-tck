@@ -15,22 +15,23 @@
  */
 package org.jboss.cdi.tck.tests.invokers;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Consumer;
+
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
 import jakarta.enterprise.inject.build.compatible.spi.InvokerFactory;
 import jakarta.enterprise.inject.build.compatible.spi.InvokerInfo;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
 import jakarta.enterprise.invoke.InvokerBuilder;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.Consumer;
-
 public abstract class InvokerHolderExtensionBase {
     private final Map<String, InvokerInfo> invokers = new LinkedHashMap<>();
 
     protected final void registerInvokers(BeanInfo bean, InvokerFactory invokers, Set<String> methods) {
-        registerInvokers(bean, invokers, methods, builder -> {});
+        registerInvokers(bean, invokers, methods, builder -> {
+        });
     }
 
     protected final void registerInvokers(BeanInfo bean, InvokerFactory invokers, Set<String> methods,

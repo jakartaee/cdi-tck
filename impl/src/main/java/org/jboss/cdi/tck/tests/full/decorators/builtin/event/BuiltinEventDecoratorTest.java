@@ -20,9 +20,13 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.full.decorators.AbstractDecoratorTest;
@@ -34,12 +38,9 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
@@ -51,7 +52,9 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
                 .withTestClassPackage(BuiltinEventDecoratorTest.class)
                 .withClass(AbstractDecoratorTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(FooEventDecorator.class, StringEventDecorator.class, CharSequenceEventDecorator.class)).build();
+                        new BeansXml().decorators(FooEventDecorator.class, StringEventDecorator.class,
+                                CharSequenceEventDecorator.class))
+                .build();
     }
 
     @Inject
@@ -64,7 +67,8 @@ public class BuiltinEventDecoratorTest extends AbstractDecoratorTest {
     private Event<String> stringEvent;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aca"), @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = DECORATOR_INVOCATION, id = "aca"),
+            @SpecAssertion(section = DECORATOR_RESOLUTION, id = "aa") })
     public void testDecoratorIsResolved() {
         @SuppressWarnings("serial")
         TypeLiteral<Event<Foo>> eventFooLiteral = new TypeLiteral<Event<Foo>>() {

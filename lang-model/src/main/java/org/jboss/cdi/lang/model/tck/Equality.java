@@ -93,12 +93,15 @@ public class Equality {
         assertInequality(simpleAnnotation, simpleInterface);
         assertInequality(simpleAnnotation, simpleEnum);
 
-        Type simpleMethod = LangModelUtils.singleDeclaredMethod(simpleClass.asClass().declaration(), "simpleMethod").returnType();
-        Type anotherMethod = LangModelUtils.singleDeclaredMethod(simpleClass.asClass().declaration(), "anotherMethod").returnType();
+        Type simpleMethod = LangModelUtils.singleDeclaredMethod(simpleClass.asClass().declaration(), "simpleMethod")
+                .returnType();
+        Type anotherMethod = LangModelUtils.singleDeclaredMethod(simpleClass.asClass().declaration(), "anotherMethod")
+                .returnType();
         assertEquality(simpleMethod, anotherMethod);
         assertEquality(anotherMethod, simpleMethod);
 
-        Type simpleStaticField = LangModelUtils.singleDeclaredField(simpleClass.asClass().declaration(), "simpleStaticField").type();
+        Type simpleStaticField = LangModelUtils.singleDeclaredField(simpleClass.asClass().declaration(), "simpleStaticField")
+                .type();
         Type simpleField = LangModelUtils.singleDeclaredField(simpleClass.asClass().declaration(), "simpleField").type();
         assertEquality(simpleStaticField, simpleField);
         assertEquality(simpleField, simpleStaticField);

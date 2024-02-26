@@ -36,9 +36,8 @@ import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
-import org.jboss.cdi.tck.shrinkwrap.ee.EnterpriseArchiveBuilder;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.Versions;
+import org.jboss.cdi.tck.shrinkwrap.ee.EnterpriseArchiveBuilder;
 import org.jboss.shrinkwrap.api.BeanDiscoveryMode;
 import org.jboss.shrinkwrap.api.BeansXmlVersion;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -101,12 +100,12 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
         // B - not visible for ACD
         JavaArchive barArchive = ShrinkWrap
                 .create(JavaArchive.class, "bar-ejb.jar")
-                .addClasses(Bar.class, AlternativeBar.class, BarInspector.class, ContainerEventsObserver.class, LegacyServiceProducer.class)
+                .addClasses(Bar.class, AlternativeBar.class, BarInspector.class, ContainerEventsObserver.class,
+                        LegacyServiceProducer.class)
                 .addAsServiceProvider(Extension.class, ContainerEventsObserver.class)
                 .addAsManifestResource(new BeansXml().setBeansXmlVersion(BeansXmlVersion.v11)
-                                .setBeanDiscoveryMode(BeanDiscoveryMode.ALL)
-                                .interceptors(SecurityInterceptor.class)
-                                , "beans.xml")
+                        .setBeanDiscoveryMode(BeanDiscoveryMode.ALL)
+                        .interceptors(SecurityInterceptor.class), "beans.xml")
                 // Make A visible in a portable way
                 .setManifest(
                         new StringAsset(Descriptors.create(ManifestDescriptor.class)
@@ -155,7 +154,8 @@ public class EnterpriseArchiveModulesTest extends AbstractTest {
     }
 
     @Test(groups = JAVAEE_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "ja"), @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jb"),
+    @SpecAssertions({ @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "ja"),
+            @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jb"),
             @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "jc"), @SpecAssertion(section = BEAN_ARCHIVE_EE, id = "je"),
             @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "n") })
     public void testVisibilityAndInterceptorEnablement() throws Exception {

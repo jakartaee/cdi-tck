@@ -21,7 +21,6 @@ public class Ping {
 
     private String testServletId;
 
-
     @Inject
     IntrospectServlet servlet;
 

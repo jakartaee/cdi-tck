@@ -13,10 +13,11 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.configurators.bean;
 
-/** Dummy bean used to add as injection point into newly created beans
+/**
+ * Dummy bean used to add as injection point into newly created beans
  *
  * @author <a href="mailto:manovotn@redhat.com">Matej Novotny</a>
  */
 public class DesireToHurtHumans {
-    
+
 }

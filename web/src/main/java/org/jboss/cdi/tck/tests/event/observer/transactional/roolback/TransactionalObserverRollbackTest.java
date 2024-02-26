@@ -37,7 +37,7 @@ import org.testng.annotations.Test;
  */
 @Test(groups = { INTEGRATION })
 @SpecVersion(spec = "cdi", version = "2.0")
-public class TransactionalObserverRollbackTest extends AbstractTest{
+public class TransactionalObserverRollbackTest extends AbstractTest {
 
     @Inject
     EjbTestBean ejbTestBean;

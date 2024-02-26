@@ -13,13 +13,13 @@
  */
 package org.jboss.cdi.tck.tests.full.interceptors.contract.invocationContext;
 
+import java.lang.annotation.Annotation;
+import java.util.Set;
+
 import jakarta.annotation.Priority;
 import jakarta.interceptor.AroundInvoke;
 import jakarta.interceptor.Interceptor;
 import jakarta.interceptor.InvocationContext;
-
-import java.lang.annotation.Annotation;
-import java.util.Set;
 
 @Priority(Interceptor.Priority.APPLICATION + 400)
 @ProductInterceptorBinding3
@@ -31,7 +31,7 @@ public class ProductInterceptor2 {
     @AroundInvoke
     public Object aroundInvoke(InvocationContext invocationContext) throws Exception {
         allBindings = invocationContext.getInterceptorBindings();
-        return (1 + (Integer)invocationContext.proceed());
+        return (1 + (Integer) invocationContext.proceed());
     }
 
     public static Set<Annotation> getAllBindings() {

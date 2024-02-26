@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,  
+ * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -39,7 +39,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 /**
  * Test that servlet container built-in beans are available for injection.
- * 
+ *
  * @author Martin Kouba
  */
 @Test(groups = INTEGRATION)
@@ -55,7 +55,8 @@ public class ServletContainerBuiltinBeanTest extends AbstractTest {
     LowercaseConverter lowercaseConverter;
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "da"), @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "db"),
+    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "da"),
+            @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "db"),
             @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "dc") })
     public void testBuiltinBeansAvailableForInjection() {
 
@@ -72,7 +73,8 @@ public class ServletContainerBuiltinBeanTest extends AbstractTest {
 
     @RunAsClient
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "da"), @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "db"),
+    @SpecAssertions({ @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "da"),
+            @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "db"),
             @SpecAssertion(section = ADDITIONAL_BUILTIN_BEANS, id = "dc") })
     public void testBuiltinBeansFromClient(@ArquillianResource URL contextPath) throws Exception {
 

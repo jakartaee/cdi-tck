@@ -24,7 +24,7 @@ public class Hammer {
     public static boolean preDestroyCalled = false;
 
     public void use(Nail nail) {
-        if(nail == null) {
+        if (nail == null) {
             throw new AssertionError();
         }
     }

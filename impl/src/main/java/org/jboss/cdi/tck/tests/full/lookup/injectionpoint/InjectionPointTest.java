@@ -18,8 +18,13 @@ import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import java.lang.reflect.Type;
+import java.util.Collections;
+import java.util.List;
+
 import jakarta.enterprise.inject.spi.Decorator;
 import jakarta.enterprise.inject.spi.InjectionPoint;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -30,10 +35,6 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.List;
-
 @SpecVersion(spec = "cdi", version = "2.0")
 @Test(groups = CDI_FULL)
 public class InjectionPointTest extends AbstractTest {
@@ -42,7 +43,8 @@ public class InjectionPointTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClassPackage(InjectionPointTest.class)
-                .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL).decorators(AnimalDecorator1.class, AnimalDecorator2.class, AnimalDecorator3.class))
+                .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL).decorators(AnimalDecorator1.class, AnimalDecorator2.class,
+                        AnimalDecorator3.class))
                 .build();
     }
 
@@ -65,7 +67,7 @@ public class InjectionPointTest extends AbstractTest {
         assert cat.getInjectionPoint() != null;
         assert !cat.getInjectionPoint().isDelegate();
 
-        List<Decorator<?>> animalDecorators = getCurrentManager().resolveDecorators(Collections.<Type>singleton(Animal.class));
+        List<Decorator<?>> animalDecorators = getCurrentManager().resolveDecorators(Collections.<Type> singleton(Animal.class));
         assert animalDecorators.size() == 3;
         for (Decorator<?> animalDecorator : animalDecorators) {
             // Decorator has two injection points - metadata and delegate
@@ -94,7 +96,8 @@ public class InjectionPointTest extends AbstractTest {
     public void testPassivationCapability() throws Exception {
         InjectionPoint ip1 = getContextualReference(FieldInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
         InjectionPoint ip2 = getContextualReference(MethodInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
-        InjectionPoint ip3 = getContextualReference(ConstructorInjectionPointBean.class).getInjectedBean().getInjectedMetadata();
+        InjectionPoint ip3 = getContextualReference(ConstructorInjectionPointBean.class).getInjectedBean()
+                .getInjectedMetadata();
 
         ip1 = (InjectionPoint) activate(passivate(ip1));
         ip2 = (InjectionPoint) activate(passivate(ip2));

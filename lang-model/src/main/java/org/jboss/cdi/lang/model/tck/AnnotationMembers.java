@@ -13,13 +13,13 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
-import jakarta.enterprise.lang.model.declarations.ClassInfo;
+import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertField;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Modifier;
 
-import static org.jboss.cdi.lang.model.tck.PlainClassMembers.Verifier.assertField;
+import jakarta.enterprise.lang.model.declarations.ClassInfo;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AnnotationMembers {
@@ -38,29 +38,51 @@ public @interface AnnotationMembers {
     // methods
 
     boolean booleanMember() default true;
+
     byte byteMember() default 1;
+
     short shortMember() default 2;
+
     int intMember() default 3;
+
     long longMember() default 4;
+
     float floatMember() default 5.0F;
+
     double doubleMember() default 6.0;
+
     char charMember() default 'A';
+
     String stringMember() default "BB";
+
     Class<?> classMember() default AnnotationMembers.class;
+
     SimpleEnum enumMember() default SimpleEnum.YES;
+
     SimpleAnnotation annotationMember() default @SimpleAnnotation("CCC");
 
     boolean[] booleanArrayMember() default { true, false };
+
     byte[] byteArrayMember() default { 1, 2 };
+
     short[] shortArrayMember() default { 3, 4 };
+
     int[] intArrayMember() default { 5, 6 };
+
     long[] longArrayMember() default { 7, 8 };
+
     float[] floatArrayMember() default { 9.0F, 10.0F };
+
     double[] doubleArrayMember() default { 11.0, 12.0 };
+
     char[] charArrayMember() default { 'A', 'B' };
+
     String[] stringArrayMember() default { "CC", "DD" };
+
     Class<?>[] classArrayMember() default { SimpleAnnotation.class, SimpleEnum.class };
+
     SimpleEnum[] enumArrayMember() default { SimpleEnum.YES, SimpleEnum.NO };
+
     SimpleAnnotation[] annotationArrayMember() default { @SimpleAnnotation("EEE"), @SimpleAnnotation("FFF") };
 
     class Verifier {

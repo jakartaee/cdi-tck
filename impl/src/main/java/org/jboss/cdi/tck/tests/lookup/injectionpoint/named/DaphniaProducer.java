@@ -20,7 +20,7 @@ import jakarta.inject.Named;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 @Dependent
 public class DaphniaProducer {

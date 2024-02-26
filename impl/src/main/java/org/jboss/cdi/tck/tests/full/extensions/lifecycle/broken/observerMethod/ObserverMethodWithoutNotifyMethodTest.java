@@ -42,7 +42,8 @@ public class ObserverMethodWithoutNotifyMethodTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClass(ObserverMethodWithoutNotifyMethodTest.class)
                 .withBeansXml(new BeansXml(BeanDiscoveryMode.ALL))
-                .withClasses(AfterBeanDiscoveryObserver.class, Foo.class, FooObserver.class).withExtension(AfterBeanDiscoveryObserver.class)
+                .withClasses(AfterBeanDiscoveryObserver.class, Foo.class, FooObserver.class)
+                .withExtension(AfterBeanDiscoveryObserver.class)
                 .build();
     }
 

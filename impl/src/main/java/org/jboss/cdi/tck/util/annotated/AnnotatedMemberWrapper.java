@@ -13,18 +13,20 @@
  */
 package org.jboss.cdi.tck.util.annotated;
 
-import jakarta.enterprise.inject.spi.AnnotatedMember;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Member;
 import java.lang.reflect.Type;
 import java.util.Set;
+
+import jakarta.enterprise.inject.spi.AnnotatedMember;
 
 public class AnnotatedMemberWrapper<X> extends AnnotatedWrapper implements AnnotatedMember<X> {
 
     private AnnotatedTypeWrapper<X> declaringType;
     private AnnotatedMember<X> delegate;
 
-    public AnnotatedMemberWrapper(AnnotatedMember delegate, AnnotatedTypeWrapper<X> declaringType, boolean keepOriginalAnnotations, Annotation... annotations) {
+    public AnnotatedMemberWrapper(AnnotatedMember delegate, AnnotatedTypeWrapper<X> declaringType,
+            boolean keepOriginalAnnotations, Annotation... annotations) {
         super(delegate, keepOriginalAnnotations, annotations);
         this.delegate = delegate;
         this.declaringType = declaringType;

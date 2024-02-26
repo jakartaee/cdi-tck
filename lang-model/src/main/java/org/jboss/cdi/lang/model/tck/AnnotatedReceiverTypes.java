@@ -13,13 +13,13 @@
  */
 package org.jboss.cdi.lang.model.tck;
 
-import jakarta.enterprise.lang.model.declarations.ClassInfo;
-import jakarta.enterprise.lang.model.declarations.MethodInfo;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import jakarta.enterprise.lang.model.declarations.ClassInfo;
+import jakarta.enterprise.lang.model.declarations.MethodInfo;
 
 @Target(ElementType.TYPE_USE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -87,13 +87,15 @@ public class AnnotatedReceiverTypes<T> {
         if (method.receiverType().isClass()) { // JDK 11 reflection sees this as a class
             assert method.receiverType().asClass().annotations().size() == 1;
             assert method.receiverType().asClass().hasAnnotation(AnnReceiver1.class);
-            assert method.receiverType().asClass().declaration().name().equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
+            assert method.receiverType().asClass().declaration().name()
+                    .equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
         } else if (method.receiverType().isParameterizedType()) { // JDK 17 reflection correctly evaluates this as a parameterized type
             if (LangModelVerifier.RUN_TYPE_ANNOTATION_TESTS) {
                 assert method.receiverType().asParameterizedType().annotations().size() == 1;
                 assert method.receiverType().asParameterizedType().hasAnnotation(AnnReceiver1.class);
             }
-            assert method.receiverType().asParameterizedType().declaration().name().equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
+            assert method.receiverType().asParameterizedType().declaration().name()
+                    .equals("org.jboss.cdi.lang.model.tck.ReceiverOnGenericClass");
         }
     }
 

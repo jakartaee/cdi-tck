@@ -40,11 +40,13 @@ public class RemoteProducerTest extends AbstractTest {
 
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(RemoteProducerTest.class).withExtension(ProducerProcessor.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(RemoteProducerTest.class).withExtension(ProducerProcessor.class)
+                .build();
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "ac"), @SpecAssertion(section = PROCESS_PRODUCER, id = "e"),
+    @SpecAssertions({ @SpecAssertion(section = PROCESS_PRODUCER, id = "ac"),
+            @SpecAssertion(section = PROCESS_PRODUCER, id = "e"),
             @SpecAssertion(section = PROCESS_PRODUCER, id = "gb") })
     public void testProduceCallsOverridenResourceProducerMethod() {
         assertEquals(getContextualReference(ServiceRemote.class).ping(), "pong");

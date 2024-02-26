@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.decorators.invocation.enterprise;
 
 /**
  * @author Martin Kouba
- * 
+ *
  */
 public abstract class BusinessBase implements Business {
 

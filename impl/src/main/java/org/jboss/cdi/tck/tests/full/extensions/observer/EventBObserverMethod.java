@@ -23,7 +23,7 @@ import jakarta.enterprise.event.TransactionPhase;
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.spi.ObserverMethod;
 
-public class EventBObserverMethod implements ObserverMethod<EventB>{
+public class EventBObserverMethod implements ObserverMethod<EventB> {
     @Override
     public Class<?> getBeanClass() {
         return EventObserver.class;

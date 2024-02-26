@@ -81,7 +81,8 @@ public class ConfigureAndSetExtension implements Extension {
                 }
 
                 public Set<Annotation> getQualifiers() {
-                    return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE, Default.Literal.INSTANCE)));
+                    return Collections.unmodifiableSet(
+                            new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE, Default.Literal.INSTANCE)));
                 }
 
                 public Class<? extends Annotation> getScope() {
@@ -93,7 +94,7 @@ public class ConfigureAndSetExtension implements Extension {
                 }
 
                 public Set<Class<? extends Annotation>> getStereotypes() {
-                    return Collections.<Class<? extends Annotation>>emptySet();
+                    return Collections.<Class<? extends Annotation>> emptySet();
                 }
 
                 public boolean isAlternative() {
@@ -115,7 +116,8 @@ public class ConfigureAndSetExtension implements Extension {
             }
 
             public Set<Annotation> getQualifiers() {
-                return Collections.unmodifiableSet(new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE, Default.Literal.INSTANCE)));
+                return Collections.unmodifiableSet(
+                        new HashSet<Annotation>(Arrays.asList(Any.Literal.INSTANCE, Default.Literal.INSTANCE)));
             }
 
             public Class<? extends Annotation> getScope() {
@@ -127,7 +129,7 @@ public class ConfigureAndSetExtension implements Extension {
             }
 
             public Set<Class<? extends Annotation>> getStereotypes() {
-                return Collections.<Class<? extends Annotation>>emptySet();
+                return Collections.<Class<? extends Annotation>> emptySet();
             }
 
             public boolean isAlternative() {

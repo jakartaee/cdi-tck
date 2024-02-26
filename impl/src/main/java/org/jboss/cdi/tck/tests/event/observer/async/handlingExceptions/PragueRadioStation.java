@@ -22,9 +22,9 @@ import jakarta.enterprise.event.ObservesAsync;
 public class PragueRadioStation {
 
     public static AtomicBoolean observed = new AtomicBoolean(false);
-    
-    public void observe(@ObservesAsync RadioMessage radioMessage){
+
+    public void observe(@ObservesAsync RadioMessage radioMessage) {
         observed.set(true);
     }
-    
+
 }

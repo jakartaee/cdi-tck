@@ -31,7 +31,7 @@ import org.testng.annotations.Test;
 /**
  * This test duplicates {@link EventTest#testNonStaticObserverMethodInherited()} and
  * {@link EventTest#testNonStaticObserverMethodIndirectlyInherited()} but the base class extended is abstract.
- * 
+ *
  * @author Martin Kouba
  */
 @SpecVersion(spec = "cdi", version = "2.0")
@@ -43,7 +43,8 @@ public class ObserverInheritanceTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dc"), @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "di") })
+    @SpecAssertions({ @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "dc"),
+            @SpecAssertion(section = MEMBER_LEVEL_INHERITANCE, id = "di") })
     public void testNonStaticObserverMethodInherited() {
 
         ActionSequence.reset();

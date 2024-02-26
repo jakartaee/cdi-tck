@@ -15,14 +15,14 @@ package org.jboss.cdi.tck.tests.full.context.alterable;
 
 import static org.testng.Assert.assertTrue;
 
-import jakarta.enterprise.context.spi.AlterableContext;
-import jakarta.enterprise.context.spi.Contextual;
-import jakarta.enterprise.context.spi.CreationalContext;
-
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import jakarta.enterprise.context.spi.AlterableContext;
+import jakarta.enterprise.context.spi.Contextual;
+import jakarta.enterprise.context.spi.CreationalContext;
 
 public class CustomContext implements AlterableContext {
 

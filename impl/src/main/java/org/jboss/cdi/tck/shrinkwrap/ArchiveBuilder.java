@@ -13,8 +13,23 @@
  */
 package org.jboss.cdi.tck.shrinkwrap;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
 import jakarta.enterprise.inject.spi.Extension;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -50,33 +65,23 @@ import org.jboss.shrinkwrap.descriptor.api.webapp30.WebAppDescriptor;
 import org.jboss.shrinkwrap.descriptor.api.webcommon30.WebAppVersionType;
 import org.jboss.shrinkwrap.impl.BeansXml;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  * Abstract ShrinkWrap archive builder for CDI TCK Arquillian test.
  * <p>
- * This is a base class for builders that try to solve most <b>JBoss Test Harness</b> to <b>Arquillian</b> migration issues. The main goal was to use CDI TCK
+ * This is a base class for builders that try to solve most <b>JBoss Test Harness</b> to <b>Arquillian</b> migration issues. The
+ * main goal was to use CDI TCK
  * 1.0 tests with minimum code changes.
  * </p>
  * <p>
- * Note that all Arquillian tests running in as-client mode (including tests using {@link ShouldThrowException}) must not contain testing related stuff
- * (anything that depends on Arquillian, TestNG, incl. test class itself) since Arquillian is not enriching as-client test archives. That's why
+ * Note that all Arquillian tests running in as-client mode (including tests using {@link ShouldThrowException}) must not
+ * contain testing related stuff
+ * (anything that depends on Arquillian, TestNG, incl. test class itself) since Arquillian is not enriching as-client test
+ * archives. That's why
  * {@link #isAsClientMode} has to be properly set.
  * </p>
  * <p>
- * In case of {@link #isTestArchive} set to <code>false</code> this archive may not include any testing related stuff as it is probably part of another test
+ * In case of {@link #isTestArchive} set to <code>false</code> this archive may not include any testing related stuff as it is
+ * probably part of another test
  * archive.
  * </p>
  *
@@ -100,7 +105,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     private static final String INNER_CLASS_MARKER = "\\" + DOLLAR_SIGN;
 
-    private static final String INNER_CLASS_MATCH_PATTERN_BASE = ".*" + AssetUtil.DELIMITER_RESOURCE_PATH + "%s" + INNER_CLASS_MARKER + ".+\\.class";
+    private static final String INNER_CLASS_MATCH_PATTERN_BASE = ".*" + AssetUtil.DELIMITER_RESOURCE_PATH + "%s"
+            + INNER_CLASS_MARKER + ".+\\.class";
 
     private String name;
 
@@ -288,9 +294,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Specified class must be excluded from final archive unless also added via {@link #withClass(Class)} or {@link #withClasses(Class...)}. Useful for
+     * Specified class must be excluded from final archive unless also added via {@link #withClass(Class)} or
+     * {@link #withClasses(Class...)}. Useful for
      * exluding some classes from package added via {@link #withPackage(Package)}.
-     * 
+     *
      * Avoid using this feature if possible - the implementation has negative performance effects.
      *
      * @param clazz Fully qualified class name
@@ -305,9 +312,10 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Specified classes must be excluded from final archive unless also added via {@link #withClass(Class)} or {@link #withClasses(Class...)}. Useful for
+     * Specified classes must be excluded from final archive unless also added via {@link #withClass(Class)} or
+     * {@link #withClasses(Class...)}. Useful for
      * exluding some classes from package added via {@link #withPackage(Package)}.
-     * 
+     *
      * Avoid using this feature if possible - the implementation has negative performance effects.
      *
      * @param classes Fully qualified class names
@@ -343,7 +351,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Set test class definition for configuration purpose. Do not add it to final archive.
-     * 
+     *
      * Always use this for as-client test archives, e.g. deployment method annotated with {@link ShouldThrowException}.
      *
      * @param testClazz
@@ -525,7 +533,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Add web.xml located in src/main/resource/{testPackagePath}.
-     * 
+     *
      * <p>
      * Do not use this in new tests - use {@link #withWebXml(WebAppDescriptor)} instead.
      * </p>
@@ -598,7 +606,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of defined classes implements
+     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
+     * defined classes implements
      * {@link Extension} add corresponding service provider.
      *
      * @param beanClasses
@@ -609,7 +618,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of defined classes implements
+     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
+     * defined classes implements
      * {@link Extension} add corresponding service provider.
      *
      * @param beanClasses
@@ -620,7 +630,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of defined classes implements
+     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
+     * defined classes implements
      * {@link Extension} add corresponding service provider.
      *
      * @param beanClasses
@@ -631,7 +642,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of defined classes implements
+     * Add bean library that consists of defined bean classes; automatically include empty <code>beans.xml</code> and if any of
+     * defined classes implements
      * {@link Extension} add corresponding service provider.
      *
      * @param beanClasses
@@ -683,11 +695,13 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 extensions.add(clazz);
             }
         }
-        ServiceProviderDescriptor serviceProvider = extensions.isEmpty() ? null : new ServiceProviderDescriptor(Extension.class,
-                extensions.toArray(new Class<?>[extensions.size()]));
+        ServiceProviderDescriptor serviceProvider = extensions.isEmpty() ? null
+                : new ServiceProviderDescriptor(Extension.class,
+                        extensions.toArray(new Class<?>[extensions.size()]));
 
-        this.libraries.add(beansXml != null ? new LibraryDescriptor(name, serviceProvider, beansXml, classes) : new LibraryDescriptor(name,
-                serviceProvider, includeEmptyBeanXml, classes));
+        this.libraries.add(beansXml != null ? new LibraryDescriptor(name, serviceProvider, beansXml, classes)
+                : new LibraryDescriptor(name,
+                        serviceProvider, includeEmptyBeanXml, classes));
         return self();
     }
 
@@ -738,7 +752,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * @return <code>true</code> if TCK specific infrastructure (porting package, utils, etc.) should be automatically added, <code>false</code> otherwise
+     * @return <code>true</code> if TCK specific infrastructure (porting package, utils, etc.) should be automatically added,
+     *         <code>false</code> otherwise
      * @see #resolveAsClientMode()
      */
     public boolean isTestArchive() {
@@ -746,7 +761,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Mark this archive as non-testing. TCK specific infrastructure (porting package, utils, etc.) will not be automatically added.
+     * Mark this archive as non-testing. TCK specific infrastructure (porting package, utils, etc.) will not be automatically
+     * added.
      */
     public T notTestArchive() {
         this.isTestArchive = false;
@@ -804,7 +820,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
         }
 
         logger.log(Level.INFO, "Test archive built [info: {0}, time: {1} ms]",
-                new Object[] { testClazz != null ? testClazz.getName() : archive.getName(), Long.valueOf(System.currentTimeMillis() - start) });
+                new Object[] { testClazz != null ? testClazz.getName() : archive.getName(),
+                        Long.valueOf(System.currentTimeMillis() - start) });
 
         return archive;
     }
@@ -815,7 +832,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     protected abstract A buildInternal();
 
     /**
-     * Process packages. Exclude classes specified via {@link #withExcludedClass(String)}. If in as-client mode, filter test class.
+     * Process packages. Exclude classes specified via {@link #withExcludedClass(String)}. If in as-client mode, filter test
+     * class.
      *
      * @param archive
      */
@@ -863,7 +881,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
                     if (classesPath != null) {
                         ArchivePath classNamePath = AssetUtil.getFullPathForClassResource(className);
-                        archive.add(new ClassLoaderAsset(classNamePath.get().substring(1), clToUse), ArchivePaths.create(classesPath, classNamePath));
+                        archive.add(new ClassLoaderAsset(classNamePath.get().substring(1), clToUse),
+                                ArchivePaths.create(classesPath, classNamePath));
                     } else {
                         archive.addClass(className);
                     }
@@ -905,7 +924,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                     classesPackage = clazz.getPackage();
                 }
                 Asset resource = new ClassAsset(clazz);
-                ArchivePath location = ArchivePaths.create(resolveClassesPath(archive), AssetUtil.getFullPathForClassResource(clazz));
+                ArchivePath location = ArchivePaths.create(resolveClassesPath(archive),
+                        AssetUtil.getFullPathForClassResource(clazz));
                 archive.add(resource, location);
             }
 
@@ -1142,7 +1162,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             this.fileDescriptor = fileDescriptor;
         }
 
-        public LibraryDescriptor(String name, ServiceProviderDescriptor serviceProvider, BeansXml beansDescriptor, Class<?>... classes) {
+        public LibraryDescriptor(String name, ServiceProviderDescriptor serviceProvider, BeansXml beansDescriptor,
+                Class<?>... classes) {
             super();
             if (serviceProvider != null) {
                 this.serviceProviders = new ArrayList<ServiceProviderDescriptor>();
@@ -1159,7 +1180,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
          * @param includeEmptyBeanXml Automatically include empty beans.xml to promote the lib to BDA
          * @param classes
          */
-        public LibraryDescriptor(String name, ServiceProviderDescriptor serviceProvider, boolean includeEmptyBeanXml, Class<?>... classes) {
+        public LibraryDescriptor(String name, ServiceProviderDescriptor serviceProvider, boolean includeEmptyBeanXml,
+                Class<?>... classes) {
             super();
             if (serviceProvider != null) {
                 this.serviceProviders = new ArrayList<ServiceProviderDescriptor>();
@@ -1213,7 +1235,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
             if (serviceProviders != null) {
                 for (ServiceProviderDescriptor serviceProvider : serviceProviders) {
-                    library.addAsServiceProvider(serviceProvider.getServiceInterface(), serviceProvider.getServiceImplementations());
+                    library.addAsServiceProvider(serviceProvider.getServiceInterface(),
+                            serviceProvider.getServiceImplementations());
                 }
             }
 
@@ -1229,7 +1252,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
-     * Add default libraries from lib directory specified with <code>org.jboss.cdi.tck.libraryDirectory</code> property in <b>cdi-tck.properties</b>.
+     * Add default libraries from lib directory specified with <code>org.jboss.cdi.tck.libraryDirectory</code> property in
+     * <b>cdi-tck.properties</b>.
      */
     private void addDefaultLibraries() {
 
@@ -1255,7 +1279,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     private boolean skipClassName(String className) {
-        return ((isAsClientMode() && testClazz.getName().equals(className)) || (excludedClasses != null && excludedClasses.contains(className)));
+        return ((isAsClientMode() && testClazz.getName().equals(className))
+                || (excludedClasses != null && excludedClasses.contains(className)));
     }
 
     private boolean isSinglePackage(Set<Class<?>> classes) {
@@ -1284,11 +1309,12 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
     /**
      * Try to resolve as-client mode automatically unless it was set already.
-     * 
+     *
      * Set as-client mode to <code>true</code> provided that:
      * <ul>
      * <li>test class is annotated with {@link RunAsClient}</li>
-     * <li>the deployment method on test class definition is annotated with {@link ShouldThrowException} or {@link Deployment#testable()} is false</li>
+     * <li>the deployment method on test class definition is annotated with {@link ShouldThrowException} or
+     * {@link Deployment#testable()} is false</li>
      * <ul>
      *
      * @throws IllegalStateException If multiple deployments detected and as-client mode not set
@@ -1315,7 +1341,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
                 }
                 deploymentMethod = method;
 
-                if (method.isAnnotationPresent(ShouldThrowException.class) || !method.getAnnotation(Deployment.class).testable()) {
+                if (method.isAnnotationPresent(ShouldThrowException.class)
+                        || !method.getAnnotation(Deployment.class).testable()) {
                     setAsClientMode(true);
                 }
             }
@@ -1359,7 +1386,8 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
 
         long start = System.currentTimeMillis();
 
-        JavaArchive supportLib = ShrinkWrap.create(JavaArchive.class, "cdi-tck-incontainer.jar").addClasses(AbstractTest.class, Sections.class,
+        JavaArchive supportLib = ShrinkWrap.create(JavaArchive.class, "cdi-tck-incontainer.jar").addClasses(AbstractTest.class,
+                Sections.class,
                 TestGroups.class);
 
         logger.log(Level.INFO, "Incontainer library built [time: {0} ms]", System.currentTimeMillis() - start);
@@ -1385,7 +1413,7 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
             for (int i = 0; i < digest.length; i++) {
                 hexString.append(Integer.toHexString(0xFF & digest[i]));
             }
-            return testClazz.getSimpleName()+hexString.toString();
+            return testClazz.getSimpleName() + hexString.toString();
         }
         return null;
     }

@@ -36,8 +36,8 @@ public class LifecycleEventOrderingTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-            .withTestClassPackage(LifecycleEventOrderingTest.class)
-            .withExtension(ProductManagement.class).build();
+                .withTestClassPackage(LifecycleEventOrderingTest.class)
+                .withExtension(ProductManagement.class).build();
     }
 
     @Test

@@ -13,12 +13,13 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.handle;
 
+import java.util.UUID;
+
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.enterprise.context.Dependent;
-import org.jboss.cdi.tck.util.ActionSequence;
 
-import java.util.UUID;
+import org.jboss.cdi.tck.util.ActionSequence;
 
 @Dependent
 public class Alpha {

@@ -18,6 +18,7 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN_EE;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Status;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.ee.EnterpriseArchiveBuilder;
@@ -30,7 +31,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
- * 
+ *
  * @author Jozef Hartinger
  *
  */
@@ -46,7 +47,8 @@ public class BuiltinUserTransactionDecoratorTest extends AbstractTest {
         return new EnterpriseArchiveBuilder()
                 .withTestClassPackage(BuiltinUserTransactionDecoratorTest.class)
                 .withBeansXml(
-                        new BeansXml().decorators(UserTransactionDecorator.class)).build();
+                        new BeansXml().decorators(UserTransactionDecorator.class))
+                .build();
     }
 
     @Test
