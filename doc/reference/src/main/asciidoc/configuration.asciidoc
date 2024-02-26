@@ -98,43 +98,6 @@ You can configure the CDI TCK to just run tests related to the CDI Lite specific
        </plugin>
 ----
 
-=== Using the CDI TCK with the Jakarta EE Web Profile
-
-You can configure the CDI TCK to just run tests appropriate to the Jakarta EE Web Profile by excluding TestNG group _javaee-full_,_se_ e.g. via a maven-surefire-plugin configuration like:
-
-[source.XML, xml]
-----
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <excludedGroups>javaee-full,se</excludedGroups>
-              <dependenciesToScan>
-                <dependency>jakarta.enterprise:cdi-tck-core-impl</dependency>
-                <dependency>jakarta.enterprise:cdi-tck-web-impl</dependency>
-              </dependenciesToScan>
-            </configuration>
-       </plugin>
-----
-
-=== Using the CDI TCK with the Jakarta EE Full Platform
-
-You can configure the CDI TCK to just run tests appropriate to the Jakarta EE Full Platform by excluding TestNG group _se_ e.g. via a maven-surefire-plugin configuration like:
-
-[source.XML, xml]
-----
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <excludedGroups>se</excludedGroups>
-              <dependenciesToScan>
-                <dependency>jakarta.enterprise:cdi-tck-core-impl</dependency>
-                <dependency>jakarta.enterprise:cdi-tck-web-impl</dependency>
-              </dependenciesToScan>
-            </configuration>
-       </plugin>
-----
 
 === Using the CDI TCK with the Java SE
 
@@ -210,11 +173,8 @@ It's beyond the scope of this guide to describe in how to set up your build envi
 
 The TCK makes use of the Java 1.4 keyword +assert+; you must ensure that the JVM used to run the application server is started with assertions enabled. See link:$$http://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html#enable-disable$$[Programming With Assertions] for more information on how to enable assertions.
 
-Tests within the _jms_ test group require some basic Java Message Service configuration. A connection factory, a queue destination for PTP messaging domain and a topic destination for pub/sub messaging domain must be available via JNDI lookup. The corresponding JNDI names are specified with configuration properties - see <<tck-properties>>.
 
-Tests within the _persistence_ test group require basic data source configuration. The data source has to be valid and JTA-based. The JNDI name of the DataSource is specified with configuration property - see <<tck-properties>>.
-
-Tests within the _installedLib_ test group require the CDI TCK +cdi-tck-ext-lib+ artifact to be installed as a library (see also Jakarta EE 10 specification, section EE.10.2.2 "Installed Libraries").
+Tests within the _installedLib_ test group require the CDI TCK +cdi-tck-ext-lib+ artifact to be installed as a library (see also {jakartaee-version} specification, section EE.10.2.2 "Installed Libraries").
 
 Tests within the _systemProperties_ test group require the following system properties to be set:
 
@@ -222,17 +182,6 @@ Tests within the _systemProperties_ test group require the following system prop
 |===============
 |Name|Value
 |+cdiTckExcludeDummy+|+true+
-
-|===============
-
-Tests within the _security_ test group require the following mapping of roles to principals:
-
-[options="header"]
-|===============
-|Principal|Group
-|+student+|+student+
-|+alarm+|+alarm+, +student+
-|+printer+|+printer+|
 
 |===============
 

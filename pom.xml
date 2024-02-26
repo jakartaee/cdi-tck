@@ -92,7 +92,6 @@
         <module>ext-lib</module>
         <module>lang-model</module>
         <module>impl</module>
-        <module>web</module>
     </modules>
 
     <properties>
@@ -120,8 +119,7 @@
         <selenium.version>4.7.2</selenium.version>
         <xmlunit.version>2.9.1</xmlunit.version>
         <!-- Required for distribution build, should be overriden for each build -->
-        <cdi.tck.version>${project.version}</cdi.tck.version>
-        <weld.version>5.1.2.Final</weld.version>
+        <weld.version>6.0.0.Alpha1</weld.version>
     </properties>
 
     <!-- Dependency management -->
@@ -186,30 +184,6 @@
                 <groupId>commons-httpclient</groupId>
                 <artifactId>commons-httpclient</artifactId>
                 <version>${apache.httpclient.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-java</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-chrome-driver</artifactId>
-                <version>${selenium.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.github.bonigarcia</groupId>
-                <artifactId>webdrivermanager</artifactId>
-                <version>5.3.1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>net.sourceforge.htmlunit</groupId>
-                <artifactId>htmlunit</artifactId>
-                <version>${htmlunit.version}</version>
             </dependency>
 
             <dependency>

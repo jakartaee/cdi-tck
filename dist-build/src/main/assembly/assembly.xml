@@ -3,7 +3,7 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.2.0 https://maven.apache.org/xsd/assembly-2.2.0.xsd">
    <id>dist</id>
-   <baseDirectory>cdi-tck-${cdi.tck.version}</baseDirectory>
+   <baseDirectory>cdi-tck-${project.version}</baseDirectory>
    <formats>
       <format>zip</format>
    </formats>
@@ -51,7 +51,6 @@
          <includes>
             <include>jakarta.enterprise:cdi-tck-parent</include>
             <include>jakarta.enterprise:cdi-tck-core-impl</include>
-            <include>jakarta.enterprise:cdi-tck-web-impl</include>
             <include>jakarta.enterprise:cdi-tck-api</include>
             <include>jakarta.enterprise:cdi-tck-ext-lib</include>
             <include>jakarta.enterprise:cdi-tck-lang-model</include>
