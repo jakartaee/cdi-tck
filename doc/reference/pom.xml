@@ -19,6 +19,7 @@
         <asciidoctor.maven.plugin.version>3.0.0</asciidoctor.maven.plugin.version>
         <asciidoctorj.pdf.version>2.3.13</asciidoctorj.pdf.version>
         <pdf.name>cdi-tck-reference-guide.pdf</pdf.name>
+        <revmajor>4</revmajor>
         <revnumber>4.1</revnumber>
     </properties>
 
@@ -42,6 +43,7 @@
                     <sourceDocumentName>cdi-tck-reference-guide.asciidoc</sourceDocumentName>
                     <!-- Attributes common to all output formats -->
                     <attributes>
+                        <revmajor>${revmajor}</revmajor>
                         <revnumber>${revnumber}</revnumber>
                         <sourcedir>${project.build.sourceDirectory}</sourcedir>
                         <source-highlighter>coderay</source-highlighter>
@@ -49,7 +51,7 @@
                         <arquillian-version>${arquillian.version}</arquillian-version>
                         <testng-version>${testng.version}</testng-version>
                         <weld-version>${weld.version}</weld-version>
-                        <wildfly-version>33</wildfly-version>
+                        <wildfly-version>31</wildfly-version>
                         <glassfish-version>7.0.x</glassfish-version>
                         <jakartaee-version>Jakarta EE 11</jakartaee-version>
 

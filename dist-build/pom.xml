@@ -12,11 +12,6 @@
    <packaging>pom</packaging>
    <name>CDI TCK Distribution</name>
 
-   <modules>
-      <module>porting-package</module>
-      <module>libs</module>
-   </modules>
-
    <dependencies>
       <dependency>
          <groupId>jakarta.enterprise</groupId>

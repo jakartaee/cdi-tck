@@ -26,6 +26,18 @@
          <destName>pom.xml</destName>
          <filtered>true</filtered>
       </file>
+      <file>
+         <source>src/main/resources/weld-embedded-arquillian.xml</source>
+         <outputDirectory>weld/jboss-tck-runner/src/main/resources</outputDirectory>
+         <destName>weld-embedded-arquillian.xml</destName>
+         <filtered>false</filtered>
+      </file>
+      <file>
+         <source>src/main/resources/weld-se-arquillian.xml</source>
+         <outputDirectory>weld/jboss-tck-runner/src/main/resources</outputDirectory>
+         <destName>weld-se-arquillian.xml</destName>
+         <filtered>false</filtered>
+      </file>
 
    </files>
    <fileSets>
@@ -67,20 +79,6 @@
          <outputDirectory>/lib</outputDirectory>
          <useProjectArtifact>false</useProjectArtifact>
          <unpack>true</unpack>
-      </dependencySet>
-      <dependencySet>
-         <includes>
-            <include>jakarta.enterprise:cdi-tck-dist-porting-package</include>
-         </includes>
-         <useTransitiveDependencies>false</useTransitiveDependencies>
-         <outputDirectory>/weld</outputDirectory>
-         <useProjectArtifact>false</useProjectArtifact>
-         <unpack>true</unpack>
-         <unpackOptions>
-            <excludes>
-               <exclude>jboss-tck-runner/pom.xml</exclude>
-            </excludes>
-         </unpackOptions>
       </dependencySet>
       <dependencySet>
          <includes>

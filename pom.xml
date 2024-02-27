@@ -115,11 +115,9 @@
         <arquillian.version>1.8.0.Final</arquillian.version>
         <arquillian.container.se.api.version>1.0.2.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
-        <htmlunit.version>2.50.0</htmlunit.version>
-        <selenium.version>4.7.2</selenium.version>
         <xmlunit.version>2.9.1</xmlunit.version>
         <!-- Required for distribution build, should be overriden for each build -->
-        <weld.version>6.0.0.Alpha1</weld.version>
+        <weld.version>6.0.0.Beta1</weld.version>
     </properties>
 
     <!-- Dependency management -->

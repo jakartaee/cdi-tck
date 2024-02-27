@@ -20,8 +20,6 @@
   <url>http://weld.cdi-spec.org</url>
 
   <properties>
-    <!-- This matches the htmlunit version in TCK -->
-    <htmlunit.version>2.50.0</htmlunit.version>
     <cdi.tck.version>${project.version}</cdi.tck.version>
   </properties>
 
@@ -230,7 +228,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.12.1</version>
         <configuration>
           <!-- Disable annotation processor for test sources -->
           <testCompilerArgument>-proc:none</testCompilerArgument>
@@ -324,10 +322,7 @@
       <build>
         <resources>
           <resource>
-            <directory>src/test/resources</directory>
-          </resource>
-          <resource>
-            <directory>src/test/weld-embedded</directory>
+            <directory>src/main/resources</directory>
           </resource>
         </resources>
         <plugins>
@@ -339,6 +334,7 @@
               <excludedGroups>integration,javaee-full,se</excludedGroups>
               <systemPropertyVariables>
                 <arquillian.launch>weld</arquillian.launch>
+                <arquillian.xml>weld-embedded-arquillian.xml</arquillian.xml>
                 <!-- Specified system properties are not
                     available during in-container test execution -->
                 <org.jboss.cdi.tck.libraryDirectory>target/dependency/lib</org.jboss.cdi.tck.libraryDirectory>
@@ -417,6 +413,7 @@
               <groups>se,arquillian</groups>
               <systemPropertyVariables>
                 <arquillian.launch>weld-se</arquillian.launch>
+                <arquillian.xml>weld-se-arquillian.xml</arquillian.xml>
                 <libPath>target</libPath>
               </systemPropertyVariables>
               <suiteXmlFiles>

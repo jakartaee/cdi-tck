@@ -187,7 +187,7 @@ https://github.com/jakartaee/cdi-tck/blob/master/impl/src/main/resources/sigtest
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
     <!-- Set the Weld version to test -->
-    <weld.version>6.0.0.Alpha2</weld.version>
+    <weld.version>6.0.0.Beta1</weld.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->

@@ -249,7 +249,7 @@ This section lists the applicable requirements and specifications for the CDI TC
 *  *Testing platform* - The CDI TCK requires version {arquillian-version} of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG {testng-version}(http://testng.org). .
 
 
-*  *Porting Package* - An implementation of SPIs that are required for the test suite to run the in-container tests and at times extend the CDI 4.0 API to provide extra information to the TCK.
+*  *Porting Package* - An implementation of SPIs that are required for the test suite to run the in-container tests and at times extend the CDI {revnumber} API to provide extra information to the TCK.
 
 
 *  *TCK Audit Tool* - An itemization of the assertions in the specification documents which are cross-referenced by the individual tests. Describes how well the TCK covers the specification.
@@ -313,7 +313,7 @@ CDI supports {jakartaee-version}, {jakartaee-version} Web Profile, Embeddable Ja
 
 [[libraries]]
 
-=== Libraries for Jakarta Contexts and Dependency Injection Version {revnumber}
+=== Packages for Jakarta Contexts and Dependency Injection Version {revnumber}
 
 The following is the list of packages that constitute the required class libraries for
 Jakarta Contexts and Dependency Injection Version {revnumber}:
@@ -329,6 +329,7 @@ Jakarta Contexts and Dependency Injection Version {revnumber}:
 * jakarta.enterprise.inject.se
 * jakarta.enterprise.inject.spi
 * jakarta.enterprise.inject.spi.configurator
+* jakarta.enterprise.invoke
 * jakarta.enterprise.lang.model
 * jakarta.enterprise.lang.model.declarations
 * jakarta.enterprise.lang.model.types
