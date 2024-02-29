@@ -223,7 +223,6 @@
                                 <!-- Specified system properties are not
                                 available during in-container test execution -->
                                 <org.jboss.cdi.tck.libraryDirectory>target/dependency/lib</org.jboss.cdi.tck.libraryDirectory>
-                                <org.jboss.cdi.tck.testDataSource>java:jboss/datasources/ExampleDS</org.jboss.cdi.tck.testDataSource>
                             </systemPropertyVariables>
                             <systemProperties>
                                 <jacoco.agent>${jacoco.agent}</jacoco.agent>

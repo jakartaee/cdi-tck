@@ -30,7 +30,7 @@ import org.jboss.cdi.tck.spi.EL;
  */
 public class ConfigurationImpl implements Configuration {
 
-    private Boolean cdiLiteMode;
+    private Boolean coreMode = Boolean.TRUE;
 
     private Beans beans;
     private Contexts<? extends Context> contexts;
@@ -50,12 +50,12 @@ public class ConfigurationImpl implements Configuration {
     protected ConfigurationImpl() {
     }
 
-    public Boolean getCdiLiteMode() {
-        return cdiLiteMode;
+    public Boolean getCoreMode() {
+        return coreMode;
     }
 
-    public void setCdiLiteMode(Boolean cdiLiteMode) {
-        this.cdiLiteMode = cdiLiteMode;
+    public void setCoreMode(Boolean cdiLiteMode) {
+        this.coreMode = cdiLiteMode;
     }
 
     public Beans getBeans() {
@@ -161,9 +161,9 @@ public class ConfigurationImpl implements Configuration {
     @Override
     public String toString() {
         StringBuilder configuration = new StringBuilder();
-        configuration.append("Jakarta CDI 4.0 TCK Configuration\n");
+        configuration.append("Jakarta CDI 4.1 TCK Configuration\n");
         configuration.append("-----------------\n");
-        configuration.append("\tCDI Lite mode: ").append(getCdiLiteMode()).append("\n");
+        configuration.append("\tCDI Core mode: ").append(getCoreMode()).append("\n");
         configuration.append("\tBeans: ").append(getBeans()).append("\n");
         configuration.append("\tContexts: ").append(getContexts()).append("\n");
         configuration.append("\tContextuals: ").append(getContextuals()).append("\n");

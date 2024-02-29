@@ -345,10 +345,6 @@
                 <!-- Specified system properties are not
                     available during in-container test execution -->
                 <org.jboss.cdi.tck.libraryDirectory>target/dependency/lib</org.jboss.cdi.tck.libraryDirectory>
-                <org.jboss.cdi.tck.testDataSource>java:jboss/datasources/ExampleDS</org.jboss.cdi.tck.testDataSource>
-                <org.jboss.cdi.tck.testJmsConnectionFactory>java:/ConnectionFactory</org.jboss.cdi.tck.testJmsConnectionFactory>
-                <org.jboss.cdi.tck.testJmsQueue>java:/queue/test</org.jboss.cdi.tck.testJmsQueue>
-                <org.jboss.cdi.tck.testJmsTopic>java:/topic/test</org.jboss.cdi.tck.testJmsTopic>
               </systemPropertyVariables>
               <suiteXmlFiles>
                 <suiteXmlFile>target/suites/tck-core-suite.xml</suiteXmlFile>
@@ -543,10 +539,6 @@
                 <!-- Specified system properties are not
                     available during in-container test execution -->
                 <org.jboss.cdi.tck.libraryDirectory>target/dependency/lib</org.jboss.cdi.tck.libraryDirectory>
-                <org.jboss.cdi.tck.testDataSource>java:jboss/datasources/ExampleDS</org.jboss.cdi.tck.testDataSource>
-                <org.jboss.cdi.tck.testJmsConnectionFactory>java:/ConnectionFactory</org.jboss.cdi.tck.testJmsConnectionFactory>
-                <org.jboss.cdi.tck.testJmsQueue>java:/queue/test</org.jboss.cdi.tck.testJmsQueue>
-                <org.jboss.cdi.tck.testJmsTopic>java:/topic/test</org.jboss.cdi.tck.testJmsTopic>
                 <jacoco.agent>${jacoco.agent}</jacoco.agent>
                 <!-- Specifiy any garbage collection related args here -->
                 <gc.args />
