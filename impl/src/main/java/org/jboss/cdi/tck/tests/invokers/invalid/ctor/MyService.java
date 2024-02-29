@@ -13,17 +13,10 @@
  */
 package org.jboss.cdi.tck.tests.invokers.invalid.ctor;
 
-import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
-import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
-import jakarta.enterprise.inject.build.compatible.spi.InvokerFactory;
-import jakarta.enterprise.inject.build.compatible.spi.Registration;
-import jakarta.enterprise.lang.model.declarations.MethodInfo;
+import jakarta.enterprise.context.ApplicationScoped;
 
-public class TestExtension implements BuildCompatibleExtension {
-    @Registration(types = MyService.class)
-    public void myServiceRegistration(BeanInfo bean, InvokerFactory invokers) {
-        for (MethodInfo ctor : bean.declaringClass().constructors()) {
-            invokers.createInvoker(bean, ctor).build();
-        }
+@ApplicationScoped
+public class MyService {
+    public MyService() {
     }
 }

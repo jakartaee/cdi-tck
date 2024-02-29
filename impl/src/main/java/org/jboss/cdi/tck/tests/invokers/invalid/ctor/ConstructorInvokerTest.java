@@ -15,7 +15,6 @@
  */
 package org.jboss.cdi.tck.tests.invokers.invalid.ctor;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -43,12 +42,6 @@ public class ConstructorInvokerTest extends AbstractTest {
     @Test
     @SpecAssertion(section = Sections.BUILDING_INVOKER, id = "bb")
     public void trigger() {
-    }
-
-    @ApplicationScoped
-    static public class MyService {
-        public MyService() {
-        }
     }
 
 }

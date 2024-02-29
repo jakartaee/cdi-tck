@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.invokers.invalid;
+package org.jboss.cdi.tck.tests.invokers.invalid.objmethod;
 
 import jakarta.enterprise.inject.spi.DeploymentException;
 
@@ -22,28 +22,25 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.invokers.invalid.interceptor.MyInterceptor;
-import org.jboss.cdi.tck.tests.invokers.invalid.interceptor.MyInterceptorBinding;
-import org.jboss.cdi.tck.tests.invokers.invalid.interceptor.TestExtension;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "4.1")
-public class InterceptorInvokerTest extends AbstractTest {
+public class ObjectMethodButNotToStringInvokerTest extends AbstractTest {
     @Deployment
     @ShouldThrowException(DeploymentException.class)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClass(InterceptorInvokerTest.class)
-                .withClasses(MyInterceptorBinding.class, MyInterceptor.class, TestExtension.class)
+                .withTestClass(ObjectMethodButNotToStringInvokerTest.class)
+                .withClasses(MyService.class, TestExtension.class)
                 .withBuildCompatibleExtension(TestExtension.class)
                 .build();
     }
 
     @Test
-    @SpecAssertion(section = Sections.BUILDING_INVOKER, id = "d")
+    @SpecAssertion(section = Sections.BUILDING_INVOKER, id = "bc")
     public void trigger() {
     }
 
