@@ -104,38 +104,3 @@ mvn test -Dincontainer -Dcdi.tck.version=4.1.1
 * TestNG will report, via Maven, the outcome of the run, and report any failures on the console. Details can be found in target/surefire-reports/TestSuite.txt.
  
 ====
-
-
-[[eclipse-plugins]]
-
-
-=== Eclipse Plugins
-
-Eclipse, or any other IDE, is not required to execute or pass the TCK. However an implementor may wish to execute tests in an IDE to aid debugging the tests. This section introduces two essential Eclipse plugins, TestNG and Maven, and points you to resources explaining how to install them. 
-
-[[eclipse-testng-plugin]]
-
-
-==== TestNG Plugin
-
-The TCK test suite is built on the TestNG. Therefore, having the TestNG plugin installed in Eclipse is essential. Instructions for using the TestNG update site to add the TestNG plugin to Eclipse are provided on the TestNG link:$$http://testng.org/doc/download.html$$[download page]. You can find a tutorial that explains how to use the TestNG plugin on the TestNG link:$$http://testng.org/doc/eclipse.html$$[Eclipse page]. 
-
-[[m2e-plugin]]
-
-
-==== Maven Plugin (m2e)
-
-Another useful plugin is m2e. The TCK project uses Maven. Therefore, to work with TCK in Eclipse, you may wish to have native support for Maven projects, which the m2e plugin provides. Instructions for using the m2e update site to add the m2e plugin to Eclipse are provided on the m2e link:$$http://eclipse.org/m2e/$$[home page]. 
-
-You can alternatively use the Eclipse plugin for Maven to generate native Eclipse projects from Maven projects. 
-
-If you have Maven installed, you have everything you need.  Just execute the following command from any Maven project to produce the Eclipse project files. 
-
-
-[source, console]
-----
-mvn eclipse:eclipse
-----
-
-Again, the Eclipse plugins are not required to execute the TCK, but can be very helpful when validating an implementation against the TCK test suite and especially when using the modules from the project. 
-

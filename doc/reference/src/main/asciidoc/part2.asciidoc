@@ -13,7 +13,3 @@ Finally, you learn how to debug tests from the test suite in Eclipse.
 include::sigtest.asciidoc[]
 
 include::executing.asciidoc[]
-
-include::eclipse-running.asciidoc[]
-
-include::eclipse-debugging.asciidoc[]

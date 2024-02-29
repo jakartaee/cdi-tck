@@ -54,12 +54,6 @@ If you are running the CDI TCK for the first time, read <<introduction>> complet
 *  <<executing>> documents how the TCK test suite is executed. It covers both modes supported by the TCK, standalone and in-container, and shows how to dump the generated test artifacts to disk. 
 
 
-*  <<eclipse-running>> shows how to run individual tests in Eclipse and advises the best way to setup your Eclipse workspace for running the tests. 
-
-
-*  <<eclipse-debugging>>  builds on <<eclipse-running>> by detailing how to debug individual tests in Eclipse.
-
-
 :numbered:
 :sectanchors:
 
