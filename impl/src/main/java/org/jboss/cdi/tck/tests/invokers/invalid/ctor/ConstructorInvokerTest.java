@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.invokers.invalid;
+package org.jboss.cdi.tck.tests.invokers.invalid.ctor;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -22,8 +23,6 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.invokers.invalid.ctor.MyService;
-import org.jboss.cdi.tck.tests.invokers.invalid.ctor.TestExtension;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -45,4 +44,11 @@ public class ConstructorInvokerTest extends AbstractTest {
     @SpecAssertion(section = Sections.BUILDING_INVOKER, id = "bb")
     public void trigger() {
     }
+
+    @ApplicationScoped
+    static public class MyService {
+        public MyService() {
+        }
+    }
+
 }

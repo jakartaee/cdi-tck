@@ -20,7 +20,7 @@ import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
 
 public class TestExtension implements BuildCompatibleExtension {
-    @Registration(types = MyService.class)
+    @Registration(types = ConstructorInvokerTest.MyService.class)
     public void myServiceRegistration(BeanInfo bean, InvokerFactory invokers) {
         for (MethodInfo ctor : bean.declaringClass().constructors()) {
             invokers.createInvoker(bean, ctor).build();
