@@ -68,17 +68,17 @@
         <dependency>
             <groupId>jakarta.enterprise</groupId>
             <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <version>${cdi.tck.version}</version>
+            <version>${cdi.api.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.enterprise</groupId>
             <artifactId>jakarta.enterprise.cdi-el-api</artifactId>
-            <version>${cdi.tck.version}</version>
+            <version>${cdi.api.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.enterprise</groupId>
             <artifactId>jakarta.enterprise.lang-model</artifactId>
-            <version>${cdi.tck.version}</version>
+            <version>${cdi.api.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.interceptor</groupId>
@@ -233,7 +233,7 @@
 
                                             Updating CDI module and Interceptors API module
 
-                                            CDI version: ${cdi.tck.version}
+                                            CDI version: ${cdi.api.version}
                                             Interceptors version: ${interceptors.api.version}
 
                                             JBOSS_HOME: ${jboss.home}
@@ -248,9 +248,9 @@
                                         <property name="module.dir" value="${jboss.home}/modules//system/layers/base/jakarta/enterprise/api" />
                                         <property name="module.interceptor.dir" value="${jboss.home}/modules//system/layers/base/jakarta/interceptor/api" />
 
-                                        <property name="cdi.api.file" value="jakarta.enterprise.cdi-api-${cdi.tck.version}.jar" />
-                                        <property name="cdi.el.api.file" value="jakarta.enterprise.cdi-el-api-${cdi.tck.version}.jar" />
-                                        <property name="cdi.lang.model.file" value="jakarta.enterprise.lang-model-${cdi.tck.version}.jar" />
+                                        <property name="cdi.api.file" value="jakarta.enterprise.cdi-api-${cdi.api.version}.jar" />
+                                        <property name="cdi.el.api.file" value="jakarta.enterprise.cdi-el-api-${cdi.api.version}.jar" />
+                                        <property name="cdi.lang.model.file" value="jakarta.enterprise.lang-model-${cdi.api.version}.jar" />
                                         <property name="interceptor.api.file" value="jakarta.interceptor-api-${interceptors.api.version}.jar" />
 
                                         <delete>
