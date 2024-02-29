@@ -134,23 +134,6 @@
          <version>${project.version}</version>
          <optional>true</optional>
       </dependency>
-
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-dist-porting-package</artifactId>
-         <version>${project.version}</version>
-         <type>zip</type>
-         <optional>true</optional>
-         <classifier>dist</classifier>
-      </dependency>
-      <dependency>
-         <groupId>jakarta.enterprise</groupId>
-         <artifactId>cdi-tck-dist-libs</artifactId>
-         <version>${project.version}</version>
-         <type>zip</type>
-         <optional>true</optional>
-         <classifier>dist</classifier>
-      </dependency>
    </dependencies>
 
    <build>
