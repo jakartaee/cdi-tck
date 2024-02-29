@@ -14,6 +14,9 @@
          <source>EFTL.txt</source>
          <destName>LICENSE</destName>
       </file>
+      <!-- The root artifact-install.pom gets installed as /artifacts/pom.xml in the dist to allow one to install
+            the CDI TCK contents and dependencies from the dist.
+      -->
       <file>
          <source>artifact-install.pom</source>
          <outputDirectory>artifacts</outputDirectory>
@@ -21,13 +24,33 @@
          <filtered>true</filtered>
       </file>
       <file>
+         <source>${project.basedir}/../impl/src/main/resources/sigtest-weld-pom.xml</source>
+         <outputDirectory>artifacts</outputDirectory>
+         <filtered>true</filtered>
+      </file>
+      <!--
+      -->
+      <file>
          <source>jboss-runner.pom</source>
          <outputDirectory>weld/jboss-tck-runner</outputDirectory>
          <destName>pom.xml</destName>
          <filtered>true</filtered>
       </file>
-
+      <!-- Copy the lang-model-tck-runner/pom.xml with filtering -->
+      <file>
+         <source>${project.basedir}/lang-model-tck-runner/pom.xml</source>
+         <outputDirectory>weld/lang-model-tck-runner</outputDirectory>
+         <filtered>true</filtered>
+      </file>
+      <!-- Create a weld/jboss-as/pom.xml directory from the jboss-as-updater.pom  -->
+      <file>
+         <source>jboss-as-updater.pom</source>
+         <outputDirectory>weld/jboss-as</outputDirectory>
+         <destName>pom.xml</destName>
+         <filtered>true</filtered>
+      </file>
    </files>
+
    <fileSets>
       <fileSet>
          <directory>${project.basedir}</directory>
@@ -41,10 +64,14 @@
          <outputDirectory>weld/lang-model-tck-runner</outputDirectory>
          <includes>
             <include>src/**</include>
-            <include>pom.xml</include>
          </includes>
       </fileSet>
+      <fileSet>
+         <directory>src/test</directory>
+         <outputDirectory>weld/jboss-tck-runner/src/test</outputDirectory>
+      </fileSet>
    </fileSets>
+
 
    <dependencySets>
       <dependencySet>
@@ -67,20 +94,6 @@
          <outputDirectory>/lib</outputDirectory>
          <useProjectArtifact>false</useProjectArtifact>
          <unpack>true</unpack>
-      </dependencySet>
-      <dependencySet>
-         <includes>
-            <include>jakarta.enterprise:cdi-tck-dist-porting-package</include>
-         </includes>
-         <useTransitiveDependencies>false</useTransitiveDependencies>
-         <outputDirectory>/weld</outputDirectory>
-         <useProjectArtifact>false</useProjectArtifact>
-         <unpack>true</unpack>
-         <unpackOptions>
-            <excludes>
-               <exclude>jboss-tck-runner/pom.xml</exclude>
-            </excludes>
-         </unpackOptions>
       </dependencySet>
       <dependencySet>
          <includes>

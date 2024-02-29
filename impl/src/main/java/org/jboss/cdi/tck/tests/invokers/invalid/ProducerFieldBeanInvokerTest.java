@@ -15,12 +15,6 @@
  */
 package org.jboss.cdi.tck.tests.invokers.invalid;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Produces;
-import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
-import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
-import jakarta.enterprise.inject.build.compatible.spi.InvokerFactory;
-import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -28,6 +22,9 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.invokers.invalid.prodfield.MyProducer;
+import org.jboss.cdi.tck.tests.invokers.invalid.prodfield.MyService;
+import org.jboss.cdi.tck.tests.invokers.invalid.prodfield.TestExtension;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -40,23 +37,9 @@ public class ProducerFieldBeanInvokerTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(ProducerFieldBeanInvokerTest.class)
-                .withClasses(MyService.class, MyProducer.class)
+                .withClasses(MyService.class, MyProducer.class, TestExtension.class)
                 .withBuildCompatibleExtension(TestExtension.class)
                 .build();
-    }
-
-    public static class TestExtension implements BuildCompatibleExtension {
-        @Registration(types = MyService.class)
-        public void myServiceRegistration(BeanInfo bean, InvokerFactory invokers) {
-            bean.producerField()
-                    .type()
-                    .asClass()
-                    .declaration()
-                    .methods()
-                    .stream()
-                    .filter(it -> "hello".equals(it.name()))
-                    .forEach(it -> invokers.createInvoker(bean, it).build());
-        }
     }
 
     @Test
@@ -64,15 +47,4 @@ public class ProducerFieldBeanInvokerTest extends AbstractTest {
     public void trigger() {
     }
 
-    public static class MyService {
-        public String hello() {
-            return "foobar";
-        }
-    }
-
-    @ApplicationScoped
-    public static class MyProducer {
-        @Produces
-        public static MyService producer = new MyService();
-    }
 }

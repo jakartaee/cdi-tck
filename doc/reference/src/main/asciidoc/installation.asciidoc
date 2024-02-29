@@ -14,18 +14,16 @@ You can also download the current source code from link:$$https://github.com/ecl
 
 Executing the TCK requires a {jakartaee-version} or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK does not depend on any particular Jakarta EE implementation.
 
-A Jakarta Contexts and Dependency Injection for compatible implementation project is named Weld. The release stream for Jakarta CDI {revnumber} is named _{revmajor}.x_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
+A Jakarta Contexts and Dependency Injection compatible implementation project is named Weld. The release stream for Jakarta CDI {revnumber} TCK is named _{revnumber}.x_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
 
 
 [NOTE]
 ====
-Weld is not required for running the CDI TCK, but it can be used as a reference for familiarizing yourself with the TCK before testing your own CDI implementation. 
-
-
+Weld is not required for running the CDI TCK, but it can be used as a reference for familiarizing yourself with the TCK before testing your own CDI implementation.
 ====
 
 
-Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 17 or better, which you can obtain from the link:$$http://www.oracle.com/technetwork/java/index.html$$[Java Software] website.
+Naturally, to execute Java programs, you must have a Java SE runtime environment. The TCK requires Java SE 17 or better, which you can obtain from the link:$$https://adoptium.net/temurin/releases/$$[Eclipse Temurin] website.
 
 
 === The TCK Environment

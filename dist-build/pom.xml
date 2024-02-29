@@ -12,10 +12,9 @@
    <packaging>pom</packaging>
    <name>CDI TCK Distribution</name>
 
-   <modules>
-      <module>porting-package</module>
-      <module>libs</module>
-   </modules>
+   <properties>
+      <sigtest.filename>cdi-tck-core-impl-${project.version}-sigtest-jdk17.sig</sigtest.filename>
+   </properties>
 
    <dependencies>
       <dependency>

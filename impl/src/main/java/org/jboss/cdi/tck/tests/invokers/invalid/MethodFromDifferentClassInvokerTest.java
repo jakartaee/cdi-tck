@@ -15,20 +15,16 @@
  */
 package org.jboss.cdi.tck.tests.invokers.invalid;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
-import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
-import jakarta.enterprise.inject.build.compatible.spi.Enhancement;
-import jakarta.enterprise.inject.build.compatible.spi.InvokerFactory;
-import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.spi.DeploymentException;
-import jakarta.enterprise.lang.model.declarations.MethodInfo;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.tests.invokers.invalid.method.MyOtherService;
+import org.jboss.cdi.tck.tests.invokers.invalid.method.MyService;
+import org.jboss.cdi.tck.tests.invokers.invalid.method.TestExtension;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -41,25 +37,9 @@ public class MethodFromDifferentClassInvokerTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(MethodFromDifferentClassInvokerTest.class)
-                .withClasses(MyService.class, MyOtherService.class)
+                .withClasses(MyService.class, MyOtherService.class, TestExtension.class)
                 .withBuildCompatibleExtension(TestExtension.class)
                 .build();
-    }
-
-    public static class TestExtension implements BuildCompatibleExtension {
-        private MethodInfo doSomething;
-
-        @Enhancement(types = MyOtherService.class)
-        public void myOtherServiceEnhancement(MethodInfo method) {
-            if ("doSomething".equals(method.name())) {
-                doSomething = method;
-            }
-        }
-
-        @Registration(types = MyService.class)
-        public void myServiceRegistration(BeanInfo bean, InvokerFactory invokers) {
-            invokers.createInvoker(bean, doSomething).build();
-        }
     }
 
     @Test
@@ -67,13 +47,4 @@ public class MethodFromDifferentClassInvokerTest extends AbstractTest {
     public void trigger() {
     }
 
-    @ApplicationScoped
-    public static class MyService {
-    }
-
-    @ApplicationScoped
-    public static class MyOtherService {
-        public void doSomething() {
-        }
-    }
 }
