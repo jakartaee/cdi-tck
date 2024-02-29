@@ -95,15 +95,6 @@
       </dependencySet>
       <dependencySet>
          <includes>
-            <include>jakarta.enterprise:cdi-tck-dist-libs</include>
-         </includes>
-         <useTransitiveDependencies>false</useTransitiveDependencies>
-         <outputDirectory>/lib</outputDirectory>
-         <useProjectArtifact>false</useProjectArtifact>
-         <unpack>true</unpack>
-      </dependencySet>
-      <dependencySet>
-         <includes>
             <include>jakarta.enterprise:cdi-tck-reference-guide:zip</include>
          </includes>
          <unpack>true</unpack>

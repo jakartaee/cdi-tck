@@ -18,10 +18,6 @@ doc/
 
  – A detailed reference guide for the current version of TCK in both pdf and html formats
 
-lib/
-
- – Maven project to get all TCK dependencies
-
 weld/
 
  – subdirectory for the sample TCK runner for using Weld (the CDI ratifying compatible implementation) standalone and with WildFly
