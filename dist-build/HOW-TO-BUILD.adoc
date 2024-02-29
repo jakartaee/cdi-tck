@@ -1,2 +1,21 @@
 = Jakarta CDI TCK dist-build
-This document describes how the dist-build functions to produce the CDI TCK distribution zip bundle.
+This document describes how the dist-build functions to produce the CDI TCK distribution zip bundle. In the description below, CDI_TCK_DIST refers to the root directory of the CDI TCK distribution zip after being unpacked. For example, for the 4.1.0 release it would be cdi-tck-4.1.0.
+
+== Files in dist-build
+- The src/main/assembly/assembly.xml defines how the distribution zip is put together from contents in the CDI TCK repo, and the Weld artifacts
+- The src/test/* tree is copied to the CDI_TCK_DIST/weld/jboss-tck-runner/src/test and is related to running the TCK against Weld and WildFly/Weld.
+- artifact-install.pom is installed as CDI_TCK_DIST/artifacts/pom.xml along with the TCK artifacts and its dependencies to allow one to install the TCK into a local maven repository.
+- jboss-as-updater.pom is bundled as CDI_TCK_DIST/weld/jboss-as/pom.xml and can be used to update a bare WildFly installation with the Weld version and Jakarta API artifacts that correspond to the versions used by the TCK.
+- jboss-runner.pom is bundled as CDI_TCK_DIST/weld/jboss-tck-runner/pom.xml and contains the profiles used to run the TCK against, Weld in embedded and se modes as well as inside of the WildFly container.
+- pom.xml - defines the distribution dependencies and the maven-assembly-plugin configuration
+- README.adoc is the CDI_TCK_DIST top level readme file that describes the distribution contents
+
+== Running the build
+To create the distribution, run the following from the project root:
+
+[source, console]
+----
+mvn -Drelease install
+----
+
+The distribution zip file will be found in the dist-build/target directory.

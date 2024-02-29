@@ -8,6 +8,7 @@
       <format>zip</format>
    </formats>
 
+   <!-- The files section is used for individual files and those files that need filter applied -->
    <files>
       <!-- This is the final EFTL license -->
       <file>
@@ -23,12 +24,15 @@
          <destName>pom.xml</destName>
          <filtered>true</filtered>
       </file>
+      <!-- Install the example signature test pom that validates that the Weld version referenced by the
+            TCK passes the signature tests.
+      -->
       <file>
          <source>${project.basedir}/../impl/src/main/resources/sigtest-weld-pom.xml</source>
          <outputDirectory>artifacts</outputDirectory>
          <filtered>true</filtered>
       </file>
-      <!--
+      <!-- Install the Weld and Weld/WildFly sample TCK runner pom with filtering to pickup the correct versions
       -->
       <file>
          <source>jboss-runner.pom</source>
@@ -51,7 +55,9 @@
       </file>
    </files>
 
+   <!-- The fileSets are for bulk copying that does not need filtering -->
    <fileSets>
+      <!-- The distribution root README file -->
       <fileSet>
          <directory>${project.basedir}</directory>
          <outputDirectory>/</outputDirectory>
@@ -59,6 +65,7 @@
             <include>README.adoc</include>
          </includes>
       </fileSet>
+      <!-- Copy the sample lang model TCK runner project. The pom.xml was added above with filtering. -->
       <fileSet>
          <directory>${project.basedir}/lang-model-tck-runner</directory>
          <outputDirectory>weld/lang-model-tck-runner</outputDirectory>

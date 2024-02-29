@@ -13,6 +13,11 @@
    <name>CDI TCK Distribution</name>
 
    <properties>
+      <!-- This property is used by the impl/src/resources/sigtest-weld-pom.xml file to allow the signature test
+            file to be set to the signature test file artifact included in the TCK distribution. When the
+            sigtest-weld-pom.xml is copied to the distribution artifacts/sigtest-weld-pom.xml this is used to
+            match the sigtest-maven-plugin sigfile configuration value to the generated sigtest artifact.
+      -->
       <sigtest.filename>cdi-tck-core-impl-${project.version}-sigtest-jdk17.sig</sigtest.filename>
    </properties>
 
