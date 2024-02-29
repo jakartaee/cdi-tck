@@ -1,10 +1,17 @@
 <info>
-<title>Technology Compatibility Kit Reference Guide for Jakarta Contexts and Dependency Injection 4.0</title>
+<title>Technology Compatibility Kit Reference Guide for Jakarta Contexts and Dependency Injection 4.1</title>
 <subtitle>
  Project Lead: Red Hat Inc.
 </subtitle>
 <authorgroup>
-<author>
+    <author>
+        <firstname>Jakarta</firstname>
+        <surname>CDI Project</surname>
+        <affiliation>
+            <jobtitle>Jakarta Contexts and Dependency Injection (CDI) 4.1 specification lead</jobtitle>
+        </affiliation>
+    </author>
+    <author>
       <firstname>Antoine</firstname>
       <surname>Sabot-Durand</surname>
       <affiliation>

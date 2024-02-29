@@ -17,14 +17,7 @@ package org.jboss.cdi.tck.tests.full.invokers.invalid;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 
-import jakarta.annotation.Priority;
-import jakarta.decorator.Decorator;
-import jakarta.decorator.Delegate;
-import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.DeploymentException;
-import jakarta.enterprise.inject.spi.Extension;
-import jakarta.enterprise.inject.spi.ProcessManagedBean;
-import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -44,19 +37,9 @@ public class DecoratorInvokerTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(DecoratorInvokerTest.class)
-                .withClasses(MyService.class, MyDecorator.class)
+                .withClasses(MyService.class, MyDecorator.class, TestExtension.class)
                 .withExtension(TestExtension.class)
                 .build();
-    }
-
-    public static class TestExtension implements Extension {
-        public void myDecoratorRegistration(@Observes ProcessManagedBean<MyDecorator> pmb) {
-            pmb.getAnnotatedBeanClass()
-                    .getMethods()
-                    .stream()
-                    .filter(it -> "hello".equals(it.getJavaMember().getName()))
-                    .forEach(it -> pmb.createInvoker(it).build());
-        }
     }
 
     @Test
@@ -64,20 +47,4 @@ public class DecoratorInvokerTest extends AbstractTest {
     public void trigger() {
     }
 
-    public interface MyService {
-        String hello();
-    }
-
-    @Decorator
-    @Priority(1)
-    public static class MyDecorator implements MyService {
-        @Inject
-        @Delegate
-        MyService delegate;
-
-        @Override
-        public String hello() {
-            return "decorated: " + delegate.hello();
-        }
-    }
 }

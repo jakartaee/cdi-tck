@@ -21,12 +21,12 @@ import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import jakarta.enterprise.lang.model.declarations.FieldInfo;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
 
-class LangModelUtils {
-    static ClassInfo classOfField(ClassInfo clazz, String fieldName) {
+public class LangModelUtils {
+    public static ClassInfo classOfField(ClassInfo clazz, String fieldName) {
         return singleField(clazz, fieldName).type().asClass().declaration();
     }
 
-    static FieldInfo singleField(ClassInfo clazz, String name) {
+    public static FieldInfo singleField(ClassInfo clazz, String name) {
         FieldInfo result = null;
         for (FieldInfo field : clazz.fields()) {
             if (name.equals(field.name())) {

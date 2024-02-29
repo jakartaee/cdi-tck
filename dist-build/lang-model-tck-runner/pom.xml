@@ -3,6 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <name>CDI Lite Language Model TCK Runner</name>
+    <description>An example pom for running the lang model against Weld and WildFly</description>
     <groupId>org.jboss.weld</groupId>
     <artifactId>lang-model-tck-runner</artifactId>
     <version>4.0.5-SNAPSHOT</version>

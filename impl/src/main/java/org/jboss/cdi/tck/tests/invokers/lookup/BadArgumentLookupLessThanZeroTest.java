@@ -15,14 +15,7 @@
  */
 package org.jboss.cdi.tck.tests.invokers.lookup;
 
-import java.util.Set;
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
-import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
-import jakarta.enterprise.inject.build.compatible.spi.InvokerFactory;
-import jakarta.enterprise.inject.build.compatible.spi.Messages;
-import jakarta.enterprise.inject.build.compatible.spi.Registration;
+import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -32,6 +25,9 @@ import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.cdi.tck.tests.invokers.InvokerHolder;
 import org.jboss.cdi.tck.tests.invokers.InvokerHolderCreator;
 import org.jboss.cdi.tck.tests.invokers.InvokerHolderExtensionBase;
+import org.jboss.cdi.tck.tests.invokers.lookup.badarglt.MyDependency;
+import org.jboss.cdi.tck.tests.invokers.lookup.badarglt.MyService;
+import org.jboss.cdi.tck.tests.invokers.lookup.badarglt.TestExtension;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -40,27 +36,15 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "4.1")
 public class BadArgumentLookupLessThanZeroTest extends AbstractTest {
     @Deployment
-    @ShouldThrowException(IllegalArgumentException.class)
+    @ShouldThrowException(DeploymentException.class)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(BadArgumentLookupLessThanZeroTest.class)
                 .withClasses(MyService.class, MyDependency.class)
                 .withBuildCompatibleExtension(TestExtension.class)
-                .withClasses(InvokerHolder.class, InvokerHolderCreator.class, InvokerHolderExtensionBase.class)
+                .withClasses(InvokerHolder.class, InvokerHolderCreator.class, InvokerHolderExtensionBase.class,
+                        TestExtension.class)
                 .build();
-    }
-
-    public static class TestExtension extends InvokerHolderExtensionBase implements BuildCompatibleExtension {
-        @Registration(types = MyService.class)
-        public void myServiceRegistration(BeanInfo bean, InvokerFactory invokers, Messages msg) {
-            registerInvokers(bean, invokers, Set.of("hello"), builder -> {
-                try {
-                    builder.withArgumentLookup(-1);
-                } catch (IllegalArgumentException expected) {
-                    msg.error(expected);
-                }
-            });
-        }
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -68,17 +52,4 @@ public class BadArgumentLookupLessThanZeroTest extends AbstractTest {
     public void trigger() {
     }
 
-    @ApplicationScoped
-    static class MyService {
-        public String hello(MyDependency dependency) {
-            return "foobar" + dependency.getId();
-        }
-    }
-
-    @ApplicationScoped
-    static class MyDependency {
-        public int getId() {
-            return 0;
-        }
-    }
 }

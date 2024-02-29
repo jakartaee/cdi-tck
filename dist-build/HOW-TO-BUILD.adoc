@@ -1,0 +1,2 @@
+= Jakarta CDI TCK dist-build
+This document describes how the dist-build functions to produce the CDI TCK distribution zip bundle.

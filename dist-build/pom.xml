@@ -12,6 +12,10 @@
    <packaging>pom</packaging>
    <name>CDI TCK Distribution</name>
 
+   <properties>
+      <sigtest.filename>cdi-tck-core-impl-${project.version}-sigtest-jdk17.sig</sigtest.filename>
+   </properties>
+
    <dependencies>
       <dependency>
          <groupId>jakarta.enterprise</groupId>
