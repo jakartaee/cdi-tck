@@ -19,6 +19,8 @@
             match the sigtest-maven-plugin sigfile configuration value to the generated sigtest artifact.
       -->
       <sigtest.filename>cdi-tck-core-impl-${project.version}-sigtest-jdk17.sig</sigtest.filename>
+      <!-- Default to the apache license. Final builds should set this to EFTL.txt -->
+      <license.file>apl.txt</license.file>
    </properties>
 
    <dependencies>
