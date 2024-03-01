@@ -3,9 +3,7 @@
 Jakarta Contexts and Dependency Injection (CDI) is a Jakarta standard for
 dependency injection and contextual lifecycle management. This is the TCK for CDI.
 
-This distribution, as a whole, is licensed under the terms of the Apache Public
-License, while the final distribution used for compatibility testing is under the EFTL. The
-bundled LICENSE file will dictate which license applies to the TCK distribution.
+This distribution, as a whole, is licensed under the terms of the Apache Public License, while the final distribution used for compatibility testing is under the EFTL. The bundled LICENSE file will dictate which license applies to the TCK distribution.
 
 This distribution consists of:
 
@@ -20,19 +18,15 @@ doc/
 
  – A detailed reference guide for the current version of TCK in both pdf and html formats
 
-lib/
-
- – Maven project to get all TCK dependencies
-
 weld/
 
- – TCK runner for using Weld (the CDI RI) with JBoss AS
+ – subdirectory for the sample TCK runner for using Weld (the CDI ratifying compatible implementation) standalone and with WildFly
 
-jboss-tck-runner/
+weld/jboss-tck-runner/
 
- – maven-based TCK runner for WildFly
+ – maven-based TCK runner for standalone Weld and with WildFly
 
-lang-model-tck-runner/
+weld/lang-model-tck-runner/
 
  - maven-based Language Model TCK runner for Weld and WildFly
 

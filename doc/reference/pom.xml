@@ -21,6 +21,10 @@
         <pdf.name>cdi-tck-reference-guide.pdf</pdf.name>
         <revmajor>4</revmajor>
         <revnumber>4.1</revnumber>
+        <!-- The Weld major/minor value that is compatible with revnumber -->
+        <weld.stream>6.0</weld.stream>
+        <!-- The Major WildFly version used in the samples -->
+        <wildfly.major.version>31</wildfly.major.version>
     </properties>
 
     <build>
@@ -50,8 +54,8 @@
                         <!-- Attributes for versions used in the reference docs -->
                         <arquillian-version>${arquillian.version}</arquillian-version>
                         <testng-version>${testng.version}</testng-version>
-                        <weld-version>${weld.version}</weld-version>
-                        <wildfly-version>31</wildfly-version>
+                        <weld-stream>${weld.stream}</weld-stream>
+                        <wildfly-version>${wildfly.major.version}.x</wildfly-version>
                         <glassfish-version>7.0.x</glassfish-version>
                         <jakartaee-version>Jakarta EE 11</jakartaee-version>
 
@@ -123,7 +127,7 @@
                             <descriptors>
                                 <descriptor>src/main/assembly/assembly.xml</descriptor>
                             </descriptors>
-                            <finalName>cdi-tck-${cdi.tck.version}</finalName>
+                            <finalName>cdi-tck-${project.version}</finalName>
                         </configuration>
                     </execution>
                 </executions>

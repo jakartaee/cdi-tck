@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.cdi.tck.tests.invokers.invalid;
+package org.jboss.cdi.tck.tests.invokers.invalid.privatemethod;
 
 import jakarta.enterprise.inject.spi.DeploymentException;
 
@@ -22,8 +22,6 @@ import org.jboss.arquillian.container.test.api.ShouldThrowException;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.cdi.Sections;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.tests.invokers.invalid.privatemethod.MyService;
-import org.jboss.cdi.tck.tests.invokers.invalid.privatemethod.TestExtension;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;

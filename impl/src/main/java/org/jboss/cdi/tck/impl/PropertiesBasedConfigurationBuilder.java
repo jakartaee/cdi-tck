@@ -60,7 +60,7 @@ public class PropertiesBasedConfigurationBuilder {
      */
     @SuppressWarnings("unchecked")
     public PropertiesBasedConfigurationBuilder init(boolean deploymentPhase) {
-        configuration.setCdiLiteMode(getBooleanValue(Configuration.CDI_LITE_MODE, Boolean.FALSE, false));
+        configuration.setCoreMode(getBooleanValue(Configuration.CDI_CORE_MODE, Boolean.FALSE, false));
 
         configuration.setBeans(getInstanceValue(Beans.PROPERTY_NAME, Beans.class, !deploymentPhase));
         configuration.setEl(getInstanceValue(EL.PROPERTY_NAME, EL.class, !deploymentPhase));
@@ -71,7 +71,7 @@ public class PropertiesBasedConfigurationBuilder {
 
         configuration.setLibraryDirectory(getStringValue(Configuration.LIBRARY_DIRECTORY_PROPERTY_NAME, null, deploymentPhase));
 
-        if (!configuration.getCdiLiteMode()) {
+        if (!configuration.getCoreMode()) {
             configuration.setTestDataSource(getStringValue(Configuration.TEST_DATASOURCE_PROPERTY_NAME, null, deploymentPhase));
             configuration.setTestJmsConnectionFactory(
                     getStringValue(Configuration.TEST_JMS_CONNECTION_FACTORY, null, deploymentPhase));

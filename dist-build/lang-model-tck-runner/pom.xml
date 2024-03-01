@@ -6,7 +6,7 @@
     <description>An example pom for running the lang model against Weld and WildFly</description>
     <groupId>org.jboss.weld</groupId>
     <artifactId>lang-model-tck-runner</artifactId>
-    <version>4.0.5-SNAPSHOT</version>
+    <version>${cdi.tck.version}</version>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -19,7 +19,7 @@
             <dependency>
                 <groupId>jakarta.enterprise</groupId>
                 <artifactId>cdi-tck-lang-model</artifactId>
-                <version>${project.version}</version>
+                <version>${cdi.api.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.weld</groupId>
@@ -51,7 +51,7 @@
             <dependency>
                 <groupId>org.wildfly.arquillian</groupId>
                 <artifactId>wildfly-arquillian-container-managed</artifactId>
-                <version>5.0.0.Alpha3</version>
+                <version>5.0.1.Final</version>
             </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian.protocol</groupId>
@@ -83,7 +83,6 @@
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <version>${arquillian.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -171,9 +170,6 @@
             <build>
                 <resources>
                     <resource>
-                        <directory>src/test/resources</directory>
-                    </resource>
-                    <resource>
                         <directory>src/test/wildfly</directory>
                     </resource>
                 </resources>
@@ -216,7 +212,6 @@
                             </argLine>
                             <properties>
                                 <property>
-                                    <!-- Note a 7.4.0 issue results in NPEs and useless output if you go higher than 1 here -->
                                     <name>surefire.testng.verbose</name>
                                     <value>0</value>
                                 </property>
@@ -228,7 +223,6 @@
                                 <!-- Specified system properties are not
                                 available during in-container test execution -->
                                 <org.jboss.cdi.tck.libraryDirectory>target/dependency/lib</org.jboss.cdi.tck.libraryDirectory>
-                                <org.jboss.cdi.tck.testDataSource>java:jboss/datasources/ExampleDS</org.jboss.cdi.tck.testDataSource>
                             </systemPropertyVariables>
                             <systemProperties>
                                 <jacoco.agent>${jacoco.agent}</jacoco.agent>
@@ -241,30 +235,6 @@
                             </systemProperties>
                         </configuration>
                     </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-resources</id>
-                                <!-- perform this any time before the tests are executed -->
-                                <phase>validate</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${JBOSS_HOME}/standalone/configuration</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${JBOSS_HOME}/docs/examples/configs</directory>
-                                            <includes>standalone-activemq-embedded.xml</includes>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-
                 </plugins>
             </build>
         </profile>

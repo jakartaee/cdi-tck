@@ -8,13 +8,13 @@ This chapter explains how to obtain the TCK and supporting software and provides
 
 === Obtaining the Software
 
-You can obtain a release of the CDI TCK project from the link:$$https://download.eclipse.org/jakartaee/cdi/$$[download page] on the CDI specification website. The release stream for Jakarta CDI is named _4.1.x_. The CDI TCK is distributed as a ZIP file, which contains the TCK artifacts (the test suite binary and source, porting package API binary and source, the test suite configuration file, the audit source and report) in /artifacts and documentation in /doc. The TCK library dependencies are not part of the distribution and can be downloaded on demand (see readme.txt file in /lib).
+You can obtain a release of the CDI TCK project from the link:$$https://download.eclipse.org/jakartaee/cdi/$$[download page] on the CDI specification website. The release stream for Jakarta CDI is named _4.1.x_. The CDI TCK is distributed as a ZIP file, which contains the TCK artifacts (the test suite binary and source, porting package API binary and source, the test suite configuration file, the audit source and report) in /artifacts and documentation in /doc.
 
 You can also download the current source code from link:$$https://github.com/eclipse-ee4j/cdi-tck$$[GitHub repository].
 
-Executing the TCK requires a {jakartaee-version} or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK does not depend on any particular Jakarta EE implementation.
+Executing the TCK requires a {jakartaee-version} or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK tests do not depend on any particular Jakarta EE implementation.
 
-A Jakarta Contexts and Dependency Injection compatible implementation project is named Weld. The release stream for Jakarta CDI {revnumber} TCK is named _{revnumber}.x_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
+One Jakarta Contexts and Dependency Injection compatible implementation project is named Weld. The release stream for Jakarta CDI {revnumber} TCK is named _{revnumber}.x_. The compatible Weld release stream is _{weld-stream}_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
 
 
 [NOTE]
@@ -28,11 +28,11 @@ Naturally, to execute Java programs, you must have a Java SE runtime environment
 
 === The TCK Environment
 
-The TCK requires the following two Java runtime environments: 
+The TCK requires the following two runtime environments:
 
-*  Java SE 17 or better
-
-*  {jakartaee-version} or better (e.g., WildFly {wildfly-version} or GlassFish {glassfish-version}
+* Java SE 17 or better
+* A Maven installation, version 3.9 or higher
+*  A {jakartaee-version} runtime (e.g., WildFly {wildfly-version} or GlassFish {glassfish-version}
 
 You should refer to vendor instructions for how to install the runtime environment. 
 
@@ -56,86 +56,35 @@ core-tck-4.x.y/
    README.adoc
 ----
 
-Each test class is treated as an individual artifact. All test methods (i.e., methods annotated with +@Test+) in the test class are run in the application, meaning bean discovery occurs exactly once per artifact and the same BeanManager is used by each test method in the class. 
+Each test class is treated as an individual artifact. All test methods (i.e., methods annotated with +@Test+) in the test class are run in the application, meaning bean discovery occurs exactly once per artifact and the same BeanManager is used by each test method in the class.
 
-[TIP]
-====
-[[running-against-weld, Running the TCK against Weld and WildFly]]
-Running the TCK against Weld and WildFly
+[[running-against-wildfly]]
+
+==== Example of Setting up TCK to use WildFly
 
 * First, you should download WildFly {wildfly-version} from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
 
-* Set the JBOSS_HOME environment variable to the location of the WildFly software. 
+* Set the JBOSS_HOME environment variable to the root directory path for the location where you have unpacked WildFly software.
 
-The CDI TCK distribution includes a TCK runner that executes the TCK using Weld as the CDI implementation and WildFly as the Jakarta EE runtime. To run the TCK:
+The CDI TCK distribution includes maven project that allows one to update a bare WildFly distribution to match the CDI API artifacts and Weld version references by the TCK. To update WildFly, run the following Maven commands from within the core-tck-4.x.y/weld/jboss-as directory:
 
-* You need to install Maven. You can find documentation on how to install Maven in the link:$$http://books.sonatype.com/mvnref-book/reference/installation.html$$[Maven: The Definitive Guide] book published by Sonatype.
-
-* Next, integrate the Weld jars into WildFly:
+* Integrate the Weld jars into WildFly:
 
 [source, console]
 ----
-cd core-tck-4.x.y/weld/jboss-as
 mvn -Pupdate-jboss-as package
+----
+
+* Next, update the Jakarta API jars
+
+[source, console]
+----
+mvn -Pupdate-jakarta-apis package
 ----
 
 * Next, integrate the TCK ext jar into WildFly:
 
 [source, console]
 ----
-cd core-tck-4.x.y/weld/jboss-as
 mvn -Dtck package
 ----
-
-* Next, instruct Maven to run the TCK: 
-
-[source, console]
-----
-cd core-tck-4.x.y/weld/jboss-tck-runner
-mvn test -Dincontainer
-----
-
-* Use +cdi.tck.version+ system property to specify particular TCK version:
-
-[source, console]
-----
-mvn test -Dincontainer -Dcdi.tck.version=4.1.1
-----
-* TestNG will report, via Maven, the outcome of the run, and report any failures on the console. Details can be found in target/surefire-reports/TestSuite.txt.
- 
-====
-
-
-[[eclipse-plugins]]
-
-
-=== Eclipse Plugins
-
-Eclipse, or any other IDE, is not required to execute or pass the TCK. However an implementor may wish to execute tests in an IDE to aid debugging the tests. This section introduces two essential Eclipse plugins, TestNG and Maven, and points you to resources explaining how to install them. 
-
-[[eclipse-testng-plugin]]
-
-
-==== TestNG Plugin
-
-The TCK test suite is built on the TestNG. Therefore, having the TestNG plugin installed in Eclipse is essential. Instructions for using the TestNG update site to add the TestNG plugin to Eclipse are provided on the TestNG link:$$http://testng.org/doc/download.html$$[download page]. You can find a tutorial that explains how to use the TestNG plugin on the TestNG link:$$http://testng.org/doc/eclipse.html$$[Eclipse page]. 
-
-[[m2e-plugin]]
-
-
-==== Maven Plugin (m2e)
-
-Another useful plugin is m2e. The TCK project uses Maven. Therefore, to work with TCK in Eclipse, you may wish to have native support for Maven projects, which the m2e plugin provides. Instructions for using the m2e update site to add the m2e plugin to Eclipse are provided on the m2e link:$$http://eclipse.org/m2e/$$[home page]. 
-
-You can alternatively use the Eclipse plugin for Maven to generate native Eclipse projects from Maven projects. 
-
-If you have Maven installed, you have everything you need.  Just execute the following command from any Maven project to produce the Eclipse project files. 
-
-
-[source, console]
-----
-mvn eclipse:eclipse
-----
-
-Again, the Eclipse plugins are not required to execute the TCK, but can be very helpful when validating an implementation against the TCK test suite and especially when using the modules from the project. 
-

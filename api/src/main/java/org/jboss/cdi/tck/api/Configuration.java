@@ -29,14 +29,14 @@ import org.jboss.cdi.tck.spi.EL;
  * Porting package property names are the FQCN of the SPI class. Other property names (one for each non-porting package SPI
  * configuration option) are specified here.
  *
- * The TCK may also be configured programatically through this interface.
+ * The TCK may also be configured programmatically through this interface.
  *
  * @author Pete Muir
  * @author Martin Kouba
  */
 public interface Configuration {
 
-    public static final String CDI_LITE_MODE = "org.jboss.cdi.tck.cdiLiteMode";
+    public static final String CDI_CORE_MODE = "org.jboss.cdi.tck.cdiCoreMode";
 
     public static final String LIBRARY_DIRECTORY_PROPERTY_NAME = "org.jboss.cdi.tck.libraryDirectory";
 
@@ -64,9 +64,9 @@ public interface Configuration {
      *
      * @return true if running in a CDI Lite environment
      */
-    public Boolean getCdiLiteMode();
+    public Boolean getCoreMode();
 
-    public void setCdiLiteMode(Boolean cdiLiteMode);
+    public void setCoreMode(Boolean cdiLiteMode);
 
     /**
      * The implementation of {@link Beans} in use.
