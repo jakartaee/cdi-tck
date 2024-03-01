@@ -15,7 +15,7 @@ implementation of the Jakarta Contexts and Dependency Injection.
 
 The CDI TCK is built atop TestNG framework and Arquillian platform. The CDI TCK uses Arquillian version _{arquillian-version}_ to execute the test suite.
 
-The CDI TCK is provided under link:$$http://www.apache.org/licenses/LICENSE-2.0$$[Apache Public License 2.0].
+The CDI TCK source is provided under link:$$http://www.apache.org/licenses/LICENSE-2.0$$[Apache Public License 2.0]. The final release of the CDI TCK is subject to the link:$$https://www.eclipse.org/legal/tck.php[Eclipse Foundation Technology Compatibility Kit License]
 
 === Who Should Use This Book
 
