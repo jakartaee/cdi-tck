@@ -225,7 +225,7 @@
                 <plugin>
                     <groupId>jakarta.tck</groupId>
                     <artifactId>sigtest-maven-plugin</artifactId>
-                    <version>2.1</version>
+                    <version>2.2</version>
                 </plugin>
                 <!-- Plugin versions since ee4j parent no longer declares them-->
                 <plugin>
