@@ -110,7 +110,7 @@
         <impsort.version>1.9.0</impsort.version>
 
         <!-- Test tools/dependencies -->
-        <testng.version>7.9.0</testng.version>
+        <testng.version>7.10.0</testng.version>
         <jboss.test.audit.version>2.0.0.Final</jboss.test.audit.version>
         <arquillian.version>1.8.0.Final</arquillian.version>
         <arquillian.container.se.api.version>1.0.2.Final</arquillian.container.se.api.version>
