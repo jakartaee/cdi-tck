@@ -164,14 +164,25 @@ public class PropertiesBasedConfigurationBuilder {
     }
 
     /**
-     * Adds matches from detected resource bundles
+     * Adds matches from detected resource bundles.
      *
      * @param key The key to match
      * @param values The currently found values
      */
     private void addPropertiesFromResourceBundle(String key, Set<String> values) {
-        try {
+        addPropertiesFromResourceBundle(key, values, new StringBuilder());
+    }
 
+    /**
+     * Adds matches from detected resource bundles
+     *
+     * @param key The key to match
+     * @param values The currently found values
+     * @param info a StringBuilder to append information about the found property, useful for debugging duplicates
+     */
+    private void addPropertiesFromResourceBundle(String key, Set<String> values, StringBuilder info) {
+        try {
+            int count = 0;
             for (Enumeration<URL> e = getResources(RESOURCE_BUNDLE); e.hasMoreElements();) {
 
                 URL url = e.nextElement();
@@ -179,10 +190,12 @@ public class PropertiesBasedConfigurationBuilder {
                 InputStream propertyStream = url.openStream();
 
                 try {
-
                     properties.load(propertyStream);
-                    addProperty(key, properties.getProperty(key), values);
-
+                    String value = properties.getProperty(key);
+                    if (value != null) {
+                        values.add(value);
+                        info.append(String.format("\t%d: %s=%s\n", count++, url.toExternalForm(), value));
+                    }
                 } finally {
                     if (propertyStream != null) {
                         propertyStream.close();
@@ -296,15 +309,20 @@ public class PropertiesBasedConfigurationBuilder {
 
     private String getValue(String propertyName, boolean required) {
         Set<String> values = getPropertyValues(propertyName);
-        if (values.size() == 0) {
+        if (values.isEmpty()) {
             if (required) {
                 throw new IllegalArgumentException("Cannot find required property " + propertyName
                         + ", check that it is specified. See cdiLiteMode flag if testing CDI Lite.");
             }
             return null;
         } else if (values.size() > 1) {
-            throw new IllegalArgumentException(
-                    "More than one value given for " + propertyName + ", not sure which one to use!");
+            // Gather where the duplicate values come from
+            String systemValue = System.getProperty(propertyName);
+            StringBuilder info = new StringBuilder(
+                    "More than one value given for " + propertyName + ", not sure which one to use!\n");
+            info.append("Sources for the property\n\tSystemProperty=").append(systemValue).append('\n');
+            addPropertiesFromResourceBundle(propertyName, values, info);
+            throw new IllegalArgumentException(info.toString());
         } else {
             return values.iterator().next();
         }
