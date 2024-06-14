@@ -117,7 +117,7 @@ public interface Configuration {
     public void setLibraryDirectory(String libraryDir);
 
     /**
-     * Few TCK tests need to work with Java EE services related to persistence (JPA, JTA) - test datasource must be provided.
+     * Few TCK tests need to work with Jakarta EE services related to persistence (JPA, JTA) - test datasource must be provided.
      * These tests belong to testng group
      * <code>persistence</code>.
      *

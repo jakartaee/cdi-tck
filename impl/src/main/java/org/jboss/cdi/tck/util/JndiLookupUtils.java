@@ -32,10 +32,10 @@ public class JndiLookupUtils {
         try {
             object = new InitialContext().lookup(jndiName);
         } catch (NamingException e) {
-            throw new IllegalStateException("Unable to lookup Java EE component with JNDI name: " + jndiName, e);
+            throw new IllegalStateException("Unable to lookup Jakarta EE component with JNDI name: " + jndiName, e);
         }
 
-        logger.log("Java EE component with JNDI name {0} found: {1}", jndiName, object.toString());
+        logger.log("Jakarta EE component with JNDI name {0} found: {1}", jndiName, object.toString());
 
         return object;
     }
