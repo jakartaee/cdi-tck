@@ -127,7 +127,7 @@
             </dependencies>
         </profile>
 
-        <!-- Run the TCK in the managed container (full Java EE platform) -->
+        <!-- Run the TCK in the managed container (full Jakarta EE platform) -->
         <profile>
             <id>incontainer</id>
             <activation>
