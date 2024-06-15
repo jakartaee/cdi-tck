@@ -20,8 +20,8 @@ package org.jboss.cdi.tck;
  * <ul>
  * <li>{@link #CDI_FULL} - used to exclude the superset of CDI tests that do not apply to CDI-lite implementations</li>
  * <li>{@link #INTEGRATION} - used to exclude integration tests when running standalone container</li>
- * <li>{@link #JAVAEE_FULL} - subset of integration tests used to exclude tests that require full Jakarta EE platform; tests that
- * belong to this group are also considered to be integration tests</li>
+ * <li>{@link #JAVAEE_FULL} - subset of integration tests used to exclude tests that require full Jakarta EE platform; tests
+ * that belong to this group are also considered to be integration tests</li>
  * </ul>
  *
  * @author Martin Kouba
