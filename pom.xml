@@ -102,7 +102,7 @@
         <annotations.api.version>3.0.0</annotations.api.version>
         <interceptors.api.version>2.2.0</interceptors.api.version>
         <atinject.api.version>2.0.1</atinject.api.version>
-        <el.api.version>6.0.0</el.api.version>
+        <el.api.version>6.0.1</el.api.version>
 
         <!-- Formatting versions and config -->
         <format.skip>false</format.skip>
