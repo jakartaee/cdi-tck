@@ -1803,6 +1803,11 @@
                 <note>This is not allowed in CDI 1.0.</note>
             </assertion>
 
+            <assertion id="bdb">
+                <text>Test sealed classes and sealed interfaces.</text>
+                <note>In spec since CDI 4.1 but tested starting with CDI 5.0</note>
+            </assertion>
+
             <assertion id="ca">
                 <text>Test primitive type.</text>
             </assertion>

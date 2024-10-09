@@ -97,7 +97,7 @@
     <properties>
         <!-- CDI API -->
         <cdi.api.version>4.1.0</cdi.api.version>
-        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.release>17</maven.compiler.release>
         <!-- Jakarta EE APIs Core -->
         <annotations.api.version>3.0.0</annotations.api.version>
         <interceptors.api.version>2.2.0</interceptors.api.version>
