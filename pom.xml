@@ -113,6 +113,7 @@
         <testng.version>7.10.2</testng.version>
         <jboss.test.audit.version>2.0.0.Final</jboss.test.audit.version>
         <arquillian.version>1.9.3.Final</arquillian.version>
+        <shrinkwrap.descriptors.version>2.0.0</shrinkwrap.descriptors.version>
         <arquillian.container.se.api.version>1.0.2.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
         <xmlunit.version>2.9.1</xmlunit.version>
@@ -190,6 +191,13 @@
                 <version>${arquillian.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.shrinkwrap.descriptors</groupId>
+                <artifactId>shrinkwrap-descriptors-bom</artifactId>
+                <version>${shrinkwrap.descriptors.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <dependency>
