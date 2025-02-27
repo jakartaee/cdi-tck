@@ -53,7 +53,7 @@ public class LangModelVerifier {
     InterfaceMembers interfaceMembers;
     AnnotationMembers annotationMembers;
     EnumMembers enumMembers;
-    // TODO records -- but how?
+    RecordMembers recordMembers;
 
     InheritedMethods inheritedMethods;
     InheritedFields inheritedFields;
@@ -89,6 +89,7 @@ public class LangModelVerifier {
         InterfaceMembers.Verifier.verify(LangModelUtils.classOfField(clazz, "interfaceMembers"));
         AnnotationMembers.Verifier.verify(LangModelUtils.classOfField(clazz, "annotationMembers"));
         EnumMembers.Verifier.verify(LangModelUtils.classOfField(clazz, "enumMembers"));
+        RecordMembers.Verifier.verify(LangModelUtils.classOfField(clazz, "recordMembers"));
 
         InheritedMethods.Verifier.verify(LangModelUtils.classOfField(clazz, "inheritedMethods"));
         InheritedFields.Verifier.verify(LangModelUtils.classOfField(clazz, "inheritedFields"));

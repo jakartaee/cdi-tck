@@ -20,6 +20,7 @@ import java.util.List;
 import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import jakarta.enterprise.lang.model.declarations.FieldInfo;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
+import jakarta.enterprise.lang.model.declarations.RecordComponentInfo;
 
 public class LangModelUtils {
     public static ClassInfo classOfField(ClassInfo clazz, String fieldName) {
@@ -122,6 +123,25 @@ public class LangModelUtils {
             if (method.name().equals(name)) {
                 result.add(method);
             }
+        }
+        return result;
+    }
+
+    static RecordComponentInfo singleRecordComponent(ClassInfo clazz, String name) {
+        RecordComponentInfo result = null;
+        for (RecordComponentInfo recordComponent : clazz.recordComponents()) {
+            if (name.equals(recordComponent.name())) {
+                if (result == null) {
+                    result = recordComponent;
+                } else {
+                    throw new IllegalStateException(
+                            "More than 1 declaration of record component '" + name + "' on '" + clazz.simpleName() + "'");
+                }
+            }
+        }
+        if (result == null) {
+            throw new IllegalStateException(
+                    "No declaration of record component '" + name + "' on '" + clazz.simpleName() + "'");
         }
         return result;
     }

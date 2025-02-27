@@ -17,6 +17,7 @@ import jakarta.enterprise.lang.model.AnnotationTarget;
 import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import jakarta.enterprise.lang.model.declarations.FieldInfo;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
+import jakarta.enterprise.lang.model.declarations.RecordComponentInfo;
 import jakarta.enterprise.lang.model.types.Type;
 
 public class Equality {
@@ -24,6 +25,7 @@ public class Equality {
     SimpleInterface simpleInterface;
     SimpleEnum simpleEnum;
     SimpleAnnotation simpleAnnotation;
+    SimpleRecord simpleRecord;
 
     public static void verify(ClassInfo clazz) {
         verifyDeclarations(clazz);
@@ -35,24 +37,34 @@ public class Equality {
         ClassInfo simpleInterface = LangModelUtils.classOfField(clazz, "simpleInterface");
         ClassInfo simpleEnum = LangModelUtils.classOfField(clazz, "simpleEnum");
         ClassInfo simpleAnnotation = LangModelUtils.classOfField(clazz, "simpleAnnotation");
+        ClassInfo simpleRecord = LangModelUtils.classOfField(clazz, "simpleRecord");
 
         assertEquality(simpleClass, LangModelUtils.classOfField(clazz, "simpleClass"));
         assertEquality(simpleInterface, LangModelUtils.classOfField(clazz, "simpleInterface"));
         assertEquality(simpleEnum, LangModelUtils.classOfField(clazz, "simpleEnum"));
         assertEquality(simpleAnnotation, LangModelUtils.classOfField(clazz, "simpleAnnotation"));
+        assertEquality(simpleRecord, LangModelUtils.classOfField(clazz, "simpleRecord"));
 
         assertInequality(simpleClass, simpleInterface);
         assertInequality(simpleClass, simpleEnum);
         assertInequality(simpleClass, simpleAnnotation);
+        assertInequality(simpleClass, simpleRecord);
         assertInequality(simpleInterface, simpleClass);
         assertInequality(simpleInterface, simpleEnum);
         assertInequality(simpleInterface, simpleAnnotation);
+        assertInequality(simpleInterface, simpleRecord);
         assertInequality(simpleEnum, simpleClass);
         assertInequality(simpleEnum, simpleInterface);
         assertInequality(simpleEnum, simpleAnnotation);
+        assertInequality(simpleEnum, simpleRecord);
         assertInequality(simpleAnnotation, simpleClass);
         assertInequality(simpleAnnotation, simpleInterface);
         assertInequality(simpleAnnotation, simpleEnum);
+        assertInequality(simpleAnnotation, simpleRecord);
+        assertInequality(simpleRecord, simpleClass);
+        assertInequality(simpleRecord, simpleInterface);
+        assertInequality(simpleRecord, simpleEnum);
+        assertInequality(simpleRecord, simpleAnnotation);
 
         MethodInfo simpleMethod = LangModelUtils.singleDeclaredMethod(simpleClass, "simpleMethod");
         assertEquality(simpleMethod, LangModelUtils.singleDeclaredMethod(simpleClass, "simpleMethod"));
@@ -67,6 +79,10 @@ public class Equality {
         assertInequality(simpleField, simpleStaticField);
         assertInequality(simpleStaticField, LangModelUtils.singleDeclaredField(simpleInterface, "simpleField"));
         assertInequality(simpleField, LangModelUtils.singleDeclaredField(simpleInterface, "simpleField"));
+
+        RecordComponentInfo simpleRecordComponent = LangModelUtils.singleRecordComponent(simpleRecord, "simpleRecordComponent");
+        assertEquality(simpleRecordComponent, LangModelUtils.singleRecordComponent(simpleRecord, "simpleRecordComponent"));
+        assertInequality(simpleRecordComponent, LangModelUtils.singleRecordComponent(simpleRecord, "anotherRecordComponent"));
     }
 
     private static void verifyTypes(ClassInfo clazz) {
@@ -74,24 +90,34 @@ public class Equality {
         Type simpleInterface = LangModelUtils.singleField(clazz, "simpleInterface").type();
         Type simpleEnum = LangModelUtils.singleField(clazz, "simpleEnum").type();
         Type simpleAnnotation = LangModelUtils.singleField(clazz, "simpleAnnotation").type();
+        Type simpleRecord = LangModelUtils.singleField(clazz, "simpleRecord").type();
 
         assertEquality(simpleClass, LangModelUtils.singleField(clazz, "simpleClass").type());
         assertEquality(simpleInterface, LangModelUtils.singleField(clazz, "simpleInterface").type());
         assertEquality(simpleEnum, LangModelUtils.singleField(clazz, "simpleEnum").type());
         assertEquality(simpleAnnotation, LangModelUtils.singleField(clazz, "simpleAnnotation").type());
+        assertEquality(simpleRecord, LangModelUtils.singleField(clazz, "simpleRecord").type());
 
         assertInequality(simpleClass, simpleInterface);
         assertInequality(simpleClass, simpleEnum);
         assertInequality(simpleClass, simpleAnnotation);
+        assertInequality(simpleClass, simpleRecord);
         assertInequality(simpleInterface, simpleClass);
         assertInequality(simpleInterface, simpleEnum);
         assertInequality(simpleInterface, simpleAnnotation);
+        assertInequality(simpleInterface, simpleRecord);
         assertInequality(simpleEnum, simpleClass);
         assertInequality(simpleEnum, simpleInterface);
         assertInequality(simpleEnum, simpleAnnotation);
+        assertInequality(simpleEnum, simpleRecord);
         assertInequality(simpleAnnotation, simpleClass);
         assertInequality(simpleAnnotation, simpleInterface);
         assertInequality(simpleAnnotation, simpleEnum);
+        assertInequality(simpleAnnotation, simpleRecord);
+        assertInequality(simpleRecord, simpleClass);
+        assertInequality(simpleRecord, simpleInterface);
+        assertInequality(simpleRecord, simpleEnum);
+        assertInequality(simpleRecord, simpleAnnotation);
 
         Type simpleMethod = LangModelUtils.singleDeclaredMethod(simpleClass.asClass().declaration(), "simpleMethod")
                 .returnType();

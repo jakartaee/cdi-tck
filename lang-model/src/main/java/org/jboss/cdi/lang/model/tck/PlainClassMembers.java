@@ -233,6 +233,11 @@ public final class PlainClassMembers extends PlainAbstractClass {
 
         static void assertMethod(ClassInfo clazz, String name, int accesibility, boolean isStatic, boolean isFinal,
                 boolean isAbstract) {
+            assertMethod(clazz, name, accesibility, isStatic, isFinal, isAbstract, true);
+        }
+
+        static void assertMethod(ClassInfo clazz, String name, int accesibility, boolean isStatic, boolean isFinal,
+                boolean isAbstract, boolean testVoidType) {
             MethodInfo method = LangModelUtils.singleMethod(clazz, name);
 
             assert method.declaringClass().equals(clazz);
@@ -252,7 +257,9 @@ public final class PlainClassMembers extends PlainAbstractClass {
             assert method.isAbstract() == isAbstract;
             assert Modifier.isAbstract(method.modifiers()) == isAbstract;
 
-            assertType(method.returnType(), Type.Kind.VOID);
+            if (testVoidType) {
+                assertType(method.returnType(), Type.Kind.VOID);
+            }
         }
 
         private static void verifyConstructors(ClassInfo clazz) {
