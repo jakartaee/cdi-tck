@@ -68,7 +68,8 @@ public class WrapExpressionFactoryTest extends AbstractTest {
         ActionSequence.reset();
 
         // Wrap custom expression factory
-        ExpressionFactory wrappedExpressionFactory = getCurrentManager().wrapExpressionFactory(new DummyExpressionFactory());
+        ExpressionFactory wrappedExpressionFactory = getCurrentELAwareManager()
+                .wrapExpressionFactory(new DummyExpressionFactory());
 
         // Create method expression and invoke it with supplied EL context (porting package)
         MethodExpression methodExpression = wrappedExpressionFactory.createMethodExpression(null, "foo.test", String.class,
