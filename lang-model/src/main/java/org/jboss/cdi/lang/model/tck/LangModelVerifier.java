@@ -66,6 +66,8 @@ public class LangModelVerifier {
     RepeatableAnnotations repeatableAnnotations;
     DefaultConstructors defaultConstructors;
     Equality equality;
+    SealedClasses sealedClasses;
+    SealedInterfaces sealedInterfaces;
 
     /**
      * To run the language model TCK, this method must be called with a {@code ClassInfo} object
@@ -102,6 +104,8 @@ public class LangModelVerifier {
         RepeatableAnnotations.verify(LangModelUtils.classOfField(clazz, "repeatableAnnotations"));
         DefaultConstructors.verify(LangModelUtils.classOfField(clazz, "defaultConstructors"));
         Equality.verify(LangModelUtils.classOfField(clazz, "equality"));
+        SealedClasses.verify(LangModelUtils.classOfField(clazz, "sealedClasses"));
+        SealedInterfaces.verify(LangModelUtils.classOfField(clazz, "sealedInterfaces"));
 
         verifyPackageAnnotation(clazz);
 
