@@ -30,9 +30,3 @@ public class LangModelVerifierExtension implements BuildCompatibleExtension {
     }
 }
 ----
-
-== TODO
-
-The Language Model API includes support for Java 16 _records_, but the TCK doesn't test that.
-For now, that seems fine, because CDI doesn't really care about records.
-This deficiency will have to be resolved in some way in the future.

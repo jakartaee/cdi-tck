@@ -22,12 +22,17 @@ enum EnumWithDefaultConstructor {
     SINGLETON
 }
 
+record RecordWithDefaultConstructor() {
+}
+
 public class DefaultConstructors {
     ClassWithDefaultConstructor classWithDefaultConstructor;
     EnumWithDefaultConstructor enumWithDefaultConstructor;
+    RecordWithDefaultConstructor recordWithDefaultConstructor;
 
     public static void verify(ClassInfo clazz) {
         assert LangModelUtils.classOfField(clazz, "classWithDefaultConstructor").constructors().size() == 1;
         assert LangModelUtils.classOfField(clazz, "enumWithDefaultConstructor").constructors().size() == 1;
+        assert LangModelUtils.classOfField(clazz, "recordWithDefaultConstructor").constructors().size() == 1;
     }
 }
