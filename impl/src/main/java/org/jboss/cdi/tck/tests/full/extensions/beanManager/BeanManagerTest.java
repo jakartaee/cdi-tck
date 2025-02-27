@@ -21,7 +21,6 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEANMANAGER;
 import static org.jboss.cdi.tck.cdi.Sections.BM_DETERMINING_ANNOTATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ANNOTATEDTYPE;
-import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ELRESOLVER;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_EXTENSION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTIONTARGET;
 import static org.jboss.cdi.tck.cdi.Sections.BM_VALIDATE_IP;
@@ -135,12 +134,6 @@ public class BeanManagerTest extends AbstractTest {
         assertTrue(getCurrentManager().isPassivatingScope(SessionScoped.class));
         assertTrue(getCurrentManager().isNormalScope(DummyScoped.class));
         assertFalse(getCurrentManager().isPassivatingScope(DummyScoped.class));
-    }
-
-    @Test
-    @SpecAssertion(section = BM_OBTAIN_ELRESOLVER, id = "a")
-    public void testGetELResolver() {
-        assertNotNull(getCurrentManager().getELResolver());
     }
 
     @Test

@@ -31,6 +31,7 @@ import jakarta.enterprise.inject.UnsatisfiedResolutionException;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.BeanContainer;
 import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.el.ELAwareBeanManager;
 import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
 
@@ -72,6 +73,13 @@ public abstract class AbstractTest extends Arquillian {
      */
     protected BeanContainer getCurrentBeanContainer() {
         return beanManager;
+    }
+
+    protected ELAwareBeanManager getCurrentELAwareManager() {
+        if (beanManager instanceof ELAwareBeanManager bm) {
+            return bm;
+        }
+        throw new IllegalStateException("Current BeanManager is not ELAwareBeanManager");
     }
 
     protected byte[] passivate(Object instance) throws IOException {
