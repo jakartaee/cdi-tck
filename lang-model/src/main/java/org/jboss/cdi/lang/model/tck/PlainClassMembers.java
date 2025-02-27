@@ -266,10 +266,14 @@ public final class PlainClassMembers extends PlainAbstractClass {
             assertConstructor(clazz, PrimitiveType.PrimitiveKind.CHAR, Modifier.PRIVATE);
         }
 
-        static void assertConstructor(ClassInfo clazz, PrimitiveType.PrimitiveKind paramType, int accesibility) {
+        static void assertConstructor(ClassInfo clazz, PrimitiveType.PrimitiveKind typeOfFirstParam, int accesibility) {
             MethodInfo ctor = clazz.constructors()
                     .stream()
-                    .filter(it -> it.parameters().get(0).type().asPrimitive().primitiveKind() == paramType)
+                    .filter(it -> {
+                        Type firstParamType = it.parameters().get(0).type();
+                        return firstParamType.isPrimitive()
+                                && firstParamType.asPrimitive().primitiveKind() == typeOfFirstParam;
+                    })
                     .findAny()
                     .get();
 

@@ -28,6 +28,7 @@ import jakarta.enterprise.lang.model.declarations.ClassInfo;
 import jakarta.enterprise.lang.model.declarations.FieldInfo;
 import jakarta.enterprise.lang.model.declarations.MethodInfo;
 import jakarta.enterprise.lang.model.types.PrimitiveType;
+import jakarta.enterprise.lang.model.types.Type;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
@@ -335,8 +336,11 @@ public enum EnumMembers implements EnumInterface {
             // EnumMembers(@AnnEnumConstructor2 @AnnEnumConstructorRepeatable("foo") boolean disambiguate) {}
             MethodInfo ctor = clazz.constructors()
                     .stream()
-                    .filter(it -> it.parameters().get(0).type().asPrimitive()
-                            .primitiveKind() == PrimitiveType.PrimitiveKind.BOOLEAN)
+                    .filter(it -> {
+                        Type firstParamType = it.parameters().get(0).type();
+                        return firstParamType.isPrimitive()
+                                && firstParamType.asPrimitive().primitiveKind() == PrimitiveType.PrimitiveKind.BOOLEAN;
+                    })
                     .findAny()
                     .get();
             assert ctor.annotations().size() == 1;
@@ -360,8 +364,11 @@ public enum EnumMembers implements EnumInterface {
             // private EnumMembers(@AnnEnumConstructor4 @AnnEnumConstructorRepeatable("bar") @AnnEnumConstructorRepeatable("baz") int disambiguate) {}
             MethodInfo ctor2 = clazz.constructors()
                     .stream()
-                    .filter(it -> it.parameters().get(0).type().asPrimitive()
-                            .primitiveKind() == PrimitiveType.PrimitiveKind.INT)
+                    .filter(it -> {
+                        Type firstParamType = it.parameters().get(0).type();
+                        return firstParamType.isPrimitive()
+                                && firstParamType.asPrimitive().primitiveKind() == PrimitiveType.PrimitiveKind.INT;
+                    })
                     .findAny()
                     .get();
             assert ctor2.annotations().size() == 1;
