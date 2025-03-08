@@ -48,9 +48,8 @@ public class ResolutionByNameTest extends AbstractTest {
     @Test
     @SpecAssertion(section = DEPENDENT_SCOPE_EL, id = "a")
     public void testQualifiedNameLookup() {
-        assertTrue(getCurrentConfiguration().getEl()
-                .evaluateValueExpression(getCurrentManager(),
-                        "#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class));
+        assertTrue(getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(),
+                "#{(game.value == 'foo' and game.value == 'foo') ? game.value == 'foo' : false}", Boolean.class));
         assertEquals(getContextualReference(Counter.class).getCount(), 1);
     }
 
@@ -61,8 +60,8 @@ public class ResolutionByNameTest extends AbstractTest {
         Context requestContext = getCurrentManager().getContext(RequestScoped.class);
         Bean<Tuna> tunaBean = getBeans(Tuna.class).iterator().next();
         assertNull(requestContext.get(tunaBean));
-        TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{tunaFarm}",
-                TunaFarm.class);
+        TunaFarm tunaFarm = getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(),
+                "#{tunaFarm}", TunaFarm.class);
         assertNotNull(tunaFarm.tuna);
         long timestamp = tunaFarm.tuna.getTimestamp();
         // Lookup once again - do not create new instance - contextual instance already exists
@@ -74,9 +73,8 @@ public class ResolutionByNameTest extends AbstractTest {
     @Test
     @SpecAssertion(section = EL, id = "c")
     public void testUnresolvedNameReturnsNull() {
-        assertNull(
-                getCurrentManager().getELResolver().getValue(
-                        getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna"));
+        assertNull(getCurrentELAwareManager().getELResolver().getValue(
+                getCurrentConfiguration().getEl().createELContext(getCurrentManager()), null, "nonExistingTuna"));
     }
 
     @Test
@@ -84,15 +82,14 @@ public class ResolutionByNameTest extends AbstractTest {
     public void testELResolverReturnsContextualInstance() {
         Salmon salmon = getContextualReference(Salmon.class);
         salmon.setAge(3);
-        assertEquals(
-                getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{salmon.age}", Integer.class),
-                new Integer(3));
+        assertEquals(getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(),
+                "#{salmon.age}", Integer.class), 3);
     }
 
     @Test
     @SpecAssertions({ @SpecAssertion(section = NAMES, id = "a") })
     public void testBeanNameWithSeparatedListOfELIdentifiers() {
-        assertNotNull(getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(), "#{magic.golden.fish}",
-                GoldenFish.class));
+        assertNotNull(getCurrentConfiguration().getEl().evaluateValueExpression(getCurrentManager(),
+                "#{magic.golden.fish}", GoldenFish.class));
     }
 }

@@ -22,15 +22,35 @@ public class AnnotationInstances {
     void defaultValues() {
     }
 
-    @AnnotationMembers(booleanMember = false, byteMember = -1, shortMember = -2, intMember = -3, longMember = -4, floatMember = -5.0F, doubleMember = -6.0, charMember = 'a', stringMember = "bb", classMember = AnnotationInstances.class, enumMember = SimpleEnum.NO, annotationMember = @SimpleAnnotation("ccc"),
+    //@formatter:off
+    @AnnotationMembers(
+            booleanMember = false,
+            byteMember = -1,
+            shortMember = -2,
+            intMember = -3,
+            longMember = -4,
+            floatMember = -5.0F,
+            doubleMember = -6.0,
+            charMember = 'a',
+            stringMember = "bb",
+            classMember = AnnotationInstances.class,
+            enumMember = SimpleEnum.NO,
+            annotationMember = @SimpleAnnotation("ccc"),
 
-            booleanArrayMember = { false, true }, byteArrayMember = { -1, -2 }, shortArrayMember = { -3,
-                    -4 }, intArrayMember = { -5, -6 }, longArrayMember = { -7, -8 }, floatArrayMember = { -9.0F,
-                            -10.0F }, doubleArrayMember = { -11.0, -12.0 }, charArrayMember = { 'a',
-                                    'b' }, stringArrayMember = { "cc", "dd" }, classArrayMember = { AnnotationInstances.class,
-                                            AnnotationMembers.class }, enumArrayMember = { SimpleEnum.NO,
-                                                    SimpleEnum.YES }, annotationArrayMember = { @SimpleAnnotation("eee"),
-                                                            @SimpleAnnotation("fff") })
+            booleanArrayMember = { false, true },
+            byteArrayMember = { -1, -2 },
+            shortArrayMember = { -3, -4 },
+            intArrayMember = { -5, -6 },
+            longArrayMember = { -7, -8 },
+            floatArrayMember = { -9.0F, -10.0F },
+            doubleArrayMember = { -11.0, -12.0 },
+            charArrayMember = { 'a', 'b' },
+            stringArrayMember = { "cc", "dd" },
+            classArrayMember = { AnnotationInstances.class, AnnotationMembers.class },
+            enumArrayMember = { SimpleEnum.NO, SimpleEnum.YES },
+            annotationArrayMember = { @SimpleAnnotation("eee"), @SimpleAnnotation("fff") }
+    )
+    //@formatter:on
     void nondefaultValues() {
     }
 
