@@ -112,7 +112,7 @@
         <!-- Test tools/dependencies -->
         <testng.version>7.11.0</testng.version>
         <jboss.test.audit.version>2.0.0.Final</jboss.test.audit.version>
-        <arquillian.version>1.9.4.Final</arquillian.version>
+        <arquillian.version>1.10.0.Final</arquillian.version>
         <shrinkwrap.descriptors.version>2.0.0</shrinkwrap.descriptors.version>
         <arquillian.container.se.api.version>1.0.2.Final</arquillian.container.se.api.version>
         <apache.httpclient.version>3.1</apache.httpclient.version>
