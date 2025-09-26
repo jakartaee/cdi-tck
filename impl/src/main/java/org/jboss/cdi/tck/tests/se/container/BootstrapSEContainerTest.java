@@ -177,9 +177,9 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "de"),
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "dea"),
             @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
-    public void testAddExtensionAsExtensionInstance() {
+    public void testAddPortableExtensionAsExtensionInstance() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         TestExtension testExtension = new TestExtension();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
@@ -199,9 +199,9 @@ public class BootstrapSEContainerTest extends Arquillian {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "de"),
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "dea"),
             @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
-    public void testAddExtensionAsClass() {
+    public void testAddPortableExtensionAsClass() {
         SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
         try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
                 .addBeanClasses(Foo.class)
@@ -216,6 +216,21 @@ public class BootstrapSEContainerTest extends Arquillian {
             assertTrue(containerExtension.getProcessInjectionTargetNotified().get());
             assertTrue(containerExtension.getProcessBeanAttributesNotified().get());
             assertTrue(containerExtension.getProcessBeanNotified().get());
+        }
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = SE_BOOTSTRAP, id = "deb"),
+            @SpecAssertion(section = SE_CONTAINER_INITIALIZER, id = "b") })
+    public void testAddBuildCompatibleExtension() {
+        SeContainerInitializer seContainerInitializer = SeContainerInitializer.newInstance();
+        try (SeContainer seContainer = seContainerInitializer.disableDiscovery()
+                .addBeanClasses(Foo.class)
+                .addBuildCompatibleExtensions(TestBuildCompatibleExtension.class)
+                .initialize()) {
+            Instance<String> beanInstance = seContainer.select(String.class);
+            assertTrue(beanInstance.isResolvable());
+            assertEquals(beanInstance.get(), TestBuildCompatibleExtension.class.getSimpleName());
         }
     }
 
