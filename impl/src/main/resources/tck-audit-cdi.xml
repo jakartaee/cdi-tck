@@ -3221,6 +3221,13 @@
             </text>
         </assertion>
 
+        <assertion id="ca">
+            <text>The required type must not be a wildcard type.
+                If an injected |Instance| has a required type that is either a wildcard type or an |Event| whose specified type is a wildcard type, the container treats it as a definition error.
+                If a programmatically obtained |Instance| has a required type that is a wildcard type, non-portable behavior results.
+            </text>
+        </assertion>
+
         <assertion id="da">
             <text>If two instances of the same non repeating qualifier type are passed to |select()|, an |IllegalArgumentException| is thrown.</text>
         </assertion>
@@ -5328,6 +5335,12 @@
 
         <assertion id="eab">
             <text>If the specified type contains a type variable, an |IllegalArgumentException| is thrown.</text>
+        </assertion>
+
+        <assertion id="eac">
+            <text>The specified type must not be a wildcard type.
+                If an injected |Event| has a specified type that is a wildcard type, the container treats it as a definition error.
+                If a programmatically obtained |Event| has a specified type that is a wildcard type, non-portable behavior results..</text>
         </assertion>
 
         <assertion id="eba">
