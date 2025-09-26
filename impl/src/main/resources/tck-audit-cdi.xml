@@ -9484,8 +9484,11 @@
                     objects themselves. Other version of the method allows recursive addition
                 </text>
             </assertion>
-            <assertion id="de">
+            <assertion id="dea">
                 <text>|addExtensions()| add the provided extensions (class or instance) to the synthetic bean archive.</text>
+            </assertion>
+            <assertion id="deb">
+                <text>|addBuildCompatibleExtensions()| adds the provided build compatible extensions (classes) to the synthetic bean archive.</text>
             </assertion>
             <assertion id="df">
                 <text>|enableInterceptors()| adds interceptor classes to the list of enabled interceptors for the synthetic bean archive.</text>
