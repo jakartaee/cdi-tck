@@ -264,6 +264,10 @@
                             <compilerArgument>
                                 -AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml
                             </compilerArgument>
+                            <compilerArgs>
+                                <arg>-processor</arg>
+                                <arg>org.jboss.test.audit.report.CoverageProcessor</arg>
+                            </compilerArgs>
                             <!-- Disable annotation processor for test sources -->
                             <testCompilerArgument>-proc:none</testCompilerArgument>
                         </configuration>
