@@ -14,6 +14,7 @@
 
 package org.jboss.cdi.tck.tests.alternative.selection;
 
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_ALTERNATIVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION;
 import static org.jboss.cdi.tck.tests.alternative.selection.SelectedAlternativeTestUtil.createBuilderBase;
 
@@ -69,6 +70,7 @@ public class SelectedAlternative01Test extends AbstractTest {
 
     @Test
     @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "aa")
     public void testAlternativeManagedBeanSelected() {
         alpha.assertAvailable(Foo.class);
         bravo.assertAvailable(Foo.class);
@@ -78,6 +80,8 @@ public class SelectedAlternative01Test extends AbstractTest {
     @Test
     @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "ba")
     @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "bb")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ab")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ac")
     public void testAlternativeProducerSelected() {
         // Producer field
         alpha.assertAvailable(Bar.class, WildLiteral.INSTANCE);

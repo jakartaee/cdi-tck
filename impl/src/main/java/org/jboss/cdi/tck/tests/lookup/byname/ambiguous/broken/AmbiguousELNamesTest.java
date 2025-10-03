@@ -38,7 +38,7 @@ public class AmbiguousELNamesTest extends AbstractTest {
 
     // TODO - reenable once https://issues.jboss.org/browse/CDI-437 is resolved
     @Test(enabled = false)
-    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "da"), @SpecAssertion(section = AMBIG_NAMES, id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "da"), @SpecAssertion(section = AMBIG_NAMES, id = "cg") })
     public void testAmbiguousELNamesResolved() throws Exception {
         // Sole and produced Salmon have the same priority -> deployment exception
     }

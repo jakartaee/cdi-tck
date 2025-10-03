@@ -67,7 +67,7 @@ public class NameDefinitionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES, id = "a"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa") })
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES, id = "aa"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa") })
     public void testStereotypeDefaultsName() {
         Bean<RedSnapper> bean = getUniqueBean(RedSnapper.class);
         assertEquals(bean.getName(), "redSnapper");
