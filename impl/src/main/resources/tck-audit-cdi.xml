@@ -541,7 +541,11 @@
 
     <section id="alternatives" title="Alternatives" level="2">
         <assertion id="a" testable="false">
-            <text>An alternative is a bean that must be explicitly selected if it should be available for lookup, injection or EL resolution.</text>
+            <text>
+                An alternative is a bean that must be explicitly selected if it should be available for lookup, injection or name resolution.
+
+                During Typesafe resolution, alternatives take precedence over other, non-alternative beans.
+            </text>
             <note>Tested in section 5.1.1 Declaring selected alternatives.</note>
         </assertion>
     </section>
@@ -582,21 +586,97 @@
             </assertion>
         </group>
 
-        <assertion id="c" testable="false">
+        <assertion id="c">
+            <text>
+                If an alternative managed bean declares a reserve producer, the container automatically detects the problem and treats it as a definition error.
+            </text>
+        </assertion>
+
+        <assertion id="d" testable="false">
             <text>If an interceptor or decorator is an alternative, non-portable behavior results.</text>
             <note>Non-portable behavior.</note>
         </assertion>
 
     </section>
 
+    <section id="reserves" title="Reserves" level="2">
+        <assertion id="a" testable="false">
+            <text>
+                A reserve is a bean that must be explicitly selected if it should be available for lookup, injection or name resolution.
+
+                During Typesafe resolution, other, non-reserve beans take precedence over reserves.
+            </text>
+            <note>Tested in section 5.1.2 Declaring selected reserves.</note>
+        </assertion>
+    </section>
+
+    <section id="declaring_reserve" title="Declaring a reserve" level="3">
+        <group>
+            <text>A reserve may be declared by annotating the bean class or producer method or field with the |@Reserve| annotation.</text>
+
+            <assertion id="aa">
+                <text>Test with a bean class.</text>
+            </assertion>
+
+            <assertion id="ab">
+                <text>Test with a producer method.</text>
+            </assertion>
+
+            <assertion id="ac">
+                <text>Test with a producer field.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>A reserve may be declared by annotating a bean, producer method or producer field with a stereotype that declares a |@Reserve| annotation.</text>
+
+            <assertion id="ba">
+                <text>Test with a bean.</text>
+            </assertion>
+
+            <assertion id="bb">
+                <text>Test with a producer method.</text>
+            </assertion>
+
+            <assertion id="bc">
+                <text>Test with a producer field.</text>
+            </assertion>
+        </group>
+
+        <assertion id="c">
+            <text>
+                If a reserve is also an alternative, the container automatically detects the problem and treats it as a definition error.
+            </text>
+        </assertion>
+
+        <assertion id="d">
+            <text>
+                If a reserve managed bean declares an alternative producer, the container automatically detects the problem and treats it as a definition error.
+            </text>
+        </assertion>
+
+        <assertion id="e" testable="false">
+            <text>If an interceptor or decorator is a reserve, non-portable behavior results.</text>
+            <note>Non-portable behavior.</note>
+        </assertion>
+    </section>
+
     <section id="stereotypes" title="Stereotypes" level="2">
 
-        <assertion id="a">
+        <assertion id="aa">
             <text>A stereotype may specify that all beans with the stereotype have defaulted bean names.</text>
         </assertion>
 
-        <assertion id="aa">
+        <assertion id="ab">
             <text>A stereotype may specify that all beans with the stereotype are alternatives.</text>
+        </assertion>
+
+        <assertion id="ac">
+            <text>A stereotype may specify that all beans with the stereotype have predefined |@Priority|.</text>
+        </assertion>
+
+        <assertion id="ad">
+            <text>A stereotype may specify that all beans with the stereotype are reserves.</text>
         </assertion>
 
         <group>
@@ -725,7 +805,7 @@
 
     <section id="declaring_stereotype_with_priority" title="Declaring stereotype with @Priority" level="4">
         <assertion id="a">
-            <text>A stereotype may declare a @Priority annotation which functions as a means of enabling and ordering affected beans.</text>
+            <text>A stereotype may declare a |@Priority| annotation which functions as a means of enabling and ordering affected beans.</text>
         </assertion>
 
         <assertion id="b">
@@ -734,7 +814,16 @@
                 explicitly declare priority, the container automatically detects the problem and treats it as a definition error.
             </text>
         </assertion>
+    </section>
 
+    <section id="reserve_stereotype" title="Declaring a @Reserve stereotype" level="4">
+        <assertion id="a">
+            <text>A stereotype may declare a |@Reserve| annotation, which specifies that every bean with the stereotype is a reserve.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>If a stereotype declares both |@Alternative| and |@Reserve|, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
     </section>
 
     <section id="stereotypes_with_additional_stereotypes" title="Stereotypes with additional stereotypes" level="4">
@@ -2182,11 +2271,18 @@
             </assertion>
         </group>
 
-        <assertion id="d" testable="false">
-            <text>An alternative is never available for injection, lookup or name resolution in a module unless the module is a bean archive and the alternative
-                is explicitly selected for the bean archive or the application..
+        <assertion id="c" testable="false">
+            <text>
+                An alternative is not available for injection, lookup or name resolution to classes in a module unless the alternative is selected for the application or the module is a bean archive and the alternative is selected for that bean archive.
             </text>
-            <note>If a module/library is not BDA then no injection is possible at all</note>
+            <note>If a module/library is not a bean archive then no injection is possible at all</note>
+        </assertion>
+
+        <assertion id="d" testable="false">
+            <text>
+                A reserve is not available for injection, lookup or name resolution to classes in a module unless the reserve is selected for the application.
+            </text>
+            <note>If a module/library is not a bean archive then no injection is possible at all</note>
         </assertion>
 
         <assertion id="e">
@@ -2211,14 +2307,14 @@
     <section id="declaring_selected_alternatives_application" title="Declaring selected alternatives for an application" level="4">
 
         <group>
-            <text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the bean class of a managed bean.</text>
+            <text>An alternative may be selected for the application by placing the |@Priority| annotation on the bean class of a managed bean.</text>
             <assertion id="aa">
                 <text>Test |@Priority| on the bean class of a managed bean.</text>
             </assertion>
         </group>
 
         <group>
-            <text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the bean class that declares the producer
+            <text>An alternative may be selected for the application by placing the |@Priority| annotation on the bean class that declares the producer
                 method, field or resource.
             </text>
             <assertion id="ba">
@@ -2233,7 +2329,7 @@
         </group>
 
         <group>
-            <text>An alternative may be given a priority for the application by placing the |@Priority| annotation on the producer field, method or resource.
+            <text>An alternative may be selected for the application by placing the |@Priority| annotation on the producer field, method or resource.
             </text>
             <assertion id="ca">
                 <text>Test |@Priority| on a producer method.</text>
@@ -2243,14 +2339,6 @@
             </assertion>
             <assertion id="cc">
                 <text>Test |@Priority| on a resource.</text>
-            </assertion>
-        </group>
-
-        <group>
-            <text>For the purpose of determining the priority of any producer method or field during ambiguity resolution, the priority of the producer method or field is considered first.
-                If the producer method or field does not have a priority, the priority of the managed bean that declares the producer method or field is used.</text>
-            <assertion id="dd">
-                <text>Test |@Priority| declared directly on producer is considered first.</text>
             </assertion>
         </group>
 
@@ -2325,11 +2413,60 @@
 
     </section>
 
+    <section id="declaring_selected_reserves" title="Declaring selected reserves" level="3">
+        <assertion id="a" testable="false">
+            <text>
+                CDI defines one method of selecting reserves: the |@Priority| annotation allows a reserve to be selected for an entire application.
+            </text>
+            <note>Statement of intent.</note>
+        </assertion>
+    </section>
+
+    <section id="declaring_selected_reserves_application" title="Declaring selected reserves for an application" level="4">
+        <assertion id="a">
+            <text>A reserve may be selected for the application by placing the |@Priority| annotation on the bean class of a managed bean.</text>
+        </assertion>
+
+        <group>
+            <text>A reserve may be may be selected for the application by placing the |@Priority| annotation on the producer method, field or resource.</text>
+            <assertion id="ba">
+                <text>Test |@Priority| on the producer method.</text>
+            </assertion>
+            <assertion id="bb">
+                <text>Test |@Priority| on the producer field.</text>
+            </assertion>
+        </group>
+
+        <group>
+            <text>A reserve may be may be selected for the application by placing the |@Priority| annotation on a stereotype that is applied to the bean class, producer method or producer field.</text>
+            <assertion id="ca">
+                <text>Test |@Priority| on a stereotype applied to a bean class.</text>
+            </assertion>
+            <assertion id="cb">
+                <text>Test |@Priority| on a stereotype applied to a producer method.</text>
+            </assertion>
+            <assertion id="cc">
+                <text>Test |@Priority| on a stereotype applied to a producer field.</text>
+            </assertion>
+        </group>
+
+        <assertion id="d">
+            <text>Unlike alternative producers, reserve producers do not inherit priority from their declaring beans.</text>
+        </assertion>
+    </section>
+
     <section id="enablement" title="Enabled and disabled beans" level="3">
         <assertion id="a" testable="false">
-            <text>A bean is said to be enabled if it is deployed in a bean deployment archive, and it is not a producer method or field of a disabled bean, and
-                it is not specialized by any other enabled bean, as defined in Section 4.3, "Specialization", and either it is not an alternative, or it is not
-                an alternative, or it is a selected alternative of at least one bean archive or the application. Otherwise, the bean is said to be disabled.
+            <text>
+                A bean is said to be enabled if
+
+                it is deployed in a bean archive, and
+                it is not a producer method or field of a disabled bean, and
+                it is not specialized by any other enabled bean, as defined in Section 4.3, "Specialization", and
+                either it is not an alternative, or it is a selected alternative for at least one bean archive or for the application, and
+                either it is not a reserve, or it is a selected reserve for the application.
+
+                Otherwise, the bean is said to be disabled.
             </text>
             <note>Tested in section inter_module_injection</note>
         </assertion>
@@ -2345,9 +2482,14 @@
 
     <section id="inter_module_injection" title="Inter-module injection" level="3">
         <group>
-            <text>A bean is available for injection in a certain module if the bean is not an interceptor or decorator, the bean is enabled, the bean is either
-                not an alternative, or the module is a bean archive and the bean is a selected alternative of the bean archive, and the bean class is required
-                to be accessible to classes in the module, according to the class accessibility requirements of the module architecture.
+            <text>
+                A bean is available for injection in a certain module if:
+
+                the bean is not an interceptor or decorator,
+                the bean is enabled,
+                the bean is either not an alternative, or the bean is a selected alternative for the application, or the module is a bean archive and the bean is a selected alternative of the bean archive, and
+                the bean is either not a reserve, or the bean is a selected reserve for the application, and
+                the bean class is required to be accessible to classes in the module, according to the class accessibility requirements of the module architecture.
             </text>
 
             <assertion id="a">
@@ -2397,6 +2539,10 @@
 
             <assertion id="o">
                 <text>Check a selected alternative being managed bean is injected</text>
+            </assertion>
+
+            <assertion id="p">
+                <text>Check a selected reserve being managed bean is injected</text>
             </assertion>
 
         </group>
@@ -2499,20 +2645,68 @@
     </section>
 
     <section id="unsatisfied_and_ambig_dependencies" title="Unsatisfied and ambiguous dependencies" level="3">
-
         <group>
-            <text>When an ambiguous dependency exists, the container attempts to resolve the ambiguity. The container eliminates all eligible beans that are not
-                alternatives selected for the bean archive or selected for the application, except for producer methods and fields of beans that are
-                alternatives.
-            </text>
-            <assertion id="ca">
-                <text>If there is exactly one bean remaining, the container will select this bean, and the ambiguous dependency is called resolvable.</text>
-            </assertion>
+            <text>
+                When an ambiguous dependency exists, the container attempts to resolve the ambiguity:
 
+                1. The term candidate beans below means all beans that are eligible for injection to the injection point.
+            </text>
+            <assertion id="ca" testable="false">
+                <text>
+                    2. The container eliminates all candidate beans that are reserves.
+                </text>
+            </assertion>
             <assertion id="cb">
-                <text>If all the beans left are alternatives with a priority, then the container will determine the highest priority value, and eliminate all
-                    beans, except for producer methods and fields of beans that are alternatives with the highest priority value. If there is exactly one bean
-                    remaining, the container will select this bean, and the ambiguous dependency is called resolvable.
+                <text>
+                    3. If there is exactly one bean remaining, the container selects this bean, and the ambiguous dependency is called resolvable.
+                </text>
+            </assertion>
+            <assertion id="cc">
+                <text>
+                    4. Otherwise, if there is no bean remaining and all candidate beans are reserves, then:
+
+                    4.a. The container determines the highest priority value and eliminates all candidate beans except for reserves with the highest priority value.
+
+                    4.b. If there is exactly one bean remaining, the container selects this bean, and the ambiguous dependency is called resolvable.
+                </text>
+            </assertion>
+            <assertion id="cd">
+                <text>
+                    4.c. Otherwise, the ambiguous dependency is unresolvable.
+                </text>
+            </assertion>
+            <assertion id="ce" testable="false">
+                <text>
+                    5. Otherwise, the container eliminates all candidate beans that are not alternatives, except for producer methods and fields of candidate beans that are alternatives.
+                </text>
+            </assertion>
+            <assertion id="cf">
+                <text>
+                    6. If there is exactly one bean remaining, the container selects this bean, and the ambiguous dependency is called resolvable.
+                </text>
+            </assertion>
+            <assertion id="cg">
+                <text>
+                    7. Otherwise, if all the candidate beans left are alternatives with a priority, or producer methods or fields of candidate beans that are alternatives with a priority, then:
+
+                    7.a. The container determines the highest priority value and eliminates all candidate beans, except for:
+
+                    * alternatives with the highest priority value,
+
+                    * producer methods and fields of alternatives, where either the producer method or field has the highest priority value, or the declaring alternative has the highest priority value.
+
+                    7.b. If there is exactly one bean remaining, the container selects this bean, and the ambiguous dependency is called resolvable.
+                </text>
+            </assertion>
+            <assertion id="ch">
+                <text>
+                    7.c. Otherwise, the ambiguous dependency is unresolvable.
+                </text>
+            </assertion>
+            <assertion id="ci">
+                <text>
+                    For the purpose of determining the priority of any producer method or field during step 7. a. above, the priority of the producer method or field is considered first.
+                    If the producer method or field does not have a priority, the priority of the managed bean that declares the producer method or field is used.
                 </text>
             </assertion>
         </group>
@@ -2692,7 +2886,7 @@
         </assertion>
     </section>
 
-    <section id="name_resolution" title="EL name resolution" level="2">
+    <section id="name_resolution" title="Name resolution" level="2">
         <assertion id="d">
             <text>An name resolves to a bean if the bean has the given bean name, and the bean is available for injection in the module where the name
                 resolution is requested.
@@ -2706,37 +2900,84 @@
         </assertion>
     </section>
 
-    <section id="ambig_names" title="Ambiguous EL names" level="3">
-
+    <section id="ambig_names" title="Ambiguous names" level="3">
         <group>
-            <text>An ambiguous name exists when a name resolves to multiple beans. When an ambiguous name exists, the container attempts to resolve the
-                ambiguity. The container eliminates all eligible beans that are not alternatives selected for the bean archive or selected for the application,
-                except for producer methods and fields of beans that are alternatives.
+            <text>
+                When an ambiguous name exists, the container attempts to resolve the ambiguity:
+
+                1. The term candidate beans below means all beans to which the name resolves.
             </text>
-            <assertion id="ca">
-                <text>If there is exactly one bean remaining, the container will select this bean, and the ambiguous dependency is called resolvable.</text>
+            <assertion id="ca" testable="false">
+                <text>
+                    2. The container eliminates all candidate beans that are reserves.
+                </text>
             </assertion>
             <assertion id="cb">
-                <text>If all the beans left are alternatives with a priority, then the container will determine the highest priority value, and eliminate all
-                    beans, except for producer methods and fields of beans that are alternatives with the highest priority value. If there is exactly one bean
-                    remaining, the container will select this bean, and the ambiguous dependency is called resolvable.
+                <text>
+                    3. If there is exactly one bean remaining, the container selects this bean, and the ambiguous name is called resolvable.
+                </text>
+            </assertion>
+            <assertion id="cc">
+                <text>
+                    4. Otherwise, if there is no bean remaining and all candidate beans are reserves, then:
+
+                    a. The container determines the highest priority value and eliminates all candidate beans except for reserves with the highest priority value.
+
+                    b. If there is exactly one bean remaining, the container selects this bean, and the ambiguous name is called resolvable.
+                </text>
+            </assertion>
+            <assertion id="cd">
+                <text>
+                    c. Otherwise, the ambiguous name is unresolvable.
+                </text>
+            </assertion>
+            <assertion id="ce" testable="false">
+                <text>
+                    5. Otherwise, the container eliminates all candidate beans that are not alternatives, except for producer methods and fields of candidate beans that are alternatives.
+                </text>
+            </assertion>
+            <assertion id="cf">
+                <text>
+                    6. If there is exactly one bean remaining, the container selects this bean, and the ambiguous name is called resolvable.
+                </text>
+            </assertion>
+            <assertion id="cg">
+                <text>
+                    7. Otherwise, if all the candidate beans left are alternatives with a priority, or producer methods or fields of candidate beans that are alternatives with a priority, then:
+
+                    a. The container determines the highest priority value and eliminates all candidate beans, except for:
+
+                    * alternatives with the highest priority value,
+
+                    * producer methods and fields of alternatives, where either the producer method or field has the highest priority value, or the declaring alternative has the highest priority value.
+
+                    b. If there is exactly one bean remaining, the container selects this bean, and the ambiguous name is called resolvable.
+                </text>
+            </assertion>
+            <assertion id="ch">
+                <text>
+                    c. Otherwise, the ambiguous name is unresolvable.
+                </text>
+            </assertion>
+            <assertion id="ci">
+                <text>
+                    For the purpose of determining the priority of any producer method or field during step 7. a. above, the priority of the producer method or field is considered first.
+                    If the producer method or field does not have a priority, the priority of the managed bean that declares the producer method or field is used.
                 </text>
             </assertion>
         </group>
 
-        <group>
-            <text>All unresolvable ambiguous names are detected by the container when the application is initialized. Suppose two beans are both available for
-                injection in a certain module, and either
+        <assertion id="da">
+            <text>
+                All unresolvable ambiguous names are detected by the container when the application is initialized and treated as a deployment problem.
             </text>
+        </assertion>
 
-            <assertion id="da">
-                <text>Test two beans have the same bean name and the name is not resolvable.</text>
-            </assertion>
-
-            <assertion id="db">
-                <text>Test the bean name of one bean is of the form x.y , where y is a valid bean name, and x is the bean name of the other bean.</text>
-            </assertion>
-        </group>
+        <assertion id="db">
+            <text>
+                If there are two beans that are both available for injection in a certain module, and the bean name of one bean is of the form x.y, where y is a valid bean name, and x is the bean name of the other bean, then the container treats it as a deployment problem.
+            </text>
+        </assertion>
     </section>
 
     <section id="client_proxies" title="Client proxies" level="2">

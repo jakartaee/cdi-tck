@@ -42,14 +42,14 @@ public class AmbiguousDependencyResolutionTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cg") })
     public void testProducerMethodOnAlternativeIsNotEliminated(Foo foo) {
         assertNotNull(foo);
         assertEquals(foo.ping(), 0);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ca") })
+    @SpecAssertions({ @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cg") })
     public void testProducerFieldOnAlternativeIsNotEliminated(Bar bar) {
         assertNotNull(bar);
         assertEquals(bar.ping(), 0);

@@ -99,7 +99,7 @@ public class AlternativeAvailabilityTest extends AbstractTest {
     @Test
     @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "d")
     @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ba")
-    @SpecAssertion(section = STEREOTYPES, id = "aa")
+    @SpecAssertion(section = STEREOTYPES, id = "ab")
     @SpecAssertion(section = ALTERNATIVE_STEREOTYPE, id = "a")
     public void testAnyEnabledAlternativeStereotypeMakesAlternativeEnabled() throws Exception {
         assertEquals(getBeans(Bird.class).size(), 1);

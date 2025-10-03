@@ -46,7 +46,7 @@ public class SelectedAlternative03Test extends AbstractTest {
     Delta delta;
 
     @Test
-    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb")
+    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cg")
     public void testMultipleAlternativeBeansWithProducers() {
         Assert.assertNotNull(delta);
         Assert.assertEquals(delta.ping(), ALT2);

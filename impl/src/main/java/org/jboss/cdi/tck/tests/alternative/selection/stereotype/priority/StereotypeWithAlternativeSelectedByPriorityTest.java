@@ -22,7 +22,6 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
-import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
@@ -40,9 +39,8 @@ public class StereotypeWithAlternativeSelectedByPriorityTest extends AbstractTes
     }
 
     @Test
-    @SpecAssertions({
-            @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ba"),
-            @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ba") })
+    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION_EE, id = "ba")
+    @SpecAssertion(section = DECLARING_ALTERNATIVE, id = "ba")
     public void testStereotypeAlternativeIsEnabled() {
         assertEquals(getContextualReference(SomeInterface.class).ping(), AlternativeImpl.class.getSimpleName());
     }
