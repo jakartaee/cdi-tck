@@ -42,7 +42,7 @@ public class DefaultNamedTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES, id = "a"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa"),
+    @SpecAssertions({ @SpecAssertion(section = STEREOTYPES, id = "aa"), @SpecAssertion(section = NAMED_STEREOTYPE, id = "aa"),
             @SpecAssertion(section = NAMED_STEREOTYPE, id = "ab"), @SpecAssertion(section = DEFAULT_NAME, id = "e") })
     public void testStereotypeDeclaringNamed() {
         Bean<FallowDeer> fallowBean = getUniqueBean(FallowDeer.class);

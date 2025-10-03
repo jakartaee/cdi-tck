@@ -49,7 +49,11 @@ public class StereotypeWithPriorityTest extends AbstractTest {
     @Inject
     Charlie charlie;
 
+    @Inject
+    Qux qux;
+
     @Test
+    @SpecAssertion(section = Sections.STEREOTYPES, id = "ac")
     @SpecAssertion(section = Sections.DECLARING_STEREOTYPE_WITH_PRIORITY, id = "a")
     public void testStereotypeWithPriority() {
         // injected Foo should be FooAlternative
@@ -57,6 +61,7 @@ public class StereotypeWithPriorityTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertion(section = Sections.STEREOTYPES, id = "ac")
     @SpecAssertion(section = Sections.DECLARING_STEREOTYPE_WITH_PRIORITY, id = "a")
     @SpecAssertion(section = Sections.ALTERNATIVE_STEREOTYPE, id = "a")
     public void testStereotypeWithAlternativeAndPriority() {
@@ -65,6 +70,7 @@ public class StereotypeWithPriorityTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertion(section = Sections.STEREOTYPES, id = "ac")
     @SpecAssertion(section = Sections.DECLARING_STEREOTYPE_WITH_PRIORITY, id = "a")
     @SpecAssertion(section = Sections.ALTERNATIVE_STEREOTYPE, id = "a", note = "PriorityStereotype overrides BazAlternative")
     public void testBeanPriorityFromStereotypeOverridesOtherAlternative() {
@@ -73,9 +79,18 @@ public class StereotypeWithPriorityTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertion(section = Sections.STEREOTYPES, id = "ac")
     @SpecAssertion(section = Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "aa")
     public void testBeanOverridesPriorityFromStereotype() {
         // injected Charlie should be instance of CharlieAlternative
         assertEquals(charlie.ping(), CharlieAlternative.class.getSimpleName());
+    }
+
+    @Test
+    @SpecAssertion(section = Sections.STEREOTYPES, id = "ac")
+    @SpecAssertion(section = Sections.DECLARING_STEREOTYPE_WITH_PRIORITY, id = "a")
+    @SpecAssertion(section = Sections.RESERVE_STEREOTYPE, id = "a")
+    public void testStereotypeWithReserveAndPriority() {
+        assertEquals(qux.ping(), Qux.class.getSimpleName());
     }
 }

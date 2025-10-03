@@ -1,5 +1,5 @@
 /*
- * Copyright 2012, Red Hat, Inc., and individual contributors
+ * Copyright 2010, Red Hat, Inc., and individual contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,21 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled;
+package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled.alternative;
 
 import jakarta.enterprise.context.Dependent;
-import jakarta.inject.Inject;
+import jakarta.enterprise.inject.Alternative;
 
-/**
- * @author Martin Kouba
- *
- */
+@Alternative
 @Dependent
-public class Sea {
-
-    // Unsatisfied dependency - crab spider is not selected alternative
-    @Inject
-    CrabSpider crabSpider;
+public class CrabSpider {
 
 }
