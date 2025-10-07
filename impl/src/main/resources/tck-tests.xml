@@ -23,12 +23,6 @@
         </packages>
 
         <classes>
-            <!-- https://github.com/jakartaee/cdi-tck/issues/440 -->
-            <class name="org.jboss.cdi.tck.tests.full.extensions.lifecycle.processBeanAttributes.specialization.VetoTest">
-                <methods>
-                    <exclude name=".*"/>
-                </methods>
-            </class>
         </classes>
 
     </test>
