@@ -7340,6 +7340,21 @@
         </group>
     </section>
 
+    <section id="bm_proxy_unwrap" title="Unwrapping a client proxy" level="3">
+        <group>
+            <text>Normal scoped beans use client proxies and the method |BeanContainer.unwrapClientProxy()| unwraps the proxy and returns the underlying contextual instance.</text>
+            <assertion id="a">
+                <text>If the given |reference| is a client proxy for a bean, returns the contextual instance of the bean.</text>
+            </assertion>
+            <assertion id="b">
+                <text>Otherwise, including when |reference| is |null|, returns |reference| itself.</text>
+            </assertion>
+            <assertion id="c">
+                <text>If the bean's scope is not active, this method rethrows the |ContextNotActiveException| or |IllegalStateException|.</text>
+            </assertion>
+        </group>
+    </section>
+
     <section id="alternative_metadata_sources" title="Alternative metadata sources" level="2">
         <assertion id="a" testable="false">
             <text>The interfaces |AnnotatedType|, |AnnotatedField|, |AnnotatedMethod|, |AnnotatedConstructor| and |AnnotatedParameter| in the package
