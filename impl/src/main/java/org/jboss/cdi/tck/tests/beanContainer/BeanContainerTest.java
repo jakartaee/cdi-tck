@@ -14,13 +14,18 @@
 
 package org.jboss.cdi.tck.tests.beanContainer;
 
+import static org.jboss.cdi.tck.cdi.Sections.ACTIVE_CONTEXT;
 import static org.jboss.cdi.tck.cdi.Sections.BM_DETERMINING_ANNOTATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CONTEXTS;
+import static org.jboss.cdi.tck.cdi.Sections.BM_PROXY_UNWRAP;
 import static org.jboss.cdi.tck.cdi.Sections.BM_RESOLVE_AMBIGUOUS_DEP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNotSame;
 import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertSame;
+import static org.testng.Assert.assertThrows;
 import static org.testng.Assert.assertTrue;
 
 import java.util.Collection;
@@ -29,6 +34,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ContextNotActiveException;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
@@ -43,6 +49,7 @@ import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.literals.RetentionLiteral;
 import org.jboss.cdi.tck.literals.TargetLiteral;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
+import org.jboss.cdi.tck.spi.Contexts;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -161,4 +168,51 @@ public class BeanContainerTest extends AbstractTest {
         assertTrue(builtInContextImpls.size() >= 1);
     }
 
+    @Test
+    @SpecAssertion(section = BM_PROXY_UNWRAP, id = "a")
+    public void testUnwrapClientProxyForNormalScope() {
+        ApplicationScopedBean applicationScoped = getContextualReference(ApplicationScopedBean.class);
+        ApplicationScopedBean unwrapped = getCurrentBeanContainer().unwrapClientProxy(applicationScoped);
+        assertNotNull(unwrapped);
+        assertTrue(unwrapped instanceof ApplicationScopedBean);
+        assertNotSame(applicationScoped, unwrapped);
+
+        assertEquals(unwrapped.getId(), applicationScoped.getId());
+    }
+
+    @Test
+    @SpecAssertion(section = BM_PROXY_UNWRAP, id = "b")
+    public void testUnwrapClientProxyForPseudoScope() {
+        DependentBean dependent = getContextualReference(DependentBean.class);
+        assertSame(dependent, getCurrentBeanContainer().unwrapClientProxy(dependent));
+    }
+
+    @Test
+    @SpecAssertion(section = BM_PROXY_UNWRAP, id = "b")
+    public void testUnwrapClientProxyForNull() {
+        assertNull(getCurrentBeanContainer().unwrapClientProxy(null));
+    }
+
+    @Test
+    @SpecAssertion(section = BM_PROXY_UNWRAP, id = "c")
+    @SpecAssertion(section = ACTIVE_CONTEXT, id = "a")
+    public void testUnwrapClientProxyForInactiveScope() {
+        Contexts<Context> ctx = getCurrentConfiguration().getContexts();
+        ctx.setInactive(ctx.getRequestContext());
+
+        RequestScopedBean requestScoped = getContextualReference(RequestScopedBean.class);
+        assertThrows(ContextNotActiveException.class, () -> {
+            getCurrentBeanContainer().unwrapClientProxy(requestScoped);
+        });
+    }
+
+    @Test
+    @SpecAssertion(section = BM_PROXY_UNWRAP, id = "c")
+    @SpecAssertion(section = ACTIVE_CONTEXT, id = "b")
+    public void testUnwrapClientProxyForMultipleActiveScopes() {
+        CustomScopedBean customScoped = getContextualReference(CustomScopedBean.class);
+        assertThrows(IllegalStateException.class, () -> {
+            getCurrentBeanContainer().unwrapClientProxy(customScoped);
+        });
+    }
 }
