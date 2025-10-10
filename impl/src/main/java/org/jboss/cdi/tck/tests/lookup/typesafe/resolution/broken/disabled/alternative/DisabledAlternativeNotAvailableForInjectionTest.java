@@ -11,8 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled;
+package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled.alternative;
 
 import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
@@ -32,12 +31,12 @@ import org.testng.annotations.Test;
  *
  */
 @SpecVersion(spec = "cdi", version = "2.0")
-public class DisabledBeanNotAvailableForInjectionTest extends AbstractTest {
+public class DisabledAlternativeNotAvailableForInjectionTest extends AbstractTest {
 
     @ShouldThrowException(DeploymentException.class)
     @Deployment
     public static WebArchive createTestArchive() {
-        return new WebArchiveBuilder().withTestClassPackage(DisabledBeanNotAvailableForInjectionTest.class).build();
+        return new WebArchiveBuilder().withTestClassPackage(DisabledAlternativeNotAvailableForInjectionTest.class).build();
     }
 
     @Test

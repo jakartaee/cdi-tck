@@ -33,7 +33,7 @@ public class AmbiguousELNamesTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = AMBIG_NAMES, id = "cg") })
     public void testAmbiguousELNamesResolved() throws Exception {
         // Sole is an alternative with the highest priority -> no deployment exception
     }

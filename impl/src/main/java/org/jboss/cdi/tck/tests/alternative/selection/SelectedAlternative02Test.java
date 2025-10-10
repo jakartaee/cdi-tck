@@ -63,7 +63,7 @@ public class SelectedAlternative02Test extends AbstractTest {
     Charlie charlie;
 
     @Test
-    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb")
+    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cg")
     public void testDependencyResolvable() {
         assertNotNull(alpha);
         assertNotNull(bravo);

@@ -14,6 +14,7 @@
 package org.jboss.cdi.tck.tests.alternative.selection.priority;
 
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_ALTERNATIVES_APPLICATION;
+import static org.jboss.cdi.tck.cdi.Sections.UNSATISFIED_AND_AMBIG_DEPENDENCIES;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -84,7 +85,7 @@ public class ProducerExplicitPriorityTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_APPLICATION, id = "dd")
+    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "ci")
     public void testPriorityOnProducerOverPriorityOnClass() {
         assertNotNull(betaMethodProducer);
         assertNotNull(betaFieldProducer);
