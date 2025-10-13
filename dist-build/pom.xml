@@ -165,17 +165,4 @@
          </plugin>
       </plugins>
    </build>
-
-   <profiles>
-      <profile>
-         <id>staging</id>
-         <repositories>
-            <repository>
-               <id>jakarta-staging</id>
-               <name>Jakarta Staging Repo</name>
-               <url>https://jakarta.oss.sonatype.org/content/groups/staging</url>
-            </repository>
-         </repositories>
-      </profile>
-   </profiles>
 </project>
