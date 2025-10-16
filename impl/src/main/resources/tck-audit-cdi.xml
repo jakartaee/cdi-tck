@@ -6518,12 +6518,12 @@
         </group>
 
         <assertion id="b">
-            <text>Test that enhancment phase annotation changes are seen</text>
+            <text>Test that enhancement phase annotation changes are seen</text>
         </assertion>
     </section>
     <section id="synthesis_phase" title="The @Synthesis phase" level="3">
         <assertion id="a">
-            <text>Test that synthesis phase beans are availalble for use by runtime</text>
+            <text>Test that synthesis phase beans are available for use by runtime</text>
         </assertion>
         <assertion id="b">
             <text>Test that synthesis observers are notified of fired events</text>
