@@ -9,7 +9,7 @@
  */
 package org.jboss.cdi.tck.tests.definition.stereotype.broken.alternativeReserve;
 
-import static org.jboss.cdi.tck.cdi.Sections.RESERVE_STEREOTYPE;
+import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESERVE;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
 
@@ -23,18 +23,18 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "5.0")
-public class AlternativeAndReserveOnOneStereotypeTest extends AbstractTest {
+public class AlternativeAndReserveOnOneStereotypeAndBeanTest extends AbstractTest {
     @Deployment
     @ShouldThrowException(DefinitionException.class)
     public static WebArchive deploy() {
         return new WebArchiveBuilder()
-                .withTestClass(AlternativeAndReserveOnOneStereotypeTest.class)
-                .withClasses(AlternativeReserveStereotype.class)
+                .withTestClass(AlternativeAndReserveOnOneStereotypeAndBeanTest.class)
+                .withClasses(AlternativeReserveStereotype.class, SomeBean.class)
                 .build();
     }
 
     @Test
-    @SpecAssertion(section = RESERVE_STEREOTYPE, id = "b")
+    @SpecAssertion(section = DECLARING_RESERVE, id = "c")
     public void trigger() {
     }
 }

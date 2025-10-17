@@ -41,7 +41,7 @@ public class SelectedReserve03Test extends AbstractTest {
     Delta delta;
 
     @Test
-    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cc")
+    @SpecAssertion(section = UNSATISFIED_AND_AMBIG_DEPENDENCIES, id = "cb")
     public void testMultipleReserveBeansWithProducers() {
         assertNotNull(delta);
         assertEquals(delta.ping(), DEFAULT);

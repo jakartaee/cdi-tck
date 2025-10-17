@@ -54,5 +54,9 @@ public class SelectedReserve02Test extends AbstractTest {
         assertEquals(alpha.assertAvailable(TestBean.class).getId(), SimpleTestBean.class.getName());
         assertEquals(bravo.assertAvailable(TestBean.class).getId(), SimpleTestBean.class.getName());
         assertEquals(charlie.assertAvailable(TestBean.class).getId(), SimpleTestBean.class.getName());
+
+        alpha.assertAvailable(Boss.class);
+        bravo.assertAvailable(Boss.class);
+        charlie.assertAvailable(Boss.class);
     }
 }

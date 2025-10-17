@@ -7,11 +7,11 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-package org.jboss.cdi.tck.tests.definition.stereotype.broken.alternativeReserve;
+package org.jboss.cdi.tck.tests.lookup.typesafe.resolution.broken.disabled.alternative.producer;
 
-import static org.jboss.cdi.tck.cdi.Sections.RESERVE_STEREOTYPE;
+import static org.jboss.cdi.tck.cdi.Sections.INTER_MODULE_INJECTION;
 
-import jakarta.enterprise.inject.spi.DefinitionException;
+import jakarta.enterprise.inject.spi.DeploymentException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.ShouldThrowException;
@@ -22,19 +22,17 @@ import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
-@SpecVersion(spec = "cdi", version = "5.0")
-public class AlternativeAndReserveOnOneStereotypeTest extends AbstractTest {
+@SpecVersion(spec = "cdi", version = "2.0")
+public class ProducerOnDisabledAlternativeNotAvailableForInjectionTest extends AbstractTest {
     @Deployment
-    @ShouldThrowException(DefinitionException.class)
-    public static WebArchive deploy() {
-        return new WebArchiveBuilder()
-                .withTestClass(AlternativeAndReserveOnOneStereotypeTest.class)
-                .withClasses(AlternativeReserveStereotype.class)
+    @ShouldThrowException(DeploymentException.class)
+    public static WebArchive createTestArchive() {
+        return new WebArchiveBuilder().withTestClassPackage(ProducerOnDisabledAlternativeNotAvailableForInjectionTest.class)
                 .build();
     }
 
     @Test
-    @SpecAssertion(section = RESERVE_STEREOTYPE, id = "b")
+    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "g")
     public void trigger() {
     }
 }
