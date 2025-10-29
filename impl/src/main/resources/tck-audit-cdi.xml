@@ -5754,6 +5754,15 @@
 
     </section>
 
+    <section id="observers_primitive_types" title="Primitive types" level="3">
+        <assertion id="a">
+            <text>
+                For the purpose of observer resolution, primitive types and their corresponding wrapper types in the package |java.lang| are considered identical and assignable.
+                The container performs unboxing when it invokes an observer method that declares a primitive event parameter.
+            </text>
+        </assertion>
+    </section>
+
     <section id="event_qualifier_types_with_members" title="Event qualifier types with members" level="3">
         <assertion id="a">
             <text>The qualifier type for an |Event| qualifier may have annotation members.</text>
@@ -5835,6 +5844,10 @@
         </group>
 
         <assertion id="e">
+            <text>The event parameter type may be a primitive type.</text>
+        </assertion>
+
+        <assertion id="f">
             <text>Modifications made to the event parameter in an observer method are propagated to following observers.</text>
         </assertion>
 
