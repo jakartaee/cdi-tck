@@ -6639,6 +6639,10 @@
                 <text>|isAlternative()| must return |true| if the bean is an alternative, and |false| otherwise.</text>
             </assertion>
 
+            <assertion id="be">
+                <text>|isReserve()| must return |true| if the bean is a reserve, and |false| otherwise.</text>
+            </assertion>
+
             <assertion id="bf">
                 <text>|isEager()| must return |true| if the bean is eagerly initialized, and |false| otherwise.</text>
             </assertion>
