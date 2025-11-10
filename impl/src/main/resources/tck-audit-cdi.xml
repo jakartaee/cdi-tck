@@ -661,6 +661,49 @@
         </assertion>
     </section>
 
+    <section id="eager_initialization" title="Eager initialization" level="2">
+        <group>
+            <text>
+                A bean class of a managed bean, a producer method and a producer field may be annotated |@Eager|.
+                This annotation marks the bean as _eagerly initialized_.
+            </text>
+            <assertion id="aa">
+                <text>Test with managed bean.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test with producer method.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test with producer field.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>Test with synthetic bean.</text>
+            </assertion>
+        </group>
+        <assertion id="b">
+            <text>
+                Contextual instance of an eagerly initialized bean is created no later than at the moment the container fires the |Startup| event.
+                More precisely, it is as if an enabled bean existed that declared a synchronous observer with observed event type of |Startup|, no observed event qualifier, priority of |Integer.MIN_VALUE|, and this observer method obtained a contextual instance of the eagerly initialized bean.
+            </text>
+        </assertion>
+        <assertion id="c">
+            <text>Only |@ApplicationScoped| beans may be eagerly initialized.</text>
+        </assertion>
+        <group>
+            <text>If a bean of any other normal scope or the |@Dependent| pseudo-scope is eagerly initialized, definition error occurs.</text>
+            <assertion id="da">
+                <text>Test with |@RequestScoped| producer method.</text>
+            </assertion>
+            <assertion id="db">
+                <text>Test with |@Dependent| managed bean.</text>
+            </assertion>
+        </group>
+        <assertion id="e" testable="false">
+            <text>If a bean of any other pseudo-scope is eagerly initialized, non-portable behavior results.</text>
+            <note>Non-portable behavior.</note>
+        </assertion>
+    </section>
+
     <section id="stereotypes" title="Stereotypes" level="2">
 
         <assertion id="aa">
@@ -823,6 +866,16 @@
 
         <assertion id="b">
             <text>If a stereotype declares both |@Alternative| and |@Reserve|, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+    </section>
+
+    <section id="eager_init_stereotype" title="Declaring an @Eager stereotype" level="4">
+        <assertion id="a">
+            <text>A stereotype may declare an |@Eager| annotation, which specifies that every bean with the stereotype is eagerly initialized.</text>
+        </assertion>
+
+        <assertion id="b">
+            <text>If a stereotype declares both |@Eager| and a default scope for which eager initialization is not permitted, the container automatically detects the problem and treats it as a definition error.</text>
         </assertion>
     </section>
 
@@ -6584,6 +6637,14 @@
 
             <assertion id="bc">
                 <text>|isAlternative()| must return |true| if the bean is an alternative, and |false| otherwise.</text>
+            </assertion>
+
+            <assertion id="be">
+                <text>|isReserve()| must return |true| if the bean is a reserve, and |false| otherwise.</text>
+            </assertion>
+
+            <assertion id="bf">
+                <text>|isEager()| must return |true| if the bean is eagerly initialized, and |false| otherwise.</text>
             </assertion>
 
         </group>
