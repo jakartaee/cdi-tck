@@ -9,10 +9,17 @@
  */
 package org.jboss.cdi.tck.tests.reserve.selection.stereotype;
 
+import static org.jboss.cdi.tck.cdi.Sections.BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESERVE;
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_SELECTED_RESERVES_APPLICATION;
 import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+import java.lang.annotation.Annotation;
+import java.util.Set;
+
+import jakarta.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -45,5 +52,18 @@ public class StereotypeWithReserveSelectedByPriorityTest extends AbstractTest {
                 "ReserveProducer.producer3");
         assertEquals(getContextualReference(SomeInterface.class, ProducedByField.Literal.INSTANCE).ping(),
                 "ReserveProducer.producer2");
+    }
+
+    @Test
+    @SpecAssertion(section = BEAN, id = "be")
+    public void testMetadata() {
+        assertTrue(resolve(SomeInterface.class).isReserve());
+        assertTrue(resolve(SomeInterface.class, ProducedByMethod.Literal.INSTANCE).isReserve());
+        assertTrue(resolve(SomeInterface.class, ProducedByField.Literal.INSTANCE).isReserve());
+    }
+
+    private Bean<?> resolve(Class<?> beanType, Annotation... qualifiers) {
+        Set<Bean<?>> beans = getCurrentBeanContainer().getBeans(beanType, qualifiers);
+        return getCurrentBeanContainer().resolve(beans);
     }
 }
