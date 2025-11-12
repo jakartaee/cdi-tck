@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>jakarta.enterprise</groupId>
-		<artifactId>cdi-tck-parent</artifactId>
+		<groupId>jakarta.cdi</groupId>
+		<artifactId>jakarta.cdi-tck-parent</artifactId>
 		<version>5.0.0.Beta1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>cdi-tck-api</artifactId>
+	<artifactId>jakarta.cdi-tck-api</artifactId>
 	<packaging>jar</packaging>
 	<name>CDI TCK Porting Package API</name>
 	<description>Porting Package APIs for CDI TCK</description>

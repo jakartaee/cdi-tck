@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jakarta.enterprise</groupId>
-    <artifactId>cdi-tck-parent</artifactId>
+    <groupId>jakarta.cdi</groupId>
+    <artifactId>jakarta.cdi-tck-parent</artifactId>
     <packaging>pom</packaging>
     <version>5.0.0.Beta1-SNAPSHOT</version>
     <name>Jakarta CDI TCK</name>
@@ -126,14 +126,14 @@
         <dependencies>
 
             <dependency>
-                <groupId>jakarta.enterprise</groupId>
-                <artifactId>cdi-tck-api</artifactId>
+                <groupId>jakarta.cdi</groupId>
+                <artifactId>jakarta.cdi-tck-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>jakarta.enterprise</groupId>
-                <artifactId>cdi-tck-ext-lib</artifactId>
+                <groupId>jakarta.cdi</groupId>
+                <artifactId>jakarta.cdi-tck-ext-lib</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
