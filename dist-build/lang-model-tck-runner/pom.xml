@@ -17,8 +17,8 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>jakarta.enterprise</groupId>
-                <artifactId>cdi-tck-lang-model</artifactId>
+                <groupId>jakarta.cdi</groupId>
+                <artifactId>jakarta.cdi-tck-lang-model</artifactId>
                 <version>${cdi.api.version}</version>
             </dependency>
             <dependency>
@@ -87,8 +87,8 @@
         </dependency>
 
         <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>cdi-tck-lang-model</artifactId>
+            <groupId>jakarta.cdi</groupId>
+            <artifactId>jakarta.cdi-tck-lang-model</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

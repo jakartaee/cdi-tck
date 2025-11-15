@@ -13,8 +13,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>jakarta.enterprise</groupId>
-  <artifactId>cdi-tck-artifacts</artifactId>
+  <groupId>jakarta.cdi</groupId>
+  <artifactId>jakarta.cdi-tck-artifacts</artifactId>
   <packaging>pom</packaging>
   <!-- This is set to project release version during assembly -->
   <version>${project.version}</version>
@@ -34,8 +34,8 @@
               <goal>install-file</goal>
             </goals>
             <configuration>
-              <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-tck-parent</artifactId>
+              <groupId>jakarta.cdi</groupId>
+              <artifactId>jakarta.cdi-tck-parent</artifactId>
               <version>${project.version}</version>
               <packaging>pom</packaging>
               <file>cdi-tck-parent-${project.version}.pom</file>
@@ -50,8 +50,8 @@
               <goal>install-file</goal>
             </goals>
             <configuration>
-              <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-tck-api</artifactId>
+              <groupId>jakarta.cdi</groupId>
+              <artifactId>jakarta.cdi-tck-api</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
               <file>cdi-tck-api-${project.version}.jar</file>
@@ -68,8 +68,8 @@
               <goal>install-file</goal>
             </goals>
             <configuration>
-              <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-tck-ext-lib</artifactId>
+              <groupId>jakarta.cdi</groupId>
+              <artifactId>jakarta.cdi-tck-ext-lib</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
               <file>cdi-tck-ext-lib-${project.version}.jar</file>
@@ -84,8 +84,8 @@
               <goal>install-file</goal>
             </goals>
             <configuration>
-              <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-tck-core-impl</artifactId>
+              <groupId>jakarta.cdi</groupId>
+              <artifactId>jakarta.cdi-tck-core-impl</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
               <file>cdi-tck-core-impl-${project.version}.jar</file>
@@ -99,8 +99,8 @@
               <goal>install-file</goal>
             </goals>
             <configuration>
-              <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-tck-core-impl</artifactId>
+              <groupId>jakarta.cdi</groupId>
+              <artifactId>jakarta.cdi-tck-core-impl</artifactId>
               <version>${project.version}</version>
               <packaging>xml</packaging>
               <classifier>suite</classifier>
@@ -116,8 +116,8 @@
               <goal>install-file</goal>
             </goals>
             <configuration>
-              <groupId>jakarta.enterprise</groupId>
-              <artifactId>cdi-tck-lang-model</artifactId>
+              <groupId>jakarta.cdi</groupId>
+              <artifactId>jakarta.cdi-tck-lang-model</artifactId>
               <version>${project.version}</version>
               <packaging>jar</packaging>
               <file>cdi-tck-lang-model-${project.version}.jar</file>

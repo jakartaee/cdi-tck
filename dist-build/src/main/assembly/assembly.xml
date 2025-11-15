@@ -83,11 +83,11 @@
    <dependencySets>
       <dependencySet>
          <includes>
-            <include>jakarta.enterprise:cdi-tck-parent</include>
-            <include>jakarta.enterprise:cdi-tck-core-impl</include>
-            <include>jakarta.enterprise:cdi-tck-api</include>
-            <include>jakarta.enterprise:cdi-tck-ext-lib</include>
-            <include>jakarta.enterprise:cdi-tck-lang-model</include>
+            <include>jakarta.cdi:jakarta.cdi-tck-parent</include>
+            <include>jakarta.cdi:jakarta.cdi-tck-core-impl</include>
+            <include>jakarta.cdi:jakarta.cdi-tck-api</include>
+            <include>jakarta.cdi:jakarta.cdi-tck-ext-lib</include>
+            <include>jakarta.cdi:jakarta.cdi-tck-lang-model</include>
          </includes>
          <useTransitiveDependencies>true</useTransitiveDependencies>
          <outputDirectory>artifacts</outputDirectory>
@@ -95,7 +95,7 @@
       </dependencySet>
       <dependencySet>
          <includes>
-            <include>jakarta.enterprise:cdi-tck-reference-guide:zip</include>
+            <include>jakarta.cdi:jakarta.cdi-tck-reference-guide:zip</include>
          </includes>
          <unpack>true</unpack>
          <unpackOptions>
