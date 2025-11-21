@@ -10,6 +10,7 @@
 package org.jboss.cdi.tck.tests.definition.stereotype.broken.alternativeReserve;
 
 import static org.jboss.cdi.tck.cdi.Sections.DECLARING_RESERVE;
+import static org.jboss.cdi.tck.cdi.Sections.RESERVE_STEREOTYPE;
 
 import jakarta.enterprise.inject.spi.DefinitionException;
 
@@ -34,6 +35,7 @@ public class AlternativeAndReserveOnOneStereotypeAndBeanTest extends AbstractTes
     }
 
     @Test
+    @SpecAssertion(section = RESERVE_STEREOTYPE, id = "b")
     @SpecAssertion(section = DECLARING_RESERVE, id = "c")
     public void trigger() {
     }
