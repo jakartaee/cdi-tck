@@ -96,7 +96,7 @@
 
     <properties>
         <!-- CDI API -->
-        <cdi.api.version>5.0.0-M1</cdi.api.version>
+        <cdi.api.version>5.0.0.Alpha3</cdi.api.version>
         <maven.compiler.release>17</maven.compiler.release>
         <!-- Jakarta EE APIs Core -->
         <annotations.api.version>3.0.0</annotations.api.version>
@@ -138,20 +138,20 @@
             </dependency>
 
             <dependency>
-                <groupId>jakarta.enterprise</groupId>
-                <artifactId>jakarta.enterprise.lang-model</artifactId>
+                <groupId>jakarta.cdi</groupId>
+                <artifactId>jakarta.cdi-lang-model-api</artifactId>
                 <version>${cdi.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>jakarta.enterprise</groupId>
-                <artifactId>jakarta.enterprise.cdi-api</artifactId>
+                <groupId>jakarta.cdi</groupId>
+                <artifactId>jakarta.cdi-api</artifactId>
                 <version>${cdi.api.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>jakarta.enterprise</groupId>
-                <artifactId>jakarta.enterprise.cdi-el-api</artifactId>
+                <groupId>jakarta.cdi</groupId>
+                <artifactId>jakarta.cdi-el-api</artifactId>
                 <version>${cdi.api.version}</version>
             </dependency>
 
@@ -284,8 +284,8 @@
                     <version>${formatter.version}</version>
                     <dependencies>
                         <dependency>
-                            <groupId>jakarta.enterprise</groupId>
-                            <artifactId>cdi-ide-config</artifactId>
+                            <groupId>jakarta.cdi</groupId>
+                            <artifactId>jakarta.cdi-ide-config</artifactId>
                             <version>${cdi.api.version}</version>
                         </dependency>
                     </dependencies>
