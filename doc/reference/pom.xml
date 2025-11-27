@@ -10,7 +10,7 @@
     <parent>
         <groupId>jakarta.cdi</groupId>
         <artifactId>jakarta.cdi-tck-parent</artifactId>
-        <version>5.0.0.Alpha2</version>
+        <version>5.0.0.Alpha3-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
@@ -156,6 +156,6 @@
         <connection>scm:git:git://github.com/cdi-spec/cditck.git</connection>
         <developerConnection>scm:git:git@github.com:cdi-spec/cdi-tck.git</developerConnection>
         <url>https://github.com/cdi-spec/cdi-tck/</url>
-      <tag>5.0.0.Alpha2</tag>
+      <tag>HEAD</tag>
   </scm>
 </project>
