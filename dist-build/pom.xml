@@ -3,12 +3,12 @@
    <modelVersion>4.0.0</modelVersion>
    <parent>
       <groupId>jakarta.cdi</groupId>
-      <artifactId>cdi-tck-parent</artifactId>
+      <artifactId>jakarta.cdi-tck-parent</artifactId>
       <version>5.0.0.Beta1-SNAPSHOT</version>
       <relativePath>../pom.xml</relativePath>
    </parent>
 
-   <artifactId>cdi-tck-dist</artifactId>
+   <artifactId>jakarta.cdi-tck-dist</artifactId>
    <packaging>pom</packaging>
    <name>CDI TCK Distribution</name>
 

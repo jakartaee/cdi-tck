@@ -321,6 +321,8 @@
                     <includes>
                         <include>**/*.java</include>
                     </includes>
+                    <!-- This file gets included in the porting package dependencies over from Weld codebase and violates the check -->
+                    <excludes>**/WildFly8EEResourceManager.java</excludes>
                 </configuration>
                 <executions>
                     <execution>
