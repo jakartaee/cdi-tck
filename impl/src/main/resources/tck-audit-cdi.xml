@@ -4561,9 +4561,14 @@
 
     <section id="builtin_contexts" title="Context management for built-in scopes" level="2">
         <assertion id="a">
-            <text>A portable extension may define a custom context object for any or all of the built-in scopes. For
-                example, a remoting framework might provide a request context object for the built-in request scope.
+            <text>
+                A portable extension may define a custom context object for non-global built-in scopes and for custom scopes.
+                For example, a remoting framework might provide a request context object for the built-in request scope.
             </text>
+        </assertion>
+
+        <assertion id="aa">
+            <text>If an attempt to register a custom context object for a global built-in scope is made, deployment problem occurs.</text>
         </assertion>
 
         <assertion id="b">
