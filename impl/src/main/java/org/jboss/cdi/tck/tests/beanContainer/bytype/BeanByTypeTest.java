@@ -74,8 +74,8 @@ public class BeanByTypeTest extends AbstractTest {
         Set<Bean<?>> beans = getCurrentBeanContainer().getBeans(Connector.class);
         assertEquals(beans.size(), 2);
         for (Bean<?> bean : beans) {
-            if (!typeSetMatches(bean.getTypes(), Object.class, Connector.class)
-                    && !typeSetMatches(bean.getTypes(), Object.class, Connector.class, AlternativeConnector.class)) {
+            if (!bean.getTypes().equals(Set.of(Object.class, Connector.class))
+                    && !bean.getTypes().equals(Set.of(Object.class, Connector.class, AlternativeConnector.class))) {
                 fail("Unexpected bean types found");
             }
         }

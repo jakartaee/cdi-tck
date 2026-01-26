@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.annotated;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
-import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -92,9 +92,9 @@ public class AlternativeMetaDataTest extends AbstractTest {
     public void testGetAnnotations() {
         AnnotatedType<?> annotatedType = getCurrentManager().createAnnotatedType(ClassD.class);
         assert annotatedType.getAnnotations().size() == 2;
-        assert annotationSetMatches(annotatedType.getAnnotations(), RequestScoped.class, Tame.class);
+        assertAnnotationsMatch(annotatedType.getAnnotations(), RequestScoped.class, Tame.class);
         AnnotatedType<WildCat> annotatedWildCatType = getCurrentManager().createAnnotatedType(WildCat.class);
-        assertAnnotationSetMatches(annotatedWildCatType.getAnnotations(), RequestScoped.class);
+        assertAnnotationsMatch(annotatedWildCatType.getAnnotations(), RequestScoped.class);
     }
 
     @Test

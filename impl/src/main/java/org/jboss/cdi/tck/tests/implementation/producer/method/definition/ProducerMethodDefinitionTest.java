@@ -28,6 +28,8 @@ import static org.jboss.cdi.tck.cdi.Sections.METHOD_CONSTRUCTOR_PARAMETER_QUALIF
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
@@ -48,7 +50,6 @@ import jakarta.enterprise.util.TypeLiteral;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.Assert;
 import org.jboss.cdi.tck.util.DependentInstance;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
@@ -166,7 +167,7 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
         Set<Bean<Integer>> beans = getBeans(Integer.class, NUMBER_LITERAL);
         assertEquals(beans.size(), 1);
         Bean<Integer> bean = beans.iterator().next();
-        Assert.assertTypeSetMatches(bean.getTypes(), Object.class, int.class);
+        assertTypesMatch(bean.getTypes(), Object.class, int.class);
     }
 
     @Test
@@ -218,8 +219,8 @@ public class ProducerMethodDefinitionTest extends AbstractTest {
         Bean<DaddyLongLegs> daddyLongLegs = getUniqueBean(DaddyLongLegs.class, TAME_LITERAL);
         assertEquals(daddyLongLegs.getName(), name);
         // Any, Tame, Named
-        assertTrue(annotationSetMatches(daddyLongLegs.getQualifiers(), Any.Literal.INSTANCE, TAME_LITERAL,
-                NamedLiteral.of(name)));
+        assertAnnotationsMatch(daddyLongLegs.getQualifiers(), Any.Literal.INSTANCE, TAME_LITERAL,
+                NamedLiteral.of(name));
     }
 
     // Review 2.2

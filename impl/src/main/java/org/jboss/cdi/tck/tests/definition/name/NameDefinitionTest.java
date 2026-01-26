@@ -21,9 +21,9 @@ import static org.jboss.cdi.tck.cdi.Sections.DEFAULT_NAME;
 import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_NAME;
 import static org.jboss.cdi.tck.cdi.Sections.NAMED_STEREOTYPE;
 import static org.jboss.cdi.tck.cdi.Sections.STEREOTYPES;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Default;
@@ -62,8 +62,7 @@ public class NameDefinitionTest extends AbstractTest {
         String name = "haddock";
         Bean<Haddock> haddock = getUniqueBean(Haddock.class);
         assertEquals(haddock.getName(), name);
-        assertTrue(annotationSetMatches(haddock.getQualifiers(), Any.Literal.INSTANCE, Default.Literal.INSTANCE,
-                NamedLiteral.of(name)));
+        assertAnnotationsMatch(haddock.getQualifiers(), Any.Literal.INSTANCE, Default.Literal.INSTANCE, NamedLiteral.of(name));
     }
 
     @Test

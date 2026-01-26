@@ -14,8 +14,10 @@
 
 package org.jboss.cdi.tck.test.util;
 
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
+
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +29,6 @@ import jakarta.enterprise.inject.literal.InjectLiteral;
 import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
 
-import org.jboss.cdi.tck.util.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -36,72 +37,65 @@ import org.testng.annotations.Test;
  */
 public class AssertTest {
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testAnnotationSetMatches() {
-        Set<Annotation> annotations = new HashSet<Annotation>();
+        Set<Annotation> annotations = new HashSet<>();
         annotations.add(Any.Literal.INSTANCE);
         annotations.add(InjectLiteral.INSTANCE);
-        Assert.assertAnnotationSetMatches(annotations, Any.class, Inject.class);
+        assertAnnotationsMatch(annotations, Any.class, Inject.class);
     }
 
-    @SuppressWarnings("unchecked")
     @Test(expectedExceptions = AssertionError.class)
     public void testAnnotationSetDoesNotMatchA() {
-        Set<Annotation> annotations = new HashSet<Annotation>();
+        Set<Annotation> annotations = new HashSet<>();
         annotations.add(Any.Literal.INSTANCE);
         annotations.add(InjectLiteral.INSTANCE);
-        Assert.assertAnnotationSetMatches(annotations, Any.class);
+        assertAnnotationsMatch(annotations, Any.class);
     }
 
-    @SuppressWarnings("unchecked")
     @Test(expectedExceptions = AssertionError.class)
     public void testAnnotationSetDoesNotMatchB() {
-        Set<Annotation> annotations = new HashSet<Annotation>();
+        Set<Annotation> annotations = new HashSet<>();
         annotations.add(InjectLiteral.INSTANCE);
-        Assert.assertAnnotationSetMatches(annotations, Any.class, Inject.class);
+        assertAnnotationsMatch(annotations, Any.class, Inject.class);
     }
 
-    @SuppressWarnings("unchecked")
     @Test(expectedExceptions = AssertionError.class)
     public void testAnnotationSetDoesNotMatchC() {
-        Set<Annotation> annotations = new HashSet<Annotation>();
+        Set<Annotation> annotations = new HashSet<>();
         annotations.add(Any.Literal.INSTANCE);
         annotations.add(InjectLiteral.INSTANCE);
-        Assert.assertAnnotationSetMatches(annotations, Any.class, Default.class);
+        assertAnnotationsMatch(annotations, Any.class, Default.class);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testAnnotationSetIsEmptyAndRequiredAnnotationsEmpty() {
-        Assert.assertAnnotationSetMatches(new HashSet<Annotation>());
+        assertAnnotationsMatch(new HashSet<>(), new Class[0]);
     }
 
-    @SuppressWarnings("unchecked")
     @Test(expectedExceptions = AssertionError.class)
     public void testAnnotationSetIsEmpty() {
-        Assert.assertAnnotationSetMatches(new HashSet<Annotation>(), Any.class);
+        assertAnnotationsMatch(new HashSet<>(), Any.class);
     }
 
     @SuppressWarnings("unchecked")
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAnnotationSetIsNull() {
-        Assert.assertAnnotationSetMatches(null);
+        assertAnnotationsMatch(null, new Class[0]);
     }
 
-    @SuppressWarnings("serial")
     @Test(expectedExceptions = AssertionError.class)
-    public void testTypeSetDoeNotMatch() {
-        Assert.assertTypeSetMatches(new HashSet<Type>(Arrays.asList(String.class, new TypeLiteral<List<Integer>>() {
-        }.getType())), String.class);
+    public void testTypeSetDoesNotMatch() {
+        assertTypesMatch(Arrays.asList(String.class, new TypeLiteral<List<Integer>>() {
+        }.getType()), String.class);
     }
 
-    @SuppressWarnings("serial")
     @Test
     public void testTypeSetMatches() {
-        Assert.assertTypeSetMatches(
-                new HashSet<Type>(Arrays.asList(Integer.class, String.class, new TypeLiteral<List<Boolean>>() {
-                }.getType())), String.class, Integer.class, new TypeLiteral<List<Boolean>>() {
+        assertTypesMatch(
+                Arrays.asList(Integer.class, String.class, new TypeLiteral<List<Boolean>>() {
+                }.getType()), String.class, Integer.class, new TypeLiteral<List<Boolean>>() {
                 }.getType());
     }
 }

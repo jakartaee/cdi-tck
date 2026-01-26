@@ -15,6 +15,7 @@ package org.jboss.cdi.tck.tests.full.extensions.alternative.metadata;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -228,7 +229,7 @@ public class AlternativeMetadataTest extends AbstractTest {
         Set<Annotation> qualifiers = getContextualReference(Grocery.class, Any.Literal.INSTANCE).getFruit().getMetadata()
                 .getQualifiers();
         assertEquals(qualifiers.size(), 1);
-        assertTrue(annotationSetMatches(qualifiers, Cheap.class));
+        assertAnnotationsMatch(qualifiers, Cheap.class);
     }
 
     @Test
@@ -254,7 +255,7 @@ public class AlternativeMetadataTest extends AbstractTest {
         Set<Annotation> qualifiers = getContextualReference(Grocery.class, Any.Literal.INSTANCE).getInitializerFruit()
                 .getMetadata()
                 .getQualifiers();
-        assertTrue(annotationSetMatches(qualifiers, Cheap.class));
+        assertAnnotationsMatch(qualifiers, Cheap.class);
     }
 
     @Test
@@ -280,7 +281,7 @@ public class AlternativeMetadataTest extends AbstractTest {
         Set<Annotation> qualifiers = getContextualReference(Yogurt.class, Any.Literal.INSTANCE).getFruit().getMetadata()
                 .getQualifiers();
         assertEquals(qualifiers.size(), 1);
-        assertTrue(annotationSetMatches(qualifiers, Cheap.class));
+        assertAnnotationsMatch(qualifiers, Cheap.class);
     }
 
     @Test
@@ -304,7 +305,7 @@ public class AlternativeMetadataTest extends AbstractTest {
         assertNotNull(event);
         assertNotNull(parameter);
         assertEquals(parameter.getMetadata().getQualifiers().size(), 1);
-        assertTrue(annotationSetMatches(parameter.getMetadata().getQualifiers(), Cheap.class));
+        assertAnnotationsMatch(parameter.getMetadata().getQualifiers(), Cheap.class);
     }
 
     @Test

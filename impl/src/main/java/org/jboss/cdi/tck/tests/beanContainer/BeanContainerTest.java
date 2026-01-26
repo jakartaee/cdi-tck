@@ -19,6 +19,7 @@ import static org.jboss.cdi.tck.cdi.Sections.BM_DETERMINING_ANNOTATION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_CONTEXTS;
 import static org.jboss.cdi.tck.cdi.Sections.BM_PROXY_UNWRAP;
 import static org.jboss.cdi.tck.cdi.Sections.BM_RESOLVE_AMBIGUOUS_DEP;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -81,7 +82,7 @@ public class BeanContainerTest extends AbstractTest {
         Bean<?> bean = getCurrentBeanContainer().resolve(beans);
         assertNotNull(bean);
         assertTrue(bean.isAlternative());
-        assertTrue(typeSetMatches(bean.getTypes(), Food.class, Soy.class, Object.class));
+        assertTypesMatch(bean.getTypes(), Food.class, Soy.class, Object.class);
     }
 
     @Test(expectedExceptions = AmbiguousResolutionException.class)

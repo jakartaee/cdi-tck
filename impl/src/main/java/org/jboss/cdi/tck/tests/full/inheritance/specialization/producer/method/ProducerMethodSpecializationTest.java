@@ -17,6 +17,8 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_OR_DISPOSER_METHODS_INVOCATION;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_PRODUCER_METHOD;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -69,12 +71,12 @@ public class ProducerMethodSpecializationTest extends AbstractTest {
         // Check types of specializing bean
         Set<Type> expensiveNecklaceBeanTypes = expensiveNecklaceBean.getTypes();
         assertEquals(expensiveNecklaceBeanTypes.size(), 3);
-        assertTrue(typeSetMatches(expensiveNecklaceBeanTypes, Object.class, Product.class, Necklace.class));
+        assertTypesMatch(expensiveNecklaceBeanTypes, Object.class, Product.class, Necklace.class);
 
         // Check qualifiers of specializing bean
         Set<Annotation> expensiveNecklaceQualifiers = expensiveNecklaceBean.getQualifiers();
         assertEquals(expensiveNecklaceQualifiers.size(), 4);
-        assertTrue(annotationSetMatches(expensiveNecklaceQualifiers, Expensive.class, Sparkly.class, Any.class, Named.class));
+        assertAnnotationsMatch(expensiveNecklaceQualifiers, Expensive.class, Sparkly.class, Any.class, Named.class);
 
         // There is only one bean for type Necklace and qualifier Sparkly
         Set<Bean<Necklace>> sparklyNecklaceBeans = getBeans(Necklace.class, SPARKLY_LITERAL);
