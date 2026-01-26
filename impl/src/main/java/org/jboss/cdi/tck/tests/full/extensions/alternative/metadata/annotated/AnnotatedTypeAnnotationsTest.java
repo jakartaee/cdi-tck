@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.alternative.metadata.annotated;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.ALTERNATIVE_METADATA_SOURCES;
-import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -60,9 +60,9 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
     @Test
     @SpecAssertions({ @SpecAssertion(section = ALTERNATIVE_METADATA_SOURCES, id = "b") })
     public void testCreateAnnotatedType() {
-        assertAnnotationSetMatches(getCurrentManager().createAnnotatedType(Android.class).getAnnotations(),
+        assertAnnotationsMatch(getCurrentManager().createAnnotatedType(Android.class).getAnnotations(),
                 RequestScoped.class, InheritedQualifier.class, Fate.class);
-        assertAnnotationSetMatches(getCurrentManager().createAnnotatedType(Rimmer.class).getAnnotations(), Mortal.class,
+        assertAnnotationsMatch(getCurrentManager().createAnnotatedType(Rimmer.class).getAnnotations(), Mortal.class,
                 Dependent.class, InheritedQualifier.class, Fate.class);
     }
 
@@ -73,11 +73,11 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
 
         AnnotatedType<Kryten> kryten = extension.getKryten();
         assertNotNull(kryten);
-        assertAnnotationSetMatches(kryten.getAnnotations(), RequestScoped.class, InheritedQualifier.class, Fate.class);
+        assertAnnotationsMatch(kryten.getAnnotations(), RequestScoped.class, InheritedQualifier.class, Fate.class);
 
         AnnotatedType<Rimmer> rimmer = extension.getRimmer();
         assertNotNull(rimmer);
-        assertAnnotationSetMatches(rimmer.getAnnotations(), Mortal.class, Dependent.class, InheritedQualifier.class,
+        assertAnnotationsMatch(rimmer.getAnnotations(), Mortal.class, Dependent.class, InheritedQualifier.class,
                 Fate.class);
     }
 
@@ -88,7 +88,7 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
 
         AnnotatedType<Android> android = extension.getAndroid();
         assertNotNull(android);
-        assertAnnotationSetMatches(android.getAnnotations(), RequestScoped.class, InheritedQualifier.class, Fate.class);
+        assertAnnotationsMatch(android.getAnnotations(), RequestScoped.class, InheritedQualifier.class, Fate.class);
     }
 
     @SuppressWarnings("unchecked")
@@ -99,13 +99,13 @@ public class AnnotatedTypeAnnotationsTest extends AbstractTest {
         List<AnnotatedType<Human>> humans = extension.getAllHumans();
         assertNotNull(humans);
         assertEquals(humans.size(), 1);
-        assertAnnotationSetMatches(humans.iterator().next().getAnnotations(), Mortal.class, Dependent.class,
+        assertAnnotationsMatch(humans.iterator().next().getAnnotations(), Mortal.class, Dependent.class,
                 InheritedQualifier.class, Fate.class);
 
         List<AnnotatedType<Android>> androids = extension.getAllAndroids();
         assertNotNull(androids);
         assertEquals(androids.size(), 1);
-        assertAnnotationSetMatches(androids.iterator().next().getAnnotations(), RequestScoped.class, InheritedQualifier.class,
+        assertAnnotationsMatch(androids.iterator().next().getAnnotations(), RequestScoped.class, InheritedQualifier.class,
                 Fate.class);
     }
 

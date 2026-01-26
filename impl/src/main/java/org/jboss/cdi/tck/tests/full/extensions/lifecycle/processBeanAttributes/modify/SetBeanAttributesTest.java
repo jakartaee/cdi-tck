@@ -15,7 +15,8 @@ package org.jboss.cdi.tck.tests.full.extensions.lifecycle.processBeanAttributes.
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
-import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -74,14 +75,13 @@ public class SetBeanAttributesTest extends AbstractTest {
 
         Bean<Cat> bean = getUniqueBean(Cat.class, new Cute.Literal());
 
-        assertTypeSetMatches(bean.getTypes(), Object.class, Cat.class);
-        assertTypeSetMatches(bean.getStereotypes(), PersianStereotype.class);
-        assertTrue(
-                annotationSetMatches(bean.getQualifiers(), new Wild.Literal(true), new Cute.Literal(), Any.Literal.INSTANCE));
+        assertTypesMatch(bean.getTypes(), Object.class, Cat.class);
+        assertTypesMatch(bean.getStereotypes(), PersianStereotype.class);
+        assertAnnotationsMatch(bean.getQualifiers(), new Wild.Literal(true), new Cute.Literal(), Any.Literal.INSTANCE);
 
         // other attributes
-        assertEquals(ApplicationScoped.class, bean.getScope());
-        assertEquals(true, bean.isAlternative());
+        assertEquals(bean.getScope(), ApplicationScoped.class);
+        assertTrue(bean.isAlternative());
     }
 
     @Test
@@ -89,6 +89,6 @@ public class SetBeanAttributesTest extends AbstractTest {
     public void testChangesAreNotPropagated() {
         // No qualifiers, stereotypes, scope
         assertTrue(extension.getCatAnnotatedType().getAnnotations().isEmpty());
-        assertTypeSetMatches(extension.getCatAnnotatedType().getTypeClosure(), Object.class, Cat.class, Animal.class);
+        assertTypesMatch(extension.getCatAnnotatedType().getTypeClosure(), Object.class, Cat.class, Animal.class);
     }
 }

@@ -20,12 +20,15 @@ import static org.testng.Assert.assertNotNull;
 
 import java.io.IOException;
 
+import jakarta.enterprise.inject.spi.Annotated;
+import jakarta.enterprise.inject.spi.AnnotatedMember;
+import jakarta.enterprise.inject.spi.AnnotatedParameter;
+import jakarta.enterprise.inject.spi.AnnotatedType;
 import jakarta.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
-import org.jboss.cdi.tck.util.Assert;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecVersion;
@@ -112,7 +115,8 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
         assertEquals(inspectorCopy.getInjectionPoint().getMember(), inspector.getInjectionPoint().getMember());
 
         // Annotated does not necessarily implement equals()/hashcode() so we need to test the underlying Java reflection object
-        Assert.assertAnnotated(inspectorCopy.getInjectionPoint().getAnnotated(), inspector.getInjectionPoint().getAnnotated());
+        assertEquals(unwrap(inspectorCopy.getInjectionPoint().getAnnotated()),
+                unwrap(inspector.getInjectionPoint().getAnnotated()));
         assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getBaseType(),
                 inspector.getInjectionPoint().getAnnotated().getBaseType());
         assertEquals(inspectorCopy.getInjectionPoint().getAnnotated().getAnnotations(),
@@ -122,4 +126,15 @@ public class BuiltinBeanPassivationDependencyTest extends AbstractTest {
         assertEquals(inspectorCopy.getInjectionPoint().isTransient(), inspector.getInjectionPoint().isTransient());
     }
 
+    private static Object unwrap(final Annotated annotated) {
+        if (annotated instanceof AnnotatedMember<?> am) {
+            return am.getJavaMember();
+        } else if (annotated instanceof AnnotatedParameter<?> ap) {
+            return ap.getJavaParameter();
+        } else if (annotated instanceof AnnotatedType<?> at) {
+            return at.getJavaClass();
+        } else {
+            throw new UnsupportedOperationException("Unknown Annotated instance: " + annotated);
+        }
+    }
 }

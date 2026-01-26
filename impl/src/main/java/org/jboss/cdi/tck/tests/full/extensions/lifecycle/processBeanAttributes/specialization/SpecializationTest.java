@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.lifecycle.processBeanAttributes.
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
@@ -68,7 +69,7 @@ public class SpecializationTest extends AbstractTest {
         assertNull(extension.getBravo());
         BeanAttributes<Charlie> charlieAttributes = extension.getCharlie();
         assertNotNull(charlieAttributes);
-        annotationSetMatches(charlieAttributes.getQualifiers(), Foo.Literal.INSTANCE, Bar.Literal.INSTANCE,
+        assertAnnotationsMatch(charlieAttributes.getQualifiers(), Foo.Literal.INSTANCE, Bar.Literal.INSTANCE,
                 Baz.Literal.INSTANCE, Any.Literal.INSTANCE, NamedLiteral.of("alpha"));
         assertEquals(charlieAttributes.getName(), "alpha");
     }

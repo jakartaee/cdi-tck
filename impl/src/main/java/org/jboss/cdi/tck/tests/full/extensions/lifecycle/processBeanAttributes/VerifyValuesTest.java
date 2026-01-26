@@ -16,6 +16,8 @@ package org.jboss.cdi.tck.tests.full.extensions.lifecycle.processBeanAttributes;
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -109,9 +111,9 @@ public class VerifyValuesTest extends AbstractTest {
         verifyName(attributes, "createBravo");
         assertTrue(attributes.isAlternative());
 
-        assertTrue(typeSetMatches(attributes.getTypes(), BravoInterface.class, Object.class));
-        assertTrue(typeSetMatches(attributes.getStereotypes(), AlphaStereotype.class));
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), BravoQualifier.class, Named.class, Any.class));
+        assertTypesMatch(attributes.getTypes(), BravoInterface.class, Object.class);
+        assertTypesMatch(attributes.getStereotypes(), AlphaStereotype.class);
+        assertAnnotationsMatch(attributes.getQualifiers(), BravoQualifier.class, Named.class, Any.class);
     }
 
     @Test
@@ -132,13 +134,13 @@ public class VerifyValuesTest extends AbstractTest {
     public void testProducerFieldBeanAttributes() {
         BeanAttributes<Charlie> attributes = extension.getProducedCharlieAttributes();
         assertNotNull(attributes);
-        assertEquals(ApplicationScoped.class, attributes.getScope());
+        assertEquals(attributes.getScope(), ApplicationScoped.class);
         verifyName(attributes, "charlie");
         assertFalse(attributes.isAlternative());
 
-        assertTrue(typeSetMatches(attributes.getTypes(), Object.class, Charlie.class, CharlieInterface.class));
-        assertTrue(typeSetMatches(attributes.getStereotypes(), AlphaStereotype.class));
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), CharlieQualifier.class, Named.class, Any.class));
+        assertTypesMatch(attributes.getTypes(), Object.class, Charlie.class, CharlieInterface.class);
+        assertTypesMatch(attributes.getStereotypes(), AlphaStereotype.class);
+        assertAnnotationsMatch(attributes.getQualifiers(), CharlieQualifier.class, Named.class, Any.class);
     }
 
     @Test
@@ -147,10 +149,10 @@ public class VerifyValuesTest extends AbstractTest {
     public void testInterceptorBeanAttributes() {
         BeanAttributes<BravoInterceptor> attributes = extension.getBravoInterceptorAttributes();
         assertNotNull(attributes);
-        assertEquals(Dependent.class, attributes.getScope());
+        assertEquals(attributes.getScope(), Dependent.class);
         assertFalse(attributes.isAlternative());
 
-        assertTrue(typeSetMatches(attributes.getTypes(), Object.class, BravoInterceptor.class));
+        assertTypesMatch(attributes.getTypes(), Object.class, BravoInterceptor.class);
         assertTrue(attributes.getStereotypes().isEmpty());
     }
 
@@ -160,12 +162,12 @@ public class VerifyValuesTest extends AbstractTest {
     public void testDecoratorBeanAttributes() {
         BeanAttributes<BravoDecorator> attributes = extension.getBravoDecoratorAttributes();
         assertNotNull(attributes);
-        assertEquals(Dependent.class, attributes.getScope());
+        assertEquals(attributes.getScope(), Dependent.class);
         assertFalse(attributes.isAlternative());
 
-        assertTrue(typeSetMatches(attributes.getTypes(), Object.class, BravoDecorator.class, BravoInterface.class));
-        assertTrue(attributes.getStereotypes().size() == 1);
-        assertTrue(attributes.getStereotypes().iterator().next().equals(Decorator.class));
+        assertTypesMatch(attributes.getTypes(), Object.class, BravoDecorator.class, BravoInterface.class);
+        assertEquals(attributes.getStereotypes().size(), 1);
+        assertEquals(attributes.getStereotypes().iterator().next(), Decorator.class);
     }
 
     private void verifyName(BeanAttributes<?> attributes, String name) {

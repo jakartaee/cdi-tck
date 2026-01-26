@@ -15,6 +15,7 @@ package org.jboss.cdi.tck.tests.lookup.injectionpoint;
 
 import static org.jboss.cdi.tck.cdi.Sections.CONTEXTUAL_REFERENCE;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
@@ -162,7 +163,7 @@ public class InjectionPointTest extends AbstractTest {
         BeanWithInjectionPointMetadata beanWithInjectionPoint = beanWithInjectedBean.getInjectedBean();
         assert beanWithInjectionPoint.getInjectedMetadata() != null;
         assert beanWithInjectionPoint.getInjectedMetadata().getAnnotated() instanceof AnnotatedParameter<?>;
-        assert annotationSetMatches(beanWithInjectionPoint.getInjectedMetadata().getQualifiers(), Default.class);
+        assertAnnotationsMatch(beanWithInjectionPoint.getInjectedMetadata().getQualifiers(), Default.class);
     }
 
     @Test

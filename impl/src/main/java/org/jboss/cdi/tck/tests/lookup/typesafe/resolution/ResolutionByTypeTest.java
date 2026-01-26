@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.PRIMITIVE_TYPES_AND_NULL_VALUES;
 import static org.jboss.cdi.tck.cdi.Sections.QUALIFIER_ANNOTATION_MEMBERS;
 import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -161,7 +162,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertEquals(getBeans(Canary.class).size(), 1);
         Bean<Canary> bean = getUniqueBean(Canary.class);
         assertTrue(getBeans(Bird.class).isEmpty());
-        assertTrue(typeSetMatches(bean.getTypes(), Canary.class, Object.class));
+        assertTypesMatch(bean.getTypes(), Canary.class, Object.class);
     }
 
     @Test
@@ -171,7 +172,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertTrue(getBeans(Emu.class).isEmpty());
         assertTrue(getBeans(EUROPEAN_FLIGHTLESS_BIRD).isEmpty());
         Bean<FlightlessBird<Australian>> bean = getUniqueBean(AUSTRALIAN_FLIGHTLESS_BIRD);
-        assertTrue(typeSetMatches(bean.getTypes(), AUSTRALIAN_FLIGHTLESS_BIRD.getType(), Object.class));
+        assertTypesMatch(bean.getTypes(), AUSTRALIAN_FLIGHTLESS_BIRD.getType(), Object.class);
     }
 
     @Test
@@ -180,7 +181,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertEquals(getBeans(Parrot.class).size(), 1);
         assertTrue(getBeans(Bird.class).isEmpty());
         Bean<Parrot> bean = getUniqueBean(Parrot.class);
-        assertTrue(typeSetMatches(bean.getTypes(), Parrot.class, Object.class));
+        assertTypesMatch(bean.getTypes(), Parrot.class, Object.class);
     }
 
     @Test
@@ -189,7 +190,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertEquals(getBeans(EUROPEAN_CAT, TAME).size(), 1);
         assertTrue(getBeans(DomesticCat.class, TAME).isEmpty());
         Bean<Cat<European>> bean = getUniqueBean(EUROPEAN_CAT, TAME);
-        assertTrue(typeSetMatches(bean.getTypes(), EUROPEAN_CAT.getType(), Object.class));
+        assertTypesMatch(bean.getTypes(), EUROPEAN_CAT.getType(), Object.class);
     }
 
     @Test
@@ -198,7 +199,7 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertEquals(getBeans(AFRICAN_CAT, WILD).size(), 1);
         assertTrue(getBeans(Lion.class, WILD).isEmpty());
         Bean<Cat<African>> bean = getUniqueBean(AFRICAN_CAT, WILD);
-        assertTrue(typeSetMatches(bean.getTypes(), AFRICAN_CAT.getType(), Object.class));
+        assertTypesMatch(bean.getTypes(), AFRICAN_CAT.getType(), Object.class);
     }
 
     @Test
@@ -207,6 +208,6 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertEquals(getBeans(Dove.class).size(), 1);
         assertTrue(getBeans(Bird.class).isEmpty());
         Bean<Dove> bean = getUniqueBean(Dove.class);
-        assertTrue(typeSetMatches(bean.getTypes(), Dove.class, Object.class));
+        assertTypesMatch(bean.getTypes(), Dove.class, Object.class);
     }
 }

@@ -15,6 +15,7 @@
 package org.jboss.cdi.tck.tests.lookup.injectionpoint.dynamic;
 
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -79,8 +80,8 @@ public class DynamicInjectionPointTest extends AbstractTest {
         Set<Annotation> fooQualifiers = bar.getFoo().getInjectionPoint().getQualifiers();
         Set<Annotation> niceFooQualifiers = bar.getQualifierNiceFoo().getInjectionPoint().getQualifiers();
 
-        annotationSetMatches(fooQualifiers, Any.Literal.INSTANCE, Default.Literal.INSTANCE);
-        annotationSetMatches(niceFooQualifiers, Any.Literal.INSTANCE, new Nice.Literal());
+        assertAnnotationsMatch(fooQualifiers, Any.Literal.INSTANCE, Default.Literal.INSTANCE);
+        assertAnnotationsMatch(niceFooQualifiers, Any.Literal.INSTANCE, new Nice.Literal());
     }
 
     @Test

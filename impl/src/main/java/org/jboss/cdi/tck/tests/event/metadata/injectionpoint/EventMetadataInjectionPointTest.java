@@ -15,7 +15,7 @@ package org.jboss.cdi.tck.tests.event.metadata.injectionpoint;
 
 import static org.jboss.cdi.tck.cdi.Sections.EVENT_METADATA;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
-import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -140,12 +140,12 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
         notifier.fireInfoEvent();
         lastQualifiers = infoObserver.getLastQualifiers();
         assertNotNull(lastQualifiers);
-        assertAnnotationSetMatches(lastQualifiers, Default.class);
+        assertAnnotationsMatch(lastQualifiers, Default.class);
 
         notifier.fireConstructorInfoEvent();
         lastQualifiers = infoObserver.getLastQualifiers();
         assertNotNull(lastQualifiers);
-        assertAnnotationSetMatches(lastQualifiers, Nice.class);
+        assertAnnotationsMatch(lastQualifiers, Nice.class);
     }
 
     @Test

@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.lifecycle.processInjectionPoint;
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_INJECTION_POINT;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -73,7 +74,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     public void testFieldInjectionPoint() {
         InjectionPoint ip = extension.getAlpha();
         assertNotNull(ip);
-        assertTrue(annotationSetMatches(ip.getQualifiers(), Foo.class));
+        assertAnnotationsMatch(ip.getQualifiers(), Foo.class);
         assertNotNull(ip.getBean());
         assertEquals(extension.getInjectingBean(), ip.getBean());
         verifyType(ip, Alpha.class, String.class);
@@ -92,7 +93,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     public void testConstructorInjectionPoint() {
         InjectionPoint ip = extension.getBravo();
         assertNotNull(ip);
-        assertTrue(annotationSetMatches(ip.getQualifiers(), Bar.class));
+        assertAnnotationsMatch(ip.getQualifiers(), Bar.class);
         assertNotNull(ip.getBean());
         assertEquals(extension.getInjectingBean(), ip.getBean());
         verifyType(ip, Bravo.class, String.class);
@@ -110,7 +111,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     public void testInitializerInjectionPoint() {
         InjectionPoint ip = extension.getCharlie();
         assertNotNull(ip);
-        assertTrue(annotationSetMatches(ip.getQualifiers(), Default.class));
+        assertAnnotationsMatch(ip.getQualifiers(), Default.class);
         assertNotNull(ip.getBean());
         assertEquals(extension.getInjectingBean(), ip.getBean());
         verifyType(ip, Charlie.class);
@@ -127,7 +128,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     public void testProducerMethodInjectionPoint1() {
         InjectionPoint ip = extension.getProducerAlpha();
         assertNotNull(ip);
-        assertTrue(annotationSetMatches(ip.getQualifiers(), Foo.class));
+        assertAnnotationsMatch(ip.getQualifiers(), Foo.class);
         assertNotNull(ip.getBean());
         assertEquals(extension.getProducingBean(), ip.getBean());
         verifyType(ip, Alpha.class, Integer.class);
@@ -144,7 +145,7 @@ public class ProcessInjectionPointFiredTest extends AbstractTest {
     public void testProducerMethodInjectionPoint2() {
         InjectionPoint ip = extension.getProducerBravo();
         assertNotNull(ip);
-        assertTrue(annotationSetMatches(ip.getQualifiers(), Bar.class));
+        assertAnnotationsMatch(ip.getQualifiers(), Bar.class);
         assertNotNull(ip.getBean());
         assertEquals(extension.getProducingBean(), ip.getBean());
         verifyType(ip, Bravo.class, Integer.class);

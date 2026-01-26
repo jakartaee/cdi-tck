@@ -23,7 +23,7 @@ import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_BEAN;
 import static org.jboss.cdi.tck.cdi.Sections.DECORATOR_RESOLUTION;
 import static org.jboss.cdi.tck.cdi.Sections.DELEGATE_ATTRIBUTE;
 import static org.jboss.cdi.tck.cdi.Sections.ENABLED_DECORATORS_BEAN_ARCHIVE;
-import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
@@ -114,7 +114,7 @@ public class DecoratorDefinitionTest extends AbstractTest {
         assertTrue(decorator.getInjectionPoints().iterator().next().getAnnotated().isAnnotationPresent(Delegate.class));
         assertEquals(decorator.getDelegateType(), Logger.class);
         assertEquals(decorator.getDelegateQualifiers().size(), 1);
-        assertAnnotationSetMatches(decorator.getDelegateQualifiers(), Default.class);
+        assertAnnotationsMatch(decorator.getDelegateQualifiers(), Default.class);
     }
 
     @Test
