@@ -15,6 +15,7 @@ package org.jboss.cdi.tck.tests.full.extensions.beanManager.injectionPoint;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTIONPOINT;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -74,7 +75,7 @@ public class CreateInjectionPointTest extends AbstractTest {
         AnnotatedField<?> field = type.getFields().iterator().next();
         InjectionPoint ip = getCurrentManager().createInjectionPoint(field);
         validateParameterizedType(ip.getType(), Book.class, String.class);
-        annotationSetMatches(ip.getQualifiers(), Monograph.class, Fictional.class);
+        assertAnnotationsMatch(ip.getQualifiers(), Monograph.class, Fictional.class);
         assertNull(ip.getBean());
         assertEquals(field.getJavaMember(), ip.getMember());
         assertNotNull(ip.getAnnotated());
@@ -92,7 +93,7 @@ public class CreateInjectionPointTest extends AbstractTest {
         AnnotatedParameter<?> parameter = constructor.getParameters().get(1);
         InjectionPoint ip = getCurrentManager().createInjectionPoint(parameter);
         validateParameterizedType(ip.getType(), Book.class, String.class);
-        annotationSetMatches(ip.getQualifiers(), Fictional.class);
+        assertAnnotationsMatch(ip.getQualifiers(), Fictional.class);
         assertNull(ip.getBean());
         assertEquals(constructor.getJavaMember(), ip.getMember());
         assertNotNull(ip.getAnnotated());
@@ -105,12 +106,12 @@ public class CreateInjectionPointTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = BM_OBTAIN_INJECTIONPOINT, id = "b") })
     public void testMethodParameter() {
         AnnotatedType<?> type = getCurrentManager().createAnnotatedType(Library.class);
-        assertEquals(1, type.getMethods().size());
+        assertEquals(type.getMethods().size(), 1);
         AnnotatedMethod<?> method = type.getMethods().iterator().next();
         AnnotatedParameter<?> parameter = method.getParameters().get(2);
         InjectionPoint ip = getCurrentManager().createInjectionPoint(parameter);
         validateParameterizedType(ip.getType(), Book.class, Integer.class);
-        annotationSetMatches(ip.getQualifiers(), Default.class);
+        assertAnnotationsMatch(ip.getQualifiers(), Default.class);
         assertNull(ip.getBean());
         assertEquals(method.getJavaMember(), ip.getMember());
         assertNotNull(ip.getAnnotated());

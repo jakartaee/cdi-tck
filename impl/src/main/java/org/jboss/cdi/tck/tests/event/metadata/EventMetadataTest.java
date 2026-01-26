@@ -14,7 +14,7 @@
 package org.jboss.cdi.tck.tests.event.metadata;
 
 import static org.jboss.cdi.tck.cdi.Sections.EVENT_METADATA;
-import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
@@ -97,7 +97,7 @@ public class EventMetadataTest extends AbstractTest {
             assertNull(metadata.getInjectionPoint());
         }
         assertEquals(metadata.getType(), resolvedType);
-        assertAnnotationSetMatches(metadata.getQualifiers(), qualifiers);
+        assertAnnotationsMatch(metadata.getQualifiers(), qualifiers);
     }
 
 }

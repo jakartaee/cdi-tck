@@ -26,9 +26,9 @@ import static org.jboss.cdi.tck.cdi.Sections.NAMED_STEREOTYPE;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD_NAME;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_FIELD_TYPES;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -180,7 +180,7 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
         Bean<Tarantula> staticTarantulaBean = getUniqueBean(Tarantula.class, STATIC_LITERAL);
         assertEquals(staticTarantulaBean.getName(), "produceTarantula");
         // Any, Static
-        assertTrue(annotationSetMatches(staticTarantulaBean.getQualifiers(), Any.Literal.INSTANCE, STATIC_LITERAL));
+        assertAnnotationsMatch(staticTarantulaBean.getQualifiers(), Any.Literal.INSTANCE, STATIC_LITERAL);
 
     }
 
@@ -190,8 +190,8 @@ public class ProducerFieldDefinitionTest extends AbstractTest {
         Bean<Tarantula> tarantulaBean = getUniqueBean(Tarantula.class, PET_LITERAL);
         assertEquals(tarantulaBean.getName(), "producedPetTarantula");
         // Any, Pet, Named
-        assertTrue(annotationSetMatches(tarantulaBean.getQualifiers(), Any.Literal.INSTANCE, PET_LITERAL, NamedLiteral.of(
-                "producedPetTarantula")));
+        assertAnnotationsMatch(tarantulaBean.getQualifiers(), Any.Literal.INSTANCE, PET_LITERAL,
+                NamedLiteral.of("producedPetTarantula"));
     }
 
     // review 2.2

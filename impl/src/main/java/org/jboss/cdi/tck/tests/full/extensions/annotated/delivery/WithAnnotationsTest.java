@@ -16,7 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.annotated.delivery;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
-import static org.jboss.cdi.tck.util.Assert.assertTypeListMatches;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertFalse;
 
 import jakarta.inject.Inject;
@@ -67,7 +67,7 @@ public class WithAnnotationsTest extends AbstractTest {
     public void testDelivery() {
 
         // Annotated with @Desired or @Wanted
-        assertTypeListMatches(processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes(),
+        assertTypesMatch(processAnnotatedTypeObserver.getProcessedDesiredAndWantedTypes(),
                 // type-level
                 Bird.class, Hummingbird.class, BeeHummingbird.class,
                 // member-level
@@ -75,7 +75,7 @@ public class WithAnnotationsTest extends AbstractTest {
                 OcellatedTurkey.class, Jack.class, Sparrow.class, AplomadoFalcon.class);
 
         // Annotated with @Desired only
-        assertTypeListMatches(processAnnotatedTypeObserver.getProcessedDesiredTypes(),
+        assertTypesMatch(processAnnotatedTypeObserver.getProcessedDesiredTypes(),
                 // type-level
                 Bird.class, Hummingbird.class, BeeHummingbird.class,
                 // member-level
@@ -89,7 +89,7 @@ public class WithAnnotationsTest extends AbstractTest {
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "fc"),
             @SpecAssertion(section = PROCESS_ANNOTATED_TYPE, id = "g") })
     public void testDeliveryMetaAnnotation() {
-        assertTypeListMatches(processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes(), Chicken.class, Hen.class,
+        assertTypesMatch(processAnnotatedTypeObserver.getProcessedMetaAnnotationTypes(), Chicken.class, Hen.class,
                 RubberChicken.class, Hummingbird.class, BeeHummingbird.class);
     }
 

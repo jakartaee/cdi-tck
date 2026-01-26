@@ -15,7 +15,7 @@
 package org.jboss.cdi.tck.tests.definition.bean.types;
 
 import static org.jboss.cdi.tck.cdi.Sections.MANAGED_BEAN_TYPES;
-import static org.jboss.cdi.tck.util.Assert.assertTypeSetMatches;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
@@ -53,7 +53,7 @@ public class ManagedBeanTypesTest extends AbstractTest {
         assertNotNull(vultureBean);
         // Object, Animal<Integer>, Bird<String, Integer>, Vulture<Integer>, GriffonVulture
         assertEquals(vultureBean.getTypes().size(), 5);
-        assertTypeSetMatches(vultureBean.getTypes(), Object.class, GriffonVulture.class, new TypeLiteral<Animal<Integer>>() {
+        assertTypesMatch(vultureBean.getTypes(), Object.class, GriffonVulture.class, new TypeLiteral<Animal<Integer>>() {
         }.getType(), new TypeLiteral<Bird<String, Integer>>() {
         }.getType(), new TypeLiteral<Vulture<Integer>>() {
         }.getType());
@@ -63,7 +63,7 @@ public class ManagedBeanTypesTest extends AbstractTest {
         assertNotNull(tigerBean);
         // Object, Animal<String>, Mammal<String>, Tiger
         assertEquals(tigerBean.getTypes().size(), 4);
-        assertTypeSetMatches(tigerBean.getTypes(), Object.class, Tiger.class, new TypeLiteral<Animal<String>>() {
+        assertTypesMatch(tigerBean.getTypes(), Object.class, Tiger.class, new TypeLiteral<Animal<String>>() {
         }.getType(), new TypeLiteral<Mammal<String>>() {
         }.getType());
 
@@ -71,7 +71,7 @@ public class ManagedBeanTypesTest extends AbstractTest {
         Bean<Flock> flockBean = getUniqueBean(Flock.class);
         assertNotNull(flockBean);
         // Object, Flock, Gathering<Vulture<Integer>>, GroupingOfCertainType<Vulture<Integer>>
-        assertTypeSetMatches(flockBean.getTypes(), Object.class, Flock.class, new TypeLiteral<Gathering<Vulture<Integer>>>() {
+        assertTypesMatch(flockBean.getTypes(), Object.class, Flock.class, new TypeLiteral<Gathering<Vulture<Integer>>>() {
         }.getType(), new TypeLiteral<GroupingOfCertainType<Vulture<Integer>>>() {
         }.getType());
     }

@@ -17,8 +17,9 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.DIRECT_AND_INDIRECT_SPECIALIZATION;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZATION;
 import static org.jboss.cdi.tck.cdi.Sections.SPECIALIZE_MANAGED_BEAN;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -69,7 +70,7 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
         // Types of specializing bean
         Set<Type> lazyFarmerBeanTypes = lazyFarmerBean.getTypes();
         assertEquals(lazyFarmerBeanTypes.size(), 4);
-        assertTrue(typeSetMatches(lazyFarmerBeanTypes, Object.class, Human.class, Farmer.class, LazyFarmer.class));
+        assertTypesMatch(lazyFarmerBeanTypes, Object.class, Human.class, Farmer.class, LazyFarmer.class);
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
@@ -87,8 +88,8 @@ public class SimpleBeanSpecializationTest extends AbstractTest {
         Set<Annotation> lazyFarmerBeanQualifiers = lazyFarmerBean.getQualifiers();
         assertEquals(lazyFarmerBeanQualifiers.size(), 5);
         // LazyFarmer inherits Default from Human; LandOwner and Named from Farmer
-        assertTrue(annotationSetMatches(lazyFarmerBean.getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class,
-                Default.class));
+        assertAnnotationsMatch(lazyFarmerBean.getQualifiers(), Landowner.class, Lazy.class, Any.class, Named.class,
+                Default.class);
     }
 
     @Test

@@ -18,9 +18,14 @@ import static org.jboss.cdi.tck.cdi.Sections.LEGAL_BEAN_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.LEGAL_INJECTION_POINT_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.PERFORMING_TYPESAFE_RESOLUTION;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -96,7 +101,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
                 new TypeLiteral<Result<? extends Throwable, ? super Exception>>() {
                 });
         assert beans.size() == 1;
-        assert rawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
+        assertRawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
     }
 
     @Test
@@ -107,7 +112,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
                 new TypeLiteral<Result<? extends RuntimeException, ? super RuntimeException>>() {
                 });
         assert beans.size() == 1;
-        assert rawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
+        assertRawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
     }
 
     @Test
@@ -121,12 +126,12 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         Set<Bean<Box<? super T1>>> beans1 = getBeans(new TypeLiteral<Box<? super T1>>() {
         });
         assertEquals(beans1.size(), 1);
-        assertTrue(rawTypeSetMatches(beans1.iterator().next().getTypes(), BOX_TYPES));
+        assertRawTypeSetMatches(beans1.iterator().next().getTypes(), BOX_TYPES);
 
         Set<Bean<Box<? super T2>>> beans2 = getBeans(new TypeLiteral<Box<? super T2>>() {
         });
         assertEquals(beans2.size(), 1);
-        assertTrue(rawTypeSetMatches(beans2.iterator().next().getTypes(), BOX_TYPES));
+        assertRawTypeSetMatches(beans2.iterator().next().getTypes(), BOX_TYPES);
 
         // SuperFoo does not extend Foo
         Set<Bean<Box<? super T3>>> noBeans3 = getBeans(new TypeLiteral<Box<? super T3>>() {
@@ -146,7 +151,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         Set<Bean<Box<? super T6>>> beans6 = getBeans(new TypeLiteral<Box<? super T6>>() {
         });
         assertEquals(beans6.size(), 1);
-        assertTrue(rawTypeSetMatches(beans6.iterator().next().getTypes(), BOX_TYPES));
+        assertRawTypeSetMatches(beans6.iterator().next().getTypes(), BOX_TYPES);
     }
 
     @Test
@@ -156,7 +161,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
                 new TypeLiteral<Result<RuntimeException, IllegalStateException>>() {
                 });
         assert beans.size() == 1;
-        assert rawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
+        assertRawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
 
         Set<Bean<Result<RuntimeException, Throwable>>> noBeans = getBeans(
                 new TypeLiteral<Result<RuntimeException, Throwable>>() {
@@ -170,7 +175,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         Set<Bean<Box<BarSubBazFooImpl>>> beans = getBeans(new TypeLiteral<Box<BarSubBazFooImpl>>() {
         });
         assertEquals(beans.size(), 1);
-        assertTrue(rawTypeSetMatches(beans.iterator().next().getTypes(), BOX_TYPES));
+        assertRawTypeSetMatches(beans.iterator().next().getTypes(), BOX_TYPES);
 
         // SuperFoo is not inside BoxBarBazFooImpl's bounds
         Set<Bean<Box<BarBazSuperFooImpl>>> noBeans1 = getBeans(new TypeLiteral<Box<BarBazSuperFooImpl>>() {
@@ -189,7 +194,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         Set<Bean<Result<T1, T2>>> beans = getBeans(new TypeLiteral<Result<T1, T2>>() {
         });
         assert beans.size() == 1;
-        assert rawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
+        assertRawTypeSetMatches(beans.iterator().next().getTypes(), RESULT_TYPES);
 
         Set<Bean<Result<T1, T3>>> noBeans = getBeans(new TypeLiteral<Result<T1, T3>>() {
         });
@@ -198,7 +203,7 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         Set<Bean<Dao<T1, T3>>> daoBeans = getBeans(new TypeLiteral<Dao<T1, T3>>() {
         });
         assertEquals(daoBeans.size(), 1);
-        assertTrue(rawTypeSetMatches(daoBeans.iterator().next().getTypes(), DAO_TYPES));
+        assertRawTypeSetMatches(daoBeans.iterator().next().getTypes(), DAO_TYPES);
     }
 
     @Test
@@ -207,12 +212,12 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         Set<Bean<Box<T1>>> beans1 = getBeans(new TypeLiteral<Box<T1>>() {
         });
         assertEquals(beans1.size(), 1);
-        assertTrue(rawTypeSetMatches(beans1.iterator().next().getTypes(), BOX_TYPES));
+        assertRawTypeSetMatches(beans1.iterator().next().getTypes(), BOX_TYPES);
 
         Set<Bean<Box<T2>>> beans2 = getBeans(new TypeLiteral<Box<T2>>() {
         });
         assertEquals(beans2.size(), 1);
-        assertTrue(rawTypeSetMatches(beans2.iterator().next().getTypes(), BOX_TYPES));
+        assertRawTypeSetMatches(beans2.iterator().next().getTypes(), BOX_TYPES);
 
         // SuperFoo does not extend Foo
         Set<Bean<Box<T3>>> noBeans3 = getBeans(new TypeLiteral<Box<T3>>() {
@@ -232,6 +237,30 @@ public class AssignabilityOfRawAndParameterizedTypesTest extends AbstractTest {
         Set<Bean<Box<T6>>> beans6 = getBeans(new TypeLiteral<Box<T6>>() {
         });
         assertEquals(beans6.size(), 1);
-        assertTrue(rawTypeSetMatches(beans6.iterator().next().getTypes(), BOX_TYPES));
+        assertRawTypeSetMatches(beans6.iterator().next().getTypes(), BOX_TYPES);
+    }
+
+    /**
+     * Checks if the erasure of the given set of {@code types} contains all given {@code requiredTypes} and no other.
+     *
+     * @param types the set of types whose erasures should be checked
+     * @param requiredTypes the set of types to match
+     */
+    private void assertRawTypeSetMatches(Set<Type> types, Class<?>... requiredTypes) {
+        Set<Class<?>> rawTypes = new HashSet<>();
+        for (Type type : types) {
+            if (type instanceof Class<?> c) {
+                rawTypes.add(c);
+            } else if (type instanceof ParameterizedType pt) {
+                rawTypes.add((Class<?>) pt.getRawType());
+            }
+        }
+
+        List<Class<?>> requiredTypeList = Arrays.asList(requiredTypes);
+
+        if (requiredTypes.length != rawTypes.size() || !requiredTypeList.containsAll(rawTypes)) {
+            fail(String.format("Set %s (%s) does not match array %s (%s)", types, types.size(),
+                    requiredTypeList, requiredTypeList.size()));
+        }
     }
 }

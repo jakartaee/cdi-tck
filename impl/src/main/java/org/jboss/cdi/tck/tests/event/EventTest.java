@@ -22,6 +22,7 @@ import static org.jboss.cdi.tck.cdi.Sections.MULTIPLE_EVENT_QUALIFIERS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVERS_METHOD_INVOCATION;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVER_METHODS;
 import static org.jboss.cdi.tck.cdi.Sections.OBSERVES;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -122,7 +123,7 @@ public class EventTest extends AbstractTest {
     public void testNonStaticObserverMethodInherited() {
         Egg egg = new Egg();
         getCurrentManager().getEvent().select(Egg.class).fire(egg);
-        assertTrue(typeSetMatches(egg.getClassesVisited(), Farmer.class, LazyFarmer.class));
+        assertTypesMatch(egg.getClassesVisited(), Farmer.class, LazyFarmer.class);
     }
 
     @Test
@@ -130,8 +131,8 @@ public class EventTest extends AbstractTest {
     public void testNonStaticObserverMethodIndirectlyInherited() {
         StockPrice price = new StockPrice();
         getCurrentManager().getEvent().select(StockPrice.class).fire(price);
-        assertTrue(typeSetMatches(price.getClassesVisited(), StockWatcher.class, IntermediateStockWatcher.class,
-                IndirectStockWatcher.class));
+        assertTypesMatch(price.getClassesVisited(), StockWatcher.class, IntermediateStockWatcher.class,
+                IndirectStockWatcher.class);
     }
 
     private <E> void eventObjectContainsTypeVariables(ArrayList<E> eventToFire) {

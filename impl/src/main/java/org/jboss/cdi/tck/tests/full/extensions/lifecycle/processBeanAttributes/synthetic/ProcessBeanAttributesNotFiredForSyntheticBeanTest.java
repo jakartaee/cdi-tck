@@ -17,6 +17,7 @@ import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_ANNOTATED_TYPE;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN_ATTRIBUTES;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
@@ -73,7 +74,7 @@ public class ProcessBeanAttributesNotFiredForSyntheticBeanTest extends AbstractT
 
         BeanAttributes<Bicycle> attributesBeforeRegistering = bicycleExtension.getBicycleAttributesBeforeRegistering();
         assertEquals(attributesBeforeRegistering.getScope(), ApplicationScoped.class);
-        assertTrue(typeSetMatches(attributesBeforeRegistering.getTypes(), Object.class, Vehicle.class, Bicycle.class));
+        assertTypesMatch(attributesBeforeRegistering.getTypes(), Object.class, Vehicle.class, Bicycle.class);
         assertFalse(attributesBeforeRegistering.isAlternative());
 
         assertNull(bicycleExtension.getBicycleAttributesBeforeModifying());
@@ -82,7 +83,7 @@ public class ProcessBeanAttributesNotFiredForSyntheticBeanTest extends AbstractT
         assertEquals(beans.size(), 1);
         Bean<Bicycle> bean = beans.iterator().next();
         assertEquals(bean.getScope(), ApplicationScoped.class);
-        assertTrue(typeSetMatches(bean.getTypes(), Object.class, Vehicle.class, Bicycle.class));
+        assertTypesMatch(bean.getTypes(), Object.class, Vehicle.class, Bicycle.class);
         assertFalse(bean.isAlternative());
     }
 }
