@@ -4566,6 +4566,10 @@
             </text>
         </assertion>
 
+        <assertion id="aa">
+            <text>If an attempt to register a custom context object for an always active built-in scope is made, deployment problem occurs.</text>
+        </assertion>
+
         <assertion id="b">
             <text>The context associated with a built-in normal scope propagates across local, synchronous Java method
                 calls. The context does not propagate across remote method invocations or to asynchronous processes.
