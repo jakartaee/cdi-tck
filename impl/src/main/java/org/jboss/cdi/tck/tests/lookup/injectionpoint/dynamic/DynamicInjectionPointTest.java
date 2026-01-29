@@ -70,17 +70,19 @@ public class DynamicInjectionPointTest extends AbstractTest {
     public void testInjectionPointGetType() {
         assertEquals(bar.getFoo().getInjectionPoint().getType(), Foo.class);
         assertEquals(bar.getTypeNiceFoo().getInjectionPoint().getType(), NiceFoo.class);
+        assertEquals(bar.getQualifierNiceFoo().getInjectionPoint().getType(), Foo.class);
     }
 
-    @SuppressWarnings("serial")
     @Test
     @SpecAssertion(section = INJECTION_POINT, id = "bca")
     public void testInjectionPointGetQualifiers() {
 
         Set<Annotation> fooQualifiers = bar.getFoo().getInjectionPoint().getQualifiers();
+        Set<Annotation> niceFooType = bar.getTypeNiceFoo().getInjectionPoint().getQualifiers();
         Set<Annotation> niceFooQualifiers = bar.getQualifierNiceFoo().getInjectionPoint().getQualifiers();
 
         assertAnnotationsMatch(fooQualifiers, Any.Literal.INSTANCE, Default.Literal.INSTANCE);
+        assertAnnotationsMatch(niceFooType, Any.Literal.INSTANCE);
         assertAnnotationsMatch(niceFooQualifiers, Any.Literal.INSTANCE, new Nice.Literal());
     }
 
