@@ -14,19 +14,13 @@
 
 package org.jboss.cdi.tck.util;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-
-import jakarta.enterprise.inject.spi.Annotated;
-import jakarta.enterprise.inject.spi.AnnotatedMember;
-import jakarta.enterprise.inject.spi.AnnotatedParameter;
-import jakarta.enterprise.inject.spi.AnnotatedType;
 
 /**
  * @author Martin Kouba
@@ -38,12 +32,14 @@ public class Assert {
     }
 
     /**
+     * Asserts that given collection of {@code annotations} contains annotations of all given
+     * {@code requiredAnnotationTypes} and no other.
      *
-     * @param annotations
-     * @param requiredAnnotationTypes
-     * @throws AssertionError if the annotations set and required annotations do not match
+     * @param annotations the collection of annotations to check
+     * @param requiredAnnotationTypes the annotation types to match
      */
-    public static void assertAnnotationSetMatches(Set<? extends Annotation> annotations,
+    @SafeVarargs
+    public static void assertAnnotationsMatch(Collection<? extends Annotation> annotations,
             Class<? extends Annotation>... requiredAnnotationTypes) {
 
         if (annotations == null) {
@@ -51,11 +47,11 @@ public class Assert {
         }
 
         if (annotations.size() != requiredAnnotationTypes.length) {
-            fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(),
+            fail(String.format("Collection %s (%s) does not match array %s (%s)", annotations, annotations.size(),
                     Arrays.toString(requiredAnnotationTypes), requiredAnnotationTypes.length));
         }
 
-        if (annotations.isEmpty() && requiredAnnotationTypes.length == 0) {
+        if (annotations.isEmpty()) {
             return;
         }
 
@@ -63,71 +59,48 @@ public class Assert {
 
         for (Annotation annotation : annotations) {
             if (!requiredAnnotationTypesList.contains(annotation.annotationType())) {
-                fail(String.format("Set %s (%s) does not match array %s (%s)", annotations, annotations.size(),
+                fail(String.format("Collection %s (%s) does not match array %s (%s)", annotations, annotations.size(),
                         requiredAnnotationTypesList, requiredAnnotationTypesList.size()));
             }
         }
     }
 
     /**
+     * Asserts that given collection of {@code annotations} contains all given {@code requiredAnnotations} and no other.
      *
-     * @param types
-     * @param requiredTypes
+     * @param annotations the collection of annotations to check
+     * @param requiredAnnotations the annotations to match
      */
-    public static void assertTypeSetMatches(Set<? extends Type> types, Type... requiredTypes) {
+    public static void assertAnnotationsMatch(Collection<? extends Annotation> annotations,
+            Annotation... requiredAnnotations) {
+        if (annotations == null) {
+            throw new IllegalArgumentException();
+        }
 
+        List<Annotation> requiredAnnotationList = Arrays.asList(requiredAnnotations);
+
+        if (requiredAnnotations.length != annotations.size() || !annotations.containsAll(requiredAnnotationList)) {
+            fail(String.format("Collection %s (%s) does not match array %s (%s)", annotations, annotations.size(),
+                    requiredAnnotationList, requiredAnnotationList.size()));
+        }
+    }
+
+    /**
+     * Asserts that given collection of {@code types} contains all given {@code requiredTypes} and no other.
+     *
+     * @param types the collection of types to check
+     * @param requiredTypes the types to match
+     */
+    public static void assertTypesMatch(Collection<? extends Type> types, Type... requiredTypes) {
         if (types == null) {
             throw new IllegalArgumentException();
         }
 
         List<Type> requiredTypeList = Arrays.asList(requiredTypes);
 
-        if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
-            fail(String.format("Set %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList,
+        if (types.size() != requiredTypes.length || !types.containsAll(requiredTypeList)) {
+            fail(String.format("Collection %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList,
                     requiredTypeList.size()));
         }
     }
-
-    /**
-     *
-     * @param types
-     * @param requiredTypes
-     */
-    public static void assertTypeListMatches(List<? extends Type> types, Type... requiredTypes) {
-
-        if (types == null) {
-            throw new IllegalArgumentException();
-        }
-
-        List<Type> requiredTypeList = Arrays.asList(requiredTypes);
-
-        if (requiredTypes.length != types.size() || !types.containsAll(requiredTypeList)) {
-            fail(String.format("List %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList,
-                    requiredTypeList.size()));
-        }
-    }
-
-    /**
-     * Helper method to compare 2 Annotated. They don't necessarily implement equals()/hashcode() so we need to
-     * compare the underlying java.lang.reflect objects.
-     *
-     * @param expected The expected Annotated instance
-     * @param actual The actual Annotated instance to compare
-     */
-    public static void assertAnnotated(final Annotated expected, final Annotated actual) {
-        assertEquals(unwrap(expected), unwrap(actual));
-    }
-
-    private static Object unwrap(final Annotated annotated) {
-        if (annotated instanceof AnnotatedMember) {
-            return ((AnnotatedMember) annotated).getJavaMember();
-        } else if (annotated instanceof AnnotatedParameter) {
-            return ((AnnotatedParameter) annotated).getJavaParameter();
-        } else if (annotated instanceof AnnotatedType) {
-            return ((AnnotatedType) annotated).getJavaClass();
-        } else {
-            throw new UnsupportedOperationException("Unknown Annotated instance: " + annotated);
-        }
-    }
-
 }

@@ -16,11 +16,10 @@ package org.jboss.cdi.tck.tests.implementation.producer.method.definition.name;
 
 import static org.jboss.cdi.tck.cdi.Sections.NAMED_STEREOTYPE;
 import static org.jboss.cdi.tck.cdi.Sections.PRODUCER_METHOD_NAME;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 import jakarta.enterprise.inject.Any;
-import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.spi.Bean;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -35,7 +34,6 @@ import org.testng.annotations.Test;
 /**
  * @author Martin Kouba
  */
-@SuppressWarnings("serial")
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ProducerMethodWithDefaultNameTest extends AbstractTest {
 
@@ -67,7 +65,7 @@ public class ProducerMethodWithDefaultNameTest extends AbstractTest {
         String name = "produceJohn";
         Bean<Bug> john = getUniqueBean(Bug.class, new Funny.Literal());
         assertEquals(john.getName(), name);
-        assertTrue(annotationSetMatches(john.getQualifiers(), Any.Literal.INSTANCE, Default.Literal.INSTANCE));
+        assertAnnotationsMatch(john.getQualifiers(), Any.Literal.INSTANCE, new Funny.Literal());
     }
 
 }

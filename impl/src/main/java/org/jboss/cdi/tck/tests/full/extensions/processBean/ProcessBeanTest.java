@@ -16,6 +16,7 @@ package org.jboss.cdi.tck.tests.full.extensions.processBean;
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BEAN_DISCOVERY_STEPS;
 import static org.jboss.cdi.tck.cdi.Sections.PROCESS_BEAN;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
@@ -75,7 +76,7 @@ public class ProcessBeanTest extends AbstractTest {
 
         assertNotNull(ProcessBeanObserver.getCatBean());
         assertEquals(ProcessBeanObserver.getCatBean().getBeanClass(), Cat.class);
-        assertTrue(annotationSetMatches(ProcessBeanObserver.getCatBean().getQualifiers(), Domestic.class, Any.class));
+        assertAnnotationsMatch(ProcessBeanObserver.getCatBean().getQualifiers(), Domestic.class, Any.class);
         assertEquals(ProcessBeanObserver.getCatAnnotatedType().getBaseType(), Cat.class);
         assertEquals(ProcessBeanObserver.getCatProcessBeanCount(), 2);
         assertTrue(ProcessBeanObserver.getCatAnnotated() instanceof AnnotatedType<?>);

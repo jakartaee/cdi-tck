@@ -15,13 +15,7 @@ package org.jboss.cdi.tck;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.enterprise.context.spi.Context;
@@ -114,49 +108,6 @@ public abstract class AbstractTest extends Arquillian {
         return ConfigurationFactory.get();
     }
 
-    /**
-     * Checks if all annotations are in a given set of annotations
-     *
-     * @param annotations The annotation set
-     * @param requiredAnnotationTypes The annotations to match
-     * @return True if match, false otherwise
-     */
-    protected boolean annotationSetMatches(Set<? extends Annotation> annotations,
-            Class<? extends Annotation>... requiredAnnotationTypes) {
-        Set<Class<? extends Annotation>> annotationsTypeSet = new HashSet<Class<? extends Annotation>>();
-        for (Annotation annotation : annotations) {
-            annotationsTypeSet.add(annotation.annotationType());
-        }
-        return typeSetMatches(annotationsTypeSet, requiredAnnotationTypes);
-    }
-
-    /**
-     * @param annotations The annotation set
-     * @param requiredAnnotations The required annotations
-     * @return <code>true</code> if the specified set matches required annotations, <code>false</code> otherwise
-     */
-    protected boolean annotationSetMatches(Set<? extends Annotation> annotations, Annotation... requiredAnnotations) {
-        List<Annotation> requiredAnnotationList = new ArrayList<Annotation>();
-        return requiredAnnotations.length == annotations.size() && annotations.containsAll(requiredAnnotationList);
-    }
-
-    protected boolean rawTypeSetMatches(Set<Type> types, Class<?>... requiredTypes) {
-        Set<Type> typesRawSet = new HashSet<Type>();
-        for (Type type : types) {
-            if (type instanceof Class<?>) {
-                typesRawSet.add(type);
-            } else if (type instanceof ParameterizedType) {
-                typesRawSet.add(((ParameterizedType) type).getRawType());
-            }
-        }
-        return typeSetMatches(typesRawSet, requiredTypes);
-    }
-
-    protected boolean typeSetMatches(Collection<? extends Type> types, Type... requiredTypes) {
-        List<Type> typeList = Arrays.asList(requiredTypes);
-        return requiredTypes.length == types.size() && types.containsAll(typeList);
-    }
-
     protected <T> Bean<T> getUniqueBean(Class<T> type, Annotation... bindings) {
         Set<Bean<T>> beans = getBeans(type, bindings);
         return resolveUniqueBean(type, beans);
@@ -194,7 +145,7 @@ public abstract class AbstractTest extends Arquillian {
     }
 
     private <T> Bean<T> resolveUniqueBean(Type type, Set<Bean<T>> beans) {
-        if (beans.size() == 0) {
+        if (beans.isEmpty()) {
             throw new UnsatisfiedResolutionException("Unable to resolve any beans of " + type);
         } else if (beans.size() > 1) {
             throw new AmbiguousResolutionException("More than one bean available (" + beans + ")");

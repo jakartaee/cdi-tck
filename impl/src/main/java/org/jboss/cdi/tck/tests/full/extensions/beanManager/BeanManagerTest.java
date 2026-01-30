@@ -24,6 +24,7 @@ import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_ANNOTATEDTYPE;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_EXTENSION;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_INJECTIONTARGET;
 import static org.jboss.cdi.tck.cdi.Sections.BM_VALIDATE_IP;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -122,7 +123,7 @@ public class BeanManagerTest extends AbstractTest {
     public void testGetMetaAnnotationsForInterceptorBindingType() {
         Set<Annotation> metaAnnotations = getCurrentManager().getInterceptorBindingDefinition(Transactional.class);
         assertEquals(metaAnnotations.size(), 4);
-        assert annotationSetMatches(metaAnnotations, Target.class, Retention.class, Documented.class, InterceptorBinding.class);
+        assertAnnotationsMatch(metaAnnotations, Target.class, Retention.class, Documented.class, InterceptorBinding.class);
     }
 
     @Test

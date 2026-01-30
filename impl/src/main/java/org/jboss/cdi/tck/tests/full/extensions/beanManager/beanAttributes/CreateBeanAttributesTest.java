@@ -15,6 +15,8 @@ package org.jboss.cdi.tck.tests.full.extensions.beanManager.beanAttributes;
 
 import static org.jboss.cdi.tck.TestGroups.CDI_FULL;
 import static org.jboss.cdi.tck.cdi.Sections.BM_OBTAIN_BEANATTRIBUTES;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
+import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNull;
@@ -66,9 +68,9 @@ public class CreateBeanAttributesTest extends AbstractTest {
         AnnotatedType<Mountain> type = getCurrentManager().createAnnotatedType(Mountain.class);
         BeanAttributes<Mountain> attributes = getCurrentManager().createBeanAttributes(type);
 
-        assertTrue(typeSetMatches(attributes.getTypes(), Landmark.class, Object.class));
-        assertTrue(typeSetMatches(attributes.getStereotypes(), TundraStereotype.class));
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), Natural.class, Any.class));
+        assertTypesMatch(attributes.getTypes(), Landmark.class, Object.class);
+        assertTypesMatch(attributes.getStereotypes(), TundraStereotype.class);
+        assertAnnotationsMatch(attributes.getQualifiers(), Natural.class, Any.class);
         assertEquals(attributes.getScope(), ApplicationScoped.class);
         assertEquals(attributes.getName(), "mountain");
         assertTrue(attributes.isAlternative());
@@ -82,9 +84,9 @@ public class CreateBeanAttributesTest extends AbstractTest {
         AnnotatedType<Mountain> wrappedType = new AnnotatedTypeWrapper<Mountain>(type, false, NamedLiteral.of("Mount Blanc"));
         BeanAttributes<Mountain> attributes = getCurrentManager().createBeanAttributes(wrappedType);
 
-        assertTrue(typeSetMatches(attributes.getTypes(), Mountain.class, Landmark.class, Object.class));
+        assertTypesMatch(attributes.getTypes(), Mountain.class, Landmark.class, Object.class);
         assertTrue(attributes.getStereotypes().isEmpty());
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), Named.class, Any.class, Default.class));
+        assertAnnotationsMatch(attributes.getQualifiers(), Named.class, Any.class, Default.class);
         assertEquals(attributes.getScope(), Dependent.class);
         assertEquals(attributes.getName(), "Mount Blanc");
         assertFalse(attributes.isAlternative());
@@ -92,9 +94,9 @@ public class CreateBeanAttributesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     private void verifyLakeFish(BeanAttributes<?> attributes) {
-        assertTrue(typeSetMatches(attributes.getTypes(), Fish.class, Object.class));
-        assertTrue(typeSetMatches(attributes.getStereotypes(), TundraStereotype.class));
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), Natural.class, Any.class, Named.class));
+        assertTypesMatch(attributes.getTypes(), Fish.class, Object.class);
+        assertTypesMatch(attributes.getStereotypes(), TundraStereotype.class);
+        assertAnnotationsMatch(attributes.getQualifiers(), Natural.class, Any.class, Named.class);
         assertEquals(attributes.getScope(), ApplicationScoped.class);
         assertEquals(attributes.getName(), "fish");
         assertTrue(attributes.isAlternative());
@@ -102,8 +104,8 @@ public class CreateBeanAttributesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     private void verifyDamFish(BeanAttributes<?> attributes) {
-        assertTrue(typeSetMatches(attributes.getTypes(), Fish.class, Animal.class, Object.class));
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), Wild.class, Any.class));
+        assertTypesMatch(attributes.getTypes(), Fish.class, Animal.class, Object.class);
+        assertAnnotationsMatch(attributes.getQualifiers(), Wild.class, Any.class);
         assertTrue(attributes.getStereotypes().isEmpty());
         assertEquals(attributes.getScope(), Dependent.class);
         assertNull(attributes.getName());
@@ -112,8 +114,8 @@ public class CreateBeanAttributesTest extends AbstractTest {
 
     @SuppressWarnings("unchecked")
     private void verifyVolume(BeanAttributes<?> attributes) {
-        assertTrue(typeSetMatches(attributes.getTypes(), long.class, Object.class));
-        assertTrue(annotationSetMatches(attributes.getQualifiers(), Any.class, Default.class, Named.class));
+        assertTypesMatch(attributes.getTypes(), long.class, Object.class);
+        assertAnnotationsMatch(attributes.getQualifiers(), Any.class, Default.class, Named.class);
         assertTrue(attributes.getStereotypes().isEmpty());
         assertEquals(attributes.getScope(), Dependent.class);
         assertEquals(attributes.getName(), "volume");

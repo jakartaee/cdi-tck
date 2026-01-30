@@ -3182,17 +3182,30 @@
 
     <section id="injection_point" title="Injection point metadata" level="3">
         <assertion id="aa">
-            <text>The |getBean()| method returns the Bean object representing the bean that defines the injection point.</text>
+            <text>The |getBean()| method returns the |Bean| object representing the bean that defines the injection point.</text>
         </assertion>
 
         <assertion id="aaa">
-            <text>If the injection point does not belong to a bean, |getBean()| returns a null value.</text>
+            <text>If the injection point does not belong to a bean, the |getBean()| method returns |null|.</text>
         </assertion>
 
         <assertion id="aab">
-            <text>If the injection point represents a dynamically obtained instance, the |getBean()| method should return the |Bean| object representing the
-                bean that defines the |Instance| injection point.
+            <text>
+                If the injection point represents a dynamically obtained instance, the |getBean()| method returns
+                the |Bean| object representing the bean that defines the |Instance| injection point.
             </text>
+        </assertion>
+
+        <assertion id="aac">
+            <text>
+                If the injection point represents a dynamically obtained instance and if the |Instance| is not injected,
+                the |getBean()| method returns |null|.
+            </text>
+        </assertion>
+
+        <assertion id="aad" testable="false">
+            <text>If the injection point belongs to a synthetic bean, the |getBean()| method may return |null|.</text>
+            <note>No hard requirement.</note>
         </assertion>
 
         <assertion id="ba">
@@ -3200,8 +3213,9 @@
         </assertion>
 
         <assertion id="baa">
-            <text>If the injection point represents a dynamically obtained instance, the |getType()| method returns the required type (as defined by
-                |Instance.select()|).
+            <text>
+                If the injection point represents a dynamically obtained instance, the |getType()| method returns
+                the required type of the |Instance|, including any required subtype as defined by |Instance.select()|.
             </text>
         </assertion>
 
@@ -3210,8 +3224,9 @@
         </assertion>
 
         <assertion id="bca">
-            <text>If the injection point represents a dynamically obtained instance, the |getQualifiers()| method returns required qualifiers of the injection
-                point including any additional required qualifers (as defined by |Instance.select()|).
+            <text>
+                If the injection point represents a dynamically obtained instance, the |getQualifiers()| method returns
+                the required qualifiers of the |Instance|, including any additional required qualifiers as defined by |Instance.select()|.
             </text>
         </assertion>
 
@@ -3245,6 +3260,18 @@
             </text>
         </assertion>
 
+        <assertion id="cd">
+            <text>
+                If the injection point represents a dynamically obtained instance and if the |Instance| is not injected,
+                the |getMember()| method returns |null|.
+            </text>
+        </assertion>
+
+        <assertion id="ce" testable="false">
+            <text>If the injection point belongs to a synthetic bean, the |getMember()| method may return |null|.</text>
+            <note>No hard requirement.</note>
+        </assertion>
+
         <assertion id="daa">
             <text>The |getAnnotated()| method returns an instance of |jakarta.enterprise.inject.spi.AnnotatedField| or
                 |jakarta.enterprise.inject.spi.AnnotatedParameter|, depending upon whether the injection point is an injected field or a constructor/method
@@ -3259,23 +3286,51 @@
             </text>
         </assertion>
 
+        <assertion id="dac">
+            <text>
+                If the injection point represents a dynamically obtained instance and if the |Instance| is not injected,
+                the |getAnnotated()| method returns |null|.
+            </text>
+        </assertion>
+
+        <assertion id="dad" testable="false">
+            <text>If the injection point belongs to a synthetic bean, the |getAnnotated()| method may return |null|.</text>
+            <note>No hard requirement.</note>
+        </assertion>
+
         <assertion id="dba">
-            <text>The |isDelegate()| method returns true if the injection point is a decorator delegate injection point, and false otherwise.</text>
+            <text>The |isDelegate()| method returns |true| if the injection point is a decorator delegate injection point, and |false| otherwise.</text>
         </assertion>
 
         <assertion id="dbb">
-            <text>If the injection point represents a dynamically obtained instance then |isDelegate()| returns false.</text>
-        </assertion>
-
-        <assertion id="dca">
-            <text>The |isTransient()| method returns true if the injection point is a transient field, and false otherwise.</text>
-        </assertion>
-
-        <assertion id="dcb">
-            <text>If the injection point represents a dynamically obtained instance then the |isTransient()| method returns true if the |Instance| injection
-                point is a transient field, and false otherwise.
+            <text>
+                If the injection point represents an injection into a synthetic bean or a dynamically obtained instance,
+                the |isDelegate()| method returns |false|.
             </text>
         </assertion>
+
+        <group>
+            <text>
+                The |isTransient()| method returns |true| if the |getMember()| method returns a |Field| which is declared
+                |transient|, and |false| otherwise.
+            </text>
+
+            <assertion id="dca">
+                <text>Test with a classic injection point</text>
+            </assertion>
+
+            <assertion id="dcb">
+                <text>Test with a dynamically obtained instance</text>
+            </assertion>
+
+            <assertion id="dcc">
+                <text>Test with a non-injected |Instance|</text>
+            </assertion>
+
+            <assertion id="dcd">
+                <text>Test with |EventMetadata.getInjectionPoint()|</text>
+            </assertion>
+        </group>
 
         <assertion id="ea">
             <text>The container must provide a bean with scope |@Dependent|, bean type |InjectionPoint| and qualifier |@Default|, allowing dependent objects, as

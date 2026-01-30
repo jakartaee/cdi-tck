@@ -15,7 +15,7 @@ package org.jboss.cdi.tck.tests.event.metadata.injectionpoint;
 
 import static org.jboss.cdi.tck.cdi.Sections.EVENT_METADATA;
 import static org.jboss.cdi.tck.cdi.Sections.INJECTION_POINT;
-import static org.jboss.cdi.tck.util.Assert.assertAnnotationSetMatches;
+import static org.jboss.cdi.tck.util.Assert.assertAnnotationsMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
@@ -35,7 +35,7 @@ import jakarta.enterprise.inject.spi.Annotated;
 import jakarta.enterprise.inject.spi.AnnotatedField;
 import jakarta.enterprise.inject.spi.AnnotatedParameter;
 import jakarta.enterprise.inject.spi.Bean;
-import jakarta.enterprise.inject.spi.BeanManager;
+import jakarta.enterprise.inject.spi.BeanContainer;
 import jakarta.enterprise.util.TypeLiteral;
 import jakarta.inject.Inject;
 
@@ -49,8 +49,7 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 /**
- * Note that injection point is not available for {@link BeanManager#getEvent()} {@link Event#select(Annotation...)}
- * {@link Event#fire(Object)}.
+ * Note that injection point is not available for {@link BeanContainer#getEvent()}.
  *
  * @author Martin Kouba
  */
@@ -92,7 +91,7 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "dca"),
+    @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "dcd"),
             @SpecAssertion(section = EVENT_METADATA, id = "b") })
     public void testIsTransient() {
 
@@ -103,7 +102,6 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
         assertTrue(infoObserver.isLastIsTransient());
     }
 
-    @SuppressWarnings("serial")
     @Test
     @SpecAssertions({ @SpecAssertion(section = INJECTION_POINT, id = "ba"),
             @SpecAssertion(section = EVENT_METADATA, id = "b") })
@@ -140,12 +138,12 @@ public class EventMetadataInjectionPointTest extends AbstractTest {
         notifier.fireInfoEvent();
         lastQualifiers = infoObserver.getLastQualifiers();
         assertNotNull(lastQualifiers);
-        assertAnnotationSetMatches(lastQualifiers, Default.class);
+        assertAnnotationsMatch(lastQualifiers, Default.class);
 
         notifier.fireConstructorInfoEvent();
         lastQualifiers = infoObserver.getLastQualifiers();
         assertNotNull(lastQualifiers);
-        assertAnnotationSetMatches(lastQualifiers, Nice.class);
+        assertAnnotationsMatch(lastQualifiers, Nice.class);
     }
 
     @Test
