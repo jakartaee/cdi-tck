@@ -13,6 +13,8 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.registration;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import jakarta.enterprise.inject.build.compatible.spi.BeanInfo;
@@ -22,11 +24,14 @@ import jakarta.enterprise.inject.build.compatible.spi.ObserverInfo;
 import jakarta.enterprise.inject.build.compatible.spi.Registration;
 import jakarta.enterprise.inject.build.compatible.spi.Types;
 import jakarta.enterprise.inject.build.compatible.spi.Validation;
+import jakarta.enterprise.util.TypeLiteral;
 
 public class RegistrationExtension implements BuildCompatibleExtension {
     private final AtomicInteger beanCounter = new AtomicInteger();
+    private final AtomicInteger genericBeanCounter = new AtomicInteger();
     private final AtomicInteger beanMyQualifierCounter = new AtomicInteger();
     private final AtomicInteger observerCounter = new AtomicInteger();
+    private final AtomicInteger genericObserverCounter = new AtomicInteger();
     private final AtomicInteger interceptorCounter = new AtomicInteger();
 
     @Registration(types = MyService.class)
@@ -38,11 +43,35 @@ public class RegistrationExtension implements BuildCompatibleExtension {
         }
     }
 
+    @Registration(types = MyGenericServiceOfString.class)
+    public void genericBeans(BeanInfo bean) {
+        genericBeanCounter.incrementAndGet();
+    }
+
+    static class MyGenericServiceOfString extends TypeLiteral<MyGenericService<String>> {
+    }
+
     @Registration(types = Object.class)
     public void observers(ObserverInfo observer, Types types) {
         if (observer.declaringClass().superInterfaces().contains(types.of(MyService.class))) {
             observerCounter.incrementAndGet();
         }
+    }
+
+    @Registration(types = CollectionOfString.class)
+    public void genericObservers1(ObserverInfo observer) {
+        genericObserverCounter.incrementAndGet();
+    }
+
+    @Registration(types = ListOfString.class)
+    public void genericObservers2(ObserverInfo observer) {
+        genericObserverCounter.incrementAndGet();
+    }
+
+    static class CollectionOfString extends TypeLiteral<Collection<String>> {
+    }
+
+    static class ListOfString extends TypeLiteral<List<String>> {
     }
 
     @Registration(types = MyInterceptor.class)
@@ -59,12 +88,20 @@ public class RegistrationExtension implements BuildCompatibleExtension {
             msg.error("Should see 2 beans of type MyService");
         }
 
+        if (genericBeanCounter.get() != 2) {
+            msg.error("Should see 2 beans of type MyGenericService");
+        }
+
         if (beanMyQualifierCounter.get() != 1) {
             msg.error("Should see 1 bean of type MyService with qualifier MyQualifier");
         }
 
-        if (observerCounter.get() != 1) {
-            msg.error("Should see 1 observer declared in class that implements MyService");
+        if (observerCounter.get() != 4) {
+            msg.error("Should see 4 observers declared in classes that implements MyService");
+        }
+
+        if (genericObserverCounter.get() != 2) { // one observer counted twice
+            msg.error("Should see 1 observer whose event type is assignable to Collection<String> and List<String>");
         }
 
         if (interceptorCounter.get() != 1) {
