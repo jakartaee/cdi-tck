@@ -8137,8 +8137,7 @@
         </group>
 
         <group>
-            <text>|addAnnotatedType()| adds a given |AnnotatedType| to the set of types which will be scanned during bean discovery, with an optional
-                identifier.
+            <text>|addAnnotatedType()| adds a given `AnnotatedType` to the set of types discovered during type discovery, with an identifier.
             </text>
             <assertion id="af">
                 <text>Test the |addAnnotatedType()| method.</text>
@@ -8208,7 +8207,7 @@
         </assertion>
 
         <assertion id="e">
-            <text>|addAnnotatedType()| adds a given AnnotatedType to the set of types which will be scanned during bean discovery, with an identifier.</text>
+            <text>|addAnnotatedType()| adds a given AnnotatedType to the set of types discovered during type discovery, with an identifier.</text>
         </assertion>
 
         <assertion id="ea">
