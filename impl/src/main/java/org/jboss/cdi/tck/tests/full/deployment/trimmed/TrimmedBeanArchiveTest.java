@@ -42,7 +42,7 @@ public class TrimmedBeanArchiveTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(TrimmedBeanArchiveTest.class)
-                .withExtension(TestExtension.class)
+                .withExtensions(TestExtension.class, ExtensionAddingTypes.class)
                 .withBeansXml("beans.xml").build();
     }
 
@@ -68,5 +68,23 @@ public class TrimmedBeanArchiveTest extends AbstractTest {
     @SpecAssertion(section = Sections.TRIMMED_BEAN_ARCHIVE, id = "a")
     public void testDiscoveredBeanWithStereoType(Instance<Segway> segwayInstance) {
         Assert.assertFalse(segwayInstance.isUnsatisfied());
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = Sections.TRIMMED_BEAN_ARCHIVE, id = "a")
+    public void testSyntheticAnnotatedTypes(Instance<Object> instance) {
+        // assert all synthetic PATs were fired
+        Assert.assertTrue(extension.isUnannotatedOnePATFired());
+        Assert.assertTrue(extension.isUnannotatedTwoPATFired());
+        Assert.assertTrue(extension.isUnannotatedThreePATFired());
+        Assert.assertTrue(extension.isUnannotatedFourPATFired());
+
+        // types one and two should NOT be added, they had no bean defining annotation
+        Assert.assertTrue(instance.select(UnannotatedTypeOne.class).isUnsatisfied());
+        Assert.assertTrue(instance.select(UnannotatedTypeTwo.class).isUnsatisfied());
+
+        // types three and four should be added, they were registered with bean defining annotation (scope)
+        Assert.assertTrue(instance.select(UnannotatedTypeThree.class).isResolvable());
+        Assert.assertTrue(instance.select(UnannotatedTypeFour.class).isResolvable());
     }
 }

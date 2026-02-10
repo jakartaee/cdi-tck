@@ -35,6 +35,7 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.jboss.test.audit.annotations.SpecAssertion;
 import org.jboss.test.audit.annotations.SpecAssertions;
 import org.jboss.test.audit.annotations.SpecVersion;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 /**
@@ -48,9 +49,10 @@ public class TrimmedBeanArchiveSETest extends Arquillian {
     public static Archive<?> deployment() {
         final JavaArchive trimmed = ShrinkWrap.create(JavaArchive.class)
                 .addClasses(TrimmedBeanArchiveSETest.class, Bar.class, Foo.class, BarProducer.class, FooProducer.class,
-                        TestStereotype.class,
-                        TestExtension.class, BarInterceptor.class, BarInterceptorBinding.class)
-                .addAsServiceProvider(Extension.class, TestExtension.class)
+                        TestStereotype.class, UnannotatedTypeOne.class, UnannotatedTypeTwo.class, UnannotatedTypeThree.class,
+                        UnannotatedTypeFour.class, TestExtension.class, ExtensionAddingTypes.class, BarInterceptor.class,
+                        BarInterceptorBinding.class)
+                .addAsServiceProvider(Extension.class, TestExtension.class, ExtensionAddingTypes.class)
                 .addAsManifestResource(TrimmedBeanArchiveSETest.class.getPackage(), "beans.xml", "beans.xml");
         return ClassPath.builder().add(trimmed).build();
     }
@@ -71,6 +73,18 @@ public class TrimmedBeanArchiveSETest extends Arquillian {
             assertTrue(ext.getBarPATFired());
             assertTrue(ext.getBarProducerPBAFired());
             assertFalse(ext.getBarPBFired());
+            assertTrue(ext.isUnannotatedOnePATFired());
+            assertTrue(ext.isUnannotatedTwoPATFired());
+            assertTrue(ext.isUnannotatedThreePATFired());
+            assertTrue(ext.isUnannotatedFourPATFired());
+
+            // types one and two should NOT be added, they had no bean defining annotation
+            Assert.assertTrue(seContainer.select(UnannotatedTypeOne.class).isUnsatisfied());
+            Assert.assertTrue(seContainer.select(UnannotatedTypeTwo.class).isUnsatisfied());
+
+            // types three and four should be added, they were registered with bean defining annotation (scope)
+            Assert.assertTrue(seContainer.select(UnannotatedTypeThree.class).isResolvable());
+            Assert.assertTrue(seContainer.select(UnannotatedTypeFour.class).isResolvable());
         }
 
     }
