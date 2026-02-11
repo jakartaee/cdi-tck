@@ -20,12 +20,17 @@ import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.inject.spi.Extension;
 import jakarta.enterprise.inject.spi.ProcessAnnotatedType;
 import jakarta.enterprise.inject.spi.ProcessBeanAttributes;
+import jakarta.enterprise.inject.spi.ProcessSyntheticAnnotatedType;
 
 public class TestExtension implements Extension {
 
     private AtomicInteger vehiclePBAinvocations = new AtomicInteger(0);
     private AtomicBoolean bikerProducerPBAFired = new AtomicBoolean(false);
     private AtomicBoolean bikerProducerPATFired = new AtomicBoolean(false);
+    private AtomicBoolean unannotatedOnePATFired = new AtomicBoolean(false);
+    private AtomicBoolean unannotatedTwoPATFired = new AtomicBoolean(false);
+    private AtomicBoolean unannotatedThreePATFired = new AtomicBoolean(false);
+    private AtomicBoolean unannotatedFourPATFired = new AtomicBoolean(false);
 
     void observesVehiclePBA(@Observes ProcessBeanAttributes<? extends MotorizedVehicle> event) {
         vehiclePBAinvocations.incrementAndGet();
@@ -39,6 +44,22 @@ public class TestExtension implements Extension {
         bikerProducerPATFired.set(true);
     }
 
+    void observesUnannotatedOnePAT(@Observes ProcessSyntheticAnnotatedType<UnannotatedTypeOne> event) {
+        unannotatedOnePATFired.set(true);
+    }
+
+    void observesUnannotatedTwoPAT(@Observes ProcessSyntheticAnnotatedType<UnannotatedTypeTwo> event) {
+        unannotatedTwoPATFired.set(true);
+    }
+
+    void observesUnannotatedThreePAT(@Observes ProcessSyntheticAnnotatedType<UnannotatedTypeThree> event) {
+        unannotatedThreePATFired.set(true);
+    }
+
+    void observesUnannotatedFourPAT(@Observes ProcessSyntheticAnnotatedType<UnannotatedTypeFour> event) {
+        unannotatedFourPATFired.set(true);
+    }
+
     public AtomicInteger getVehiclePBAinvocations() {
         return vehiclePBAinvocations;
     }
@@ -49,5 +70,21 @@ public class TestExtension implements Extension {
 
     public boolean isBikerProducerPATFired() {
         return bikerProducerPATFired.get();
+    }
+
+    public boolean isUnannotatedOnePATFired() {
+        return unannotatedOnePATFired.get();
+    }
+
+    public boolean isUnannotatedTwoPATFired() {
+        return unannotatedTwoPATFired.get();
+    }
+
+    public boolean isUnannotatedThreePATFired() {
+        return unannotatedThreePATFired.get();
+    }
+
+    public boolean isUnannotatedFourPATFired() {
+        return unannotatedFourPATFired.get();
     }
 }
