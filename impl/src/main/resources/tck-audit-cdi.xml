@@ -9609,6 +9609,12 @@
                 are removed from the set of discovered types.
             </text>
         </assertion>
+
+        <assertion id="b">
+            <text>
+                If an archive other than an explicit bean archive is marked as 'trimmed', the container automatically detects it and treats it as a deployment problem.
+            </text>
+        </assertion>
     </section>
 
     <section id="bean_discovery_steps" title="Bean discovery" level="3">
