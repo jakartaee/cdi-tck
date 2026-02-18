@@ -13,17 +13,30 @@
  */
 package org.jboss.cdi.tck.tests.build.compatible.extensions.registration;
 
+import java.util.List;
+
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.Startup;
 
 @Dependent
-public class MyServiceFoo implements MyService {
+public class MyServiceFoo implements MyService, MyGenericService<String> {
     @Override
     public String hello() {
         return "foo";
     }
 
     void init(@Observes Startup event) {
+    }
+
+    void observeListOfString(@Observes List<String> list) {
+    }
+
+    // this observer should _not_ be counted
+    void observeIterableOfString(@Observes Iterable<String> list) {
+    }
+
+    // this observer should _not_ be counted either
+    void observeListOfInteger(@Observes List<Integer> list) {
     }
 }
