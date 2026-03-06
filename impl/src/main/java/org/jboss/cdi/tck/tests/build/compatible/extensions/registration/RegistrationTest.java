@@ -34,7 +34,9 @@ public class RegistrationTest extends AbstractTest {
 
     @Test
     @SpecAssertion(section = Sections.REGISTRATION_PHASE, id = "ac", note = "BeanInfo filtered to MyService")
+    @SpecAssertion(section = Sections.REGISTRATION_PHASE, id = "ac", note = "BeanInfo filtered to MyGenericService")
     @SpecAssertion(section = Sections.REGISTRATION_PHASE, id = "ae", note = "ObserverInfo filtered to Object")
+    @SpecAssertion(section = Sections.REGISTRATION_PHASE, id = "ae", note = "ObserverInfo filtered to Collection/List")
     @SpecAssertion(section = Sections.VALIDATION_PHASE, id = "a", note = "Validation determine test outcome")
     public void trigger() {
         // test is present in RegistrationExtension and if it fails, deployment should fail
