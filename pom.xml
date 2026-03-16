@@ -316,13 +316,23 @@
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
-                <version>0.16.1</version>
+                <version>0.17</version>
                 <configuration>
-                    <includes>
-                        <include>**/*.java</include>
-                    </includes>
+                    <!-- Exclude all files, then re-include only *.java files for license checking -->
+                    <inputExcludes>
+                        <inputExclude>**/*.*</inputExclude>
+                    </inputExcludes>
+                    <inputIncludes>
+                        <inputInclude>**/*.java</inputInclude>
+                    </inputIncludes>
                     <!-- This file gets included in the porting package dependencies over from Weld codebase and violates the check -->
-                    <excludes>**/WildFly8EEResourceManager.java</excludes>
+                    <inputExclude>**/WildFly8EEResourceManager.java</inputExclude>
+                    <!-- Allow 0 standards when all Java files live in submodules (e.g. release profile) -->
+                    <counterMins>
+                        <counterMin>STANDARDS:0</counterMin>
+                        <counterMin>LICENSE_CATEGORIES:0</counterMin>
+                        <counterMin>LICENSE_NAMES:0</counterMin>
+                    </counterMins>
                 </configuration>
                 <executions>
                     <execution>
