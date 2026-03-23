@@ -316,7 +316,7 @@
             <plugin>
                 <groupId>org.apache.rat</groupId>
                 <artifactId>apache-rat-plugin</artifactId>
-                <version>0.17</version>
+                <version>0.18</version>
                 <configuration>
                     <!-- Exclude all files, then re-include only *.java files for license checking -->
                     <inputExcludes>
