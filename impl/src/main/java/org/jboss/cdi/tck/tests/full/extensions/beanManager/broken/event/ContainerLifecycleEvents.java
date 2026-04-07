@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import jakarta.enterprise.context.spi.Context;
 import jakarta.enterprise.inject.spi.AfterBeanDiscovery;
@@ -151,6 +152,10 @@ public class ContainerLifecycleEvents {
     public static final AfterDeploymentValidation AFTER_DEPLOYMENT_VALIDATION = new AfterDeploymentValidation() {
         @Override
         public void addDeploymentProblem(Throwable t) {
+        }
+
+        @Override
+        public void ensureAsyncHandlerExists(Class<?> type, Supplier<String> message) {
         }
     };
 
