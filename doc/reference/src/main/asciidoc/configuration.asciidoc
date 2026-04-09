@@ -92,7 +92,7 @@ You can configure the CDI TCK to just run tests related to the CDI Lite specific
             <configuration>
               <excludedGroups>cdi-full,se</excludedGroups>
               <dependenciesToScan>
-                <dependency>jakarta.enterprise:cdi-tck-core-impl</dependency>
+                <dependency>jakarta.cdi:jakarta.cdi-tck-core-impl</dependency>
               </dependenciesToScan>
             </configuration>
        </plugin>
@@ -111,7 +111,7 @@ You can configure the CDI TCK to just run tests appropriate to the Java SE runti
             <configuration>
               <groups>se,arquillian</groups>
               <dependenciesToScan>
-                <dependency>jakarta.enterprise:cdi-tck-core-impl</dependency>
+                <dependency>jakarta.cdi:jakarta.cdi-tck-core-impl</dependency>
               </dependenciesToScan>
             </configuration>
        </plugin>
@@ -124,7 +124,7 @@ The _arquillian_ group specification is needed due to an issue open issue with h
 
 === Configuring TestNG to execute the TCK
 
-The CDI TCK is built atop Arquillian and TestNG, and it's TestNG that is responsible for selecting the tests to execute, the order of execution, and reporting the results. Detailed TestNG documentation can be found at link:$$http://testng.org/doc/documentation-main.html$$[testng.org].
+The CDI TCK is built atop Arquillian and TestNG, and it's TestNG that is responsible for selecting the tests to execute, the order of execution, and reporting the results. Detailed TestNG documentation can be found at link:$$https://testng.org/doc/documentation-main.html$$[testng.org].
 
 Certain TestNG configuration file must be run by TestNG (described by the TestNG documentation as "with a +testng.xml+ file") unmodified for an implementation to pass the TCK. The TCK distribution contains the configuration file accurate at the date of the release - +artifacts/cdi-tck-impl-suite.xml+. However this artifact may not be up to date due to unresolved challenges or pending releases. Therefore a canonical configuration file exists. This file is located in the CDI TCK source code repository at _$$${CORRESPONDING_BRANCH_ROOT}/impl/src/main/resources/tck-tests.xml$$_.
 
@@ -157,7 +157,7 @@ This file also allows tests to be excluded from a run:
 [NOTE]
 ====
 Additionally there is available canonical configuration file at https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/tck-tests-previous.xml.
-Please note that this exclude list serves only for the previous micro version of TCK release! This means that if the latest version of TCK is e.g. 4.0.1 then this exclude list is valid only for the version 4.0.0 and invalid for any other version!
+Please note that this exclude list serves only for the previous micro version of TCK release! This means that if the latest version of TCK is e.g. 5.0.1 then this exclude list is valid only for the version 5.0.0 and invalid for any other version!
 ====
 
 TestNG provides extensive reporting information. Depending on the build tool or IDE you use, the reporting will take a different format. Please consult the TestNG documentation and the tool documentation for more information.
@@ -171,7 +171,7 @@ It's beyond the scope of this guide to describe in how to set up your build envi
 
 === Configuring your application server to execute the TCK
 
-The TCK makes use of the Java 1.4 keyword +assert+; you must ensure that the JVM used to run the application server is started with assertions enabled. See link:$$http://docs.oracle.com/javase/7/docs/technotes/guides/language/assert.html#enable-disable$$[Programming With Assertions] for more information on how to enable assertions.
+The TCK makes use of the Java 1.4 keyword +assert+; you must ensure that the JVM used to run the application server is started with assertions enabled. See link:$$https://docs.oracle.com/javase/17/docs/technotes/guides/language/assert.html$$[Programming With Assertions] for more information on how to enable assertions.
 
 
 Tests within the _installedLib_ test group require the CDI TCK +cdi-tck-ext-lib+ artifact to be installed as a library (see also {jakartaee-version} specification, section EE.10.2.2 "Installed Libraries").

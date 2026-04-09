@@ -34,21 +34,21 @@ https://github.com/jakartaee/cdi-tck/blob/master/impl/src/main/resources/sigtest
   <parent>
     <groupId>org.eclipse.ee4j</groupId>
     <artifactId>project</artifactId>
-    <version>1.0.9</version>
+    <version>2.0.2</version>
   </parent>
 
-  <groupId>jakarta.enterprise</groupId>
+  <groupId>jakarta.cdi</groupId>
   <artifactId>cdi-tck-sigtest</artifactId>
-  <version>4.1</version>
+  <version>5.0</version>
   <name>CDI TCK Signature Tests</name>
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
     <!-- Set the api jar artifact versions here -->
-    <annotations.api.version>3.0.0-M1</annotations.api.version>
-    <interceptors.api.version>2.2.0-M1</interceptors.api.version>
+    <annotations.api.version>3.0.0</annotations.api.version>
+    <interceptors.api.version>2.2.0</interceptors.api.version>
     <atinject.api.version>2.0.1</atinject.api.version>
-    <el.api.version>5.0.1</el.api.version>
-    <cdi.api.version>4.1.0.Beta1</cdi.api.version>
+    <el.api.version>6.0.1</el.api.version>
+    <cdi.api.version>5.0.0.Alpha4</cdi.api.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
@@ -74,13 +74,18 @@ https://github.com/jakartaee/cdi-tck/blob/master/impl/src/main/resources/sigtest
       <version>${atinject.api.version}</version>
     </dependency>
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.lang-model</artifactId>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-lang-model-api</artifactId>
       <version>${cdi.api.version}</version>
     </dependency>
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-api</artifactId>
+      <version>${cdi.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-el-api</artifactId>
       <version>${cdi.api.version}</version>
     </dependency>
   </dependencies>
@@ -140,8 +145,8 @@ Your version should specify the dependencies on these jars as used in your compa
 Feb 16, 2024 11:42:25 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
 INFO: SignatureTest.args: [-FileName, /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/cdi-api-jdk17.sigfile, -static, -b, -Mode, bin, -ApiVersion, 4.1, -PackageWithoutSubpackages, jakarta.decorator, -Package, jakarta.enterprise, -PackageWithoutSubpackages, jakarta.interceptor, -BootCP, -Classpath, /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/target/classes:/Users/starksm/.m2/repository/jakarta/annotation/jakarta.annotation-api/3.0.0-M1/jakarta.annotation-api-3.0.0-M1.jar:/Users/starksm/.m2/repository/jakarta/el/jakarta.el-api/5.0.1/jakarta.el-api-5.0.1.jar:/Users/starksm/.m2/repository/jakarta/interceptor/jakarta.interceptor-api/2.2.0-M1/jakarta.interceptor-api-2.2.0-M1.jar:/Users/starksm/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/starksm/.m2/repository/jakarta/enterprise/jakarta.enterprise.lang-model/4.1.0.Beta1/jakarta.enterprise.lang-model-4.1.0.Beta1.jar:/Users/starksm/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/4.1.0.Beta1/jakarta.enterprise.cdi-api-4.1.0.Beta1.jar]
 [INFO] SignatureTest report
-Base version: 4.1.0-SNAPSHOT
-Tested version: 4.1
+Base version: 5.0.0.Alpha4
+Tested version: 5.0
 Check mode: bin [throws removed]
 Constant checking: on
 
@@ -176,17 +181,17 @@ Another example that just specifies a compatible implementation test as the depe
   <parent>
     <groupId>org.eclipse.ee4j</groupId>
     <artifactId>project</artifactId>
-    <version>1.0.9</version>
+    <version>2.0.2</version>
   </parent>
 
-  <groupId>jakarta.enterprise</groupId>
+  <groupId>jakarta.cdi</groupId>
   <artifactId>cdi-tck-weld-sigtest</artifactId>
-  <version>4.0</version>
+  <version>5.0</version>
   <name>CDI TCK Signature Tests</name>
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
     <!-- Set the Weld version to test -->
-    <weld.version>6.0.0.Beta1</weld.version>
+    <weld.version>7.0.0.Alpha1</weld.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->

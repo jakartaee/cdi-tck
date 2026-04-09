@@ -24,11 +24,11 @@ This guide is for implementors of the Jakarta Context and Dependency Injection {
 
 === Before You Read This Book
 
-Before reading this guide, you should familiarize yourself with the Jakarta EE programming model, specifically the Jakarta Enterprise Beans (EJB) 4.0 and the Jakarta Contexts and Dependency Injection {revnumber} specifications. A good resource for the Jakarta EE programming model is the link:$$http://jakarta.ee$$[Jakarta EE] web site.
+Before reading this guide, you should familiarize yourself with the Jakarta Contexts and Dependency Injection {revnumber} specification. A good resource for the Jakarta EE programming model is the link:$$https://jakarta.ee$$[Jakarta EE] web site.
 
 The CDI TCK is based on the Jakarta Context and Dependency Injection technology specification. Information about the specification, including links to the specification documents, can be found on the link:$$https://jakarta.ee/specifications/cdi$$[CDI page].
 
-Before running the tests in the CDI TCK, read and become familiar with the Arquillian testing platform. A good starting point could be  a series of link:$$http://arquillian.org/guides/$$[Arquillian Guides]. 
+Before running the tests in the CDI TCK, read and become familiar with the Arquillian testing platform. A good starting point could be  a series of link:$$https://arquillian.org/guides/$$[Arquillian Guides]. 
 
 
 === How This Book Is Organized

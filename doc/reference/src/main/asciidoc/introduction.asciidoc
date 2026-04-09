@@ -137,7 +137,7 @@ intended for any other purpose.
                      Specifications and a compatible implementation produced through the
                      Jakarta EE Specification Process.
 |Technology Under Test  +|
-                     Specifications and the compatible implementation for Jakarta Contexts and Dependency Injection Version 3.0.
+                     Specifications and the compatible implementation for Jakarta Contexts and Dependency Injection Version {revnumber}.
 |Test Suite   +|
                      The requirements, tests, and testing tools distributed by the
                      Maintenance Lead or TCK Lead as applicable to a given Version of the Technology.
@@ -246,7 +246,7 @@ This section lists the applicable requirements and specifications for the CDI TC
 *  *Jakarta Contexts and Dependency Injection {revnumber} API* - The Java API defined in the CDI specification and provided by the compatible implementation.
 
 
-*  *Testing platform* - The CDI TCK requires version {arquillian-version} of the Arquillian (http://arquillian.org). The TCK test suite is based on TestNG {testng-version}(http://testng.org). .
+*  *Testing platform* - The CDI TCK requires version {arquillian-version} of the Arquillian (https://arquillian.org). The TCK test suite is based on TestNG {testng-version} (https://testng.org).
 
 
 *  *Porting Package* - An implementation of SPIs that are required for the test suite to run the in-container tests and at times extend the CDI {revnumber} API to provide extra information to the TCK.
@@ -268,7 +268,7 @@ This section lists the applicable requirements and specifications for the CDI TC
 
 [TIP]
 ====
-The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar+ which contains two classes showing how the Weld compatible implementation passes the CDI TCK. The source for these classes is available from link:$$hhttps://github.com/weld/core/tree/{weld-version}/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck$$[]
+The TCK distribution includes +weld/porting-package-lib/weld-inject-tck-runner-X.Y.Z-Q-tests.jar+ which contains two classes showing how the Weld compatible implementation passes the CDI TCK. The source for these classes is available from link:$$https://github.com/weld/core/tree/{weld-version}/inject-tck-runner/src/test/java/org/jboss/weld/atinject/tck$$[]
 
 
 ====
@@ -309,7 +309,7 @@ The CDI TCK has been tested on following platforms:
 *  Weld {weld-version} using Eclipse Temurin Java SE 21 on Linux and MacOS
 *  WildFly {wildfly-version} using Eclipse Temurin Java SE 21 on Linux and MacOS
 
-CDI supports {jakartaee-version}, {jakartaee-version} Web Profile, Embeddable Jakarta Enterprise Beans 4.0. The TCK will execute on any of these runtimes, but is only part of the CTS for {jakartaee-version} and {jakartaee-version} Web Profile.
+CDI supports {jakartaee-version}, {jakartaee-version} Web Profile, and {jakartaee-version} Core Profile. The TCK will execute on any of these runtimes, but is only part of the CTS for {jakartaee-version} and {jakartaee-version} Web Profile.
 
 [[libraries]]
 

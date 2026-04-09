@@ -8,13 +8,13 @@ This chapter explains how to obtain the TCK and supporting software and provides
 
 === Obtaining the Software
 
-You can obtain a release of the CDI TCK project from the link:$$https://download.eclipse.org/jakartaee/cdi/$$[download page] on the CDI specification website. The release stream for Jakarta CDI is named _4.1.x_. The CDI TCK is distributed as a ZIP file, which contains the TCK artifacts (the test suite binary and source, porting package API binary and source, the test suite configuration file, the audit source and report) in /artifacts and documentation in /doc.
+You can obtain a release of the CDI TCK project from the link:$$https://download.eclipse.org/jakartaee/cdi/$$[download page] on the CDI specification website. The release stream for Jakarta CDI is named _5.0.x_. The CDI TCK is distributed as a ZIP file, which contains the TCK artifacts (the test suite binary and source, porting package API binary and source, the test suite configuration file, the audit source and report) in /artifacts and documentation in /doc.
 
 You can also download the current source code from link:$$https://github.com/eclipse-ee4j/cdi-tck$$[GitHub repository].
 
 Executing the TCK requires a {jakartaee-version} or better runtime environment (i.e., application server), to which the test artifacts are deployed and the individual tests are invoked. The TCK tests do not depend on any particular Jakarta EE implementation.
 
-One Jakarta Contexts and Dependency Injection compatible implementation project is named Weld. The release stream for Jakarta CDI {revnumber} TCK is named _{revnumber}.x_. The compatible Weld release stream is _{weld-stream}_. You can obtain the latest release from the link:$$http://weld.cdi-spec.org/download/$$[download page] on the Weld website.
+One Jakarta Contexts and Dependency Injection compatible implementation project is named Weld. The release stream for Jakarta CDI {revnumber} TCK is named _{revnumber}.x_. The compatible Weld release stream is _{weld-stream}_. You can obtain the latest release from the link:$$https://weld.cdi-spec.org/download/$$[download page] on the Weld website.
 
 
 [NOTE]
@@ -36,7 +36,7 @@ The TCK requires the following two runtime environments:
 
 You should refer to vendor instructions for how to install the runtime environment. 
 
-The rest of the TCK software can simply be extracted. Extract the TCK distribution to create a _core-tck-4.x.y_ directory. The resulting folder structure is shown here:
+The rest of the TCK software can simply be extracted. Extract the TCK distribution to create a _cdi-tck-x.y.z_ directory. The resulting folder structure is shown here:
 
 
 [NOTE]
@@ -47,10 +47,9 @@ This layout is assumed through all descriptions in this reference guide.
 
 [source, console]
 ----
-core-tck-4.x.y/
+cdi-tck-x.y.z/
    artifacts/
    doc/
-   lib/
    weld/
    LICENSE
    README.adoc
@@ -62,11 +61,11 @@ Each test class is treated as an individual artifact. All test methods (i.e., me
 
 ==== Example of Setting up TCK to use WildFly
 
-* First, you should download WildFly {wildfly-version} from the WildFly link:$$http://www.wildfly.org/downloads/$$[project page].
+* First, you should download WildFly {wildfly-version} from the WildFly link:$$https://www.wildfly.org/downloads/$$[project page].
 
 * Set the JBOSS_HOME environment variable to the root directory path for the location where you have unpacked WildFly software.
 
-The CDI TCK distribution includes maven project that allows one to update a bare WildFly distribution to match the CDI API artifacts and Weld version references by the TCK. To update WildFly, run the following Maven commands from within the core-tck-4.x.y/weld/jboss-as directory:
+The CDI TCK distribution includes maven project that allows one to update a bare WildFly distribution to match the CDI API artifacts and Weld version references by the TCK. To update WildFly, run the following Maven commands from within the cdi-tck-x.y.z/weld/jboss-as directory:
 
 * Integrate the Weld jars into WildFly:
 

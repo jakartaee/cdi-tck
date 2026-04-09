@@ -54,6 +54,7 @@
                         <!-- Attributes for versions used in the reference docs -->
                         <arquillian-version>${arquillian.version}</arquillian-version>
                         <testng-version>${testng.version}</testng-version>
+                        <weld-version>${weld.version}</weld-version>
                         <weld-stream>${weld.stream}</weld-stream>
                         <wildfly-version>${wildfly.major.version}.x</wildfly-version>
                         <glassfish-version>7.0.x</glassfish-version>
