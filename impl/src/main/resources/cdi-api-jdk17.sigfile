@@ -1,5 +1,5 @@
 #Signature file v4.1
-#Version 4.1.0-SNAPSHOT
+#Version 1.0
 
 CLSS public abstract interface !annotation jakarta.decorator.Decorator
  anno 0 jakarta.enterprise.inject.Stereotype()
@@ -30,6 +30,10 @@ CLSS public final static jakarta.enterprise.context.ApplicationScoped$Literal
 cons public init()
 fld public final static jakarta.enterprise.context.ApplicationScoped$Literal INSTANCE
 intf jakarta.enterprise.context.ApplicationScoped
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.ApplicationScoped>
 hfds serialVersionUID
 
@@ -49,7 +53,11 @@ fld public final static jakarta.enterprise.context.BeforeDestroyed$Literal CONVE
 fld public final static jakarta.enterprise.context.BeforeDestroyed$Literal REQUEST
 fld public final static jakarta.enterprise.context.BeforeDestroyed$Literal SESSION
 intf jakarta.enterprise.context.BeforeDestroyed
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
 meth public java.lang.Class<? extends java.lang.annotation.Annotation> value()
+meth public java.lang.String toString()
 meth public static jakarta.enterprise.context.BeforeDestroyed$Literal of(java.lang.Class<? extends java.lang.annotation.Annotation>)
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.BeforeDestroyed>
 hfds serialVersionUID,value
@@ -101,6 +109,10 @@ CLSS public final static jakarta.enterprise.context.ConversationScoped$Literal
 cons public init()
 fld public final static jakarta.enterprise.context.ConversationScoped$Literal INSTANCE
 intf jakarta.enterprise.context.ConversationScoped
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.ConversationScoped>
 hfds serialVersionUID
 
@@ -118,6 +130,10 @@ CLSS public final static jakarta.enterprise.context.Dependent$Literal
 cons public init()
 fld public final static jakarta.enterprise.context.Dependent$Literal INSTANCE
 intf jakarta.enterprise.context.Dependent
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.Dependent>
 hfds serialVersionUID
 
@@ -137,10 +153,33 @@ fld public final static jakarta.enterprise.context.Destroyed$Literal CONVERSATIO
 fld public final static jakarta.enterprise.context.Destroyed$Literal REQUEST
 fld public final static jakarta.enterprise.context.Destroyed$Literal SESSION
 intf jakarta.enterprise.context.Destroyed
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
 meth public java.lang.Class<? extends java.lang.annotation.Annotation> value()
+meth public java.lang.String toString()
 meth public static jakarta.enterprise.context.Destroyed$Literal of(java.lang.Class<? extends java.lang.annotation.Annotation>)
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.Destroyed>
 hfds serialVersionUID,value
+
+CLSS public abstract interface !annotation jakarta.enterprise.context.Eager
+ anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE, METHOD, FIELD])
+innr public final static Literal
+intf java.lang.annotation.Annotation
+
+CLSS public final static jakarta.enterprise.context.Eager$Literal
+ outer jakarta.enterprise.context.Eager
+cons public init()
+fld public final static jakarta.enterprise.context.Eager$Literal INSTANCE
+intf jakarta.enterprise.context.Eager
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
+supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.Eager>
+hfds serialVersionUID
 
 CLSS public abstract interface !annotation jakarta.enterprise.context.Initialized
  anno 0 jakarta.inject.Qualifier()
@@ -158,7 +197,11 @@ fld public final static jakarta.enterprise.context.Initialized$Literal CONVERSAT
 fld public final static jakarta.enterprise.context.Initialized$Literal REQUEST
 fld public final static jakarta.enterprise.context.Initialized$Literal SESSION
 intf jakarta.enterprise.context.Initialized
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
 meth public java.lang.Class<? extends java.lang.annotation.Annotation> value()
+meth public java.lang.String toString()
 meth public static jakarta.enterprise.context.Initialized$Literal of(java.lang.Class<? extends java.lang.annotation.Annotation>)
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.Initialized>
 hfds serialVersionUID,value
@@ -192,6 +235,10 @@ CLSS public final static jakarta.enterprise.context.RequestScoped$Literal
 cons public init()
 fld public final static jakarta.enterprise.context.RequestScoped$Literal INSTANCE
 intf jakarta.enterprise.context.RequestScoped
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.RequestScoped>
 hfds serialVersionUID
 
@@ -209,6 +256,10 @@ CLSS public final static jakarta.enterprise.context.SessionScoped$Literal
 cons public init()
 fld public final static jakarta.enterprise.context.SessionScoped$Literal INSTANCE
 intf jakarta.enterprise.context.SessionScoped
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.context.SessionScoped>
 hfds serialVersionUID
 
@@ -329,6 +380,10 @@ CLSS public final static jakarta.enterprise.inject.Alternative$Literal
 cons public init()
 fld public final static jakarta.enterprise.inject.Alternative$Literal INSTANCE
 intf jakarta.enterprise.inject.Alternative
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.inject.Alternative>
 hfds serialVersionUID
 
@@ -353,6 +408,10 @@ CLSS public final static jakarta.enterprise.inject.Any$Literal
 cons public init()
 fld public final static jakarta.enterprise.inject.Any$Literal INSTANCE
 intf jakarta.enterprise.inject.Any
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.inject.Any>
 hfds serialVersionUID
 
@@ -384,6 +443,10 @@ CLSS public final static jakarta.enterprise.inject.Default$Literal
 cons public init()
 fld public final static jakarta.enterprise.inject.Default$Literal INSTANCE
 intf jakarta.enterprise.inject.Default
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.inject.Default>
 hfds serialVersionUID
 
@@ -455,6 +518,25 @@ CLSS public abstract interface !annotation jakarta.enterprise.inject.Produces
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[METHOD, FIELD])
 intf java.lang.annotation.Annotation
 
+CLSS public abstract interface !annotation jakarta.enterprise.inject.Reserve
+ anno 0 java.lang.annotation.Documented()
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE, METHOD, FIELD])
+innr public final static Literal
+intf java.lang.annotation.Annotation
+
+CLSS public final static jakarta.enterprise.inject.Reserve$Literal
+ outer jakarta.enterprise.inject.Reserve
+cons public init()
+fld public final static jakarta.enterprise.inject.Reserve$Literal INSTANCE
+intf jakarta.enterprise.inject.Reserve
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
+supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.inject.Reserve>
+hfds serialVersionUID
+
 CLSS public jakarta.enterprise.inject.ResolutionException
 cons public init()
 cons public init(java.lang.String)
@@ -475,6 +557,10 @@ CLSS public final static jakarta.enterprise.inject.Specializes$Literal
 cons public init()
 fld public final static jakarta.enterprise.inject.Specializes$Literal INSTANCE
 intf jakarta.enterprise.inject.Specializes
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.inject.Specializes>
 hfds serialVersionUID
 
@@ -496,6 +582,10 @@ CLSS public final static jakarta.enterprise.inject.TransientReference$Literal
 cons public init()
 fld public final static jakarta.enterprise.inject.TransientReference$Literal INSTANCE
 intf jakarta.enterprise.inject.TransientReference
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.inject.TransientReference>
 hfds serialVersionUID
 
@@ -511,7 +601,11 @@ CLSS public final static jakarta.enterprise.inject.Typed$Literal
  outer jakarta.enterprise.inject.Typed
 fld public final static jakarta.enterprise.inject.Typed$Literal INSTANCE
 intf jakarta.enterprise.inject.Typed
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
 meth public java.lang.Class<?>[] value()
+meth public java.lang.String toString()
 meth public static jakarta.enterprise.inject.Typed$Literal of(java.lang.Class<?>[])
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.inject.Typed>
 hfds serialVersionUID,value
@@ -544,6 +638,10 @@ CLSS public final static jakarta.enterprise.inject.Vetoed$Literal
 cons public init()
 fld public final static jakarta.enterprise.inject.Vetoed$Literal INSTANCE
 intf jakarta.enterprise.inject.Vetoed
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.inject.Vetoed>
 hfds serialVersionUID
 
@@ -629,8 +727,10 @@ meth public abstract jakarta.enterprise.inject.build.compatible.spi.AnnotationBu
 CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.BeanInfo
 meth public abstract boolean isAlternative()
 meth public abstract boolean isClassBean()
+meth public abstract boolean isEager()
 meth public abstract boolean isProducerField()
 meth public abstract boolean isProducerMethod()
+meth public abstract boolean isReserve()
 meth public abstract boolean isSynthetic()
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.DisposerInfo disposer()
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.ScopeInfo scope()
@@ -721,6 +821,10 @@ meth public abstract jakarta.enterprise.invoke.InvokerBuilder<jakarta.enterprise
 
 CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.InvokerInfo
 
+CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.InvokerValidation
+meth public abstract void ensureAsyncHandlerExists(java.lang.Class<?>,java.util.function.Supplier<java.lang.String>)
+meth public void ensureAsyncHandlerExists(java.lang.Class<?>)
+
 CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.Messages
 meth public abstract void error(java.lang.Exception)
 meth public abstract void error(java.lang.String)
@@ -801,7 +905,9 @@ meth public abstract java.lang.Class<? extends jakarta.enterprise.inject.spi.Ext
 
 CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.StereotypeInfo
 meth public abstract boolean isAlternative()
+meth public abstract boolean isEager()
 meth public abstract boolean isNamed()
+meth public abstract boolean isReserve()
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.ScopeInfo defaultScope()
 meth public abstract java.lang.Integer priority()
 meth public abstract java.util.Collection<jakarta.enterprise.lang.model.AnnotationInfo> interceptorBindings()
@@ -815,11 +921,13 @@ CLSS public abstract interface jakarta.enterprise.inject.build.compatible.spi.Sy
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> alternative(boolean)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> createWith(java.lang.Class<? extends jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanCreator<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}>>)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> disposeWith(java.lang.Class<? extends jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanDisposer<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}>>)
+meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> eager(boolean)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> name(java.lang.String)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> priority(int)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> qualifier(jakarta.enterprise.lang.model.AnnotationInfo)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> qualifier(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> qualifier(java.lang.annotation.Annotation)
+meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> reserve(boolean)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> scope(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> stereotype(jakarta.enterprise.lang.model.declarations.ClassInfo)
 meth public abstract jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder<{jakarta.enterprise.inject.build.compatible.spi.SyntheticBeanBuilder%0}> stereotype(java.lang.Class<? extends java.lang.annotation.Annotation>)
@@ -921,12 +1029,20 @@ CLSS public final jakarta.enterprise.inject.literal.InjectLiteral
 cons public init()
 fld public final static jakarta.enterprise.inject.literal.InjectLiteral INSTANCE
 intf jakarta.inject.Inject
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.inject.Inject>
 hfds serialVersionUID
 
 CLSS public final jakarta.enterprise.inject.literal.NamedLiteral
 fld public final static jakarta.inject.Named INSTANCE
 intf jakarta.inject.Named
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 meth public java.lang.String value()
 meth public static jakarta.enterprise.inject.literal.NamedLiteral of(java.lang.String)
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.inject.Named>
@@ -936,6 +1052,10 @@ CLSS public final jakarta.enterprise.inject.literal.QualifierLiteral
 cons public init()
 fld public final static jakarta.enterprise.inject.literal.QualifierLiteral INSTANCE
 intf jakarta.inject.Qualifier
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.inject.Qualifier>
 hfds serialVersionUID
 
@@ -943,6 +1063,10 @@ CLSS public final jakarta.enterprise.inject.literal.SingletonLiteral
 cons public init()
 fld public final static jakarta.enterprise.inject.literal.SingletonLiteral INSTANCE
 intf jakarta.inject.Singleton
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.inject.Singleton>
 hfds serialVersionUID
 
@@ -957,6 +1081,7 @@ meth public jakarta.enterprise.inject.spi.BeanContainer getBeanContainer()
 CLSS public abstract jakarta.enterprise.inject.se.SeContainerInitializer
 cons public init()
 meth public abstract !varargs jakarta.enterprise.inject.se.SeContainerInitializer addBeanClasses(java.lang.Class<?>[])
+meth public abstract !varargs jakarta.enterprise.inject.se.SeContainerInitializer addBuildCompatibleExtensions(java.lang.Class<? extends jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension>[])
 meth public abstract !varargs jakarta.enterprise.inject.se.SeContainerInitializer addExtensions(jakarta.enterprise.inject.spi.Extension[])
 meth public abstract !varargs jakarta.enterprise.inject.se.SeContainerInitializer addExtensions(java.lang.Class<? extends jakarta.enterprise.inject.spi.Extension>[])
 meth public abstract !varargs jakarta.enterprise.inject.se.SeContainerInitializer addPackages(boolean,java.lang.Class<?>[])
@@ -987,12 +1112,15 @@ meth public abstract void addObserverMethod(jakarta.enterprise.inject.spi.Observ
 
 CLSS public abstract interface jakarta.enterprise.inject.spi.AfterDeploymentValidation
 meth public abstract void addDeploymentProblem(java.lang.Throwable)
+meth public abstract void ensureAsyncHandlerExists(java.lang.Class<?>,java.util.function.Supplier<java.lang.String>)
+meth public void ensureAsyncHandlerExists(java.lang.Class<?>)
 
 CLSS public abstract interface jakarta.enterprise.inject.spi.AfterTypeDiscovery
 meth public abstract <%0 extends java.lang.Object> jakarta.enterprise.inject.spi.configurator.AnnotatedTypeConfigurator<{%%0}> addAnnotatedType(java.lang.Class<{%%0}>,java.lang.String)
 meth public abstract java.util.List<java.lang.Class<?>> getAlternatives()
 meth public abstract java.util.List<java.lang.Class<?>> getDecorators()
 meth public abstract java.util.List<java.lang.Class<?>> getInterceptors()
+meth public abstract java.util.List<java.lang.Class<?>> getReserves()
 meth public abstract void addAnnotatedType(jakarta.enterprise.inject.spi.AnnotatedType<?>,java.lang.String)
 
 CLSS public abstract interface jakarta.enterprise.inject.spi.Annotated
@@ -1056,6 +1184,8 @@ meth public abstract java.lang.String getName()
 meth public abstract java.util.Set<java.lang.Class<? extends java.lang.annotation.Annotation>> getStereotypes()
 meth public abstract java.util.Set<java.lang.annotation.Annotation> getQualifiers()
 meth public abstract java.util.Set<java.lang.reflect.Type> getTypes()
+meth public boolean isEager()
+meth public boolean isReserve()
 
 CLSS public abstract interface jakarta.enterprise.inject.spi.BeanContainer
 meth public abstract !varargs <%0 extends java.lang.Object> java.util.Set<jakarta.enterprise.inject.spi.ObserverMethod<? super {%%0}>> resolveObserverMethods({%%0},java.lang.annotation.Annotation[])
@@ -1063,6 +1193,7 @@ meth public abstract !varargs java.util.List<jakarta.enterprise.inject.spi.Inter
 meth public abstract !varargs java.util.Set<jakarta.enterprise.inject.spi.Bean<?>> getBeans(java.lang.reflect.Type,java.lang.annotation.Annotation[])
 meth public abstract <%0 extends java.lang.Object> jakarta.enterprise.context.spi.CreationalContext<{%%0}> createCreationalContext(jakarta.enterprise.context.spi.Contextual<{%%0}>)
 meth public abstract <%0 extends java.lang.Object> jakarta.enterprise.inject.spi.Bean<? extends {%%0}> resolve(java.util.Set<jakarta.enterprise.inject.spi.Bean<? extends {%%0}>>)
+meth public abstract <%0 extends java.lang.Object> {%%0} unwrapClientProxy({%%0})
 meth public abstract boolean isInterceptorBinding(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract boolean isMatchingBean(java.util.Set<java.lang.reflect.Type>,java.util.Set<java.lang.annotation.Annotation>,java.lang.reflect.Type,java.util.Set<java.lang.annotation.Annotation>)
 meth public abstract boolean isMatchingEvent(java.lang.reflect.Type,java.util.Set<java.lang.annotation.Annotation>,java.lang.reflect.Type,java.util.Set<java.lang.annotation.Annotation>)
@@ -1094,10 +1225,6 @@ meth public abstract boolean areQualifiersEquivalent(java.lang.annotation.Annota
 meth public abstract boolean isPassivatingScope(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract int getInterceptorBindingHashCode(java.lang.annotation.Annotation)
 meth public abstract int getQualifierHashCode(java.lang.annotation.Annotation)
-meth public abstract jakarta.el.ELResolver getELResolver()
- anno 0 java.lang.Deprecated(boolean forRemoval=true, java.lang.String since="4.1")
-meth public abstract jakarta.el.ExpressionFactory wrapExpressionFactory(jakarta.el.ExpressionFactory)
- anno 0 java.lang.Deprecated(boolean forRemoval=true, java.lang.String since="4.1")
 meth public abstract jakarta.enterprise.inject.spi.Bean<?> getPassivationCapableBean(java.lang.String)
 meth public abstract jakarta.enterprise.inject.spi.BeanAttributes<?> createBeanAttributes(jakarta.enterprise.inject.spi.AnnotatedMember<?>)
 meth public abstract jakarta.enterprise.inject.spi.InjectionPoint createInjectionPoint(jakarta.enterprise.inject.spi.AnnotatedField<?>)
@@ -1406,8 +1533,10 @@ meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesCo
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> addType(java.lang.reflect.Type)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> addTypes(java.util.Set<java.lang.reflect.Type>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> alternative(boolean)
+meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> eager(boolean)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> name(java.lang.String)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> qualifiers(java.util.Set<java.lang.annotation.Annotation>)
+meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> reserve(boolean)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> scope(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> stereotypes(java.util.Set<java.lang.Class<? extends java.lang.annotation.Annotation>>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanAttributesConfigurator%0}> types(java.util.Set<java.lang.reflect.Type>)
@@ -1436,12 +1565,14 @@ meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> beanClass(java.lang.Class<?>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> destroyWith(java.util.function.BiConsumer<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0},jakarta.enterprise.context.spi.CreationalContext<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}>>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> disposeWith(java.util.function.BiConsumer<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0},jakarta.enterprise.inject.Instance<java.lang.Object>>)
+meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> eager(boolean)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> id(java.lang.String)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> injectionPoints(java.util.Set<jakarta.enterprise.inject.spi.InjectionPoint>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> name(java.lang.String)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> priority(int)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> qualifiers(java.util.Set<java.lang.annotation.Annotation>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> read(jakarta.enterprise.inject.spi.BeanAttributes<?>)
+meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> reserve(boolean)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> scope(java.lang.Class<? extends java.lang.annotation.Annotation>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> stereotypes(java.util.Set<java.lang.Class<? extends java.lang.annotation.Annotation>>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.BeanConfigurator<{jakarta.enterprise.inject.spi.configurator.BeanConfigurator%0}> types(java.util.Set<java.lang.reflect.Type>)
@@ -1483,7 +1614,29 @@ CLSS public abstract interface jakarta.enterprise.inject.spi.configurator.Produc
 meth public abstract <%0 extends {jakarta.enterprise.inject.spi.configurator.ProducerConfigurator%0}> jakarta.enterprise.inject.spi.configurator.ProducerConfigurator<{jakarta.enterprise.inject.spi.configurator.ProducerConfigurator%0}> produceWith(java.util.function.Function<jakarta.enterprise.context.spi.CreationalContext<{%%0}>,{%%0}>)
 meth public abstract jakarta.enterprise.inject.spi.configurator.ProducerConfigurator<{jakarta.enterprise.inject.spi.configurator.ProducerConfigurator%0}> disposeWith(java.util.function.Consumer<{jakarta.enterprise.inject.spi.configurator.ProducerConfigurator%0}>)
 
+CLSS public abstract interface jakarta.enterprise.inject.spi.el.ELAwareBeanManager
+intf jakarta.enterprise.inject.spi.BeanManager
+meth public abstract jakarta.el.ELResolver getELResolver()
+meth public abstract jakarta.el.ExpressionFactory wrapExpressionFactory(jakarta.el.ExpressionFactory)
+
 CLSS abstract interface jakarta.enterprise.inject.spi.package-info
+
+CLSS public abstract interface jakarta.enterprise.invoke.AsyncHandler<%0 extends java.lang.Object>
+innr public abstract interface static !annotation ParameterType
+innr public abstract interface static !annotation ReturnType
+meth public abstract {jakarta.enterprise.invoke.AsyncHandler%0} transform({jakarta.enterprise.invoke.AsyncHandler%0},java.lang.Runnable)
+
+CLSS public abstract interface static !annotation jakarta.enterprise.invoke.AsyncHandler$ParameterType
+ outer jakarta.enterprise.invoke.AsyncHandler
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE])
+intf java.lang.annotation.Annotation
+
+CLSS public abstract interface static !annotation jakarta.enterprise.invoke.AsyncHandler$ReturnType
+ outer jakarta.enterprise.invoke.AsyncHandler
+ anno 0 java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy value=RUNTIME)
+ anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[TYPE])
+intf java.lang.annotation.Annotation
 
 CLSS public abstract interface jakarta.enterprise.invoke.Invoker<%0 extends java.lang.Object, %1 extends java.lang.Object>
 meth public abstract {jakarta.enterprise.invoke.Invoker%1} invoke({jakarta.enterprise.invoke.Invoker%0},java.lang.Object[]) throws java.lang.Exception
@@ -1576,12 +1729,14 @@ meth public abstract boolean isFinal()
 meth public abstract boolean isInterface()
 meth public abstract boolean isPlainClass()
 meth public abstract boolean isRecord()
+meth public abstract boolean isSealed()
 meth public abstract int modifiers()
 meth public abstract jakarta.enterprise.lang.model.declarations.ClassInfo superClassDeclaration()
 meth public abstract jakarta.enterprise.lang.model.declarations.PackageInfo packageInfo()
 meth public abstract jakarta.enterprise.lang.model.types.Type superClass()
 meth public abstract java.lang.String name()
 meth public abstract java.lang.String simpleName()
+meth public abstract java.util.Collection<jakarta.enterprise.lang.model.declarations.ClassInfo> permittedSubclasses()
 meth public abstract java.util.Collection<jakarta.enterprise.lang.model.declarations.FieldInfo> fields()
 meth public abstract java.util.Collection<jakarta.enterprise.lang.model.declarations.MethodInfo> constructors()
 meth public abstract java.util.Collection<jakarta.enterprise.lang.model.declarations.MethodInfo> methods()
@@ -1811,6 +1966,10 @@ CLSS public final static jakarta.enterprise.util.Nonbinding$Literal
 cons public init()
 fld public final static jakarta.enterprise.util.Nonbinding$Literal INSTANCE
 intf jakarta.enterprise.util.Nonbinding
+meth public boolean equals(java.lang.Object)
+meth public int hashCode()
+meth public java.lang.Class<? extends java.lang.annotation.Annotation> annotationType()
+meth public java.lang.String toString()
 supr jakarta.enterprise.util.AnnotationLiteral<jakarta.enterprise.util.Nonbinding>
 hfds serialVersionUID
 
@@ -1937,8 +2096,10 @@ meth public abstract int compareTo({java.lang.Comparable%0})
 
 CLSS public abstract java.lang.Enum<%0 extends java.lang.Enum<{java.lang.Enum%0}>>
 cons protected init(java.lang.String,int)
+innr public final static EnumDesc
 intf java.io.Serializable
 intf java.lang.Comparable<{java.lang.Enum%0}>
+intf java.lang.constant.Constable
 meth protected final java.lang.Object clone() throws java.lang.CloneNotSupportedException
 meth protected final void finalize()
 meth public final boolean equals(java.lang.Object)
@@ -1947,9 +2108,11 @@ meth public final int hashCode()
 meth public final int ordinal()
 meth public final java.lang.Class<{java.lang.Enum%0}> getDeclaringClass()
 meth public final java.lang.String name()
+meth public final java.util.Optional<java.lang.Enum$EnumDesc<{java.lang.Enum%0}>> describeConstable()
 meth public java.lang.String toString()
 meth public static <%0 extends java.lang.Enum<{%%0}>> {%%0} valueOf(java.lang.Class<{%%0}>,java.lang.String)
 supr java.lang.Object
+hfds name,ordinal
 
 CLSS public java.lang.Exception
 cons protected init(java.lang.String,java.lang.Throwable,boolean,boolean)
@@ -1958,6 +2121,7 @@ cons public init(java.lang.String)
 cons public init(java.lang.String,java.lang.Throwable)
 cons public init(java.lang.Throwable)
 supr java.lang.Throwable
+hfds serialVersionUID
 
 CLSS public abstract interface !annotation java.lang.FunctionalInterface
  anno 0 java.lang.annotation.Documented()
@@ -1992,6 +2156,7 @@ cons public init(java.lang.String)
 cons public init(java.lang.String,java.lang.Throwable)
 cons public init(java.lang.Throwable)
 supr java.lang.Exception
+hfds serialVersionUID
 
 CLSS public java.lang.Throwable
 cons protected init(java.lang.String,java.lang.Throwable,boolean,boolean)
@@ -2014,6 +2179,8 @@ meth public void printStackTrace(java.io.PrintStream)
 meth public void printStackTrace(java.io.PrintWriter)
 meth public void setStackTrace(java.lang.StackTraceElement[])
 supr java.lang.Object
+hfds CAUSE_CAPTION,EMPTY_THROWABLE_ARRAY,NULL_CAUSE_MESSAGE,SELF_SUPPRESSION_MESSAGE,SUPPRESSED_CAPTION,SUPPRESSED_SENTINEL,UNASSIGNED_STACK,backtrace,cause,depth,detailMessage,serialVersionUID,stackTrace,suppressedExceptions
+hcls PrintStreamOrWriter,SentinelHolder,WrappedPrintStream,WrappedPrintWriter
 
 CLSS public abstract interface java.lang.annotation.Annotation
 meth public abstract boolean equals(java.lang.Object)
@@ -2046,4 +2213,7 @@ CLSS public abstract interface !annotation java.lang.annotation.Target
  anno 0 java.lang.annotation.Target(java.lang.annotation.ElementType[] value=[ANNOTATION_TYPE])
 intf java.lang.annotation.Annotation
 meth public abstract java.lang.annotation.ElementType[] value()
+
+CLSS public abstract interface java.lang.constant.Constable
+meth public abstract java.util.Optional<? extends java.lang.constant.ConstantDesc> describeConstable()
 

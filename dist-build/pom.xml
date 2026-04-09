@@ -18,7 +18,7 @@
             sigtest-weld-pom.xml is copied to the distribution artifacts/sigtest-weld-pom.xml this is used to
             match the sigtest-maven-plugin sigfile configuration value to the generated sigtest artifact.
       -->
-      <sigtest.filename>cdi-tck-core-impl-${project.version}-sigtest-jdk17.sig</sigtest.filename>
+      <sigtest.filename>cdi-tck-core-impl-${project.version}-sigtest-jdk17.sigfile</sigtest.filename>
       <!-- Default to the apache license. Final builds should set this to EFTL.txt -->
       <license.file>apl.txt</license.file>
    </properties>
@@ -132,7 +132,7 @@
          <artifactId>jakarta.cdi-tck-core-impl</artifactId>
          <version>${project.version}</version>
          <classifier>sigtest-jdk17</classifier>
-         <type>sig</type>
+         <type>sigfile</type>
          <optional>true</optional>
       </dependency>
       <dependency>

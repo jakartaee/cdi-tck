@@ -6,12 +6,12 @@
   <parent>
     <groupId>org.eclipse.ee4j</groupId>
     <artifactId>project</artifactId>
-    <version>1.0.9</version>
+    <version>2.0.2</version>
   </parent>
 
-  <groupId>jakarta.enterprise</groupId>
+  <groupId>jakarta.cdi</groupId>
   <artifactId>cdi-tck-sigtest</artifactId>
-  <version>4.1</version>
+  <version>5.0</version>
   <name>CDI TCK Signature Tests</name>
   <description>CDI TCK Signature test validation of CDI dependent API jars</description>
   <properties>
@@ -19,8 +19,8 @@
     <annotations.api.version>3.0.0</annotations.api.version>
     <interceptors.api.version>2.2.0</interceptors.api.version>
     <atinject.api.version>2.0.1</atinject.api.version>
-    <el.api.version>6.0.0</el.api.version>
-    <cdi.api.version>4.1.0</cdi.api.version>
+    <el.api.version>6.0.1</el.api.version>
+    <cdi.api.version>5.0.0.Alpha4</cdi.api.version>
   </properties>
 
   <!-- Set the api jar artifact dependencies here -->
@@ -46,13 +46,18 @@
       <version>${atinject.api.version}</version>
     </dependency>
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.lang-model</artifactId>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-lang-model-api</artifactId>
       <version>${cdi.api.version}</version>
     </dependency>
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-api</artifactId>
+      <version>${cdi.api.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-el-api</artifactId>
       <version>${cdi.api.version}</version>
     </dependency>
   </dependencies>
@@ -91,7 +96,7 @@
           </execution>
         </executions>
         <configuration>
-          <sigfile>cdi-api-jdk17.sig</sigfile>
+          <sigfile>cdi-api-jdk17.sigfile</sigfile>
           <packages>jakarta.decorator,jakarta.enterprise.**,jakarta.interceptor</packages>
           <classes>target/classes</classes>
           <report>cdi-sig-report.txt</report>
