@@ -18,4 +18,4 @@ CLASSPATH="${CLASSPATH}:${ATINJECT_API_JAR}"
 CLASSPATH="${CLASSPATH}:${EL_API_JAR}"
 CLASSPATH="${CLASSPATH}:${INTERCEPTOR_API_JAR}"
 
-java -jar  "${SIGTEST_JAR}" Setup -classpath "${CLASSPATH}" -Package jakarta.decorator -Package jakarta.enterprise -FileName cdi-api.sig -static
+java -jar  "${SIGTEST_JAR}" Setup -classpath "${CLASSPATH}" -Package jakarta.decorator -Package jakarta.enterprise -FileName cdi-api.sigfile -static

@@ -155,8 +155,8 @@
                                     <classifier>audit-int</classifier>
                                 </artifact>
                                 <artifact>
-                                    <file>${basedir}/src/main/resources/cdi-api-jdk17.sig</file>
-                                    <type>sig</type>
+                                    <file>${basedir}/src/main/resources/cdi-api-jdk17.sigfile</file>
+                                    <type>sigfile</type>
                                     <classifier>sigtest-jdk17</classifier>
                                 </artifact>
                             </artifacts>
@@ -365,7 +365,7 @@
 
         <profile>
             <!--This profile can be used to (re)generate signatures of CDI API, note that they differ based on JDK used to build them-->
-            <!--All .sig files should be included in the generated jar files!-->
+            <!--All .sigfile files should be included in the generated jar files!-->
             <id>signature-generation</id>
             <activation>
                 <property>
@@ -391,8 +391,26 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>jakarta.enterprise</groupId>
-                                            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+                                            <groupId>jakarta.cdi</groupId>
+                                            <artifactId>jakarta.cdi-api</artifactId>
+                                            <version>${cdi.api.version}</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
+                                            <includes>**/*.class,**/*.xml</includes>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>jakarta.cdi</groupId>
+                                            <artifactId>jakarta.cdi-lang-model-api</artifactId>
+                                            <version>${cdi.api.version}</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}/cdi-api</outputDirectory>
+                                            <includes>**/*.class,**/*.xml</includes>
+                                        </artifactItem>
+                                        <artifactItem>
+                                            <groupId>jakarta.cdi</groupId>
+                                            <artifactId>jakarta.cdi-el-api</artifactId>
                                             <version>${cdi.api.version}</version>
                                             <type>jar</type>
                                             <overWrite>false</overWrite>
@@ -440,6 +458,7 @@
                                 jakarta.enterprise.inject.se,
                                 jakarta.enterprise.inject.spi,
                                 jakarta.enterprise.inject.spi.configurator,
+                                jakarta.enterprise.inject.spi.el,
                                 jakarta.enterprise.invoke,
                                 jakarta.enterprise.util,
                                 jakarta.enterprise.lang.model,
@@ -448,7 +467,7 @@
                                 jakarta.interceptor
                             </packages>
                             <attach>false</attach>
-                            <sigfile>${project.build.directory}/cdi-api-jdk${jdk.major.version}.sig</sigfile>
+                            <sigfile>${project.build.directory}/cdi-api-jdk${jdk.major.version}.sigfile</sigfile>
                         </configuration>
                     </plugin>
                 </plugins>

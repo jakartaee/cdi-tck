@@ -13,7 +13,7 @@ You can then execute the build by running a command such as:
 mvn clean install -Psignature-generation -Djdk.major.version=${JDK}
 
 
-This will generate a file named "cdi-api-jdk${JDK}.sig" (e.g. cdi-api-jdk11.sig) and located in ${TCK_REPO}/impl/target.
+This will generate a file named "cdi-api-jdk${JDK}.sigfile" (e.g. cdi-api-jdk11.sigfile) and located in ${TCK_REPO}/impl/target.
 Note that the JDK variable only affects file naming and nothing else.
 
 Check Using the Maven sigtest-pom.xml
@@ -26,4 +26,4 @@ JDK 11 signature tests
 You need a different signature file for each major JDK version.
 Currently, there is only JDK 11 version included.
 
-cdi-api-jdk11.sig is a signature file built with JDK 11 and can be found under ${TCK_REPO}/impl/src/main/resources/cdi-api-jdk11.sig
+cdi-api-jdk11.sigfile is a signature file built with JDK 11 and can be found under ${TCK_REPO}/impl/src/main/resources/cdi-api-jdk11.sigfile
