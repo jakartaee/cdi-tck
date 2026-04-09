@@ -17,7 +17,7 @@ To execute the TCK test suite against Weld, first switch to the jboss-tck-runner
 
 [source, console]
 ----
-cd core-tck-4.x.y/weld/jboss-tck-runner
+cd cdi-tck-x.y.z/weld/jboss-tck-runner
 ----
 
 
@@ -59,7 +59,7 @@ To specify particular TCK version:
 
 [source, console]
 ----
-mvn test -Dincontainer -Dcdi.tck.version=4.1.0
+mvn test -Dincontainer -Dcdi.tck.version=5.0.0.Alpha4
 ----
 
 
@@ -153,7 +153,7 @@ To execute the TCK test suite against Weld, first switch to the lang-model-tck-r
 
 [source, console]
 ----
-cd core-tck-4.x.y/weld/lang-model-tck-runner
+cd cdi-tck-x.y.z/weld/lang-model-tck-runner
 ----
 
 [NOTE]

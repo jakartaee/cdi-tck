@@ -7,3 +7,4 @@ target
 *.iml
 
 test-output
+doc/reference/*.pdf
