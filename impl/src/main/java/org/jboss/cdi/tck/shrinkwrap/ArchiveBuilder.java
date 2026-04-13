@@ -251,6 +251,32 @@ public abstract class ArchiveBuilder<T extends ArchiveBuilder<T, A>, A extends A
     }
 
     /**
+     * Add a service provider class for given service class. In other words, add a file
+     * {@code META-INF/services/<service class>} whose content is {@code <service provider class>}.
+     *
+     * @param serviceClass
+     * @param serviceProviderClass
+     * @return
+     * @param <SP>
+     */
+    public <SP> T withServiceProvider(Class<SP> serviceClass, Class<? extends SP> serviceProviderClass) {
+        return withServiceProvider(new ServiceProviderDescriptor(serviceClass, serviceProviderClass));
+    }
+
+    /**
+     * Add a service provider class for given service class. In other words, add a file
+     * {@code META-INF/services/<service class>} whose content is {@code <service provider classes>}.
+     *
+     * @param serviceClass
+     * @param serviceProviderClasses
+     * @return
+     * @param <SP>
+     */
+    public <SP> T withServiceProvider(Class<SP> serviceClass, List<Class<? extends SP>> serviceProviderClasses) {
+        return withServiceProvider(new ServiceProviderDescriptor(serviceClass, serviceProviderClasses.toArray(new Class[0])));
+    }
+
+    /**
      * Add service provider.
      *
      * @param serviceProvider
