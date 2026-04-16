@@ -35,21 +35,12 @@ import java.util.regex.Pattern;
  */
 public final class ActionSequence {
 
-    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.$\\-]+");
-
-    private static final TransformationUtils.Function<Class<?>, String> GET_SIMPLE_NAME = new TransformationUtils.Function<Class<?>, String>() {
-        @Override
-        public String apply(Class<?> input) {
-            return input.getSimpleName();
-        }
-    };
-
     private String name;
 
     /**
      * Data - list of actions
      */
-    private List<String> data = Collections.synchronizedList(new ArrayList<String>());
+    private final List<String> data = Collections.synchronizedList(new ArrayList<>());
 
     public ActionSequence() {
         super();
@@ -79,7 +70,7 @@ public final class ActionSequence {
      * @return read-only copy of sequence data
      */
     public List<String> getData() {
-        return Collections.unmodifiableList(new ArrayList<String>(this.data));
+        return List.copyOf(this.data);
     }
 
     /**
@@ -92,7 +83,7 @@ public final class ActionSequence {
     /**
      *
      * @param actions
-     * @return <code>true</code> if sequence data contain all of the specified actions, <code>false</code> otherwise
+     * @return <code>true</code> if sequence data contain all specified actions, <code>false</code> otherwise
      */
     public boolean containsAll(String... actions) {
         return getData().containsAll(Arrays.asList(actions));
@@ -182,7 +173,7 @@ public final class ActionSequence {
      * @param expected
      */
     public void assertDataEquals(Class<?>... expected) {
-        assertDataEquals(TransformationUtils.transform(GET_SIMPLE_NAME, expected));
+        assertDataEquals(Arrays.stream(expected).map(Class::getSimpleName).toList());
     }
 
     /**
@@ -214,17 +205,19 @@ public final class ActionSequence {
      * @param expected
      */
     public void assertDataContainsAll(Class<?>... expected) {
-        assertDataContainsAll(TransformationUtils.transform(GET_SIMPLE_NAME, expected));
+        assertDataContainsAll(Arrays.stream(expected).map(Class::getSimpleName).toList());
     }
 
     // Static members
+
+    private static final Pattern VALID_NAME_PATTERN = Pattern.compile("[a-zA-Z0-9_.$\\-]+");
 
     private static final String DEFAULT_SEQUENCE = "default";
 
     /**
      * Static sequence map
      */
-    private static Map<String, ActionSequence> sequences = new HashMap<String, ActionSequence>();
+    private static final Map<String, ActionSequence> sequences = new HashMap<>();
 
     /**
      * Remove all sequences.
@@ -331,8 +324,7 @@ public final class ActionSequence {
 
         ActionSequence sequence = new ActionSequence();
 
-        if (csv.length() != 0) {
-
+        if (!csv.isEmpty()) {
             String[] data = csv.split(",");
             for (String actionId : data) {
                 sequence.add(actionId);
