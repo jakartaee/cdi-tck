@@ -6658,6 +6658,36 @@
         <assertion id="b">
             <text>Test that synthesis observers are notified of fired events</text>
         </assertion>
+        <assertion id="ca">
+            <text>A synthetic bean may declare injection points using |withInjectionPoint()|. These injection points are validated by the container at deployment time.</text>
+        </assertion>
+        <assertion id="cb">
+            <text>If no qualifier is passed to |withInjectionPoint()|, |@Default| is assumed.</text>
+        </assertion>
+        <assertion id="cc">
+            <text>A registered injection point for which no matching bean exists is treated as a deployment problem.</text>
+        </assertion>
+        <assertion id="cd">
+            <text>The synthetic bean creation function may accept a |SyntheticInjections| parameter to obtain injectable references for registered injection points.</text>
+        </assertion>
+        <assertion id="ce">
+            <text>The synthetic bean destruction function may accept a |SyntheticInjections| parameter to obtain injectable references for registered injection points.</text>
+        </assertion>
+        <assertion id="cf">
+            <text>|SyntheticInjections.get()| throws |IllegalArgumentException| if the type/qualifiers combination was not registered with |withInjectionPoint()|.</text>
+        </assertion>
+        <assertion id="cg">
+            <text>|SyntheticInjections.get()| may use |TypeLiteral| to look up parameterized bean types.</text>
+        </assertion>
+        <assertion id="ch">
+            <text>All |@Dependent| bean instances created by |SyntheticInjections| are destroyed when the corresponding synthetic bean instance is destroyed.</text>
+        </assertion>
+        <assertion id="ci">
+            <text>For a |@Dependent| synthetic bean, the |InjectionPoint| to which it is injected may be obtained from the |SyntheticInjections| parameter, if previously registered.</text>
+        </assertion>
+        <assertion id="cl">
+            <text>|SyntheticInjections.get()| with a qualifier retrieves the bean matching both type and qualifier.</text>
+        </assertion>
     </section>
     <section id="validation_phase" title="The @Validation phase" level="3">
         <assertion id="a">
