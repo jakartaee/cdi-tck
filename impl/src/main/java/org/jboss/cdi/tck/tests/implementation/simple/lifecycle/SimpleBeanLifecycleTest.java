@@ -189,13 +189,51 @@ public class SimpleBeanLifecycleTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION, id = "a") })
+    @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION, id = "aa")
+    @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba")
     public void testDependentsDestroyedAfterPreDestroy() {
         Bean<FishPond> pondBean = getBeans(FishPond.class).iterator().next();
         CreationalContext<FishPond> creationalContext = getCurrentManager().createCreationalContext(pondBean);
         FishPond fishPond = pondBean.create(creationalContext);
         pondBean.destroy(fishPond, creationalContext);
+        assert FishPond.isBeanDestroyed();
         assert Salmon.isBeanDestroyed();
+    }
+
+    @Test
+    @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION, id = "ab")
+    @SpecAssertion(section = MANAGED_BEAN_LIFECYCLE, id = "ba")
+    public void testDependentsDestroyedAfterPreDestroyAndAutoClose() {
+        Bean<FishPondCloseable> pondBean = getBeans(FishPondCloseable.class).iterator().next();
+        CreationalContext<FishPondCloseable> creationalContext = getCurrentManager().createCreationalContext(pondBean);
+        FishPondCloseable fishPond = pondBean.create(creationalContext);
+        pondBean.destroy(fishPond, creationalContext);
+        assert FishPondCloseable.isBeanDestroyed();
+        assert FishPondCloseable.isBeanClosed();
+        assert Salmon.isBeanDestroyed();
+    }
+
+    @Test
+    @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION, id = "ac")
+    public void testDependentsDestroyedAfterDisposer() {
+        Bean<DecorativeTree> treeBean = getBeans(DecorativeTree.class).iterator().next();
+        CreationalContext<DecorativeTree> creationalContext = getCurrentManager().createCreationalContext(treeBean);
+        DecorativeTree decorativeTree = treeBean.create(creationalContext);
+        treeBean.destroy(decorativeTree, creationalContext);
+        assert DecorativeTreeProducer.isDisposerCalled();
+        assert TreeBranch.isBeanDestroyed();
+    }
+
+    @Test
+    @SpecAssertion(section = DEPENDENT_OBJECTS_DESTRUCTION, id = "ad")
+    public void testDependentsDestroyedAfterDisposerAndAutoClose() {
+        Bean<DecorativeTreeCloseable> treeBean = getBeans(DecorativeTreeCloseable.class).iterator().next();
+        CreationalContext<DecorativeTreeCloseable> creationalContext = getCurrentManager().createCreationalContext(treeBean);
+        DecorativeTreeCloseable decorativeTree = treeBean.create(creationalContext);
+        treeBean.destroy(decorativeTree, creationalContext);
+        assert DecorativeTreeCloseableProducer.isDisposerCalled();
+        assert DecorativeTreeCloseable.isCloseCalled();
+        assert TreeBranch.isBeanDestroyed();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)

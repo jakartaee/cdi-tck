@@ -121,6 +121,38 @@ public class ProducerMethodLifecycleTest extends AbstractTest {
         assert SpiderProducer.getInjectedWeb().isDestroyed();
     }
 
+    @Test
+    @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "ma")
+    @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "na")
+    @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "r")
+    public void testProducerMethodBeanDestroyWithAutoClose() {
+        Bean<JumpingSpiderCloseable> bean = getUniqueBean(JumpingSpiderCloseable.class);
+        CreationalContext<JumpingSpiderCloseable> cc = getCurrentManager().createCreationalContext(bean);
+        JumpingSpiderCloseable spider = bean.create(cc);
+        assert !JumpingSpiderCloseableProducer.isDisposerCalled();
+        assert !JumpingSpiderCloseable.isClosed();
+        assert !Venom.isDestroyed();
+        bean.destroy(spider, cc);
+        assert JumpingSpiderCloseableProducer.isDisposerCalled();
+        assert JumpingSpiderCloseable.isClosed();
+        assert Venom.isDestroyed();
+    }
+
+    @Test
+    @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "ma")
+    @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "nb")
+    @SpecAssertion(section = PRODUCER_METHOD_LIFECYCLE, id = "r")
+    public void testProducerMethodBeanDestroyWithoutAutoClose() {
+        Bean<JumpingSpider> bean = getUniqueBean(JumpingSpider.class);
+        CreationalContext<JumpingSpider> cc = getCurrentManager().createCreationalContext(bean);
+        JumpingSpider spider = bean.create(cc);
+        assert !JumpingSpiderProducer.isDisposerCalled();
+        assert !Venom.isDestroyed();
+        bean.destroy(spider, cc);
+        assert JumpingSpiderProducer.isDisposerCalled();
+        assert Venom.isDestroyed();
+    }
+
     @Test(expectedExceptions = FooException.class)
     @SpecAssertions({ @SpecAssertion(section = CONTEXTUAL, id = "aa") })
     public void testCreateRethrowsUncheckedException() {
