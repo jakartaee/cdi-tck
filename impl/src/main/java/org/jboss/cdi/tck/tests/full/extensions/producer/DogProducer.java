@@ -13,6 +13,7 @@
  */
 package org.jboss.cdi.tck.tests.full.extensions.producer;
 
+import jakarta.enterprise.context.AutoClose;
 import jakarta.enterprise.inject.Disposes;
 import jakarta.enterprise.inject.Produces;
 
@@ -21,6 +22,8 @@ public class DogProducer {
     public static final String NOISY_DOG_COLOR = "White";
     private static boolean noisyDogProducerCalled;
     private static boolean noisyDogDisposerCalled;
+    private static boolean barkingDogDisposerCalled;
+    private static boolean howlingDogDisposerCalled;
 
     @Produces
     @Quiet
@@ -33,8 +36,29 @@ public class DogProducer {
         return new Dog(NOISY_DOG_COLOR);
     }
 
+    @Produces
+    @Barking
+    @AutoClose
+    public VocalDog produceBarkingDog = new BarkingDog();
+
+    @Produces
+    @Howling
+    @AutoClose
+    public VocalDog produceHowlingDog() {
+        return new HowlingDog();
+    }
+
     public void disposeNoisyDog(@Disposes @Noisy Dog dog) {
         noisyDogDisposerCalled = true;
+    }
+
+    public void disposeBarkingDog(@Disposes @Barking VocalDog dog) {
+        barkingDogDisposerCalled = true;
+    }
+
+    public void disposeHowlingDog(@Disposes @Howling VocalDog dog) {
+        assert !HowlingDog.closed;
+        howlingDogDisposerCalled = true;
     }
 
     public static boolean isNoisyDogProducerCalled() {
@@ -45,8 +69,18 @@ public class DogProducer {
         return noisyDogDisposerCalled;
     }
 
+    public static boolean isBarkingDogDisposerCalled() {
+        return barkingDogDisposerCalled;
+    }
+
+    public static boolean isHowlingDogDisposerCalled() {
+        return howlingDogDisposerCalled;
+    }
+
     public static void reset() {
         DogProducer.noisyDogProducerCalled = false;
         DogProducer.noisyDogDisposerCalled = false;
+        DogProducer.barkingDogDisposerCalled = false;
+        DogProducer.howlingDogDisposerCalled = false;
     }
 }

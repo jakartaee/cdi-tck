@@ -20,6 +20,8 @@ import jakarta.inject.Inject;
 
 @Dependent
 public class FishPond {
+    private static boolean beanDestroyed;
+
     public boolean postConstructCalled;
 
     public Animal goldfish;
@@ -31,6 +33,7 @@ public class FishPond {
 
     @Inject
     public FishPond(Goldfish goldfish, Goose goose) {
+        beanDestroyed = false;
         this.goldfish = goldfish;
         this.goose = goose;
     }
@@ -43,5 +46,10 @@ public class FishPond {
     @PreDestroy
     public void destroy() {
         assert !Salmon.isBeanDestroyed();
+        beanDestroyed = true;
+    }
+
+    public static boolean isBeanDestroyed() {
+        return beanDestroyed;
     }
 }

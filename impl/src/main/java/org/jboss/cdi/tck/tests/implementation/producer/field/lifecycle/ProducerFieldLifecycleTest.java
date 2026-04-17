@@ -36,11 +36,8 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "2.0")
 public class ProducerFieldLifecycleTest extends AbstractTest {
 
-    @SuppressWarnings("serial")
     private AnnotationLiteral<Null> NULL_LITERAL = new Null.Literal();
-    @SuppressWarnings("serial")
     private AnnotationLiteral<Broken> BROKEN_LITERAL = new Broken.Literal();
-    @SuppressWarnings("serial")
     private AnnotationLiteral<Tame> TAME_LITERAL = new Tame.Literal();
 
     @Deployment
@@ -115,5 +112,29 @@ public class ProducerFieldLifecycleTest extends AbstractTest {
         bean.destroy(instance, ctx);
         assertTrue(BlackWidowProducer.blackWidowDestroyed);
         assertEquals(BlackWidowProducer.destroyedBlackWidowTimeOfBirth, instance.getTimeOfBirth());
+    }
+
+    @Test
+    @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "pa")
+    public void testProducerFieldBeanDestroyWithAutoClose() {
+        Bean<JumpingSpiderCloseable> bean = getUniqueBean(JumpingSpiderCloseable.class);
+        CreationalContext<JumpingSpiderCloseable> cc = getCurrentManager().createCreationalContext(bean);
+        JumpingSpiderCloseable spider = bean.create(cc);
+        assert !JumpingSpiderCloseableProducer.isDisposerCalled();
+        assert !JumpingSpiderCloseable.isClosed();
+        bean.destroy(spider, cc);
+        assert JumpingSpiderCloseableProducer.isDisposerCalled();
+        assert JumpingSpiderCloseable.isClosed();
+    }
+
+    @Test
+    @SpecAssertion(section = PRODUCER_FIELD_LIFECYCLE, id = "pb")
+    public void testProducerFieldBeanDestroyWithoutAutoClose() {
+        Bean<JumpingSpider> bean = getUniqueBean(JumpingSpider.class);
+        CreationalContext<JumpingSpider> cc = getCurrentManager().createCreationalContext(bean);
+        JumpingSpider spider = bean.create(cc);
+        assert !JumpingSpiderProducer.isDisposerCalled();
+        bean.destroy(spider, cc);
+        assert JumpingSpiderProducer.isDisposerCalled();
     }
 }

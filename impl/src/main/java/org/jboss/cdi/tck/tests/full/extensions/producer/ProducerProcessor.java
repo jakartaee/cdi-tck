@@ -30,8 +30,11 @@ import jakarta.enterprise.inject.spi.Producer;
 
 public class ProducerProcessor implements Extension {
     private static InjectionTarget<Cat> catInjectionTarget;
+    private static InjectionTarget<CatCloseable> catCloseableInjectionTarget;
     private static Producer<Dog> noisyDogProducer;
     private static Producer<Dog> quietDogProducer;
+    private static Producer<VocalDog> barkingDogProducer;
+    private static Producer<VocalDog> howlingDogProducer;
     private static InjectionTarget<Dog> dogInjectionTarget;
     private static AnnotatedType<Dog> dogAnnotatedType;
     private static boolean overriddenCowProducerCalled;
@@ -54,8 +57,22 @@ public class ProducerProcessor implements Extension {
         }
     }
 
+    public void processVocalDogProducerProducer(@Observes ProcessProducer<DogProducer, VocalDog> producerEvent) {
+        if (producerEvent.getAnnotatedMember().isAnnotationPresent(Barking.class)) {
+            barkingDogProducer = producerEvent.getProducer();
+            assert producerEvent.getAnnotatedMember() instanceof AnnotatedField<?>;
+        } else if (producerEvent.getAnnotatedMember().isAnnotationPresent(Howling.class)) {
+            howlingDogProducer = producerEvent.getProducer();
+            assert producerEvent.getAnnotatedMember() instanceof AnnotatedMethod<?>;
+        }
+    }
+
     public void processCatProducer(@Observes ProcessInjectionTarget<Cat> event) {
         catInjectionTarget = event.getInjectionTarget();
+    }
+
+    public void processCatCloseableProducer(@Observes ProcessInjectionTarget<CatCloseable> event) {
+        catCloseableInjectionTarget = event.getInjectionTarget();
     }
 
     public void processDogInjectionTarget(@Observes ProcessInjectionTarget<Dog> injectionTargetEvent) {
@@ -95,8 +112,20 @@ public class ProducerProcessor implements Extension {
         return quietDogProducer;
     }
 
+    public static Producer<VocalDog> getBarkingDogProducer() {
+        return barkingDogProducer;
+    }
+
+    public static Producer<VocalDog> getHowlingDogProducer() {
+        return howlingDogProducer;
+    }
+
     public static InjectionTarget<Cat> getCatInjectionTarget() {
         return catInjectionTarget;
+    }
+
+    public static InjectionTarget<CatCloseable> getCatCloseableInjectionTarget() {
+        return catCloseableInjectionTarget;
     }
 
     public static InjectionTarget<Dog> getDogInjectionTarget() {
