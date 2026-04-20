@@ -6959,9 +6959,9 @@
         </assertion>
 
         <group>
-            <text>For a |Producer| that represents a class, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no
-                parameters otherwise, as defined in Section 5.5.1, "Injection using the bean constructor". and returns the resulting instance. If the class has
-                interceptors, |produce()| is responsible for building the interceptors and decorators of the instance.
+            <text>For a |Producer| that represents a managed bean, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no
+                parameters otherwise, as defined in Section 5.5.1, "Injection using the bean constructor". and returns the resulting instance. If the bean has
+                interceptors or decorators, |produce()| is responsible for building the interceptors and decorators of the instance.
             </text>
             <assertion id="ba">
                 <text>Test field injection occurs</text>
@@ -6982,11 +6982,11 @@
 
 
         <assertion id="c">
-            <text>For a |Producer| that represents a class, |dispose()| does nothing.</text>
+            <text>For a |Producer| that represents a managed bean, |dispose()| only does one thing: if the bean is auto-closeable and the class of the contextual instance of the bean implements |AutoCloseable|, the |close()| method is called on the instance.</text>
         </assertion>
 
         <group>
-            <text>For a |Producer| that represents a class, |getInjectionPoints()| returns a set of |InjectionPoint| objects representing all injected fields,
+            <text>For a |Producer| that represents a managed bean, |getInjectionPoints()| returns a set of |InjectionPoint| objects representing all injected fields,
                 bean constructor parameters and initializer method parameters.
             </text>
 
@@ -7021,6 +7021,7 @@
             <text>For a Producer that represents a producer method or field, |dispose()| calls the disposer method, if any, on a contextual instance of the bean
                 that declares the disposer method, as defined in Section 5.5.4, "Invocation of producer or disposer methods", or performs any additional
                 required cleanup, if any, to destroy state associated with a resource.
+                Then, if the bean is auto-closeable and the class of the contextual instance of the bean implements |AutoCloseable|, the |close()| method is called on the instance.
             </text>
 
             <assertion id="faa">
