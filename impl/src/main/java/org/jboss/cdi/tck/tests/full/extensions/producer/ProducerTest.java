@@ -99,6 +99,18 @@ public class ProducerTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "c") })
+    public void testDisposeCallsClose() {
+        InjectionTarget<CatCloseable> injectionTarget = ProducerProcessor.getCatCloseableInjectionTarget();
+
+        CatCloseable cat = getContextualReference(CatCloseable.class);
+        assert !CatCloseable.closed;
+
+        injectionTarget.dispose(cat);
+        assert CatCloseable.closed;
+    }
+
+    @Test
     @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "da") })
     public void testGetInjectionPointsForFields() {
         InjectionTarget<Cat> injectionTarget = ProducerProcessor.getCatInjectionTarget();
@@ -179,6 +191,32 @@ public class ProducerTest extends AbstractTest {
         assert DogProducer.isNoisyDogProducerCalled();
         producer.dispose(dog);
         assert DogProducer.isNoisyDogDisposerCalled();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "faa") })
+    public void testProducerForMethodDisposesProductAndDoesntCallClose() {
+        Bean<VocalDog> dogBean = getUniqueBean(VocalDog.class, new Barking.Literal());
+        Producer<VocalDog> producer = ProducerProcessor.getBarkingDogProducer();
+        DogProducer.reset();
+        VocalDog dog = producer.produce(getCurrentManager().createCreationalContext(dogBean));
+        assert !DogProducer.isBarkingDogDisposerCalled();
+        producer.dispose(dog);
+        assert DogProducer.isBarkingDogDisposerCalled();
+    }
+
+    @Test
+    @SpecAssertions({ @SpecAssertion(section = INJECTIONTARGET, id = "faa") })
+    public void testProducerForMethodDisposesProductAndCallsClose() {
+        Bean<VocalDog> dogBean = getUniqueBean(VocalDog.class, new Howling.Literal());
+        Producer<VocalDog> producer = ProducerProcessor.getHowlingDogProducer();
+        DogProducer.reset();
+        VocalDog dog = producer.produce(getCurrentManager().createCreationalContext(dogBean));
+        assert !DogProducer.isHowlingDogDisposerCalled();
+        assert !HowlingDog.closed;
+        producer.dispose(dog);
+        assert DogProducer.isHowlingDogDisposerCalled();
+        assert HowlingDog.closed;
     }
 
     @Test
