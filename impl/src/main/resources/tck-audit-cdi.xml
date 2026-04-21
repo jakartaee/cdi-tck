@@ -4989,6 +4989,10 @@
             <text>Invocations of methods declared by |java.lang.Object| are not business method invocations.</text>
         </assertion>
 
+        <assertion id="n">
+            <text>Invocations of |AutoCloseable.close()| on auto-closeable beans during destruction are not business method invocations.</text>
+        </assertion>
+
         <group>
             <text>If, and only if, the invocation is a business method invocation it passes through method interceptors and decorators.</text>
 
