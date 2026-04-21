@@ -7,14 +7,14 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBeanInjectionsInjectionPoint;
+package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBeanInjectionsInjectionPointIndirect;
 
 import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.spi.InjectionPoint;
 import jakarta.inject.Inject;
 
 @Dependent
-public class PojoConsumer {
+public class MyService {
     @Inject
-    @MyQualifier(binding = "alpha", nonBinding = "bravo")
-    SyntheticPojo pojo;
+    InjectionPoint injectionPoint;
 }
