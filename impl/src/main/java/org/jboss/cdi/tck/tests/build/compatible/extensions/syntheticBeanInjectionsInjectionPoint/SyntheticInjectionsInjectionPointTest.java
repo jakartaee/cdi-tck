@@ -10,8 +10,11 @@
 package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBeanInjectionsInjectionPoint;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
+
+import java.lang.annotation.Annotation;
 
 import jakarta.enterprise.inject.Instance;
 
@@ -43,6 +46,23 @@ public class SyntheticInjectionsInjectionPointTest extends AbstractTest {
         assertNotNull(consumer.pojo);
         assertNotNull(consumer.pojo.injectionPoint);
         assertEquals(consumer.pojo.injectionPoint.getType(), SyntheticPojo.class);
+
+        MyQualifier qualifier = null;
+        for (Annotation a : consumer.pojo.injectionPoint.getQualifiers()) {
+            if (a instanceof MyQualifier) {
+                qualifier = (MyQualifier) a;
+            }
+        }
+        assertNotNull(qualifier);
+        assertEquals(qualifier.binding(), "alpha");
+        assertEquals(qualifier.nonBinding(), "bravo");
+
+        assertNotNull(consumer.pojo.injectionPoint.getBean());
+        assertEquals(consumer.pojo.injectionPoint.getBean().getBeanClass(), PojoConsumer.class);
+        assertFalse(consumer.pojo.injectionPoint.isDelegate());
+        assertFalse(consumer.pojo.injectionPoint.isTransient());
+        assertNotNull(consumer.pojo.injectionPoint.getMember());
+        assertNotNull(consumer.pojo.injectionPoint.getAnnotated());
         handle.destroy();
     }
 

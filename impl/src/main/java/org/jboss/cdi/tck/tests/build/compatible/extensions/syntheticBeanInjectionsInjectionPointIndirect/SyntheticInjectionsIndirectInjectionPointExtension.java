@@ -7,7 +7,7 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBeanInjectionsInjectionPoint;
+package org.jboss.cdi.tck.tests.build.compatible.extensions.syntheticBeanInjectionsInjectionPointIndirect;
 
 import java.lang.annotation.Annotation;
 
@@ -15,17 +15,14 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.build.compatible.spi.BuildCompatibleExtension;
 import jakarta.enterprise.inject.build.compatible.spi.Synthesis;
 import jakarta.enterprise.inject.build.compatible.spi.SyntheticComponents;
-import jakarta.enterprise.inject.spi.InjectionPoint;
 
-public class SyntheticInjectionsInjectionPointExtension implements BuildCompatibleExtension {
+public class SyntheticInjectionsIndirectInjectionPointExtension implements BuildCompatibleExtension {
     @Synthesis
     public void synthesize(SyntheticComponents syn) {
         syn.addBean(SyntheticPojo.class)
                 .type(SyntheticPojo.class)
                 .scope(Dependent.class)
-                .qualifier(new MyQualifier.Literal("alpha", ""))
-                .withInjectionPoint(InjectionPoint.class, new Annotation[0])
-                .createWith(SyntheticPojoCreator.class)
-                .disposeWith(SyntheticPojoDisposer.class);
+                .withInjectionPoint(MyService.class, new Annotation[0])
+                .createWith(SyntheticPojoCreator.class);
     }
 }
