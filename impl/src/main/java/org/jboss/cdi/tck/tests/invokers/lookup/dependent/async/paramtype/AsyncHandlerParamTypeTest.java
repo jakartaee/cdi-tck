@@ -47,7 +47,7 @@ public class AsyncHandlerParamTypeTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AsyncHandlerParamTypeTest.class)
                 .withClasses(InvokerHolder.class, InvokerHolderCreator.class, InvokerHolderExtensionBase.class)
-                .withServiceProvider(AsyncHandler.class, MyAsyncTypeHandler.class)
+                .withServiceProvider(AsyncHandler.ParameterType.class, MyAsyncTypeHandler.class)
                 .withBuildCompatibleExtension(TestExtension.class)
                 .build();
     }
@@ -55,7 +55,7 @@ public class AsyncHandlerParamTypeTest extends AbstractTest {
     public static class TestExtension extends InvokerHolderExtensionBase implements BuildCompatibleExtension {
         @Registration(types = MyBean.class)
         public void registration(BeanInfo bean, InvokerFactory invokers) {
-            registerInvokers(bean, invokers, Set.of("hello", "helloThrow"), builder -> {
+            registerInvokers(bean, invokers, Set.of("helloSync", "helloAsync", "helloThrow"), builder -> {
                 builder.withInstanceLookup();
                 builder.withArgumentLookup(0);
             });
@@ -73,13 +73,34 @@ public class AsyncHandlerParamTypeTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "b")
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "g")
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "h")
-    public void test(InvokerHolder invokers) throws Exception {
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "cf")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "ha")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "i")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "j")
+    public void testSync(InvokerHolder invokers) throws Exception {
         MyDependentBean.reset();
 
-        Invoker<MyBean, MyAsyncType<String>> hello = invokers.get("hello");
+        Invoker<MyBean, MyAsyncType<String>> hello = invokers.get("helloSync");
+        MyAsyncType<String> result = MyAsyncType.createSuspended();
+
+        assertEquals(MyDependentBean.destroyedCounter.get(), 0);
+
+        hello.invoke(null, new Object[] { null, result });
+
+        assertEquals(MyDependentBean.destroyedCounter.get(), 1);
+        assertTrue(result.isComplete());
+        assertEquals(result.getIfComplete(), "hello");
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "cf")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "hb")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "i")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "j")
+    public void testAsync(InvokerHolder invokers) throws Exception {
+        MyDependentBean.reset();
+
+        Invoker<MyBean, MyAsyncType<String>> hello = invokers.get("helloAsync");
         CompletableFuture<String> future = new CompletableFuture<>();
         MyAsyncType<String> result = MyAsyncType.createSuspended();
 
@@ -100,8 +121,9 @@ public class AsyncHandlerParamTypeTest extends AbstractTest {
     // this test verifies both that dependent instances created for the invocation are destroyed
     // in case of a synchronous exception and that a "secondary completion" is ignored
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "b")
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "i")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "cf")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "hc")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "k")
     public void testSyncThrow(InvokerHolder invokers) {
         MyDependentBean.reset();
 

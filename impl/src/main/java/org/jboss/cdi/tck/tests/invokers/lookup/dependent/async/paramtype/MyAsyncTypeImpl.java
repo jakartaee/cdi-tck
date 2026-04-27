@@ -35,6 +35,9 @@ final class MyAsyncTypeImpl<T> implements MyAsyncType<T> {
 
     @Override
     public void whenComplete(Runnable callback) {
+        if (callback == null) {
+            throw new IllegalArgumentException("callback may not be null");
+        }
         if (!this.callback.compareAndSet(null, callback)) {
             throw new IllegalStateException("only one callback possible");
         }

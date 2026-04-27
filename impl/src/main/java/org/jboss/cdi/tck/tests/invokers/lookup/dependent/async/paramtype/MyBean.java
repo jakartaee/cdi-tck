@@ -17,7 +17,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MyBean {
-    public void hello(MyDependentBean bean, CompletableFuture<String> future, MyAsyncType<String> async) {
+    public void helloSync(MyDependentBean bean, MyAsyncType<String> async) {
+        async.resume("hello");
+    }
+
+    public void helloAsync(MyDependentBean bean, CompletableFuture<String> future, MyAsyncType<String> async) {
         future.whenComplete((value, error) -> {
             assertNull(error);
             async.resume(value);

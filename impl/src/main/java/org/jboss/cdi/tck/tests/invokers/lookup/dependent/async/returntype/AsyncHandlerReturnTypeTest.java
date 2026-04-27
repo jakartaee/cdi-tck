@@ -47,7 +47,7 @@ public class AsyncHandlerReturnTypeTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClassPackage(AsyncHandlerReturnTypeTest.class)
                 .withClasses(InvokerHolder.class, InvokerHolderCreator.class, InvokerHolderExtensionBase.class)
-                .withServiceProvider(AsyncHandler.class, MyAsyncTypeHandler.class)
+                .withServiceProvider(AsyncHandler.ReturnType.class, MyAsyncTypeHandler.class)
                 .withBuildCompatibleExtension(TestExtension.class)
                 .build();
     }
@@ -55,7 +55,7 @@ public class AsyncHandlerReturnTypeTest extends AbstractTest {
     public static class TestExtension extends InvokerHolderExtensionBase implements BuildCompatibleExtension {
         @Registration(types = MyBean.class)
         public void registration(BeanInfo bean, InvokerFactory invokers) {
-            registerInvokers(bean, invokers, Set.of("hello", "helloThrow"), builder -> {
+            registerInvokers(bean, invokers, Set.of("helloSync", "helloAsync", "helloThrow"), builder -> {
                 builder.withInstanceLookup();
                 builder.withArgumentLookup(0);
             });
@@ -73,13 +73,33 @@ public class AsyncHandlerReturnTypeTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "b")
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "g")
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "h")
-    public void test(InvokerHolder invokers) throws Exception {
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "be")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "ga")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "i")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "j")
+    public void testSync(InvokerHolder invokers) throws Exception {
         MyDependentBean.reset();
 
-        Invoker<MyBean, MyAsyncType<String>> hello = invokers.get("hello");
+        Invoker<MyBean, MyAsyncType<String>> hello = invokers.get("helloSync");
+
+        assertEquals(MyDependentBean.destroyedCounter.get(), 0);
+
+        MyAsyncType<String> result = hello.invoke(null, new Object[] { null });
+
+        assertEquals(MyDependentBean.destroyedCounter.get(), 1);
+        assertTrue(result.isComplete());
+        assertEquals(result.getIfComplete(), "hello");
+    }
+
+    @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "be")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "gb")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "i")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "j")
+    public void testAsync(InvokerHolder invokers) throws Exception {
+        MyDependentBean.reset();
+
+        Invoker<MyBean, MyAsyncType<String>> hello = invokers.get("helloAsync");
         CompletableFuture<String> future = new CompletableFuture<>();
 
         assertEquals(MyDependentBean.destroyedCounter.get(), 0);
@@ -97,12 +117,13 @@ public class AsyncHandlerReturnTypeTest extends AbstractTest {
     }
 
     // this test only verifies that dependent instances created for the invocation are destroyed in case of a synchronous
-    // exception, but it does not (and cannot) verify that a "secondary completion" is ignored, because an async handler
-    // for return type runs _after_ the method is invoked, and if the invoked method throws an exception synchronously,
+    // exception, but it does not (and cannot) verify that a "secondary completion" is ignored, because a return type
+    // async handler runs _after_ the method is invoked, and if the invoked method throws an exception synchronously,
     // there's no object the async handler could transform and so no "secondary completion" can possibly occur
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "b")
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "i")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "be")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "gc")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "k")
     public void testSyncThrow(InvokerHolder invokers) {
         MyDependentBean.reset();
 

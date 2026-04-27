@@ -6527,101 +6527,145 @@
                 Sometimes, the action started by the method does not necessarily finish when the method returns; the _completion_ of the action is asynchronous to the method call.
                 Such methods are called _asynchronous_ methods.
                 Method invokers have special support for asynchronous methods when it comes to destroying instances of looked up |@Dependent| beans.
+
+                An _async handler_ is either a return type async handler or a parameter type async handler.
             </text>
             <note>Introductory text, no requirements.</note>
         </assertion>
-        <assertion id="b">
-            <text>
-                An _async handler_ is a service provider of |jakarta.enterprise.invoke.AsyncHandler| declared in |META-INF/services|.
-            </text>
-        </assertion>
         <group>
             <text>
-                An async handler must have a direct superinterface type that is a parameterized type whose generic interface is |AsyncHandler| and its sole type argument is a class type, interface type or parameterized type, otherwise deployment problem occurs.
+                A _return type async handler_ is a service provider of |jakarta.enterprise.invoke.AsyncHandler.ReturnType| declared in |META-INF/services|.
+                A return type async handler must have a direct superinterface type that is a parameterized type whose generic interface is |AsyncHandler.ReturnType| and its sole type argument is a class type, interface type or parameterized type, otherwise definition error occurs.
+                The erasure of the type argument to |AsyncHandler.ReturnType| is called the _async type_ of the return type async handler.
+                The target method matches a return type async handler if the erasure of the method's return type is identical to the async type of the async handler.
             </text>
-            <assertion id="ca">
-                <text>Test with raw |AsyncHandler|.</text>
+            <assertion id="ba">
+                <text>Test with raw async handler.</text>
             </assertion>
-            <assertion id="cb">
-                <text>Test with type variable as the type argument to |AsyncHandler|.</text>
+            <assertion id="bb">
+                <text>Test with type variable as the type argument to async handler.</text>
             </assertion>
-            <assertion id="cc">
-                <text>Test with array type as the type argument to |AsyncHandler|.</text>
+            <assertion id="bc">
+                <text>Test with array type as the type argument to async handler.</text>
             </assertion>
-            <assertion id="cd">
-                <text>Test with indirect implementation of |AsyncHandler|.</text>
+            <assertion id="bd">
+                <text>Test with indirect implementation of async handler.</text>
+            </assertion>
+            <assertion id="be">
+                <text>No error.</text>
             </assertion>
         </group>
-        <assertion id="d" testable="false">
+        <group>
             <text>
-                The erasure of the type argument to |AsyncHandler| is called the _async type_ of the async handler.
-                An async handler must be stateless (and therefore thread safe); there are no guarantees about its lifecycle.
+                A _parameter type async handler_ is a service provider of |jakarta.enterprise.invoke.AsyncHandler.ParameterType| declared in |META-INF/services|.
+                A parameter type async handler must have a direct superinterface type that is a parameterized type whose generic interface is |AsyncHandler.ParameterType| and its sole type argument is a class type, interface type or parameterized type, otherwise definition error occurs.
+                The erasure of the type argument to |AsyncHandler.ParameterType| is called the _async type_ of the parameter type async handler.
+                The target method matches a parameter type async handler if it declares exactly one parameter whose type's erasure is identical to the async type of the async handler; this parameter is called the _async parameter_.
             </text>
+            <assertion id="ca">
+                <text>Test with raw async handler.</text>
+            </assertion>
+            <assertion id="cb">
+                <text>Test with type variable as the type argument to async handler.</text>
+            </assertion>
+            <assertion id="cc">
+                <text>Test with array type as the type argument to async handler.</text>
+            </assertion>
+            <assertion id="cd">
+                <text>Test with indirect implementation of async handler.</text>
+            </assertion>
+            <assertion id="ce">
+                <text>Test with two parameters that match an async handler.</text>
+            </assertion>
+            <assertion id="cf">
+                <text>No error.</text>
+            </assertion>
+        </group>
+        <assertion id="d">
+            <text>If an async handler is both a return type async handler and parameter type async handler, definition error occurs.</text>
+        </assertion>
+        <assertion id="e" testable="false">
+            <text>An async handler must be stateless (and therefore thread safe); there are no guarantees about its lifecycle.</text>
             <note>The only requirement stated here (statelessness) is a requirement on outside code, not on the container.</note>
         </assertion>
-        <assertion id="e">
-            <text>
-                Each async handler must be annotated either |@AsyncHandler.ReturnType| or |@AsyncHandler.ParameterType|, otherwise deployment problem occurs.
-            </text>
-        </assertion>
-        <assertion id="f" testable="false">
-            <text>
-                If an async handler is annotated |@AsyncHandler.ReturnType|, the target method matches the async handler if the erasure of its return type is identical to the async type of the async handler.
-                If an async handler is annotated |@AsyncHandler.ParameterType|, the target method matches the async handler if it declares exactly one parameter whose type's erasure is identical to the async type of the async handler; this parameter is called an _async parameter_.
-            </text>
-            <note>No actual requirement.</note>
-        </assertion>
-        <assertion id="g">
-            <text>
-                If the target method matches exactly one async handler, the invoker becomes asynchronous.
-                An asynchronous invoker calls the |transform()| method of the matching async handler exactly once during |invoke()|.
-                If the matching async handler is annotated |@AsyncHandler.ReturnType|, the |transform()| method is called after the target method is called, with the return value of the target method as the |original|, and the result is returned to the caller.
-                If the matching async handler is annotated |@AsyncHandler.ParameterType|, the |transform()| method is called before the target method is called, with the given argument value of the async parameter as the |original|, and the result is passed to the target method as the argument value of the async parameter.
-                The async handler signals completion of the asynchronous action by calling |completion.run()|.
-            </text>
-        </assertion>
-        <assertion id="h">
-            <text>
-                The requirement to destroy instances of |@Dependent| looked up beans is different for asynchronous invokers.
-                The instances of |@Dependent| looked up beans are destroyed when the asynchronous action completes, as signalled by the async handler.
-            </text>
-        </assertion>
-        <assertion id="i">
-            <text>
-                If an asynchronous target method throws synchronously, instances of |@Dependent| looked up beans are destroyed before |invoke()| rethrows the exception; in this case, the async handler is still permitted to call |completion.run()|, but the call must be ignored.
-            </text>
+        <assertion id="f">
+            <text>If the target method matches exactly one async handler, the invoker becomes asynchronous.</text>
+            <note>Test with multiple matching async handlers.</note>
         </assertion>
         <group>
             <text>
-                The CDI container must include async handlers for the following return types:
+                If the matching async handler is a return type async handler, an asynchronous invoker calls its |transform()| method once during |invoke()|, after the target method returns, with the return value of the target method as the |original|, and returns the result to the caller.
+                When the target method throws an exception synchronously, the |transform()| method is not called.
             </text>
-            <assertion id="ja">
+            <assertion id="ga">
+                <text>Test synchronous completion.</text>
+            </assertion>
+            <assertion id="gb">
+                <text>Test asynchronous completion.</text>
+            </assertion>
+            <assertion id="gc">
+                <text>Test synchronously thrown exception.</text>
+            </assertion>
+        </group>
+        <group id="h">
+            <text>
+                If the matching async handler is a parameter type async handler, an asynchronous invoker:
+
+                calls its |transformArgument()| method once during |invoke()|, before the target method is called, with the given argument value of the async parameter as the |original|, and passes the result to the target method as the argument value of the async parameter;
+
+                calls its |transformReturnValue()| method once during |invoke()|, after the target method returns, with the return value of the target method as the |original|, and returns the result to the caller.
+
+                When the target method throws an exception synchronously, the |transformReturnValue()| method is not called.
+            </text>
+            <assertion id="ha">
+                <text>Test synchronous completion.</text>
+            </assertion>
+            <assertion id="hb">
+                <text>Test asynchronous completion.</text>
+            </assertion>
+            <assertion id="hc">
+                <text>Test synchronously thrown exception.</text>
+            </assertion>
+        </group>
+        <assertion id="i">
+            <text>The async handler signals completion of the asynchronous action by calling |completion.run()|.</text>
+        </assertion>
+        <assertion id="j">
+            <text>
+                The requirement to destroy instances of |@Dependent| looked up beans is different for asynchronous invokers.
+                The instances of |@Dependent| looked up beans are destroyed when the asynchronous action completes, as signaled by the async handler.
+            </text>
+        </assertion>
+        <assertion id="k">
+            <text>
+                If an asynchronous target method throws synchronously, instances of |@Dependent| looked up beans are destroyed
+                before |invoke()| rethrows the exception; in this case, the async handler is still permitted to call
+                |completion.run()|, but the call must be ignored.
+            </text>
+        </assertion>
+        <group>
+            <text>The CDI container must include return type async handlers for the following types:</text>
+            <assertion id="la">
                 <text>|java.util.concurrent.CompletionStage|</text>
             </assertion>
-            <assertion id="jb">
+            <assertion id="lb">
                 <text>|java.util.concurrent.CompletableFuture|</text>
             </assertion>
-            <assertion id="jc">
+            <assertion id="lc">
                 <text>|java.util.concurrent.Flow.Publisher|</text>
             </assertion>
         </group>
-        <assertion id="k">
+        <assertion id="m">
             <text>If two async handlers have the same async type, by default a deployment problem occurs.</text>
         </assertion>
-        <assertion id="l" testable="false">
+        <assertion id="n" testable="false">
             <text>
-                Containers are required to provide implementation-defined means of configuring an async handler that should be used for any given async type.
+                Containers are required to provide an implementation-defined means of configuring the async handler that should be used for a particular async type.
                 If such configuration is present, other async handlers for the given async type are ignored; the target method only matches the configured async handler.
-                If the configured async handler does not exist, deployment problem occurs.
-                It is possible to configure a custom async handler for the built-in return types listed above.
+                If the configured async handler does not exist or its async type is different from the configured one, deployment problem occurs.
+                It is possible to configure a custom async handler for the built-in types listed above.
             </text>
             <note>Implementation-defined behavior.</note>
-        </assertion>
-        <assertion id="m" testable="false">
-            <text>
-                If the target method matches more than one async handler, non-portable behavior results.
-            </text>
-            <note>Non-portable behavior.</note>
         </assertion>
     </section>
 

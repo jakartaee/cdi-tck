@@ -15,7 +15,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MyBean {
-    public MyAsyncType<String> hello(MyDependentBean bean, CompletableFuture<String> future) {
+    public MyAsyncType<String> helloSync(MyDependentBean bean) {
+        return MyAsyncType.from(CompletableFuture.completedFuture("hello"));
+    }
+
+    public MyAsyncType<String> helloAsync(MyDependentBean bean, CompletableFuture<String> future) {
         return MyAsyncType.from(future);
     }
 

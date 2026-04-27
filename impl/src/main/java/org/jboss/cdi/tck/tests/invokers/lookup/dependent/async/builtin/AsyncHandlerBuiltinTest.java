@@ -77,7 +77,7 @@ public class AsyncHandlerBuiltinTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "ja")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "la")
     public void testCompletionStage(InvokerHolder invokers) throws Exception {
         MyDependentBean.reset();
 
@@ -99,7 +99,7 @@ public class AsyncHandlerBuiltinTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "jb")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "lb")
     public void testCompletableFuture(InvokerHolder invokers) throws Exception {
         MyDependentBean.reset();
 
@@ -121,7 +121,7 @@ public class AsyncHandlerBuiltinTest extends AbstractTest {
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "jc")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "lc")
     public void testFlowPublisher(InvokerHolder invokers) throws Exception {
         MyDependentBean.reset();
 

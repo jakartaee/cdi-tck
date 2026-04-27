@@ -11,10 +11,15 @@ package org.jboss.cdi.tck.tests.invokers.lookup.dependent.async.invalid;
 
 import jakarta.enterprise.invoke.AsyncHandler;
 
-@AsyncHandler.ReturnType // to prevent a different deployment problem
-public class AsyncHandlerIndirect<T> extends AsyncHandlerSubclass<MyAsyncType<T>> {
+public class AsyncHandlerBothKinds<T>
+        implements AsyncHandler.ReturnType<MyAsyncType<T>>, AsyncHandler.ParameterType<MyAsyncType<T>> {
     @Override
     public MyAsyncType<T> transform(MyAsyncType<T> original, Runnable completion) {
+        return original;
+    }
+
+    @Override
+    public MyAsyncType<T> transformArgument(MyAsyncType<T> original, Runnable completion) {
         return original;
     }
 }

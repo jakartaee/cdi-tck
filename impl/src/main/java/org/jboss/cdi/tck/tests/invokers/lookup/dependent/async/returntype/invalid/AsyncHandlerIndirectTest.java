@@ -7,9 +7,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-package org.jboss.cdi.tck.tests.invokers.lookup.dependent.async.invalid;
+package org.jboss.cdi.tck.tests.invokers.lookup.dependent.async.returntype.invalid;
 
-import jakarta.enterprise.inject.spi.DeploymentException;
+import jakarta.enterprise.inject.spi.DefinitionException;
 import jakarta.enterprise.invoke.AsyncHandler;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -25,17 +25,17 @@ import org.testng.annotations.Test;
 @SpecVersion(spec = "cdi", version = "5.0")
 public class AsyncHandlerIndirectTest extends AbstractTest {
     @Deployment
-    @ShouldThrowException(DeploymentException.class)
+    @ShouldThrowException(DefinitionException.class)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(AsyncHandlerIndirectTest.class)
                 .withClasses(MyAsyncType.class, AsyncHandlerSubclass.class, AsyncHandlerIndirect.class)
-                .withServiceProvider(AsyncHandler.class, AsyncHandlerIndirect.class)
+                .withServiceProvider(AsyncHandler.ReturnType.class, AsyncHandlerIndirect.class)
                 .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "cd")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "bd")
     public void trigger() {
     }
 }

@@ -7,15 +7,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-package org.jboss.cdi.tck.tests.invokers.lookup.dependent.async.invalid;
+package org.jboss.cdi.tck.tests.invokers.lookup.dependent.async.returntype.invalid;
 
 import jakarta.enterprise.invoke.AsyncHandler;
 
-@AsyncHandler.ReturnType
-@AsyncHandler.ParameterType
-public class AsyncHandlerBothAnnotations<T> implements AsyncHandler<MyAsyncType<T>> {
-    @Override
-    public MyAsyncType<T> transform(MyAsyncType<T> original, Runnable completion) {
-        return original;
-    }
+public abstract class AsyncHandlerSubclass<T> implements AsyncHandler.ReturnType<T> {
 }

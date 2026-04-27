@@ -7,7 +7,9 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-package org.jboss.cdi.tck.tests.invokers.lookup.dependent.async.invalid;
+package org.jboss.cdi.tck.tests.invokers.lookup.dependent.async.paramtype.invalid;
+
+import java.util.List;
 
 import jakarta.enterprise.inject.spi.DeploymentException;
 import jakarta.enterprise.invoke.AsyncHandler;
@@ -23,19 +25,19 @@ import org.jboss.test.audit.annotations.SpecVersion;
 import org.testng.annotations.Test;
 
 @SpecVersion(spec = "cdi", version = "5.0")
-public class AsyncHandlerTypeVariableTest extends AbstractTest {
+public class MultipleAsyncHandlersForOneParamTypeTest extends AbstractTest {
     @Deployment
     @ShouldThrowException(DeploymentException.class)
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
-                .withTestClass(AsyncHandlerTypeVariableTest.class)
-                .withClass(AsyncHandlerTypeVariable.class)
-                .withServiceProvider(AsyncHandler.class, AsyncHandlerTypeVariable.class)
+                .withTestClass(MultipleAsyncHandlersForOneParamTypeTest.class)
+                .withClasses(MyAsyncType.class, AsyncHandler1.class, AsyncHandler2.class)
+                .withServiceProvider(AsyncHandler.ParameterType.class, List.of(AsyncHandler1.class, AsyncHandler2.class))
                 .build();
     }
 
     @Test(dataProvider = ARQUILLIAN_DATA_PROVIDER)
-    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "cb")
+    @SpecAssertion(section = Sections.INVOKER_ASYNCHRONOUS_METHODS, id = "m")
     public void trigger() {
     }
 }
