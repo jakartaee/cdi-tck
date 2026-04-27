@@ -355,6 +355,29 @@
     </scm>
 
     <profiles>
+        <!-- Temporary profile to allow overriding central-staging-plugins version via
+             -Dcentral-staging.version=... in order to test added plugin capabilities.
+             Once the parent project inherits the required version, this can be removed. -->
+        <profile>
+            <id>override-central-staging</id>
+            <activation>
+                <property>
+                    <name>central-staging.version</name>
+                </property>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.eclipse.cbi.central</groupId>
+                            <artifactId>central-staging-plugins</artifactId>
+                            <version>${central-staging.version}</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
         <profile>
             <id>docs</id>
             <activation>
