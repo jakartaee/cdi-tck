@@ -20,6 +20,8 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
+import jakarta.enterprise.inject.Instance;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
 import org.jboss.cdi.tck.shrinkwrap.WebArchiveBuilder;
@@ -136,6 +138,33 @@ public class InterceptorInvocationTest extends AbstractTest {
 
         assertFalse(AlmightyInterceptor.methodIntercepted);
         assertTrue(AlmightyInterceptor.lifecycleCallbackIntercepted);
+    }
+
+    @Test
+    @SpecAssertion(section = BIZ_METHOD, id = "n")
+    public void testCloseIsNotInterceptedDuringDestruction() {
+        AlmightyInterceptor.reset();
+
+        Instance<Object> instance = getCurrentBeanContainer().createInstance();
+
+        MissileCloseable missile = instance.select(MissileCloseable.class).get();
+        assertFalse(missile.closed);
+
+        missile.close();
+
+        assertTrue(missile.closed);
+        assertTrue(AlmightyInterceptor.methodIntercepted);
+
+        missile.reset();
+        AlmightyInterceptor.reset();
+
+        assertFalse(missile.closed);
+        assertFalse(AlmightyInterceptor.methodIntercepted);
+
+        instance.destroy(missile);
+
+        assertTrue(missile.closed);
+        assertFalse(AlmightyInterceptor.methodIntercepted);
     }
 
 }
