@@ -365,6 +365,15 @@
                     <name>central-staging.version</name>
                 </property>
             </activation>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>cbi-snapshots</id>
+                    <url>https://repo.eclipse.org/content/repositories/cbi-maven2-snapshots/</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
             <build>
                 <pluginManagement>
                     <plugins>
