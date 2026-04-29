@@ -140,11 +140,6 @@
                                     <classifier>suite</classifier>
                                 </artifact>
                                 <artifact>
-                                    <file>${basedir}/src/main/resources/tck-audit-mb.xml</file>
-                                    <type>xml</type>
-                                    <classifier>audit-mb</classifier>
-                                </artifact>
-                                <artifact>
                                     <file>${basedir}/src/main/resources/tck-audit-cdi.xml</file>
                                     <type>xml</type>
                                     <classifier>audit-cdi</classifier>
@@ -262,7 +257,7 @@
                                 <endorseddirs>${project.build.directory}/endorsed</endorseddirs>
                             </compilerArguments>
                             <compilerArgument>
-                                -AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-mb.xml,${basedir}/src/main/resources/tck-audit-int.xml
+                                -AauditXml=${basedir}/src/main/resources/tck-audit-cdi.xml,${basedir}/src/main/resources/tck-audit-int.xml
                             </compilerArgument>
                             <compilerArgs>
                                 <arg>-processor</arg>
@@ -288,11 +283,6 @@
                                             <file>../target/coverage-cdi.html</file>
                                             <type>html</type>
                                             <classifier>coverage-cdi</classifier>
-                                        </artifact>
-                                        <artifact>
-                                            <file>../target/coverage-mb.html</file>
-                                            <type>html</type>
-                                            <classifier>coverage-mb</classifier>
                                         </artifact>
                                         <artifact>
                                             <file>../target/coverage-interceptors.html</file>
