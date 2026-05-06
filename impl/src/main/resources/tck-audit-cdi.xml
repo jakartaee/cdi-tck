@@ -704,6 +704,34 @@
         </assertion>
     </section>
 
+
+    <section id="auto_closing" title="Automatic closing" level="2">
+        <group>
+            <text>
+                A bean class of a managed bean, a producer method and a producer field may be annotated |@AutoClose|.
+                This annotation marks the bean as _auto-closeable_.
+            </text>
+            <assertion id="aa">
+                <text>Test with managed bean.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test with producer method.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test with producer field.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>Test with synthetic bean.</text>
+            </assertion>
+        </group>
+        <assertion id="b">
+            <text>
+                If the class of a contextual instance of an auto-closeable bean implements the |java.lang.AutoCloseable| interface,
+                the |close()| method is called on the instance during destruction.
+            </text>
+        </assertion>
+    </section>
+
     <section id="stereotypes" title="Stereotypes" level="2">
 
         <assertion id="aa">
@@ -724,6 +752,10 @@
 
         <assertion id="ae">
             <text>A stereotype may specify that all beans with the stereotype are eagerly initialized.</text>
+        </assertion>
+
+        <assertion id="af">
+            <text>A stereotype may specify that all beans with the stereotype are auto-closeable.</text>
         </assertion>
 
         <group>
@@ -880,6 +912,12 @@
 
         <assertion id="b">
             <text>If a stereotype declares both |@Eager| and a default scope for which eager initialization is not permitted, the container automatically detects the problem and treats it as a definition error.</text>
+        </assertion>
+    </section>
+
+    <section id="auto_close_stereotype" title="Declaring an @AutoClose stereotype" level="4">
+        <assertion id="a">
+            <text>A stereotype may declare an |@AutoClose| annotation, which specifies that every bean with the stereotype is auto-closeable.</text>
         </assertion>
     </section>
 
@@ -3156,11 +3194,24 @@
     </section>
 
     <section id="dependent_objects_destruction" title="Destruction of dependent objects" level="3">
-        <assertion id="a">
-            <text>When the container destroys an instance of a bean, the container destroys all dependent objects, as defined in Section 6.4.2, "Destruction of
-                objects with scope @Dependent", after the |@PreDestroy| callback completes.
+        <group>
+            <text>
+                When the container destroys an instance of a bean, the container destroys all dependent objects, after
+                the |@PreDestroy| callback or disposer method completes and after the possible |AutoCloseable.close()| call returns.
             </text>
-        </assertion>
+            <assertion id="aa">
+                <text>Test with |@PreDestroy| callback, without |AutoCloseable.close()|.</text>
+            </assertion>
+            <assertion id="ab">
+                <text>Test with |@PreDestroy| callback, with |AutoCloseable.close()|.</text>
+            </assertion>
+            <assertion id="ac">
+                <text>Test with disposer method, without |AutoCloseable.close()|.</text>
+            </assertion>
+            <assertion id="ad">
+                <text>Test with disposer method, with |AutoCloseable.close()|.</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="producer_or_disposer_methods_invocation" title="Invocation of producer or disposer methods" level="3">
@@ -4938,6 +4989,10 @@
             <text>Invocations of methods declared by |java.lang.Object| are not business method invocations.</text>
         </assertion>
 
+        <assertion id="n">
+            <text>Invocations of |AutoCloseable.close()| on auto-closeable beans during destruction are not business method invocations.</text>
+        </assertion>
+
         <group>
             <text>If, and only if, the invocation is a business method invocation it passes through method interceptors and decorators.</text>
 
@@ -4971,8 +5026,10 @@
         </assertion>
 
         <assertion id="ba">
-            <text>When the |destroy()| method is called, the container destroys the instance, as defined by the Managed Beans specification, and any dependent
-                objects, as defined in Section 5.5.3, "Destruction of dependent objects".
+            <text>
+                When the |destroy()| method is called, the container destroys the instance.
+                Then, if the managed bean is auto-closeable and the class of the contextual instance implements |AutoCloseable|, the |close()| method is called on the instance.
+                Finally, the container destroys dependent objects.
             </text>
         </assertion>
     </section>
@@ -5003,6 +5060,19 @@
                 parameter.
             </text>
         </assertion>
+
+        <group>
+            <text>
+                Then, if the producer method bean is auto-closeable and the class of the contextual instance implements |AutoCloseable|,
+                the |close()| method is called on the instance.
+            </text>
+            <assertion id="na">
+                <text>Test with instance that implements |AutoCloseable|.</text>
+            </assertion>
+            <assertion id="nb">
+                <text>Test with instance that does not implement |AutoCloseable|.</text>
+            </assertion>
+        </group>
 
         <assertion id="r">
             <text>Finally, the container destroys dependent objects, as defined in Section 5.5.3, "Destruction of dependent objects".</text>
@@ -5035,6 +5105,19 @@
                 parameter.
             </text>
         </assertion>
+
+        <group>
+            <text>
+                Then, if the producer field bean is auto-closeable and the class of the contextual instance implements |AutoCloseable|,
+                the |close()| method is called on the instance.
+            </text>
+            <assertion id="pa">
+                <text>Test with instance that implements |AutoCloseable|.</text>
+            </assertion>
+            <assertion id="pb">
+                <text>Test with instance that does not implements |AutoCloseable|.</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="decorators" title="Decorators" level="1">
@@ -6741,6 +6824,10 @@
                 <text>|isEager()| must return |true| if the bean is eagerly initialized, and |false| otherwise.</text>
             </assertion>
 
+            <assertion id="bg">
+                <text>|isAutoClose()| must return |true| if the bean is auto-closeable, and |false| otherwise.</text>
+            </assertion>
+
         </group>
 
         <group>
@@ -6876,9 +6963,9 @@
         </assertion>
 
         <group>
-            <text>For a |Producer| that represents a class, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no
-                parameters otherwise, as defined in Section 5.5.1, "Injection using the bean constructor". and returns the resulting instance. If the class has
-                interceptors, |produce()| is responsible for building the interceptors and decorators of the instance.
+            <text>For a |Producer| that represents a managed bean, |produce()| calls the constructor annotated |@Inject| if it exists, or the constructor with no
+                parameters otherwise, as defined in Section 5.5.1, "Injection using the bean constructor". and returns the resulting instance. If the bean has
+                interceptors or decorators, |produce()| is responsible for building the interceptors and decorators of the instance.
             </text>
             <assertion id="ba">
                 <text>Test field injection occurs</text>
@@ -6899,11 +6986,11 @@
 
 
         <assertion id="c">
-            <text>For a |Producer| that represents a class, |dispose()| does nothing.</text>
+            <text>For a |Producer| that represents a managed bean, |dispose()| only does one thing: if the bean is auto-closeable and the class of the contextual instance of the bean implements |AutoCloseable|, the |close()| method is called on the instance.</text>
         </assertion>
 
         <group>
-            <text>For a |Producer| that represents a class, |getInjectionPoints()| returns a set of |InjectionPoint| objects representing all injected fields,
+            <text>For a |Producer| that represents a managed bean, |getInjectionPoints()| returns a set of |InjectionPoint| objects representing all injected fields,
                 bean constructor parameters and initializer method parameters.
             </text>
 
@@ -6938,6 +7025,7 @@
             <text>For a Producer that represents a producer method or field, |dispose()| calls the disposer method, if any, on a contextual instance of the bean
                 that declares the disposer method, as defined in Section 5.5.4, "Invocation of producer or disposer methods", or performs any additional
                 required cleanup, if any, to destroy state associated with a resource.
+                Then, if the bean is auto-closeable and the class of the contextual instance of the bean implements |AutoCloseable|, the |close()| method is called on the instance.
             </text>
 
             <assertion id="faa">
