@@ -21,6 +21,7 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Martin Kouba
@@ -102,5 +103,13 @@ public class Assert {
             fail(String.format("Collection %s (%s) does not match array %s (%s)", types, types.size(), requiredTypeList,
                     requiredTypeList.size()));
         }
+    }
+
+    /**
+     * @deprecated Use {@link #assertTypesMatch(Collection, Type...)} instead.
+     */
+    @Deprecated(forRemoval = true)
+    public static void assertTypeSetMatches(Set<? extends Type> types, Type... requiredTypes) {
+        assertTypesMatch(types, requiredTypes);
     }
 }

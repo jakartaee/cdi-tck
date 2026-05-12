@@ -15,7 +15,12 @@ package org.jboss.cdi.tck;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.enterprise.context.spi.Context;
@@ -106,6 +111,53 @@ public abstract class AbstractTest extends Arquillian {
 
     protected Configuration getCurrentConfiguration() {
         return ConfigurationFactory.get();
+    }
+
+    /**
+     * @deprecated Use {@link org.jboss.cdi.tck.util.Assert#assertTypesMatch(Collection, Type...)} instead.
+     */
+    @Deprecated(forRemoval = true)
+    protected boolean typeSetMatches(Collection<? extends Type> types, Type... requiredTypes) {
+        List<Type> typeList = Arrays.asList(requiredTypes);
+        return requiredTypes.length == types.size() && types.containsAll(typeList);
+    }
+
+    /**
+     * @deprecated Use {@link org.jboss.cdi.tck.util.Assert#assertAnnotationsMatch(Collection, Class[])} instead.
+     */
+    @Deprecated(forRemoval = true)
+    protected boolean annotationSetMatches(Set<? extends Annotation> annotations,
+            Class<? extends Annotation>... requiredAnnotationTypes) {
+        Set<Class<? extends Annotation>> annotationsTypeSet = new HashSet<>();
+        for (Annotation annotation : annotations) {
+            annotationsTypeSet.add(annotation.annotationType());
+        }
+        return typeSetMatches(annotationsTypeSet, requiredAnnotationTypes);
+    }
+
+    /**
+     * @deprecated Use {@link org.jboss.cdi.tck.util.Assert#assertAnnotationsMatch(Collection, Annotation[])} instead.
+     */
+    @Deprecated(forRemoval = true)
+    protected boolean annotationSetMatches(Set<? extends Annotation> annotations, Annotation... requiredAnnotations) {
+        List<Annotation> requiredAnnotationList = Arrays.asList(requiredAnnotations);
+        return requiredAnnotations.length == annotations.size() && annotations.containsAll(requiredAnnotationList);
+    }
+
+    /**
+     * @deprecated Use {@link org.jboss.cdi.tck.util.Assert#assertTypesMatch(Collection, Type...)} instead.
+     */
+    @Deprecated(forRemoval = true)
+    protected boolean rawTypeSetMatches(Set<Type> types, Class<?>... requiredTypes) {
+        Set<Type> typesRawSet = new HashSet<>();
+        for (Type type : types) {
+            if (type instanceof Class<?>) {
+                typesRawSet.add(type);
+            } else if (type instanceof ParameterizedType) {
+                typesRawSet.add(((ParameterizedType) type).getRawType());
+            }
+        }
+        return typeSetMatches(typesRawSet, requiredTypes);
     }
 
     protected <T> Bean<T> getUniqueBean(Class<T> type, Annotation... bindings) {
