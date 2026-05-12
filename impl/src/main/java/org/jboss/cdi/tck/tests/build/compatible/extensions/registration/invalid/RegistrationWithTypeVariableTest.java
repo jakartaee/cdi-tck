@@ -30,6 +30,7 @@ public class RegistrationWithTypeVariableTest extends AbstractTest {
         return new WebArchiveBuilder()
                 .withTestClass(RegistrationWithTypeVariableTest.class)
                 .withClass(MyGenericService.class)
+                .withClass(RegistrationWithTypeVariableExtension.class)
                 .withBuildCompatibleExtension(RegistrationWithTypeVariableExtension.class)
                 .build();
     }

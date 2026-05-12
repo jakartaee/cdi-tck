@@ -28,6 +28,7 @@ public class RegistrationWithRawTypeLiteralTest extends AbstractTest {
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder()
                 .withTestClass(RegistrationWithRawTypeLiteralTest.class)
+                .withClass(RegistrationWithRawTypeLiteralExtension.class)
                 .withBuildCompatibleExtension(RegistrationWithRawTypeLiteralExtension.class)
                 .build();
     }
