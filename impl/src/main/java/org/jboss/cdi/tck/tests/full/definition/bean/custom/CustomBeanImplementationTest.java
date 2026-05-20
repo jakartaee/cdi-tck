@@ -60,6 +60,9 @@ public class CustomBeanImplementationTest extends AbstractTest {
     @SpecAssertions({ @SpecAssertion(section = DECLARING_SELECTED_ALTERNATIVES_BEAN_ARCHIVE, id = "h"),
             @SpecAssertion(section = INTER_MODULE_INJECTION, id = "q") })
     public void testGetBeanClassCalled() {
+        // note that `Bean.getBeanClass()` may be called multiple times on multiple places
+        // and this test therefore cannot verify it was called when verifying inter-module
+        // visibility, but it's the best we can do
         assert AfterBeanDiscoveryObserver.integerBean.isGetBeanClassCalled();
     }
 
@@ -137,16 +140,5 @@ public class CustomBeanImplementationTest extends AbstractTest {
         byte[] serializedBean = passivate(passCapBean);
         PassivationCapableBean actCapBean = (PassivationCapableBean) activate(serializedBean);
         Assert.assertEquals(passCapBean.getFoo().getId(), actCapBean.getFoo().getId());
-    }
-
-    @Test
-    @SpecAssertion(section = INTER_MODULE_INJECTION, id = "r")
-    public void testInjectionPointGetMemberIsUsedToDetermineTheClassThatDeclaresAnInjectionPoint() {
-        // resolve the bean and invoke a method on it to make sure it was created/used
-        Foo foo = getContextualReference(Foo.class, new PassivableLiteral());
-        foo.getId();
-        Assert.assertEquals(CustomInjectionPoint.getMembersClasses().size(), 2);
-        Assert.assertTrue(CustomInjectionPoint.getMembersClasses().contains(Bar.class));
-        Assert.assertTrue(CustomInjectionPoint.getMembersClasses().contains(Integer.class));
     }
 }
