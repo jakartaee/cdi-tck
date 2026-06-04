@@ -2,150 +2,122 @@
 
 == Running the Signature Test
 
-One of the requirements of an implementation passing the TCK is for it to pass the CDI signature test. This section describes how the signature file is generated and how to run it against your implementation. 
-
+One of the requirements of an implementation passing the TCK is for it to pass the CDI signature test.
+This section describes how to run the signature test against your implementation.
 
 === Obtaining the sigtest plugin
 
-The sigtest plugin is availble from Maven Central using a dependency like:
+The sigtest plugin is available from Maven Central using a dependency like:
+
 [source, xml]
 ----
 ...
     <plugin>
-    <groupId>jakarta.tck</groupId>
-    <artifactId>sigtest-maven-plugin</artifactId>
-    <version>2.2</version>
+        <groupId>jakarta.tck</groupId>
+        <artifactId>sigtest-maven-plugin</artifactId>
+        <version>2.6</version>
     </plugin>
 ----
 
-The source for the sigtest plugin can be found here:
-https://github.com/eclipse-ee4j/jakartaee-tck-tools/tree/master/tools/sigtest
+The source for the sigtest plugin can be found here: https://github.com/eclipse-ee4j/jakartaee-tck-tools/tree/master/tools/sigtest
 
 === Running the signature test
-To run the signature test, use a pom file like that found in
-https://github.com/jakartaee/cdi-tck/blob/master/impl/src/main/resources/sigtest-pom.xml and shown here:
+
+To run the signature test, use a POM file like this:
+
 [source, xml]
 ----
 <?xml version="1.0"?>
-<!-- Sample maven pom to verify signatures -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <!-- For access to staging repos, add -Pstaging -->
-  <parent>
-    <groupId>org.eclipse.ee4j</groupId>
-    <artifactId>project</artifactId>
-    <version>2.0.2</version>
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>jakarta.cdi</groupId>
-  <artifactId>cdi-tck-sigtest</artifactId>
-  <version>5.0</version>
-  <name>CDI TCK Signature Tests</name>
-  <description>CDI TCK Signature test validation of CDI dependent API jars</description>
-  <properties>
-    <!-- Set the api jar artifact versions here -->
-    <annotations.api.version>3.0.0</annotations.api.version>
-    <interceptors.api.version>2.2.0</interceptors.api.version>
-    <atinject.api.version>2.0.1</atinject.api.version>
-    <el.api.version>6.0.1</el.api.version>
-    <cdi.api.version>5.0.0.Alpha4</cdi.api.version>
-  </properties>
+    <parent>
+        <groupId>org.eclipse.ee4j</groupId>
+        <artifactId>project</artifactId>
+        <version>2.0.2</version>
+    </parent>
 
-  <!-- Set the api jar artifact dependencies here -->
-  <dependencies>
-    <dependency>
-      <groupId>jakarta.annotation</groupId>
-      <artifactId>jakarta.annotation-api</artifactId>
-      <version>${annotations.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.el</groupId>
-      <artifactId>jakarta.el-api</artifactId>
-      <version>${el.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.interceptor</groupId>
-      <artifactId>jakarta.interceptor-api</artifactId>
-      <version>${interceptors.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.inject</groupId>
-      <artifactId>jakarta.inject-api</artifactId>
-      <version>${atinject.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.cdi</groupId>
-      <artifactId>jakarta.cdi-lang-model-api</artifactId>
-      <version>${cdi.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.cdi</groupId>
-      <artifactId>jakarta.cdi-api</artifactId>
-      <version>${cdi.api.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>jakarta.cdi</groupId>
-      <artifactId>jakarta.cdi-el-api</artifactId>
-      <version>${cdi.api.version}</version>
-    </dependency>
-  </dependencies>
+    <groupId>jakarta.cdi</groupId>
+    <artifactId>cdi-tck-sigtest</artifactId>
+    <version>5.0</version>
 
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>unpack-dependencies</id>
-            <phase>package</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <stripVersion>true</stripVersion>
-              <overWriteReleases>true</overWriteReleases>
-              <outputDirectory>target/classes</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>jakarta.tck</groupId>
-        <artifactId>sigtest-maven-plugin</artifactId>
-        <version>2.2</version>
-        <executions>
-          <execution>
-            <id>sigtest</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <sigfile>cdi-api-jdk17.sigfile</sigfile>
-          <packages>jakarta.decorator,jakarta.enterprise.**,jakarta.interceptor</packages>
-          <classes>target/classes</classes>
-          <report>cdi-sig-report.txt</report>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <properties>
+        <weld.version>7.0.0.Beta1</weld.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jboss.weld</groupId>
+            <artifactId>weld-core-impl</artifactId>
+            <version>${weld.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>download-sigfile</id>
+                        <phase>generate-test-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>jakarta.cdi</groupId>
+                                    <artifactId>jakarta.cdi-tck-core-impl</artifactId>
+                                    <version>${version.cdi-tck}</version>
+                                    <type>sigfile</type>
+                                    <classifier>jdk17</classifier>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                    <destFileName>cdi-api.sigfile</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>jakarta.tck</groupId>
+                <artifactId>sigtest-maven-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>sigtest</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <action>strictcheck</action>
+                    <sigfile>${project.build.directory}/cdi-api.sigfile</sigfile>
+                    <packages>jakarta.decorator,jakarta.enterprise.**,jakarta.interceptor</packages>
+                    <report>${project.build.directory}/cdi-sig-report.xml</report>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
 ----
-Your version should specify the dependencies on these jars as used in your compatible implementation.
 
-[source, console]
+[source]
 ----
-(base) starksm@Scotts-Mac-Studio impl % mvn -Djdk.major.version=21 -Dsignature process-resources
+(base) starksm@Scotts-Mac-Studio impl % mvn clean test
 ...
-[INFO] --- sigtest:2.1:check (sigtest) @ cdi-tck-sigtest ---
+[INFO] --- sigtest:2.6:check (sigtest) @ cdi-tck-sigtest ---
 [INFO] Packages: jakarta.decorator,jakarta.enterprise.**,jakarta.interceptor
 Feb 16, 2024 11:42:25 PM com.sun.tdk.signaturetest.SignatureTest parseParameters
-INFO: SignatureTest.args: [-FileName, /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/cdi-api-jdk17.sigfile, -static, -b, -Mode, bin, -ApiVersion, 4.1, -PackageWithoutSubpackages, jakarta.decorator, -Package, jakarta.enterprise, -PackageWithoutSubpackages, jakarta.interceptor, -BootCP, -Classpath, /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/target/classes:/Users/starksm/.m2/repository/jakarta/annotation/jakarta.annotation-api/3.0.0-M1/jakarta.annotation-api-3.0.0-M1.jar:/Users/starksm/.m2/repository/jakarta/el/jakarta.el-api/5.0.1/jakarta.el-api-5.0.1.jar:/Users/starksm/.m2/repository/jakarta/interceptor/jakarta.interceptor-api/2.2.0-M1/jakarta.interceptor-api-2.2.0-M1.jar:/Users/starksm/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/starksm/.m2/repository/jakarta/enterprise/jakarta.enterprise.lang-model/4.1.0.Beta1/jakarta.enterprise.lang-model-4.1.0.Beta1.jar:/Users/starksm/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/4.1.0.Beta1/jakarta.enterprise.cdi-api-4.1.0.Beta1.jar]
+INFO: SignatureTest.args: [-FileName, /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/cdi-api.sigfile, -static, -ApiVersion, 4.1, -PackageWithoutSubpackages, jakarta.decorator, -Package, jakarta.enterprise, -PackageWithoutSubpackages, jakarta.interceptor, -BootCP, 17, -Classpath, /Users/starksm/Dev/Jakarta/rh-cdi-tck/impl/src/main/resources/target/classes:/Users/starksm/.m2/repository/jakarta/annotation/jakarta.annotation-api/3.0.0-M1/jakarta.annotation-api-3.0.0-M1.jar:/Users/starksm/.m2/repository/jakarta/el/jakarta.el-api/5.0.1/jakarta.el-api-5.0.1.jar:/Users/starksm/.m2/repository/jakarta/interceptor/jakarta.interceptor-api/2.2.0-M1/jakarta.interceptor-api-2.2.0-M1.jar:/Users/starksm/.m2/repository/jakarta/inject/jakarta.inject-api/2.0.1/jakarta.inject-api-2.0.1.jar:/Users/starksm/.m2/repository/jakarta/enterprise/jakarta.enterprise.lang-model/4.1.0.Beta1/jakarta.enterprise.lang-model-4.1.0.Beta1.jar:/Users/starksm/.m2/repository/jakarta/enterprise/jakarta.enterprise.cdi-api/4.1.0.Beta1/jakarta.enterprise.cdi-api-4.1.0.Beta1.jar]
 [INFO] SignatureTest report
-Base version: 5.0.0.Alpha4
+Base version: 5.0.0.Beta1
 Tested version: 5.0
 Check mode: bin [throws removed]
 Constant checking: on
@@ -162,115 +134,44 @@ Warning: The return type java.lang.reflect.Member can't be resolved
 [INFO] Total time:  2.021 s
 [INFO] Finished at: 2024-02-16T23:42:25-06:00
 [INFO] ------------------------------------------------------------------------
-
 ----
 
 You can ignore the following warnings:
-+"The return type java.lang.reflect.Member can't be resolved"+
 
-The important thing is that the mvn version shows "BUILD SUCCESS".
-
-Another example that just specifies a compatible implementation test as the dependency to validate the API artifact signatures from the transitive dependencies is pom file like that found in the cdi dist artifacts/sigtest-weld.xml and shown here:
-[source, xml]
+[source]
 ----
-<?xml version="1.0"?>
-<!-- Sample maven pom to verify signatures using only the weld-core-imp artifiact and its dependencies -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <!-- For access to staging repos, add -Pstaging -->
-  <parent>
-    <groupId>org.eclipse.ee4j</groupId>
-    <artifactId>project</artifactId>
-    <version>2.0.2</version>
-  </parent>
-
-  <groupId>jakarta.cdi</groupId>
-  <artifactId>cdi-tck-weld-sigtest</artifactId>
-  <version>5.0</version>
-  <name>CDI TCK Signature Tests</name>
-  <description>CDI TCK Signature test validation of CDI dependent API jars</description>
-  <properties>
-    <!-- Set the Weld version to test -->
-    <weld.version>7.0.0.Alpha1</weld.version>
-  </properties>
-
-  <!-- Set the api jar artifact dependencies here -->
-  <dependencies>
-    <dependency>
-      <groupId>org.jboss.weld</groupId>
-      <artifactId>weld-core-impl</artifactId>
-      <version>${weld.version}</version>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>unpack-dependencies</id>
-            <phase>package</phase>
-            <goals>
-              <goal>unpack-dependencies</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>target/classes</outputDirectory>
-              <overWriteReleases>false</overWriteReleases>
-              <overWriteSnapshots>false</overWriteSnapshots>
-              <overWriteIfNewer>true</overWriteIfNewer>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>jakarta.tck</groupId>
-        <artifactId>sigtest-maven-plugin</artifactId>
-        <version>2.1</version>
-        <executions>
-          <execution>
-            <id>sigtest</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <sigfile>cdi-api-jdk17.sigfile</sigfile>
-          <packages>jakarta.decorator,jakarta.enterprise.**,jakarta.interceptor</packages>
-          <classes>target/classes</classes>
-          <report>cdi-sig-report.xml</report>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-</project>
+The return type java.lang.reflect.Member can't be resolved
 ----
-To verify the signatures of the Weld version specified in the artifacts/sigtest-weld-pom.xml, run:
 
-```
-% mvn -f artifacts/sigtest-weld-pom.xml verify
-...
-[INFO] /Users/starksm/Dev/Jakarta/rh-cdi-tck/dist-build/target/cdi-tck-4.1.0-SNAPSHOT/artifacts/cdi-sig-report.xml: 0 failures in /Users/starksm/Dev/Jakarta/rh-cdi-tck/dist-build/target/cdi-tck-4.1.0-SNAPSHOT/artifacts/cdi-tck-core-impl-4.1.0-SNAPSHOT-sigtest-jdk17.sig
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-```
+The important thing is that Maven shows `BUILD SUCCESS`.
 
-=== CDI Lite Signature Tests
-CDI Lite requires the same signature tests as Full. Even though CDI Lite does not require some of the Jakarta Interceptors behaviors, we did not want to restrict what CDI Lite implementations might provide in the way of interceptors, for example, an implementation that supports both Lite and Full. An implementation of CDI Lite can simply depend on the Jakarta Interceptors API artifact to meet the signature test requirements.
+=== CDI Lite signature tests
+
+CDI Lite requires the same signature tests as CDI Full.
+
+If your implementation only supports CDI Lite and does not support CDI Full:
+
+* you are required to provide the exact same CDI API, CDI Lang Model API, and Interceptors API
+* you are _not_ required to provide the CDI EL API
+
+To prevent the signature test from failing, you should exclude the relevant package in the `sigtest-maven-plugin` configuration:
+
+[source,xml]
+----
+<excludes>jakarta.enterprise.inject.spi.el</excludes>
+----
 
 === Forcing a signature test failure
 
-Just for fun (and to confirm that the signature test is working correctly), you can try the following:
+Just for fun (and to confirm that the signature test works correctly), you can try the following:
 
-1) Edit cdi-api-jdk11.sigfile
+. Edit `cdi-api.sigfile`
 
-2) Modify one of the class signatures - in the following example we change one of the constructors for +BusyConversationException+ - here's the original:
-
-[source, console]
+. Modify one of the class signatures.
+In the following example, we change one of the constructors of `BusyConversationException`.
+Here's the original:
++
+[source]
 ----
 CLSS public jakarta.enterprise.context.BusyConversationException
 cons public BusyConversationException()
@@ -279,12 +180,11 @@ cons public BusyConversationException(java.lang.String,java.lang.Throwable)
 cons public BusyConversationException(java.lang.Throwable)
 supr jakarta.enterprise.context.ContextException
 hfds serialVersionUID
-
 ----
-
-Let's change the default (empty) constructor parameter to one with a +java.lang.Integer+ parameter instead:
-
-[source, console]
++
+Let's change the default (zero-param) constructor to have a `java.lang.Integer` parameter instead:
++
+[source]
 ----
 CLSS public jakarta.enterprise.context.BusyConversationException
 cons public BusyConversationException(java.lang.Integer)
@@ -293,25 +193,19 @@ cons public BusyConversationException(java.lang.String,java.lang.Throwable)
 cons public BusyConversationException(java.lang.Throwable)
 supr jakarta.enterprise.context.ContextException
 hfds serialVersionUID
-
 ----
 
-3) Now when we run the signature test using the above command, we should get the following errors:
-
-
-[source, console]
-....
+. Now when we run the signature test, we should get the following errors:
++
+[source]
+----
 Missing Constructors
 --------------------
 
-jakarta.enterprise.context.BusyConversationException:         constructor public jakarta.enterprise.context.BusyConversationException.BusyConversationException(java.lang.Integer)
+jakarta.enterprise.context.BusyConversationException:       constructor public jakarta.enterprise.context.BusyConversationException.init(java.lang.Integer)
 
 Added Constructors
 ------------------
 
-jakarta.enterprise.context.BusyConversationException:         constructor public jakarta.enterprise.context.BusyConversationException.BusyConversationException()
-
-
-STATUS:Failed.2 errors
-....
-
+jakarta.enterprise.context.BusyConversationException:       constructor public jakarta.enterprise.context.BusyConversationException.init()
+----

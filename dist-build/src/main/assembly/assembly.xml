@@ -28,8 +28,9 @@
             TCK passes the signature tests.
       -->
       <file>
-         <source>${project.basedir}/../impl/src/main/resources/sigtest-weld-pom.xml</source>
+         <source>sigtest-weld.pom</source>
          <outputDirectory>artifacts</outputDirectory>
+         <destName>sigtest-weld-pom.xml</destName>
          <filtered>true</filtered>
       </file>
       <!-- Install the Weld and Weld/WildFly sample TCK runner pom with filtering to pickup the correct versions

@@ -118,7 +118,7 @@
         <apache.httpclient.version>3.1</apache.httpclient.version>
         <xmlunit.version>2.9.1</xmlunit.version>
         <!-- Required for distribution build, should be overriden for each build -->
-        <weld.version>6.0.0.Beta1</weld.version>
+        <weld.version>7.0.0.Beta1</weld.version>
     </properties>
 
     <!-- Dependency management -->
