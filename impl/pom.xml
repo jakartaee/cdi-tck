@@ -150,9 +150,9 @@
                                     <classifier>audit-int</classifier>
                                 </artifact>
                                 <artifact>
-                                    <file>${basedir}/src/main/resources/cdi-api-jdk17.sigfile</file>
+                                    <file>${project.build.directory}/cdi-api.sigfile</file>
                                     <type>sigfile</type>
-                                    <classifier>sigtest-jdk17</classifier>
+                                    <classifier>jdk${maven.compiler.release}</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>
@@ -359,13 +359,9 @@
             <id>signature-generation</id>
             <activation>
                 <property>
-                    <name>signature</name>
+                    <name>!skipSignature</name>
                 </property>
             </activation>
-            <properties>
-                <!--Default assumed JDK version, can be overriden via -Djdk.major.version=X-->
-                <jdk.major.version>17</jdk.major.version>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -456,8 +452,8 @@
                                 jakarta.enterprise.lang.model.types,
                                 jakarta.interceptor
                             </packages>
+                            <sigfile>${project.build.directory}/cdi-api.sigfile</sigfile>
                             <attach>false</attach>
-                            <sigfile>${project.build.directory}/cdi-api-jdk${jdk.major.version}.sigfile</sigfile>
                         </configuration>
                     </plugin>
                 </plugins>
