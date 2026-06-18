@@ -3826,32 +3826,37 @@
     </section>
 
     <section id="builtin_instance" title="The built-in Instance" level="3">
-        <assertion id="a" testable="false">
-            <text>The container must provide a built-in bean that is eligible for injection to any injection point with required type Instance &lt;X&gt; or
-                Provider&lt;&gt;, for any
-                legal bean type X.
+        <group>
+            <text>
+                The container must provide a built-in bean with:
             </text>
-        </assertion>
 
-        <assertion id="b" testable="false">
-            <text>The container must provide a built-in bean that has any qualifiers.</text>
-        </assertion>
+            <assertion id="a" testable="false">
+                <text>
+                    |Instance&lt;X&gt;| and |Provider&lt;X&gt;| for every legal bean type |X| in its set of bean types,
+                </text>
+            </assertion>
 
-        <assertion id="d">
-            <text>The container must provide a built-in bean with scope @Dependent.</text>
-        </assertion>
+            <assertion id="b" testable="false">
+                <text>every qualifier type in its set of qualifier types,</text>
+            </assertion>
 
-        <assertion id="e">
-            <text>The container must provide a built-in bean with no bean name.</text>
-        </assertion>
+            <assertion id="d">
+                <text>scope |@Dependent|,</text>
+            </assertion>
 
-        <assertion id="f">
-            <text>The container must provide a built-in bean with an implementation provided automatically by the container.</text>
-        </assertion>
+            <assertion id="e">
+                <text>no bean name, and</text>
+            </assertion>
 
-        <assertion id="g">
-            <text>The built-in implementation must be a passivation capable dependency, as defined in Section 6.6.2, "Passivation capable dependencies".</text>
-        </assertion>
+            <assertion id="f">
+                <text>an implementation provided automatically by the container.</text>
+            </assertion>
+
+            <assertion id="g">
+                <text>The built-in implementation must be a passivation capable dependency, as defined in Section 6.6.2, "Passivation capable dependencies".</text>
+            </assertion>
+        </group>
     </section>
 
     <section id="annotationliteral_typeliteral" title="Using AnnotationLiteral and TypeLiteral" level="3">
