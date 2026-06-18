@@ -29,6 +29,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
+import java.util.List;
 
 import jakarta.enterprise.context.spi.CreationalContext;
 import jakarta.enterprise.event.Event;
@@ -128,8 +129,8 @@ public class FireEventTest extends AbstractTest {
      **/
     // Simplify assertions
     @Test(groups = REWRITE)
-    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "b"),
-            @SpecAssertion(section = EVENT, id = "cb") })
+    @SpecAssertion(section = FIRING_EVENTS_SYNCHRONOUSLY, id = "b")
+    @SpecAssertion(section = EVENT, id = "cba")
     public void testInjectedEventAcceptsEventObject() throws SecurityException, NoSuchFieldException, NoSuchMethodException {
         Billing billing = getContextualReference(Billing.class);
         billing.reset();
@@ -172,15 +173,28 @@ public class FireEventTest extends AbstractTest {
         assertEquals(billing.getMiniBarValue(), 16);
     }
 
+    @SpecAssertion(section = EVENT, id = "cbb")
+    public void testInjectedEventAcceptsWildcardWithLowerBound() {
+        Bartender bartender = getContextualReference(Bartender.class);
+        bartender.reset();
+
+        Drinker drinker = getContextualReference(Drinker.class);
+
+        drinker.drinkBeer();
+        drinker.drinkWine();
+
+        assertEquals(List.of("Beer", "Wine"), Bartender.drinks);
+    }
+
     /**
-     * This test verifies that the {@link Event} object representing an {@link Item} with the {@link Lifted} binding type is
+     * This test verifies that the {@link Event} object representing an {@link Item} with the {@link Lifted} qualifier type is
      * properly injected and that this object can be used to fire an event. The functionality is verified by checking that the
-     * cooresponding observer gets invoked.
+     * corresponding observer gets invoked.
      */
     @SuppressWarnings("serial")
     // Simplify assertions
     @Test(groups = REWRITE)
-    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS, id = "c"), @SpecAssertion(section = EVENT, id = "cb") })
+    @SpecAssertions({ @SpecAssertion(section = FIRING_EVENTS, id = "c"), @SpecAssertion(section = EVENT, id = "cc") })
     public void testInjectedEventCanHaveBindings() {
         Billing billing = getContextualReference(Billing.class);
         billing.reset();

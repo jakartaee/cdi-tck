@@ -3592,9 +3592,26 @@
             </text>
         </assertion>
 
-        <assertion id="ab">
-            <text>For an injected |Instance|, the required type is the type parameter specified at the injection point, and the required qualifiers are the
-                qualifiers specified at the injection point.
+        <group>
+            <text>
+                For an injected |Instance|, the _required type_ is the type argument specified at the injection point,
+                unless the type argument is a wildcard with upper bound (or an unbounded wildcard), in which case
+                the required type is the wildcard's upper bound (or |java.lang.Object|).
+            </text>
+            <assertion id="aba">
+                <text>Test with plain type</text>
+            </assertion>
+            <assertion id="abb">
+                <text>Test with wildcard with upper bound</text>
+            </assertion>
+            <assertion id="abc">
+                <text>Test with unbounded wildcard</text>
+            </assertion>
+        </group>
+
+        <assertion id="ac">
+            <text>
+                For an injected |Instance|, the _required qualifiers_ are the qualifiers specified at the injection point.
             </text>
         </assertion>
 
@@ -3608,16 +3625,46 @@
             <text>Rules specified at "The default qualifier at injection points" are applied before performing typesafe resolution.</text>
         </assertion>
 
-        <assertion id="c">
-            <text>If an injection point of raw type |Instance| is defined, the container automatically detects the problem and treats it as a definition
-                error.
-            </text>
-        </assertion>
+        <group>
+            <text>
+                If an injection point of
 
-        <assertion id="ca">
-            <text>The required type must not be a wildcard type.
-                If an injected |Instance| has a required type that is either a wildcard type or an |Event| whose specified type is a wildcard type, the container treats it as a definition error.
-                If a programmatically obtained |Instance| has a required type that is a wildcard type, non-portable behavior results.
+                raw type |Instance|, or
+                type |Instance&lt;? super X&gt;|, for any type |X|, or
+                type |Instance&lt;X&gt;| or |Instance&lt;? extends X&gt;|, where |X| is a type for which an injection point may not exist, as specified in The built-in |Event|,
+
+                is defined, the container automatically detects the problem and treats it as a definition error.
+            </text>
+            <assertion id="ca">
+                <text>raw type |Instance|</text>
+            </assertion>
+            <assertion id="cb">
+                <text>type |Instance&lt;? super X&gt;|, for any type |X|</text>
+            </assertion>
+            <assertion id="cc">
+                <text>type |Instance&lt;Event&gt;|</text>
+            </assertion>
+            <assertion id="cd">
+                <text>type |Instance&lt;Event&lt;?&gt;&gt;|</text>
+            </assertion>
+            <assertion id="ce">
+                <text>type |Instance&lt;Event&lt;? extends X&gt;&gt;|, for any type |X|</text>
+            </assertion>
+            <assertion id="cf">
+                <text>type |Instance&lt;? extends Event&gt;|</text>
+            </assertion>
+            <assertion id="cg">
+                <text>type |Instance&lt;? extends Event&lt;?&gt;&gt;|</text>
+            </assertion>
+            <assertion id="ch">
+                <text>type |Instance&lt;? extends Event&lt;? extends X&gt;&gt;|, for any type |X|</text>
+            </assertion>
+        </group>
+
+        <assertion id="cz">
+            <text>
+                If programmatically obtaining an |Instance| whose required type is a wildcard with lower bound is attempted,
+                an |IllegalArgumentException| is thrown.
             </text>
         </assertion>
 
@@ -5750,9 +5797,21 @@
             <text>The |Event| interface provides a method for firing events with a specified combination of type and qualifiers.</text>
         </assertion>
 
-        <assertion id="cb">
-            <text>For an injected |Event|, the specified type is the type parameter specified at the injection point, and the specified qualifiers are the
-                qualifiers specified at the injection point.
+        <group>
+            <text>
+                For an injected |Event|, the _specified type_ is the type argument specified at the injection point,
+                unless the type argument is a wildcard with lower bound, in which case the specified type is the wildcard's lower bound.
+            </text>
+            <assertion id="cba">
+                <text>Test with plain type</text>
+            </assertion>
+            <assertion id="cbb">
+                <text>Test with wildcard with lower bound</text>
+            </assertion>
+        </group>
+
+        <assertion id="cc">
+            <text>For an injected |Event|, the specified qualifiers are the qualifiers specified at the injection point.
             </text>
         </assertion>
 
@@ -5767,9 +5826,10 @@
         </assertion>
 
         <assertion id="eac">
-            <text>The specified type must not be a wildcard type.
-                If an injected |Event| has a specified type that is a wildcard type, the container treats it as a definition error.
-                If a programmatically obtained |Event| has a specified type that is a wildcard type, non-portable behavior results..</text>
+            <text>
+                If programmatically obtaining an |Event| whose specified type is a wildcard without lower bound is attempted,
+                an |IllegalArgumentException| is thrown.
+            </text>
         </assertion>
 
         <assertion id="eba">
@@ -5822,7 +5882,7 @@
 
     <section id="builtin_event" title="The built-in Event" level="3">
         <assertion id="a">
-            <text>The container must provide a built-in bean with |Event&lt;X&gt;| in its set of bean types, for every Java type |x| that does not contain a
+            <text>The container must provide a built-in bean with |Event&lt;X&gt;| in its set of bean types, for every Java type |X| that does not contain a
                 type variable.
             </text>
         </assertion>
@@ -5843,12 +5903,28 @@
             <text>The container must provide a built-in bean with an implementation provided automatically by the container.</text>
         </assertion>
 
-        <assertion id="e">
-            <text>If an injection point of raw type |Event| is defined, the container automatically detects the problem and treats it as a definition error.
-            </text>
-        </assertion>
+        <group>
+            <text>
+                If an injection point of
 
-        <assertion id="g">
+                raw type |Event|, or
+                type |Event&lt;?&gt;|, or
+                type |Event&lt;? extends X&gt;|, for any type |X|,
+
+                is defined, the container automatically detects the problem and treats it as a definition error.
+            </text>
+            <assertion id="ga">
+                <text>raw type |Event|</text>
+            </assertion>
+            <assertion id="gb">
+                <text>type |Event&lt;?&gt;|</text>
+            </assertion>
+            <assertion id="gc">
+                <text>type |Event&lt;? extends X&gt;|, for any type |X|</text>
+            </assertion>
+        </group>
+
+        <assertion id="h">
             <text>The built-in implementation must be a passivation capable dependency, as defined in Section 6.6.2, "Passivation capable
                 dependencies (CDI Full)".
             </text>
