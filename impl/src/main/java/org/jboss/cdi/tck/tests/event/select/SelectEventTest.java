@@ -14,7 +14,14 @@
 package org.jboss.cdi.tck.tests.event.select;
 
 import static org.jboss.cdi.tck.cdi.Sections.EVENT;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertThrows;
 
+import java.util.Collection;
+
+import jakarta.enterprise.event.Event;
+import jakarta.enterprise.inject.Instance;
+import jakarta.enterprise.inject.spi.CDI;
 import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -78,6 +85,25 @@ public class SelectEventTest extends AbstractTest {
         SecuritySensor sensor = getContextualReference(SecuritySensor.class);
         sensor.securityEvent.select(new TypeLiteral<SecurityEvent_Illegal<T>>() {
         });
+    }
+
+    @Test
+    @SpecAssertion(section = EVENT, id = "eac")
+    public void testLookupThrowsExceptionIfEventTypeIsWildcardWithoutLowerBound() {
+        Instance<Object> lookup = CDI.current();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            lookup.select(new TypeLiteral<Event<?>>() {
+            }).get();
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            lookup.select(new TypeLiteral<Event<? extends Number>>() {
+            }).get();
+        });
+
+        assertNotNull(lookup.select(new TypeLiteral<Event<? super Collection<String>>>() {
+        }).get());
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)

@@ -42,7 +42,7 @@ public class RawEventDisposerInjectionTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = BUILTIN_EVENT, id = "e")
+    @SpecAssertion(section = BUILTIN_EVENT, id = "ga")
     public void testDefinitionError() {
         // Test initialization is aborted by the container
     }
