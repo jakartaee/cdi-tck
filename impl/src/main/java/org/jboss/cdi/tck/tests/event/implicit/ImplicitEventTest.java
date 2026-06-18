@@ -107,7 +107,7 @@ public class ImplicitEventTest extends AbstractTest {
     }
 
     @Test(groups = TestGroups.CDI_FULL)
-    @SpecAssertions({ @SpecAssertion(section = BUILTIN_EVENT, id = "g"),
+    @SpecAssertions({ @SpecAssertion(section = BUILTIN_EVENT, id = "h"),
             @SpecAssertion(section = PASSIVATION_CAPABLE_DEPENDENCY, id = "eb") })
     public void testImplicitEventIsPassivationCapable() throws IOException, ClassNotFoundException {
         StudentDirectory directory = getContextualReference(StudentDirectory.class);
