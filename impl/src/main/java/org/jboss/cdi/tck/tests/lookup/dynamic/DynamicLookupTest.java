@@ -21,6 +21,7 @@ import static org.jboss.cdi.tck.cdi.Sections.PROVIDER;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertThrows;
 import static org.testng.Assert.assertTrue;
 
 import java.util.Iterator;
@@ -31,6 +32,7 @@ import jakarta.enterprise.inject.Any;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.UnsatisfiedResolutionException;
 import jakarta.enterprise.inject.spi.CDI;
+import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -64,6 +66,23 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "cz")
+    public void testObtainingInstanceWithWildcardTypeArgument() {
+        Instance<Object> lookup = CDI.current();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            lookup.select(new TypeLiteral<Instance<? super Integer>>() {
+            }).get();
+        });
+
+        assertNotNull(lookup.select(new TypeLiteral<Instance<?>>() {
+        }).get());
+
+        assertNotNull(lookup.select(new TypeLiteral<Instance<? extends Number>>() {
+        }).get());
+    }
+
+    @Test
     @SpecAssertion(section = DYNAMIC_LOOKUP, id = "da")
     public void testDuplicateBindingsThrowsException() {
         try {
@@ -92,10 +111,13 @@ public class DynamicLookupTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertions({ @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ba"),
-            @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ca"),
-            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "aa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ab"),
-            @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fa"), @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fc") })
+    @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ba")
+    @SpecAssertion(section = PROGRAMMATIC_LOOKUP, id = "ca")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "aa")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "aba")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ac")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fa")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "fc")
     public void testGetMethod() {
         // initial setup of contextual instance
         getContextualReference(AdvancedPaymentProcessor.class, Any.Literal.INSTANCE).setValue(10);
@@ -104,6 +126,24 @@ public class DynamicLookupTest extends AbstractTest {
                 .getPaymentProcessor();
         assertTrue(instance.get() instanceof AdvancedPaymentProcessor);
         assertEquals(instance.get().getValue(), 10);
+    }
+
+    @Test
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "abb")
+    public void testInstanceOfWildcardWithUpperBound() {
+        Instance<? extends Uncommon> instance = getContextualReference(ObtainsInstanceBean.class).getWildcardWithUpperBound();
+        // there are 2 beans that implement `Uncommon`: `Corge` and `Garply`
+        assertTrue(instance.isAmbiguous());
+        assertEquals(instance.stream().count(), 2L);
+    }
+
+    @Test
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "abc")
+    public void testInstanceOfUnboundedWildcard() {
+        Instance<?> instance = getContextualReference(ObtainsInstanceBean.class).getUnboundedWildcard();
+        // there are enabled alternatives and exactly 1 has highest priority
+        assertTrue(instance.isResolvable());
+        assertTrue(instance.get() instanceof Baz);
     }
 
     @Test

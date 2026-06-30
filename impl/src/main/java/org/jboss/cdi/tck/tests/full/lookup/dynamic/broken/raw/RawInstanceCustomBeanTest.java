@@ -50,7 +50,7 @@ public class RawInstanceCustomBeanTest extends AbstractTest {
     }
 
     @Test
-    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "c")
+    @SpecAssertion(section = DYNAMIC_LOOKUP, id = "ca")
     public void testDefinitionError() {
         // Test initialization is aborted by the container
     }

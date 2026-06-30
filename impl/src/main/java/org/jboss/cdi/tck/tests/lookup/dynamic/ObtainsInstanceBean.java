@@ -33,6 +33,12 @@ public class ObtainsInstanceBean {
     @Inject
     Instance<Common> common;
 
+    @Inject
+    Instance<? extends Uncommon> wildcardOfUncommon;
+
+    @Inject
+    Instance<?> unboundedWildcard;
+
     public Instance<AsynchronousPaymentProcessor> getPaymentProcessor() {
         return paymentProcessor;
     }
@@ -43,5 +49,13 @@ public class ObtainsInstanceBean {
 
     public Instance<Common> getCommon() {
         return common;
+    }
+
+    public Instance<? extends Uncommon> getWildcardWithUpperBound() {
+        return wildcardOfUncommon;
+    }
+
+    public Instance<?> getUnboundedWildcard() {
+        return unboundedWildcard;
     }
 }
