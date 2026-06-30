@@ -3838,7 +3838,7 @@
             </assertion>
 
             <assertion id="b" testable="false">
-                <text>every qualifier type in its set of qualifier types,</text>
+                <text>all possible qualifiers in its set of qualifiers,</text>
             </assertion>
 
             <assertion id="d">
@@ -5893,7 +5893,7 @@
         </assertion>
 
         <assertion id="b">
-            <text>The container must provide a built-in bean with every event qualifier type in its set of qualifier types.</text>
+            <text>The container must provide a built-in bean with all possible qualifiers in its set of qualifiers.</text>
         </assertion>
 
         <assertion id="d">
