@@ -3663,8 +3663,8 @@
 
         <assertion id="cz">
             <text>
-                If programmatically obtaining an |Instance| whose required type is a wildcard with lower bound is attempted,
-                an |IllegalArgumentException| is thrown.
+                If the application attempts to programmatically obtain an |Instance| whose required type is a wildcard
+                with lower bound, an |IllegalArgumentException| is thrown.
             </text>
         </assertion>
 
@@ -5832,8 +5832,8 @@
 
         <assertion id="eac">
             <text>
-                If programmatically obtaining an |Event| whose specified type is a wildcard without lower bound is attempted,
-                an |IllegalArgumentException| is thrown.
+                If the application attempts to programmatically obtain an |Event| whose specified type is a wildcard
+                without lower bound, an |IllegalArgumentException| is thrown.
             </text>
         </assertion>
 
