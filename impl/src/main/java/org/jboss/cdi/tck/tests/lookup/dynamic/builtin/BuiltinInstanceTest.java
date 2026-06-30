@@ -13,16 +13,25 @@
  */
 package org.jboss.cdi.tck.tests.lookup.dynamic.builtin;
 
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_EVENT;
 import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_INSTANCE;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
+import java.lang.reflect.ParameterizedType;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Default;
 import jakarta.enterprise.inject.Instance;
 import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.AnnotationLiteral;
 import jakarta.enterprise.util.TypeLiteral;
+import jakarta.inject.Provider;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.cdi.tck.AbstractTest;
@@ -46,6 +55,37 @@ public class BuiltinInstanceTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(BuiltinInstanceTest.class).build();
+    }
+
+    @Test
+    @SpecAssertion(section = BUILTIN_EVENT, id = "a")
+    public void testBeanTypesOfBuiltinInstance() {
+        Bean<Instance<Cow>> bean = getUniqueBean(new TypeLiteral<Instance<Cow>>() {
+        });
+        Set<Class<?>> rawTypes = bean.getTypes()
+                .stream()
+                .map(type -> {
+                    if (type instanceof Class<?> c) {
+                        return c;
+                    } else if (type instanceof ParameterizedType pt && pt.getRawType() instanceof Class<?> c) {
+                        return c;
+                    } else {
+                        throw new AssertionError("Unexpected type " + type);
+                    }
+                })
+                .collect(Collectors.toSet());
+        assertTrue(rawTypes.contains(Object.class));
+        assertTrue(rawTypes.contains(Provider.class));
+        assertTrue(rawTypes.contains(Instance.class));
+    }
+
+    @Test
+    @SpecAssertion(section = BUILTIN_INSTANCE, id = "b")
+    public void testQualifiersOfBuiltinInstance() {
+        Bean<Instance<Cow>> bean = getUniqueBean(new TypeLiteral<Instance<Cow>>() {
+        });
+        assertTrue(bean.getQualifiers().contains(Any.Literal.INSTANCE));
+        assertTrue(bean.getQualifiers().contains(Default.Literal.INSTANCE));
     }
 
     @Test

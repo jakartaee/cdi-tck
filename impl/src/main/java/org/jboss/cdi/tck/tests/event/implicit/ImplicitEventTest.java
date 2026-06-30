@@ -14,15 +14,22 @@
 package org.jboss.cdi.tck.tests.event.implicit;
 
 import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_EVENT;
+import static org.jboss.cdi.tck.cdi.Sections.BUILTIN_INSTANCE;
 import static org.jboss.cdi.tck.cdi.Sections.EVENT_TYPES_AND_QUALIFIER_TYPES;
 import static org.jboss.cdi.tck.cdi.Sections.PASSIVATION_CAPABLE_DEPENDENCY;
+import static org.testng.Assert.assertTrue;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Default;
+import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.util.TypeLiteral;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -53,6 +60,34 @@ public class ImplicitEventTest extends AbstractTest {
     @Deployment
     public static WebArchive createTestArchive() {
         return new WebArchiveBuilder().withTestClassPackage(ImplicitEventTest.class).build();
+    }
+
+    @Test
+    @SpecAssertion(section = BUILTIN_INSTANCE, id = "a")
+    public void testBeanTypesOfBuiltinEvent() {
+        Bean<Event<StudentRegisteredEvent>> bean = getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL);
+        Set<Class<?>> rawTypes = bean.getTypes()
+                .stream()
+                .map(type -> {
+                    if (type instanceof Class<?> c) {
+                        return c;
+                    } else if (type instanceof ParameterizedType pt && pt.getRawType() instanceof Class<?> c) {
+                        return c;
+                    } else {
+                        throw new AssertionError("Unexpected type " + type);
+                    }
+                })
+                .collect(Collectors.toSet());
+        assertTrue(rawTypes.contains(Object.class));
+        assertTrue(rawTypes.contains(Event.class));
+    }
+
+    @Test
+    @SpecAssertion(section = BUILTIN_INSTANCE, id = "b")
+    public void testQualifiersOfBuiltinEvent() {
+        Bean<Event<StudentRegisteredEvent>> bean = getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL);
+        assertTrue(bean.getQualifiers().contains(Any.Literal.INSTANCE));
+        assertTrue(bean.getQualifiers().contains(Default.Literal.INSTANCE));
     }
 
     @Test
