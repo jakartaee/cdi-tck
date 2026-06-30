@@ -2706,6 +2706,27 @@
             </assertion>
         </group>
 
+        <group>
+            <text>
+                For the built-in beans defined in The built-in |Instance| and The built-in |Event|, the rules above do not apply.
+                Instead:
+            </text>
+            <assertion id="ma">
+                <text>
+                    The built-in bean for |Instance| is assignable to all injection points with required type |Instance&lt;X&gt;|,
+                    |Instance&lt;? extends X&gt;|, |Provider&lt;X&gt;| or |Provider&lt;? extends X&gt;|, where |X| is a legal bean type,
+                    regardless of required qualifiers.
+                </text>
+            </assertion>
+            <assertion id="mb">
+                <text>
+                    The built-in bean for |Event| is assignable to all injection points with required type |Event&lt;X&gt;|
+                    or |Event&lt;? super X&gt;|, where |X| is a type that does not contain a type variable,
+                    regardless of required qualifiers.
+                </text>
+            </assertion>
+        </group>
+
         <assertion id="n">
             <text>A bean is eligible for injection to a certain injection point if it is available for injection in the module that contains the class that
                 declares the injection point, and it is assignable to the injection point.
@@ -3830,14 +3851,14 @@
                 The container must provide a built-in bean with:
             </text>
 
-            <assertion id="a" testable="false">
+            <assertion id="a">
                 <text>
-                    |Instance&lt;X&gt;| and |Provider&lt;X&gt;| for every legal bean type |X| in its set of bean types,
+                    bean types |Instance&lt;X&gt;| and |Provider&lt;X&gt;|, where |X| is a type variable without bounds,
                 </text>
             </assertion>
 
-            <assertion id="b" testable="false">
-                <text>every qualifier type in its set of qualifier types,</text>
+            <assertion id="b">
+                <text>qualifier |@Default|,</text>
             </assertion>
 
             <assertion id="d">
@@ -5885,27 +5906,33 @@
     </section>
 
     <section id="builtin_event" title="The built-in Event" level="3">
-        <assertion id="a">
-            <text>The container must provide a built-in bean with |Event&lt;X&gt;| in its set of bean types, for every Java type |X| that does not contain a
-                type variable.
+        <group>
+            <text>
+                The container must provide a built-in bean with:
             </text>
-        </assertion>
 
-        <assertion id="b">
-            <text>The container must provide a built-in bean with every event qualifier type in its set of qualifier types.</text>
-        </assertion>
+            <assertion id="a">
+                <text>
+                    bean type |Event&lt;X&gt;|, where |X| is a type variable without bounds,
+                </text>
+            </assertion>
 
-        <assertion id="d">
-            <text>The container must provide a built-in bean with scope |@Dependent|.</text>
-        </assertion>
+            <assertion id="b">
+                <text>qualifier `@Default`,</text>
+            </assertion>
 
-        <assertion id="e">
-            <text>The container must provide a built-in bean with no bean name.</text>
-        </assertion>
+            <assertion id="d">
+                <text>scope |@Dependent|,</text>
+            </assertion>
 
-        <assertion id="f">
-            <text>The container must provide a built-in bean with an implementation provided automatically by the container.</text>
-        </assertion>
+            <assertion id="e">
+                <text>no bean name, and</text>
+            </assertion>
+
+            <assertion id="f">
+                <text>an implementation provided automatically by the container.</text>
+            </assertion>
+        </group>
 
         <group>
             <text>

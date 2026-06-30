@@ -24,6 +24,7 @@ import static org.jboss.cdi.tck.cdi.Sections.RESTRICTING_BEAN_TYPES;
 import static org.jboss.cdi.tck.util.Assert.assertTypesMatch;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
@@ -154,6 +155,68 @@ public class ResolutionByTypeTest extends AbstractTest {
         assertTrue(classes.contains(Halibut.class));
         assertTrue(classes.contains(RoundWhitefish.class));
         assertFalse(classes.contains(Sole.class));
+    }
+
+    @Test
+    @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "ma")
+    @SpecAssertion(section = PERFORMING_TYPESAFE_RESOLUTION, id = "mb")
+    public void testInstanceAndEventInjection() {
+        Clients clients = getContextualReference(Clients.class);
+        assertNotNull(clients.provider1);
+        assertNotNull(clients.provider2);
+        assertNotNull(clients.provider3);
+        assertNotNull(clients.provider4);
+        assertNotNull(clients.instance1);
+        assertNotNull(clients.instance2);
+        assertNotNull(clients.instance3);
+        assertNotNull(clients.instance4);
+
+        assertNotNull(clients.parameterizedProvider1);
+        assertNotNull(clients.parameterizedProvider2);
+        assertNotNull(clients.parameterizedProvider3);
+        assertNotNull(clients.parameterizedProvider4);
+        assertNotNull(clients.parameterizedInstance1);
+        assertNotNull(clients.parameterizedInstance2);
+        assertNotNull(clients.parameterizedInstance3);
+        assertNotNull(clients.parameterizedInstance4);
+
+        assertNotNull(clients.rawProvider1);
+        assertNotNull(clients.rawProvider2);
+        assertNotNull(clients.rawProvider3);
+        assertNotNull(clients.rawProvider4);
+        assertNotNull(clients.rawInstance1);
+        assertNotNull(clients.rawInstance2);
+        assertNotNull(clients.rawInstance3);
+        assertNotNull(clients.rawInstance4);
+
+        assertNotNull(clients.arrayProvider1);
+        assertNotNull(clients.arrayProvider2);
+        assertNotNull(clients.arrayProvider3);
+        assertNotNull(clients.arrayProvider4);
+        assertNotNull(clients.arrayInstance1);
+        assertNotNull(clients.arrayInstance2);
+        assertNotNull(clients.arrayInstance3);
+        assertNotNull(clients.arrayInstance4);
+
+        assertNotNull(clients.event1);
+        assertNotNull(clients.event2);
+        assertNotNull(clients.event3);
+        assertNotNull(clients.event4);
+
+        assertNotNull(clients.parameterizedEvent1);
+        assertNotNull(clients.parameterizedEvent2);
+        assertNotNull(clients.parameterizedEvent3);
+        assertNotNull(clients.parameterizedEvent4);
+
+        assertNotNull(clients.rawEvent1);
+        assertNotNull(clients.rawEvent2);
+        assertNotNull(clients.rawEvent3);
+        assertNotNull(clients.rawEvent4);
+
+        assertNotNull(clients.arrayEvent1);
+        assertNotNull(clients.arrayEvent2);
+        assertNotNull(clients.arrayEvent3);
+        assertNotNull(clients.arrayEvent4);
     }
 
     @Test
