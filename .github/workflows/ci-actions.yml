@@ -22,9 +22,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
-      - name: "Maven install(staging)"
-        run: |
-          mvn clean install -Dno-format -Pstaging -B -V
       - name: "Maven install"
         run: |
-          mvn clean install -Dno-format -B -V javadoc:javadoc
+          mvn clean install -Dno-format -Pstaged -B -V javadoc:javadoc
