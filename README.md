@@ -24,7 +24,7 @@ The https://github.com/jakartaee/cdi/wiki/Eclipse-CI-Release-Jobs page describes
 
 ## Sources in GIT
 
-Master branch contains the CDI TCK 4.1
+Main branch contains the CDI TCK 5.0
 
 ### Source Layout
 
