@@ -255,7 +255,7 @@ This section lists the applicable requirements and specifications for the CDI TC
 *  *TCK Audit Tool* - An itemization of the assertions in the specification documents which are cross-referenced by the individual tests. Describes how well the TCK covers the specification.
 
 
-*  *Compatible implementation* - A compatible implementation runtime for compatibility testing of the CDI specification is the Jakarta Platform Enterprise Edition 10 compatible implementation.
+*  *Compatible implementation* - A compatible implementation runtime for compatibility testing of the CDI specification is the {jakartaee-version} compatible implementation.
 
 
 *  *Jarkarta Dependency Injection (DI)* - CDI builds on DI, and as such CDI implementations must additionally pass the Jakarta Dependency Injection TCK.

@@ -13,7 +13,7 @@
       <!-- This is the license to use in the dist -->
       <file>
          <source>${license.file}</source>
-         <destName>LICENSE</destName>
+         <destName>LICENSE.txt</destName>
       </file>
       <!-- The root artifact-install.pom gets installed as /artifacts/pom.xml in the dist to allow one to install
             the CDI TCK contents and dependencies from the dist.
