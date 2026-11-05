@@ -66,6 +66,7 @@ public class QualifierDefinitionTest extends AbstractTest {
         assert model.getQualifiers().size() == 4;
     }
 
+    @Test
     @SpecAssertion(section = METHOD_CONSTRUCTOR_PARAMETER_QUALIFIERS, id = "a")
     public void testFieldInjectedFromProducerMethod() throws Exception {
         Bean<Barn> barnBean = getBeans(Barn.class).iterator().next();

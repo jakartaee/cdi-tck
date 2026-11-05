@@ -104,6 +104,7 @@ public class ImplicitEventTest extends AbstractTest {
         assert getBeans(AWARD_EVENT_LITERAL, Any.Literal.INSTANCE, new HonorsLiteral()).size() == 1;
     }
 
+    @Test
     @SpecAssertion(section = EVENT_TYPES_AND_QUALIFIER_TYPES, id = "i")
     public void testImplicitEventHasAnyBinding() {
         assert getUniqueBean(STUDENT_REGISTERED_EVENT_LITERAL).getQualifiers().contains(Any.Literal.INSTANCE);
