@@ -7,7 +7,7 @@ This chapter explains how to run the TCK on Weld as well as your own implementat
 
 === The Test Suite Runner
 
-The test suite is executed by the Maven Surefire plugin during the test phase of the Maven life cycle. The execution happens within a TCK runner project (as opposed to the TCK project itself). The TCK distribution includes a sample runner project that executes the CDI TCK on Weld in standalone mode as well as inside WildFly {wildfly-version}. To execute the CDI TCK on your own CDI implementation or server, you could modify the sample TCK runner project and change it to use your CDI implementation and/or Arquillian container configuration.
+The test suite is executed by the Maven Surefire plugin during the test phase of the Maven life cycle. The execution happens within a TCK runner project (as opposed to the TCK project itself). The TCK distribution includes a sample runner project that executes the CDI TCK on Weld in standalone mode as well as inside WildFly {wildfly-version}. To execute the CDI TCK on your own CDI implementation or server, you could modify the sample TCK runner project and change it to use your CDI implementation and/or Arquillian container configuration. The sample runner defaults to Surefire 3.6.1 with directory discovery and the release-matched Exclude List. It copies the TCK `excludes` text classifier into `target/suites/`; see <<configuration>> for the include patterns, package scope, and listener registration.
 
 
 
@@ -34,6 +34,8 @@ Then execute the Maven life cycle through the test phase:
 ----
 mvn test
 ----
+
+For a release that still requires the Surefire 3.5.6 TestNG XML path, run `mvn test -DlegacyXml=true`. Keep this XML path separate from a populated `excludesFile`.
 
 Without any command-line flags, the test suite is run in standalone mode (activating weld-embedded Maven profile), which means that any test within the _integration_, _javaee-full_ and SE TestNG group is excluded. This mode uses the _Weld EE Embedded Arquillian container adapter_ to invoke the test within a mock Jakarta EE life cycle and capture the results of the test. However, passing the suite in this mode is not sufficient to pass the TCK as a whole. The suite must be passed while executing using the in-container mode.
 

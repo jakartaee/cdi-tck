@@ -103,6 +103,19 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                            <Specification-Version>${cdi.api.version}</Specification-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
@@ -138,6 +151,11 @@
                                     <file>${basedir}/src/main/resources/tck-tests.xml</file>
                                     <type>xml</type>
                                     <classifier>suite</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${basedir}/src/main/resources/tck-excludes.txt</file>
+                                    <type>txt</type>
+                                    <classifier>excludes</classifier>
                                 </artifact>
                                 <artifact>
                                     <file>${basedir}/src/main/resources/tck-audit-cdi.xml</file>

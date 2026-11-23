@@ -12,7 +12,7 @@ This distribution consists of:
 
 * TCK binaries and sources, packaged as JARs
 * specification audit (source and report)
-* TestNG `suite.xml` file for running the TCK
+* TestNG `suite.xml` for the Surefire 3.5.6 legacy runner and the authoritative `excludes.txt` for directory discovery with Surefire 3.6.0 or later
 * `pom.xml` to install the TCK artifacts into local Maven repository
 
 `doc/`
@@ -25,7 +25,7 @@ This distribution consists of:
 
 `weld/jboss-tck-runner/`
 
-* Maven-based TCK runner for standalone Weld and with WildFly
+* Maven-based TCK runner for standalone Weld and with WildFly. It copies the release-matched `excludes` text artifact to `target/suites/tck-excludes.txt`. For the legacy TestNG XML path, use `-DlegacyXml=true` (Surefire 3.5.6); do not combine this route with a populated `excludesFile`.
 
 `weld/lang-model-tck-runner/`
 

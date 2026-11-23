@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 package org.jboss.weld.tck.wildfly;
+
 import java.util.List;
 
 import jakarta.enterprise.inject.spi.DefinitionException;

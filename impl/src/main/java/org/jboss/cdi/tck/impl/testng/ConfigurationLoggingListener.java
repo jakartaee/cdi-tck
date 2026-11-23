@@ -28,25 +28,34 @@ import org.testng.ISuiteListener;
 public class ConfigurationLoggingListener implements ISuiteListener {
 
     private static final String CONFIGURATION_FILE_PATH = "target/cdi-tck-configuration.log";
-    private final Logger logger = Logger.getLogger(ConfigurationLoggingListener.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ConfigurationLoggingListener.class.getName());
+    private static boolean configurationLogged;
 
     @Override
     public void onStart(ISuite suite) {
+        logConfiguration();
+    }
+
+    private static synchronized void logConfiguration() {
+        // TestNG may start suites during discovery and again during execution.
+        if (configurationLogged) {
+            return;
+        }
         try {
             FileHandler fh = new FileHandler(CONFIGURATION_FILE_PATH);
             fh.setFormatter(new SimpleFormatter());
-            logger.addHandler(fh);
+            LOGGER.addHandler(fh);
         } catch (SecurityException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        logger.log(Level.INFO, "CDI-TCK Implementation version: {0}",
-                Package.getPackage("org.jboss.cdi.tck.impl.testng").getImplementationVersion());
-        logger.log(Level.INFO, "CDI-TCK Specification version: {0}",
-                Package.getPackage("org.jboss.cdi.tck.impl.testng").getSpecificationVersion());
+        Package tckPackage = ConfigurationLoggingListener.class.getPackage();
+        LOGGER.log(Level.INFO, "CDI-TCK Implementation version: {0}", tckPackage.getImplementationVersion());
+        LOGGER.log(Level.INFO, "CDI-TCK Specification version: {0}", tckPackage.getSpecificationVersion());
         Configuration conf = ConfigurationFactory.get();
-        logger.log(Level.INFO, conf.toString());
+        LOGGER.log(Level.INFO, conf.toString());
+        configurationLogged = true;
     }
 
     @Override

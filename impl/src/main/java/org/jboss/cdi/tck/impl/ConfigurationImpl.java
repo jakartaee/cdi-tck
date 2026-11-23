@@ -161,7 +161,12 @@ public class ConfigurationImpl implements Configuration {
     @Override
     public String toString() {
         StringBuilder configuration = new StringBuilder();
-        configuration.append("Jakarta CDI 4.1 TCK Configuration\n");
+        configuration.append("Jakarta CDI");
+        String specificationVersion = ConfigurationImpl.class.getPackage().getSpecificationVersion();
+        if (specificationVersion != null) {
+            configuration.append(' ').append(specificationVersion);
+        }
+        configuration.append(" TCK Configuration\n");
         configuration.append("-----------------\n");
         configuration.append("\tCDI Core mode: ").append(getCoreMode()).append("\n");
         configuration.append("\tBeans: ").append(getBeans()).append("\n");

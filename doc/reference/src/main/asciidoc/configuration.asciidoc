@@ -122,46 +122,46 @@ You can configure the CDI TCK to just run tests appropriate to the Java SE runti
 The _arquillian_ group specification is needed due to an issue open issue with how the Arquillian TestNG integration behaves: https://github.com/arquillian/arquillian-core/issues/395[ARQ-395]
 ====
 
-=== Configuring TestNG to execute the TCK
+=== Selecting the TCK tests and applying the Exclude List
 
-The CDI TCK is built atop Arquillian and TestNG, and it's TestNG that is responsible for selecting the tests to execute, the order of execution, and reporting the results. Detailed TestNG documentation can be found at link:$$https://testng.org/doc/documentation-main.html$$[testng.org].
+The CDI TCK uses Arquillian and TestNG. Starting with Maven Surefire 3.6.0, select the CDI TCK classes by directory discovery: TestNG `suiteXmlFiles` no longer selects the suite. Surefire 3.6.0 ignores that setting, and 3.6.1 and later reject it. Scan the release-matched `jakarta.cdi:jakarta.cdi-tck-core-impl` dependency with `dependenciesToScan`, and include the complete `org.jboss.cdi.tck.tests` and `org.jboss.cdi.tck.interceptors.tests` package trees. These patterns include test classes regardless of their names and correspond to the package scope in the accompanying TestNG suite descriptor. Do not assume that a successful Maven exit proves this scope was discovered; compare the report's test count and class names with the intended suite.
 
-Certain TestNG configuration file must be run by TestNG (described by the TestNG documentation as "with a +testng.xml+ file") unmodified for an implementation to pass the TCK. The TCK distribution contains the configuration file accurate at the date of the release - +artifacts/cdi-tck-impl-suite.xml+. However this artifact may not be up to date due to unresolved challenges or pending releases. Therefore a canonical configuration file exists. This file is located in the CDI TCK source code repository at _$$${CORRESPONDING_BRANCH_ROOT}/impl/src/main/resources/tck-tests.xml$$_.
+The authoritative CDI Core TCK Exclude List for each release is `impl/src/main/resources/tck-excludes.txt` in the source tree, published as the `jakarta.cdi:jakarta.cdi-tck-core-impl:txt:excludes` classifier. The distribution contains `artifacts/jakarta.cdi-tck-core-impl-<version>-excludes.txt`. It may contain class entries such as `**/ExampleTest.java` or individual method entries such as `**/ExampleTest.java#testExample`; fully qualified class names with optional `#method` are also accepted. Lines beginning with `#` are comments. An empty list means no exclusions for that release. The TCK Lead publishes updates to this list; an implementor must use the list for the version under test without adding local exclusions.
 
-
-[NOTE]
-====
-The canonical configuration file for CDI TCK is located at https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/tck-tests.xml.
-====
-
-This file also allows tests to be excluded from a run:
+A runner using Surefire 3.6.0 or later can copy the text classifier to `target/suites/tck-excludes.txt` during `process-test-resources` and configure:
 
 [source.XML, xml]
 ----
-<suite name="CDI TCK" verbose="0" configfailurepolicy="continue">
-   <test name="CDI TCK">
-      ...
-      <classes>
-         <class name="org.jboss.cdi.tck.tests.context.application.ApplicationContextTest">
-            <methods>
-               <exclude name="testApplicationScopeActiveDuringServiceMethod"/>
-            </methods>
-         </class>
-      </classes>
-      ...
-   </test>
-</suite>
+<configuration>
+  <dependenciesToScan>
+    <dependency>jakarta.cdi:jakarta.cdi-tck-core-impl</dependency>
+  </dependenciesToScan>
+  <includes>
+    <include>**/org/jboss/cdi/tck/tests/**/*.java</include>
+    <include>**/org/jboss/cdi/tck/interceptors/tests/**/*.java</include>
+  </includes>
+  <excludesFile>target/suites/tck-excludes.txt</excludesFile>
+  <properties>
+    <property>
+      <name>usedefaultlisteners</name>
+      <value>false</value>
+    </property>
+    <property>
+      <name>listener</name>
+      <value>org.jboss.cdi.tck.impl.testng.ConfigurationLoggingListener,org.jboss.cdi.tck.impl.testng.ProgressLoggingTestListener</value>
+    </property>
+  </properties>
+  <failIfNoTests>true</failIfNoTests>
+</configuration>
 ----
 
+Apply the same selection and exclusion rules in any other implementation's runner. Keep the intended TestNG group selection for CDI Core, SE, or Full mode and check that the target container and porting package are configured for that mode. The required `SingleTestClassMethodInterceptor` is registered by the TCK JAR through `META-INF/services/org.testng.ITestNGListener`; keep that service resource visible on the test classpath. The service registration replaces its former XML-only listener registration.
 
-[NOTE]
-====
-Additionally there is available canonical configuration file at https://github.com/eclipse-ee4j/cdi-tck/blob/master/impl/src/main/resources/tck-tests-previous.xml.
-Please note that this exclude list serves only for the previous micro version of TCK release! This means that if the latest version of TCK is e.g. 5.0.1 then this exclude list is valid only for the version 5.0.0 and invalid for any other version!
-====
+The TestNG engine first runs a dry discovery pass to build the test plan, then executes the selected tests. TestNG loads service-registered listeners in both passes. Surefire's `listener` property takes effect only during execution, after discovery has selected the methods. The interceptor must run during discovery because it can filter methods with `-DtckTest`; do not register it again through the runner's `listener` property. The Weld sample runner registers the optional `ConfigurationLoggingListener` and `ProgressLoggingTestListener` through that property so they log actual execution rather than the discovery pass. `usedefaultlisteners=false` suppresses TestNG's default reporters. Register other optional listeners explicitly if your runner needs them. These optional listeners are distinct from the authoritative Exclude List.
 
-TestNG provides extensive reporting information. Depending on the build tool or IDE you use, the reporting will take a different format. Please consult the TestNG documentation and the tool documentation for more information.
+The `suite` XML classifier (`impl/src/main/resources/tck-tests.xml`, distributed as `artifacts/jakarta.cdi-tck-core-impl-<version>-suite.xml`) remains for the Surefire 3.5.6 legacy path. It defines the TCK package scope and TestNG listeners; the runner profiles select groups. With 3.5.6, do not combine `suiteXmlFiles` with a populated `excludesFile`: this can switch Surefire from XML suite execution to directory discovery. The distributed Weld sample runner selects the legacy path with `-DlegacyXml=true`; its default uses directory discovery and the text Exclude List, as required from Surefire 3.6.0 onward. The sample currently pins 3.6.1. For this release the text list is empty, so both paths exclude the same tests. Use directory discovery for any release with a nonempty text Exclude List; the legacy XML path must not bypass those exclusions.
 
+TestNG and Surefire produce test results in different formats. For a Maven run, inspect `target/surefire-reports/TEST-*.xml` and the console summary, confirm a nonzero test count, and check that any listed excluded class or method is absent while unrelated methods remain. The current release's empty Exclude List should remove no tests.
 
 === Configuring your build environment to execute the TCK
 
