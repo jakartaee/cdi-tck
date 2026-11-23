@@ -23,6 +23,13 @@ The challenges will be addressed in a timely fashion by the TCK Lead, as designa
 
 The current TCK Lead is listed on the link:$$https://jakarta.ee/specifications/cdi$$[CDI Project Summary Page] on Jakarta EE.
 
+This specification allows for lazy consensus as a resolution path for TCK test challenges as described in the Jakarta EE TCK Process Guide. For this specification, test challenges will be deemed accepted 14 days from the date the test challenge issue is last commented on by a specification team committer, or 14 days from the date of filing if no comments are made by a specification team committer.
+
+If any specification team member determines that the challenge requires review it should be marked with the tag <challenge-review> and it will be resolved under the 'Active Resolution' process as described in the Jakarta EE TCK Process guide. Generally, once a conversation occurs with a member of the committer team, the filer should consider that the challenge will follow the Active Resolution process.
+
+In the event a challenge is approved under lazy consensus, any vendor implementation Compatibility Certification Request (CCR) that uses this challenge must include the issue ID along with the TCK details and test reporting statistics for this specification, regardless if the CCR is filed to this specification project issue tracker, or it is filed for any other specification project issue tracker. Failure to include this issue reference could result in CCR  approval delay.
+
+Once a TCK revision, that includes the resolution of this challenge is released, it is no longer necessary to include any additional reference in your CCR.
 
 === How accepted challenges to the TCK are managed?
 The worflow for TCK challenges is outlined in
