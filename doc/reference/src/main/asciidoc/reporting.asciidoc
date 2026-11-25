@@ -138,86 +138,28 @@ The coverage report is color coded to indicate the status of an assertion, or gr
 
 For reasons provided in the +tck-audit.xml+ document and presented in the coverage report, some assertions are not testable. 
 
-The coverage report does not give any indication as to whether the tests are passing. That's where the TestNG reports come in. 
+The coverage report does not indicate whether the tests pass. Test execution reports provide those results.
 
 
 
-==== TestNG Reports
+==== Test Execution Reports
 
-The CDI TCK test suite is really just a TestNG test suite. That means an execution of the CDI TCK test suite produces the same reports as TestNG does. This section will go over those reports and show you where to find each of them. 
+The CDI TCK uses TestNG, but report formats depend on how the tests are run. This section describes Maven Surefire reports and the TestNG IDE view.
 
 
 
 ===== Maven, Surefire and TestNG
 
-When the CDI TCK test suite is executed during the Maven test phase of the TCK runner project, TestNG is invoked indirectly through the Maven Surefire plugin. Surefire is a test execution abstraction layer capable of executing a mix of tests written for JUnit, TestNG, and other supported test frameworks. 
+The sample Maven runner uses Surefire 3.6.1 and discovers TestNG tests through the JUnit Platform TestNG engine. Its explicitly registered configuration and progress listeners write `target/cdi-tck-configuration.log` and progress messages respectively when they execute. Surefire writes the console summary and per-class XML and text files under `target/surefire-reports/` (`TEST-*.xml` and `*.txt`). These are the primary test execution records. The sample runner also configures `maven-surefire-report-plugin` to generate `target/surefire-reports/test-report.html` during the `test` phase when the reporting goal succeeds.
 
-Why is this relevant? It means two things. First, it means that you are going to get a summary of the test run on the commandline. Here's the output generated when the tests are run using standalone mode. 
+Native TestNG HTML reports such as `index.html` and `emailable-report.html` depend on TestNG reporter registration. The sample runner and legacy suite XML do not register those reporters, so they are not a required reporting output. If your runner registers them explicitly, treat those pages as supplemental to Surefire's XML and console results.
 
-[source, console]
-....
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running TestSuite
-[XmlMethodSelector] CLASSNAME:org.jboss.testharness.impl.testng.DisableIntegrationTestsMethodSelector
-[XmlMethodSelector] SETTING PRIORITY:0
-[XmlMethodSelector] CLASSNAME:org.jboss.testharness.impl.testng.ExcludeIncontainerUnderInvestigationMethodSelector
-[XmlMethodSelector] SETTING PRIORITY:0
-Tests run: 441, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.816 sec
-
-Results :
-
-Tests run: 441, Failures: 0, Errors: 0, Skipped: 0
-....
-
-
-[NOTE]
-====
-The number of tests executed, the execution time, and the output will differ when you run the tests using in-container mode as the CDI TCK requires. 
-
-
-====
-
-
-If the Maven reporting plugin that complements Surefire is configured properly, Maven will also generate a generic HTML test result report. That report is written to the file test-report.html in the target/surefire-reports directory of the TCK runner project. It shows how many tests were run, how many failed and the success rate of the test run. 
-
-The one drawback of the Maven Surefire report plugin is that it buffers the test failures and puts them in the HTML report rather than outputting them to the commandline. If you are running the test suite to determine if there are any failures, it may be more useful to get this information in the foreground. You can prevent the failures from being redirected to the report using the following commandline switch: 
+To keep test output in the console, run:
 
 [source, console]
 ----
 mvn test -Dsurefire.useFile=false
 ----
-
-The information that the Surefire provides is fairly basic and the detail pales in comparison to what the native TestNG reports provide. 
-
-
-
-===== TestNG HTML Reports
-
-TestNG produces several HTML reports for a given test run. All the reports can be found in the target/surefire-reports directory in the TCK runner project. Below is a list of the three types of reports: 
-
-* Test Summary Report
-
-
-* Test Suite Detail Report
-
-
-* Emailable Report
-
-The first report, the test summary report, shown below, is written to the file index.html. It produces the same information as the generic Surefire report.
-
-image:testng-summary-report.png[image] 
-
-The summary report links to the test suite detail report, which has a wealth of information. It shows a complete list of test groups along with the classes in each group, which groups were included and excluded, and any exceptions that were raised, whether from a passed or failed test. A partial view of the test suite detail report is shown below. 
-
-image:testng-suite-detail-report.png[image]
-
-The test suite detail report is very useful, but it borderlines on complex. As an alternative, you can have a look at the emailable report, which is a single HTML document that shows much of the same information as the test suite detail report in a more compact layout. A partial view of the emailable report is shown below. 
-
-image:testng-emailable-report.png[image]
-
-Now that you have seen two ways to get test results from the Maven test execution, let's switch over to the IDE, specifically Eclipse, and see how it presents TestNG test results. 
 
 ===== Test Results in the TestNG Plugin View
 

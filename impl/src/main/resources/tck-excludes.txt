@@ -1,0 +1,7 @@
+# CDI Core TCK Exclude List for the matching TCK release.
+# This is the authoritative list for Surefire directory discovery.
+# One active entry per line: a class path or a class path followed by #method.
+# Example class: **/SomeTest.java
+# Example method: **/SomeTest.java#testSomeBehavior
+# Fully qualified class names (with optional #method) are also supported.
+# The list is intentionally empty for this release; do not add local exclusions.

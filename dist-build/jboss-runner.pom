@@ -7,7 +7,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>weld-jboss-runner-tck</artifactId>
-  <name>CDI TCK runner (4.1) for Weld (WildFly)</name>
+  <name>CDI TCK runner for Weld (WildFly)</name>
   <description>Aggregates dependencies and runs the CDI TCK (both standalone and on WildFly)</description>
 
   <licenses>
@@ -21,13 +21,14 @@
 
   <properties>
     <cdi.tck.version>${project.version}</cdi.tck.version>
-    <surefire.version>3.2.5</surefire.version>
+    <surefire.version>3.6.1</surefire.version>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-api</artifactId>
+      <version>${cdi.api.version}</version>
     </dependency>
 
     <dependency>
@@ -67,8 +68,8 @@
     </dependency>
 
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>cdi-tck-api</artifactId>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-tck-api</artifactId>
       <version>${cdi.tck.version}</version>
       <exclusions>
         <exclusion>
@@ -79,8 +80,8 @@
     </dependency>
 
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>cdi-tck-core-impl</artifactId>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-tck-core-impl</artifactId>
       <version>${cdi.tck.version}</version>
       <type>xml</type>
       <classifier>suite</classifier>
@@ -110,8 +111,8 @@
     </dependency>
 
     <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>cdi-tck-core-impl</artifactId>
+      <groupId>jakarta.cdi</groupId>
+      <artifactId>jakarta.cdi-tck-core-impl</artifactId>
       <version>${cdi.tck.version}</version>
       <scope>test</scope>
       <exclusions>
@@ -159,6 +160,7 @@
     <dependency>
       <groupId>org.jboss.shrinkwrap.descriptors</groupId>
       <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
+      <version>${shrinkwrap.descriptors.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -199,9 +201,10 @@
               <value>false</value>
             </property>
           </properties>
-          <!-- https://issues.apache.org/jira/browse/SUREFIRE-569 -->
+          <failIfNoTests>true</failIfNoTests>
+          <!-- Scan the current CDI TCK artifact, not transitive older TCK versions. -->
           <dependenciesToScan>
-            <dependency>jakarta.enterprise:cdi-tck-core-impl</dependency>
+            <dependency>jakarta.cdi:jakarta.cdi-tck-core-impl</dependency>
           </dependenciesToScan>
         </configuration>
       </plugin>
@@ -255,7 +258,93 @@
 
   <profiles>
     <profile>
-      <!-- Copies the TCK testsuite xml artifacts into the target/suites directory for use by profiles -->
+      <id>directory-discovery</id>
+      <activation>
+        <property>
+          <name>!legacyXml</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>copy-tck-excludes</id>
+                <phase>process-test-resources</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>jakarta.cdi</groupId>
+                      <artifactId>jakarta.cdi-tck-core-impl</artifactId>
+                      <version>${cdi.tck.version}</version>
+                      <type>txt</type>
+                      <classifier>excludes</classifier>
+                      <destFileName>tck-excludes.txt</destFileName>
+                    </artifactItem>
+                  </artifactItems>
+                  <outputDirectory>target/suites</outputDirectory>
+                  <overWriteSnapshots>true</overWriteSnapshots>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <excludesFile>target/suites/tck-excludes.txt</excludesFile>
+              <properties>
+                <property>
+                  <name>usedefaultlisteners</name>
+                  <value>false</value>
+                </property>
+                <property>
+                  <name>listener</name>
+                  <value>org.jboss.cdi.tck.impl.testng.ConfigurationLoggingListener,org.jboss.cdi.tck.impl.testng.ProgressLoggingTestListener</value>
+                </property>
+              </properties>
+              <includes>
+                <include>**/org/jboss/cdi/tck/tests/**/*.java</include>
+                <include>**/org/jboss/cdi/tck/interceptors/tests/**/*.java</include>
+              </includes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <!-- Compatibility path for TCK releases using the TestNG XML suite. -->
+      <id>legacy-testng-xml</id>
+      <activation>
+        <property>
+          <name>legacyXml</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <properties>
+        <surefire.version>3.5.6</surefire.version>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <suiteXmlFiles>
+                <suiteXmlFile>target/suites/tck-core-suite.xml</suiteXmlFile>
+              </suiteXmlFiles>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <!-- Retain the XML artifact for the separate Surefire 3.5.6 legacy route. -->
       <id>copy-test-suites</id>
       <activation>
         <property>
@@ -279,8 +368,8 @@
             <configuration>
               <artifactItems>
                 <artifactItem>
-                  <groupId>jakarta.enterprise</groupId>
-                  <artifactId>cdi-tck-core-impl</artifactId>
+                  <groupId>jakarta.cdi</groupId>
+                  <artifactId>jakarta.cdi-tck-core-impl</artifactId>
                   <version>${cdi.tck.version}</version>
                   <type>xml</type>
                   <classifier>suite</classifier>
@@ -361,9 +450,6 @@
                     available during in-container test execution -->
                 <org.jboss.cdi.tck.libraryDirectory>target/dependency/lib</org.jboss.cdi.tck.libraryDirectory>
               </systemPropertyVariables>
-              <suiteXmlFiles>
-                <suiteXmlFile>target/suites/tck-core-suite.xml</suiteXmlFile>
-              </suiteXmlFiles>
             </configuration>
           </plugin>
         </plugins>
@@ -435,9 +521,6 @@
                 <arquillian.xml>weld-se-arquillian.xml</arquillian.xml>
                 <libPath>target</libPath>
               </systemPropertyVariables>
-              <suiteXmlFiles>
-                <suiteXmlFile>target/suites/tck-core-suite.xml</suiteXmlFile>
-              </suiteXmlFiles>
             </configuration>
           </plugin>
         </plugins>
@@ -456,7 +539,6 @@
       </activation>
       <properties>
         <excluded.groups>integration,javaee-full,se</excluded.groups>
-        <cdi.tck.suite.xml.file>target/suites/tck-core-suite.xml</cdi.tck.suite.xml.file>
       </properties>
       <dependencies>
         <dependency>
@@ -562,9 +644,6 @@
                   ${surefire.plugin.jdk17.args}
                 </additional.vm.args>
               </systemPropertyVariables>
-              <suiteXmlFiles>
-                <suiteXmlFile>${cdi.tck.suite.xml.file}</suiteXmlFile>
-              </suiteXmlFiles>
             </configuration>
           </plugin>
         </plugins>

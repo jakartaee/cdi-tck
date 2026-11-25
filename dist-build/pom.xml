@@ -93,6 +93,14 @@
          <groupId>jakarta.cdi</groupId>
          <artifactId>jakarta.cdi-tck-core-impl</artifactId>
          <version>${project.version}</version>
+         <classifier>excludes</classifier>
+         <type>txt</type>
+         <optional>true</optional>
+      </dependency>
+      <dependency>
+         <groupId>jakarta.cdi</groupId>
+         <artifactId>jakarta.cdi-tck-core-impl</artifactId>
+         <version>${project.version}</version>
          <classifier>coverage-cdi</classifier>
          <type>html</type>
          <optional>true</optional>
