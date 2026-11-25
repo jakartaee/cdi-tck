@@ -138,21 +138,19 @@ The coverage report is color coded to indicate the status of an assertion, or gr
 
 For reasons provided in the +tck-audit.xml+ document and presented in the coverage report, some assertions are not testable. 
 
-The coverage report does not give any indication as to whether the tests are passing. That's where the TestNG reports come in. 
+The coverage report does not indicate whether the tests pass. Test execution reports provide those results.
 
 
 
-==== TestNG Reports
+==== Test Execution Reports
 
-The CDI TCK test suite is really just a TestNG test suite. That means an execution of the CDI TCK test suite produces the same reports as TestNG does. This section will go over those reports and show you where to find each of them. 
+The CDI TCK uses TestNG, but report formats depend on how the tests are run. This section describes Maven Surefire reports and the TestNG IDE view.
 
 
 
 ===== Maven, Surefire and TestNG
 
 The sample Maven runner uses Surefire 3.6.1 and discovers TestNG tests through the JUnit Platform TestNG engine. Its explicitly registered configuration and progress listeners write `target/cdi-tck-configuration.log` and progress messages respectively when they execute. Surefire writes the console summary and per-class XML and text files under `target/surefire-reports/` (`TEST-*.xml` and `*.txt`). These are the primary test execution records. The sample runner also configures `maven-surefire-report-plugin` to generate `target/surefire-reports/test-report.html` during the `test` phase when the reporting goal succeeds.
-
-Check the number of tests, failures, errors, and skips in these reports against the expected mode and the release's Exclude List. In particular, verify that the count is nonzero and that the nonstandard `NormalScopedBeanWithInjectionPoint` test is present when its group is selected. A green run with fewer tests than the intended suite is incomplete.
 
 Native TestNG HTML reports such as `index.html` and `emailable-report.html` depend on TestNG reporter registration. The sample runner and legacy suite XML do not register those reporters, so they are not a required reporting output. If your runner registers them explicitly, treat those pages as supplemental to Surefire's XML and console results.
 
